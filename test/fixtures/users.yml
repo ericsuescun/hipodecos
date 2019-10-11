@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email2: MyString
+  tel: MyString
+  cel: MyString
+  birth_date: 2019-10-11
+  join_date: 2019-10-11
+  active: false
+  deactivation_date: 2019-10-11
+  last_admin_id: 1
+  notes: MyText
+  role_id: 1
+  file_id: 1
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email2: MyString
+  tel: MyString
+  cel: MyString
+  birth_date: 2019-10-11
+  join_date: 2019-10-11
+  active: false
+  deactivation_date: 2019-10-11
+  last_admin_id: 1
+  notes: MyText
+  role_id: 1
+  file_id: 1

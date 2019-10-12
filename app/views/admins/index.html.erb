@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="contanier">
+  <div class="row">
+    <div class="col-sm-8 mx-auto">
+      <h1>Admins de Hipodecos</h1>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Cellular</th>
+            <th>Dirección</th>
+            <th>God mode</th>
+            <th>Reports only</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<h1>Admins</h1>
+        <tbody>
+          <% @admins.each do |admin| %>
+            <tr>
+              <td scope="col"><%= admin.name %></td>
+              <td><%= admin.email %></td>
+              <td><%= admin.tel %></td>
+              <td><%= admin.cel %></td>
+              <td><%= admin.address %></td>
+              <td><%= admin.god_mode %></td>
+              <td><%= admin.reports_only %></td>
+              <td><%= link_to 'Editar', edit_admin_registration_path(admin) %></td>
+              <td><%= link_to "Salir", destroy_admin_session_path, method: :delete %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Tel</th>
-      <th>Cel</th>
-      <th>Address</th>
-      <th>God mode</th>
-      <th>Reports only</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <br>
 
-  <tbody>
-    <% @admins.each do |admin| %>
-      <tr>
-        <td><%= admin.name %></td>
-        <td><%= admin.email %></td>
-        <td><%= admin.tel %></td>
-        <td><%= admin.cel %></td>
-        <td><%= admin.address %></td>
-        <td><%= admin.god_mode %></td>
-        <td><%= admin.reports_only %></td>
-        <td><%= link_to 'Show', admin %></td>
-        <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
-        <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Admin', new_admin_path %>
+      <%= link_to 'Registrar otro Admin', new_admin_registration_path %>
+    </div>
+  </div>
+</div>

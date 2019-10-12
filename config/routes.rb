@@ -2,11 +2,10 @@ Rails.application.routes.draw do
 
 	root to: "admins#index"
 
-	resources :users
-	resources :admins
+	resources :admins, only: [:index]
+	resources :users, only: [:index]
 
 	devise_for :admins, path: 'admins', controllers: { sessions: "admins/sessions", registrations: "admins/registrations", passwords: "admins/passwords", unlocks: "admins/unlocks", confirmations: "admins/confirmations" }
-
 	devise_for :users, path: 'users', controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", unlocks: "users/unlocks", confirmations: "users/confirmations" }
 	
 

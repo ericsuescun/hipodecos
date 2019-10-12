@@ -1,0 +1,37 @@
+<%= form_with(model: codeval, local: true) do |form| %>
+  <% if codeval.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(codeval.errors.count, "error") %> prohibited this codeval from being saved:</h2>
+
+      <ul>
+      <% codeval.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin_system %>
+    <%= form.text_field :origin_system %>
+  </div>
+
+  <div class="field">
+    <%= form.label :oms_code %>
+    <%= form.text_field :oms_code %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

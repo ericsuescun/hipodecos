@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Codevals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+      <th>Origin system</th>
+      <th>Oms code</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @codevals.each do |codeval| %>
+      <tr>
+        <td><%= codeval.code %></td>
+        <td><%= codeval.description %></td>
+        <td><%= codeval.origin_system %></td>
+        <td><%= codeval.oms_code %></td>
+        <td><%= link_to 'Show', codeval %></td>
+        <td><%= link_to 'Edit', edit_codeval_path(codeval) %></td>
+        <td><%= link_to 'Destroy', codeval, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Codeval', new_codeval_path %>

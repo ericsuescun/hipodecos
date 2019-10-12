@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_12_034946) do
+ActiveRecord::Schema.define(version: 2019_10_12_043433) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -46,6 +46,23 @@ ActiveRecord::Schema.define(version: 2019_10_12_034946) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["entity_id"], name: "index_branches_on_entity_id"
+  end
+
+  create_table "codevals", force: :cascade do |t|
+    t.string "code"
+    t.text "description"
+    t.string "origin_system"
+    t.string "oms_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "costs", force: :cascade do |t|
+    t.integer "codeval_id"
+    t.decimal "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["codeval_id"], name: "index_costs_on_codeval_id"
   end
 
   create_table "entities", force: :cascade do |t|

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @codeval.code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @codeval.description %>
+</p>
+
+<p>
+  <strong>Origin system:</strong>
+  <%= @codeval.origin_system %>
+</p>
+
+<p>
+  <strong>Oms code:</strong>
+  <%= @codeval.oms_code %>
+</p>
+
+<%= link_to 'Edit', edit_codeval_path(@codeval) %> |
+<%= link_to 'Back', codevals_path %>

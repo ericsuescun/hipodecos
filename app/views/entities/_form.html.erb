@@ -1,0 +1,72 @@
+<%= form_with(model: entity, local: true) do |form| %>
+  <% if entity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(entity.errors.count, "error") %> prohibited this entity from being saved:</h2>
+
+      <ul>
+      <% entity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :initials %>
+    <%= form.text_field :initials %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mgr_name %>
+    <%= form.text_field :mgr_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mgr_email %>
+    <%= form.text_field :mgr_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mgr_tel %>
+    <%= form.text_field :mgr_tel %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mgr_cel %>
+    <%= form.text_field :mgr_cel %>
+  </div>
+
+  <div class="field">
+    <%= form.label :municipality %>
+    <%= form.text_field :municipality %>
+  </div>
+
+  <div class="field">
+    <%= form.label :department %>
+    <%= form.text_field :department %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :entype %>
+    <%= form.text_field :entype %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

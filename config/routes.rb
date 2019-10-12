@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :branches
+  resources :entities
+  resources :promoters
 	root to: "admins#index"
 
 	resources :admins, only: [:index]

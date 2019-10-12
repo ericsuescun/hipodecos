@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Entities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Initials</th>
+      <th>Code</th>
+      <th>Mgr name</th>
+      <th>Mgr email</th>
+      <th>Mgr tel</th>
+      <th>Mgr cel</th>
+      <th>Municipality</th>
+      <th>Department</th>
+      <th>Address</th>
+      <th>Entype</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @entities.each do |entity| %>
+      <tr>
+        <td><%= entity.name %></td>
+        <td><%= entity.initials %></td>
+        <td><%= entity.code %></td>
+        <td><%= entity.mgr_name %></td>
+        <td><%= entity.mgr_email %></td>
+        <td><%= entity.mgr_tel %></td>
+        <td><%= entity.mgr_cel %></td>
+        <td><%= entity.municipality %></td>
+        <td><%= entity.department %></td>
+        <td><%= entity.address %></td>
+        <td><%= entity.entype %></td>
+        <td><%= link_to 'Show', entity %></td>
+        <td><%= link_to 'Edit', edit_entity_path(entity) %></td>
+        <td><%= link_to 'Destroy', entity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Entity', new_entity_path %>

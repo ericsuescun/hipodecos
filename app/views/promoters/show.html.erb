@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @promoter.name %>
+</p>
+
+<p>
+  <strong>Initials:</strong>
+  <%= @promoter.initials %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @promoter.code %>
+</p>
+
+<%= link_to 'Edit', edit_promoter_path(@promoter) %> |
+<%= link_to 'Back', promoters_path %>

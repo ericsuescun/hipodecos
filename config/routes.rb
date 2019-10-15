@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
 
+
+  resources :values
+  resources :factors
+  resources :rates
   resources :costs
   resources :codevals
+  resources :codevals do
+  	resources :costs	
+  end
+  
   resources :branches
   resources :entities
   resources :promoters

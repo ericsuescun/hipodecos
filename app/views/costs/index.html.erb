@@ -5,8 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Codeval</th>
-      <th>Cost</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Admin</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,8 +15,9 @@
   <tbody>
     <% @costs.each do |cost| %>
       <tr>
-        <td><%= cost.codeval %></td>
-        <td><%= cost.cost %></td>
+        <td><%= cost.name %></td>
+        <td><%= cost.description %></td>
+        <td><%= cost.admin_id %></td>
         <td><%= link_to 'Show', cost %></td>
         <td><%= link_to 'Edit', edit_cost_path(cost) %></td>
         <td><%= link_to 'Destroy', cost, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,4 +1,5 @@
 class PromotersController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_promoter, only: [:show, :edit, :update, :destroy]
 
   # GET /promoters

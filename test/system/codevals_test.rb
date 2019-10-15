@@ -14,8 +14,10 @@ class CodevalsTest < ApplicationSystemTestCase
     visit codevals_url
     click_on "New Codeval"
 
+    fill_in "Admin", with: @codeval.admin_id
     fill_in "Code", with: @codeval.code
     fill_in "Description", with: @codeval.description
+    fill_in "Name", with: @codeval.name
     fill_in "Oms code", with: @codeval.oms_code
     fill_in "Origin system", with: @codeval.origin_system
     click_on "Create Codeval"
@@ -28,8 +30,10 @@ class CodevalsTest < ApplicationSystemTestCase
     visit codevals_url
     click_on "Edit", match: :first
 
+    fill_in "Admin", with: @codeval.admin_id
     fill_in "Code", with: @codeval.code
     fill_in "Description", with: @codeval.description
+    fill_in "Name", with: @codeval.name
     fill_in "Oms code", with: @codeval.oms_code
     fill_in "Origin system", with: @codeval.origin_system
     click_on "Update Codeval"

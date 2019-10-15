@@ -12,13 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :codeval_id %>
-    <%= form.text_field :codeval_id %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :cost %>
-    <%= form.text_field :cost %>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :admin_id %>
+    <%= form.number_field :admin_id %>
   </div>
 
   <div class="actions">

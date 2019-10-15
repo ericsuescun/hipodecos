@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Factors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Codeval</th>
+      <th>Rate</th>
+      <th>Factor</th>
+      <th>Description</th>
+      <th>Admin</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @factors.each do |factor| %>
+      <tr>
+        <td><%= factor.codeval %></td>
+        <td><%= factor.rate %></td>
+        <td><%= factor.factor %></td>
+        <td><%= factor.description %></td>
+        <td><%= factor.admin_id %></td>
+        <td><%= link_to 'Show', factor %></td>
+        <td><%= link_to 'Edit', edit_factor_path(factor) %></td>
+        <td><%= link_to 'Destroy', factor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Factor', new_factor_path %>

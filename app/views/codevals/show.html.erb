@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Name:</strong>
+  <%= @codeval.name %>
+</p>
+
+<p>
   <strong>Code:</strong>
   <%= @codeval.code %>
 </p>
@@ -18,6 +23,11 @@
 <p>
   <strong>Oms code:</strong>
   <%= @codeval.oms_code %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @codeval.admin_id %>
 </p>
 
 <%= link_to 'Edit', edit_codeval_path(@codeval) %> |

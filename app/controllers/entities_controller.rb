@@ -1,4 +1,5 @@
 class EntitiesController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   # GET /entities

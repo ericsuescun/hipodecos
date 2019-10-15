@@ -5,10 +5,12 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
       <th>Code</th>
       <th>Description</th>
       <th>Origin system</th>
       <th>Oms code</th>
+      <th>Admin</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +18,12 @@
   <tbody>
     <% @codevals.each do |codeval| %>
       <tr>
+        <td><%= codeval.name %></td>
         <td><%= codeval.code %></td>
         <td><%= codeval.description %></td>
         <td><%= codeval.origin_system %></td>
         <td><%= codeval.oms_code %></td>
+        <td><%= codeval.admin_id %></td>
         <td><%= link_to 'Show', codeval %></td>
         <td><%= link_to 'Edit', edit_codeval_path(codeval) %></td>
         <td><%= link_to 'Destroy', codeval, method: :delete, data: { confirm: 'Are you sure?' } %></td>

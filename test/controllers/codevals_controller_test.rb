@@ -17,7 +17,7 @@ class CodevalsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create codeval" do
     assert_difference('Codeval.count') do
-      post codevals_url, params: { codeval: { code: @codeval.code, description: @codeval.description, oms_code: @codeval.oms_code, origin_system: @codeval.origin_system } }
+      post codevals_url, params: { codeval: { admin_id: @codeval.admin_id, code: @codeval.code, description: @codeval.description, name: @codeval.name, oms_code: @codeval.oms_code, origin_system: @codeval.origin_system } }
     end
 
     assert_redirected_to codeval_url(Codeval.last)
@@ -34,7 +34,7 @@ class CodevalsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update codeval" do
-    patch codeval_url(@codeval), params: { codeval: { code: @codeval.code, description: @codeval.description, oms_code: @codeval.oms_code, origin_system: @codeval.origin_system } }
+    patch codeval_url(@codeval), params: { codeval: { admin_id: @codeval.admin_id, code: @codeval.code, description: @codeval.description, name: @codeval.name, oms_code: @codeval.oms_code, origin_system: @codeval.origin_system } }
     assert_redirected_to codeval_url(@codeval)
   end
 

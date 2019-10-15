@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_12_043433) do
+ActiveRecord::Schema.define(version: 2019_10_15_043741) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -49,20 +49,22 @@ ActiveRecord::Schema.define(version: 2019_10_12_043433) do
   end
 
   create_table "codevals", force: :cascade do |t|
+    t.string "name"
     t.string "code"
     t.text "description"
     t.string "origin_system"
     t.string "oms_code"
+    t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "costs", force: :cascade do |t|
-    t.integer "codeval_id"
-    t.decimal "cost"
+    t.string "name"
+    t.text "description"
+    t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["codeval_id"], name: "index_costs_on_codeval_id"
   end
 
   create_table "entities", force: :cascade do |t|
@@ -81,10 +83,30 @@ ActiveRecord::Schema.define(version: 2019_10_12_043433) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "factors", force: :cascade do |t|
+    t.integer "codeval_id"
+    t.integer "rate_id"
+    t.decimal "factor"
+    t.text "description"
+    t.integer "admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["codeval_id"], name: "index_factors_on_codeval_id"
+    t.index ["rate_id"], name: "index_factors_on_rate_id"
+  end
+
   create_table "promoters", force: :cascade do |t|
     t.string "name"
     t.string "initials"
     t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -113,6 +135,18 @@ ActiveRecord::Schema.define(version: 2019_10_12_043433) do
     t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "values", force: :cascade do |t|
+    t.integer "codeval_id"
+    t.integer "cost_id"
+    t.decimal "value"
+    t.text "description"
+    t.integer "admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["codeval_id"], name: "index_values_on_codeval_id"
+    t.index ["cost_id"], name: "index_values_on_cost_id"
   end
 
 end

@@ -14,8 +14,9 @@ class CostsTest < ApplicationSystemTestCase
     visit costs_url
     click_on "New Cost"
 
-    fill_in "Codeval", with: @cost.codeval_id
-    fill_in "Cost", with: @cost.cost
+    fill_in "Admin", with: @cost.admin_id
+    fill_in "Description", with: @cost.description
+    fill_in "Name", with: @cost.name
     click_on "Create Cost"
 
     assert_text "Cost was successfully created"
@@ -26,8 +27,9 @@ class CostsTest < ApplicationSystemTestCase
     visit costs_url
     click_on "Edit", match: :first
 
-    fill_in "Codeval", with: @cost.codeval_id
-    fill_in "Cost", with: @cost.cost
+    fill_in "Admin", with: @cost.admin_id
+    fill_in "Description", with: @cost.description
+    fill_in "Name", with: @cost.name
     click_on "Update Cost"
 
     assert_text "Cost was successfully updated"

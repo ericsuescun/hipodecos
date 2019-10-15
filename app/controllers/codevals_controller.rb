@@ -69,6 +69,6 @@ class CodevalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def codeval_params
-      params.require(:codeval).permit(:code, :description, :origin_system, :oms_code)
+      params.require(:codeval).permit(:name, :code, :description, :origin_system, :oms_code, :admin_id)
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_15_043741) do
+ActiveRecord::Schema.define(version: 2019_10_15_045402) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -107,6 +107,19 @@ ActiveRecord::Schema.define(version: 2019_10_15_043741) do
     t.string "name"
     t.text "description"
     t.integer "admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.integer "admin_id"
+    t.string "name"
+    t.text "description"
+    t.decimal "rate"
+    t.decimal "time"
+    t.decimal "health_care_rate"
+    t.decimal "pension_rate"
+    t.decimal "parafiscal_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

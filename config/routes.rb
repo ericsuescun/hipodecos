@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :roles
   resources :values
   resources :factors
   resources :rates

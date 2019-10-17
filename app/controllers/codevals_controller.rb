@@ -1,4 +1,5 @@
 class CodevalsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_codeval, only: [:show, :edit, :update, :destroy]
 
   # GET /codevals

@@ -29,7 +29,7 @@ class PromotersController < ApplicationController
 
     respond_to do |format|
       if @promoter.save
-        format.html { redirect_to @promoter, notice: 'Promoter was successfully created.' }
+        format.html { redirect_to promoters_path, notice: 'EPS creada con éxito.' }
         format.json { render :show, status: :created, location: @promoter }
       else
         format.html { render :new }

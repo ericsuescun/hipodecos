@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :entity_id %>
-    <%= form.text_field :entity_id %>
+    <%= form.label "IPS a la que pertenece" %><br />
+    <%= form.select :entity_id, Entity.pluck(:name, :id), {prompt:"Seleccione la IPS"}, class: "form-control" %>
   </div>
 
   <div class="field">

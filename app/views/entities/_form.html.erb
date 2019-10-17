@@ -1,72 +1,67 @@
-<%= form_with(model: entity, local: true) do |form| %>
-  <% if entity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(entity.errors.count, "error") %> prohibited this entity from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <%= form_with(model: entity, local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label "Nombre" %>
+          <%= form.text_field :name, class: "form-control form-control-lg input" %>
+        </div>
 
-      <ul>
-      <% entity.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <div class="form-group">
+          <%= form.label "Siglas" %>
+          <%= form.text_field :initials, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Código IPS" %>
+          <%= form.text_field :code, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Nombre del gerente" %>
+          <%= form.text_field :mgr_name, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Email corporativo" %>
+          <%= form.text_field :mgr_email, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Teléfono de contacto" %>
+          <%= form.text_field :mgr_tel, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Celular de contacto" %>
+          <%= form.text_field :mgr_cel, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Municipio" %>
+          <%= form.text_field :municipality, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Departamento" %>
+          <%= form.text_field :department, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Dirección de correspondencia" %>
+          <%= form.text_field :address, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Tipo de entidad" %>
+          <%= form.text_field :entype, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Guardar EPS", class: "btn btn-primary btn-block" %>
+        </div>
       <% end %>
-      </ul>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :initials %>
-    <%= form.text_field :initials %>
-  </div>
-
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :mgr_name %>
-    <%= form.text_field :mgr_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :mgr_email %>
-    <%= form.text_field :mgr_email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :mgr_tel %>
-    <%= form.text_field :mgr_tel %>
-  </div>
-
-  <div class="field">
-    <%= form.label :mgr_cel %>
-    <%= form.text_field :mgr_cel %>
-  </div>
-
-  <div class="field">
-    <%= form.label :municipality %>
-    <%= form.text_field :municipality %>
-  </div>
-
-  <div class="field">
-    <%= form.label :department %>
-    <%= form.text_field :department %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :entype %>
-    <%= form.text_field :entype %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

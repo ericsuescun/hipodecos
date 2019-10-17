@@ -1,4 +1,5 @@
 class RolesController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   # GET /roles
@@ -25,10 +26,11 @@ class RolesController < ApplicationController
   # POST /roles.json
   def create
     @role = Role.new(role_params)
+    @role.admin_id = current_admin.id
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to @role, notice: 'Role was successfully created.' }
+        format.html { redirect_to roles_path, notice: 'Cargo creado exitosamente.' }
         format.json { render :show, status: :created, location: @role }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.html { redirect_to @role, notice: 'Role was successfully updated.' }
+        format.html { redirect_to roles_path, notice: 'Cargo editado exitosamente.' }
         format.json { render :show, status: :ok, location: @role }
       else
         format.html { render :edit }

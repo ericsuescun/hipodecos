@@ -1,31 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
 
-<h1>Promoters</h1>
+      <h1>Listado de EPS</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Initials</th>
-      <th>Code</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Siglas</th>
+            <th>Código</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @promoters.each do |promoter| %>
-      <tr>
-        <td><%= promoter.name %></td>
-        <td><%= promoter.initials %></td>
-        <td><%= promoter.code %></td>
-        <td><%= link_to 'Show', promoter %></td>
-        <td><%= link_to 'Edit', edit_promoter_path(promoter) %></td>
-        <td><%= link_to 'Destroy', promoter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @promoters.each do |promoter| %>
+            <tr>
+              <td><%= promoter.name %></td>
+              <td><%= promoter.initials %></td>
+              <td><%= promoter.code %></td>
+              <td><%= link_to 'Editar', edit_promoter_path(promoter) %></td>
+              <td><%= link_to 'Borrar', promoter, method: :delete, data: { confirm: '¿Confirmas la acción?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<br>
+      <br>
 
-<%= link_to 'New Promoter', new_promoter_path %>
+    </div>
+  </div>
+</div>

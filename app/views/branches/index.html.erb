@@ -1,49 +1,56 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
 
-<h1>Branches</h1>
+      <h1>Sedes IPS</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Entity</th>
-      <th>Name</th>
-      <th>Initials</th>
-      <th>Code</th>
-      <th>Mgr name</th>
-      <th>Mgr email</th>
-      <th>Mgr tel</th>
-      <th>Mgr cel</th>
-      <th>Municipality</th>
-      <th>Department</th>
-      <th>Address</th>
-      <th>Entype</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>IPS Pirncipal</th>
+            <th>Nombre</th>
+            <th>Siglas</th>
+            <th>Código</th>
+            <th>Contacto</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Celular</th>
+            <th>Municipio</th>
+            <th>Departamento</th>
+            <th>Dirección</th>
+            <th>Tipo de IPS</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @branches.each do |branch| %>
-      <tr>
-        <td><%= branch.entity %></td>
-        <td><%= branch.name %></td>
-        <td><%= branch.initials %></td>
-        <td><%= branch.code %></td>
-        <td><%= branch.mgr_name %></td>
-        <td><%= branch.mgr_email %></td>
-        <td><%= branch.mgr_tel %></td>
-        <td><%= branch.mgr_cel %></td>
-        <td><%= branch.municipality %></td>
-        <td><%= branch.department %></td>
-        <td><%= branch.address %></td>
-        <td><%= branch.entype %></td>
-        <td><%= link_to 'Show', branch %></td>
-        <td><%= link_to 'Edit', edit_branch_path(branch) %></td>
-        <td><%= link_to 'Destroy', branch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @branches.each do |branch| %>
+            <tr>
+              <td><%= branch.entity.name %></td>
+              <td><%= branch.name %></td>
+              <td><%= branch.initials %></td>
+              <td><%= branch.code %></td>
+              <td><%= branch.mgr_name %></td>
+              <td><%= branch.mgr_email %></td>
+              <td><%= branch.mgr_tel %></td>
+              <td><%= branch.mgr_cel %></td>
+              <td><%= branch.municipality %></td>
+              <td><%= branch.department %></td>
+              <td><%= branch.address %></td>
+              <td><%= branch.entype %></td>
+              <td><%= link_to 'Editar', edit_branch_path(branch) %></td>
+              <td><%= link_to 'Borrar', branch, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<br>
+      <br>
 
-<%= link_to 'New Branch', new_branch_path %>
+      <%= link_to 'Crear sede', new_branch_path %>
+
+      <br>
+
+    </div>
+  </div>
+</div>

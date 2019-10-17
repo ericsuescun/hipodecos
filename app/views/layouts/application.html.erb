@@ -18,83 +18,111 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Admins
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/admins">Admins</a>
-              <a class="dropdown-item" href="/admins/sign_up">Nuevo</a>
-              <a class="dropdown-item" href="/admins/sign_in">Ingresar</a>
-              <a class="dropdown-item" href="/admins/edit">Editar</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Usuarios
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/users">Usuarios</a>
-              <a class="dropdown-item" href="/users/sign_up">Nuevo</a>
-              <a class="dropdown-item" href="/users/sign_in">Ingresar</a>
-              <a class="dropdown-item" href="/users/edit">Editar</a>
-              <a class="dropdown-item" href="#">Archivos y hojas de vida</a>
-              <a class="dropdown-item" href="#">Roles</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Instituciones
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/promoters">EPS</a>
-              <a class="dropdown-item" href="#">IPS</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Sedes</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Administración
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">CUPS</a>
-              <a class="dropdown-item" href="#">Costos</a>
-              <a class="dropdown-item" href="#">Tarifas</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Lista de no conformidades</a>
-              <a class="dropdown-item" href="#">Lista de correcciones</a>
-              <a class="dropdown-item" href="#">No conformidades</a>
-              <div class="dropdown-divider"></div>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Reportes
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">A</a>
-              <a class="dropdown-item" href="#">B</a>
-              <a class="dropdown-item" href="#">C</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">D</a>
-              <a class="dropdown-item" href="#">E</a>
-              <a class="dropdown-item" href="#">F</a>
-              <div class="dropdown-divider"></div>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">IPS</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              CUPS
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/codevals">Listado</a>
-              <a class="dropdown-item" href="/codevals/new">Nuevo</a>
-            </div>
-          </li>
+          <% if admin_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admins
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/admins">Admins</a>
+                <a class="dropdown-item" href="/admins/sign_in">Ingresar</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Usuarios
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Usuarios", users_path, class: "dropdown-item" %>
+                <%= link_to "Ingresar", new_user_session_path, class: "dropdown-item" %>
+                <%= link_to "Nuevo Usuario", new_user_registration_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Cargos", roles_path, class: "dropdown-item" %>
+                <%= link_to 'Nuevo Cargo', new_role_path, class: "dropdown-item" %>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Instituciones
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "EPS", promoters_path, class: "dropdown-item" %>
+                <%= link_to "Crear EPS", new_promoter_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to "IPS", entities_path, class: "dropdown-item" %>
+                <%= link_to "Crear IPS", new_entity_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Sedes IPS", branches_path, class: "dropdown-item" %>
+                <%= link_to "Crear Sede IPS", new_branch_path, class: "dropdown-item" %>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Administración
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">CUPS</a>
+                <a class="dropdown-item" href="#">Costos</a>
+                <a class="dropdown-item" href="#">Tarifas</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Lista de no conformidades</a>
+                <a class="dropdown-item" href="#">Lista de correcciones</a>
+                <a class="dropdown-item" href="#">No conformidades</a>
+                <div class="dropdown-divider"></div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Reportes
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">A</a>
+                <a class="dropdown-item" href="#">B</a>
+                <a class="dropdown-item" href="#">C</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">D</a>
+                <a class="dropdown-item" href="#">E</a>
+                <a class="dropdown-item" href="#">F</a>
+                <div class="dropdown-divider"></div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">IPS</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                CUPS
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/codevals">Listado</a>
+                <a class="dropdown-item" href="/codevals/new">Nuevo</a>
+              </div>
+            </li>
+          <% end %>
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Informes
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/admins">Matrícula</a>
+                <a class="dropdown-item" href="/admins/sign_up">Edición</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Procedimientos
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/users">Registro de especímenes</a>
+                <a class="dropdown-item" href="/users/sign_up">Macros</a>
+                <a class="dropdown-item" href="/users/sign_in">Cassettes</a>
+                <a class="dropdown-item" href="/users/edit">Bloques</a>
+                <a class="dropdown-item" href="#">Placas</a>
+                <%= link_to "Roles", roles_path, class: "dropdown-item" %>
+              </div>
+            </li>
+          <% end %>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
@@ -104,7 +132,7 @@
           <ul class="navbar-nav d-flex justify-content-end">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= current_admin.email %>
+                Admin: <%= current_admin.email %>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <%= link_to "Salir", destroy_admin_session_path, method: :delete, class: "dropdown-item" %>
@@ -116,7 +144,7 @@
             <ul class="navbar-nav d-flex justify-content-end">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <%= current_user.email %>
+                  Usuario: <%= current_user.email %>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <%= link_to "Salir", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
@@ -125,9 +153,6 @@
             </ul>
           <% else %>
             <ul class="navbar-nav d-flex justify-content-end">
-              <li class="nav-item active">
-                <%= link_to "Regístrate", new_admin_registration_path, class: "nav-link" %>
-              </li>
               <li class="nav-item active">
                 <%= link_to "Ingresar", new_admin_session_path, class: "nav-link" %>
               </li>

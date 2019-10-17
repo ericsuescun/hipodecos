@@ -1,4 +1,5 @@
 class CostsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_cost, only: [:show, :edit, :update, :destroy]
 
   # GET /costs

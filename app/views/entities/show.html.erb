@@ -1,59 +1,43 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @entity.name %>
-</p>
-
-<p>
-  <strong>Initials:</strong>
-  <%= @entity.initials %>
-</p>
-
-<p>
-  <strong>Code:</strong>
-  <%= @entity.code %>
-</p>
-
-<p>
-  <strong>Mgr name:</strong>
-  <%= @entity.mgr_name %>
-</p>
-
-<p>
-  <strong>Mgr email:</strong>
-  <%= @entity.mgr_email %>
-</p>
-
-<p>
-  <strong>Mgr tel:</strong>
-  <%= @entity.mgr_tel %>
-</p>
-
-<p>
-  <strong>Mgr cel:</strong>
-  <%= @entity.mgr_cel %>
-</p>
-
-<p>
-  <strong>Municipality:</strong>
-  <%= @entity.municipality %>
-</p>
-
-<p>
-  <strong>Department:</strong>
-  <%= @entity.department %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @entity.address %>
-</p>
-
-<p>
-  <strong>Entype:</strong>
-  <%= @entity.entype %>
-</p>
-
-<%= link_to 'Edit', edit_entity_path(@entity) %> |
-<%= link_to 'Back', entities_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="card text-center mt-3">
+        <div class="card-header">
+          <%= @entity.initials %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= @entity.name %> - <%= @entity.code %></h5>
+          <p class="card-text">Gerente: <%= @entity.mgr_name %>, <%= @entity.mgr_email %></p>
+          <p class="card-text">Teléfono: <%= @entity.mgr_tel %>, Celular: <%= @entity.mgr_cel %></p>
+        </div>
+        <div class="card-footer text-muted">
+          Entidad <%= @entity.entype %>
+          <%= @entity.address %>, <%= @entity.municipality %>, <%= @entity.department %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <% @branches.each do |branch| %>
+      <div class="col-12 col-lg-3">
+        <div class="card text-center mt-3">
+          <div class="card-header">
+            <%= branch.initials %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= branch.name %> - <%= branch.code %></h5>
+            <p class="card-text">Gerente: <%= branch.mgr_name %>, <%= branch.mgr_email %></p>
+            <p class="card-text">Teléfono: <%= branch.mgr_tel %>, Celular: <%= branch.mgr_cel %></p>
+          </div>
+          <div class="card-footer text-muted">
+            <p>Entidad <%= branch.entype %></p>
+            <p><%= branch.address %>, <%= branch.municipality %>, <%= branch.department %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+<!--       <div class="col-12 col-lg-3">
+        <%= render 'form', entity: @entity.branches.build %>
+      </div> -->
+  </div>
+</div>

@@ -1,4 +1,5 @@
 class FactorsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_factor, only: [:show, :edit, :update, :destroy]
 
   # GET /factors

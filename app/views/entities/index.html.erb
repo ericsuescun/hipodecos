@@ -1,47 +1,51 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
 
-<h1>Entities</h1>
+      <h1>Listado de Instituciones Prestadoras de Salud - IPS</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Initials</th>
-      <th>Code</th>
-      <th>Mgr name</th>
-      <th>Mgr email</th>
-      <th>Mgr tel</th>
-      <th>Mgr cel</th>
-      <th>Municipality</th>
-      <th>Department</th>
-      <th>Address</th>
-      <th>Entype</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Siglas</th>
+            <th>Código</th>
+            <th>Contacto</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Celular</th>
+            <th>Municipio</th>
+            <th>Departamento</th>
+            <th>Dirección</th>
+            <th>Tipo de IPS</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @entities.each do |entity| %>
-      <tr>
-        <td><%= entity.name %></td>
-        <td><%= entity.initials %></td>
-        <td><%= entity.code %></td>
-        <td><%= entity.mgr_name %></td>
-        <td><%= entity.mgr_email %></td>
-        <td><%= entity.mgr_tel %></td>
-        <td><%= entity.mgr_cel %></td>
-        <td><%= entity.municipality %></td>
-        <td><%= entity.department %></td>
-        <td><%= entity.address %></td>
-        <td><%= entity.entype %></td>
-        <td><%= link_to 'Show', entity %></td>
-        <td><%= link_to 'Edit', edit_entity_path(entity) %></td>
-        <td><%= link_to 'Destroy', entity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @entities.each do |entity| %>
+            <tr>
+              <td><%= entity.name %></td>
+              <td><%= entity.initials %></td>
+              <td><%= entity.code %></td>
+              <td><%= entity.mgr_name %></td>
+              <td><%= entity.mgr_email %></td>
+              <td><%= entity.mgr_tel %></td>
+              <td><%= entity.mgr_cel %></td>
+              <td><%= entity.municipality %></td>
+              <td><%= entity.department %></td>
+              <td><%= entity.address %></td>
+              <td><%= entity.entype %></td>
+              <td><%= link_to 'Mostrar', entity %></td>
+              <td><%= link_to 'Editar', edit_entity_path(entity) %></td>
+              <td><%= link_to 'Borrar', entity, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<br>
+      <br>
 
-<%= link_to 'New Entity', new_entity_path %>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 class ValuesController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_value, only: [:show, :edit, :update, :destroy]
 
   # GET /values

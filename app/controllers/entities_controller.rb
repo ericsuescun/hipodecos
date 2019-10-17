@@ -11,6 +11,7 @@ class EntitiesController < ApplicationController
   # GET /entities/1
   # GET /entities/1.json
   def show
+    @branches = @entity.branches
   end
 
   # GET /entities/new
@@ -25,11 +26,27 @@ class EntitiesController < ApplicationController
   # POST /entities
   # POST /entities.json
   def create
-    @entity = Entity.new(entity_params)
-
+    @entity = Entity.new(entity_params)  
+    @branch = Branch.new  
     respond_to do |format|
       if @entity.save
-        format.html { redirect_to @entity, notice: 'Entity was successfully created.' }
+
+        @branch.entity = @entity
+        @branch.name = @entity.name
+        @branch.initials = @entity.initials
+        @branch.code = @entity.code
+        @branch.mgr_name = @entity.mgr_name
+        @branch.mgr_email = @entity.mgr_email
+        @branch.mgr_tel = @entity.mgr_tel
+        @branch.mgr_cel = @entity.mgr_cel
+        @branch.municipality = @entity.municipality
+        @branch.department = @entity.department
+        @branch.address = @entity.address
+        @branch.entype = @entity.entype
+        
+        @branch.save
+
+        format.html { redirect_to @entity, notice: 'IPS creada exitosamente. Hicimos por ti una sede principal con los mismos datos, revísala!' }
         format.json { render :show, status: :created, location: @entity }
       else
         format.html { render :new }
@@ -43,7 +60,7 @@ class EntitiesController < ApplicationController
   def update
     respond_to do |format|
       if @entity.update(entity_params)
-        format.html { redirect_to @entity, notice: 'Entity was successfully updated.' }
+        format.html { redirect_to entities_path, notice: 'IPS editada exitosamente.' }
         format.json { render :show, status: :ok, location: @entity }
       else
         format.html { render :edit }

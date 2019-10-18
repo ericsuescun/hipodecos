@@ -27,15 +27,24 @@ class CostsController < ApplicationController
   def create
     @cost = Cost.new(cost_params)
 
-    respond_to do |format|
-      if @cost.save
-        format.html { redirect_to @cost, notice: 'Cost was successfully created.' }
-        format.json { render :show, status: :created, location: @cost }
-      else
-        format.html { render :new }
-        format.json { render json: @cost.errors, status: :unprocessable_entity }
-      end
+    @cost.admin_id = current_admin.id
+
+    @cost.save
+
+    @codevals = Codeval.all
+
+    @codevals.each do |codeval|
+      value = Value.new
+      value.codeval = codeval
+      value.cost = @cost
+      value.value = codeval.values.find_by_cost_id(@cost.base.to_i).value * @cost.factor
+      value.description = @cost.description
+      value.admin_id = current_admin.id
+      value.save
     end
+
+    redirect_to @cost, notice: 'Rate was successfully created.'
+
   end
 
   # PATCH/PUT /costs/1
@@ -70,6 +79,6 @@ class CostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cost_params
-      params.require(:cost).permit(:name, :description, :admin_id)
+      params.require(:cost).permit(:name, :description, :admin_id, :base, :factor)
     end
 end

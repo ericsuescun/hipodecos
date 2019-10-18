@@ -1,32 +1,28 @@
-<%= form_with(model: rate, local: true) do |form| %>
-  <% if rate.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(rate.errors.count, "error") %> prohibited this rate from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4 mx-auto">
+      <%= form_with(model: rate, local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label "Nombre" %>
+          <%= form.text_field :name, class: "form-control form-control-lg input" %>
+        </div>
 
-      <ul>
-      <% rate.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <div class="form-group">
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Factor general" %>
+          <%= form.number_field :factor, step: :any, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Guardar", class: 'btn btn-primary btn-block' %>
+        </div>
       <% end %>
-      </ul>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin_id %>
-    <%= form.number_field :admin_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

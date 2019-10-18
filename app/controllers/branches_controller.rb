@@ -25,14 +25,16 @@ class BranchesController < ApplicationController
   # POST /branches
   # POST /branches.json
   def create
-    @branch = Branch.new(branch_params)
+    # @branch = Branch.new(branch_params)
+
+    entity = Entity.find(params[:entity_id])
 
     respond_to do |format|
-      if @branch.save
-        format.html { redirect_to @branch, notice: 'Branch was successfully created.' }
+      if entity.branches.create(branch_params)
+        format.html { redirect_to entity, notice: 'La sede ha sido creada exitosamente.' }
         format.json { render :show, status: :created, location: @branch }
       else
-        format.html { render :new }
+        format.html { render entity }
         format.json { render json: @branch.errors, status: :unprocessable_entity }
       end
     end
@@ -41,9 +43,10 @@ class BranchesController < ApplicationController
   # PATCH/PUT /branches/1
   # PATCH/PUT /branches/1.json
   def update
+    ret_url = @branch.entity
     respond_to do |format|
       if @branch.update(branch_params)
-        format.html { redirect_to @branch, notice: 'Branch was successfully updated.' }
+        format.html { redirect_to ret_url, notice: 'La sede ha sido editada exitosamente.' }
         format.json { render :show, status: :ok, location: @branch }
       else
         format.html { render :edit }
@@ -55,9 +58,10 @@ class BranchesController < ApplicationController
   # DELETE /branches/1
   # DELETE /branches/1.json
   def destroy
+    ret_url = @branch.entity
     @branch.destroy
     respond_to do |format|
-      format.html { redirect_to branches_url, notice: 'Branch was successfully destroyed.' }
+      format.html { redirect_to ret_url, notice: 'La sede ha sido borrada exitosamente.' }
       format.json { head :no_content }
     end
   end

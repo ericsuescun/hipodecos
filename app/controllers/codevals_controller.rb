@@ -26,6 +26,7 @@ class CodevalsController < ApplicationController
   # POST /codevals.json
   def create
     @codeval = Codeval.new(codeval_params)
+    @codeval.admin_id = current_admin.id
 
     respond_to do |format|
       if @codeval.save

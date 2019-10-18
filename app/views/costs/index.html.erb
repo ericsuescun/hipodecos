@@ -1,31 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <h1>Tablas de costos</h1>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Admin</th>
+            <th>Fecha de creación</th>
+            <th>Fecha de modificación</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<h1>Costs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Admin</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @costs.each do |cost| %>
-      <tr>
-        <td><%= cost.name %></td>
-        <td><%= cost.description %></td>
-        <td><%= cost.admin_id %></td>
-        <td><%= link_to 'Show', cost %></td>
-        <td><%= link_to 'Edit', edit_cost_path(cost) %></td>
-        <td><%= link_to 'Destroy', cost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Cost', new_cost_path %>
+        <tbody>
+          <% @costs.each do |cost| %>
+            <tr>
+              <td><%= cost.name %></td>
+              <td><%= cost.description %></td>
+              <td><%= Admin.find(cost.admin_id).name %></td>
+              <td><%= cost.created_at %></td>
+              <td><%= cost.updated_at %></td>
+              <td><%= link_to 'Detalles', cost %></td>
+              <td><%= link_to 'Editar', edit_cost_path(cost) %></td>
+              <td><%= link_to 'Borrar', cost, method: :delete, data: { confirm: '¿Confirmas la acción?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

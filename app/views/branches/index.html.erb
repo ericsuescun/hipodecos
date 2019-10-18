@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid d-none">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
 
@@ -7,10 +7,10 @@
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
-            <th>IPS Pirncipal</th>
+            <th>Código</th>
+            <th>IPS Principal</th>
             <th>Nombre</th>
             <th>Siglas</th>
-            <th>Código</th>
             <th>Contacto</th>
             <th>Email</th>
             <th>Teléfono</th>
@@ -26,10 +26,10 @@
         <tbody>
           <% @branches.each do |branch| %>
             <tr>
+              <td><%= branch.code %></td>
               <td><%= branch.entity.name %></td>
               <td><%= branch.name %></td>
               <td><%= branch.initials %></td>
-              <td><%= branch.code %></td>
               <td><%= branch.mgr_name %></td>
               <td><%= branch.mgr_email %></td>
               <td><%= branch.mgr_tel %></td>
@@ -47,10 +47,37 @@
 
       <br>
 
-      <%= link_to 'Crear sede', new_branch_path %>
+    </div>
+  </div>
+</div>
 
-      <br>
 
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <h1>Listado de sedes IPS</h1>
+      <% @branches.each do |branch| %>
+
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-lg-8">
+              <div class="card-body">
+                <h3 class="card-title">IPS <%= branch.entity.name %>, sede <%= branch.initials %></h3>
+                <p class="card-text">Gerente: <strong><%= branch.mgr_name %></strong></p>
+                <p class="card-text">Email: <strong><%= branch.mgr_email %></strong></p>
+                <p class="card-text">Teléfonos: <strong><%= branch.mgr_tel %> - <%= branch.mgr_cel %></strong></p>
+                <p class="card-text">Dirección: <strong><%= branch.address %></strong></p>
+                <p class="card-text"><small class="text-muted"><%= branch.municipality %>, <%= branch.department %></small></p>
+              </div>
+            </div>
+            <div class="col-12 col-lg-2 mx-auto my-3">
+              <br>
+              <%= link_to 'Editar', edit_branch_path(branch), class: 'btn btn-primary' %>
+              <%= link_to 'Borrar', branch, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

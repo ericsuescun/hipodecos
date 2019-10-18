@@ -1,37 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <h1>Listado de CUPS</h1>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>CUPS</th>
+            <th>OMS</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Origin system</th>
+            <th>Admin</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<h1>Codevals</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Code</th>
-      <th>Description</th>
-      <th>Origin system</th>
-      <th>Oms code</th>
-      <th>Admin</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @codevals.each do |codeval| %>
-      <tr>
-        <td><%= codeval.name %></td>
-        <td><%= codeval.code %></td>
-        <td><%= codeval.description %></td>
-        <td><%= codeval.origin_system %></td>
-        <td><%= codeval.oms_code %></td>
-        <td><%= codeval.admin_id %></td>
-        <td><%= link_to 'Show', codeval %></td>
-        <td><%= link_to 'Edit', edit_codeval_path(codeval) %></td>
-        <td><%= link_to 'Destroy', codeval, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Codeval', new_codeval_path %>
+        <tbody>
+          <% @codevals.each do |codeval| %>
+            <tr>
+              <td><%= codeval.code %></td>
+              <td><%= codeval.oms_code %></td>
+              <td><%= codeval.name %></td>
+              <td><%= codeval.description %></td>
+              <td><%= codeval.origin_system %></td>
+              <td><%= Admin.find(codeval.admin_id).name %></td>
+              <td><%= link_to 'Detalles', codeval %></td>
+              <td><%= link_to 'Editar', edit_codeval_path(codeval) %></td>
+              <td><%= link_to 'Borrar', codeval, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

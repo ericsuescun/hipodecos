@@ -1,22 +1,15 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-lg-12 mx-auto">
+    <div class="col-12 col-lg-8 mx-auto">
 
-      <h1>Listado de Instituciones Prestadoras de Salud - IPS</h1>
+      <h1>Listado de IPS</h1>
 
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
+            <th>Código</th>
             <th>Nombre</th>
             <th>Siglas</th>
-            <th>Código</th>
-            <th>Contacto</th>
-            <th>Email</th>
-            <th>Teléfono</th>
-            <th>Celular</th>
-            <th>Municipio</th>
-            <th>Departamento</th>
-            <th>Dirección</th>
             <th>Tipo de IPS</th>
             <th colspan="3"></th>
           </tr>
@@ -25,18 +18,11 @@
         <tbody>
           <% @entities.each do |entity| %>
             <tr>
+              <td><%= entity.code %></td>
               <td><%= entity.name %></td>
               <td><%= entity.initials %></td>
-              <td><%= entity.code %></td>
-              <td><%= entity.mgr_name %></td>
-              <td><%= entity.mgr_email %></td>
-              <td><%= entity.mgr_tel %></td>
-              <td><%= entity.mgr_cel %></td>
-              <td><%= entity.municipality %></td>
-              <td><%= entity.department %></td>
-              <td><%= entity.address %></td>
               <td><%= entity.entype %></td>
-              <td><%= link_to 'Mostrar', entity %></td>
+              <td><%= link_to 'Detalles', entity %></td>
               <td><%= link_to 'Editar', edit_entity_path(entity) %></td>
               <td><%= link_to 'Borrar', entity, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
             </tr>

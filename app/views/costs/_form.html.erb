@@ -1,32 +1,32 @@
-<%= form_with(model: cost, local: true) do |form| %>
-  <% if cost.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(cost.errors.count, "error") %> prohibited this cost from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <%= form_with(model: cost, local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label "Nombre" %>
+          <%= form.text_field :name, class: "form-control form-control-lg input" %>
+        </div>
 
-      <ul>
-      <% cost.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <div class="form-group">
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Base" %>
+          <%= form.select :base, Cost.pluck(:name, :id), {prompt:"Seleccione la tabla de costo base"}, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Aplicar factor (1 si no va a ver cambio)" %>
+          <%= form.number_field :factor, step: :any, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Guardar", class: 'btn btn-primary btn-block'%>
+        </div>
       <% end %>
-      </ul>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin_id %>
-    <%= form.number_field :admin_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

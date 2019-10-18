@@ -1,34 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @codeval.name %>
-</p>
-
-<p>
-  <strong>Code:</strong>
-  <%= @codeval.code %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @codeval.description %>
-</p>
-
-<p>
-  <strong>Origin system:</strong>
-  <%= @codeval.origin_system %>
-</p>
-
-<p>
-  <strong>Oms code:</strong>
-  <%= @codeval.oms_code %>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @codeval.admin_id %>
-</p>
-
 <%= link_to 'Edit', edit_codeval_path(@codeval) %> |
-<%= link_to 'Back', codevals_path %>
+<%= link_to 'Back', rates_path %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="card text-center mt-3">
+        <div class="card-header">
+          CUPS: <strong><%= @codeval.code %></strong> - OMS: <strong><%= @codeval.oms_code %></strong>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= @codeval.name %></h5>
+          <p class="card-text"><%= @codeval.description %></p>
+          <p class="card-text"><%= @codeval.description %> en el sistema: <%= @codeval.origin_system %></p>
+        </div>
+        <div class="card-footer text-muted">
+          Modificado por: <%= Admin.find(@codeval.admin_id).name %> - Fecha de creación: <%= @codeval.created_at %> - Fecha de modificación: <%= @codeval.updated_at %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
+      <% @codeval.costs.each do |cost| %>
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>Tabla de costo</th>
+              <th>Costo asociado</th>
+              <th>Asigando por:</th>
+              <th>Comentarios</th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= cost.name %></td>
+              <td><%= @codeval.values[0].value %></td>
+              <td><%= Admin.find(cost.admin_id).name %></td>
+              <td><%= cost.description %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

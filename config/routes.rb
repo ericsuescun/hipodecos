@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :informs
+  resources :patients
   devise_scope :user do get "users" => "users#index"
   end
 
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
   resources :entities do
     resources :branches
   end
-  resources :branches
+  resources :branches, except: [:new]
 
   resources :promoters
 

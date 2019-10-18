@@ -1,31 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <h1>Tarifas</h1>
 
-<h1>Rates</h1>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Último Admin</th>
+            <th>Factor original</th>
+            <th>Fecha modificación</th>
+            <th>Fecha de creación</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Admin</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <tbody>
+          <% @rates.each do |rate| %>
+            <tr>
+              <td><%= rate.name %></td>
+              <td><%= rate.description %></td>
+              <td><%= Admin.find(rate.admin_id).name %></td>
+              <td><%= rate.factor %></td>
+              <td><%= rate.updated_at %></td>
+              <td><%= rate.created_at %></td>
+              <td><%= link_to 'Mostrar tarifa', rate_path(rate) %></td>
+              <td><%= link_to 'Editar', edit_rate_path(rate) %></td>
+              <td><%= link_to 'Borrar', rate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @rates.each do |rate| %>
-      <tr>
-        <td><%= rate.name %></td>
-        <td><%= rate.description %></td>
-        <td><%= rate.admin_id %></td>
-        <td><%= link_to 'Show', rate %></td>
-        <td><%= link_to 'Edit', edit_rate_path(rate) %></td>
-        <td><%= link_to 'Destroy', rate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<%= link_to 'New Rate', new_rate_path %>

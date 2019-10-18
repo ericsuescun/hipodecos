@@ -27,15 +27,33 @@ class RatesController < ApplicationController
   def create
     @rate = Rate.new(rate_params)
 
-    respond_to do |format|
-      if @rate.save
-        format.html { redirect_to @rate, notice: 'Rate was successfully created.' }
-        format.json { render :show, status: :created, location: @rate }
-      else
-        format.html { render :new }
-        format.json { render json: @rate.errors, status: :unprocessable_entity }
-      end
+    @rate.admin_id = current_admin.id
+
+    @rate.save
+
+    @codevals = Codeval.all
+
+    @codevals.each do |codeval|
+      factor = Factor.new
+      factor.codeval = codeval
+      factor.rate = @rate
+      factor.factor = @rate.factor
+      factor.description = @rate.description
+      factor.admin_id = current_admin.id
+      factor.save
     end
+
+    redirect_to @rate, notice: 'Rate was successfully created.'
+
+    # respond_to do |format|
+    #   if @rate.save
+    #     format.html { redirect_to @rate, notice: 'Rate was successfully created.' }
+    #     format.json { render :show, status: :created, location: @rate }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @rate.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /rates/1
@@ -70,6 +88,6 @@ class RatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rate_params
-      params.require(:rate).permit(:name, :description, :admin_id)
+      params.require(:rate).permit(:name, :description, :admin_id, :factor)
     end
 end

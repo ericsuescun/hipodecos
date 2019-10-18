@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @inform.user_id %>
+</p>
+
+<p>
+  <strong>Physician:</strong>
+  <%= @inform.physician_id %>
+</p>
+
+<p>
+  <strong>Tag code:</strong>
+  <%= @inform.tag_code %>
+</p>
+
+<p>
+  <strong>Receive date:</strong>
+  <%= @inform.receive_date %>
+</p>
+
+<p>
+  <strong>Delivery date:</strong>
+  <%= @inform.delivery_date %>
+</p>
+
+<p>
+  <strong>Prmtr auth code:</strong>
+  <%= @inform.prmtr_auth_code %>
+</p>
+
+<p>
+  <strong>Zone type:</strong>
+  <%= @inform.zone_type %>
+</p>
+
+<p>
+  <strong>Pregnancy status:</strong>
+  <%= @inform.pregnancy_status %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @inform.status %>
+</p>
+
+<p>
+  <strong>Regime:</strong>
+  <%= @inform.regime %>
+</p>
+
+<p>
+  <strong>Entity:</strong>
+  <%= @inform.entity_id %>
+</p>
+
+<p>
+  <strong>Branch:</strong>
+  <%= @inform.branch_id %>
+</p>
+
+<p>
+  <strong>Copayment:</strong>
+  <%= @inform.copayment %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @inform.cost %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @inform.price %>
+</p>
+
+<%= link_to 'Edit', edit_inform_path(@inform) %> |
+<%= link_to 'Back', informs_path %>

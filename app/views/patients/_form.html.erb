@@ -1,0 +1,112 @@
+<%= form_with(model: patient, local: true) do |form| %>
+  <% if patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+
+      <ul>
+      <% patient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :id_number %>
+    <%= form.text_field :id_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id_type %>
+    <%= form.number_field :id_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birth_date %>
+    <%= form.date_select :birth_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age_number %>
+    <%= form.number_field :age_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age_type %>
+    <%= form.number_field :age_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name1 %>
+    <%= form.text_field :name1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name2 %>
+    <%= form.text_field :name2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lastname1 %>
+    <%= form.text_field :lastname1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lastname2 %>
+    <%= form.text_field :lastname2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sex %>
+    <%= form.number_field :sex %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.number_field :gender %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tel %>
+    <%= form.text_field :tel %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cel %>
+    <%= form.text_field :cel %>
+  </div>
+
+  <div class="field">
+    <%= form.label :occupation %>
+    <%= form.text_field :occupation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :residence_code %>
+    <%= form.text_field :residence_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :municipality %>
+    <%= form.text_field :municipality %>
+  </div>
+
+  <div class="field">
+    <%= form.label :department %>
+    <%= form.text_field :department %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

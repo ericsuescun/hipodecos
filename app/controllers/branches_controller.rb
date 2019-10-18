@@ -5,6 +5,7 @@ class BranchesController < ApplicationController
   # GET /branches
   # GET /branches.json
   def index
+    @tab = :admins
     @branches = Branch.all
   end
 

@@ -37,28 +37,38 @@
   </div>
 
   <div class="field">
+    <%= form.label :user_review_date %>
+    <%= form.date_select :user_review_date %>
+  </div>
+
+  <div class="field">
     <%= form.label :prmtr_auth_code %>
     <%= form.text_field :prmtr_auth_code %>
   </div>
 
   <div class="field">
     <%= form.label :zone_type %>
-    <%= form.number_field :zone_type %>
+    <%= form.text_field :zone_type %>
   </div>
 
   <div class="field">
     <%= form.label :pregnancy_status %>
-    <%= form.number_field :pregnancy_status %>
+    <%= form.text_field :pregnancy_status %>
   </div>
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.number_field :status %>
+    <%= form.text_field :status %>
   </div>
 
   <div class="field">
     <%= form.label :regime %>
-    <%= form.number_field :regime %>
+    <%= form.text_field :regime %>
+  </div>
+
+  <div class="field">
+    <%= form.label :promoter_id %>
+    <%= form.number_field :promoter_id %>
   </div>
 
   <div class="field">

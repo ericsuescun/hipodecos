@@ -23,11 +23,13 @@ class InformsTest < ApplicationSystemTestCase
     fill_in "Pregnancy status", with: @inform.pregnancy_status
     fill_in "Price", with: @inform.price
     fill_in "Prmtr auth code", with: @inform.prmtr_auth_code
+    fill_in "Promoter", with: @inform.promoter_id
     fill_in "Receive date", with: @inform.receive_date
     fill_in "Regime", with: @inform.regime
     fill_in "Status", with: @inform.status
     fill_in "Tag code", with: @inform.tag_code
     fill_in "User", with: @inform.user_id
+    fill_in "User review date", with: @inform.user_review_date
     fill_in "Zone type", with: @inform.zone_type
     click_on "Create Inform"
 
@@ -48,11 +50,13 @@ class InformsTest < ApplicationSystemTestCase
     fill_in "Pregnancy status", with: @inform.pregnancy_status
     fill_in "Price", with: @inform.price
     fill_in "Prmtr auth code", with: @inform.prmtr_auth_code
+    fill_in "Promoter", with: @inform.promoter_id
     fill_in "Receive date", with: @inform.receive_date
     fill_in "Regime", with: @inform.regime
     fill_in "Status", with: @inform.status
     fill_in "Tag code", with: @inform.tag_code
     fill_in "User", with: @inform.user_id
+    fill_in "User review date", with: @inform.user_review_date
     fill_in "Zone type", with: @inform.zone_type
     click_on "Update Inform"
 

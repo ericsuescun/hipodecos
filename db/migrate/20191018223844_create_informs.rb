@@ -6,11 +6,13 @@ class CreateInforms < ActiveRecord::Migration[5.2]
       t.string :tag_code
       t.date :receive_date
       t.date :delivery_date
+      t.date :user_review_date
       t.string :prmtr_auth_code
-      t.integer :zone_type
-      t.integer :pregnancy_status
-      t.integer :status
-      t.integer :regime
+      t.string :zone_type
+      t.string :pregnancy_status
+      t.string :status
+      t.string :regime
+      t.integer :promoter_id
       t.integer :entity_id
       t.integer :branch_id
       t.decimal :copayment

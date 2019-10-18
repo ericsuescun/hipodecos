@@ -5,6 +5,7 @@ class RatesController < ApplicationController
   # GET /rates
   # GET /rates.json
   def index
+    @tab = :admins
     @rates = Rate.all
   end
 

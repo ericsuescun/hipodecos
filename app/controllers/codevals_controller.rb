@@ -5,6 +5,7 @@ class CodevalsController < ApplicationController
   # GET /codevals
   # GET /codevals.json
   def index
+    @tab = :admins
     @codevals = Codeval.all
   end
 

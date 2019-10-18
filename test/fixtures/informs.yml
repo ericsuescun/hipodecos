@@ -6,11 +6,13 @@ one:
   tag_code: MyString
   receive_date: 2019-10-18
   delivery_date: 2019-10-18
+  user_review_date: 2019-10-18
   prmtr_auth_code: MyString
-  zone_type: 1
-  pregnancy_status: 1
-  status: 1
-  regime: 1
+  zone_type: MyString
+  pregnancy_status: MyString
+  status: MyString
+  regime: MyString
+  promoter_id: 1
   entity_id: 1
   branch_id: 1
   copayment: 9.99
@@ -23,11 +25,13 @@ two:
   tag_code: MyString
   receive_date: 2019-10-18
   delivery_date: 2019-10-18
+  user_review_date: 2019-10-18
   prmtr_auth_code: MyString
-  zone_type: 1
-  pregnancy_status: 1
-  status: 1
-  regime: 1
+  zone_type: MyString
+  pregnancy_status: MyString
+  status: MyString
+  regime: MyString
+  promoter_id: 1
   entity_id: 1
   branch_id: 1
   copayment: 9.99

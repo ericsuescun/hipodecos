@@ -5,6 +5,7 @@ class PromotersController < ApplicationController
   # GET /promoters
   # GET /promoters.json
   def index
+    @tab = :admins
     @promoters = Promoter.all
   end
 

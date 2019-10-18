@@ -1,112 +1,114 @@
-<%= form_with(model: patient, local: true) do |form| %>
-  <% if patient.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <%= form_with(model: patient, local: true) do |form| %>
+        <div class="row">
+          <div class="col-12 col-lg-4">
+            <div class="form-group">
+              <%= form.label "Número de identificación" %>
+              <%= form.text_field :id_number, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="form-group">
+              <%= form.label "Tipo de identificación" %>
+              <%= form.number_field :id_type, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="form-group">
+              <%= form.label "Fecha de nacimiento" %>
+              <%= form.date_select :birth_date, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+        </div>
+        
 
-      <ul>
-      <% patient.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        
+
+        
+
+        <div class="form-group">
+          <%= form.label "Edad" %>
+          <%= form.number_field :age_number, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Unidad Edad" %>
+          <%= form.number_field :age_type, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Primer nombre" %>
+          <%= form.text_field :name1, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Segundo nombre" %>
+          <%= form.text_field :name2, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Primer apellido" %>
+          <%= form.text_field :lastname1, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Segundo apellido" %>
+          <%= form.text_field :lastname2, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Sexo" %>
+          <%= form.number_field :sex, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Dirección" %>
+          <%= form.text_field :address, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Email" %>
+          <%= form.text_field :email, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Teléfono" %>
+          <%= form.text_field :tel, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Celular" %>
+          <%= form.text_field :cel, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Ocupación" %>
+          <%= form.text_field :occupation, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Código de residencia" %>
+          <%= form.text_field :residence_code, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Municipio" %>
+          <%= form.text_field :municipality, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Departamento" %>
+          <%= form.text_field :department, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Guardar", class: 'btn btn-primary btn-block' %>
+        </div>
       <% end %>
-      </ul>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :id_number %>
-    <%= form.text_field :id_number %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :id_type %>
-    <%= form.number_field :id_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :birth_date %>
-    <%= form.date_select :birth_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :age_number %>
-    <%= form.number_field :age_number %>
-  </div>
-
-  <div class="field">
-    <%= form.label :age_type %>
-    <%= form.number_field :age_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name1 %>
-    <%= form.text_field :name1 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name2 %>
-    <%= form.text_field :name2 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lastname1 %>
-    <%= form.text_field :lastname1 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lastname2 %>
-    <%= form.text_field :lastname2 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sex %>
-    <%= form.number_field :sex %>
-  </div>
-
-  <div class="field">
-    <%= form.label :gender %>
-    <%= form.number_field :gender %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :tel %>
-    <%= form.text_field :tel %>
-  </div>
-
-  <div class="field">
-    <%= form.label :cel %>
-    <%= form.text_field :cel %>
-  </div>
-
-  <div class="field">
-    <%= form.label :occupation %>
-    <%= form.text_field :occupation %>
-  </div>
-
-  <div class="field">
-    <%= form.label :residence_code %>
-    <%= form.text_field :residence_code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :municipality %>
-    <%= form.text_field :municipality %>
-  </div>
-
-  <div class="field">
-    <%= form.label :department %>
-    <%= form.text_field :department %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

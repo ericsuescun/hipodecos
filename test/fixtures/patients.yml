@@ -2,16 +2,16 @@
 
 one:
   id_number: MyString
-  id_type: 1
+  id_type: MyString
   birth_date: 2019-10-18
   age_number: 1
-  age_type: 1
+  age_type: MyString
   name1: MyString
   name2: MyString
   lastname1: MyString
   lastname2: MyString
-  sex: 1
-  gender: 1
+  sex: MyString
+  gender: MyString
   address: MyString
   email: MyString
   tel: MyString
@@ -23,16 +23,16 @@ one:
 
 two:
   id_number: MyString
-  id_type: 1
+  id_type: MyString
   birth_date: 2019-10-18
   age_number: 1
-  age_type: 1
+  age_type: MyString
   name1: MyString
   name2: MyString
   lastname1: MyString
   lastname2: MyString
-  sex: 1
-  gender: 1
+  sex: MyString
+  gender: MyString
   address: MyString
   email: MyString
   tel: MyString

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_18_142242) do
+ActiveRecord::Schema.define(version: 2019_10_18_223844) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -103,11 +103,13 @@ ActiveRecord::Schema.define(version: 2019_10_18_142242) do
     t.string "tag_code"
     t.date "receive_date"
     t.date "delivery_date"
+    t.date "user_review_date"
     t.string "prmtr_auth_code"
-    t.integer "zone_type"
-    t.integer "pregnancy_status"
-    t.integer "status"
-    t.integer "regime"
+    t.string "zone_type"
+    t.string "pregnancy_status"
+    t.string "status"
+    t.string "regime"
+    t.integer "promoter_id"
     t.integer "entity_id"
     t.integer "branch_id"
     t.decimal "copayment"
@@ -119,16 +121,16 @@ ActiveRecord::Schema.define(version: 2019_10_18_142242) do
 
   create_table "patients", force: :cascade do |t|
     t.string "id_number"
-    t.integer "id_type"
+    t.string "id_type"
     t.date "birth_date"
     t.integer "age_number"
-    t.integer "age_type"
+    t.string "age_type"
     t.string "name1"
     t.string "name2"
     t.string "lastname1"
     t.string "lastname2"
-    t.integer "sex"
-    t.integer "gender"
+    t.string "sex"
+    t.string "gender"
     t.string "address"
     t.string "email"
     t.string "tel"

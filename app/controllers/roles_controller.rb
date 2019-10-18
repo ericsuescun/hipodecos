@@ -5,6 +5,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
+    @tab = :admins
     @roles = Role.all
   end
 

@@ -5,6 +5,7 @@ class EntitiesController < ApplicationController
   # GET /entities
   # GET /entities.json
   def index
+    @tab = :admins
     @entities = Entity.all
   end
 

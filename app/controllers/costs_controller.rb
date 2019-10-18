@@ -5,6 +5,7 @@ class CostsController < ApplicationController
   # GET /costs
   # GET /costs.json
   def index
+    @tab = :admins
     @costs = Cost.all
   end
 

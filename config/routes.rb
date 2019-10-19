@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :informs
+  resources :samples
+  resources :studies
+  
+  resources :informs do
+    resources :samples
+    resources :studies
+  end
   resources :patients do
     resources :informs
   end

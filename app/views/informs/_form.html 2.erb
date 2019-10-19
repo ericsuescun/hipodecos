@@ -1,0 +1,107 @@
+<%= form_with(model: inform, local: true) do |form| %>
+  <% if inform.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(inform.errors.count, "error") %> prohibited this inform from being saved:</h2>
+
+      <ul>
+      <% inform.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :patient_id %>
+    <%= form.text_field :patient_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :physician_id %>
+    <%= form.number_field :physician_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tag_code %>
+    <%= form.text_field :tag_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :receive_date %>
+    <%= form.date_select :receive_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :delivery_date %>
+    <%= form.date_select :delivery_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_review_date %>
+    <%= form.date_select :user_review_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prmtr_auth_code %>
+    <%= form.text_field :prmtr_auth_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zone_type %>
+    <%= form.text_field :zone_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pregnancy_status %>
+    <%= form.text_field :pregnancy_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :regime %>
+    <%= form.text_field :regime %>
+  </div>
+
+  <div class="field">
+    <%= form.label :promoter_id %>
+    <%= form.number_field :promoter_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :entity_id %>
+    <%= form.number_field :entity_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :branch_id %>
+    <%= form.number_field :branch_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :copayment %>
+    <%= form.text_field :copayment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.text_field :cost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

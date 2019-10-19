@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4 mx-auto">
+      <%= form_with(model: codeval, local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label "Nombre" %>
+          <%= form.text_field :name, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Código" %>
+          <%= form.text_field :code, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Sistema" %>
+          <%= form.text_field :origin_system, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Código OMS" %>
+          <%= form.text_field :oms_code, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Guardar", class: 'btn btn-primary btn-block' %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

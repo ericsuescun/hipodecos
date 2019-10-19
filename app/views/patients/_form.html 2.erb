@@ -1,0 +1,153 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <%= form_with(model: patient, local: true) do |form| %>
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "# de identificación" %>
+              <%= form.text_field :id_number, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "Tipo de identificación" %>
+              <%= form.select(:id_type, options_for_select([['Cédula', 'CC'], ['Cédula de extranjería', 'CE'], ['Carnet Diplomático', 'CD'], ['Pasaporte', 'PA'], ['Salvoconducto', 'SC'], ['Permiso Especial', 'PE'], ['Registro Civil', 'RC'], ['Tarjeta de Identidad', 'TI'], ['Certificado de Nacimiento', 'NC'], ['Adulto sin identificación', 'AS'], ['Menor sin identificación', 'MS']], @patient.id_type), { include_blank: true }, class: "form-control form-control-lg input") %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Fecha de nacimiento" %>
+              <%= form.date_field :birth_date, autocomplete: "Fecha de nacimiento", class: "form-control form-control-lg input"  %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "Edad" %>
+              <%= form.number_field :age_number, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "Unidad Edad" %>
+              <%= form.select(:age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']], @patient.age_type), { include_blank: true }, class: "form-control form-control-lg input") %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Nombre" %>
+              <%= form.text_field :name1, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Segundo nombre" %>
+              <%= form.text_field :name2, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Apellido" %>
+              <%= form.text_field :lastname1, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Segundo apellido" %>
+              <%= form.text_field :lastname2, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-1">
+            <div class="form-group">
+              <%= form.label "Sexo" %>
+              <%= form.select(:sex, options_for_select([['Femenino', 'F'], ['Masculino', 'M']], @patient.sex), { include_blank: true }, class: "form-control form-control-lg input") %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-5">
+            <div class="form-group">
+              <%= form.label "Dirección" %>
+              <%= form.text_field :address, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="form-group">
+              <%= form.label "Email" %>
+              <%= form.text_field :email, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "Teléfono" %>
+              <%= form.text_field :tel, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Celular" %>
+              <%= form.text_field :cel, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Ocupación" %>
+              <%= form.text_field :occupation, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Código de residencia" %>
+              <%= form.text_field :residence_code, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Municipio" %>
+              <%= form.text_field :municipality, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Departamento" %>
+              <%= form.text_field :department, class: "form-control form-control-lg input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+
+          </div>
+          <div class="col-12 col-lg-3">
+            
+          </div>
+          <div class="col-12 col-lg-3">
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-4 mx-auto">
+            <div class="actions">
+              <%= form.submit "Guardar", class: 'btn btn-primary btn-block' %>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
+

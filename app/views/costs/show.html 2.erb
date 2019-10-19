@@ -1,0 +1,65 @@
+<%= link_to 'Edit', edit_cost_path(@cost) %> |
+<%= link_to 'Back', rates_path %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="card text-center mt-3">
+        <div class="card-header">
+          Tarifa: <strong><%= @cost.name %></strong>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= Admin.find(@cost.admin_id).name %> tomó como tabla base: <%= @cost.base %></h5>
+          <p class="card-text"><%= @cost.description %></p>
+        </div>
+        <div class="card-footer text-muted">
+        	Fecha de creación: <%= @cost.created_at %> - Fecha de modificación: <%= @cost.updated_at %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+  	<div class="col-12 col-lg-12 mx-auto">
+  		<% @cost.values.each do |value| %>
+  			<table class="table table-striped">
+  				<thead class="thead-dark">
+  					<tr>
+  						<th>CUPS</th>
+  						<th>Costo</th>
+  						<th>Asigando por:</th>
+              <th>Comentarios</th>
+  					</tr>
+  					
+  				</thead>
+  				<tbody>
+  					<tr>
+  						<td><%= value.codeval.code %></td>
+  						<td><%= number_to_currency(value.value, precision: 0, delimiter: ',') %></td>
+  						<td><%= Admin.find(value.admin_id).name %></td>
+              <td><%= value.description %></td>
+  					</tr>
+  				</tbody>
+  			</table>
+  		<% end %>
+  	</div>
+  </div>
+</div>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cost.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @cost.description %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @cost.admin_id %>
+</p>
+
+<%= link_to 'Edit', edit_cost_path(@cost) %> |
+<%= link_to 'Back', costs_path %>

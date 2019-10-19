@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  codeval: one
+  rate: one
+  factor: 9.99
+  description: MyText
+  admin_id: 1
+
+two:
+  codeval: two
+  rate: two
+  factor: 9.99
+  description: MyText
+  admin_id: 1

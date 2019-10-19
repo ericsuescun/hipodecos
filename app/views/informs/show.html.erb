@@ -1,12 +1,110 @@
-<div class="card mb-3">
-  <div class="row no-gutters">
-    <div class="col-lg-8">
-      <div class="card-body">
-        <h5 class="card-title"><%= @inform.tag_code %> recibido hace <%= time_ago_in_words(@inform.receive_date) %></h5>
-        <p class="card-text">Médico tratante: <%= @inform.physician_id %></p>
-        <p class="card-text">EPS: <%= Promoter.find(@inform.promoter_id).initials %></p>
-        <p class="card-text">Sede IPS: <%= Branch.find(@inform.branch_id).initials %></p>
-        <p class="card-text"><small class="text-muted">Creado el <%= @inform.created_at %></small></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-lg-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= @inform.tag_code %> recibido hace <%= time_ago_in_words(@inform.receive_date) %></h5>
+              <p class="card-text">Médico tratante: <%= @inform.physician_id %></p>
+              <p class="card-text">EPS: <%= Promoter.find(@inform.promoter_id).initials %></p>
+              <p class="card-text">Sede IPS: <%= Branch.find(@inform.branch_id).initials %></p>
+              <p class="card-text">Factura: <%= @inform.invoice %></p>
+              <p class="card-text"><small class="text-muted">Creado el <%= @inform.created_at %></small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-info">
+    <h1>Muestras para <%= @inform.tag_code %></h1>
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <div class="row">
+          <% @inform.samples.each do |sample| %>
+            <div class="col-12 col-lg-3">
+              <div class="card text-center mt-3">
+                <div class="card-header">
+                  <strong><%= sample.sample_tag %></strong>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"><%= sample.name %></h5>
+                  <p class="card-text"><%= sample.description %></p>
+                  <%= link_to "Editar", edit_sample_path(sample), class: 'btn btn-primary' %>
+                  <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
+                </div>
+                <div class="card-footer text-muted">
+                  <p>Creada el <%= sample.created_at %> por <%= User.find(sample.user_id).email %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>      
+      </div>
+      <div class="col-12 col-lg-3 mx-auto">
+        <%= form_for [@inform, @inform.samples.build] do |form| %>
+
+          <div class="form-group">
+            <%= form.label :name %>
+            <%= form.text_field :name, class: "form-control form-control-lg input" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :description %>
+            <%= form.text_area :description, class: "form-control form-control-lg input" %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-warning">
+    <h1>CUPS para <%= @inform.tag_code %></h1>
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <div class="row">
+          <% @inform.studies.each do |study| %>
+            <div class="col-12 col-lg-3">
+              <div class="card text-center mt-3">
+                <div class="card-header">
+                  <strong>CUPS <%= Codeval.find(study.codeval_id).code %></strong>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"><%= study.factor %> X</h5>
+                  <%= link_to "Editar", edit_study_path(study), class: 'btn btn-primary' %>
+                  <%= link_to 'Borrar', study, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
+                </div>
+                <div class="card-footer text-muted">
+                  <p>Creada el <%= study.created_at %> por <%= User.find(study.user_id).email %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>      
+      </div>
+      <div class="col-12 col-lg-3 mx-auto">
+        <%= form_for [@inform, @inform.studies.build] do |form| %>
+
+          <div class="form-group">
+            <%= form.label "CUPS" %>
+            <%= form.select :codeval_id, Codeval.pluck(:name, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label "Factor" %>
+            <%= form.number_field :factor, class: "form-control form-control-lg input" %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
+          </div>
+
+        <% end %>
       </div>
     </div>
   </div>
@@ -16,7 +114,7 @@
 
 <p>
   <strong>Patient:</strong>
-  <%= @inform.patient.name1 %>
+  <%= @inform.patient.name1 %> <%= @inform.patient.name2 %>
 </p>
 
 <p>

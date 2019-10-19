@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Inform: one
+  user_id: 1
+  codeval_id: 1
+  factor: 1
+
+two:
+  Inform: two
+  user_id: 1
+  codeval_id: 1
+  factor: 1

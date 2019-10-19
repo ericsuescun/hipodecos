@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_19_011054) do
+ActiveRecord::Schema.define(version: 2019_10_19_060405) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 2019_10_19_011054) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "invoice"
     t.index ["patient_id"], name: "index_informs_on_patient_id"
   end
 
@@ -173,6 +174,28 @@ ActiveRecord::Schema.define(version: 2019_10_19_011054) do
     t.decimal "parafiscal_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "samples", force: :cascade do |t|
+    t.integer "inform_id"
+    t.integer "user_id"
+    t.string "name"
+    t.text "description"
+    t.string "specimen_tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "sample_tag"
+    t.index ["inform_id"], name: "index_samples_on_inform_id"
+  end
+
+  create_table "studies", force: :cascade do |t|
+    t.integer "inform_id"
+    t.integer "user_id"
+    t.integer "codeval_id"
+    t.integer "factor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inform_id"], name: "index_studies_on_inform_id"
   end
 
   create_table "users", force: :cascade do |t|

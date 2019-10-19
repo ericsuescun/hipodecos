@@ -17,7 +17,7 @@ class InformsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create inform" do
     assert_difference('Inform.count') do
-      post informs_url, params: { inform: { branch_id: @inform.branch_id, copayment: @inform.copayment, cost: @inform.cost, delivery_date: @inform.delivery_date, entity_id: @inform.entity_id, physician_id: @inform.physician_id, pregnancy_status: @inform.pregnancy_status, price: @inform.price, prmtr_auth_code: @inform.prmtr_auth_code, promoter_id: @inform.promoter_id, receive_date: @inform.receive_date, regime: @inform.regime, status: @inform.status, tag_code: @inform.tag_code, user_id: @inform.user_id, user_review_date: @inform.user_review_date, zone_type: @inform.zone_type } }
+      post informs_url, params: { inform: { branch_id: @inform.branch_id, copayment: @inform.copayment, cost: @inform.cost, delivery_date: @inform.delivery_date, entity_id: @inform.entity_id, patient_id: @inform.patient_id, physician_id: @inform.physician_id, pregnancy_status: @inform.pregnancy_status, price: @inform.price, prmtr_auth_code: @inform.prmtr_auth_code, promoter_id: @inform.promoter_id, receive_date: @inform.receive_date, regime: @inform.regime, status: @inform.status, tag_code: @inform.tag_code, user_id: @inform.user_id, user_review_date: @inform.user_review_date, zone_type: @inform.zone_type } }
     end
 
     assert_redirected_to inform_url(Inform.last)
@@ -34,7 +34,7 @@ class InformsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update inform" do
-    patch inform_url(@inform), params: { inform: { branch_id: @inform.branch_id, copayment: @inform.copayment, cost: @inform.cost, delivery_date: @inform.delivery_date, entity_id: @inform.entity_id, physician_id: @inform.physician_id, pregnancy_status: @inform.pregnancy_status, price: @inform.price, prmtr_auth_code: @inform.prmtr_auth_code, promoter_id: @inform.promoter_id, receive_date: @inform.receive_date, regime: @inform.regime, status: @inform.status, tag_code: @inform.tag_code, user_id: @inform.user_id, user_review_date: @inform.user_review_date, zone_type: @inform.zone_type } }
+    patch inform_url(@inform), params: { inform: { branch_id: @inform.branch_id, copayment: @inform.copayment, cost: @inform.cost, delivery_date: @inform.delivery_date, entity_id: @inform.entity_id, patient_id: @inform.patient_id, physician_id: @inform.physician_id, pregnancy_status: @inform.pregnancy_status, price: @inform.price, prmtr_auth_code: @inform.prmtr_auth_code, promoter_id: @inform.promoter_id, receive_date: @inform.receive_date, regime: @inform.regime, status: @inform.status, tag_code: @inform.tag_code, user_id: @inform.user_id, user_review_date: @inform.user_review_date, zone_type: @inform.zone_type } }
     assert_redirected_to inform_url(@inform)
   end
 

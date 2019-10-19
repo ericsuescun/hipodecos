@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :informs
-  resources :patients
+  resources :patients do
+    resources :informs
+  end
   devise_scope :user do get "users" => "users#index"
   end
 
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
   resources :factors
   resources :rates
   resources :costs
+
   resources :codevals
   resources :codevals do
   	resources :factors

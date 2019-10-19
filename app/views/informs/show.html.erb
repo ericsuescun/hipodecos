@@ -1,4 +1,23 @@
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-lg-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= @inform.tag_code %> recibido hace <%= time_ago_in_words(@inform.receive_date) %></h5>
+        <p class="card-text">Médico tratante: <%= @inform.physician_id %></p>
+        <p class="card-text">EPS: <%= Promoter.find(@inform.promoter_id).initials %></p>
+        <p class="card-text">Sede IPS: <%= Branch.find(@inform.branch_id).initials %></p>
+        <p class="card-text"><small class="text-muted">Creado el <%= @inform.created_at %></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= @inform.patient.name1 %>
+</p>
 
 <p>
   <strong>User:</strong>

@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Patient</th>
       <th>User</th>
       <th>Physician</th>
       <th>Tag code</th>
@@ -29,6 +30,7 @@
   <tbody>
     <% @informs.each do |inform| %>
       <tr>
+        <td><%= inform.patient %></td>
         <td><%= inform.user_id %></td>
         <td><%= inform.physician_id %></td>
         <td><%= inform.tag_code %></td>

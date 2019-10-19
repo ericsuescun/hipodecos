@@ -19,6 +19,7 @@ class InformsTest < ApplicationSystemTestCase
     fill_in "Cost", with: @inform.cost
     fill_in "Delivery date", with: @inform.delivery_date
     fill_in "Entity", with: @inform.entity_id
+    fill_in "Patient", with: @inform.patient_id
     fill_in "Physician", with: @inform.physician_id
     fill_in "Pregnancy status", with: @inform.pregnancy_status
     fill_in "Price", with: @inform.price
@@ -46,6 +47,7 @@ class InformsTest < ApplicationSystemTestCase
     fill_in "Cost", with: @inform.cost
     fill_in "Delivery date", with: @inform.delivery_date
     fill_in "Entity", with: @inform.entity_id
+    fill_in "Patient", with: @inform.patient_id
     fill_in "Physician", with: @inform.physician_id
     fill_in "Pregnancy status", with: @inform.pregnancy_status
     fill_in "Price", with: @inform.price

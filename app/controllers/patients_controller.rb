@@ -14,7 +14,13 @@ class PatientsController < ApplicationController
 
   # GET /patients/new
   def new
-    @patient = Patient.new
+    # @patient = Patient.new
+    patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
+    if patients.length == 1
+      redirect_to patient_path(patients.first)
+    else
+      @patient = Patient.new(id_number: params[:id_number])
+    end
   end
 
   # GET /patients/1/edit
@@ -28,7 +34,7 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
-        format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
+        format.html { redirect_to new_patient_path, notice: 'Patient was successfully created.' }
         format.json { render :show, status: :created, location: @patient }
       else
         format.html { render :new }

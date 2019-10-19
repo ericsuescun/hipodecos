@@ -120,6 +120,13 @@
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+
+          <%= form_tag(new_patient_path, method: "get") do %>
+            <%= label_tag(:id_number, "Buscar y crear") %>
+            <%= text_field_tag(:id_number) %>
+            <%= submit_tag("Go!") %>
+          <% end %>
+
         </form>
         <% if admin_signed_in? %>
           <ul class="navbar-nav d-flex justify-content-end">

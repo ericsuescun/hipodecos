@@ -1,6 +1,7 @@
 class CreateInforms < ActiveRecord::Migration[5.2]
   def change
     create_table :informs do |t|
+      t.references :patient, foreign_key: true
       t.integer :user_id
       t.integer :physician_id
       t.string :tag_code

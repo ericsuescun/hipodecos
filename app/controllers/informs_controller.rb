@@ -24,16 +24,18 @@ class InformsController < ApplicationController
   # POST /informs
   # POST /informs.json
   def create
-    @inform = Inform.new(inform_params)
+    # @inform = Inform.new(inform_params)
+    @patient = Patient.find(params[:patient_id])
+    inform = @patient.informs.build(inform_params)
+    inform.user_id = current_user.id
+    inform.entity_id = Branch.find(inform.branch_id).entity.id
 
-    respond_to do |format|
-      if @inform.save
-        format.html { redirect_to @inform, notice: 'Inform was successfully created.' }
-        format.json { render :show, status: :created, location: @inform }
-      else
-        format.html { render :new }
-        format.json { render json: @inform.errors, status: :unprocessable_entity }
-      end
+    if inform.save
+      inform.tag_code = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
+      inform.save #Just after saving is when I get de ID, and its needed for the serial code...
+      redirect_to @patient, notice: 'Inform was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -69,6 +71,6 @@ class InformsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def inform_params
-      params.require(:inform).permit(:user_id, :physician_id, :tag_code, :receive_date, :delivery_date, :user_review_date, :prmtr_auth_code, :zone_type, :pregnancy_status, :status, :regime, :promoter_id, :entity_id, :branch_id, :copayment, :cost, :price)
+      params.require(:inform).permit(:patient_id, :user_id, :physician_id, :tag_code, :receive_date, :delivery_date, :user_review_date, :prmtr_auth_code, :zone_type, :pregnancy_status, :status, :regime, :promoter_id, :entity_id, :branch_id, :copayment, :cost, :price)
     end
 end

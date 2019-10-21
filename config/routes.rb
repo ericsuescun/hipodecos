@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :diagnostics
+  resources :micros
+  resources :slides
+  resources :blocks
+  resources :macros
   resources :samples
   resources :studies
   

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inform:</strong>
+  <%= @diagnostic.inform %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @diagnostic.user_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @diagnostic.description %>
+</p>
+
+<%= link_to 'Edit', edit_diagnostic_path(@diagnostic) %> |
+<%= link_to 'Back', diagnostics_path %>

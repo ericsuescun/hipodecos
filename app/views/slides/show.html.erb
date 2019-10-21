@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inform:</strong>
+  <%= @slide.inform %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @slide.user_id %>
+</p>
+
+<p>
+  <strong>Slide tag:</strong>
+  <%= @slide.slide_tag %>
+</p>
+
+<p>
+  <strong>Stored:</strong>
+  <%= @slide.stored %>
+</p>
+
+<%= link_to 'Edit', edit_slide_path(@slide) %> |
+<%= link_to 'Back', slides_path %>

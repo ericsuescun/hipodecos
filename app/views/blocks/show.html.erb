@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inform:</strong>
+  <%= @block.inform %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @block.user_id %>
+</p>
+
+<p>
+  <strong>Block tag:</strong>
+  <%= @block.block_tag %>
+</p>
+
+<p>
+  <strong>Stored:</strong>
+  <%= @block.stored %>
+</p>
+
+<%= link_to 'Edit', edit_block_path(@block) %> |
+<%= link_to 'Back', blocks_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_19_060405) do
+ActiveRecord::Schema.define(version: 2019_10_21_155417) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 2019_10_19_060405) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "inform_id"
+    t.integer "user_id"
+    t.string "block_tag"
+    t.boolean "stored"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inform_id"], name: "index_blocks_on_inform_id"
   end
 
   create_table "branches", force: :cascade do |t|
@@ -67,6 +77,15 @@ ActiveRecord::Schema.define(version: 2019_10_19_060405) do
     t.datetime "updated_at", null: false
     t.integer "base"
     t.decimal "factor"
+  end
+
+  create_table "diagnostics", force: :cascade do |t|
+    t.integer "inform_id"
+    t.integer "user_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inform_id"], name: "index_diagnostics_on_inform_id"
   end
 
   create_table "entities", force: :cascade do |t|
@@ -120,6 +139,24 @@ ActiveRecord::Schema.define(version: 2019_10_19_060405) do
     t.datetime "updated_at", null: false
     t.string "invoice"
     t.index ["patient_id"], name: "index_informs_on_patient_id"
+  end
+
+  create_table "macros", force: :cascade do |t|
+    t.integer "inform_id"
+    t.integer "user_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inform_id"], name: "index_macros_on_inform_id"
+  end
+
+  create_table "micros", force: :cascade do |t|
+    t.integer "inform_id"
+    t.integer "user_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inform_id"], name: "index_micros_on_inform_id"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -186,6 +223,16 @@ ActiveRecord::Schema.define(version: 2019_10_19_060405) do
     t.datetime "updated_at", null: false
     t.string "sample_tag"
     t.index ["inform_id"], name: "index_samples_on_inform_id"
+  end
+
+  create_table "slides", force: :cascade do |t|
+    t.integer "inform_id"
+    t.integer "user_id"
+    t.string "slide_tag"
+    t.boolean "stored"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inform_id"], name: "index_slides_on_inform_id"
   end
 
   create_table "studies", force: :cascade do |t|

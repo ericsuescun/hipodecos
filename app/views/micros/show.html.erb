@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inform:</strong>
+  <%= @micro.inform %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @micro.user_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @micro.description %>
+</p>
+
+<%= link_to 'Edit', edit_micro_path(@micro) %> |
+<%= link_to 'Back', micros_path %>

@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   resources :informs do
     resources :samples
     resources :studies
+    resources :macros
+    resources :blocks
+    resources :slides
+    resources :micros
+    resources :diagnostics
   end
   resources :patients do
     resources :informs

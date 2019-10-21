@@ -24,16 +24,14 @@ class MicrosController < ApplicationController
   # POST /micros
   # POST /micros.json
   def create
-    @micro = Micro.new(micro_params)
+    inform = Inform.find(params[:inform_id])
+    micro = inform.micros.build(micro_params)
+    micro.user_id = current_user.id
 
-    respond_to do |format|
-      if @micro.save
-        format.html { redirect_to @micro, notice: 'Micro was successfully created.' }
-        format.json { render :show, status: :created, location: @micro }
-      else
-        format.html { render :new }
-        format.json { render json: @micro.errors, status: :unprocessable_entity }
-      end
+    if micro.save
+      redirect_to inform, notice: 'La micro ha sido creada exitosamente.'
+    else
+      render :new
     end
   end
 

@@ -18,190 +18,29 @@
       </div>
     </div>
   </div>
-  <div class="alert alert-info">
-    <h1>Muestras para <%= @inform.tag_code %></h1>
-    <div class="row">
-      <div class="col-12 col-lg-8">
-        <div class="row">
-          <% @inform.samples.each do |sample| %>
-            <div class="col-12 col-lg-3">
-              <div class="card text-center mt-3">
-                <div class="card-header">
-                  <strong><%= sample.sample_tag %></strong>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title"><%= sample.name %></h5>
-                  <p class="card-text"><%= sample.description %></p>
-                  <%= link_to "Editar", edit_sample_path(sample), class: 'btn btn-primary' %>
-                  <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-                </div>
-                <div class="card-footer text-muted">
-                  <p>Creada el <%= sample.created_at %> por <%= User.find(sample.user_id).email %></p>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>      
-      </div>
-      <div class="col-12 col-lg-3 mx-auto">
-        <%= form_for [@inform, @inform.samples.build] do |form| %>
-
-          <div class="form-group">
-            <%= form.label "Nombre de muestra" %>
-            <%= form.text_field :name, class: "form-control form-control-lg input" %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label "Descripción" %>
-            <%= form.text_area :description, class: "form-control form-control-lg input" %>
-          </div>
-
-          <div class="actions">
-            <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
-          </div>
-
-        <% end %>
-      </div>
-    </div>
+  <div class="alert alert-light">
+    <%= render 'samples' %>
+  </div>
+  <div class="alert alert-secondary">
+    <%= render 'codevals' %>
+  </div>
+  <div class="alert alert-dark">
+    <%= render 'macros' %>
   </div>
   <div class="alert alert-warning">
-    <h1>CUPS para <%= @inform.tag_code %></h1>
-    <div class="row">
-      <div class="col-12 col-lg-8">
-        <div class="row">
-          <% @inform.studies.each do |study| %>
-            <div class="col-12 col-lg-3">
-              <div class="card text-center mt-3">
-                <div class="card-header">
-                  <strong>CUPS <%= Codeval.find(study.codeval_id).code %></strong>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title"><%= study.factor %> X</h5>
-                  <%= link_to "Editar", edit_study_path(study), class: 'btn btn-primary' %>
-                  <%= link_to 'Borrar', study, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-                </div>
-                <div class="card-footer text-muted">
-                  <p>Creada el <%= study.created_at %> por <%= User.find(study.user_id).email %></p>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>      
-      </div>
-      <div class="col-12 col-lg-3 mx-auto">
-        <%= form_for [@inform, @inform.studies.build] do |form| %>
-
-          <div class="form-group">
-            <%= form.label "Código CUPS" %>
-            <%= form.select :codeval_id, Codeval.pluck(:name, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label "¿Cuántos CUPS de éste tipo requieres?" %>
-            <%= form.number_field :factor, class: "form-control form-control-lg input" %>
-          </div>
-
-          <div class="actions">
-            <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
-          </div>
-
-        <% end %>
-      </div>
-    </div>
+    <%= render 'blocks' %>
+  </div>
+  <div class="alert alert-primary">
+    <%= render 'slides' %>
+  </div>
+  <div class="alert alert-info">
+    <%= render 'micros' %>
+  </div>
+  <div class="alert alert-success">
+    <%= render 'diagnostics' %>
   </div>
 </div>
 
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Patient:</strong>
-  <%= @inform.patient.name1 %> <%= @inform.patient.name2 %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @inform.user_id %>
-</p>
-
-<p>
-  <strong>Physician:</strong>
-  <%= @inform.physician_id %>
-</p>
-
-<p>
-  <strong>Tag code:</strong>
-  <%= @inform.tag_code %>
-</p>
-
-<p>
-  <strong>Receive date:</strong>
-  <%= @inform.receive_date %>
-</p>
-
-<p>
-  <strong>Delivery date:</strong>
-  <%= @inform.delivery_date %>
-</p>
-
-<p>
-  <strong>User review date:</strong>
-  <%= @inform.user_review_date %>
-</p>
-
-<p>
-  <strong>Prmtr auth code:</strong>
-  <%= @inform.prmtr_auth_code %>
-</p>
-
-<p>
-  <strong>Zone type:</strong>
-  <%= @inform.zone_type %>
-</p>
-
-<p>
-  <strong>Pregnancy status:</strong>
-  <%= @inform.pregnancy_status %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @inform.status %>
-</p>
-
-<p>
-  <strong>Regime:</strong>
-  <%= @inform.regime %>
-</p>
-
-<p>
-  <strong>Promoter:</strong>
-  <%= @inform.promoter_id %>
-</p>
-
-<p>
-  <strong>Entity:</strong>
-  <%= @inform.entity_id %>
-</p>
-
-<p>
-  <strong>Branch:</strong>
-  <%= @inform.branch_id %>
-</p>
-
-<p>
-  <strong>Copayment:</strong>
-  <%= @inform.copayment %>
-</p>
-
-<p>
-  <strong>Cost:</strong>
-  <%= @inform.cost %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @inform.price %>
-</p>
-
-<%= link_to 'Edit', edit_inform_path(@inform) %> |
-<%= link_to 'Back', informs_path %>
+<%= link_to 'Editar', edit_inform_path(@inform) %> |
+<%= link_to 'Volver a informes', informs_path %>

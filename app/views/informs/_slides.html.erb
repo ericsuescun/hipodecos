@@ -1,0 +1,38 @@
+<h1>Placas para <%= @inform.tag_code %></h1>
+<div class="row">
+  <div class="col-12 col-lg-8">
+    <div class="row">
+      <% @inform.slides.each do |slide| %>
+        <div class="col-12 col-lg-3">
+          <div class="card text-center mt-3">
+            <div class="card-header">
+              <strong><%= slide.slide_tag %></strong>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= slide.slide_tag %></h5>
+              <%= link_to "Editar", edit_slide_path(slide), class: 'btn btn-primary' %>
+              <%= link_to 'Borrar', slide, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
+            </div>
+            <div class="card-footer text-muted">
+              <p>Creada el <%= slide.created_at %> por <%= User.find(slide.user_id).email %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>      
+  </div>
+  <div class="col-12 col-lg-3 mx-auto">
+    <%= form_for [@inform, @inform.slides.build] do |form| %>
+
+      <div class="form-group">
+        <%= form.check_box :stored %>
+        <%= form.label "Placa guardada" %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Agregar", class: "btn btn-primary btn-block" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

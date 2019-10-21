@@ -24,16 +24,14 @@ class MacrosController < ApplicationController
   # POST /macros
   # POST /macros.json
   def create
-    @macro = Macro.new(macro_params)
+    inform = Inform.find(params[:inform_id])
+    macro = inform.macros.build(macro_params)
+    macro.user_id = current_user.id
 
-    respond_to do |format|
-      if @macro.save
-        format.html { redirect_to @macro, notice: 'Macro was successfully created.' }
-        format.json { render :show, status: :created, location: @macro }
-      else
-        format.html { render :new }
-        format.json { render json: @macro.errors, status: :unprocessable_entity }
-      end
+    if macro.save
+      redirect_to inform, notice: 'La macro ha sido creada exitosamente.'
+    else
+      render :new
     end
   end
 

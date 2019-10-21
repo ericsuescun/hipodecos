@@ -24,16 +24,14 @@ class DiagnosticsController < ApplicationController
   # POST /diagnostics
   # POST /diagnostics.json
   def create
-    @diagnostic = Diagnostic.new(diagnostic_params)
+    inform = Inform.find(params[:inform_id])
+    diagnostic = inform.diagnostics.build(diagnostic_params)
+    diagnostic.user_id = current_user.id
 
-    respond_to do |format|
-      if @diagnostic.save
-        format.html { redirect_to @diagnostic, notice: 'Diagnostic was successfully created.' }
-        format.json { render :show, status: :created, location: @diagnostic }
-      else
-        format.html { render :new }
-        format.json { render json: @diagnostic.errors, status: :unprocessable_entity }
-      end
+    if diagnostic.save
+      redirect_to inform, notice: 'El diagnóstico ha sido creado exitosamente.'
+    else
+      render :new
     end
   end
 

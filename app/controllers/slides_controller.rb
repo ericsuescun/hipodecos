@@ -24,16 +24,16 @@ class SlidesController < ApplicationController
   # POST /slides
   # POST /slides.json
   def create
-    @slide = Slide.new(slide_params)
+    inform = Inform.find(params[:inform_id])
+    slide = inform.slides.build(slide_params)
+    slide.user_id = current_user.id
 
-    respond_to do |format|
-      if @slide.save
-        format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
-        format.json { render :show, status: :created, location: @slide }
-      else
-        format.html { render :new }
-        format.json { render json: @slide.errors, status: :unprocessable_entity }
-      end
+    if slide.save
+      slide.slide_tag = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
+      slide.save
+      redirect_to inform, notice: 'La placa ha sido creada exitosamente.'
+    else
+      render :new
     end
   end
 

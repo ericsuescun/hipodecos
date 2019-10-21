@@ -24,16 +24,16 @@ class BlocksController < ApplicationController
   # POST /blocks
   # POST /blocks.json
   def create
-    @block = Block.new(block_params)
+    inform = Inform.find(params[:inform_id])
+    block = inform.blocks.build(block_params)
+    block.user_id = current_user.id
 
-    respond_to do |format|
-      if @block.save
-        format.html { redirect_to @block, notice: 'Block was successfully created.' }
-        format.json { render :show, status: :created, location: @block }
-      else
-        format.html { render :new }
-        format.json { render json: @block.errors, status: :unprocessable_entity }
-      end
+    if block.save
+      block.block = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
+      block.save
+      redirect_to inform, notice: 'El bloque ha sido creado exitosamente.'
+    else
+      render :new
     end
   end
 

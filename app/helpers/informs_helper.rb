@@ -6,4 +6,8 @@ module InformsHelper
 	def promoter
 		Promoter.find(@inform.promoter_id).initials
 	end
+
+	def user(model)
+		User.find(model.user_id)
+	end
 end

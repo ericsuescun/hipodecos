@@ -19,12 +19,22 @@
             <h1>CUPS</h1>
             <br>
             <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Nombre</th>
+                  <th>Múltiple</th>
+                  <th>Por</th>
+                  <th scope="2"></th>
+                </tr>
+              </thead>
               <tbody>
                 <% @inform.studies.each do |study| %>
                   <tr>
                     <td><%= Codeval.find(study.codeval_id).code %></td>
                     <td><%= Codeval.find(study.codeval_id).name %></td>
                     <td><%= study.factor %>X</td>
+                    <td><%= user(study).first_name %></td>
                     <td><%= link_to 'Editar', edit_study_path(study) %></td>
                     <td><%= link_to 'Borrar', study, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
                   </tr>
@@ -65,6 +75,7 @@
                       <th>Código</th>
                       <th>Nombre</th>
                       <th>Descrp.</th>
+                      <th>Por</th>
                       <th scope="2"></th>
                     </tr>
                   </thead>
@@ -74,6 +85,7 @@
                         <td><%= sample.sample_tag %></td>
                         <td><%= sample.name %></td>
                         <td><%= sample.description %></td>
+                        <td><%= user(sample).first_name %></td>
                         <td><%= link_to "Editar", edit_sample_path(sample) %></td>
                         <td><%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
                       </tr>
@@ -88,6 +100,7 @@
                     <tr>
                       <th>Código</th>
                       <th>Guard.</th>
+                      <th>Por</th>
                       <th scope="2"></th>
                     </tr>
                   </thead>
@@ -96,6 +109,7 @@
                       <tr>
                         <td><%= block.block_tag %></td>
                         <td><%= block.stored == true ? 'Si' : 'No' %></td>
+                        <td><%= user(block).first_name %></td>
                         <td><%= link_to 'Editar', edit_block_path(block) %></td>
                         <td><%= link_to 'Borrar', block, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
                       </tr>
@@ -110,6 +124,7 @@
                     <tr>
                       <th>Código</th>
                       <th>Guard.</th>
+                      <th>Por</th>
                       <th scope="2"></th>
                     </tr>
                   </thead>
@@ -118,6 +133,7 @@
                       <tr>
                         <td><%= slide.slide_tag %></td>
                         <td><%= slide.stored == true ? "Si" : "No" %></td>
+                        <td><%= user(slide).first_name %></td>
                         <td><%= link_to 'Editar', edit_slide_path(slide) %></td>
                         <td><%= link_to 'Borrar', slide, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
                       </tr>
@@ -173,25 +189,26 @@
             <h3>Descripción Macroscópica</h3>
             <% @inform.macros.each do |macro| %>
               <p><%= macro.description %></p>
-              <div class="text-muted"><p><%= User.find(macro.user_id).email %></p></div>
+              <div class="text-muted"><p>Por: <%= user(macro).first_name %></p></div>
               <%= link_to 'Editar', edit_macro_path(macro) %>
               <%= link_to ' Borrar', macro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
             <% end %>
           </div>
-          <div class="col-12 col-lg-8 mx-auto">
-            <h1>Macro</h1>
-            <%= form_for [@inform, @inform.macros.build] do |form| %>
-              <div class="form-group">
-                <%= form.label "Descripción" %>
-                <%= form.text_area :description, class: "form-control form-control-lg input" %>
-              </div>
-              
-              <div class="actions">
-                <%= form.submit "Agregar", class: "btn btn-primary" %>
-              </div>
+          <% if @inform.macros.length < 1 %>
+            <div class="col-12 col-lg-8 mx-auto">
+              <%= form_for [@inform, @inform.macros.build] do |form| %>
+                <div class="form-group">
+                  <%= form.label "Descripción" %>
+                  <%= form.text_area :description, class: "form-control form-control-lg input" %>
+                </div>
+                
+                <div class="actions">
+                  <%= form.submit "Agregar", class: "btn btn-primary" %>
+                </div>
 
-            <% end %>
-          </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <div class="row">
           <div class="col-12 col-lg-8 mt-3 mx-auto">
@@ -199,25 +216,26 @@
             <h3>Descripción Microscópica</h3>
             <% @inform.micros.each do |micro| %>
               <p><%= micro.description %></p>
-              <div class="text-muted"><p><%= User.find(micro.user_id).email %></p></div>
+              <div class="text-muted"><p>Por: <%= user(micro).first_name %></p></div>
               <%= link_to 'Editar', edit_micro_path(micro) %>
               <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
             <% end %>
           </div>
-          <div class="col-12 col-lg-8 mx-auto">
-            <h1>Micro</h1>
-            <%= form_for [@inform, @inform.micros.build] do |form| %>
-              <div class="form-group">
-                <%= form.label "Descripción" %>
-                <%= form.text_area :description, class: "form-control form-control-lg input" %>
-              </div>
-              
-              <div class="actions">
-                <%= form.submit "Agregar", class: "btn btn-primary" %>
-              </div>
+          <% if @inform.micros.length < 1 %>
+            <div class="col-12 col-lg-8 mx-auto">
+              <%= form_for [@inform, @inform.micros.build] do |form| %>
+                <div class="form-group">
+                  <%= form.label "Descripción" %>
+                  <%= form.text_area :description, class: "form-control form-control-lg input" %>
+                </div>
+                
+                <div class="actions">
+                  <%= form.submit "Agregar", class: "btn btn-primary" %>
+                </div>
 
-            <% end %>
-          </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <div class="row">
           <div class="col-12 col-lg-8 mt-3 mx-auto">
@@ -225,25 +243,26 @@
             <h3>Diagnóstico</h3>
             <% @inform.diagnostics.each do |diagnostic| %>
               <p><%= diagnostic.description %></p>
-              <div class="text-muted"><p><%= User.find(diagnostic.user_id).email %></p></div>
+              <div class="text-muted"><p>Por: <%= user(diagnostic).first_name %></p></div>
               <%= link_to 'Editar', edit_diagnostic_path(diagnostic) %>
               <%= link_to ' Borrar', diagnostic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
             <% end %>
           </div>
-          <div class="col-12 col-lg-8 mx-auto">
-            <h1>Diagnóstico</h1>
-            <%= form_for [@inform, @inform.diagnostics.build] do |form| %>
-              <div class="form-group">
-                <%= form.label "Descripción" %>
-                <%= form.text_area :description, class: "form-control form-control-lg input" %>
-              </div>
-              
-              <div class="actions">
-                <%= form.submit "Agregar", class: "btn btn-primary" %>
-              </div>
+          <% if @inform.diagnostics.length < 1 %>
+            <div class="col-12 col-lg-8 mx-auto">
+              <%= form_for [@inform, @inform.diagnostics.build] do |form| %>
+                <div class="form-group">
+                  <%= form.label "Descripción" %>
+                  <%= form.text_area :description, class: "form-control form-control-lg input" %>
+                </div>
+                
+                <div class="actions">
+                  <%= form.submit "Agregar", class: "btn btn-primary" %>
+                </div>
 
-            <% end %>
-          </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>       
       </div>
     </div>

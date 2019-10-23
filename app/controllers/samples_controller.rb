@@ -43,7 +43,7 @@ class SamplesController < ApplicationController
   def update
     respond_to do |format|
       if @sample.update(sample_params)
-        format.html { redirect_to @sample, notice: 'Sample was successfully updated.' }
+        format.html { redirect_to inform_path(@inf), notice: 'Sample was successfully updated.' }
         format.json { render :show, status: :ok, location: @sample }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class SamplesController < ApplicationController
   def destroy
     @sample.destroy
     respond_to do |format|
-      format.html { redirect_to samples_url, notice: 'Sample was successfully destroyed.' }
+      format.html { redirect_to inform_path(@inf), notice: 'Sample was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -66,6 +66,7 @@ class SamplesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_sample
       @sample = Sample.find(params[:id])
+      @inf = @sample.inform_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

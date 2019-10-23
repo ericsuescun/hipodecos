@@ -42,7 +42,7 @@ class SlidesController < ApplicationController
   def update
     respond_to do |format|
       if @slide.update(slide_params)
-        format.html { redirect_to @slide, notice: 'Slide was successfully updated.' }
+        format.html { redirect_to inform_path(@inf), notice: 'Slide was successfully updated.' }
         format.json { render :show, status: :ok, location: @slide }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class SlidesController < ApplicationController
   def destroy
     @slide.destroy
     respond_to do |format|
-      format.html { redirect_to slides_url, notice: 'Slide was successfully destroyed.' }
+      format.html { redirect_to inform_path(@inf), notice: 'Slide was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,7 @@ class SlidesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_slide
       @slide = Slide.find(params[:id])
+      @inf = @slide.inform_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

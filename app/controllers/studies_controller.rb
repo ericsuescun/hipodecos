@@ -40,7 +40,7 @@ class StudiesController < ApplicationController
   def update
     respond_to do |format|
       if @study.update(study_params)
-        format.html { redirect_to @study, notice: 'Study was successfully updated.' }
+        format.html { redirect_to inform_path(@inf), notice: 'Study was successfully updated.' }
         format.json { render :show, status: :ok, location: @study }
       else
         format.html { render :edit }
@@ -54,7 +54,7 @@ class StudiesController < ApplicationController
   def destroy
     @study.destroy
     respond_to do |format|
-      format.html { redirect_to studies_url, notice: 'Study was successfully destroyed.' }
+      format.html { redirect_to inform_path(@inf), notice: 'Study was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -63,10 +63,11 @@ class StudiesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_study
       @study = Study.find(params[:id])
+      @inf = @study.inform_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def study_params
-      params.require(:study).permit(:Inform_id, :user_id, :codeval_id, :factor)
+      params.require(:study).permit(:inform_id, :user_id, :codeval_id, :factor)
     end
 end

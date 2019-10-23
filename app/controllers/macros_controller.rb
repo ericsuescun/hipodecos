@@ -40,7 +40,7 @@ class MacrosController < ApplicationController
   def update
     respond_to do |format|
       if @macro.update(macro_params)
-        format.html { redirect_to @macro, notice: 'Macro was successfully updated.' }
+        format.html { redirect_to inform_path(@inf), notice: 'Macro was successfully updated.' }
         format.json { render :show, status: :ok, location: @macro }
       else
         format.html { render :edit }
@@ -54,7 +54,7 @@ class MacrosController < ApplicationController
   def destroy
     @macro.destroy
     respond_to do |format|
-      format.html { redirect_to macros_url, notice: 'Macro was successfully destroyed.' }
+      format.html { redirect_to inform_path(@inf), notice: 'Macro was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -63,6 +63,7 @@ class MacrosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_macro
       @macro = Macro.find(params[:id])
+      @inf = @macro.inform_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

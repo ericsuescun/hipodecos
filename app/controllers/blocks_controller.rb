@@ -42,7 +42,7 @@ class BlocksController < ApplicationController
   def update
     respond_to do |format|
       if @block.update(block_params)
-        format.html { redirect_to @block, notice: 'Block was successfully updated.' }
+        format.html { redirect_to inform_path(@inf), notice: 'Block was successfully updated.' }
         format.json { render :show, status: :ok, location: @block }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class BlocksController < ApplicationController
   def destroy
     @block.destroy
     respond_to do |format|
-      format.html { redirect_to blocks_url, notice: 'Block was successfully destroyed.' }
+      format.html { redirect_to inform_path(@inf), notice: 'Block was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,7 @@ class BlocksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_block
       @block = Block.find(params[:id])
+      @inf = @block.inform_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

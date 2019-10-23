@@ -40,7 +40,7 @@ class MicrosController < ApplicationController
   def update
     respond_to do |format|
       if @micro.update(micro_params)
-        format.html { redirect_to @micro, notice: 'Micro was successfully updated.' }
+        format.html { redirect_to inform_path(@inf), notice: 'Micro was successfully updated.' }
         format.json { render :show, status: :ok, location: @micro }
       else
         format.html { render :edit }
@@ -54,7 +54,7 @@ class MicrosController < ApplicationController
   def destroy
     @micro.destroy
     respond_to do |format|
-      format.html { redirect_to micros_url, notice: 'Micro was successfully destroyed.' }
+      format.html { redirect_to inform_path(@inf), notice: 'Micro was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -63,6 +63,7 @@ class MicrosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_micro
       @micro = Micro.find(params[:id])
+      @inf = @micro.inform_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :micros
     resources :diagnostics
   end
+
   resources :patients do
     resources :informs
   end

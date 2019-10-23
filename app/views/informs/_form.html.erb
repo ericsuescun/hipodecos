@@ -1,107 +1,67 @@
-<%= form_with(model: inform, local: true) do |form| %>
-  <% if inform.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(inform.errors.count, "error") %> prohibited this inform from being saved:</h2>
+<div class="row">
+  <div class="col-12 col-lg-8 mx-auto">
+    <%= form_with(model: @inform, local: true) do |form| %>
+    <div class="row">
+      <div class="col-12 col-lg-6 mx-auto">
 
-      <ul>
-      <% inform.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <div class="form-group">
+          <%= form.label "Médico tratante" %>
+          <%= form.number_field :physician_id, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Fecha de recepción" %>
+          <%= form.date_field :receive_date, autocomplete: "Fecha de recepción", class: "form-control form-control-lg input"  %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Fecha de entrega" %>
+          <%= form.date_field :delivery_date, autocomplete: "Fecha de entrega", class: "form-control form-control-lg input"  %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Código de autorización EPS/IPS" %>
+          <%= form.text_field :prmtr_auth_code, class: "form-control form-control-lg input" %>
+        </div>
+        <div class="form-group">
+          <%= form.label "Factura" %>
+          <%= form.text_field :invoice, class: "form-control form-control-lg input" %>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="form-group">
+          <%= form.label "Estado del paciente" %>
+          <%= form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @inform.status), { include_blank: true }, class: "form-control form-control-lg input") %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "EPS" %>
+          <%= form.select :promoter_id, Promoter.pluck(:name, :id), {prompt:"Seleccione la EPS"}, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Sede IPS" %>
+          <%= form.select :branch_id, Branch.pluck(:name, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control form-control-lg input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Tipo de zona" %>
+          <%= form.select(:zone_type, options_for_select([['Rural', 'R'], ['Urbano', 'U']], @inform.zone_type), { include_blank: true }, class: "form-control form-control-lg input") %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Estado de embarazo" %>
+          <%= form.select(:pregnancy_status, options_for_select([['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3'], ['No Emb', '4']], @inform.pregnancy_status), { include_blank: true }, class: "form-control form-control-lg input") %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :patient_id %>
-    <%= form.text_field :patient_id %>
+    <div class="row">
+      <div class="col-12 col-lg-4 mx-auto">
+        <div class="actions">
+          <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :physician_id %>
-    <%= form.number_field :physician_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :tag_code %>
-    <%= form.text_field :tag_code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :receive_date %>
-    <%= form.date_select :receive_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :delivery_date %>
-    <%= form.date_select :delivery_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_review_date %>
-    <%= form.date_select :user_review_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :prmtr_auth_code %>
-    <%= form.text_field :prmtr_auth_code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :zone_type %>
-    <%= form.text_field :zone_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :pregnancy_status %>
-    <%= form.text_field :pregnancy_status %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.text_field :status %>
-  </div>
-
-  <div class="field">
-    <%= form.label :regime %>
-    <%= form.text_field :regime %>
-  </div>
-
-  <div class="field">
-    <%= form.label :promoter_id %>
-    <%= form.number_field :promoter_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :entity_id %>
-    <%= form.number_field :entity_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :branch_id %>
-    <%= form.number_field :branch_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :copayment %>
-    <%= form.text_field :copayment %>
-  </div>
-
-  <div class="field">
-    <%= form.label :cost %>
-    <%= form.text_field :cost %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

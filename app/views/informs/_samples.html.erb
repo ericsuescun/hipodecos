@@ -3,7 +3,24 @@
   <div class="col-12 col-lg-8">
     <div class="row">
       <% @inform.samples.each do |sample| %>
-        <div class="col-12 col-lg-3">
+        <div class="col-12 col-lg-8">
+          <table class="table table-striped">
+            <tr>
+              <td><%= sample.sample_tag %></td>
+              <td><%= sample.name %></td>
+              <td><%= sample.description %></td>
+              <td>
+                <span>
+                  <%= link_to "Editar", edit_sample_path(sample), class: 'btn btn-primary' %>
+                </span>
+                <span>
+                  <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
+                </span>
+                
+                
+              </td>
+            </tr>
+          </table>
           <div class="card text-center mt-3">
             <div class="card-header">
               <strong><%= sample.sample_tag %></strong>
@@ -22,21 +39,21 @@
       <% end %>
     </div>      
   </div>
-  <div class="col-12 col-lg-3 mx-auto">
+  <div class="col-12 col-lg-2 mx-auto">
     <%= form_for [@inform, @inform.samples.build] do |form| %>
 
       <div class="form-group">
         <%= form.label "Nombre de muestra" %>
-        <%= form.text_field :name, class: "form-control form-control-lg input" %>
+        <%= form.text_field :name, class: "form-control input" %>
       </div>
 
       <div class="form-group">
         <%= form.label "Descripción" %>
-        <%= form.text_area :description, class: "form-control form-control-lg input" %>
+        <%= form.text_area :description, class: "form-control input" %>
       </div>
 
       <div class="actions">
-        <%= form.submit "Agregar", class: "btn btn-primary btn-block" %>
+        <%= form.submit "Agregar", class: "btn btn-primary" %>
       </div>
 
     <% end %>

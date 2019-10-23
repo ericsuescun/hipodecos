@@ -4,7 +4,37 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.all
+    if params[:filter].blank?    
+      if params[:tag_code].blank?
+        @patients = Patient.all
+      else
+        @patients = Patient.where(tag_code: params[:tag_code])
+      end
+    else
+      if params[:filter] == 'hoy'
+        @patients = Patient.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
+      else
+        if params[:filter] == 'ayer'
+          @patients = Patient.where(created_at: (Date.today - 1).beginning_of_day..(Date.today - 1).end_of_day)
+        else
+          if params[:filter] == 'antier'
+            @patients = Patient.where(created_at: (Date.today - 2).beginning_of_day..(Date.today - 2).end_of_day)
+          else
+            if params[:filter] == 'trasantier'
+              @patients = Patient.where(created_at: (Date.today - 3).beginning_of_day..(Date.today - 3).end_of_day)
+            else
+              if params[:filter] == 'semana'
+                @patients = Patient.where(created_at: (Date.today - 7).beginning_of_day..Date.today.end_of_day)
+              else
+                if params[:filter] == 'mes'
+                  @patients = Patient.where(created_at: (Date.today - 30).beginning_of_day..Date.today.end_of_day)
+                end
+              end
+            end
+          end
+        end
+      end
+    end
   end
 
   # GET /patients/1

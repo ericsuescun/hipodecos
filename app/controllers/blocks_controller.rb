@@ -29,7 +29,7 @@ class BlocksController < ApplicationController
     block.user_id = current_user.id
 
     if block.save
-      block.block = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
+      block.block_tag = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
       block.save
       redirect_to inform, notice: 'El bloque ha sido creado exitosamente.'
     else

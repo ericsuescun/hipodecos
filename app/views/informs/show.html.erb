@@ -1,37 +1,201 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-lg-8 mx-auto">
-      <div class="card mb-3">
-        <div class="row no-gutters">
-          <div class="col-lg-8">
-            <div class="card-body">
-              <h5 class="card-title"><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %> - <%= @inform.patient.id_type %>: <%= @inform.patient.id_number %></h5>
-              <h5 class="card-title"><%= @inform.tag_code %> recibido hace <%= time_ago_in_words(@inform.receive_date) %></h5>
-              <p class="card-text">Médico tratante: <%= @inform.physician_id %></p>
-              <p class="card-text">EPS: <%= Promoter.find(@inform.promoter_id).initials %></p>
-              <p class="card-text">Sede IPS: <%= Branch.find(@inform.branch_id).initials %></p>
-              <p class="card-text">Factura: <%= @inform.invoice %></p>
-              <p class="card-text"><small class="text-muted">Creado el <%= @inform.created_at %></small></p>
+    <div class="col-12 col-lg-12 mx-auto">
+      <div class="alert alert-info">
+        <div class="row">
+          <div class="col-12 col-lg-8 mt-3 mx-auto">
+            <h1>Informe #<%= @inform.tag_code %></h1>
+            <p>Paciente: <strong><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %> </strong> F.Recibo: <strong><%= @inform.receive_date %></strong></p>
+            <p><%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong> Edad: <strong><%= @inform.patient.age_number %> <%= @inform.patient.age_type %></strong> Tel: <strong><%= @inform.patient.tel %></strong> F.Infor: <strong><%= @inform.delivery_date %></strong></p>
+            <p>Clínica: <strong><%= branch %></strong> Entidad: <strong><%= promoter %></strong> Tarifa: </p>
+            <p>Doctor: <strong><%= @inform.physician_id %></strong></p>
+            <p>Dirección: <strong><%= @inform.patient.address %></strong></p>
+            <p>--------------------------------------------------</p>
+            <h3>Descripción Macroscópica</h3>
+            <% @inform.macros.each do |macro| %>
+              <p><%= macro.description %></p>
+              <div class="text-muted"><p><%= User.find(macro.user_id).email %></p></div>
+              <%= link_to 'Editar', edit_macro_path(macro) %>
+              <%= link_to ' Borrar', macro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
+            <% end %>
+            <p>--------------------------------------------------</p>
+            <h3>Descripción Microscópica</h3>
+            <% @inform.micros.each do |micro| %>
+              <p><%= micro.description %></p>
+              <div class="text-muted"><p><%= User.find(micro.user_id).email %></p></div>
+              <%= link_to 'Editar', edit_micro_path(micro) %>
+              <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
+            <% end %>
+            <p>--------------------------------------------------</p>
+            <h3>Diagnóstico</h3>
+            <% @inform.diagnostics.each do |diagnostic| %>
+              <p><%= diagnostic.description %></p>
+              <div class="text-muted"><p><%= User.find(diagnostic.user_id).email %></p></div>
+              <%= link_to 'Editar', edit_diagnostic_path(diagnostic) %>
+              <%= link_to ' Borrar', diagnostic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
+            <% end %>
+            <p>--------------------------------------------------</p>
+            <div class="row">
+              <div class="col-12 col-lg-12 mb-3">
+                <h1>CUPS</h1>
+                <table>
+                  <tbody>
+                    <% @inform.studies.each do |study| %>
+                      <tr>
+                        <td><%= Codeval.find(study.codeval_id).name %></td>
+                        <td><%= study.factor %>X</td>
+                        <td><%= link_to 'Editar', edit_study_path(study) %></td>
+                        <td><%= link_to 'Borrar', study, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-lg-4">
+                <h1>Muestras</h1>
+                <table>
+                  <tbody>
+                    <% @inform.samples.each do |sample| %>
+                      <tr>
+                        <td><%= sample.sample_tag %></td>
+                        <td><%= sample.name %></td>
+                        <td><%= sample.description %></td>
+                        <td><%= link_to "Editar", edit_sample_path(sample) %></td>
+                        <td><%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-12 col-lg-4">
+                <h1>Bloques</h1>
+                <table>
+                  <tbody>
+                    <% @inform.blocks.each do |block| %>
+                      <tr>
+                        <td><%= block.block_tag %></td>
+                        <td><%= block.stored == true ? 'Guardado' : 'No guardado' %></td>
+                        <td><%= link_to 'Editar', edit_block_path(block) %></td>
+                        <td><%= link_to 'Borrar', block, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-12 col-lg-4">
+                <h1>Placas</h1>
+                <table>
+                  <tbody>
+                    <% @inform.slides.each do |slide| %>
+                      <tr>
+                        <td><%= slide.slide_tag %></td>
+                        <td><%= slide.stored == true ? "Guardada" : "No guardada" %></td>
+                        <td><%= link_to 'Editar', edit_slide_path(slide) %></td>
+                        <td><%= link_to 'Borrar', slide, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+        </div>        
       </div>
     </div>
   </div>
-  <div class="alert alert-light">
-    <%= render 'samples' %>
+  <div class="row">
+    <div class="col-12 col-lg-2">
+      <h1>Muestras</h1>
+      <%= form_for [@inform, @inform.samples.build] do |form| %>
+
+        <div class="form-group">
+          <%= form.label "Nombre de muestra" %>
+          <%= form.text_field :name, class: "form-control input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Agregar", class: "btn btn-primary" %>
+        </div>
+
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-2">
+      <h1>CUPS</h1>
+      <%= form_for [@inform, @inform.studies.build] do |form| %>
+
+        <div class="form-group">
+          <%= form.label "Código CUPS" %>
+          <%= form.select :codeval_id, Codeval.pluck(:name, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "¿Cuántos CUPS de éste tipo requieres?" %>
+          <%= form.number_field :factor, class: "form-control input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
+        </div>
+
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-2">
+      <h1>Macro</h1>
+      <%= form_for [@inform, @inform.macros.build] do |form| %>
+        <div class="form-group">
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control form-control-lg input" %>
+        </div>
+        
+        <div class="actions">
+          <%= form.submit "Agregar", class: "btn btn-primary btn-block" %>
+        </div>
+
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-2">
+      <h1>Bloques</h1>
+      <%= form_for [@inform, @inform.blocks.build] do |form| %>
+        <div class="form-group">
+          <%= form.check_box :stored %>
+          <%= form.label "Bloque guardado" %>
+        </div>
+        <div class="actions">
+          <%= form.submit "Agregar", class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-2">
+      <h1>Placas</h1>
+      <%= form_for [@inform, @inform.slides.build] do |form| %>
+        <div class="form-group">
+          <%= form.check_box :stored %>
+          <%= form.label "Placa guardada" %>
+        </div>
+        <div class="actions">
+          <%= form.submit "Agregar", class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-2">
+      
+    </div>
+    <div class="col-12 col-lg-2">
+      
+    </div>
   </div>
-  <div class="alert alert-secondary">
-    <%= render 'codevals' %>
-  </div>
-  <div class="alert alert-dark">
-    <%= render 'macros' %>
-  </div>
+
   <div class="alert alert-warning">
-    <%= render 'blocks' %>
   </div>
   <div class="alert alert-primary">
-    <%= render 'slides' %>
+    
   </div>
   <div class="alert alert-info">
     <%= render 'micros' %>

@@ -2,37 +2,10 @@
 <div class="row">
   <div class="col-12 col-lg-8">
     <div class="row">
-      <% @inform.blocks.each do |block| %>
-        <div class="col-12 col-lg-3">
-          <div class="card text-center mt-3">
-            <div class="card-header">
-              <strong><%= block.block_tag %></strong>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title"><%= block.block_tag %></h5>
-              <%= link_to "Editar", edit_block_path(block), class: 'btn btn-primary' %>
-              <%= link_to 'Borrar', block, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-            </div>
-            <div class="card-footer text-muted">
-              <p>Creada el <%= block.created_at %> por <%= User.find(block.user_id).email %></p>
-            </div>
-          </div>
-        </div>
-      <% end %>
+      
     </div>      
   </div>
   <div class="col-12 col-lg-3 mx-auto">
-    <%= form_for [@inform, @inform.blocks.build] do |form| %>
-
-      <div class="form-group">
-        <%= form.check_box :stored %>
-        <%= form.label "Bloque guardado" %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit "Agregar", class: "btn btn-primary btn-block" %>
-      </div>
-
-    <% end %>
+    
   </div>
 </div>

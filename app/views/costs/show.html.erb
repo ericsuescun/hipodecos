@@ -28,6 +28,7 @@
   						<th>Costo</th>
   						<th>Asigando por:</th>
               <th>Comentarios</th>
+              <th scope="1"></th>
   					</tr>
   					
   				</thead>
@@ -37,6 +38,7 @@
   						<td><%= number_to_currency(value.value, precision: 0, delimiter: ',') %></td>
   						<td><%= Admin.find(value.admin_id).name %></td>
               <td><%= value.description %></td>
+              <td><%= link_to "Editar", edit_value_path(value) %></td>
   					</tr>
   				</tbody>
   			</table>

@@ -4,19 +4,6 @@
     <div class="row">
       <div class="col-12 col-lg-6 mx-auto">
 
-
-        <%= form.fields_for :physicians do |phy_form| %>
-          <div class="form-group">
-            <%= phy_form.label "Nombres" %>
-            <%= phy_form.text_field :name, class: "form-control input" %>
-          </div>
-
-          <div class="form-group">
-            <%= phy_form.label "Apellidos" %>
-            <%= phy_form.text_field :lastname, class: "form-control input" %>
-          </div>
-        <% end %>
-
         <div class="form-group">
           <%= form.label "Fecha de recepción" %>
           <%= form.date_field :receive_date, autocomplete: "Fecha de recepción", class: "form-control form-control-lg input"  %>

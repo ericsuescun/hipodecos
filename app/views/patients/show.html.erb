@@ -71,87 +71,72 @@
     <div class="col-12 col-lg-8">
       <div class="alert alert-success">
         <h1>Nuevo informe</h1>
-        <%= form_with model: @patient do |f| %>
+        <%= form_for [@patient, @patient.informs.build] do |form| %>
+          <div class="row">
+            <div class="col-12 col-lg-6">
 
-          <%= f.fields_for :physician do |pform| %>
-            <div class="form-group">
-              <%= pform.label "Nombres" %>
-              <%= pform.text_field :name %>
-            </div>
-
-            <div class="form-group">
-              <%= pform.label "Apellidos" %>
-              <%= pform.text_field :lastname %>
-            </div>
-          <% end %>
-
-          <%= form_for [@patient, @patient.informs.build] do |form| %>
-            <div class="row">
-              <div class="col-12 col-lg-6">
-
-                <div class="form-group">
-                  <%= form.label "Fecha de recepción" %>
-                  <%= form.date_field :receive_date, autocomplete: "Fecha de recepción", class: "form-control form-control-lg input"  %>
-                </div>
-
-                <div class="form-group">
-                  <%= form.label "Fecha de entrega" %>
-                  <%= form.date_field :delivery_date, autocomplete: "Fecha de entrega", class: "form-control form-control-lg input"  %>
-                </div>
-
-                <div class="form-group">
-                  <%= form.label "Código de autorización EPS/IPS" %>
-                  <%= form.text_field :prmtr_auth_code, class: "form-control form-control-lg input" %>
-                </div>
-                <div class="form-group">
-                  <%= form.label "Factura" %>
-                  <%= form.text_field :invoice, class: "form-control form-control-lg input" %>
-                </div>
+              <div class="form-group">
+                <%= form.label "Fecha de recepción" %>
+                <%= form.date_field :receive_date, autocomplete: "Fecha de recepción", class: "form-control form-control-lg input"  %>
               </div>
-              <div class="col-12 col-lg-6">
-                <div class="form-group">
-                  <%= form.label "Estado del paciente" %>
-                  <%= form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
-                </div>
 
-                <div class="form-group">
-                  <%= form.label "EPS" %>
-                  <%= form.select :promoter_id, Promoter.pluck(:name, :id), {prompt:"Seleccione la EPS"}, class: "form-control form-control-lg input" %>
-                </div>
+              <div class="form-group">
+                <%= form.label "Fecha de entrega" %>
+                <%= form.date_field :delivery_date, autocomplete: "Fecha de entrega", class: "form-control form-control-lg input"  %>
+              </div>
 
-                <div class="form-group">
-                  <%= form.label "Sede IPS" %>
-                  <%= form.select :branch_id, Branch.pluck(:name, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control form-control-lg input" %>
-                </div>
+              <div class="form-group">
+                <%= form.label "Código de autorización EPS/IPS" %>
+                <%= form.text_field :prmtr_auth_code, class: "form-control form-control-lg input" %>
+              </div>
+              <div class="form-group">
+                <%= form.label "Factura" %>
+                <%= form.text_field :invoice, class: "form-control form-control-lg input" %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <%= form.label "Estado del paciente" %>
+                <%= form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
+              </div>
 
-                <div class="form-group">
-                  <%= form.label "Tipo de zona" %>
-                  <%= form.select(:zone_type, options_for_select([['Rural', 'R'], ['Urbano', 'U']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
-                </div>
-                <% if @patient.sex == 'F' %>
-                  <div class="form-group">
-                    <%= form.label "Estado de embarazo" %>
-                    <%= form.select(:pregnancy_status, options_for_select([['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3'], ['No Emb', '4']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
-                  </div>
-                <% else %>
+              <div class="form-group">
+                <%= form.label "EPS" %>
+                <%= form.select :promoter_id, Promoter.pluck(:name, :id), {prompt:"Seleccione la EPS"}, class: "form-control form-control-lg input" %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label "Sede IPS" %>
+                <%= form.select :branch_id, Branch.pluck(:name, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control form-control-lg input" %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label "Tipo de zona" %>
+                <%= form.select(:zone_type, options_for_select([['Rural', 'R'], ['Urbano', 'U']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
+              </div>
+              <% if @patient.sex == 'F' %>
                 <div class="form-group">
                   <%= form.label "Estado de embarazo" %>
-                  <fieldset disabled>
-                    <%= form.select(:pregnancy_status, options_for_select([['No Emb', '4']], @patient.informs), { include_blank: false }, class: "form-control form-control-lg input") %>
-                  </fieldset>
+                  <%= form.select(:pregnancy_status, options_for_select([['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3'], ['No Emb', '4']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
                 </div>
-                <% end %>
+              <% else %>
+              <div class="form-group">
+                <%= form.label "Estado de embarazo" %>
+                <fieldset disabled>
+                  <%= form.select(:pregnancy_status, options_for_select([['No Emb', '4']], @patient.informs), { include_blank: false }, class: "form-control form-control-lg input") %>
+                </fieldset>
+              </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-4 mx-auto">
+              <div class="actions">
+                <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
               </div>
             </div>
-            <div class="row">
-              <div class="col-12 col-lg-4 mx-auto">
-                <div class="actions">
-                  <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end %>  
+          </div>
+        <% end %>
       </div>
       
     </div>

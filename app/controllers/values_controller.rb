@@ -41,10 +41,10 @@ class ValuesController < ApplicationController
   # PATCH/PUT /values/1
   # PATCH/PUT /values/1.json
   def update
-    value.admin_id = current_admin.id
+    @value.admin_id = current_admin.id
 
     if @value.update(value_params)
-      redirect_to @value, notice: 'Valor modificado exitosamente.'
+      redirect_to cost_path(@value.cost_id), notice: 'Valor modificado exitosamente.'
     else
       render :edit
     end

@@ -27,28 +27,20 @@ class FactorsController < ApplicationController
   def create
     @factor = Factor.new(factor_params)
 
-    respond_to do |format|
-      if @factor.save
-        format.html { redirect_to @factor, notice: 'Factor was successfully created.' }
-        format.json { render :show, status: :created, location: @factor }
-      else
-        format.html { render :new }
-        format.json { render json: @factor.errors, status: :unprocessable_entity }
-      end
+    if @factor.save
+      redirect_to @factor, notice: 'Factor exitosamente creado.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /factors/1
   # PATCH/PUT /factors/1.json
   def update
-    respond_to do |format|
-      if @factor.update(factor_params)
-        format.html { redirect_to @factor, notice: 'Factor was successfully updated.' }
-        format.json { render :show, status: :ok, location: @factor }
-      else
-        format.html { render :edit }
-        format.json { render json: @factor.errors, status: :unprocessable_entity }
-      end
+    if @factor.update(factor_params)
+      redirect_to rate_path(@factor.rate_id), notice: 'Factor exitosamente actualizado.'
+    else
+      render :edit
     end
   end
 
@@ -57,7 +49,7 @@ class FactorsController < ApplicationController
   def destroy
     @factor.destroy
     respond_to do |format|
-      format.html { redirect_to factors_url, notice: 'Factor was successfully destroyed.' }
+      format.html { redirect_to factors_url, notice: 'Factor exitosamente borrado.' }
       format.json { head :no_content }
     end
   end

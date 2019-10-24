@@ -28,6 +28,7 @@
   						<th>Factor asociado</th>
   						<th>Asigando por:</th>
               <th>Comentarios</th>
+              <th scope="1"></th>
   					</tr>
   					
   				</thead>
@@ -37,6 +38,7 @@
   						<td><%= factor.factor %></td>
   						<td><%= Admin.find(factor.admin_id).name %></td>
               <td><%= factor.description %></td>
+              <td><%= link_to "Editar", edit_factor_path(factor) %></td>
   					</tr>
   				</tbody>
   			</table>

@@ -38,13 +38,17 @@ class CostsController < ApplicationController
       value = Value.new
       value.codeval = codeval
       value.cost = @cost
-      value.value = codeval.values.find_by_cost_id(@cost.base.to_i).value * @cost.factor
+      if @cost.base == nil
+        value.value = 0
+      else
+        value.value = codeval.values.find_by_cost_id(@cost.base.to_i).value * @cost.factor
+      end
       value.description = @cost.description
       value.admin_id = current_admin.id
       value.save
     end
 
-    redirect_to @cost, notice: 'Rate was successfully created.'
+    redirect_to @cost, notice: 'Tabla de costos creada exitosamente.'
 
   end
 
@@ -53,7 +57,7 @@ class CostsController < ApplicationController
   def update
     respond_to do |format|
       if @cost.update(cost_params)
-        format.html { redirect_to @cost, notice: 'Cost was successfully updated.' }
+        format.html { redirect_to @cost, notice: 'Costo exitosamente actualizado.' }
         format.json { render :show, status: :ok, location: @cost }
       else
         format.html { render :edit }
@@ -67,7 +71,7 @@ class CostsController < ApplicationController
   def destroy
     @cost.destroy
     respond_to do |format|
-      format.html { redirect_to costs_url, notice: 'Cost was successfully destroyed.' }
+      format.html { redirect_to costs_url, notice: 'Costo exitosamente borrado.' }
       format.json { head :no_content }
     end
   end

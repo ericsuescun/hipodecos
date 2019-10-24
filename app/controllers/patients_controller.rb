@@ -45,11 +45,15 @@ class PatientsController < ApplicationController
   # GET /patients/new
   def new
     # @patient = Patient.new
+
     patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
     if patients.length == 1
+      @patient = patients.first
+      @physician = patients.first.physicians.build
       redirect_to patient_path(patients.first)
     else
       @patient = Patient.new(id_number: params[:id_number])
+      @physician = @patient.physicians.build
     end
   end
 
@@ -62,28 +66,43 @@ class PatientsController < ApplicationController
   def create
     @patient = Patient.new(patient_params)
 
-    respond_to do |format|
-      if @patient.save
-        format.html { redirect_to new_patient_path, notice: 'Patient was successfully created.' }
-        format.json { render :show, status: :created, location: @patient }
-      else
-        format.html { render :new }
-        format.json { render json: @patient.errors, status: :unprocessable_entity }
-      end
+    inform = @patient.informs.build(patient_params[:inform])
+    physician = @patient.physicians.build(patient_params[:physician])
+    inform.user_id = current_user.id
+    if @patient.sex == 'M'
+      inform.pregnancy_status = '4'
+    end
+    inform.save
+    physician.inform_id = inform.id
+    inform.tag_code = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
+    inform.save
+    physician.save
+
+    if @patient.save
+      redirect_to new_patient_path, notice: 'Paciente matriculado exitosamente.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /patients/1
-  # PATCH/PUT /patients/1.json
   def update
-    respond_to do |format|
-      if @patient.update(patient_params)
-        format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
-        format.json { render :show, status: :ok, location: @patient }
-      else
-        format.html { render :edit }
-        format.json { render json: @patient.errors, status: :unprocessable_entity }
-      end
+
+    inform = @patient.informs.build(patient_params[:inform])
+    physician = @patient.physicians.build(patient_params[:physician])
+    inform.user_id = current_user.id
+    if @patient.sex == 'M'
+      inform.pregnancy_status = '4'
+    end
+    inform.save
+    physician.inform_id = inform.id
+    inform.tag_code = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
+    inform.save
+    physician.save
+
+    if @patient.update(patient_params)
+      redirect_to @patient, notice: 'Patient was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -105,6 +124,6 @@ class PatientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def patient_params
-      params.require(:patient).permit(:id_number, :id_type, :birth_date, :age_number, :age_type, :name1, :name2, :lastname1, :lastname2, :sex, :gender, :address, :email, :tel, :cel, :occupation, :residence_code, :municipality, :department)
+      params.require(:patient).permit(:id_number, :id_type, :birth_date, :age_number, :age_type, :name1, :name2, :lastname1, :lastname2, :sex, :gender, :address, :email, :tel, :cel, :occupation, :residence_code, :municipality, :department, physicians_attributes: [:inform_id, :user_id, :name, :lastname, :tel, :cel, :email, :study1, :study2])
     end
 end

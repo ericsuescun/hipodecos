@@ -9,9 +9,67 @@
             <p>Paciente: <strong><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %> </strong> F.Recibo: <strong><%= @inform.receive_date %></strong></p>
             <p><%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong> Edad: <strong><%= @inform.patient.age_number %> <%= @inform.patient.age_type %></strong> Tel: <strong><%= @inform.patient.tel %></strong> F.Infor: <strong><%= @inform.delivery_date %></strong></p>
             <p>Clínica: <strong><%= branch %></strong> Entidad: <strong><%= promoter %></strong> Tarifa: </p>
-            <p>Doctor: <strong><%= @inform.physician_id %></strong></p>
+            <% @inform.physicians.each do |physician| %>
+              <p>Doctor: <strong><%= physician.name %> <%= physician.lastname %></strong> <%= link_to 'Editar', edit_physician_path(physician) %> <%= link_to 'Borrar', physician, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td></p>
+            <% end %>
             <p>Dirección: <strong><%= @inform.patient.address %></strong></p>
             <br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-10 mx-auto">
+            <h1>Doctor</h1>
+            <%= form_for [@inform, @inform.physicians.build] do |form| %>
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="form-group">
+                    <%= form.label "Nombres" %>
+                    <%= form.text_field :name, class: "form-control input" %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <div class="form-group">
+                    <%= form.label "Apellidos" %>
+                    <%= form.text_field :lastname, class: "form-control input" %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                  <div class="form-group">
+                    <%= form.label "Teléfono" %>
+                    <%= form.text_field :tel, class: "form-control input" %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                  <div class="form-group">
+                    <%= form.label "Celular" %>
+                    <%= form.text_field :cel, class: "form-control input" %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="form-group">
+                    <%= form.label "Email" %>
+                    <%= form.text_field :email, class: "form-control input" %>
+                  </div>
+                  <div class="actions"> <!-- Este botón lo pongo acá por estética -->
+                    <%= form.submit "Agregar", class: "btn btn-primary" %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <div class="form-group">
+                    <%= form.label "Especialidad" %>
+                    <%= form.text_field :study1, class: "form-control input" %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <div class="form-group">
+                    <%= form.label "Otra especialidad/estudio" %>
+                    <%= form.text_field :study2, class: "form-control input" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="row">

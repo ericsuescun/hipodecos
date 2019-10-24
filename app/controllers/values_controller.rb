@@ -41,14 +41,12 @@ class ValuesController < ApplicationController
   # PATCH/PUT /values/1
   # PATCH/PUT /values/1.json
   def update
-    respond_to do |format|
-      if @value.update(value_params)
-        format.html { redirect_to @value, notice: 'Value was successfully updated.' }
-        format.json { render :show, status: :ok, location: @value }
-      else
-        format.html { render :edit }
-        format.json { render json: @value.errors, status: :unprocessable_entity }
-      end
+    value.admin_id = current_admin.id
+
+    if @value.update(value_params)
+      redirect_to @value, notice: 'Valor modificado exitosamente.'
+    else
+      render :edit
     end
   end
 
@@ -56,10 +54,7 @@ class ValuesController < ApplicationController
   # DELETE /values/1.json
   def destroy
     @value.destroy
-    respond_to do |format|
-      format.html { redirect_to values_url, notice: 'Value was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to values_url, notice: 'Valor borrado exitosamente.'
   end
 
   private

@@ -1,37 +1,23 @@
-<%= form_with(model: study, local: true) do |form| %>
-  <% if study.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(study.errors.count, "error") %> prohibited this study from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <%= form_with(model: sample, local: true) do |form| %>
 
-      <ul>
-      <% study.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <div class="form-group">
+          <%= form.label "Código CUPS" %>
+          <%= form.select :codeval_id, Codeval.pluck(:name, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Factor" %>
+          <%= form.number_field :factor, class: "form-control input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Guardar", class: "btn btn-primary" %>
+        </div>
       <% end %>
-      </ul>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :inform_id %>
-    <%= form.text_field :inform_id %>
   </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :codeval_id %>
-    <%= form.number_field :codeval_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :factor %>
-    <%= form.number_field :factor %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

@@ -1,42 +1,22 @@
-<%= form_with(model: factor, local: true) do |form| %>
-  <% if factor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(factor.errors.count, "error") %> prohibited this factor from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <%= form_with(model: factor, local: true) do |form| %>
 
-      <ul>
-      <% factor.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <div class="form-group">
+          <%= form.label "Factor: 1 + margen" %>
+          <%= form.text_field :factor, class: "form-control input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit %>
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :codeval_id %>
-    <%= form.text_field :codeval_id %>
   </div>
-
-  <div class="field">
-    <%= form.label :rate_id %>
-    <%= form.text_field :rate_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :factor %>
-    <%= form.text_field :factor %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin_id %>
-    <%= form.number_field :admin_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :physicians
   resources :diagnostics
   resources :micros
   resources :slides
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   resources :studies
   
   resources :informs do
+    resources :physicians
     resources :samples
     resources :studies
     resources :macros

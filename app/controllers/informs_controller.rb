@@ -45,6 +45,7 @@ class InformsController < ApplicationController
   # GET /informs/new
   def new
     @inform = Inform.new
+    @physician = @inform.physicians.build
   end
 
   # GET /informs/1/edit
@@ -58,6 +59,9 @@ class InformsController < ApplicationController
     @patient = Patient.find(params[:patient_id])
     inform = @patient.informs.build(inform_params)
     inform.user_id = current_user.id
+    if @patient.sex == 'M'
+      inform.pregnancy_status = '4'
+    end
     inform.entity_id = Branch.find(inform.branch_id).entity.id
 
     if inform.save
@@ -101,6 +105,6 @@ class InformsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def inform_params
-      params.require(:inform).permit(:patient_id, :user_id, :physician_id, :tag_code, :receive_date, :delivery_date, :user_review_date, :prmtr_auth_code, :zone_type, :pregnancy_status, :status, :regime, :promoter_id, :entity_id, :branch_id, :copayment, :cost, :price, :invoice)
+      params.require(:inform).permit(:patient_id, :user_id, :physician_id, :tag_code, :receive_date, :delivery_date, :user_review_date, :prmtr_auth_code, :zone_type, :pregnancy_status, :status, :regime, :promoter_id, :entity_id, :branch_id, :copayment, :cost, :price, :invoice, physicians_attributes: [:inform_id, :user_id, :name, :lastname, :tel, :cel, :email, :study1, :study2])
     end
 end

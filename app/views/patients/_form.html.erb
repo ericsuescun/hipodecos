@@ -130,31 +130,34 @@
             
           </div>
         </div>
-        <%= form.fields_for :informs do |informs_form| %>
-          <div class="row">
-            <div class="col-12 col-lg-3">
-              <div class="form-group">
-                <%= informs_form.label "Fecha de recepción" %>
-                <%= informs_form.date_field :receive_date, autocomplete: "Fecha de nacimiento", class: "form-control input"  %>
+        <% if action != 'edit' %>
+          <%= form.fields_for :informs do |informs_form| %>
+            <div class="row">
+              <div class="col-12 col-lg-3">
+                <div class="form-group">
+                  <%= informs_form.label "Fecha de recepción" %>
+                  <%= informs_form.date_field :receive_date, autocomplete: "Fecha de nacimiento", class: "form-control input"  %>
+                </div>
               </div>
-            </div>
-            <div class="col-12 col-lg-3">
-              <div class="form-group">
-                <%= informs_form.label "EPS" %>
-                <%= informs_form.select :promoter_id, Promoter.pluck(:name, :id), {prompt:"Seleccione la EPS"}, class: "form-control input" %>
+              <div class="col-12 col-lg-3">
+                <div class="form-group">
+                  <%= informs_form.label "EPS" %>
+                  <%= informs_form.select :promoter_id, Promoter.pluck(:name, :id), {prompt:"Seleccione la EPS"}, class: "form-control input" %>
+                </div>
               </div>
-            </div>
-            <div class="col-12 col-lg-3">
-              <div class="form-group">
-                <%= informs_form.label "Sede IPS" %>
-                <%= informs_form.select :branch_id, Branch.pluck(:name, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control input" %>
+              <div class="col-12 col-lg-3">
+                <div class="form-group">
+                  <%= informs_form.label "Sede IPS" %>
+                  <%= informs_form.select :branch_id, Branch.pluck(:name, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control input" %>
+                </div>
               </div>
-            </div>
-            <div class="col-12 col-lg-3">
-              
-            </div>
-          </div>  
+              <div class="col-12 col-lg-3">
+                
+              </div>
+            </div>  
+          <% end %>
         <% end %>
+
         <div class="row">
           <div class="col-12 col-lg-4 mx-auto">
             <div class="actions">

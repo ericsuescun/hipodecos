@@ -67,13 +67,14 @@ class PatientsController < ApplicationController
     @patient = Patient.new(patient_params)
 
     if @patient.sex == 'M'
-      inform.pregnancy_status = '4'
+      @patient.informs.first.pregnancy_status = '4'
     end
 
     @patient.informs.first.user_id = current_user.id
     @patient.informs.first.entity_id = Branch.find(params[:patient][:informs_attributes][:"0"][:branch_id]).entity_id
 
     if @patient.save
+      @patient.informs.first.update(tag_code: ('C' + Date.today.strftime('%y').to_s + '-' + @patient.informs.first.id.to_s))
       redirect_to new_patient_path, notice: 'Paciente matriculado exitosamente.'
     else
       render :new
@@ -81,16 +82,6 @@ class PatientsController < ApplicationController
   end
 
   def update
-
-    inform = @patient.informs.build(patient_params[:informs])
-    inform.user_id = current_user.id
-    if @patient.sex == 'M'
-      inform.pregnancy_status = '4'
-    end
-    inform.save
-    inform.tag_code = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
-    inform.save
-
     if @patient.update(patient_params)
       redirect_to @patient, notice: 'Patient was successfully updated.'
     else
@@ -116,6 +107,6 @@ class PatientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def patient_params
-      params.require(:patient).permit(:id_number, :id_type, :birth_date, :age_number, :age_type, :name1, :name2, :lastname1, :lastname2, :sex, :gender, :address, :email, :tel, :cel, :occupation, :residence_code, :municipality, :department, informs_attributes: [ :receive_date, :promoter_id, :branch_id ])
+      params.require(:patient).permit(:id_number, :id_type, :birth_date, :age_number, :age_type, :name1, :name2, :lastname1, :lastname2, :sex, :gender, :address, :email, :tel, :cel, :occupation, :residence_code, :municipality, :department, informs_attributes: [ :id, :receive_date, :promoter_id, :branch_id ])
     end
 end

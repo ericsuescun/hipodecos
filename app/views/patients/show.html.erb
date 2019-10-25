@@ -42,6 +42,8 @@
             <% end %>
           </div>
         </div>
+        <%= link_to 'Editar', edit_patient_path(@patient) %> |
+        <%= link_to 'Regresar a pacientes', patients_path %>
       </div>      
     </div>
 
@@ -112,7 +114,7 @@
 
               <div class="form-group">
                 <%= form.label "Tipo de zona" %>
-                <%= form.select(:zone_type, options_for_select([['Rural', 'R'], ['Urbano', 'U']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
+                <%= form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
               </div>
               <% if @patient.sex == 'F' %>
                 <div class="form-group">
@@ -142,6 +144,3 @@
     </div>
   </div>
 </div>
-
-<%= link_to 'Edit', edit_patient_path(@patient) %> |
-<%= link_to 'Back', patients_path %>

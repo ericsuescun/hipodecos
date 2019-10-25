@@ -1,5 +1,4 @@
 class Physician < ApplicationRecord
-  belongs_to :inform
+  belongs_to :inform, optional: true
 
-  validates :name, :lastname, presence: true
 end

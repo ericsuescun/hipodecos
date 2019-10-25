@@ -1,6 +1,6 @@
-<h1>Edición de informe</h1>
+<h1>Edición de informe <%= @inform.tag_code %></h1>
 
 <%= render 'form', inform: @inform %>
 
-<%= link_to 'Show', @inform %> |
-<%= link_to 'Back', informs_path %>
+<%= link_to 'No editar y regresar a ' + @inform.tag_code , @inform %> |
+<%= link_to 'Volver a informes', informs_path %>

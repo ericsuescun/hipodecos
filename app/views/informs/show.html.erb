@@ -13,6 +13,8 @@
               <p>Doctor: <strong><%= physician.name %> <%= physician.lastname %></strong> <%= link_to 'Editar', edit_physician_path(physician) %> <%= link_to 'Borrar', physician, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td></p>
             <% end %>
             <p>Dirección: <strong><%= @inform.patient.address %></strong></p>
+            <%= link_to 'Editar', edit_inform_path(@inform) %> |
+            <%= link_to 'Volver a informes', informs_path %>
             <br>
           </div>
         </div>
@@ -326,7 +328,3 @@
     </div>
   </div>
 </div>
-
-
-<%= link_to 'Editar', edit_inform_path(@inform) %> |
-<%= link_to 'Volver a informes', informs_path %>

@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   end
 
   resources :patients do
-    resources :informs
+    resources :informs do
+      resources :physicians
+    end
   end
   devise_scope :user do get "users" => "users#index"
   end

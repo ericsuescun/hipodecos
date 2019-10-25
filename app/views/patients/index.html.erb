@@ -7,11 +7,9 @@
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
-            <th>id</th>
             <th># id</th>
             <th>Nacimiento</th>
             <th>Edad</th>
-            <th>D/M/A</th>
             <th>Nombre</th>
             <th>Sexo</th>
             <th>Dirección</th>
@@ -25,15 +23,16 @@
         <tbody>
           <% @patients.each do |patient| %>
             <tr>
-              <td><%= patient.id_type %></td>
-              <td>
+              <td><%= patient.id_type %>
                 <%= link_to patient do %>
-                  <%= patient.id_number %>
+                   <%= patient.id_number %>
                 <% end %>
               </td>
               <td><%= patient.birth_date %></td>
-              <td><%= patient.age_number %></td>
-              <td><%= patient.age_type %></td>
+              <td>
+                <%= patient.age_number %> <%= patient.age_type == 'A' ? 'Años' : patient.age_type == 'M' ? 'Meses' : 'Días' %>
+                  
+              </td>
               <td><%= patient.name1 %> <%= patient.name2 %> <%= patient.lastname1 %> <%= patient.lastname2 %></td>
               <td><%= patient.sex %></td>
               <td><%= patient.address %></td>

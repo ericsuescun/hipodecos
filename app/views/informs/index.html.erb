@@ -7,7 +7,7 @@
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
-            <th>Etiqueta</th>
+            <th>Informe</th>
             <th>Ingreso PSS</th>
             <th>User PSS</th>
             <th>Paciente</th>
@@ -27,7 +27,11 @@
               </td>
               <td><%= inform.created_at.strftime('%d/%m/%Y') %></td>
               <td><%= User.find(inform.user_id).first_name %></td>
-              <td><%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %></td>
+              <td>
+                <%= link_to inform.patient  do %>
+                  <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
+                  <% end %>
+              </td>
               <td><%= Promoter.find(inform.promoter_id).initials %></td>
               <td><%= Branch.find(inform.branch_id).initials %></td>
               <td><%= inform.prmtr_auth_code %></td>

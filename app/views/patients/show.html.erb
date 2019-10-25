@@ -127,25 +127,69 @@
                   <%= form.select(:pregnancy_status, options_for_select([['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3'], ['No Emb', '4']], @patient.informs), { include_blank: true }, class: "form-control input") %>
                 </div>
               <% else %>
-              <div class="form-group">
-                <%= form.label "Estado de embarazo" %>
-                <fieldset disabled>
-                  <%= form.select(:pregnancy_status, options_for_select([['No Emb', '4']], @patient.informs), { include_blank: false }, class: "form-control input") %>
-                </fieldset>
-              </div>
+                <div class="form-group">
+                  <%= form.label "Estado de embarazo" %>
+                  <fieldset disabled>
+                    <%= form.select(:pregnancy_status, options_for_select([['No Emb', '4']], @patient.informs), { include_blank: false }, class: "form-control input") %>
+                  </fieldset>
+                </div>
               <% end %>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12 col-lg-4 mx-auto">
-              <div class="actions">
-                <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
+          <div class="alert alert-success">
+            <%= form.fields_for :physicians do |phy_form| %>
+              <h5>Médico tratante</h5>
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="form-group">
+                    <%= phy_form.label "Nombre" %>
+                    <%= phy_form.text_field :name, class: "form-control input" %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <div class="form-group">
+                    <%= phy_form.label "Apellido" %>
+                    <%= phy_form.text_field :lastname, class: "form-control input" %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                  <div class="form-group">
+                    <%= phy_form.label "Teléfono" %>
+                    <%= phy_form.text_field :tel, class: "form-control input" %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                  <div class="form-group">
+                    <%= phy_form.label "Celular" %>
+                    <%= phy_form.text_field :cel, class: "form-control input" %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <%= phy_form.label "email" %>
+                  <%= phy_form.text_field :email, class: "form-control input" %>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <%= phy_form.label "Especialidad" %>
+                  <%= phy_form.text_field :study1, class: "form-control input" %>
+                </div>
+                <div class="col-12 col-lg-4">
+                  <%= phy_form.label "Otro estudio/especialidad" %>
+                  <%= phy_form.text_field :study2, class: "form-control input" %>
+                </div>
+              </div>
+            <% end %>
+            <div class="row">
+              <div class="col-12 col-lg-4 mx-auto">
+                <div class="actions">
+                  <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
+                </div>
               </div>
             </div>
           </div>
         <% end %>
       </div>
-      
     </div>
   </div>
 </div>

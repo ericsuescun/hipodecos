@@ -71,6 +71,7 @@
       </div>
     </div>
     <div class="col-12 col-lg-8">
+      <div class="alert alert-success">
         <h1>Nuevo informe</h1>
         <%= form_for [@patient, @patient.informs.build] do |form| %>
           <div class="row">
@@ -182,11 +183,13 @@
           <div class="row">
             <div class="col-12 col-lg-4 mx-auto">
               <div class="actions">
-                <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
+                <%= form.submit "Guardar", class: "btn btn-primary btn-block mt-3" %>
               </div>
             </div>
           </div>
         <% end %>
+      </div>
+
     </div>
   </div>
 </div>

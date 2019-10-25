@@ -71,7 +71,6 @@
       </div>
     </div>
     <div class="col-12 col-lg-8">
-      <div class="alert alert-success">
         <h1>Nuevo informe</h1>
         <%= form_for [@patient, @patient.informs.build] do |form| %>
           <div class="row">
@@ -136,8 +135,7 @@
               <% end %>
             </div>
           </div>
-          <div class="alert alert-success">
-            <%= form.fields_for :physicians do |phy_form| %>
+            <%= form.fields_for [@patient, @patient.informs.build.physicians.build] do |phy_form| %>
               <h5>Médico tratante</h5>
               <div class="row">
                 <div class="col-12 col-lg-4">
@@ -180,16 +178,15 @@
                 </div>
               </div>
             <% end %>
-            <div class="row">
-              <div class="col-12 col-lg-4 mx-auto">
-                <div class="actions">
-                  <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
-                </div>
+
+          <div class="row">
+            <div class="col-12 col-lg-4 mx-auto">
+              <div class="actions">
+                <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
               </div>
             </div>
           </div>
         <% end %>
-      </div>
     </div>
   </div>
 </div>

@@ -65,6 +65,21 @@ class InformsController < ApplicationController
     inform.entity_id = Branch.find(inform.branch_id).entity.id
 
     if inform.save
+
+      if !params[:inform][:physician].blank?
+        pnew = Physician.new
+        pnew.name = params[:inform][:physician][:name]
+        pnew.lastname = params[:inform][:physician][:lastname]
+        pnew.tel = params[:inform][:physician][:tel]
+        pnew.cel = params[:inform][:physician][:cel]
+        pnew.email = params[:inform][:physician][:email]
+        pnew.study1 = params[:inform][:physician][:study1]
+        pnew.study2 = params[:inform][:physician][:study2]
+        pnew.inform_id = inform.id
+        pnew.user_id = current_user.id
+        pnew.save
+      end
+
       inform.tag_code = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
       inform.save #Just after saving is when I get de ID, and its needed for the serial code...
       redirect_to @patient, notice: 'Inform was successfully created.'

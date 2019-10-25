@@ -40,6 +40,7 @@ class PatientsController < ApplicationController
   # GET /patients/1
   # GET /patients/1.json
   def show
+    
   end
 
   # GET /patients/new
@@ -92,10 +93,7 @@ class PatientsController < ApplicationController
   # DELETE /patients/1.json
   def destroy
     @patient.destroy
-    respond_to do |format|
-      format.html { redirect_to patients_url, notice: 'Patient was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to patients_url, notice: 'Patient was successfully destroyed.'
   end
 
   private

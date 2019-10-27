@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  objectionable: one
+  objectionable_type: Objectionable
+  user_id: 1
+  name: MyString
+  responsible_user_id: 1
+  close_user_id: 1
+  close_date: 2019-10-26
+  description: MyText
+  closed: false
+
+two:
+  objectionable: two
+  objectionable_type: Objectionable
+  user_id: 1
+  name: MyString
+  responsible_user_id: 1
+  close_user_id: 1
+  close_date: 2019-10-26
+  description: MyText
+  closed: false

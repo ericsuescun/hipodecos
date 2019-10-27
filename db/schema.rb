@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_25_163131) do
+ActiveRecord::Schema.define(version: 2019_10_27_040851) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -67,6 +67,17 @@ ActiveRecord::Schema.define(version: 2019_10_25_163131) do
     t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "commentable_type"
+    t.integer "commentable_id"
+    t.integer "user_id"
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
   end
 
   create_table "costs", force: :cascade do |t|
@@ -161,6 +172,21 @@ ActiveRecord::Schema.define(version: 2019_10_25_163131) do
     t.index ["inform_id"], name: "index_micros_on_inform_id"
   end
 
+  create_table "objections", force: :cascade do |t|
+    t.string "objectionable_type"
+    t.integer "objectionable_id"
+    t.integer "user_id"
+    t.string "name"
+    t.integer "responsible_user_id"
+    t.integer "close_user_id"
+    t.date "close_date"
+    t.text "description"
+    t.boolean "closed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["objectionable_type", "objectionable_id"], name: "index_objections_on_objectionable_type_and_objectionable_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string "id_number"
     t.string "id_type"
@@ -198,6 +224,17 @@ ActiveRecord::Schema.define(version: 2019_10_25_163131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["inform_id"], name: "index_physicians_on_inform_id"
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string "imageable_type"
+    t.integer "imageable_id"
+    t.integer "user_id"
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id"
   end
 
   create_table "promoters", force: :cascade do |t|

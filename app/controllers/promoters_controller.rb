@@ -28,28 +28,20 @@ class PromotersController < ApplicationController
   def create
     @promoter = Promoter.new(promoter_params)
 
-    respond_to do |format|
       if @promoter.save
-        format.html { redirect_to promoters_path, notice: 'EPS creada con éxito.' }
-        format.json { render :show, status: :created, location: @promoter }
+        redirect_to promoters_path, notice: 'EPS creada con éxito.'
       else
-        format.html { render :new }
-        format.json { render json: @promoter.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
   end
 
   # PATCH/PUT /promoters/1
   # PATCH/PUT /promoters/1.json
   def update
-    respond_to do |format|
-      if @promoter.update(promoter_params)
-        format.html { redirect_to @promoter, notice: 'Promoter was successfully updated.' }
-        format.json { render :show, status: :ok, location: @promoter }
-      else
-        format.html { render :edit }
-        format.json { render json: @promoter.errors, status: :unprocessable_entity }
-      end
+    if @promoter.update(promoter_params)
+      redirect_to @promoter, notice: 'EPS exitosamente actualizada.'
+    else
+      render :edit
     end
   end
 
@@ -57,10 +49,7 @@ class PromotersController < ApplicationController
   # DELETE /promoters/1.json
   def destroy
     @promoter.destroy
-    respond_to do |format|
-      format.html { redirect_to promoters_url, notice: 'Promoter was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      redirect_to promoters_url, notice: 'Promoter was successfully destroyed.'
   end
 
   private
@@ -71,6 +60,6 @@ class PromotersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def promoter_params
-      params.require(:promoter).permit(:name, :initials, :code)
+      params.require(:promoter).permit(:name, :initials, :code, :regime)
     end
 end

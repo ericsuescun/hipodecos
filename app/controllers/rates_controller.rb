@@ -44,41 +44,33 @@ class RatesController < ApplicationController
       factor.save
     end
 
-    redirect_to @rate, notice: 'Rate was successfully created.'
-
-    # respond_to do |format|
-    #   if @rate.save
-    #     format.html { redirect_to @rate, notice: 'Rate was successfully created.' }
-    #     format.json { render :show, status: :created, location: @rate }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @rate.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    redirect_to @rate, notice: 'Tarifa exitosamente creada.'
   end
 
   # PATCH/PUT /rates/1
   # PATCH/PUT /rates/1.json
   def update
-    respond_to do |format|
-      if @rate.update(rate_params)
-        format.html { redirect_to @rate, notice: 'Rate was successfully updated.' }
-        format.json { render :show, status: :ok, location: @rate }
-      else
-        format.html { render :edit }
-        format.json { render json: @rate.errors, status: :unprocessable_entity }
-      end
+
+    @rate.admin_id = current_admin.id
+    
+    @rate.factors.each do |factor|
+      factor.update(factor: rate_params[:factor], description: rate_params[:description])
+    end #Traigo toda la colecciones de factores para la Rate actual y los recorro
+
+
+    if @rate.update(rate_params)
+      redirect_to @rate, notice: 'Tarifa exitosamente actualizada.'
+    else
+      render :edit
     end
+
   end
 
   # DELETE /rates/1
   # DELETE /rates/1.json
   def destroy
     @rate.destroy
-    respond_to do |format|
-      format.html { redirect_to rates_url, notice: 'Rate was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to rates_url, notice: 'Tarifa exitosamente borrada.'
   end
 
   private

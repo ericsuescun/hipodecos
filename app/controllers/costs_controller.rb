@@ -48,32 +48,31 @@ class CostsController < ApplicationController
       value.save
     end
 
-    redirect_to @cost, notice: 'Tabla de costos creada exitosamente.'
+    redirect_to @cost, notice: 'Tabla de costos exitosamente creada.'
 
   end
 
   # PATCH/PUT /costs/1
   # PATCH/PUT /costs/1.json
   def update
-    respond_to do |format|
-      if @cost.update(cost_params)
-        format.html { redirect_to @cost, notice: 'Costo exitosamente actualizado.' }
-        format.json { render :show, status: :ok, location: @cost }
-      else
-        format.html { render :edit }
-        format.json { render json: @cost.errors, status: :unprocessable_entity }
-      end
+
+    @cost.values.each do |value|
+      value.update(value: (Value.find(cost_params[:base]).value * cost_params[:factor].to_d), admin_id: current_admin.id, description: cost_params[:description])
     end
+
+    if @cost.update(cost_params)
+      redirect_to @cost, notice: 'Tabla de costos exitosamente actualizada.'
+    else
+      render :edit
+    end
+    
   end
 
   # DELETE /costs/1
   # DELETE /costs/1.json
   def destroy
     @cost.destroy
-    respond_to do |format|
-      format.html { redirect_to costs_url, notice: 'Costo exitosamente borrado.' }
-      format.json { head :no_content }
-    end
+    redirect_to costs_url, notice: 'Tabla de costo exitosamente borrada.'
   end
 
   private

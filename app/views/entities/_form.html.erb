@@ -59,6 +59,16 @@
             <%= form.label "Tipo de entidad" %>
             <%= form.text_field :entype, class: "form-control form-control-lg input" %>
           </div>
+
+          <div class="form-group">
+            <%= form.label "Tabla de costo" %>
+            <%= form.select :cost_id, Cost.pluck(:name, :id), {prompt:"Seleccione tabla de costo"}, class: "form-control form-control-lg input" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label "Tabla de tarifas" %>
+            <%= form.select :rate_id, Rate.pluck(:name, :id), {prompt:"Seleccione tabla de tarifas"}, class: "form-control form-control-lg input" %>
+          </div>
         </div>
 
       </div>

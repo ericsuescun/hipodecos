@@ -1,64 +1,111 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Editar sede ' + @branch.name, edit_branch_path(@branch) %> |
+<%= link_to 'Volver a listado de sedes', branches_path %>
 
-<p>
-  <strong>Entity:</strong>
-  <%= @branch.entity %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <fieldset disabled>
+      <%= form_with(model: @branch, local: true) do |form| %>
+        <div class="row">
+          <div class="col-12 col-lg-8 mx-auto">
+            <div class="form-group">
+              <%= form.label "IPS a la que pertenece" %><br />
+              <%= form.select :entity_id, Entity.pluck(:name, :id), {prompt:"Seleccione la IPS"}, class: "form-control form-control-lg" %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-6 col-lg-4 offset-lg-2">
+            <div class="form-group">
+              <%= form.label "Nombre" %>
+              <%= form.text_field :name, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @branch.name %>
-</p>
+            <div class="form-group">
+              <%= form.label "Iniciales" %>
+              <%= form.text_field :initials, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Initials:</strong>
-  <%= @branch.initials %>
-</p>
+            <div class="form-group">
+              <%= form.label "Código" %>
+              <%= form.text_field :code, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Code:</strong>
-  <%= @branch.code %>
-</p>
+            <div class="form-group">
+              <%= form.label "Contacto" %>
+              <%= form.text_field :mgr_name, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Mgr name:</strong>
-  <%= @branch.mgr_name %>
-</p>
+            <div class="form-group">
+              <%= form.label "Email" %>
+              <%= form.text_field :mgr_email, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Mgr email:</strong>
-  <%= @branch.mgr_email %>
-</p>
+            <div class="form-group">
+              <%= form.label "Teléfono" %>
+              <%= form.text_field :mgr_tel, class: 'form-control form-control-lg input' %>
+            </div>
+          </div>
+                
+          <div class="col-6 col-lg-4">
 
-<p>
-  <strong>Mgr tel:</strong>
-  <%= @branch.mgr_tel %>
-</p>
+            <div class="form-group">
+              <%= form.label "Celular" %>
+              <%= form.text_field :mgr_cel, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Mgr cel:</strong>
-  <%= @branch.mgr_cel %>
-</p>
+            <div class="form-group">
+              <%= form.label "Municipio" %>
+              <%= form.text_field :municipality, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Municipality:</strong>
-  <%= @branch.municipality %>
-</p>
+            <div class="form-group">
+              <%= form.label "Departamento" %>
+              <%= form.text_field :department, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Department:</strong>
-  <%= @branch.department %>
-</p>
+            <div class="form-group">
+              <%= form.label "Dirección" %>
+              <%= form.text_field :address, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @branch.address %>
-</p>
+            <div class="form-group">
+              <%= form.label "Tipo de entidad" %>
+              <%= form.text_field :entype, class: 'form-control form-control-lg input' %>
+            </div>
 
-<p>
-  <strong>Entype:</strong>
-  <%= @branch.entype %>
-</p>
-
-<%= link_to 'Edit', edit_branch_path(@branch) %> |
-<%= link_to 'Back', branches_path %>
+          </div>
+        </div>
+        
+      <% end %>  
+      </fieldset>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Informe</th>
+            <th>CUPS</th>
+            <th>Factor</th>
+            <th>Costo</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% studies2.each do |study| %>
+            <tr>
+              <td><%= Inform.find(study.inform_id).tag_code %></td>
+              <td><%= Codeval.find(study.codeval_id).code %></td>
+              <td><%= study.factor %></td>
+              <td><%= number_to_currency(Value.where(codeval_id: study.codeval_id, cost_id: @branch.entity.cost_id).first.value, precision: 0, delimiter: ',') %></td>
+              <td><%= number_to_currency(Value.where(codeval_id: study.codeval_id, cost_id: @branch.entity.cost_id).first.value * Factor.where(codeval_id: study.codeval_id, rate_id: @branch.entity.rate_id).first.factor * study.factor, precision: 0, delimiter: ',') %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

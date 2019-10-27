@@ -1,19 +1,24 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-lg-4 mx-auto">
+			<p>
+			  <strong>Nombre:</strong>
+			  <%= @promoter.name %>
+			</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @promoter.name %>
-</p>
+			<p>
+			  <strong>Iniciales:</strong>
+			  <%= @promoter.initials %>
+			</p>
 
-<p>
-  <strong>Initials:</strong>
-  <%= @promoter.initials %>
-</p>
+			<p>
+			  <strong>Código:</strong>
+			  <%= @promoter.code %>
+			</p>
 
-<p>
-  <strong>Code:</strong>
-  <%= @promoter.code %>
-</p>
+			<%= link_to 'Editar', edit_promoter_path(@promoter) %> |
+			<%= link_to "Regresar a EPS's", promoters_path %>
 
-<%= link_to 'Edit', edit_promoter_path(@promoter) %> |
-<%= link_to 'Back', promoters_path %>
+		</div>
+	</div>
+</div>

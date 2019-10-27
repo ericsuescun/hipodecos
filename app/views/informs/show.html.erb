@@ -8,7 +8,7 @@
             <br>
             <p>Paciente: <strong><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %> </strong> F.Recibo: <strong><%= @inform.receive_date %></strong></p>
             <p><%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong> Edad: <strong><%= @inform.patient.age_number %> <%= @inform.patient.age_type %></strong> Tel: <strong><%= @inform.patient.tel %></strong> F.Infor: <strong><%= @inform.delivery_date %></strong></p>
-            <p>Clínica: <strong><%= branch %></strong> Entidad: <strong><%= promoter %></strong> Tarifa: </p>
+            <p>Clínica: <strong><%= Branch.find(@inform.branch_id).initials %></strong> Entidad: <strong><%= Promoter.find(@inform.promoter_id).initials %></strong> Tarifa: </p>
             <% @inform.physicians.each do |physician| %>
               <p>Doctor: <strong><%= physician.name %> <%= physician.lastname %></strong> <%= link_to 'Editar', edit_physician_path(physician) %> <%= link_to 'Borrar', physician, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td></p>
             <% end %>

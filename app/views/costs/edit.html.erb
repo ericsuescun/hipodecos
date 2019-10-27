@@ -1,6 +1,6 @@
-<h1>Editing Cost</h1>
+<h1>Editando tabla de costos</h1>
 
 <%= render 'form', cost: @cost %>
 
-<%= link_to 'Show', @cost %> |
-<%= link_to 'Back', costs_path %>
+<%= link_to 'Cancelar y volver a tabla de costos ' + @cost.name, @cost %> |
+<%= link_to 'Volver a tablas de costos', costs_path %>

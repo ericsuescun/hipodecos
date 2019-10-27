@@ -3,12 +3,14 @@
     <div class="col-12 col-lg-8 mx-auto">
       <div class="card text-center mt-3">
         <div class="card-header">
-          IPS: <strong><%= @entity.initials %></strong>
+          IPS: <strong><%= @entity.initials %></strong> Costo base: <strong><%= cost %></strong> Tarifas: <strong><%= rate %></strong>
         </div>
         <div class="card-body">
           <h5 class="card-title"><%= @entity.name %> - <%= @entity.code %></h5>
           <p class="card-text">Gerente: <%= @entity.mgr_name %>, <%= @entity.mgr_email %></p>
           <p class="card-text">Teléfono: <%= @entity.mgr_tel %>, Celular: <%= @entity.mgr_cel %></p>
+          <%= link_to "Editar", edit_entity_path(@entity), class: 'btn btn-primary' %>
+          <%= link_to 'Borrar', @entity, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
         </div>
         <div class="card-footer text-muted">
           Entidad <%= @entity.entype %>

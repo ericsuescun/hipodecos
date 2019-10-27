@@ -20,8 +20,8 @@
               <td><%= cost.name %></td>
               <td><%= cost.description %></td>
               <td><%= Admin.find(cost.admin_id).name %></td>
-              <td><%= cost.created_at %></td>
-              <td><%= cost.updated_at %></td>
+              <td><%= cost.created_at.strftime('%d/%m/%Y') %></td>
+              <td><%= cost.updated_at.strftime('%d/%m/%Y') %></td>
               <td><%= link_to 'Detalles', cost %></td>
               <td><%= link_to 'Editar', edit_cost_path(cost) %></td>
               <td><%= link_to 'Borrar', cost, method: :delete, data: { confirm: '¿Confirmas la acción?' } %></td>

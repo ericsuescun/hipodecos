@@ -7,6 +7,7 @@
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
+            <th>Régimen</th>
             <th>Código</th>
             <th>Nombre</th>
             <th>Siglas</th>
@@ -17,6 +18,7 @@
         <tbody>
           <% @promoters.each do |promoter| %>
             <tr>
+              <td><%= promoter.regime %></td>
               <td><%= promoter.code %></td>
               <td><%= promoter.name %></td>
               <td><%= promoter.initials %></td>

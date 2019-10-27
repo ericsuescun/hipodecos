@@ -1,19 +1,19 @@
-<%= link_to 'Edit', edit_cost_path(@cost) %> |
-<%= link_to 'Back', rates_path %>
+<%= link_to 'Editar tabla de costos ' + @cost.name, edit_cost_path(@cost) %> |
+<%= link_to 'Volver a tabla de costos', costs_path %>
 
 <div class="container">
   <div class="row">
     <div class="col-12 col-lg-8 mx-auto">
-      <div class="card text-center mt-3">
+      <div class="card text-center my-3">
         <div class="card-header">
-          Tarifa: <strong><%= @cost.name %></strong>
+          Tabla de costos: <strong><%= @cost.name %></strong>
         </div>
         <div class="card-body">
-          <h5 class="card-title"><%= Admin.find(@cost.admin_id).name %> tomó como tabla base: <%= @cost.base %></h5>
+          <h5 class="card-title"><%= Admin.find(@cost.admin_id).name %> tomó como tabla base: <%= @cost.base == nil ? "Ninguna" : Cost.find(@cost.base).name %></h5>
           <p class="card-text"><%= @cost.description %></p>
         </div>
         <div class="card-footer text-muted">
-        	Fecha de creación: <%= @cost.created_at %> - Fecha de modificación: <%= @cost.updated_at %>
+        	Fecha de creación: <%= @cost.created_at.strftime('%d/%m/%Y') %> - Fecha de modificación: <%= @cost.updated_at.strftime('%d/%m/%Y') %>
         </div>
       </div>
     </div>
@@ -46,22 +46,3 @@
   	</div>
   </div>
 </div>
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @cost.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @cost.description %>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @cost.admin_id %>
-</p>
-
-<%= link_to 'Edit', edit_cost_path(@cost) %> |
-<%= link_to 'Back', costs_path %>

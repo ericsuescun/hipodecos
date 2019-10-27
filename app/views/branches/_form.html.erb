@@ -3,9 +3,13 @@
     <div class="col-12 col-lg-12 mx-auto">
       <%= form_with(model: branch, local: true) do |form| %>
 
-        <div class="form-group">
-          <%= form.label "IPS a la que pertenece" %><br />
-          <%= form.select :entity_id, Entity.pluck(:name, :id), {prompt:"Seleccione la IPS"}, class: "form-control" %>
+        <div class="row">
+          <div class="col-12 col-lg-8 mx-auto">
+            <div class="form-group">
+              <%= form.label "IPS a la que pertenece" %><br />
+              <%= form.select :entity_id, Entity.pluck(:name, :id), {prompt:"Seleccione la IPS"}, class: "form-control form-control-lg" %>
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="col-6 col-lg-4 offset-lg-2">

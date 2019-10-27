@@ -1,12 +1,24 @@
 Rails.application.routes.draw do
 
+  get 'objections/index'
+  get 'objections/new'
+  get 'objections/create'
+  get 'objections/edit'
+  get 'objections/update'
+  get 'objections/delete'
+  get 'objections/show'
+
+  resources :samples do
+    resources :objections, module: :samples
+  end
+
   resources :physicians
   resources :diagnostics
   resources :micros
   resources :slides
   resources :blocks
   resources :macros
-  resources :samples
+  
   resources :studies
   
   resources :informs do

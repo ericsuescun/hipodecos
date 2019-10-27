@@ -32,7 +32,7 @@ class SamplesController < ApplicationController
     if sample.save
       sample.sample_tag = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
       sample.save
-      redirect_to inform, notice: 'La muestra ha sido creada exitosamente.'
+      redirect_to inform, notice: 'La muestra ha sido exitosamente creada.'
     else
       render :new
     end
@@ -41,14 +41,10 @@ class SamplesController < ApplicationController
   # PATCH/PUT /samples/1
   # PATCH/PUT /samples/1.json
   def update
-    respond_to do |format|
-      if @sample.update(sample_params)
-        format.html { redirect_to inform_path(@inf), notice: 'Sample was successfully updated.' }
-        format.json { render :show, status: :ok, location: @sample }
-      else
-        format.html { render :edit }
-        format.json { render json: @sample.errors, status: :unprocessable_entity }
-      end
+    if @sample.update(sample_params)
+      redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente actualizada.'
+    else
+      render :edit
     end
   end
 
@@ -57,7 +53,7 @@ class SamplesController < ApplicationController
   def destroy
     @sample.destroy
     respond_to do |format|
-      format.html { redirect_to inform_path(@inf), notice: 'Sample was successfully destroyed.' }
+      format.html { redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente borrada.' }
       format.json { head :no_content }
     end
   end

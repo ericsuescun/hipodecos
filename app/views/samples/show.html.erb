@@ -1,29 +1,35 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Editar muestra ' + @sample.name + " de informe " + take_inf.tag_code, edit_sample_path(@sample) %> |
+<%= link_to 'Volver al informe', inform_path(@inf) %>
 
-<p>
-  <strong>Inform:</strong>
-  <%= @sample.inform %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4 mx-auto">
+      <fieldset disabled>
+        <%= form_with(model: @sample, local: true) do |form| %>
 
-<p>
-  <strong>User:</strong>
-  <%= @sample.user_id %>
-</p>
+          <div class="form-group">
+            <%= form.label "Nombre" %>
+            <%= form.text_field :name, class: "form-control input" %>
+          </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @sample.name %>
-</p>
+          <div class="form-group">
+            <%= form.label "Descripción" %>
+            <%= form.text_area :description, class: "form-control input" %>
+          </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @sample.description %>
-</p>
+          <div class="form-group">
+            <%= form.label "Etiqueta" %>
+            <%= form.text_field :sample_tag, class: "form-control input" %>
+          </div>
+          <p class="text-muted">Creado por: <%= User.find(@sample.user_id).email %></p>
+        <% end %>
+      </fieldset>
+    </div>
+    <div class="col-12 col-lg-4">
+      <%= render partial: "objections/form", locals: { objectionable: @sample } %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Specimen tag:</strong>
-  <%= @sample.specimen_tag %>
-</p>
 
-<%= link_to 'Edit', edit_sample_path(@sample) %> |
-<%= link_to 'Back', samples_path %>
+

@@ -146,9 +146,18 @@
                         <td><%= sample.name %></td>
                         <td><%= sample.description %></td>
                         <td><%= user(sample).first_name %></td>
+                        <td><%= link_to "Revisar", sample_path(sample) %></td>
                         <td><%= link_to "Editar", edit_sample_path(sample) %></td>
                         <td><%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
                       </tr>
+                      <% sample.objections.each do |objection| %>
+                        <tr>
+                          <td>No conformidad: </td>
+                          <td><%= objection.name %></td>
+                          <td><%= objection.description %></td>
+                        </tr>
+                      <% end %>
+
                     <% end %>
                   </tbody>
                 </table>

@@ -38,14 +38,26 @@ class DiagnosticsController < ApplicationController
   # PATCH/PUT /diagnostics/1
   # PATCH/PUT /diagnostics/1.json
   def update
-    respond_to do |format|
-      if @diagnostic.update(diagnostic_params)
-        format.html { redirect_to @diagnostic, notice: 'Diagnostic was successfully updated.' }
-        format.json { render :show, status: :ok, location: @diagnostic }
-      else
-        format.html { render :edit }
-        format.json { render json: @diagnostic.errors, status: :unprocessable_entity }
+    log = "\nCAMBIOS:\n"
+    if @diagnostic.description != diagnostic_params[:description]
+      log += "\n-DESCRIPCIÓN-\nANTES:" + @diagnostic.description + "\n- DESPUÉS: -\n" + diagnostic_params[:description]
+    else
+      log += "\n-DESCRIPCIÓN-\nSIN CAMBIOS."
+    end
+
+    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
+
+    if @diagnostic.update(diagnostic_params)
+      @diagnostic.objections.each do |objection|
+        objection.closed = true
+        objection.close_user_id = current_user.id
+        objection.close_date = @diagnostic.updated_at
+        objection.description = objection.description + log
+        objection.save
       end
+      redirect_to @diagnostic, notice: 'Diagnostic was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -53,9 +65,7 @@ class DiagnosticsController < ApplicationController
   # DELETE /diagnostics/1.json
   def destroy
     @diagnostic.destroy
-    respond_to do |format|
-      format.html { redirect_to diagnostics_url, notice: 'Diagnostic was successfully destroyed.' }
-      format.json { head :no_content }
+      redirect_to diagnostics_url, notice: 'Diagnostic was successfully destroyed.'
     end
   end
 

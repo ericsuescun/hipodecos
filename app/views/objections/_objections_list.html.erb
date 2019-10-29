@@ -1,0 +1,22 @@
+<table class="table table striped">
+  <thead>
+    <tr>
+      <th>Tipo</th>
+      <th>Descripción</th>
+      <th>Responsable</th>
+      <th>Detectada por</th>
+      <th>Tratada por</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% objectionable.objections.each do |objection| %>
+      <tr class=<%= objection.closed == false ? "objection" : "" %> >
+        <td><%= objection.name %></td>
+        <td><%= objection.description %></td>
+        <td><%= User.where(id: objection.responsible_user_id).first.try(:email) %></td>
+        <td><%= User.where(id: objection.user_id).first.try(:email) %></td>
+        <td><%= User.where(id: objection.close_user_id).first.try(:email) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

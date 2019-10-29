@@ -1,6 +1,7 @@
-<h1>Editing Study</h1>
+<%= link_to 'Volver al informe', inform_path(@inf) %>
+
+<h1>Edición de estudio (CUPS)</h1>
 
 <%= render 'form', study: @study %>
 
-<%= link_to 'Show', @study %> |
-<%= link_to 'Back', studies_path %>
+<%= render partial: "objections/objections_list", locals: { objectionable: @study } %>

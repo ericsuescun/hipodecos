@@ -1,19 +1,40 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Editar macro de informe' + take_inf.tag_code, edit_macro_path(@macro) %> |
+<%= link_to 'Volver al informe', inform_path(@inf) %>
 
-<p>
-  <strong>Inform:</strong>
-  <%= @macro.inform %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 offset-lg-1">
+      <div class="alert alert-success">
+        <h1>Macro</h1>
+        <fieldset disabled>
+          <%= form_with(model: @macro, local: true) do |form| %>
 
-<p>
-  <strong>User:</strong>
-  <%= @macro.user_id %>
-</p>
+            <div class="form-group">
+              <%= form.label "Descripción" %>
+              <%= form.text_area :description, class: "form-control input" %>
+            </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @macro.description %>
-</p>
+            <p class="text-muted">Creado por: <%= User.find(@macro.user_id).email %></p>
+          <% end %>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="alert alert-warning">
+        <h1>Revisión</h1>
+        <%= render partial: "objections/form", locals: { objectionable: @macro } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="alert alert-warning">
+        <%= render partial: "objections/objections_list", locals: { objectionable: @macro } %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_macro_path(@macro) %> |
-<%= link_to 'Back', macros_path %>
+
+

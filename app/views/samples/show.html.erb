@@ -1,32 +1,46 @@
 <%= link_to 'Editar muestra ' + @sample.name + " de informe " + take_inf.tag_code, edit_sample_path(@sample) %> |
 <%= link_to 'Volver al informe', inform_path(@inf) %>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-12 col-lg-4 mx-auto">
-      <fieldset disabled>
-        <%= form_with(model: @sample, local: true) do |form| %>
+    <div class="col-12 col-lg-4 offset-lg-2">
+      <div class="alert alert-success">
+        <h1>Muestra</h1>
+        <fieldset disabled>
+          <%= form_with(model: @sample, local: true) do |form| %>
 
-          <div class="form-group">
-            <%= form.label "Nombre" %>
-            <%= form.text_field :name, class: "form-control input" %>
-          </div>
+            <div class="form-group">
+              <%= form.label "Nombre" %>
+              <%= form.text_field :name, class: "form-control input" %>
+            </div>
 
-          <div class="form-group">
-            <%= form.label "Descripción" %>
-            <%= form.text_area :description, class: "form-control input" %>
-          </div>
+            <div class="form-group">
+              <%= form.label "Descripción" %>
+              <%= form.text_area :description, class: "form-control input" %>
+            </div>
 
-          <div class="form-group">
-            <%= form.label "Etiqueta" %>
-            <%= form.text_field :sample_tag, class: "form-control input" %>
-          </div>
-          <p class="text-muted">Creado por: <%= User.find(@sample.user_id).email %></p>
-        <% end %>
-      </fieldset>
+            <div class="form-group">
+              <%= form.label "Etiqueta" %>
+              <%= form.text_field :sample_tag, class: "form-control input" %>
+            </div>
+            <p class="text-muted">Creado por: <%= User.find(@sample.user_id).email %></p>
+          <% end %>
+        </fieldset>
+      </div>
+      
     </div>
     <div class="col-12 col-lg-4">
-      <%= render partial: "objections/form", locals: { objectionable: @sample } %>
+      <div class="alert alert-warning">
+        <h1>Revisión</h1>
+        <%= render partial: "objections/form", locals: { objectionable: @sample } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="alert alert-warning">
+        <%= render partial: "objections/objections_list", locals: { objectionable: @sample } %>
+      </div>
     </div>
   </div>
 </div>

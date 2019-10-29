@@ -40,14 +40,30 @@ class SlidesController < ApplicationController
   # PATCH/PUT /slides/1
   # PATCH/PUT /slides/1.json
   def update
-    respond_to do |format|
-      if @slide.update(slide_params)
-        format.html { redirect_to inform_path(@inf), notice: 'Slide was successfully updated.' }
-        format.json { render :show, status: :ok, location: @slide }
-      else
-        format.html { render :edit }
-        format.json { render json: @slide.errors, status: :unprocessable_entity }
+    log = "\nCAMBIOS:\n"
+    if @slide.slide_tag != slide_params[:slide_tag]
+      log += "\n-ETIQUETA-\nANTES:" + @slide.slide_tag + "\n- DESPUÉS: -\n" + slide_params[:slide_tag]
+    else
+      log += "\n-ETIQUETA-\nSIN CAMBIOS."
+    end
+    if @slide.stored != slide_params[:stored]
+      log += "\n-GUARDADO-\nANTES:" + (@slide.stored == true ? 'Si' : 'No') + "\n- DESPUÉS: -\n" + (slide_params[:stored] == true ? 'Si' : 'No')
+    else
+      log += "\n-GUARDADO-\nSIN CAMBIOS."
+    end
+    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s + "\nEtiqueta: " + slide_params[:slide_tag]
+
+    if @slide.update(slide_params)
+      @slide.objections.each do |objection|
+        objection.closed = true
+        objection.close_user_id = current_user.id
+        objection.close_date = @slide.updated_at
+        objection.description = objection.description + log
+        objection.save
       end
+      redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente actualizada.'
+    else
+      render :edit
     end
   end
 

@@ -1,24 +1,42 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Editar bloque' + @block.block_tag + ' de informe' + take_inf.tag_code, edit_block_path(@block) %> |
+<%= link_to 'Volver al informe', inform_path(@inf) %>
 
-<p>
-  <strong>Inform:</strong>
-  <%= @block.inform %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 offset-lg-1">
+      <div class="alert alert-success">
+        <h1>Bloque</h1>
+        <fieldset disabled>
+          <%= form_with(model: @block, local: true) do |form| %>
 
-<p>
-  <strong>User:</strong>
-  <%= @block.user_id %>
-</p>
+          <div class="form-group">
+            <%= form.label "Etiqueta" %>
+            <%= form.text_field :block_tag, class: "form-control input" %>
+          </div>
 
-<p>
-  <strong>Block tag:</strong>
-  <%= @block.block_tag %>
-</p>
+          <div class="form-group">
+            <%= form.label "Guardado" %>
+            <%= form.check_box :stored, class: "form-control input" %>
+          </div>
 
-<p>
-  <strong>Stored:</strong>
-  <%= @block.stored %>
-</p>
-
-<%= link_to 'Edit', edit_block_path(@block) %> |
-<%= link_to 'Back', blocks_path %>
+            <p class="text-muted">Creado por: <%= User.find(@block.user_id).email %></p>
+          <% end %>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="alert alert-warning">
+        <h1>Revisión</h1>
+        <%= render partial: "objections/form", locals: { objectionable: @block } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="alert alert-warning">
+        <%= render partial: "objections/objections_list", locals: { objectionable: @block } %>
+      </div>
+    </div>
+  </div>
+</div>

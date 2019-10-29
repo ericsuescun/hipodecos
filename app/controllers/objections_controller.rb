@@ -11,6 +11,7 @@ class ObjectionsController < ApplicationController
     objection = @objectionable.objections.new(objection_params) #@objectionable se crea en una version (una clase heredada) personalizada del controlador de Objection para cada tipo de modelo DESDE DONDE se le llama
     objection.responsible_user_id = @objectionable.user_id #Se carga como responsable al creador de la sample
     objection.user_id = current_user.id
+    objection.closed = false
     if objection.save
       redirect_to @objectionable, notice: "No conformidad levantada!"
     else

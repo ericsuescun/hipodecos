@@ -1,3 +1,5 @@
 <h1>Edición de bloque</h1>
 
 <%= render 'form', block: @block %>
+
+<%= render partial: "objections/objections_list", locals: { objectionable: @block } %>

@@ -2,7 +2,7 @@
   
   <div class="form-group">
     <%= form.label "Título de NC" %>
-    <%= form.select(:name, options_for_select([['Se recibe muestra que no es', 'Se recibe muestra que no es']]), { }, class: "form-control input") %>
+    <%= form.select(:name, options_for_select([['Se recibe muestra que no es', 'Se recibe muestra que no es'], ['Cambio de CUPS','Cambio de CUPS'], ['Error en descripción macroscópica', 'Error en descripción macroscópica'], ['Descripción macro incompleta', 'Descripción macro incompleta'], ['Bloque mal marcado', 'Bloque mal marcado'], ['Bloque crudo', 'Bloque crudo'], ['Bloque mal incluido', 'Bloque mal incluido']]), { include_blank: true }, class: "form-control input") %>
   </div>
 
   <div class="form-group">
@@ -11,7 +11,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Crear No Conformidad", class: "btn btn-warning btn-block" %>
+    <%= form.submit "Levantar No Conformidad", class: "btn btn-warning btn-block" %>
   </div>
 
 <% end %>

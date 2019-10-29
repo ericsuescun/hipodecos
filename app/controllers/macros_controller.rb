@@ -38,14 +38,26 @@ class MacrosController < ApplicationController
   # PATCH/PUT /macros/1
   # PATCH/PUT /macros/1.json
   def update
-    respond_to do |format|
-      if @macro.update(macro_params)
-        format.html { redirect_to inform_path(@inf), notice: 'Macro was successfully updated.' }
-        format.json { render :show, status: :ok, location: @macro }
-      else
-        format.html { render :edit }
-        format.json { render json: @macro.errors, status: :unprocessable_entity }
+    log = "\nCAMBIOS:\n"
+    if @macro.description != macro_params[:description]
+      log += "\n-DESCRIPCIÓN-\nANTES:" + @macro.description + "\n- DESPUÉS: -\n" + macro_params[:description]
+    else
+      log += "\n-DESCRIPCIÓN-\nSIN CAMBIOS."
+    end
+
+    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
+
+    if @macro.update(macro_params)
+      @macro.objections.each do |objection|
+        objection.closed = true
+        objection.close_user_id = current_user.id
+        objection.close_date = @macro.updated_at
+        objection.description = objection.description + log
+        objection.save
       end
+      redirect_to @macro, notice: 'Diagnostic was successfully updated.'
+    else
+      render :edit
     end
   end
 

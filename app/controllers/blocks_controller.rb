@@ -40,14 +40,30 @@ class BlocksController < ApplicationController
   # PATCH/PUT /blocks/1
   # PATCH/PUT /blocks/1.json
   def update
-    respond_to do |format|
-      if @block.update(block_params)
-        format.html { redirect_to inform_path(@inf), notice: 'Block was successfully updated.' }
-        format.json { render :show, status: :ok, location: @block }
-      else
-        format.html { render :edit }
-        format.json { render json: @block.errors, status: :unprocessable_entity }
+    log = "\nCAMBIOS:\n"
+    if @block.block_tag != block_params[:block_tag]
+      log += "\n-ETIQUETA-\nANTES:" + @block.block_tag + "\n- DESPUÉS: -\n" + block_params[:block_tag]
+    else
+      log += "\n-ETIQUETA-\nSIN CAMBIOS."
+    end
+    if @block.stored != block_params[:stored]
+      log += "\n-GUARDADO-\nANTES:" + (@block.stored == true ? 'Si' : 'No') + "\n- DESPUÉS: -\n" + (block_params[:stored] == true ? 'Si' : 'No')
+    else
+      log += "\n-GUARDADO-\nSIN CAMBIOS."
+    end
+    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s + "\nEtiqueta: " + block_params[:block_tag]
+
+    if @block.update(block_params)
+      @block.objections.each do |objection|
+        objection.closed = true
+        objection.close_user_id = current_user.id
+        objection.close_date = @block.updated_at
+        objection.description = objection.description + log
+        objection.save
       end
+      redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente actualizada.'
+    else
+      render :edit
     end
   end
 

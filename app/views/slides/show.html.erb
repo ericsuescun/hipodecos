@@ -1,24 +1,42 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Editar placa' + @slide.slide_tag + ' de informe' + take_inf.tag_code, edit_slide_path(@slide) %> |
+<%= link_to 'Volver al informe', inform_path(@inf) %>
 
-<p>
-  <strong>Inform:</strong>
-  <%= @slide.inform %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 offset-lg-1">
+      <div class="alert alert-success">
+        <h1>Placa</h1>
+        <fieldset disabled>
+          <%= form_with(model: @slide, local: true) do |form| %>
 
-<p>
-  <strong>User:</strong>
-  <%= @slide.user_id %>
-</p>
+          <div class="form-group">
+            <%= form.label "Etiqueta" %>
+            <%= form.text_field :slide_tag, class: "form-control input" %>
+          </div>
 
-<p>
-  <strong>Slide tag:</strong>
-  <%= @slide.slide_tag %>
-</p>
+          <div class="form-group">
+            <%= form.label "Guardado" %>
+            <%= form.check_box :stored, class: "form-control input" %>
+          </div>
 
-<p>
-  <strong>Stored:</strong>
-  <%= @slide.stored %>
-</p>
-
-<%= link_to 'Edit', edit_slide_path(@slide) %> |
-<%= link_to 'Back', slides_path %>
+            <p class="text-muted">Creado por: <%= User.find(@slide.user_id).email %></p>
+          <% end %>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="alert alert-warning">
+        <h1>Revisión</h1>
+        <%= render partial: "objections/form", locals: { objectionable: @slide } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="alert alert-warning">
+        <%= render partial: "objections/objections_list", locals: { objectionable: @slide } %>
+      </div>
+    </div>
+  </div>
+</div>

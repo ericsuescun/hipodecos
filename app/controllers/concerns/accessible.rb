@@ -16,4 +16,5 @@ module Accessible
   #     redirect_to(authenticated_user_root_path) && return
   #   end
   # end
+
 end

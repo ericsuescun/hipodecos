@@ -29,7 +29,7 @@ class StudiesController < ApplicationController
     study.user_id = current_user.id
 
     if study.save
-      redirect_to inform, notice: 'Study was successfully created.'
+      redirect_to inform, notice: 'CUPS exitosamente creado.'
     else
       render :new
     end
@@ -38,25 +38,40 @@ class StudiesController < ApplicationController
   # PATCH/PUT /studies/1
   # PATCH/PUT /studies/1.json
   def update
-    respond_to do |format|
-      if @study.update(study_params)
-        format.html { redirect_to inform_path(@inf), notice: 'Study was successfully updated.' }
-        format.json { render :show, status: :ok, location: @study }
-      else
-        format.html { render :edit }
-        format.json { render json: @study.errors, status: :unprocessable_entity }
-      end
+
+    log = "\nCAMBIOS:\n"
+    if @study.codeval_id != study_params[:codeval_id]
+      log += "\n-CUPS-\nANTES:" + Codeval.find(@study.codeval_id).code.to_s + "\n- DESPUÉS: -\n" + Codeval.find(study_params[:codeval_id]).code.to_s
+    else
+      log += "\n-CUPS-\nSIN CAMBIOS."
     end
+    if @study.factor != study_params[:factor]
+      log += "\n-FACTOR-\nANTES:" + @study.factor.to_s + "\n- DESPUÉS: -\n" + study_params[:factor].to_s
+    else
+      log += "\n-FACTOR-\nSIN CAMBIOS."
+    end
+    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
+
+    if @study.update(study_params)
+      @study.objections.each do |objection|
+        objection.closed = true
+        objection.close_user_id = current_user.id
+        objection.close_date = @study.updated_at
+        objection.description = objection.description + log
+        objection.save
+      end
+      redirect_to inform_path(@inf), notice: 'CUPS exitosamente actualizado.'
+    else
+      render :edit
+    end
+
   end
 
   # DELETE /studies/1
   # DELETE /studies/1.json
   def destroy
     @study.destroy
-    respond_to do |format|
-      format.html { redirect_to inform_path(@inf), notice: 'Study was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to inform_path(@inf), notice: 'CUPS exitosamente borrado.'
   end
 
   private

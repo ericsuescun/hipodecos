@@ -38,14 +38,26 @@ class MicrosController < ApplicationController
   # PATCH/PUT /micros/1
   # PATCH/PUT /micros/1.json
   def update
-    respond_to do |format|
-      if @micro.update(micro_params)
-        format.html { redirect_to inform_path(@inf), notice: 'Micro was successfully updated.' }
-        format.json { render :show, status: :ok, location: @micro }
-      else
-        format.html { render :edit }
-        format.json { render json: @micro.errors, status: :unprocessable_entity }
+    log = "\nCAMBIOS:\n"
+    if @micro.description != micro_params[:description]
+      log += "\n-DESCRIPCIÓN-\nANTES:" + @micro.description + "\n- DESPUÉS: -\n" + micro_params[:description]
+    else
+      log += "\n-DESCRIPCIÓN-\nSIN CAMBIOS."
+    end
+
+    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
+
+    if @micro.update(micro_params)
+      @micro.objections.each do |objection|
+        objection.closed = true
+        objection.close_user_id = current_user.id
+        objection.close_date = @micro.updated_at
+        objection.description = objection.description + log
+        objection.save
       end
+      redirect_to @micro, notice: 'Diagnostic was successfully updated.'
+    else
+      render :edit
     end
   end
 

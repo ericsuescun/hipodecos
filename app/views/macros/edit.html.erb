@@ -1,6 +1,5 @@
-<h1>Editing Macro</h1>
+<h1>Edición de macro</h1>
 
 <%= render 'form', macro: @macro %>
 
-<%= link_to 'Show', @macro %> |
-<%= link_to 'Back', macros_path %>
+<%= render partial: "objections/objections_list", locals: { objectionable: @macro } %>

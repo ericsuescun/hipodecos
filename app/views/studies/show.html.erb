@@ -1,24 +1,40 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Editar CUPS ' + Codeval.find(@study.codeval_id).code.to_s + " de informe " + take_inf.tag_code, edit_study_path(@study) %> |
+<%= link_to 'Volver al informe', inform_path(@inf) %>
 
-<p>
-  <strong>Inform:</strong>
-  <%= @study.inform %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-4 offset-lg-2">
+    	<div class="alert alert-success">
+    	  <h1>CUPS</h1>
+    	  <fieldset disabled>
+    	  	<%= form_with(model: @study, local: true) do |form| %>
 
-<p>
-  <strong>User:</strong>
-  <%= @study.user_id %>
-</p>
+    	  	  <div class="form-group">
+    	  	    <%= form.label "Código CUPS" %>
+    	  	    <%= form.select :codeval_id, Codeval.pluck(:code, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
+    	  	  </div>
 
-<p>
-  <strong>Codeval:</strong>
-  <%= @study.codeval_id %>
-</p>
+    	  	  <div class="form-group">
+    	  	    <%= form.label "Factor" %>
+    	  	    <%= form.number_field :factor, class: "form-control input" %>
+    	  	  </div>
 
-<p>
-  <strong>Factor:</strong>
-  <%= @study.factor %>
-</p>
-
-<%= link_to 'Edit', edit_study_path(@study) %> |
-<%= link_to 'Back', studies_path %>
+    	  	<% end %>
+    	  </fieldset>
+    	</div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="alert alert-warning">
+        <h1>Revisión</h1>
+        <%= render partial: "objections/form", locals: { objectionable: @study } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+	    <div class="alert alert-warning">
+	    <%= render partial: "objections/objections_list", locals: { objectionable: @study } %>
+	  	</div>
+    </div>
+  </div>
+</div>

@@ -1,49 +1,69 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Editar doctor ' + @physician.name + " de informe " + take_inf.tag_code, edit_physician_path(@physician) %> |
+<%= link_to 'Volver al informe', inform_path(@inf) %>
 
-<p>
-  <strong>Inform:</strong>
-  <%= @physician.inform %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-4 offset-lg-2">
+      <div class="alert alert-success">
+        <h1>Doctor</h1>
+        <fieldset disabled>
+          <%= form_with(model: @physician, local: true) do |form| %>
 
-<p>
-  <strong>User:</strong>
-  <%= @physician.user_id %>
-</p>
+            <div class="form-group">
+              <%= form.label "Nombres" %>
+              <%= form.text_field :name, class: "form-control input" %>
+            </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @physician.name %>
-</p>
+            <div class="form-group">
+              <%= form.label "Apellidos" %>
+              <%= form.text_field :lastname, class: "form-control input" %>
+            </div>
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @physician.lastname %>
-</p>
+            <div class="form-group">
+              <%= form.label "Teléfono" %>
+              <%= form.text_field :tel, class: "form-control input" %>
+            </div>
 
-<p>
-  <strong>Tel:</strong>
-  <%= @physician.tel %>
-</p>
+            <div class="form-group">
+              <%= form.label "Celular" %>
+              <%= form.text_field :cel, class: "form-control input" %>
+            </div>
 
-<p>
-  <strong>Cel:</strong>
-  <%= @physician.cel %>
-</p>
+            <div class="form-group">
+              <%= form.label "Email" %>
+              <%= form.text_field :email, class: "form-control input" %>
+            </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @physician.email %>
-</p>
+            <div class="form-group">
+              <%= form.label "Especialidad" %>
+              <%= form.text_field :study1, class: "form-control input" %>
+            </div>
 
-<p>
-  <strong>Study1:</strong>
-  <%= @physician.study1 %>
-</p>
+            <div class="form-group">
+              <%= form.label "Otro estudio/especialidad" %>
+              <%= form.text_field :study2, class: "form-control input" %>
+            </div>
+            <p class="text-muted">Creado por: <%= User.find(@physician.user_id).email %></p>
+          <% end %>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="alert alert-warning">
+        <h1>Revisión</h1>
+        <%= render partial: "objections/form", locals: { objectionable: @physician } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="alert alert-warning">
+        <%= render partial: "objections/objections_list", locals: { objectionable: @physician } %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Study2:</strong>
-  <%= @physician.study2 %>
-</p>
 
-<%= link_to 'Edit', edit_physician_path(@physician) %> |
-<%= link_to 'Back', physicians_path %>
+

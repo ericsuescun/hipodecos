@@ -69,6 +69,10 @@ Rails.application.routes.draw do
       resources :objections, module: :diagnostics
     end
 
+    resources :physicians do
+      resources :objections, module: :physicians
+    end
+
     resources :patients do
       resources :informs do
         resources :physicians

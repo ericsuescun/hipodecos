@@ -38,8 +38,53 @@ class PhysiciansController < ApplicationController
   # PATCH/PUT /physicians/1
   # PATCH/PUT /physicians/1.json
   def update
+    log = "\nCAMBIOS:\n"
+    if @physician.name != physician_params[:name]
+      log += "\n-NOMBRES-\nANTES:" + @physician.name + "\n- DESPUÉS: -\n" + physician_params[:name]
+    else
+      log += "\n-NOMBRES-\nSIN CAMBIOS."
+    end
+    if @physician.lastname != physician_params[:lastname]
+      log += "\n-APELLIDOS-\nANTES:" + @physician.lastname + "\n- DESPUÉS: -\n" + physician_params[:lastname]
+    else
+      log += "\n-APELLIDOS-\nSIN CAMBIOS."
+    end
+    if @physician.tel != physician_params[:tel]
+      log += "\n-TEL-\nANTES:" + @physician.tel + "\n- DESPUÉS: -\n" + physician_params[:tel]
+    else
+      log += "\n-TEL-\nSIN CAMBIOS."
+    end
+    if @physician.cel != physician_params[:cel]
+      log += "\n-CEL-\nANTES:" + @physician.cel + "\n- DESPUÉS: -\n" + physician_params[:cel]
+    else
+      log += "\n-CEL-\nSIN CAMBIOS."
+    end
+    if @physician.email != physician_params[:email]
+      log += "\n-EMAIL-\nANTES:" + @physician.email + "\n- DESPUÉS: -\n" + physician_params[:email]
+    else
+      log += "\n-EMAIL-\nSIN CAMBIOS."
+    end
+    if @physician.study1 != physician_params[:study1]
+      log += "\n-study1-\nANTES:" + @physician.study1 + "\n- DESPUÉS: -\n" + physician_params[:study1]
+    else
+      log += "\n-study1-\nSIN CAMBIOS."
+    end
+    if @physician.study2 != physician_params[:study2]
+      log += "\n-study2-\nANTES:" + @physician.study2 + "\n- DESPUÉS: -\n" + physician_params[:study2]
+    else
+      log += "\n-study2-\nSIN CAMBIOS."
+    end
+    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
+
     if @physician.update(physician_params)
-      redirect_to inform_path(@inf), notice: 'Doctor editado exitosamente..'
+      @physician.objections.each do |objection|
+        objection.closed = true
+        objection.close_user_id = current_user.id
+        objection.close_date = @physician.updated_at
+        objection.description = objection.description + log
+        objection.save
+      end
+      redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente actualizada.'
     else
       render :edit
     end

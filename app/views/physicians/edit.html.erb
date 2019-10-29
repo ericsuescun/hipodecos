@@ -2,4 +2,4 @@
 
 <%= render 'form', physician: @physician %>
 
-<%= link_to 'Cancelar y volver al informe ' + @physician.inform.tag_code , inform_path(@physician.inform) %> | <%= link_to 'Regresar a informes', informs_path %>
+<%= render partial: "objections/objections_list", locals: { objectionable: @physician } %>

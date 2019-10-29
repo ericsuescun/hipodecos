@@ -100,12 +100,14 @@
                 <%= link_to "Matricular", new_patient_path, class: "dropdown-item" %>
                 <%= link_to "Todos", informs_path, class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
-                <%= link_to "Hoy", informs_path + "?filter=hoy", class: "dropdown-item" %>
-                <%= link_to "Ayer", informs_path + "?filter=ayer", class: "dropdown-item" %>
-                <%= link_to "Antier", informs_path + "?filter=antier", class: "dropdown-item" %>
-                <%= link_to "Trasantier(Puente)", informs_path + "?filter=trasantier", class: "dropdown-item" %>
-                <%= link_to "Últimos 7 días", informs_path + "?filter=semana", class: "dropdown-item" %>
-                <%= link_to "Últimos 30 días", informs_path + "?filter=mes", class: "dropdown-item" %>
+                <%= link_to "Hoy", day_before_search(0), class: "dropdown-item" %>
+                <%= link_to "Ayer", day_before_search(1), class: "dropdown-item" %>
+                <%= link_to "Antier", day_before_search(2), class: "dropdown-item" %>
+                <%= link_to "Trasantier(Puente)", day_before_search(3), class: "dropdown-item" %>
+                <%= link_to "Últimos 7 días", days_ago_search(7), class: "dropdown-item" %>
+                <%= link_to "Últimos 30 días", days_ago_search(30), class: "dropdown-item" %>
+                <%= link_to "Este mes", month_before_search(0), class: "dropdown-item" %>
+                <%= link_to "El mes pasado", month_before_search(1), class: "dropdown-item" %>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -113,15 +115,10 @@
                 Reportes
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%= link_to "Matricular", new_patient_path, class: "dropdown-item" %>
-                <%= link_to "Todos", informs_path, class: "dropdown-item" %>
+                <%= link_to "Estado", 'reports/status', class: "dropdown-item" %>
+                <%= link_to "No conformidades", 'reports/objections', class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
-                <%= link_to "Hoy", informs_path + "?filter=hoy", class: "dropdown-item" %>
-                <%= link_to "Ayer", informs_path + "?filter=ayer", class: "dropdown-item" %>
-                <%= link_to "Antier", informs_path + "?filter=antier", class: "dropdown-item" %>
-                <%= link_to "Trasantier(Puente)", informs_path + "?filter=trasantier", class: "dropdown-item" %>
-                <%= link_to "Últimos 7 días", informs_path + "?filter=semana", class: "dropdown-item" %>
-                <%= link_to "Últimos 30 días", informs_path + "?filter=mes", class: "dropdown-item" %>
+                <%= link_to "Ventas", 'reports/sales', class: "dropdown-item" %>
               </div>
             </li>
             <%= form_tag informs_path, method: "get", class: "form-inline my-2 my-lg-0" do %>

@@ -4,37 +4,10 @@ class InformsController < ApplicationController
   # GET /informs
   # GET /informs.json
   def index
-    if params[:filter].blank?    
-      if params[:tag_code].blank?
-        @informs = Inform.all
-      else
-        @informs = Inform.where(tag_code: params[:tag_code])
-      end
-    else
-      if params[:filter] == 'hoy'
-        @informs = Inform.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
-      else
-        if params[:filter] == 'ayer'
-          @informs = Inform.where(created_at: (Date.today - 1).beginning_of_day..(Date.today - 1).end_of_day)
-        else
-          if params[:filter] == 'antier'
-            @informs = Inform.where(created_at: (Date.today - 2).beginning_of_day..(Date.today - 2).end_of_day)
-          else
-            if params[:filter] == 'trasantier'
-              @informs = Inform.where(created_at: (Date.today - 3).beginning_of_day..(Date.today - 3).end_of_day)
-            else
-              if params[:filter] == 'semana'
-                @informs = Inform.where(created_at: (Date.today - 7).beginning_of_day..Date.today.end_of_day)
-              else
-                if params[:filter] == 'mes'
-                  @informs = Inform.where(created_at: (Date.today - 30).beginning_of_day..Date.today.end_of_day)
-                end
-              end
-            end
-          end
-        end
-      end
-    end
+    initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    date_range = initial_date..final_date
+    @informs = Inform.where(created_at: date_range)
   end
 
   # GET /informs/1

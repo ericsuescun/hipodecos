@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'reports/status'
+  get 'reports/objections'
+  get 'reports/sales'
   get 'pictures/index'
   get 'pictures/new'
   get 'pictures/create'

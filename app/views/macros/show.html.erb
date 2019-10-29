@@ -17,6 +17,8 @@
             <p class="text-muted">Creado por: <%= User.find(@macro.user_id).email %></p>
           <% end %>
         </fieldset>
+        <h1>Cargar fotos</h1>
+        <%= render partial: "pictures/form", locals: { imageable: @macro } %>
       </div>
       
     </div>

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :branches, except: [:new]
     resources :promoters
     resources :physicians
+    resources :pictures
 
     resources :admins, only: [:index]
     resources :users, only: [:index]
@@ -46,10 +47,12 @@ Rails.application.routes.draw do
       resources :slides
       resources :micros
       resources :diagnostics
+      resources :pictures, module: :informs
     end
 
     resources :samples do
       resources :objections, module: :samples
+      resources :pictures, module: :samples
     end
 
     resources :studies do
@@ -66,10 +69,12 @@ Rails.application.routes.draw do
 
     resources :macros do
       resources :objections, module: :macros
+      resources :pictures, module: :macros
     end
 
     resources :micros do
       resources :objections, module: :micros
+      resources :pictures, module: :micros
     end
 
     resources :diagnostics do
@@ -79,6 +84,8 @@ Rails.application.routes.draw do
     resources :physicians do
       resources :objections, module: :physicians
     end
+
+
 
     resources :patients do
       resources :informs do

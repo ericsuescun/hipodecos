@@ -3,5 +3,7 @@ class Sample < ApplicationRecord
 
   has_many :objections, as: :objectionable
 
+  has_many :pictures, as: :imageable
+
   default_scope -> { order(created_at: :desc) }
 end

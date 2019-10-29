@@ -6,6 +6,8 @@ class Inform < ApplicationRecord
   has_many :physicians, dependent: :destroy
   accepts_nested_attributes_for :physicians, allow_destroy: true
 
+  has_many :pictures, as: :imageable
+
   has_many :samples, dependent: :destroy
   has_many :studies, dependent: :destroy
   has_many :macros, dependent: :destroy

@@ -3,7 +3,7 @@
     <div class="col-12 col-lg-12 mx-auto">
       <div class="alert alert-success">
         <div class="row">
-          <div class="col-12 col-lg-8 mt-3 mx-auto">
+          <div class="col-12 col-lg-4 mt-3">
             <h1>Informe <%= @inform.tag_code %></h1>
             <br>
             <p>Paciente: <strong><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %> </strong> F.Recibo: <strong><%= @inform.receive_date %></strong></p>
@@ -16,6 +16,30 @@
             <%= link_to 'Editar', edit_inform_path(@inform) %> |
             <%= link_to 'Volver a informes', informs_path %>
             <br>
+
+            <br>
+          </div>
+          <div class="col-12 col-lg-8 mt-3">
+            <% @inform.pictures.each do |picture| %>
+              <div class="card d-inline-block mx-auto" style="width: 57rem;">
+                <div class="card-header">
+                    <%= picture.description %>
+                  </div>
+                <img class="card-img-top" src="<%= picture.name.url %>" alt="Card image cap" >
+                <div class="card-body">
+                  <%= link_to 'Borrar', inform_picture_path(@inform, picture), method: :delete, data: { confirm: 'Confirmar borrado?' }
+                   %>
+                   <div class="card-footer text-muted">
+                   </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-8 mx-auto">
+            <h1>Escanear órdenes</h1>
+            <%= render partial: "pictures/form", locals: { imageable: @inform } %>
           </div>
         </div>
         <div class="row">
@@ -352,8 +376,31 @@
               </table>
             <% end %>
           </div>
-          <% if @inform.micros.length < 1 %>
-            <div class="col-12 col-lg-8 mx-auto">
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-8 mx-auto">
+            <% @inform.micros.each do |micro| %>
+              <% micro.pictures.each do |pic| %>
+                <div class="card d-inline-block mx-auto" style="width: 18rem;">
+                  <div class="card-header">
+                      <%= pic.description %>
+                    </div>
+                  <img class="card-img-top" src="<%= pic.name.url %>" alt="Card image cap" >
+                  <div class="card-body">
+                    <%= link_to 'Borrar', inform_picture_path(@inform, pic), method: :delete, data: { confirm: 'Confirmar borrado?' }
+                     %>
+                     <div class="card-footer text-muted">
+                       Cargada por: <%= User.find(pic.user_id).email %>
+                     </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-8 mt-3 mx-auto">
+            <% if @inform.micros.length < 1 %>
               <%= form_for [@inform, @inform.micros.build] do |form| %>
                 <div class="form-group">
                   <%= form.label "Descripción" %>
@@ -365,8 +412,8 @@
                 </div>
 
               <% end %>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
         <div class="row">
           <div class="col-12 col-lg-8 mt-3 mx-auto">

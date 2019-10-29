@@ -10,8 +10,8 @@ class InformsController < ApplicationController
       date_range = initial_date..final_date
       @informs = Inform.where(created_at: date_range)
     else
-      if !params[:filter].blank?
-        @informs = Inform.where(tag_code: params[:filter])
+      if !params[:tag_code].blank?
+        @informs = Inform.where(tag_code: params[:tag_code])
       else
         @informs = Inform.all
       end

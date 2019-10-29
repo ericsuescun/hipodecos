@@ -1,19 +1,37 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Editar diagnóstico de informe' + take_inf.tag_code, edit_diagnostic_path(@diagnostic) %> |
+<%= link_to 'Volver al informe', inform_path(@inf) %>
 
-<p>
-  <strong>Inform:</strong>
-  <%= @diagnostic.inform %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 offset-lg-1">
+      <div class="alert alert-success">
+        <h1>Diagnóstico</h1>
+        <fieldset disabled>
+          <%= form_with(model: @diagnostic, local: true) do |form| %>
 
-<p>
-  <strong>User:</strong>
-  <%= @diagnostic.user_id %>
-</p>
+            <div class="form-group">
+              <%= form.label "Descripción" %>
+              <%= form.text_area :description, class: "form-control input" %>
+            </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @diagnostic.description %>
-</p>
-
-<%= link_to 'Edit', edit_diagnostic_path(@diagnostic) %> |
-<%= link_to 'Back', diagnostics_path %>
+            <p class="text-muted">Creado por: <%= User.find(@diagnostic.user_id).email %></p>
+          <% end %>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="alert alert-warning">
+        <h1>Revisión</h1>
+        <%= render partial: "objections/form", locals: { objectionable: @diagnostic } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="alert alert-warning">
+        <%= render partial: "objections/objections_list", locals: { objectionable: @diagnostic } %>
+      </div>
+    </div>
+  </div>
+</div>

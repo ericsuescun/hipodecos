@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'pictures/index'
+  get 'pictures/new'
+  get 'pictures/create'
+  get 'pictures/edit'
+  get 'pictures/update'
+  get 'pictures/delete'
+  get 'pictures/show'
     root to: "users#index"
 
     resources :roles

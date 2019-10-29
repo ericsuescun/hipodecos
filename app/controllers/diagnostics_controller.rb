@@ -65,14 +65,14 @@ class DiagnosticsController < ApplicationController
   # DELETE /diagnostics/1.json
   def destroy
     @diagnostic.destroy
-      redirect_to diagnostics_url, notice: 'Diagnostic was successfully destroyed.'
-    end
+    redirect_to diagnostics_url, notice: 'Diagnostic was successfully destroyed.'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_diagnostic
       @diagnostic = Diagnostic.find(params[:id])
+      @inf = @diagnostic.inform_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

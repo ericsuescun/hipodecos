@@ -1,19 +1,40 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Editar micro de informe' + take_inf.tag_code, edit_micro_path(@micro) %> |
+<%= link_to 'Volver al informe', inform_path(@inf) %>
 
-<p>
-  <strong>Inform:</strong>
-  <%= @micro.inform %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 offset-lg-1">
+      <div class="alert alert-success">
+        <h1>Micro</h1>
+        <fieldset disabled>
+          <%= form_with(model: @micro, local: true) do |form| %>
 
-<p>
-  <strong>User:</strong>
-  <%= @micro.user_id %>
-</p>
+            <div class="form-group">
+              <%= form.label "Descripción" %>
+              <%= form.text_area :description, class: "form-control input" %>
+            </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @micro.description %>
-</p>
+            <p class="text-muted">Creado por: <%= User.find(@micro.user_id).email %></p>
+          <% end %>
+        </fieldset>
+      </div>
+      
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="alert alert-warning">
+        <h1>Revisión</h1>
+        <%= render partial: "objections/form", locals: { objectionable: @micro } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="alert alert-warning">
+        <%= render partial: "objections/objections_list", locals: { objectionable: @micro } %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_micro_path(@micro) %> |
-<%= link_to 'Back', micros_path %>
+
+

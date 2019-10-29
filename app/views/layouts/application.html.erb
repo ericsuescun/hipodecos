@@ -93,30 +93,30 @@
           <% end %>
           <% if user_signed_in? %>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle btn btn-outline-success" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle btn btn-outline-success mr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Informes
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <%= link_to "Matricular", new_patient_path, class: "dropdown-item" %>
                 <%= link_to "Todos", informs_path, class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
-                <%= link_to "Hoy", day_before_search(0), class: "dropdown-item" %>
-                <%= link_to "Ayer", day_before_search(1), class: "dropdown-item" %>
-                <%= link_to "Antier", day_before_search(2), class: "dropdown-item" %>
-                <%= link_to "Trasantier(Puente)", day_before_search(3), class: "dropdown-item" %>
-                <%= link_to "Últimos 7 días", days_ago_search(7), class: "dropdown-item" %>
-                <%= link_to "Últimos 30 días", days_ago_search(30), class: "dropdown-item" %>
-                <%= link_to "Este mes", month_before_search(0), class: "dropdown-item" %>
-                <%= link_to "El mes pasado", month_before_search(1), class: "dropdown-item" %>
+                <%= link_to "Hoy", informs_path + day_before_search(0), class: "dropdown-item" %>
+                <%= link_to "Ayer", informs_path + day_before_search(1), class: "dropdown-item" %>
+                <%= link_to "Antier", informs_path + day_before_search(2), class: "dropdown-item" %>
+                <%= link_to "Trasantier(Puente)", informs_path + day_before_search(3), class: "dropdown-item" %>
+                <%= link_to "Últimos 7 días", informs_path + days_ago_search(7), class: "dropdown-item" %>
+                <%= link_to "Últimos 30 días", informs_path + days_ago_search(30), class: "dropdown-item" %>
+                <%= link_to "Este mes", informs_path + month_before_search(0), class: "dropdown-item" %>
+                <%= link_to "El mes pasado", informs_path + month_before_search(1), class: "dropdown-item" %>
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle btn btn-outline-success" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle btn btn-outline-success mr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Reportes
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%= link_to "Estado", 'reports/status', class: "dropdown-item" %>
-                <%= link_to "No conformidades", 'reports/objections', class: "dropdown-item" %>
+                <%= link_to "Estado", reports_status_path, class: "dropdown-item" %>
+                <%= link_to "No conformidades", reports_objections_path, class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
                 <%= link_to "Ventas", 'reports/sales', class: "dropdown-item" %>
               </div>
@@ -165,7 +165,7 @@
             </li>
             <%= form_tag new_patient_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
               <%= text_field_tag :id_number, nil, class: "form-control input mx-2", placeholder: "# identificación" %>
-              <%= submit_tag("Matricular!", class: "btn btn-outline-primary my-2 my-lg-0") %>
+              <%= submit_tag("Buscar/Matricular!", class: "btn btn-outline-primary my-2 my-lg-0") %>
             <% end %>
           </ul>
         <% end %>
@@ -191,41 +191,41 @@
         <ul class="navbar-nav mr-auto">
           <% if user_signed_in? %>
             <li class="nav-item mr-1">
-              <%= link_to "Hoy", informs_path + "?filter=hoy", class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
+              <%= link_to "Hoy", informs_path + day_before_search(0), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
             </li>
             <li class="nav-item mr-1">
-              <%= link_to "Ayer", informs_path + "?filter=ayer", class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
-            </li>
-            <li class="nav-item mr-1">
-              <%= link_to "Antier", informs_path + "?filter=antier", class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
+              <%= link_to "Ayer", informs_path + day_before_search(1), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
             </li>
             <!-- <li class="nav-item mr-1">
-              <%= link_to "Trasantier(Puente)", informs_path + "?filter=trasantier", class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
+              <%= link_to "Antier", informs_path + day_before_search(2), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
+            </li> -->
+            <!-- <li class="nav-item mr-1">
+              <%= link_to "Trasantier(Puente)", informs_path + day_before_search(3), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
             </li> -->
             <li class="nav-item mr-1">
-              <%= link_to "Últimos 7 días", informs_path + "?filter=semana", class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
+              <%= link_to "Últimos 7 días", informs_path + days_ago_search(7), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
             </li>
             <!-- <li class="nav-item mr-1">
-              <%= link_to "Últimos 30 días", informs_path + "?filter=mes", class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
+              <%= link_to "Últimos 30 días", informs_path + days_ago_search(30), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
             </li> -->
           </ul>
           <ul class="navbar-nav d-flex justify-content-end">
             <li class="nav-item mr-1">
-              <%= link_to "Hoy", patients_path + "?filter=hoy", class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+              <%= link_to "Hoy", patients_path + day_before_search(0), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
             </li>
             <li class="nav-item mr-1">
-              <%= link_to "Ayer", patients_path + "?filter=ayer", class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+              <%= link_to "Ayer", patients_path + day_before_search(1), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
             <li class="nav-item mr-1">
-              <%= link_to "Antier", patients_path + "?filter=antier", class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+              <%= link_to "Antier", patients_path + day_before_search(2), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
             </li>
             <!-- <li class="nav-item mr-1">
-              <%= link_to "Trasantier(Puente)", patients_path + "?filter=trasantier", class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+              <%= link_to "Trasantier(Puente)", patients_path + day_before_search(3), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
             </li> -->
             <li class="nav-item mr-1">
-              <%= link_to "Últimos 7 días", patients_path + "?filter=semana", class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+              <%= link_to "Últimos 7 días", patients_path  + days_ago_search(7), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
             </li>
             <!-- <li class="nav-item mr-1">
-              <%= link_to "Últimos 30 días", patients_path + "?filter=mes", class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+              <%= link_to "Últimos 30 días", patients_path  + days_ago_search(30), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
             </li> -->
           <% end %>
           </ul>

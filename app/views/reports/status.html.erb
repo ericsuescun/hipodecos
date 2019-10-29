@@ -1,2 +1,42 @@
-<h1>Reports#status</h1>
-<p>Find me in app/views/reports/status.html.erb</p>
+<h1>Isabela Reporta</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Informe</th>
+						<th>Oportunidad</th>
+						<th>Doctores</th>
+						<th>Muestras</th>
+						<th>CUPS</th>
+						<th>Bloques</th>
+						<th>Placas</th>
+						<th>Macro</th>
+						<th>Micro</th>
+						<th>Dx.</th>
+						<th>(%)Avance</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @informs.each do |inform| %>
+						<tr>
+							<td><%= link_to inform.tag_code, inform_path(inform) %></td>
+							<td><%= (Date.today.to_date - inform.created_at.to_date).to_i %></td>
+							<td><%= inform.physicians.count %> <span class="badge badge-warning"><%= objs(inform.physicians) %></span></td>
+							<td><%= inform.samples.count %> <span class="badge badge-warning"><%= objs(inform.samples) %></span></td>
+							<td><%= inform.studies.count %> <span class="badge badge-warning"><%= objs(inform.studies) %></span></td>
+							<td><%= inform.blocks.count %> <span class="badge badge-warning"><%= objs(inform.blocks) %></span></td>
+							<td><%= inform.slides.count %> <span class="badge badge-warning"><%= objs(inform.slides) %></span></td>
+							<td><%= inform.macros.count %> <span class="badge badge-warning"><%= objs(inform.macros) %></span></td>
+							<td><%= inform.micros.count %> <span class="badge badge-warning"><%= objs(inform.micros) %></span></td>
+							<td><%= inform.diagnostics.count %> <span class="badge badge-warning"><%= objs(inform.diagnostics) %></span></td>
+							<td><span class="badge badge-<%= inform_status(inform) < 33 ? "danger" : inform_status(inform) < 66 ? "warning" : "success" %>"><%= inform_status(inform) %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+

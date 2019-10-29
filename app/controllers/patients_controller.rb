@@ -4,35 +4,16 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    if params[:filter].blank?    
-      if params[:tag_code].blank?
-        @patients = Patient.all
-      else
-        @patients = Patient.where(tag_code: params[:tag_code])
-      end
+    if params[:yi]
+      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+      date_range = initial_date..final_date
+      @patients = Patient.where(created_at: date_range)
     else
-      if params[:filter] == 'hoy'
-        @patients = Patient.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
+      if !params[:id_number].blank?
+        @patients = Patient.where(id_number: params[:tag_code])
       else
-        if params[:filter] == 'ayer'
-          @patients = Patient.where(created_at: (Date.today - 1).beginning_of_day..(Date.today - 1).end_of_day)
-        else
-          if params[:filter] == 'antier'
-            @patients = Patient.where(created_at: (Date.today - 2).beginning_of_day..(Date.today - 2).end_of_day)
-          else
-            if params[:filter] == 'trasantier'
-              @patients = Patient.where(created_at: (Date.today - 3).beginning_of_day..(Date.today - 3).end_of_day)
-            else
-              if params[:filter] == 'semana'
-                @patients = Patient.where(created_at: (Date.today - 7).beginning_of_day..Date.today.end_of_day)
-              else
-                if params[:filter] == 'mes'
-                  @patients = Patient.where(created_at: (Date.today - 30).beginning_of_day..Date.today.end_of_day)
-                end
-              end
-            end
-          end
-        end
+        @patients = Patient.all
       end
     end
   end

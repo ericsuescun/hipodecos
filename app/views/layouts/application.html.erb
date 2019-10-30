@@ -110,17 +110,6 @@
                 <%= link_to "El mes pasado", informs_path + month_before_search(1), class: "dropdown-item" %>
               </div>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle btn btn-outline-success mr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Reportes
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <%= link_to "Estado", reports_status_path, class: "dropdown-item" %>
-                <%= link_to "No conformidades", reports_objections_path, class: "dropdown-item" %>
-                <div class="dropdown-divider"></div>
-                <%= link_to "Ventas", 'reports/sales', class: "dropdown-item" %>
-              </div>
-            </li>
             <%= form_tag informs_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
               <%= text_field_tag :tag_code, nil, class: "form-control input mx-2", placeholder: "Código de informe" %>
               <%= submit_tag("Buscar", class: "btn btn-outline-success my-2 my-lg-0") %>
@@ -208,6 +197,9 @@
             <!-- <li class="nav-item mr-1">
               <%= link_to "Últimos 30 días", informs_path + days_ago_search(30), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
             </li> -->
+            <li class="nav-item mr-1">
+              <%= link_to "Reportes", reports_sales_path, class: "btn btn-success btn-block my-2 my-lg-0" %>
+            </li>
           </ul>
           <ul class="navbar-nav d-flex justify-content-end">
             <li class="nav-item mr-1">

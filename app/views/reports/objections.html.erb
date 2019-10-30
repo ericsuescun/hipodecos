@@ -15,9 +15,9 @@
 					<% User.all.each do |user| %>
 						<tr>
 							<td><%= user.email %></td>
-							<td><%= Objection.where(responsible_user_id: user.id, closed: false).count %></td>
-							<td><%= Objection.where(responsible_user_id: user.id, closed: true).count %></td>
-							<td><%= Objection.where(responsible_user_id: user.id).count %></td>
+							<td><%= @objections.where(responsible_user_id: user.id, closed: false).count %></td>
+							<td><%= @objections.where(responsible_user_id: user.id, closed: true).count %></td>
+							<td><%= @objections.where(responsible_user_id: user.id).count %></td>
 						</tr>
 					<% end %>
 				</tbody>
@@ -38,51 +38,51 @@
 				<tbody>
 					<tr>
 						<td>Doctor</td>
-						<td><%= Objection.where(objectionable_type: "Physician", closed: false).count %></td>
-						<td><%= Objection.where(objectionable_type: "Physician", closed: true).count %>: <span class="badge badge-<%= avg_review(Physician.all) > 1800 ? "danger" : avg_review(Physician.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Physician.all)) %></td>
-						<td><%= Objection.where(objectionable_type: "Physician").count %></td>
+						<td><%= @objections.where(objectionable_type: "Physician", closed: false).count %></td>
+						<td><%= @objections.where(objectionable_type: "Physician", closed: true).count %>: <span class="badge badge-<%= avg_review(Physician.all) > 1800 ? "danger" : avg_review(Physician.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Physician.all)) %></td>
+						<td><%= @objections.where(objectionable_type: "Physician").count %></td>
 					</tr>
 					<tr>
 						<td>CUPS</td>
-						<td><%= Objection.where(objectionable_type: "Study", closed: false).count %></td>
-						<td><%= Objection.where(objectionable_type: "Study", closed: true).count %>: <span class="badge badge-<%= avg_review(Study.all) > 1800 ? "danger" : avg_review(Study.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Study.all)) %></td>
-						<td><%= Objection.where(objectionable_type: "Study").count %></td>
+						<td><%= @objections.where(objectionable_type: "Study", closed: false).count %></td>
+						<td><%= @objections.where(objectionable_type: "Study", closed: true).count %>: <span class="badge badge-<%= avg_review(Study.all) > 1800 ? "danger" : avg_review(Study.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Study.all)) %></td>
+						<td><%= @objections.where(objectionable_type: "Study").count %></td>
 					</tr>
 					<tr>
 						<td>Muestras</td>
-						<td><%= Objection.where(objectionable_type: "Sample", closed: false).count %></td>
-						<td><%= Objection.where(objectionable_type: "Sample", closed: true).count %>: <span class="badge badge-<%= avg_review(Sample.all) > 1800 ? "danger" : avg_review(Sample.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Sample.all)) %></td>
-						<td><%= Objection.where(objectionable_type: "Sample").count %></td>
+						<td><%= @objections.where(objectionable_type: "Sample", closed: false).count %></td>
+						<td><%= @objections.where(objectionable_type: "Sample", closed: true).count %>: <span class="badge badge-<%= avg_review(Sample.all) > 1800 ? "danger" : avg_review(Sample.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Sample.all)) %></td>
+						<td><%= @objections.where(objectionable_type: "Sample").count %></td>
 					</tr>
 					<tr>
 						<td>Bloques</td>
-						<td><%= Objection.where(objectionable_type: "Block", closed: false).count %></td>
-						<td><%= Objection.where(objectionable_type: "Block", closed: true).count %>: <span class="badge badge-<%= avg_review(Block.all) > 1800 ? "danger" : avg_review(Block.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Block.all)) %></td>
-						<td><%= Objection.where(objectionable_type: "Block").count %></td>
+						<td><%= @objections.where(objectionable_type: "Block", closed: false).count %></td>
+						<td><%= @objections.where(objectionable_type: "Block", closed: true).count %>: <span class="badge badge-<%= avg_review(Block.all) > 1800 ? "danger" : avg_review(Block.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Block.all)) %></td>
+						<td><%= @objections.where(objectionable_type: "Block").count %></td>
 					</tr>
 					<tr>
 						<td>Placas</td>
-						<td><%= Objection.where(objectionable_type: "Slide", closed: false).count %></td>
-						<td><%= Objection.where(objectionable_type: "Slide", closed: true).count %>: <span class="badge badge-<%= avg_review(Slide.all) > 1800 ? "danger" : avg_review(Slide.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Slide.all)) %></td>
-						<td><%= Objection.where(objectionable_type: "Slide").count %></td>
+						<td><%= @objections.where(objectionable_type: "Slide", closed: false).count %></td>
+						<td><%= @objections.where(objectionable_type: "Slide", closed: true).count %>: <span class="badge badge-<%= avg_review(Slide.all) > 1800 ? "danger" : avg_review(Slide.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Slide.all)) %></td>
+						<td><%= @objections.where(objectionable_type: "Slide").count %></td>
 					</tr>
 					<tr>
 						<td>Macro</td>
-						<td><%= Objection.where(objectionable_type: "Macro", closed: false).count %></td>
-						<td><%= Objection.where(objectionable_type: "Macro", closed: true).count %>: <span class="badge badge-<%= avg_review(Macro.all) > 1800 ? "danger" : avg_review(Macro.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Macro.all)) %></td>
-						<td><%= Objection.where(objectionable_type: "Macro").count %></td>
+						<td><%= @objections.where(objectionable_type: "Macro", closed: false).count %></td>
+						<td><%= @objections.where(objectionable_type: "Macro", closed: true).count %>: <span class="badge badge-<%= avg_review(Macro.all) > 1800 ? "danger" : avg_review(Macro.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Macro.all)) %></td>
+						<td><%= @objections.where(objectionable_type: "Macro").count %></td>
 					</tr>
 					<tr>
 						<td>Micro</td>
-						<td><%= Objection.where(objectionable_type: "Micro", closed: false).count %></td>
-						<td><%= Objection.where(objectionable_type: "Micro", closed: true).count %>: <span class="badge badge-<%= avg_review(Micro.all) > 1800 ? "danger" : avg_review(Micro.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Micro.all)) %></td>
-						<td><%= Objection.where(objectionable_type: "Micro").count %></td>
+						<td><%= @objections.where(objectionable_type: "Micro", closed: false).count %></td>
+						<td><%= @objections.where(objectionable_type: "Micro", closed: true).count %>: <span class="badge badge-<%= avg_review(Micro.all) > 1800 ? "danger" : avg_review(Micro.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Micro.all)) %></td>
+						<td><%= @objections.where(objectionable_type: "Micro").count %></td>
 					</tr>
 					<tr>
 						<td>Diagnóstico</td>
-						<td><%= Objection.where(objectionable_type: "Diagnostic", closed: false).count %></td>
-						<td><%= Objection.where(objectionable_type: "Diagnostic", closed: true).count %>: <span class="badge badge-<%= avg_review(Diagnostic.all) > 1800 ? "danger" : avg_review(Diagnostic.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Diagnostic.all)) %></td>
-						<td><%= Objection.where(objectionable_type: "Diagnostic").count %></td>
+						<td><%= @objections.where(objectionable_type: "Diagnostic", closed: false).count %></td>
+						<td><%= @objections.where(objectionable_type: "Diagnostic", closed: true).count %>: <span class="badge badge-<%= avg_review(Diagnostic.all) > 1800 ? "danger" : avg_review(Diagnostic.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Diagnostic.all)) %></td>
+						<td><%= @objections.where(objectionable_type: "Diagnostic").count %></td>
 					</tr>
 				</tbody>
 			</table>

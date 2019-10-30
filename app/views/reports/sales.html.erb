@@ -1,2 +1,26 @@
-<h1>Reports#sales</h1>
-<p>Find me in app/views/reports/sales.html.erb</p>
+<h1>Reportes</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-lg-8 mx-auto">
+			<h1>Informes</h1>
+			<div class="col-12 col-lg-8 mx-auto">
+				<%= form_tag reports_status_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+				  <%= date_field_tag :init_date, nil, class: "form-control input mx-2", placeholder: "Fecha inicio" %>
+				  <%= date_field_tag :final_date, nil, class: "form-control input mx-2", placeholder: "Fecha fin" %>
+				  <%= submit_tag("Reportes", class: "btn btn-success my-2") %>
+				<% end %>
+			</div>
+			
+			<br>
+			<h1>No Conformidades</h1>
+			<div class="col-12 col-lg-8 mx-auto">
+				<%= form_tag reports_objections_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+				  <%= date_field_tag :init_date, nil, class: "form-control input mx-2", placeholder: "Fecha inicio" %>
+				  <%= date_field_tag :final_date, nil, class: "form-control input mx-2", placeholder: "Fecha fin" %>
+				  <%= submit_tag("Reportes", class: "btn btn-warning my-2") %>
+				<% end %>
+			</div>
+			
+		</div>
+	</div>
+</div>

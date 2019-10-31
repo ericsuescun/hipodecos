@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Diagcodes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Admin</th>
+      <th>Organ</th>
+      <th>Feature1</th>
+      <th>Feature2</th>
+      <th>Feature3</th>
+      <th>Feature4</th>
+      <th>Feature5</th>
+      <th>Description</th>
+      <th>Pss code</th>
+      <th>Who code</th>
+      <th>Score</th>
+      <th>Order</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @diagcodes.each do |diagcode| %>
+      <tr>
+        <td><%= diagcode.admin_id %></td>
+        <td><%= diagcode.organ %></td>
+        <td><%= diagcode.feature1 %></td>
+        <td><%= diagcode.feature2 %></td>
+        <td><%= diagcode.feature3 %></td>
+        <td><%= diagcode.feature4 %></td>
+        <td><%= diagcode.feature5 %></td>
+        <td><%= diagcode.description %></td>
+        <td><%= diagcode.pss_code %></td>
+        <td><%= diagcode.who_code %></td>
+        <td><%= diagcode.score %></td>
+        <td><%= diagcode.order %></td>
+        <td><%= link_to 'Show', diagcode %></td>
+        <td><%= link_to 'Edit', edit_diagcode_path(diagcode) %></td>
+        <td><%= link_to 'Destroy', diagcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Diagcode', new_diagcode_path %>

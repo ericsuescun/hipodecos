@@ -1,0 +1,77 @@
+<%= form_with(model: diagcode, local: true) do |form| %>
+  <% if diagcode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(diagcode.errors.count, "error") %> prohibited this diagcode from being saved:</h2>
+
+      <ul>
+      <% diagcode.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :admin_id %>
+    <%= form.number_field :admin_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :organ %>
+    <%= form.text_field :organ %>
+  </div>
+
+  <div class="field">
+    <%= form.label :feature1 %>
+    <%= form.text_field :feature1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :feature2 %>
+    <%= form.text_field :feature2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :feature3 %>
+    <%= form.text_field :feature3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :feature4 %>
+    <%= form.text_field :feature4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :feature5 %>
+    <%= form.text_field :feature5 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pss_code %>
+    <%= form.text_field :pss_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :who_code %>
+    <%= form.text_field :who_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :score %>
+    <%= form.text_field :score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order %>
+    <%= form.number_field :order %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

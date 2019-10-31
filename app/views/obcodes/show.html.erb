@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @obcode.admin_id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @obcode.title %>
+</p>
+
+<p>
+  <strong>Process:</strong>
+  <%= @obcode.process %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @obcode.score %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @obcode.order %>
+</p>
+
+<%= link_to 'Edit', edit_obcode_path(@obcode) %> |
+<%= link_to 'Back', obcodes_path %>

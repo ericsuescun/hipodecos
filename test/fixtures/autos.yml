@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dx_table: one
+  user_id: 1
+  admin_id: 1
+  title: MyString
+  body: MyText
+  param1: MyString
+  param2: MyString
+  param3: MyString
+  param4: MyString
+
+two:
+  dx_table: two
+  user_id: 1
+  admin_id: 1
+  title: MyString
+  body: MyText
+  param1: MyString
+  param2: MyString
+  param3: MyString
+  param4: MyString

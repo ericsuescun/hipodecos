@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Obcodes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Admin</th>
+      <th>Title</th>
+      <th>Process</th>
+      <th>Score</th>
+      <th>Order</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @obcodes.each do |obcode| %>
+      <tr>
+        <td><%= obcode.admin_id %></td>
+        <td><%= obcode.title %></td>
+        <td><%= obcode.process %></td>
+        <td><%= obcode.score %></td>
+        <td><%= obcode.order %></td>
+        <td><%= link_to 'Show', obcode %></td>
+        <td><%= link_to 'Edit', edit_obcode_path(obcode) %></td>
+        <td><%= link_to 'Destroy', obcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Obcode', new_obcode_path %>

@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  admin_id: 1
+  organ: MyString
+  feature1: MyString
+  feature2: MyString
+  feature3: MyString
+  feature4: MyString
+  feature5: MyString
+  description: MyText
+  pss_code: MyString
+  who_code: MyString
+  score: 9.99
+  order: 1
+
+two:
+  admin_id: 1
+  organ: MyString
+  feature1: MyString
+  feature2: MyString
+  feature3: MyString
+  feature4: MyString
+  feature5: MyString
+  description: MyText
+  pss_code: MyString
+  who_code: MyString
+  score: 9.99
+  order: 1

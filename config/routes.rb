@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :obcodes
+  resources :autos
+  resources :diagcodes
   get 'reports/status'
   get 'reports/objections'
   get 'reports/sales'

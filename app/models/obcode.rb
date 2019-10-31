@@ -1,0 +1,2 @@
+class Obcode < ApplicationRecord
+end

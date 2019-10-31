@@ -15,3 +15,4 @@
                		amount: Faker::Commerce.price(range: 6000..50000)
                	)
 end
+

@@ -1,26 +1,101 @@
-<h1>Reportes</h1>
+<h1>Reporte de ventas</h1>
+<h1><%= search_range %></h1>
 <div class="container">
 	<div class="row">
-		<div class="col-12 col-lg-8 mx-auto">
-			<h1>Informes</h1>
-			<div class="col-12 col-lg-8 mx-auto">
-				<%= form_tag reports_status_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
-				  <%= date_field_tag :init_date, nil, class: "form-control input mx-2", placeholder: "Fecha inicio" %>
-				  <%= date_field_tag :final_date, nil, class: "form-control input mx-2", placeholder: "Fecha fin" %>
-				  <%= submit_tag("Reportes", class: "btn btn-success my-2") %>
-				<% end %>
-			</div>
-			
+		<div class="col-12 col-lg-12">
+			<h1>Reporte de ventas totales en el periodo</h1>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Ventas</th>
+						<th>Costos</th>
+						<th>Margen</th>
+						<th>Informes</th>
+						<th>CUPS</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= number_to_currency(whole_sales_indexes[0], precision: 0, delimiter: '.') %></td>
+						<td><%= number_to_currency(whole_sales_indexes[1], precision: 0, delimiter: '.') %> (<%= number_with_precision(whole_sales_indexes[11], :precision => 1) %>%)</td>
+						<td><%= number_to_currency(whole_sales_indexes[2], precision: 0, delimiter: '.') %> (<%= number_with_precision(whole_sales_indexes[12], :precision => 1) %>%)</td>
+						<td><%= whole_sales_indexes[3] %></td>
+						<td><%= whole_sales_indexes[4] %></td>
+					</tr>
+				</tbody>
+			</table>
 			<br>
-			<h1>No Conformidades</h1>
-			<div class="col-12 col-lg-8 mx-auto">
-				<%= form_tag reports_objections_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
-				  <%= date_field_tag :init_date, nil, class: "form-control input mx-2", placeholder: "Fecha inicio" %>
-				  <%= date_field_tag :final_date, nil, class: "form-control input mx-2", placeholder: "Fecha fin" %>
-				  <%= submit_tag("Reportes", class: "btn btn-warning my-2") %>
-				<% end %>
-			</div>
-			
+			<h1>Reporte de promedios en el periodo</h1>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Ventas / Informe</th>
+						<th>Costos / Informe</th>
+						<th>Margen / Informe</th>
+						<th>CUPS / Informe</th>
+						<th>Ventas / CUPS</th>
+						<th>Costos / CUPS</th>
+						<th>Márgenes / CUPS</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<% if whole_sales_indexes[3] != 0 %>
+							<td><%= number_to_currency(100 * whole_sales_indexes[0] / whole_sales_indexes[3], precision: 0, delimiter: '.') %></td>
+							<td><%= number_to_currency(100 * whole_sales_indexes[1] / whole_sales_indexes[3], precision: 0, delimiter: '.') %></td>
+							<td><%= number_to_currency(100 * whole_sales_indexes[2] / whole_sales_indexes[3], precision: 0, delimiter: '.') %></td>
+							<td><%= number_with_precision(whole_sales_indexes[4] / whole_sales_indexes[3], :precision => 1) %></td>
+						<% else %>
+							<td>Sin dato</td>
+							<td>Sin dato</td>
+							<td>Sin dato</td>
+							<td>Sin dato</td>
+						<% end %>
+						<% if whole_sales_indexes[4] != 0 %>
+							<td><%= number_to_currency(100 * whole_sales_indexes[0] / whole_sales_indexes[4], precision: 0, delimiter: '.') %></td>
+							<td><%= number_to_currency(100 * whole_sales_indexes[1] / whole_sales_indexes[4], precision: 0, delimiter: '.') %></td>
+							<td><%= number_to_currency(100 * whole_sales_indexes[2] / whole_sales_indexes[4], precision: 0, delimiter: '.') %></td>
+						<% else %>
+							<td>Sin dato</td>
+							<td>Sin dato</td>
+							<td>Sin dato</td>
+						<% end %>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<h1>Reporte por sedes de IPS</h1>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Sede IPS</th>
+						<th>Tarifas</th>
+						<th>Ventas</th>
+						<th>Tablas</th>
+						<th>Costo</th>
+						<th>Margen</th>
+						<th>Informes</th>
+						<th>CUPS</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @branches.each do |branch| %>
+						<tr>
+							<td><%= branch.initials %></td>
+							<td><%= Rate.find(branch.entity.rate_id).name %></td>
+							<td><%= number_to_currency(sales(branch)[0], precision: 0, delimiter: '.') %></td>
+							<td><%= Cost.find(branch.entity.cost_id).name %></td>
+							<td><%= number_to_currency(sales(branch)[1], precision: 0, delimiter: '.') %></td>
+							<td><%= number_to_currency(sales(branch)[2], precision: 0, delimiter: '.') %></td>
+							<td><%= sales(branch)[3] %></td>
+							<td><%= sales(branch)[4] %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+60.times do |n|
+  Expense.create!(
+  					extype: Faker::Number.between(from: 0, to: 7),
+               		exdate: Faker::Date.between(from: 180.days.ago, to: Date.today.end_of_month),
+               		concept: Faker::Commerce.product_name,
+               		category: Faker::Number.between(from: 0, to: 7),
+               		amount: Faker::Commerce.price(range: 6000..50000)
+               	)
+end

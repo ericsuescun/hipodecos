@@ -1,0 +1,160 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Isabela</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentB" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContentB">
+    <ul class="navbar-nav mr-auto">
+      <% if admin_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admins
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/admins">Admins</a>
+            <a class="dropdown-item" href="/admins/sign_in">Ingresar</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Usuarios
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Usuarios", users_path, class: "dropdown-item" %>
+            <%= link_to "Ingresar", new_user_session_path, class: "dropdown-item" %>
+            <%= link_to "Nuevo Usuario", new_user_registration_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Perfiles", roles_path, class: "dropdown-item" %>
+            <%= link_to 'Nuevo Perfil', new_role_path, class: "dropdown-item" %>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Instituciones
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "EPS", promoters_path, class: "dropdown-item" %>
+            <%= link_to "Crear EPS", new_promoter_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "IPS", entities_path, class: "dropdown-item" %>
+            <%= link_to "Crear IPS", new_entity_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Sedes IPS", branches_path, class: "dropdown-item" %>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Administración
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "CUPS", codevals_path, class: "dropdown-item" %>
+            <%= link_to "Agegar CUPS", new_codeval_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Tablas de costo", costs_path, class: "dropdown-item" %>
+            <%= link_to "Nueva tabla de costo", new_cost_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Tarifas", rates_path, class: "dropdown-item" %>
+            <%= link_to "Nueva Tarifa", new_rate_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Lista de no conformidades</a>
+            <a class="dropdown-item" href="#">Lista de correcciones</a>
+            <a class="dropdown-item" href="#">No conformidades</a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Reportes
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">A</a>
+            <a class="dropdown-item" href="#">B</a>
+            <a class="dropdown-item" href="#">C</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">D</a>
+            <a class="dropdown-item" href="#">E</a>
+            <a class="dropdown-item" href="#">F</a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </li>
+      <% end %>
+      <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn btn-outline-success mr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Informes
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Matricular", new_patient_path, class: "dropdown-item" %>
+            <%= link_to "Todos", informs_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Hoy", informs_path + day_before_search(0), class: "dropdown-item" %>
+            <%= link_to "Ayer", informs_path + day_before_search(1), class: "dropdown-item" %>
+            <%= link_to "Antier", informs_path + day_before_search(2), class: "dropdown-item" %>
+            <%= link_to "Trasantier(Puente)", informs_path + day_before_search(3), class: "dropdown-item" %>
+            <%= link_to "Últimos 7 días", informs_path + days_ago_search(7), class: "dropdown-item" %>
+            <%= link_to "Últimos 30 días", informs_path + days_ago_search(30), class: "dropdown-item" %>
+            <%= link_to "Este mes", informs_path + month_before_search(0), class: "dropdown-item" %>
+            <%= link_to "El mes pasado", informs_path + month_before_search(1), class: "dropdown-item" %>
+          </div>
+        </li>
+        <%= form_tag informs_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+          <%= text_field_tag :tag_code, nil, class: "form-control input mx-2", placeholder: "Código de informe" %>
+          <%= submit_tag("Buscar", class: "btn btn-outline-success my-2 my-lg-0") %>
+        <% end %>
+      <% end %>
+    </ul>
+    <% if admin_signed_in? %>
+      <ul class="navbar-nav d-flex justify-content-end">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin: <%= current_admin.email %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Salir", destroy_admin_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+    <% if user_signed_in? %>
+      <ul class="navbar-nav d-flex justify-content-end">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Usuario: <%= current_user.email %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Salir", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle btn btn-outline-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Pacientes
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Todos", patients_path, class: "dropdown-item" %>
+            <%= link_to "Hoy", patients_path + "?filter=hoy", class: "dropdown-item" %>
+            <%= link_to "Ayer", patients_path + "?filter=ayer", class: "dropdown-item" %>
+            <%= link_to "Antier", patients_path + "?filter=antier", class: "dropdown-item" %>
+            <%= link_to "Trasantier(Puente)", patients_path + "?filter=trasantier", class: "dropdown-item" %>
+            <%= link_to "últimos 7 días", patients_path + "?filter=semana", class: "dropdown-item" %>
+            <%= link_to "últimos 30 días", patients_path + "?filter=mes", class: "dropdown-item" %>
+          </div>
+        </li>
+        <%= form_tag new_patient_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+          <%= text_field_tag :id_number, nil, class: "form-control input mx-2", placeholder: "# identificación" %>
+          <%= submit_tag("Buscar/Matricular!", class: "btn btn-outline-primary my-2 my-lg-0") %>
+        <% end %>
+      </ul>
+    <% end %>
+    <% unless user_signed_in? || admin_signed_in? %>
+      <ul class="navbar-nav d-flex justify-content-end">
+        <li class="nav-item active">
+          <%= link_to "Ingresar Admin", new_admin_session_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item active">
+          <%= link_to "Ingresar User", new_user_session_path, class: "nav-link" %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</nav>

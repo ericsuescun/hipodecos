@@ -1,4 +1,5 @@
 <h1>Reporte de No Conformidades</h1>
+<h1><%= search_range %></h1>
 <div class="container">
 	<div class="row">
 		<div class="col-12 col-lg-10 mx-auto my-3">
@@ -9,15 +10,17 @@
 						<th>NC Abiertas</th>
 						<th>NC Cerradas</th>
 						<th>Total de NC</th>
+						<th>Promedio de atención</th>
 					</tr>
 				</thead>
 				<tbody>
 					<% User.all.each do |user| %>
 						<tr>
 							<td><%= user.email %></td>
-							<td><%= @objections.where(responsible_user_id: user.id, closed: false).count %></td>
-							<td><%= @objections.where(responsible_user_id: user.id, closed: true).count %></td>
-							<td><%= @objections.where(responsible_user_id: user.id).count %></td>
+							<td><%= get_by_user(user)[1] %></td>
+							<td><%= get_by_user(user)[2] %></td>
+							<td><%= get_by_user(user)[0] %></td>
+							<td><span class="badge badge-<%= color(get_by_user(user)[3]) %>"><%= get_by_user(user)[3] != 0 ? distance_of_time_in_words(get_by_user(user)[3]) : 'sin dato' %></td>
 						</tr>
 					<% end %>
 				</tbody>
@@ -33,56 +36,65 @@
 						<th>NC Abiertas</th>
 						<th>NC Cerradas</th>
 						<th>Total de NC</th>
+						<th>Promedio de atención</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>Doctor</td>
-						<td><%= @objections.where(objectionable_type: "Physician", closed: false).count %></td>
-						<td><%= @objections.where(objectionable_type: "Physician", closed: true).count %>: <span class="badge badge-<%= avg_review(Physician.all) > 1800 ? "danger" : avg_review(Physician.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Physician.all)) %></td>
-						<td><%= @objections.where(objectionable_type: "Physician").count %></td>
+						<td><%= get_by_process(@obj_physicians)[1] %></td>
+						<td><%= get_by_process(@obj_physicians)[2] %></td>
+						<td><%= get_by_process(@obj_physicians)[0] %></td>
+						<td><span class="badge badge-<%= color(get_by_process(@obj_physicians)[3]) %>"><%= get_by_process(@obj_physicians)[3] != 0 ? distance_of_time_in_words(get_by_process(@obj_physicians)[3]) : 'sin dato' %></td>
 					</tr>
 					<tr>
 						<td>CUPS</td>
-						<td><%= @objections.where(objectionable_type: "Study", closed: false).count %></td>
-						<td><%= @objections.where(objectionable_type: "Study", closed: true).count %>: <span class="badge badge-<%= avg_review(Study.all) > 1800 ? "danger" : avg_review(Study.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Study.all)) %></td>
-						<td><%= @objections.where(objectionable_type: "Study").count %></td>
+						<td><%= get_by_process(@obj_studies)[1] %></td>
+						<td><%= get_by_process(@obj_studies)[2] %></td>
+						<td><%= get_by_process(@obj_studies)[0] %></td>
+						<td><span class="badge badge-<%= color(get_by_process(@obj_studies)[3]) %>"><%= get_by_process(@obj_studies)[3] != 0 ? distance_of_time_in_words(get_by_process(@obj_studies)[3]) : 'sin dato' %></td>
 					</tr>
 					<tr>
-						<td>Muestras</td>
-						<td><%= @objections.where(objectionable_type: "Sample", closed: false).count %></td>
-						<td><%= @objections.where(objectionable_type: "Sample", closed: true).count %>: <span class="badge badge-<%= avg_review(Sample.all) > 1800 ? "danger" : avg_review(Sample.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Sample.all)) %></td>
-						<td><%= @objections.where(objectionable_type: "Sample").count %></td>
+						<td>Muestra</td>
+						<td><%= get_by_process(@obj_samples)[1] %></td>
+						<td><%= get_by_process(@obj_samples)[2] %></td>
+						<td><%= get_by_process(@obj_samples)[0] %></td>
+						<td><span class="badge badge-<%= color(get_by_process(@obj_samples)[3]) %>"><%= get_by_process(@obj_samples)[3] != 0 ? distance_of_time_in_words(get_by_process(@obj_samples)[3]) : 'sin dato' %></td>
 					</tr>
 					<tr>
-						<td>Bloques</td>
-						<td><%= @objections.where(objectionable_type: "Block", closed: false).count %></td>
-						<td><%= @objections.where(objectionable_type: "Block", closed: true).count %>: <span class="badge badge-<%= avg_review(Block.all) > 1800 ? "danger" : avg_review(Block.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Block.all)) %></td>
-						<td><%= @objections.where(objectionable_type: "Block").count %></td>
+						<td>Bloque</td>
+						<td><%= get_by_process(@obj_blocks)[1] %></td>
+						<td><%= get_by_process(@obj_blocks)[2] %></td>
+						<td><%= get_by_process(@obj_blocks)[0] %></td>
+						<td><span class="badge badge-<%= color(get_by_process(@obj_blocks)[3]) %>"><%= get_by_process(@obj_blocks)[3] != 0 ? distance_of_time_in_words(get_by_process(@obj_blocks)[3]) : 'sin dato' %></td>
 					</tr>
 					<tr>
-						<td>Placas</td>
-						<td><%= @objections.where(objectionable_type: "Slide", closed: false).count %></td>
-						<td><%= @objections.where(objectionable_type: "Slide", closed: true).count %>: <span class="badge badge-<%= avg_review(Slide.all) > 1800 ? "danger" : avg_review(Slide.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Slide.all)) %></td>
-						<td><%= @objections.where(objectionable_type: "Slide").count %></td>
+						<td>Placa</td>
+						<td><%= get_by_process(@obj_slides)[1] %></td>
+						<td><%= get_by_process(@obj_slides)[2] %></td>
+						<td><%= get_by_process(@obj_slides)[0] %></td>
+						<td><span class="badge badge-<%= color(get_by_process(@obj_slides)[3]) %>"><%= get_by_process(@obj_slides)[3] != 0 ? distance_of_time_in_words(get_by_process(@obj_slides)[3]) : 'sin dato' %></td>
 					</tr>
 					<tr>
 						<td>Macro</td>
-						<td><%= @objections.where(objectionable_type: "Macro", closed: false).count %></td>
-						<td><%= @objections.where(objectionable_type: "Macro", closed: true).count %>: <span class="badge badge-<%= avg_review(Macro.all) > 1800 ? "danger" : avg_review(Macro.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Macro.all)) %></td>
-						<td><%= @objections.where(objectionable_type: "Macro").count %></td>
+						<td><%= get_by_process(@obj_macros)[1] %></td>
+						<td><%= get_by_process(@obj_macros)[2] %></td>
+						<td><%= get_by_process(@obj_macros)[0] %></td>
+						<td><span class="badge badge-<%= color(get_by_process(@obj_macros)[3]) %>"><%= get_by_process(@obj_macros)[3] != 0 ? distance_of_time_in_words(get_by_process(@obj_macros)[3]) : 'sin dato' %></td>
 					</tr>
 					<tr>
 						<td>Micro</td>
-						<td><%= @objections.where(objectionable_type: "Micro", closed: false).count %></td>
-						<td><%= @objections.where(objectionable_type: "Micro", closed: true).count %>: <span class="badge badge-<%= avg_review(Micro.all) > 1800 ? "danger" : avg_review(Micro.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Micro.all)) %></td>
-						<td><%= @objections.where(objectionable_type: "Micro").count %></td>
+						<td><%= get_by_process(@obj_micros)[1] %></td>
+						<td><%= get_by_process(@obj_micros)[2] %></td>
+						<td><%= get_by_process(@obj_micros)[0] %></td>
+						<td><span class="badge badge-<%= color(get_by_process(@obj_micros)[3]) %>"><%= get_by_process(@obj_micros)[3] != 0 ? distance_of_time_in_words(get_by_process(@obj_micros)[3]) : 'sin dato' %></td>
 					</tr>
 					<tr>
 						<td>Diagnóstico</td>
-						<td><%= @objections.where(objectionable_type: "Diagnostic", closed: false).count %></td>
-						<td><%= @objections.where(objectionable_type: "Diagnostic", closed: true).count %>: <span class="badge badge-<%= avg_review(Diagnostic.all) > 1800 ? "danger" : avg_review(Diagnostic.all) > 900 ? "warning" : "success" %>"><%= "Prom.Atn: " + distance_of_time_in_words(avg_review(Diagnostic.all)) %></td>
-						<td><%= @objections.where(objectionable_type: "Diagnostic").count %></td>
+						<td><%= get_by_process(@obj_diagnostics)[1] %></td>
+						<td><%= get_by_process(@obj_diagnostics)[2] %></td>
+						<td><%= get_by_process(@obj_diagnostics)[0] %></td>
+						<td><span class="badge badge-<%= color(get_by_process(@obj_diagnostics)[3]) %>"><%= get_by_process(@obj_diagnostics)[3] != 0 ? distance_of_time_in_words(get_by_process(@obj_diagnostics)[3]) : 'sin dato' %></td>
 					</tr>
 				</tbody>
 			</table>

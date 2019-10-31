@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   get 'reports/status'
   get 'reports/objections'
   get 'reports/sales'
+  get 'reports/reports_params_today'
+  get 'reports/reports_params_yes'
+  get 'reports/reports_params_yes2'
+  get 'reports/reports_params_week'
+
   get 'pictures/index'
   get 'pictures/new'
   get 'pictures/create'
@@ -10,6 +15,16 @@ Rails.application.routes.draw do
   get 'pictures/update'
   get 'pictures/delete'
   get 'pictures/show'
+
+
+  get 'objections/index'
+  get 'objections/new'
+  get 'objections/create'
+  get 'objections/edit'
+  get 'objections/update'
+  get 'objections/delete'
+  get 'objections/show'
+
     root to: "users#index"
 
     resources :roles
@@ -95,22 +110,6 @@ Rails.application.routes.draw do
         resources :physicians
       end
     end
-
-
-
-    get 'objections/index'
-    get 'objections/new'
-    get 'objections/create'
-    get 'objections/edit'
-    get 'objections/update'
-    get 'objections/delete'
-    get 'objections/show'
-
-
-
-
-
-  
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

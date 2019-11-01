@@ -20,19 +20,19 @@
   </div>
   <div class="row">
   	<div class="col-12 col-lg-12 mx-auto">
-  		<% @cost.values.each do |value| %>
-  			<table class="table table-striped">
-  				<thead class="thead-dark">
-  					<tr>
-  						<th>CUPS</th>
-  						<th>Costo</th>
-  						<th>Asigando por:</th>
-              <th>Comentarios</th>
-              <th scope="1"></th>
-  					</tr>
-  					
-  				</thead>
-  				<tbody>
+			<table class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>CUPS</th>
+						<th>Costo</th>
+						<th>Asigando por:</th>
+            <th>Comentarios</th>
+            <th scope="1"></th>
+					</tr>
+					
+				</thead>
+				<tbody>
+          <% @cost.values.each do |value| %>
   					<tr>
   						<td><%= value.codeval.code %></td>
   						<td><%= number_to_currency(value.value, precision: 0, delimiter: ',') %></td>
@@ -40,9 +40,9 @@
               <td><%= value.description %></td>
               <td><%= link_to "Editar", edit_value_path(value) %></td>
   					</tr>
-  				</tbody>
-  			</table>
-  		<% end %>
+          <% end %>
+				</tbody>
+			</table>
   	</div>
   </div>
 </div>

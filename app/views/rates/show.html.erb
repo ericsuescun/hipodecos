@@ -20,19 +20,18 @@
   </div>
   <div class="row">
   	<div class="col-12 col-lg-8 mx-auto">
-  		<% @rate.factors.each do |factor| %>
-  			<table class="table table-striped">
-  				<thead class="thead-dark">
-  					<tr>
-  						<th>CUPS</th>
-  						<th>Factor asociado</th>
-  						<th>Asigando por:</th>
-              <th>Comentarios</th>
-              <th scope="1"></th>
-  					</tr>
-  					
-  				</thead>
-  				<tbody>
+			<table class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>CUPS</th>
+						<th>Factor asociado</th>
+						<th>Asigando por:</th>
+            <th>Comentarios</th>
+            <th scope="1"></th>
+					</tr>
+				</thead>
+				<tbody>
+          <% @rate.factors.each do |factor| %>
   					<tr>
   						<td><%= factor.codeval.code %></td>
   						<td><%= factor.factor %></td>
@@ -40,9 +39,9 @@
               <td><%= factor.description %></td>
               <td><%= link_to "Editar", edit_factor_path(factor) %></td>
   					</tr>
-  				</tbody>
-  			</table>
-  		<% end %>
+          <% end %>
+				</tbody>
+			</table>
   	</div>
   </div>
 </div>

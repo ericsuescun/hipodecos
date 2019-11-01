@@ -132,7 +132,7 @@
                 <div class="col-12 col-lg-3">
                   <div class="form-group">
                     <%= informs_form.label "Fecha de recepción" %>
-                    <%= informs_form.date_field :receive_date, autocomplete: "Fecha de nacimiento", class: "form-control input"  %>
+                    <%= informs_form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de nacimiento", class: "form-control input"  %>
                   </div>
                 </div>
                 <div class="col-12 col-lg-3">
@@ -170,7 +170,7 @@
                 <div class="col-12 col-lg-3">
                   <div class="form-group">
                     <%= informs_form.label "Tipo de zona" %>
-                    <%= informs_form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
+                    <%= informs_form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']], @patient.informs), {  }, class: "form-control form-control-lg input") %>
                   </div>
                 </div>
                 <div class="col-12 col-lg-3">

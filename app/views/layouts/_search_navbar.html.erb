@@ -57,10 +57,11 @@
             <%= link_to "Tarifas", rates_path, class: "dropdown-item" %>
             <%= link_to "Nueva Tarifa", new_rate_path, class: "dropdown-item" %>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Lista de no conformidades</a>
-            <a class="dropdown-item" href="#">Lista de correcciones</a>
-            <a class="dropdown-item" href="#">No conformidades</a>
+            <%= link_to "Automáticos", diagcodes_path, class: "dropdown-item" %>
+            <%= link_to "Nuevos Automáticos", new_diagcode_path, class: "dropdown-item" %>
             <div class="dropdown-divider"></div>
+            <%= link_to "Listado de No Conformidades", obcodes_path, class: "dropdown-item" %>
+            <%= link_to "Nueva No Conformidad", new_obcode_path, class: "dropdown-item" %>
           </div>
         </li>
         <li class="nav-item dropdown">

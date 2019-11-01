@@ -4,7 +4,7 @@ class CodevalsController < ApplicationController
 
   def import
     Codeval.import(params[:file])
-    redirect_to root_url, notice: "Datos importados!"
+    redirect_to codevals_path, notice: "Datos importados!"
   end
 
   # GET /codevals
@@ -36,7 +36,7 @@ class CodevalsController < ApplicationController
 
     respond_to do |format|
       if @codeval.save
-        format.html { redirect_to @codeval, notice: 'Codeval was successfully created.' }
+        format.html { redirect_to @codeval, notice: 'CUPS exitosamente creado.' }
         format.json { render :show, status: :created, location: @codeval }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class CodevalsController < ApplicationController
   def update
     respond_to do |format|
       if @codeval.update(codeval_params)
-        format.html { redirect_to @codeval, notice: 'Codeval was successfully updated.' }
+        format.html { redirect_to @codeval, notice: 'CUPS exitosamente actualizado.' }
         format.json { render :show, status: :ok, location: @codeval }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class CodevalsController < ApplicationController
   def destroy
     @codeval.destroy
     respond_to do |format|
-      format.html { redirect_to codevals_url, notice: 'Codeval was successfully destroyed.' }
+      format.html { redirect_to codevals_url, notice: 'CUPS exitosamente borrado.' }
       format.json { head :no_content }
     end
   end

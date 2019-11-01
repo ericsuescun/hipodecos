@@ -14,6 +14,7 @@
             <th>EPS</th>
             <th>Sede IPS</th>
             <th>Código Authoriz.</th>
+            <th scope="1"></th>
           </tr>
         </thead>
 
@@ -35,6 +36,7 @@
               <td><%= Promoter.find(inform.promoter_id).initials %></td>
               <td><%= Branch.find(inform.branch_id).initials %></td>
               <td><%= inform.prmtr_auth_code %></td>
+              <td><%= link_to 'Borrar', inform, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
             </tr>
           <% end %>
         </tbody>

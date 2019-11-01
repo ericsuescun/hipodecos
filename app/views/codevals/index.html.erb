@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
-      
+
       <h4>Importar datos</h4>
       <%= form_tag import_codevals_path, multipart: true do %>
         <%= file_field_tag :file %>
@@ -13,7 +13,7 @@
         <thead class="thead-dark">
           <tr>
             <th>CUPS</th>
-            <th>OMS</th>
+            <th>Refs.</th>
             <th>Name</th>
             <th>Description</th>
             <th>Origin system</th>
@@ -30,7 +30,7 @@
               <td><%= codeval.name %></td>
               <td><%= codeval.description %></td>
               <td><%= codeval.origin_system %></td>
-              <td><%= Admin.find(codeval.admin_id).name %></td>
+              <td><%= codeval.admin_id == nil ? "sin dato" : Admin.find(codeval.admin_id).name %></td>
               <td><%= link_to 'Detalles', codeval %></td>
               <td><%= link_to 'Editar', edit_codeval_path(codeval) %></td>
               <td><%= link_to 'Borrar', codeval, method: :delete, data: { confirm: 'Are you sure?' } %></td>

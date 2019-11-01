@@ -109,7 +109,7 @@
                 <tr>
                   <th>Código</th>
                   <th>Nombre</th>
-                  <th>Múltiple</th>
+                  <th>Múltiplo</th>
                   <th>Por</th>
                   <th scope="3"></th>
                 </tr>
@@ -119,7 +119,7 @@
                   <tr>
                     <td><%= Codeval.find(study.codeval_id).code %></td>
                     <td><%= Codeval.find(study.codeval_id).name %></td>
-                    <td><%= study.factor %>X</td>
+                    <td>x <%= study.factor %></td>
                     <td><%= user(study).first_name %></td>
                     <td><%= link_to "Revisar", study_path(study) %></td>
                     <td><%= link_to 'Editar', edit_study_path(study) %></td>
@@ -148,7 +148,7 @@
 
               <div class="form-group">
                 <%= form.label "¿Cuántos CUPS de éste tipo requieres?" %>
-                <%= form.number_field :factor, class: "form-control input" %>
+                <%= form.number_field :factor, value: 1, class: "form-control input" %>
               </div>
 
               <div class="actions">

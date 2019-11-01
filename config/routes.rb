@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
-  resources :obcodes
+  resources :obcodes do
+    collection {post :import}
+  end
   resources :autos
-  resources :diagcodes
+  resources :diagcodes do
+    collection {post :import}
+  end
+  
   get 'reports/status'
   get 'reports/objections'
   get 'reports/sales'

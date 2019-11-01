@@ -1,6 +1,11 @@
 class ObcodesController < ApplicationController
   before_action :set_obcode, only: [:show, :edit, :update, :destroy]
 
+  def import
+    Obcode.import(params[:file])
+    redirect_to obcodes_path, notice: "Datos importados!"
+  end
+
   # GET /obcodes
   # GET /obcodes.json
   def index

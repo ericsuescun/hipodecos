@@ -1,6 +1,11 @@
 class DiagcodesController < ApplicationController
   before_action :set_diagcode, only: [:show, :edit, :update, :destroy]
 
+  def import
+    Diagcode.import(params[:file])
+    redirect_to diagcodes_path, notice: "Datos importados!"
+  end
+
   # GET /diagcodes
   # GET /diagcodes.json
   def index

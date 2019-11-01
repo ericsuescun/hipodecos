@@ -44,7 +44,7 @@
 							<td><%= number_to_currency(whole_sales_indexes[0] / whole_sales_indexes[3], precision: 0, delimiter: '.') %></td>
 							<td><%= number_to_currency(whole_sales_indexes[1] / whole_sales_indexes[3], precision: 0, delimiter: '.') %></td>
 							<td><%= number_to_currency(whole_sales_indexes[2] / whole_sales_indexes[3], precision: 0, delimiter: '.') %></td>
-							<td><%= number_with_precision(whole_sales_indexes[4] / whole_sales_indexes[3], :precision => 1) %></td>
+							<td><%= number_with_precision(100 * whole_sales_indexes[4] / whole_sales_indexes[3], :precision => 0) %>%</td>
 						<% else %>
 							<td>Sin dato</td>
 							<td>Sin dato</td>

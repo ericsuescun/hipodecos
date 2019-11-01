@@ -64,20 +64,14 @@ module ReportsHelper
 			
 			@informs.where(branch_id: branch).each do |inform|
 				inform.studies.each do |study|
-					sales += (Value.where(codeval_id: study.codeval_id, cost_id: branch.entity.cost_id).first.value * study.factor.to_d) * Factor.where(codeval_id: study.codeval_id, rate_id: branch.entity.rate_id).first.factor
-				end
-			end
-
-			
-			@informs.where(branch_id: branch).each do |inform|
-				inform.studies.each do |study|
+					studies_count += 1
 					costs += (Value.where(codeval_id: study.codeval_id, cost_id: branch.entity.cost_id).first.value * study.factor.to_d)
+					sales += (Value.where(codeval_id: study.codeval_id, cost_id: branch.entity.cost_id).first.value * study.factor.to_d) * Factor.where(codeval_id: study.codeval_id, rate_id: branch.entity.rate_id).first.factor
 				end
 			end
 
 			infos += @informs.where(branch_id: branch).count
 
-			@informs.where(branch_id: branch).count
 		end
 
 		return [ sales, costs, sales - costs, infos, studies_count ]

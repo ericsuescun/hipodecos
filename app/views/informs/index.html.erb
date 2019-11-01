@@ -26,7 +26,7 @@
                   <%= inform.tag_code %>
                 <% end %>
               </td>
-              <td><%= inform.created_at.strftime('%d/%m/%Y') %></td>
+              <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
               <td><%= User.find(inform.user_id).first_name %></td>
               <td>
                 <%= link_to inform.patient  do %>

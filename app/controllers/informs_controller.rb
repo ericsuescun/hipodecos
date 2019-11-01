@@ -8,7 +8,7 @@ class InformsController < ApplicationController
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
       final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
       date_range = initial_date..final_date
-      @informs = Inform.where(created_at: date_range)
+      @informs = Inform.where(receive_date: date_range)
     else
       if !params[:tag_code].blank?
         @informs = Inform.where(tag_code: params[:tag_code])

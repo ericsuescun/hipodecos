@@ -1,7 +1,7 @@
 class Inform < ApplicationRecord
   belongs_to :patient, optional: true
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(receive_date: :desc) }
 
   has_many :physicians, dependent: :destroy
   accepts_nested_attributes_for :physicians, allow_destroy: true

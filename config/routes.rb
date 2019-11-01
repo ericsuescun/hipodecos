@@ -52,7 +52,8 @@ Rails.application.routes.draw do
 
     resources :codevals do
       resources :factors
-      resources :values 
+      resources :values
+      collection {post :import}
     end
     
     resources :entities do

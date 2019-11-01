@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_040851) do
+ActiveRecord::Schema.define(version: 2019_10_31_231111) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,21 @@ ActiveRecord::Schema.define(version: 2019_10_27_040851) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "autos", force: :cascade do |t|
+    t.integer "dx_table_id"
+    t.integer "user_id"
+    t.integer "admin_id"
+    t.string "title"
+    t.text "body"
+    t.string "param1"
+    t.string "param2"
+    t.string "param3"
+    t.string "param4"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dx_table_id"], name: "index_autos_on_dx_table_id"
   end
 
   create_table "blocks", force: :cascade do |t|
@@ -88,6 +103,23 @@ ActiveRecord::Schema.define(version: 2019_10_27_040851) do
     t.datetime "updated_at", null: false
     t.integer "base"
     t.decimal "factor"
+  end
+
+  create_table "diagcodes", force: :cascade do |t|
+    t.integer "admin_id"
+    t.string "organ"
+    t.string "feature1"
+    t.string "feature2"
+    t.string "feature3"
+    t.string "feature4"
+    t.string "feature5"
+    t.text "description"
+    t.string "pss_code"
+    t.string "who_code"
+    t.decimal "score"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "diagnostics", force: :cascade do |t|
@@ -170,6 +202,16 @@ ActiveRecord::Schema.define(version: 2019_10_27_040851) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["inform_id"], name: "index_micros_on_inform_id"
+  end
+
+  create_table "obcodes", force: :cascade do |t|
+    t.integer "admin_id"
+    t.string "title"
+    t.string "process"
+    t.decimal "score"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "objections", force: :cascade do |t|

@@ -1,4 +1,5 @@
 class SamplesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_sample, only: [:show, :edit, :update, :destroy]
 
   # GET /samples

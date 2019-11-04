@@ -1,4 +1,5 @@
 class PatientsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   # GET /patients
@@ -28,7 +29,7 @@ class PatientsController < ApplicationController
   def new
     patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
 
-    if patients.length == 1
+    if patients.length > 0
       @patient = patients.first
       @inform = patients.first.informs.build.physicians.build #Creo la instancia para physician para la form
       redirect_to patient_path(patients.first)

@@ -1,4 +1,5 @@
 class InformsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_inform, only: [:show, :edit, :update, :destroy]
 
   # GET /informs

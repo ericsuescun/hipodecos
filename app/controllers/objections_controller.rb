@@ -1,4 +1,5 @@
 class ObjectionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_objection, only: [:show, :edit, :update, :destroy]
 
   def index

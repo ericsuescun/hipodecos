@@ -1,0 +1,99 @@
+es:
+  devise:
+    failure:
+      user:
+        already_authenticated: 'Ya has iniciado una sesión.'
+        unauthenticated: 'Tienes que iniciar sesión o registrarte para poder continuar.'
+        unconfirmed: 'Tienes que confirmar tu cuenta para poder continuar.'
+        locked: 'Tu cuenta está bloqueada.'
+        invalid: 'Contraseña o Correo inválidos.'
+        invalid_token: 'Código de autenticación inválido.'
+        timeout: 'Tu sesión expiró, por favor inicia sesión nuevamente para continuar.'
+        inactive: 'Tu cuenta aún no ha sido activada.'
+      admin:
+        already_authenticated: 'Ya has iniciado una sesión.'
+        unauthenticated: 'Tienes que iniciar sesión o registrarte para poder continuar.'
+        unconfirmed: 'Tienes que confirmar tu cuenta para poder continuar.'
+        locked: 'Tu cuenta está bloqueada.'
+        invalid: 'Contraseña o Correo inválidos.'
+        invalid_token: 'Código de autenticación inválido.'
+        timeout: 'Tu sesión expiró, por favor inicia sesión nuevamente para continuar.'
+        inactive: 'Tu cuenta aún no ha sido activada.'
+    sessions:
+      user:
+        link: 'Iniciar Sesión'
+        signed_in: 'Sesión iniciada.'
+        signed_out: 'Sesión finalizada.'
+      admin:
+        link: 'Iniciar Sesión'
+        signed_in: 'Sesión iniciada.'
+        signed_out: 'Sesión finalizada.'
+    passwords:
+      user:
+        link: '¿Olvidaste tu contraseña?'
+        send_instructions: 'Vas a recibir un correo con instrucciones sobre cómo resetear tu contraseña en unos pocos minutos.'
+        updated: 'Tu contraseña fue cambiada. Ya iniciaste sesión.'
+        send_paranoid_instructions: "Si tu Correo existe en nuestra base de datos, vas a recibir un correo con instrucciones sobre cómo resetear tu contraseña en tu bandeja de entrada."
+      admin:
+        link: '¿Olvidaste tu contraseña?'
+        send_instructions: 'Vas a recibir un correo con instrucciones sobre cómo resetear tu contraseña en unos pocos minutos.'
+        updated: 'Tu contraseña fue cambiada. Ya iniciaste sesión.'
+        send_paranoid_instructions: "Si tu Correo existe en nuestra base de datos, vas a recibir un correo con instrucciones sobre cómo resetear tu contraseña en tu bandeja de entrada."
+    confirmations:
+      user:
+        link: "¿No recibiste instrucciones de confirmación?"
+        send_instructions: 'Vas a recibir un correo con instrucciones sobre cómo confirmar tu cuenta en unos pocos minutos.'
+        send_paranoid_instructions: 'Si tu Correo existe en nuestra base de datos, vas a recibir un correo con instrucciones sobre cómo confirmar tu cuenta en unos pocos minutos.'
+        confirmed: 'Tu cuenta fue confirmada. Ya iniciaste sesión.'  
+      admin:
+        link: "¿No recibiste instrucciones de confirmación?"
+        send_instructions: 'Vas a recibir un correo con instrucciones sobre cómo confirmar tu cuenta en unos pocos minutos.'
+        send_paranoid_instructions: 'Si tu Correo existe en nuestra base de datos, vas a recibir un correo con instrucciones sobre cómo confirmar tu cuenta en unos pocos minutos.'
+        confirmed: 'Tu cuenta fue confirmada. Ya iniciaste sesión.'
+    registrations:
+      user:
+        link: 'Crear cuenta'
+        signed_up: 'Bienvenido. Tu cuenta fue creada.'
+        inactive_signed_up: 'Tu cuenta fue creada. Sin embargo, no podemos iniciar tu sesión porque tu cuenta está %{reason}.'
+        updated: 'Tu cuenta fue actualizada.'
+        destroyed: 'Fue grato tenerte con nosotros. Tu cuenta fue cancelada.'
+      admin:
+        link: 'Crear cuenta'
+        signed_up: 'Bienvenido. Tu cuenta fue creada.'
+        inactive_signed_up: 'Tu cuenta fue creada. Sin embargo, no podemos iniciar tu sesión porque tu cuenta está %{reason}.'
+        updated: 'Tu cuenta fue actualizada.'
+        destroyed: 'Fue grato tenerte con nosotros. Tu cuenta fue cancelada.'
+    unlocks:
+      user:
+        link: "¿No recibiste instrucciones para desbloquear?"
+        send_instructions: 'Vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.'
+        send_paranoid_instructions: 'Si tu cuenta existe, vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.'
+        unlocked: 'Tu cuenta fue desbloqueada. Ya iniciaste sesión.'
+      admin:
+        link: "¿No recibiste instrucciones para desbloquear?"
+        send_instructions: 'Vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.'
+        send_paranoid_instructions: 'Si tu cuenta existe, vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.'
+        unlocked: 'Tu cuenta fue desbloqueada. Ya iniciaste sesión.'
+    omniauth_callbacks:
+      user:
+        success: 'Has sido autorizado satisfactoriamente de la cuenta %{kind}.'
+        failure: 'No has sido autorizado en la cuenta %{kind} porque "%{reason}".'
+      admin:
+        success: 'Has sido autorizado satisfactoriamente de la cuenta %{kind}.'
+        failure: 'No has sido autorizado en la cuenta %{kind} porque "%{reason}".'
+    mailer:
+      confirmation_instructions: 
+        user:
+          subject: 'Instrucciones de confirmación'
+        admin:
+          subject: 'Instrucciones de confirmación'
+      reset_password_instructions:
+        user:
+          subject: 'Instrucciones de recuperación de contraseña'
+        admin:
+          subject: 'Instrucciones de recuperación de contraseña'
+      unlock_instructions:
+        user:
+          subject: 'Instrucciones para desbloquear'
+        admin:
+          subject: 'Instrucciones para desbloquear'

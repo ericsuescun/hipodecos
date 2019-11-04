@@ -1,8 +1,8 @@
 <div class="contanier">
   <div class="row">
     <div class="col-12 col-lg-8 mx-auto">
-      <h2 class="edit-user">Edición de informción personal de <%= resource_name.to_s.humanize %></h2>
-      <%= form_with(@user, local: true) do |f| %>
+      <h2 class="edit-user">Edición de informción personal de </h2>
+      <%= form_for(@user) do |f| %>
         <div class="alert alert-info">
           <div class="row mx-auto">
             <div class="col-6 col-lg-4 mx-auto">
@@ -107,7 +107,9 @@
               </div>
             </div>
           </div>
-
+          <div class="actions">
+            <%= f.submit "Guardar", class: "btn btn-primary" %>
+          </div>
         </div>
       <% end %> 
     </div>

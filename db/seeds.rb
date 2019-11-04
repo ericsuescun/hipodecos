@@ -16,3 +16,9 @@
                	)
 end
 
+20.times do |n|
+	Patient.create!(
+						id_number: 
+
+					)
+end

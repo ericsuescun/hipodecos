@@ -1,4 +1,5 @@
 class DiagcodesController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_diagcode, only: [:show, :edit, :update, :destroy]
 
   def import

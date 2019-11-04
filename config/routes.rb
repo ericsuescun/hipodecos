@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :obcodes do
-    collection {post :import}
-  end
-  resources :autos
-  resources :diagcodes do
-    collection {post :import}
-  end
+
   
   get 'reports/status'
   get 'reports/objections'
@@ -33,7 +27,7 @@ Rails.application.routes.draw do
   get 'objections/delete'
   get 'objections/show'
 
-    root to: "users#index"
+    root to: "informs#index"
 
     resources :roles
     resources :values
@@ -46,18 +40,29 @@ Rails.application.routes.draw do
     resources :physicians
     resources :pictures
 
-    resources :admins, only: [:index]
-    resources :users, only: [:index]
-    devise_for :admins, path: 'admins', controllers: { sessions: "admins/sessions", passwords: "admins/passwords", unlocks: "admins/unlocks", confirmations: "admins/confirmations" }
+    resources :users, only: [:index, :edit, :update]
     devise_for :users, path: 'users', controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", unlocks: "users/unlocks", confirmations: "users/confirmations" }
 
     devise_scope :user do get "users" => "users#index"
     end
 
+    resources :admins, only: [:index]
+    devise_for :admins, path: 'admins', controllers: { sessions: "admins/sessions", passwords: "admins/passwords", unlocks: "admins/unlocks", confirmations: "admins/confirmations" }
+    
+
 
     resources :codevals do
       resources :factors
       resources :values
+      collection {post :import}
+    end
+
+    resources :obcodes do
+      collection {post :import}
+    end
+
+    resources :autos
+    resources :diagcodes do
       collection {post :import}
     end
     

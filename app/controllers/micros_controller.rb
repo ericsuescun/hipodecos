@@ -1,4 +1,5 @@
 class MicrosController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_micro, only: [:show, :edit, :update, :destroy]
 
   # GET /micros

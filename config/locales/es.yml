@@ -1,9 +1,18 @@
 es:
   activerecord:
+    models:
     attributes:
       user:
         password: Contraseña
         current_password: La contraseña actual
+      role:
+        health_care_rate: "El porcentaje asignado a salud"
+        pension_rate: "El porcentaje asignado a pensión"
+        parafiscal_rate: "El porcentaje asignado a parafiscales"
+        name: "El nombre del perfil"
+        description: "La descripción"
+        rate: "El salario"
+        time: "Las horas por mes"
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'

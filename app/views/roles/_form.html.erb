@@ -2,6 +2,19 @@
   <div class="row">
     <div class="col-12 col-lg-8 mx-auto">
       <%= form_with(model: role, local: true) do |form| %>
+
+      <% if role.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(role.errors.count, "errores") %> impidieron guardar este perfil:</h2>
+
+          <ul>
+          <% role.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <div class="row">
         <div class="col-12 col-lg-6 mx-auto">
           <div class="form-group">

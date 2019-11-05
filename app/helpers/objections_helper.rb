@@ -50,4 +50,8 @@ module ObjectionsHelper
 		end
 	end
 
+	def objection_title(id)
+		Obcode.find(id).title
+	end
+
 end

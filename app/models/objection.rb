@@ -3,5 +3,5 @@ class Objection < ApplicationRecord
 
   default_scope -> { order(closed: :asc, created_at: :desc) }
 
-  validates :name, presence: true
+  validates :obcode_id, presence: true
 end

@@ -26,5 +26,9 @@ module ApplicationHelper
 			"Entre " + date_init.strftime('%b %d de %Y') + " y " + date_final.strftime('%b %d de %Y')
 		end
 	end
+
+	def objection_title(id)
+		Obcode.where(id: id).first.try(:title)
+	end
 	
 end

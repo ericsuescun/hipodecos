@@ -128,7 +128,7 @@
                   <% study.objections.each do |objection| %>
                     <tr class=<%= objection.closed == false ? "objection" : "" %> >
                       <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection.name %></td>
+                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
                       <!-- <td><%= objection.description %></td> -->
                     </tr>
                   <% end %>
@@ -187,7 +187,7 @@
                       <% sample.objections.each do |objection| %>
                         <tr class=<%= objection.closed == false ? "objection" : "" %> >
                           <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection.name %></td>
+                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
                           <!-- <td><%= objection.description %></td> -->
                         </tr>
                       <% end %>
@@ -243,7 +243,7 @@
                       <% block.objections.each do |objection| %>
                         <tr class=<%= objection.closed == false ? "objection" : "" %> >
                           <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection.name %></td>
+                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
                           <!-- <td><%= objection.description %></td> -->
                         </tr>
                       <% end %>
@@ -275,7 +275,7 @@
                       <% slide.objections.each do |objection| %>
                         <tr class=<%= objection.closed == false ? "objection" : "" %> >
                           <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection.name %></td>
+                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
                           <!-- <td><%= objection.description %></td> -->
                         </tr>
                       <% end %>
@@ -329,7 +329,7 @@
                   <% macro.objections.each do |objection| %>
                     <tr class=<%= objection.closed == false ? "objection" : "" %> >
                       <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection.name %></td>
+                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
                       <!-- <td><%= objection.description %></td> -->
                     </tr>
                   <% end %>
@@ -368,7 +368,7 @@
                   <% micro.objections.each do |objection| %>
                     <tr class=<%= objection.closed == false ? "objection" : "" %> >
                       <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection.name %></td>
+                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
                       <!-- <td><%= objection.description %></td> -->
                     </tr>
                   <% end %>
@@ -430,7 +430,7 @@
                   <% diagnostic.objections.each do |objection| %>
                     <tr class=<%= objection.closed == false ? "objection" : "" %> >
                       <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection.name %></td>
+                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
                       <!-- <td><%= objection.description %></td> -->
                     </tr>
                   <% end %>

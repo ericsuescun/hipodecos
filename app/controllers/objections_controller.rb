@@ -38,6 +38,6 @@ class ObjectionsController < ApplicationController
     end
 
     def objection_params
-      params.require(:objection).permit(:user_id, :name, :responsible_user_id, :close_user_id, :close_date, :description, :closed)
+      params.require(:objection).permit(:user_id, :obcode_id, :responsible_user_id, :close_user_id, :close_date, :description, :closed)
     end
 end

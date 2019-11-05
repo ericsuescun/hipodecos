@@ -219,7 +219,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_151214) do
     t.string "objectionable_type"
     t.integer "objectionable_id"
     t.integer "user_id"
-    t.string "name"
+    t.integer "obcode_id"
     t.integer "responsible_user_id"
     t.integer "close_user_id"
     t.date "close_date"

@@ -11,7 +11,7 @@
   <tbody>
     <% objectionable.objections.each do |objection| %>
       <tr class=<%= objection.closed == false ? "objection" : "" %> >
-        <td><%= objection.name %></td>
+        <td><%= Obcode.where(id: objection.obcode_id).first.try(:title) %></td>
         <td><%= objection.description %></td>
         <td><%= User.where(id: objection.responsible_user_id).first.try(:email) %></td>
         <td><%= User.where(id: objection.user_id).first.try(:email) %></td>

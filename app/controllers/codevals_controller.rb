@@ -34,28 +34,20 @@ class CodevalsController < ApplicationController
     @codeval = Codeval.new(codeval_params)
     @codeval.admin_id = current_admin.id
 
-    respond_to do |format|
-      if @codeval.save
-        format.html { redirect_to @codeval, notice: 'CUPS exitosamente creado.' }
-        format.json { render :show, status: :created, location: @codeval }
-      else
-        format.html { render :new }
-        format.json { render json: @codeval.errors, status: :unprocessable_entity }
-      end
+    if @codeval.save
+      redirect_to @codeval, notice: 'CUPS exitosamente creado.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /codevals/1
   # PATCH/PUT /codevals/1.json
   def update
-    respond_to do |format|
-      if @codeval.update(codeval_params)
-        format.html { redirect_to @codeval, notice: 'CUPS exitosamente actualizado.' }
-        format.json { render :show, status: :ok, location: @codeval }
-      else
-        format.html { render :edit }
-        format.json { render json: @codeval.errors, status: :unprocessable_entity }
-      end
+    if @codeval.update(codeval_params)
+      redirect_to @codeval, notice: 'CUPS exitosamente actualizado.'
+    else
+      render :edit
     end
   end
 
@@ -63,10 +55,7 @@ class CodevalsController < ApplicationController
   # DELETE /codevals/1.json
   def destroy
     @codeval.destroy
-    respond_to do |format|
-      format.html { redirect_to codevals_url, notice: 'CUPS exitosamente borrado.' }
-      format.json { head :no_content }
-    end
+    redirect_to codevals_url, notice: 'CUPS exitosamente borrado.'
   end
 
   private

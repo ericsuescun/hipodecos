@@ -8,4 +8,6 @@ class Micro < ApplicationRecord
   has_many :pictures, as: :imageable
 
   default_scope -> { order(created_at: :desc) }
+
+  validates :description, presence: true
 end

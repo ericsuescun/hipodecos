@@ -5,4 +5,6 @@ class Study < ApplicationRecord
   has_many :objections, as: :objectionable
 
   default_scope -> { order(created_at: :desc) }
+
+  validates :codeval_id, :factor, presence: true
 end

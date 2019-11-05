@@ -14,6 +14,8 @@ class Codeval < ApplicationRecord
 	# has_many :costs, through: :values, dependent: :destroy
 	has_many :costs, through: :values
 
+	validates :code, :name, :description, presence: true
+
 	def self.import(file)
 		CSV.foreach(file.path, :col_sep => (";"), headers: true, encoding: 'iso-8859-1:utf-8') do |row|
 			Codeval.create!(row.to_hash.merge(admin_id: 1))

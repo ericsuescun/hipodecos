@@ -57,7 +57,7 @@
 
           <div class="form-group">
             <%= form.label "Tipo de entidad" %>
-            <%= form.text_field :entype, class: "form-control form-control-lg input" %>
+            <%= form.select(:entype, options_for_select([['Privada', 'Privada'], ['Pública', 'Publica']], @entity.entype), { include_blank: true }, class: "form-control form-control-lg input") %>
           </div>
 
           <div class="form-group">

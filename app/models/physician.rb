@@ -3,4 +3,6 @@ class Physician < ApplicationRecord
 
   has_many :objections, as: :objectionable
 
+  validates :name, :lastname, presence: true
+
 end

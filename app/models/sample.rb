@@ -1,7 +1,8 @@
 class Sample < ApplicationRecord
   belongs_to :inform
 
-  has_many :objections, as: :objectionable, dependent: :destroy
+  # has_many :objections, as: :objectionable, dependent: :destroy
+  has_many :objections, as: :objectionable
 
   has_many :pictures, as: :imageable
 

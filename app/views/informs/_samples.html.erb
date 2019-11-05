@@ -1,61 +1,55 @@
-<h1>Muestras para <%= @inform.tag_code %></h1>
 <div class="row">
-  <div class="col-12 col-lg-8">
-    <div class="row">
-      <% @inform.samples.each do |sample| %>
-        <div class="col-12 col-lg-8">
-          <table class="table table-striped">
-            <tr>
-              <td><%= sample.sample_tag %></td>
-              <td><%= sample.name %></td>
-              <td><%= sample.description %></td>
-              <td>
-                <span>
-                  <%= link_to "Editar", edit_sample_path(sample), class: 'btn btn-primary' %>
-                </span>
-                <span>
-                  <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-                </span>
-                
-                
-              </td>
+  <div class="col-12 col-lg-8 mx-auto">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Descrp.</th>
+          <th>Por</th>
+          <th scope="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% inform.samples.each do |sample| %>
+          <tr>
+            <td><%= sample.sample_tag %></td>
+            <td><%= sample.name %></td>
+            <!-- <td><%= sample.description %></td> -->
+            <td><%= User.where(id: sample.user_id).first.try(:first_name) %></td>
+            <td><%= link_to "Revisar", sample_path(sample) %></td>
+            <td><%= link_to "Editar", edit_sample_path(sample) %></td>
+            <td><%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+          </tr>
+          <% sample.objections.each do |objection| %>
+            <tr class=<%= objection.closed == false ? "objection" : "" %> >
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+              <!-- <td><%= objection.description %></td> -->
             </tr>
-          </table>
-          <div class="card text-center mt-3">
-            <div class="card-header">
-              <strong><%= sample.sample_tag %></strong>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title"><%= sample.name %></h5>
-              <p class="card-text"><%= sample.description %></p>
-              <%= link_to "Editar", edit_sample_path(sample), class: 'btn btn-primary' %>
-              <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-            </div>
-            <div class="card-footer text-muted">
-              <p>Creada el <%= sample.created_at %> por <%= User.find(sample.user_id).email %></p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>      
-  </div>
-  <div class="col-12 col-lg-2 mx-auto">
-    <%= form_for [@inform, @inform.samples.build] do |form| %>
+          <% end %>
 
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12 col-lg-4">
+    <h4>Agregar muestras</h4>
+    <%= form_for [inform, inform.samples.build] do |form| %>
       <div class="form-group">
         <%= form.label "Nombre de muestra" %>
         <%= form.text_field :name, class: "form-control input" %>
       </div>
-
       <div class="form-group">
         <%= form.label "Descripción" %>
         <%= form.text_area :description, class: "form-control input" %>
       </div>
-
       <div class="actions">
         <%= form.submit "Agregar", class: "btn btn-primary" %>
       </div>
-
     <% end %>
   </div>
+</div>
+<div class="row">
+
 </div>

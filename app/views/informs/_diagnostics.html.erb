@@ -1,38 +1,39 @@
-<h1>Diagnóstico para <%= @inform.tag_code %></h1>
 <div class="row">
-  <div class="col-12 col-lg-8">
-    <div class="row">
-      <% @inform.diagnostics.each do |diagnostic| %>
-        <div class="col-12 col-lg-3">
-          <div class="card text-center mt-3">
-            <div class="card-header">
-              <strong>Diagnóstico</strong>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Descripción</h5>
-              <p class="card-text"><%= diagnostic.description %></p>
-              <%= link_to "Editar", edit_diagnostic_path(diagnostic), class: 'btn btn-primary' %>
-              <%= link_to 'Borrar', diagnostic, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-            </div>
-            <div class="card-footer text-muted">
-              <p>Creada el <%= diagnostic.created_at %> por <%= User.find(diagnostic.user_id).email %></p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>      
-  </div>
-  <div class="col-12 col-lg-3 mx-auto">
-    <%= form_for [@inform, @inform.diagnostics.build] do |form| %>
-      <div class="form-group">
-        <%= form.label "Descripción" %>
-        <%= form.text_area :description, class: "form-control form-control-lg input" %>
-      </div>
-      
-      <div class="actions">
-        <%= form.submit "Agregar", class: "btn btn-primary btn-block" %>
-      </div>
-
+  <div class="col-12 col-lg-12">
+    <% inform.diagnostics.each do |diagnostic| %>
+      <p><%= diagnostic.description %></p>
+      <div class="text-muted"><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %></p></div>
+      <%= link_to 'Revisar', diagnostic_path(diagnostic) %>
+      <%= link_to 'Editar', edit_diagnostic_path(diagnostic) %>
+      <%= link_to ' Borrar', diagnostic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
+      <table>
+        <tbody>
+          <% diagnostic.objections.each do |objection| %>
+            <tr class=<%= objection.closed == false ? "objection" : "" %> >
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+              <!-- <td><%= objection.description %></td> -->
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
   </div>
+</div>
+<div class="row">
+  <% if inform.diagnostics.length < 1 %>
+    <div class="col-12 col-lg-8 mx-auto">
+      <%= form_for [inform, inform.diagnostics.build] do |form| %>
+        <div class="form-group">
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control form-control-lg input" %>
+        </div>
+        
+        <div class="actions">
+          <%= form.submit "Agregar", class: "btn btn-primary" %>
+        </div>
+
+      <% end %>
+    </div>
+  <% end %>
 </div>

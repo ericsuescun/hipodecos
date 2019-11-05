@@ -1,38 +1,43 @@
-<h1>Micro para <%= @inform.tag_code %></h1>
 <div class="row">
-  <div class="col-12 col-lg-8">
-    <div class="row">
-      <% @inform.micros.each do |micro| %>
-        <div class="col-12 col-lg-3">
-          <div class="card text-center mt-3">
-            <div class="card-header">
-              <strong>Micro</strong>
+  <div class="col-12 col-lg-12">
+    <% inform.micros.each do |micro| %>
+      <p><%= micro.description %></p>
+      <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %></p></div>
+      <%= link_to 'Revisar', micro_path(micro) %>
+      <%= link_to 'Editar', edit_micro_path(micro) %>
+      <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
+      <table>
+        <tbody>
+          <% micro.objections.each do |objection| %>
+            <tr class=<%= objection.closed == false ? "objection" : "" %> >
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+              <!-- <td><%= objection.description %></td> -->
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-lg-8 mx-auto">
+    <% inform.micros.each do |micro| %>
+      <% micro.pictures.each do |pic| %>
+        <div class="card d-inline-block mx-auto" style="width: 18rem;">
+          <div class="card-header">
+              <%= pic.description %>
             </div>
-            <div class="card-body">
-              <h5 class="card-title">Descripción</h5>
-              <p class="card-text"><%= micro.description %></p>
-              <%= link_to "Editar", edit_micro_path(micro), class: 'btn btn-primary' %>
-              <%= link_to 'Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-            </div>
-            <div class="card-footer text-muted">
-              <p>Creada el <%= micro.created_at %> por <%= User.find(micro.user_id).email %></p>
-            </div>
+          <img class="card-img-top" src="<%= pic.name.url %>" alt="Card image cap" >
+          <div class="card-body">
+            <%= link_to 'Borrar', inform_picture_path(inform, pic), method: :delete, data: { confirm: 'Confirmar borrado?' }
+             %>
+             <div class="card-footer text-muted">
+               Cargada por: <%= User.find(pic.user_id).email %>
+             </div>
           </div>
         </div>
       <% end %>
-    </div>      
-  </div>
-  <div class="col-12 col-lg-3 mx-auto">
-    <%= form_for [@inform, @inform.micros.build] do |form| %>
-      <div class="form-group">
-        <%= form.label "Descripción" %>
-        <%= form.text_area :description, class: "form-control form-control-lg input" %>
-      </div>
-      
-      <div class="actions">
-        <%= form.submit "Agregar", class: "btn btn-primary btn-block" %>
-      </div>
-
     <% end %>
   </div>
 </div>

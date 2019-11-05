@@ -1,415 +1,96 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
-      <div class="alert alert-success">
+      
         <div class="row">
-          <div class="col-12 col-lg-12 mt-3">
+          <div class="col-12 col-lg-12 my-3">
             <%= render partial: "inform" %>
           </div>
-          <br>
         </div>
-        <div class="row">
-          <div class="col-12 col-lg-8 mx-auto mt-3">
-            <h1>Órdenes y documentos escaneados</h1>
-            <%= render partial: "escaneos", locals: { inform: @inform } %>
-            <br>
-            <h4>Agregar nuevos escaner de órdenes o documentos</h4>
-            <%= render partial: "pictures/form", locals: { imageable: @inform } %>
+        <div class="alert alert-success">
+          <div class="row">
+            <div class="col-12 col-lg-8 mb-3">
+              <h1>Órdenes y documentos escaneados</h1>
+              <%= render partial: "escaneos", locals: { inform: @inform } %>
+            </div>
+            <div class="col-12 col-lg-4">
+              <h4>Agregar nuevos escaner de órdenes o documentos</h4>
+              <%= render partial: "pictures/form", locals: { imageable: @inform } %>
+            </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-lg-8 mx-auto">
+          <div class="col-12 col-lg-12 mx-auto mb-3">
+            <div class="alert alert-success">
+              <h1>Doctor</h1>
+              <%= render partial: "physician", locals: { inform: @inform } %>
+            </div>
             
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-lg-10 mx-auto">
-            <h1>Doctor</h1>
-            <%= render partial: "physician", locals: { inform: @inform } %>
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>CUPS</h1>
+              <%= render partial: "studies", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Muestras</h1>
+              <%= render partial: "samples", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Bloques</h1>
+            <%= render partial: "blocks", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Placas</h1>
+              <%= render partial: "slides", locals: { inform: @inform } %>
+            </div>
+            
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-lg-8 mb-3 mx-auto">
-            <h1>CUPS</h1>
-            <br>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Nombre</th>
-                  <th>Múltiplo</th>
-                  <th>Por</th>
-                  <th scope="3"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @inform.studies.each do |study| %>
-                  <tr>
-                    <td><%= Codeval.find(study.codeval_id).code %></td>
-                    <td><%= Codeval.find(study.codeval_id).name %></td>
-                    <td>x <%= study.factor %></td>
-                    <td><%= user(study).first_name %></td>
-                    <td><%= link_to "Revisar", study_path(study) %></td>
-                    <td><%= link_to 'Editar', edit_study_path(study) %></td>
-                    <td><%= link_to 'Borrar', study, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-                  </tr>
-                  <% study.objections.each do |objection| %>
-                    <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                      <!-- <td><%= objection.description %></td> -->
-                    </tr>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
+            <div class="alert alert-success">
+              <h1>Descripción Macroscópica</h1>
+            <%= render partial: "macros", locals: { inform: @inform } %>
+            </div>
+            
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-lg-3 mx-auto">
-            <h4>Agregar CUPS</h4>
-            <%= form_for [@inform, @inform.studies.build] do |form| %>
-
-              <div class="form-group">
-                <%= form.label "Código CUPS" %>
-                <%= form.select :codeval_id, Codeval.pluck(:code, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "¿Cuántos CUPS de éste tipo requieres?" %>
-                <%= form.number_field :factor, value: 1, class: "form-control input" %>
-              </div>
-
-              <div class="actions">
-                <%= form.submit "Agregar", class: "btn btn-primary" %>
-              </div>
-
-            <% end %>
+          <div class="col-12 col-lg-8 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Descripción Microscópica</h1>
+            <%= render partial: "micros", locals: { inform: @inform } %>
+            </div>
+            
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-lg-12 mt-3 mx-auto">
-            <div class="row">
-              <div class="col-12 col-lg-8 mx-auto">
-                <h1>Muestras</h1>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Código</th>
-                      <th>Nombre</th>
-                      <th>Descrp.</th>
-                      <th>Por</th>
-                      <th scope="2"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% @inform.samples.each do |sample| %>
-                      <tr>
-                        <td><%= sample.sample_tag %></td>
-                        <td><%= sample.name %></td>
-                        <!-- <td><%= sample.description %></td> -->
-                        <td><%= user(sample).first_name %></td>
-                        <td><%= link_to "Revisar", sample_path(sample) %></td>
-                        <td><%= link_to "Editar", edit_sample_path(sample) %></td>
-                        <td><%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-                      </tr>
-                      <% sample.objections.each do |objection| %>
-                        <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                          <!-- <td><%= objection.description %></td> -->
-                        </tr>
-                      <% end %>
-
-                    <% end %>
-                  </tbody>
-                </table>
-              </div>
+          <div class="col-12 col-lg-8 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Diagnóstico</h1>
+              <%= render partial: "diagnostics", locals: { inform: @inform } %>
             </div>
-            <div class="row">
-              <div class="col-12 col-lg-8 mx-auto">
-                <%= form_for [@inform, @inform.samples.build] do |form| %>
-                  <div class="form-group">
-                    <%= form.label "Nombre de muestra" %>
-                    <%= form.text_field :name, class: "form-control input" %>
-                  </div>
-                  <div class="form-group">
-                    <%= form.label "Descripción" %>
-                    <%= form.text_area :description, class: "form-control input" %>
-                  </div>
-                  <div class="actions">
-                    <%= form.submit "Agregar", class: "btn btn-primary" %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
+            
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-12 mt-3 mx-auto">
-            <div class="row">
-              <div class="col-12 col-lg-8 mx-auto">
-                <h1>Bloques</h1>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Código</th>
-                      <th>Descr.</th>
-                      <th>Guard.</th>
-                      <th>Por</th>
-                      <th scope="3"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% @inform.blocks.each do |block| %>
-                      <tr>
-                        <td><%= block.block_tag %></td>
-                        <td><%= block.description %></td>
-                        <td><%= block.stored == true ? 'Si' : 'No' %></td>
-                        <td><%= user(block).first_name %></td>
-                        <td><%= link_to 'Revisar', block_path(block) %></td>
-                        <td><%= link_to 'Editar', edit_block_path(block) %></td>
-                        <td><%= link_to 'Borrar', block, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-                      </tr>
-                      <% block.objections.each do |objection| %>
-                        <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                          <!-- <td><%= objection.description %></td> -->
-                        </tr>
-                      <% end %>
-                    <% end %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 col-lg-4 offset-lg-2">
-                <h4>Nuevo bloque</h4>
-                <%= form_for [@inform, @inform.blocks.build] do |form| %>
-                  <div class="form-group">
-                    <%= form.label "Descripción" %>
-                    <%= form.text_area :description, class: "form-control form-control-lg input" %>
-                  </div>
-
-                  <div class="form-group">
-                    <%= form.check_box :stored %>
-                    <%= form.label "Bloque guardado" %>
-                  </div>
-                  <div class="actions">
-                    <%= form.submit "Agregar", class: "btn btn-primary" %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-12 mt-3 mx-auto">
-            <div class="row">
-              <div class="col-12 col-lg-8 mx-auto">
-                <h1>Placas</h1>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Código</th>
-                      <th>Descr.</th>
-                      <th>Guard.</th>
-                      <th>Por</th>
-                      <th scope="3"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% @inform.slides.each do |slide| %>
-                      <tr>
-                        <td><%= slide.slide_tag %></td>
-                        <td><%= slide.description %></td>
-                        <td><%= slide.stored == true ? "Si" : "No" %></td>
-                        <td><%= user(slide).first_name %></td>
-                        <td><%= link_to 'Revisar', slide_path(slide) %></td>
-                        <td><%= link_to 'Editar', edit_slide_path(slide) %></td>
-                        <td><%= link_to 'Borrar', slide, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-                      </tr>
-                      <% slide.objections.each do |objection| %>
-                        <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                          <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                          <!-- <td><%= objection.description %></td> -->
-                        </tr>
-                      <% end %>
-                    <% end %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 col-lg-4 offset-lg-2">
-                <h4>Nueva placa</h4>
-                <%= form_for [@inform, @inform.slides.build] do |form| %>
-                  <div class="form-group">
-                    <%= form.label "Descripción" %>
-                    <%= form.text_area :description, class: "form-control form-control-lg input" %>
-                  </div>
-
-                  <div class="form-group">
-                    <%= form.check_box :stored %>
-                    <%= form.label "Placa guardada" %>
-                  </div>
-                  <div class="actions">
-                    <%= form.submit "Agregar", class: "btn btn-primary" %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-12 mt-3 mx-auto">
-            <div class="row">
-
-              
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-8 mt-3 mx-auto">
-            <p>--------------------------------------------------</p>
-            <h3>Descripción Macroscópica</h3>
-            <% @inform.macros.each do |macro| %>
-              <p><%= macro.description %></p>
-              <div class="text-muted"><p>Por: <%= user(macro).first_name %></p></div>
-              <%= link_to 'Revisar', macro_path(macro) %>
-              <%= link_to 'Editar', edit_macro_path(macro) %>
-              <%= link_to ' Borrar', macro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
-              <table>
-                <tbody>
-                  <% macro.objections.each do |objection| %>
-                    <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                      <!-- <td><%= objection.description %></td> -->
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            <% end %>
-          </div>
-          <% if @inform.macros.length < 1 %>
-            <div class="col-12 col-lg-8 mx-auto">
-              <%= form_for [@inform, @inform.macros.build] do |form| %>
-                <div class="form-group">
-                  <%= form.label "Descripción" %>
-                  <%= form.text_area :description, class: "form-control form-control-lg input" %>
-                </div>
-                
-                <div class="actions">
-                  <%= form.submit "Agregar", class: "btn btn-primary" %>
-                </div>
-
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-8 mt-3 mx-auto">
-            <p>--------------------------------------------------</p>
-            <h3>Descripción Microscópica</h3>
-            <% @inform.micros.each do |micro| %>
-              <p><%= micro.description %></p>
-              <div class="text-muted"><p>Por: <%= user(micro).first_name %></p></div>
-              <%= link_to 'Revisar', micro_path(micro) %>
-              <%= link_to 'Editar', edit_micro_path(micro) %>
-              <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
-              <table>
-                <tbody>
-                  <% micro.objections.each do |objection| %>
-                    <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                      <!-- <td><%= objection.description %></td> -->
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            <% end %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-8 mx-auto">
-            <% @inform.micros.each do |micro| %>
-              <% micro.pictures.each do |pic| %>
-                <div class="card d-inline-block mx-auto" style="width: 18rem;">
-                  <div class="card-header">
-                      <%= pic.description %>
-                    </div>
-                  <img class="card-img-top" src="<%= pic.name.url %>" alt="Card image cap" >
-                  <div class="card-body">
-                    <%= link_to 'Borrar', inform_picture_path(@inform, pic), method: :delete, data: { confirm: 'Confirmar borrado?' }
-                     %>
-                     <div class="card-footer text-muted">
-                       Cargada por: <%= User.find(pic.user_id).email %>
-                     </div>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-8 mt-3 mx-auto">
-            <% if @inform.micros.length < 1 %>
-              <%= form_for [@inform, @inform.micros.build] do |form| %>
-                <div class="form-group">
-                  <%= form.label "Descripción" %>
-                  <%= form.text_area :description, class: "form-control form-control-lg input" %>
-                </div>
-                
-                <div class="actions">
-                  <%= form.submit "Agregar", class: "btn btn-primary" %>
-                </div>
-
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-8 mt-3 mx-auto">
-            <p>--------------------------------------------------</p>
-            <h3>Diagnóstico</h3>
-            <% @inform.diagnostics.each do |diagnostic| %>
-              <p><%= diagnostic.description %></p>
-              <div class="text-muted"><p>Por: <%= user(diagnostic).first_name %></p></div>
-              <%= link_to 'Revisar', diagnostic_path(diagnostic) %>
-              <%= link_to 'Editar', edit_diagnostic_path(diagnostic) %>
-              <%= link_to ' Borrar', diagnostic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
-              <table>
-                <tbody>
-                  <% diagnostic.objections.each do |objection| %>
-                    <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                      <!-- <td><%= objection.description %></td> -->
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            <% end %>
-          </div>
-          <% if @inform.diagnostics.length < 1 %>
-            <div class="col-12 col-lg-8 mx-auto">
-              <%= form_for [@inform, @inform.diagnostics.build] do |form| %>
-                <div class="form-group">
-                  <%= form.label "Descripción" %>
-                  <%= form.text_area :description, class: "form-control form-control-lg input" %>
-                </div>
-                
-                <div class="actions">
-                  <%= form.submit "Agregar", class: "btn btn-primary" %>
-                </div>
-
-              <% end %>
-            </div>
-          <% end %>
         </div>       
-      </div>
     </div>
   </div>
 </div>

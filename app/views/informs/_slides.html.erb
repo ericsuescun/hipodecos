@@ -1,27 +1,55 @@
-<h1>Placas para <%= @inform.tag_code %></h1>
 <div class="row">
-  <div class="col-12 col-lg-8">
-    <div class="row">
-      <% @inform.slides.each do |slide| %>
-        <div class="col-12 col-lg-3">
-          <div class="card text-center mt-3">
-            <div class="card-header">
-              <strong><%= slide.slide_tag %></strong>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title"><%= slide.slide_tag %></h5>
-              <%= link_to "Editar", edit_slide_path(slide), class: 'btn btn-primary' %>
-              <%= link_to 'Borrar', slide, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-            </div>
-            <div class="card-footer text-muted">
-              <p>Creada el <%= slide.created_at %> por <%= User.find(slide.user_id).email %></p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>      
+  <div class="col-12 col-lg-8 mx-auto">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descr.</th>
+          <th>Guard.</th>
+          <th>Por</th>
+          <th scope="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% inform.slides.each do |slide| %>
+          <tr>
+            <td><%= slide.slide_tag %></td>
+            <td><%= slide.description %></td>
+            <td><%= slide.stored == true ? "Si" : "No" %></td>
+            <td><%= User.where(id: slide.user_id).first.try(:first_name) %></td>
+            <td><%= link_to 'Revisar', slide_path(slide) %></td>
+            <td><%= link_to 'Editar', edit_slide_path(slide) %></td>
+            <td><%= link_to 'Borrar', slide, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+          </tr>
+          <% slide.objections.each do |objection| %>
+            <tr class=<%= objection.closed == false ? "objection" : "" %> >
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+              <!-- <td><%= objection.description %></td> -->
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-  <div class="col-12 col-lg-3 mx-auto">
+  <div class="col-12 col-lg-4">
+    <h4>Nueva placa</h4>
+    <%= form_for [inform, inform.slides.build] do |form| %>
+      <div class="form-group">
+        <%= form.label "Descripción" %>
+        <%= form.text_area :description, class: "form-control form-control-lg input" %>
+      </div>
 
+      <div class="form-group">
+        <%= form.check_box :stored %>
+        <%= form.label "Placa guardada" %>
+      </div>
+      <div class="actions">
+        <%= form.submit "Agregar", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
+</div>
+<div class="row">
+
 </div>

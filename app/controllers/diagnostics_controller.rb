@@ -66,7 +66,7 @@ class DiagnosticsController < ApplicationController
   # DELETE /diagnostics/1.json
   def destroy
     @diagnostic.destroy
-    redirect_to diagnostics_url, notice: 'Diagnostic was successfully destroyed.'
+    redirect_to inform_path(@inf), notice: 'Diagnostic was successfully destroyed.'
   end
 
   private

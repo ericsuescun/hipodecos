@@ -2,6 +2,19 @@
   <div class="row">
     <div class="col-12 col-lg-8 mx-auto">
       <%= form_with(model: cost, local: true) do |form| %>
+
+      <% if cost.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(cost.errors.count, "errores") %> impidieron guardar esta tabla de costos:</h2>
+
+          <ul>
+          <% cost.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
         <div class="form-group">
           <%= form.label "Nombre" %>
           <%= form.text_field :name, class: "form-control form-control-lg input" %>

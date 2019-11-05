@@ -5,6 +5,15 @@ es:
       user:
         password: Contraseña
         current_password: La contraseña actual
+        password_confirmation: Confirmación de contraseña
+        last_name: Apellidos
+        first_name: Nombres
+        role_id: Cargo
+        birth_date: Cumpleaños
+        join_date: Fecha de ingreso
+        address: Dirección
+        tel: Teléfono
+        cel: Celular
       role:
         health_care_rate: "El porcentaje asignado a salud"
         pension_rate: "El porcentaje asignado a pensión"
@@ -13,6 +22,28 @@ es:
         description: "La descripción"
         rate: "El salario"
         time: "Las horas por mes"
+      promoter:
+        name: Nombre
+        initials: Siglas
+        code: Código
+      entity:
+        name: Nombre
+        initials: Siglas
+        code: Código
+        cost_id: "Tabla de costo"
+        rate_id: "Tabla de tarifas"
+      codeval:
+        name: Nombre
+        code: Código
+        description: Descripción
+      cost:
+        name: Nombre
+        description: Descripción
+        factor: Factor
+      rate:
+        name: Nombre
+        description: Descripción
+        factor: Factor
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'

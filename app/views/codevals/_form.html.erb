@@ -2,6 +2,19 @@
   <div class="row">
     <div class="col-12 col-lg-4 mx-auto">
       <%= form_with(model: codeval, local: true) do |form| %>
+
+      <% if codeval.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(codeval.errors.count, "errores") %> impidieron guardar este CUPS:</h2>
+
+          <ul>
+          <% codeval.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
         <div class="form-group">
           <%= form.label "Nombre" %>
           <%= form.text_field :name, class: "form-control form-control-lg input" %>

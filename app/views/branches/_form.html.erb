@@ -3,6 +3,18 @@
     <div class="col-12 col-lg-12 mx-auto">
       <%= form_with(model: branch, local: true) do |form| %>
 
+      <% if branch.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(branch.errors.count, "errores") %> impidieron guardar esta sede IPS:</h2>
+
+          <ul>
+          <% branch.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
         <div class="row">
           <div class="col-12 col-lg-8 mx-auto">
             <div class="form-group">

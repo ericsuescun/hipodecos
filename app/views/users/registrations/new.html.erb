@@ -5,6 +5,7 @@
         <h2 class="edit-user">Registro de informción personal de <%= resource_name.to_s.humanize %></h2>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
+
           <div class="alert alert-info">
 
             <div class="row mx-auto">

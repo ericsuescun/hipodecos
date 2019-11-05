@@ -1,0 +1,14 @@
+<% inform.pictures.each do |picture| %>
+  <div class="card d-inline-block mx-auto mb-3" style="width: 57rem;">
+    <div class="card-header">
+        <%= picture.description %>
+      </div>
+    <img class="card-img-top" src="<%= picture.name.url %>" alt="Card image cap" >
+    <div class="card-body">
+      <%= link_to 'Borrar', inform_picture_path(inform, picture), method: :delete, data: { confirm: '¿Confirmas la operación?' }
+       %>
+       <div class="card-footer text-muted">
+       </div>
+    </div>
+  </div>
+<% end %>

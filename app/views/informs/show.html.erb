@@ -3,101 +3,29 @@
     <div class="col-12 col-lg-12 mx-auto">
       <div class="alert alert-success">
         <div class="row">
-          <div class="col-12 col-lg-4 mt-3">
-            <h1>Informe <%= @inform.tag_code %></h1>
-            <br>
-            <p>Paciente: <strong><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %> </strong> F.Recibo: <strong><%= @inform.receive_date %></strong></p>
-            <p><%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong> Edad: <strong><%= @inform.patient.age_number %> <%= @inform.patient.age_type %></strong> Tel: <strong><%= @inform.patient.tel %></strong> F.Infor: <strong><%= @inform.delivery_date %></strong></p>
-            <p>Clínica: <strong><%= Branch.find(@inform.branch_id).initials %></strong> Entidad: <strong><%= Promoter.find(@inform.promoter_id).initials %></strong> Tarifa: </p>
-            <% @inform.physicians.each do |physician| %>
-              <p>Doctor: <strong><%= physician.name %> <%= physician.lastname %></strong> <%= link_to 'Revisar', physician_path(physician) %> <%= link_to 'Editar', edit_physician_path(physician) %> <%= link_to 'Borrar', physician, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td></p>
-            <% end %>
-            <p>Dirección: <strong><%= @inform.patient.address %></strong></p>
-            <%= link_to 'Editar', edit_inform_path(@inform) %> |
-            <%= link_to 'Volver a informes', informs_path %>
-            <br>
-
-            <br>
+          <div class="col-12 col-lg-12 mt-3">
+            <%= render partial: "inform" %>
           </div>
-          <div class="col-12 col-lg-8 mt-3">
-            <% @inform.pictures.each do |picture| %>
-              <div class="card d-inline-block mx-auto" style="width: 57rem;">
-                <div class="card-header">
-                    <%= picture.description %>
-                  </div>
-                <img class="card-img-top" src="<%= picture.name.url %>" alt="Card image cap" >
-                <div class="card-body">
-                  <%= link_to 'Borrar', inform_picture_path(@inform, picture), method: :delete, data: { confirm: 'Confirmar borrado?' }
-                   %>
-                   <div class="card-footer text-muted">
-                   </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
+          <br>
         </div>
         <div class="row">
-          <div class="col-12 col-lg-8 mx-auto">
-            <h1>Escanear órdenes</h1>
+          <div class="col-12 col-lg-8 mx-auto mt-3">
+            <h1>Órdenes y documentos escaneados</h1>
+            <%= render partial: "escaneos", locals: { inform: @inform } %>
+            <br>
+            <h4>Agregar nuevos escaner de órdenes o documentos</h4>
             <%= render partial: "pictures/form", locals: { imageable: @inform } %>
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-lg-8 mx-auto">
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-10 mx-auto">
             <h1>Doctor</h1>
-            <%= form_for [@inform, @inform.physicians.build] do |form| %>
-              <div class="row">
-                <div class="col-12 col-lg-6">
-                  <div class="form-group">
-                    <%= form.label "Nombres" %>
-                    <%= form.text_field :name, class: "form-control input" %>
-                  </div>
-                </div>
-                <div class="col-12 col-lg-6">
-                  <div class="form-group">
-                    <%= form.label "Apellidos" %>
-                    <%= form.text_field :lastname, class: "form-control input" %>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 col-lg-3">
-                  <div class="form-group">
-                    <%= form.label "Teléfono" %>
-                    <%= form.text_field :tel, class: "form-control input" %>
-                  </div>
-                </div>
-                <div class="col-12 col-lg-3">
-                  <div class="form-group">
-                    <%= form.label "Celular" %>
-                    <%= form.text_field :cel, class: "form-control input" %>
-                  </div>
-                </div>
-                <div class="col-12 col-lg-6">
-                  <div class="form-group">
-                    <%= form.label "Email" %>
-                    <%= form.text_field :email, class: "form-control input" %>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12 col-lg-6">
-                  <div class="form-group">
-                    <%= form.label "Especialidad" %>
-                    <%= form.text_field :study1, class: "form-control input" %>
-                  </div>
-                </div>
-                <div class="col-12 col-lg-6">
-                  <div class="form-group">
-                    <%= form.label "Otra especialidad/estudio" %>
-                    <%= form.text_field :study2, class: "form-control input" %>
-                  </div>
-                </div>
-              </div>
-              <div class="actions"> <!-- Este botón lo pongo acá por estética -->
-                <%= form.submit "Agregar", class: "btn btn-primary" %>
-              </div>
-            <% end %>
+            <%= render partial: "physician", locals: { inform: @inform } %>
           </div>
         </div>
         <div class="row">
@@ -139,6 +67,7 @@
         </div>
         <div class="row">
           <div class="col-12 col-lg-3 mx-auto">
+            <h4>Agregar CUPS</h4>
             <%= form_for [@inform, @inform.studies.build] do |form| %>
 
               <div class="form-group">

@@ -1,3 +1,4 @@
+<%= link_to 'No guardar y volver al informe', inform_path(@inf) %>
 <div class="container">
   <div class="row">
     <div class="col-12 col-lg-4 mx-auto">
@@ -6,6 +7,11 @@
         <div class="form-group">
           <%= form.label "Etiqueta" %>
           <%= form.text_field :slide_tag, class: "form-control input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control input" %>
         </div>
 
         <div class="form-group">

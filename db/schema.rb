@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_151214) do
+ActiveRecord::Schema.define(version: 2019_11_05_191523) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_151214) do
     t.boolean "stored"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
     t.index ["inform_id"], name: "index_blocks_on_inform_id"
   end
 
@@ -330,6 +331,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_151214) do
     t.boolean "stored"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
     t.index ["inform_id"], name: "index_slides_on_inform_id"
   end
 

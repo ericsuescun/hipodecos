@@ -15,6 +15,11 @@
           </div>
 
           <div class="form-group">
+            <%= form.label "Descripción" %>
+            <%= form.text_area :description, class: "form-control input" %>
+          </div>
+
+          <div class="form-group">
             <%= form.label "Guardado" %>
             <%= form.check_box :stored, class: "form-control input" %>
           </div>

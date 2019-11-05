@@ -219,12 +219,13 @@
         <div class="row">
           <div class="col-12 col-lg-12 mt-3 mx-auto">
             <div class="row">
-              <div class="col-12 col-lg-5 offset-lg-1">
+              <div class="col-12 col-lg-8 mx-auto">
                 <h1>Bloques</h1>
                 <table class="table table-striped">
                   <thead>
                     <tr>
                       <th>Código</th>
+                      <th>Descr.</th>
                       <th>Guard.</th>
                       <th>Por</th>
                       <th scope="3"></th>
@@ -234,6 +235,7 @@
                     <% @inform.blocks.each do |block| %>
                       <tr>
                         <td><%= block.block_tag %></td>
+                        <td><%= block.description %></td>
                         <td><%= block.stored == true ? 'Si' : 'No' %></td>
                         <td><%= user(block).first_name %></td>
                         <td><%= link_to 'Revisar', block_path(block) %></td>
@@ -251,12 +253,30 @@
                   </tbody>
                 </table>
               </div>
-              <div class="col-12 col-lg-5">
+            </div>
+            <div class="row">
+              <div class="col-12 col-lg-4 offset-lg-2">
+                <%= form_for [@inform, @inform.blocks.build] do |form| %>
+                  <div class="form-group">
+                    <%= form.check_box :stored %>
+                    <%= form.label "Bloque guardado" %>
+                  </div>
+                  <div class="actions">
+                    <%= form.submit "Agregar", class: "btn btn-primary" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-12 mt-3 mx-auto">
+            <div class="row">
+              <div class="col-12 col-lg-8 mx-auto">
                 <h1>Placas</h1>
                 <table class="table table-striped">
                   <thead>
                     <tr>
                       <th>Código</th>
+                      <th>Descr.</th>
                       <th>Guard.</th>
                       <th>Por</th>
                       <th scope="3"></th>
@@ -266,6 +286,7 @@
                     <% @inform.slides.each do |slide| %>
                       <tr>
                         <td><%= slide.slide_tag %></td>
+                        <td><%= slide.description %></td>
                         <td><%= slide.stored == true ? "Si" : "No" %></td>
                         <td><%= user(slide).first_name %></td>
                         <td><%= link_to 'Revisar', slide_path(slide) %></td>
@@ -284,23 +305,8 @@
                 </table>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-12 mt-3 mx-auto">
             <div class="row">
               <div class="col-12 col-lg-4 offset-lg-2">
-                <%= form_for [@inform, @inform.blocks.build] do |form| %>
-                  <div class="form-group">
-                    <%= form.check_box :stored %>
-                    <%= form.label "Bloque guardado" %>
-                  </div>
-                  <div class="actions">
-                    <%= form.submit "Agregar", class: "btn btn-primary" %>
-                  </div>
-                <% end %>
-              </div>
-              <div class="col-12 col-lg-4">
                 <%= form_for [@inform, @inform.slides.build] do |form| %>
                   <div class="form-group">
                     <%= form.check_box :stored %>
@@ -311,6 +317,14 @@
                   </div>
                 <% end %>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mt-3 mx-auto">
+            <div class="row">
+
+              
             </div>
           </div>
         </div>

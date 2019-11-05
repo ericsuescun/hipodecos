@@ -47,6 +47,11 @@ class SlidesController < ApplicationController
     else
       log += "\n-ETIQUETA-\nSIN CAMBIOS."
     end
+    if @slide.description != slide_params[:description]
+      log += "\n-DESCRIPCION-\nANTES:" + @slide.description + "\n- DESPUÉS: -\n" + slide_params[:description]
+    else
+      log += "\n-DESCRIPCION-\nSIN CAMBIOS."
+    end
     if @slide.stored != slide_params[:stored]
       log += "\n-GUARDADO-\nANTES:" + (@slide.stored == true ? 'Si' : 'No') + "\n- DESPUÉS: -\n" + (slide_params[:stored] == true ? 'Si' : 'No')
     else
@@ -87,6 +92,6 @@ class SlidesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def slide_params
-      params.require(:slide).permit(:inform_id, :user_id, :slide_tag, :stored)
+      params.require(:slide).permit(:inform_id, :user_id, :slide_tag, :stored, :description)
     end
 end

@@ -47,6 +47,11 @@ class BlocksController < ApplicationController
     else
       log += "\n-ETIQUETA-\nSIN CAMBIOS."
     end
+    if @block.description != block_params[:description]
+      log += "\n-DESCRIPCION-\nANTES:" + @block.description + "\n- DESPUÉS: -\n" + block_params[:description]
+    else
+      log += "\n-DESCRIPCION-\nSIN CAMBIOS."
+    end
     if @block.stored != block_params[:stored]
       log += "\n-GUARDADO-\nANTES:" + (@block.stored == true ? 'Si' : 'No') + "\n- DESPUÉS: -\n" + (block_params[:stored] == true ? 'Si' : 'No')
     else
@@ -87,6 +92,6 @@ class BlocksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def block_params
-      params.require(:block).permit(:inform_id, :user_id, :block_tag, :stored)
+      params.require(:block).permit(:inform_id, :user_id, :block_tag, :stored, :description)
     end
 end

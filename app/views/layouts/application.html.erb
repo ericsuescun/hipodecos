@@ -7,22 +7,33 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Lato|Roboto&display=swap" rel="stylesheet">
   </head>
 
   <body>
-    <%= render partial: 'layouts/search_navbar' %>
-    <%= render partial: 'layouts/fast_navbar' %>
-    <% if flash[:notice] %>
-      <div class="alert alert-warning"><%= flash[:notice] %></div>
-    <% end %>
+    <!--<%= render partial: 'layouts/header' %>-->
+    <% if admin_signed_in? || user_signed_in? %>
+      <%= render partial: 'layouts/search_navbar' %>
+      <%= render partial: 'layouts/fast_navbar' %>
+      <% if flash[:notice] %>
+        <div class="alert alert-warning"><%= flash[:notice] %></div>
+      <% end %>
 
-    <% if flash[:alert] %>
-      <div class="alert alert-danger"><%= flash[:alert] %></div>
-    <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger"><%= flash[:alert] %></div>
+      <% end %>
 
-    <% if flash[:message] %>
-      <div class="alert alert-info"><%= flash[:message] %></div>
+      <% if flash[:message] %>
+        <div class="alert alert-info"><%= flash[:message] %></div>
+      <% end %>
     <% end %>
+    
     <%= yield %>
+    <% if admin_signed_in? || user_signed_in? %>
+      <%= render partial: 'layouts/footer2' %>
+    <% else %>
+      <%= render partial: 'layouts/footer' %>
+    <% end %>
   </body>
 </html>

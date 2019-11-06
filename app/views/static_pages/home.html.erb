@@ -1,2 +1,11 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<h1 id="home">Laboratorio de Patología y Citología</h1>
+<div class="container-fluid">
+	<%= render partial: "home_logo" %>
+	<%= render partial: "home_menu" %>
+	<%= render partial: "home_stats" %>
+	<div class="row">
+		<div class="col-12 col-lg-8 mx-auto mt-3">
+			<img src="<%= asset_path 'microscope2.JPG' %>" class="d-block w-100" alt="...">
+		</div>
+	</div>
+</div>

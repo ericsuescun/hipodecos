@@ -1,2 +1,30 @@
-<h1>StaticPages#contact</h1>
-<p>Find me in app/views/static_pages/contact.html.erb</p>
+<h1 id="home">Laboratorio de Patología y Citología</h1>
+<div class="container-fluid">
+	<%= render partial: "home_logo" %>
+	<%= render partial: "home_menu" %>
+	
+	<div class="row">
+		<div class="col-12 col-lg-4 offset-2 mt-3">
+			<h4 class="services">General</h4>
+			<ul>
+				<li>Ventas: <%= link_to "comercial@patologiasuescun.com", "comercial@patologiasuescun.com" %></li>
+				<li>Informes y operación en general: <%= link_to "servicioalcliente@patologiasuescun.com", "servicioalcliente@patologiasuescun.com" %></li>
+				<li>Mercadeo: <%= link_to "mercadeo@patologiasuescun.com", "mercadeo@patologiasuescun.com" %></li>
+				<li>Comentarios, sugerencias, quejas o reclamos: <%= link_to "gerencia@patologiasuescun.com", "gerencia@patologiasuescun.com" %></li>
+			</ul>
+			<h4 class="services">Su opinión cuenta</h4>
+			<p>Apreciamos mucho sus comentarios sobre el laboratorio, nuestro servicio y la atención en general. Estamos siempre atentos para atender con la mayor prontitud sus comentarios, sugerencias, quejas o reclamos. Puede escribirnos al correo: <%= link_to "gerencia@patologiasuescun.com", "gerencia@patologiasuescun.com" %></p>
+			<h4>Puntos de atención</h4>
+			<p>Sede San Vicente de Paul - Calle 64 No 51 D 38 | Medellín, Antioquia. Colombia
+PBX +57(4) 444-5412</p>
+			<h4 class="services">Redes Sociales</h4>
+			<ul>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="col-12 col-lg-4 mt-3">
+			<img src="<%= asset_path 'logo2.PNG' %>" class="d-block w-100" alt="...">
+		</div>
+	</div>
+</div>

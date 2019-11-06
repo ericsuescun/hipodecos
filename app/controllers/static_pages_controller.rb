@@ -24,8 +24,18 @@ class StaticPagesController < ApplicationController
   end
 
   def portfolio
+    @codevals = Codeval.all
   end
 
-  def offices
+  def customers
+    @branches = Branch.all
+  end
+
+  def science
+    
+  end
+
+  def news
+    
   end
 end

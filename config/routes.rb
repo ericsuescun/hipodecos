@@ -1,43 +1,44 @@
 Rails.application.routes.draw do
 
-
+    root to: "static_pages#home"
   
-  get 'static_pages/home'
-  get 'static_pages/services'
-  get 'static_pages/whoweare'
-  get 'static_pages/contact'
-  get 'static_pages/help'
-  get 'static_pages/faq'
-  get 'static_pages/results'
-  get 'static_pages/tech'
-  get 'static_pages/portfolio'
-  get 'static_pages/offices'
-  get 'reports/status'
-  get 'reports/objections'
-  get 'reports/sales'
-  get 'reports/reports_params_today'
-  get 'reports/reports_params_yes'
-  get 'reports/reports_params_yes2'
-  get 'reports/reports_params_week'
+    get 'static_pages/home'
+    get 'static_pages/services'
+    get 'static_pages/whoweare'
+    get 'static_pages/customers'
+    get 'static_pages/contact'
+    get 'static_pages/help'
+    get 'static_pages/faq'
+    get 'static_pages/results'
+    get 'static_pages/tech'
+    get 'static_pages/portfolio'
+    get 'static_pages/science'
+    get 'static_pages/news'
 
-  get 'pictures/index'
-  get 'pictures/new'
-  get 'pictures/create'
-  get 'pictures/edit'
-  get 'pictures/update'
-  get 'pictures/delete'
-  get 'pictures/show'
+    get 'reports/status'
+    get 'reports/objections'
+    get 'reports/sales'
+    get 'reports/reports_params_today'
+    get 'reports/reports_params_yes'
+    get 'reports/reports_params_yes2'
+    get 'reports/reports_params_week'
+
+    get 'pictures/index'
+    get 'pictures/new'
+    get 'pictures/create'
+    get 'pictures/edit'
+    get 'pictures/update'
+    get 'pictures/delete'
+    get 'pictures/show'
 
 
-  get 'objections/index'
-  get 'objections/new'
-  get 'objections/create'
-  get 'objections/edit'
-  get 'objections/update'
-  get 'objections/delete'
-  get 'objections/show'
-
-    root to: "informs#index"
+    get 'objections/index'
+    get 'objections/new'
+    get 'objections/create'
+    get 'objections/edit'
+    get 'objections/update'
+    get 'objections/delete'
+    get 'objections/show'
 
     resources :roles
     resources :values

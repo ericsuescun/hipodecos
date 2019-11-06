@@ -1,2 +1,16 @@
-<h1>StaticPages#whoweare</h1>
-<p>Find me in app/views/static_pages/whoweare.html.erb</p>
+<h1 id="home">Laboratorio de Patología y Citología</h1>
+<div class="container-fluid">
+	<%= render partial: "home_logo" %>
+	<%= render partial: "home_menu" %>
+	
+	<div class="row">
+		<div class="col-12 col-lg-4 offset-2 mt-3">
+			<p>Fundado en 1978 el Laboratorio de Patología Suescún ha concentrado sus esfuerzos en proveer siempre una atención humanizada, con resultados altamente confiables y oportunos.  Más de 35 años de experiencia, sumados a la más alta <%= link_to "tecnología", static_pages_tech_path %> y un talento humano competente nos permiten prestar un servicio de procesamiento y análisis de muestras de Patología y Citología que supera las exigencias de los entes de control colombianos.</p>
+
+			<p>Hemos diseñado una política de calidad que permite el procesamiento de especímenes patológicos y citológicos con protocolos definidos, que conlleven a producir informes impecables y compatibles con las normas éticas y legales.</p>
+		</div>
+		<div class="col-12 col-lg-4 mt-3">
+			<img src="<%= asset_path 'pathologist1.JPG' %>" class="d-block w-100" alt="...">
+		</div>
+	</div>
+</div>

@@ -1,2 +1,86 @@
-<h1>StaticPages#tech</h1>
-<p>Find me in app/views/static_pages/tech.html.erb</p>
+<h1 id="home">Laboratorio de Patología y Citología</h1>
+<div class="container-fluid">
+	<%= render partial: "home_logo" %>
+	<%= render partial: "home_menu" %>
+	<div class="row">
+		<div class="col-12 col-lg-8 mx-auto">
+			<p>Nuestros equipos</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-8 mx-auto mt-3">
+			<div class="card-group">
+				<div class="card" style="width: 18rem;">
+				  <img src="<%= asset_path 'microscope1.JPG' %>" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Microscopios</h5>
+				    <p class="card-text">Marca Leica</p>
+				    <a href="#" class="btn btn-primary">Especificaciones</a>
+				  </div>
+				  <div class="card-footer">
+				    <small class="text-muted">Last updated 3 mins ago</small>
+				  </div>
+				</div>
+				<div class="card" style="width: 18rem;">
+				  <img src="<%= asset_path 'oven.JPG' %>" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Horno de precisión</h5>
+				    <p class="card-text">Características</p>
+				    <a href="#" class="btn btn-primary">Especificaciones</a>
+				  </div>
+				  <div class="card-footer">
+				    <small class="text-muted">Last updated 3 mins ago</small>
+				  </div>
+				</div>
+				<div class="card" style="width: 18rem;">
+				  <img src="<%= asset_path 'parafina.JPG' %>" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Estación de parafina</h5>
+				    <p class="card-text">Permite la inclusión de especímenes a temperatura controlada para preservar los tejidos</p>
+				    <a href="#" class="btn btn-primary">Especificaciones</a>
+				  </div>
+				  <div class="card-footer">
+				    <small class="text-muted">Last updated 3 mins ago</small>
+				  </div>
+				</div>
+			</div>
+			<div class="card-group">
+				<div class="card" style="width: 18rem;">
+				  <img src="<%= asset_path 'procesador.JPG' %>" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Procesador de tejidos</h5>
+				    <p class="card-text">Permite la deshidratación de los especímenes preparándolos para la coloración</p>
+				    <a href="#" class="btn btn-primary">Especificaciones</a>
+				  </div>
+				  <div class="card-footer">
+				    <small class="text-muted">Last updated 3 mins ago</small>
+				  </div>
+				</div>
+				<div class="card" style="width: 18rem;">
+				  <img src="<%= asset_path 'stainer.JPG' %>" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Colorador automático</h5>
+				    <p class="card-text">Realiza el procesamiento automático de grupos de hasta 120 placas simultáneamente</p>
+				    <a href="#" class="btn btn-primary">Especificaciones</a>
+				  </div>
+				  <div class="card-footer">
+				    <small class="text-muted">Last updated 3 mins ago</small>
+				  </div>
+				</div>
+				<div class="card" style="width: 18rem;">
+				  <img src="<%= asset_path 'freezer.JPG' %>" class="card-img-top" alt="...">
+				  <div class="card-body">
+				    <h5 class="card-title">Micrótomo de congelación</h5>
+				    <p class="card-text">Permite el procesamiento de especímenes en medio de un procedimiento quirírgico, por lo cual debe ser congelado a -20 grados C en menos de 3 minutos.</p>
+				    <a href="#" class="btn btn-primary">Especificaciones</a>
+				  </div>
+				  <div class="card-footer">
+				    <small class="text-muted">Last updated 3 mins ago</small>
+				  </div>
+				</div>
+				
+			</div>
+		</div>
+
+	</div>
+</div>

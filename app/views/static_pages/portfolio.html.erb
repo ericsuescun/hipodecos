@@ -1,2 +1,38 @@
-<h1>StaticPages#portfolio</h1>
-<p>Find me in app/views/static_pages/portfolio.html.erb</p>
+<h1 id="home">Laboratorio de Patología y Citología</h1>
+<div class="container-fluid">
+	<%= render partial: "home_logo" %>
+	<%= render partial: "home_menu" %>
+	<div class="row">
+		<div class="col-12 col-lg-8 mx-auto">
+			<p>Este es el conjuno de CUPS que actualmente se procesan para nuestros clientes. Sin embargo, estamos abiertos a la posibilidad de hacer otros estudios por demanda.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-8 mx-auto mt-3">
+			<h4 class="services">Estudios y códigos CUPS procesados</h4>
+			<table class="table table-striped">
+		        <thead class="thead-dark">
+		          <tr>
+		            <th>CUPS</th>
+		            <th>Refs.</th>
+		            <th>Nombre</th>
+		            <th>Descripión</th>
+		            <th>Clasificación</th>
+		          </tr>
+		        </thead>
+
+		        <tbody>
+		          <% @codevals.each do |codeval| %>
+		            <tr>
+		              <td><%= codeval.code %></td>
+		              <td><%= codeval.ref_code %></td>
+		              <td><%= codeval.name %></td>
+		              <td><%= codeval.description %></td>
+		              <td><%= codeval.origin_system %></td>
+		          <% end %>
+		        </tbody>
+		      </table>
+		</div>
+
+	</div>
+</div>

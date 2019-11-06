@@ -1,2 +1,36 @@
-<h1>StaticPages#services</h1>
-<p>Find me in app/views/static_pages/services.html.erb</p>
+<h1 id="home">Laboratorio de Patología y Citología</h1>
+<div class="container-fluid">
+	<%= render partial: "home_logo" %>
+	<%= render partial: "home_menu" %>
+	<div class="row">
+		<div class="col-12 col-lg-8 mx-auto">
+			<p>El laboratorio de patología y citología realiza el estudio de los cambios que sufren las células y los tejidos corporales por efecto de la enfermedad. Patología Suescún SAS, ofrece un laboratorio con la más alta tecnología para entregar informes oportunos con la mejor calidad técnica y científica.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-4 offset-2 mt-3">
+			<img src="<%= asset_path 'microscope3.JPG' %>" class="d-block w-100" alt="...">
+		</div>
+		<div class="col-12 col-lg-4 mt-3">
+			<h4 class="services">Servicios</h4>
+			<ul>
+				<li>Estudio de biopsias simples y múltiples con tinción de rutina</li>
+				<li>Análisis de material quirúrgico simple y complejo con tinción de rutina</li>
+				<li>Interpretación de tinciones especiales de histoquímica</li>
+				<li>Proceso automatizado e interpretación de tinciones de inmunohistoquímica</li>
+				<li>Procesamiento y lectura de citologías cérvico-uterinas</li>
+				<li>Examen de citologías de: líquidos, cepillados, secreciones, y biopsias por aspiración con aguja fina (BACAF)</li>
+				<li>Estudio de biopsias por congelación</li>
+				<li>Procesamiento, tinción y montaje de placas automatizados para otros laboratorios</li>
+			</ul>
+			<h4 class="services">Nuestro sello</h4>
+			<ul>
+				<li>Asesoría permanente de patólogos expertos en Dermatopatología, Oncopatología, Hematopatología, Nefropatología y Neuropatología</li>
+				<li>Entrega de informes en medio digital y físico</li>
+				<li>Recolección de muestras y toma de citologías en sede del cliente</li>
+				<li>Interconsulta con especialistas de otros laboratorios</li>
+			</ul>
+		</div>
+
+	</div>
+</div>

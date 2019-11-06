@@ -1,0 +1,35 @@
+<h1 id="home">Laboratorio de Patología y Citología</h1>
+<div class="container-fluid">
+	<%= render partial: "home_logo" %>
+	<%= render partial: "home_menu" %>
+	<div class="row">
+		<div class="col-12 col-lg-8 mx-auto">
+			<p>Actualmente estamos atendiendo las siguientes IPS</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-8 mx-auto mt-3">
+			<h4 class="services">Clientes</h4>
+			<table class="table table-striped">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th>Código</th>
+			      <th>IPS</th>
+			      <th>Sede</th>
+			    </tr>
+			  </thead>
+
+			  <tbody>
+			    <% @branches.each do |branch| %>
+			      <tr>
+			        <td><%= branch.code %></td>
+			        <td><%= branch.entity.initials %></td>
+			        <td><%= branch.initials %></td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+		</div>
+
+	</div>
+</div>

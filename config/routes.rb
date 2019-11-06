@@ -2,6 +2,16 @@ Rails.application.routes.draw do
 
 
   
+  get 'static_pages/home'
+  get 'static_pages/services'
+  get 'static_pages/whoweare'
+  get 'static_pages/contact'
+  get 'static_pages/help'
+  get 'static_pages/faq'
+  get 'static_pages/results'
+  get 'static_pages/tech'
+  get 'static_pages/portfolio'
+  get 'static_pages/offices'
   get 'reports/status'
   get 'reports/objections'
   get 'reports/sales'

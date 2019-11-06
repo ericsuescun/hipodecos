@@ -23,7 +23,7 @@
         <tbody>
           <% @obcodes.each do |obcode| %>
             <tr>
-              <td><%= obcode.admin_id %></td>
+              <td><%= Admin.where(id: obcode.admin_id).first.try(:name) %></td>
               <td><%= obcode.title %></td>
               <td><%= obcode.process %></td>
               <td><%= obcode.score %></td>

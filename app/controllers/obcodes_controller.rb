@@ -31,29 +31,22 @@ class ObcodesController < ApplicationController
   # POST /obcodes.json
   def create
     @obcode = Obcode.new(obcode_params)
+    @obcode.admin_id = current_admin.id
 
-    respond_to do |format|
-      if @obcode.save
-        format.html { redirect_to @obcode, notice: 'Obcode was successfully created.' }
-        format.json { render :show, status: :created, location: @obcode }
-      else
-        format.html { render :new }
-        format.json { render json: @obcode.errors, status: :unprocessable_entity }
-      end
+    if @obcode.save
+      redirect_to @obcode, notice: 'Obcode was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /obcodes/1
   # PATCH/PUT /obcodes/1.json
   def update
-    respond_to do |format|
-      if @obcode.update(obcode_params)
-        format.html { redirect_to @obcode, notice: 'Obcode was successfully updated.' }
-        format.json { render :show, status: :ok, location: @obcode }
-      else
-        format.html { render :edit }
-        format.json { render json: @obcode.errors, status: :unprocessable_entity }
-      end
+    if @obcode.update(obcode_params)
+      redirect_to @obcode, notice: 'Obcode was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -61,10 +54,7 @@ class ObcodesController < ApplicationController
   # DELETE /obcodes/1.json
   def destroy
     @obcode.destroy
-    respond_to do |format|
-      format.html { redirect_to obcodes_url, notice: 'Obcode was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to obcodes_url, notice: 'Obcode was successfully destroyed.'
   end
 
   private

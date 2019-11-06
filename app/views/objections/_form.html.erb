@@ -2,7 +2,7 @@
   
   <div class="form-group">
     <%= form.label "Título de NC" %>
-    <%= form.select :obcode_id, Obcode.where(process: objectionable.class.name).pluck(:title, :id), {prompt: "Selecciona la NC"}, class: "form-control input" %>
+    <%= form.select :obcode_id, Obcode.where(process: objectionable.class.name).pluck(:title, :id) << ['Otra' , 25 ], {prompt: "Selecciona la NC"}, class: "form-control input" %>
   </div>
 
   <div class="form-group">

@@ -26,32 +26,39 @@ div#home-bar > div > ul > li > a {
 	}
 }
 
-div > div > div > ul {
-	list-style: none;
-	padding-left: 0px;
-}
+div > div > div {
+	p {
+		a {
+			list-style: none;
+			font-size: 16px;
+			color: rgb(53,115,19);
+			text-decoration: none;
+			&:hover, &:focus {
+				color: rgb(254,181,13);
+				text-decoration: none;
+			}
+		}
+	}
 
-div > div > div > ul > li > a {
-	list-style: none;
-	font-size: 16px;
-	color: rgb(53,115,19);
-	text-decoration: none;
-	&:hover, &:focus {
-		color: rgb(254,181,13);
-		text-decoration: none;
+	ul {
+		list-style: none;
+		padding-left: 0px;
+
+		li {
+			a {
+				list-style: none;
+				font-size: 16px;
+				color: rgb(53,115,19);
+				text-decoration: none;
+				&:hover, &:focus {
+					color: rgb(254,181,13);
+					text-decoration: none;
+				}
+			}
+		}
 	}
 }
 
-div > div > div > p > a {
-	list-style: none;
-	font-size: 16px;
-	color: rgb(53,115,19);
-	text-decoration: none;
-	&:hover, &:focus {
-		color: rgb(254,181,13);
-		text-decoration: none;
-	}
-}
 
 footer > div > div > div {
 	ul {

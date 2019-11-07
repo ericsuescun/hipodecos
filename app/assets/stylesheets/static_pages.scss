@@ -74,8 +74,8 @@ footer > div > div > div {
 				font-family: 'Big Shoulders Text', cursive;
 				list-style: none;
 				float: right;
-				font-size: 16px;
-				color: gray;
+				font-size: 20px;
+				color: rgb(53,115,19);
 				text-decoration: none;
 				&:hover, &:focus {
 					color: rgb(254,181,13);
@@ -96,7 +96,6 @@ footer > div > div > div {
 		a {
 			font-family: 'Roboto', sans-serif;
 			font-size: 14px;
-			color: gray;
 			color: rgb(53,115,19);
 			text-decoration: none;
 			&:hover, &:focus {

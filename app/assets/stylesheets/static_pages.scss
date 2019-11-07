@@ -53,71 +53,75 @@ div > div > div > p > a {
 	}
 }
 
-footer > div > div > div > ul > li {
-	list-style: none;
-	margin-left: 15px;
-	margin-top: 15px;
-	margin-bottom: 15px;
-	float: right;
-	text-decoration: none;
-}
+footer > div > div > div {
+	ul {
+		li {
+			list-style: none;
+			margin-left: 15px;
+			margin-top: 15px;
+			margin-bottom: 15px;
+			float: right;
+			text-decoration: none;
 
-footer > div > div > div > ul > li > a {
-	font-family: 'Big Shoulders Text', cursive;
-	list-style: none;
-	float: right;
-	font-size: 16px;
-	color: gray;
-	text-decoration: none;
-	&:hover, &:focus {
-		color: rgb(254,181,13);
+			a {
+				font-family: 'Big Shoulders Text', cursive;
+				list-style: none;
+				float: right;
+				font-size: 16px;
+				color: gray;
+				text-decoration: none;
+				&:hover, &:focus {
+					color: rgb(254,181,13);
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+	small {
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		color: gray;
 		text-decoration: none;
+
+		a {
+			font-family: 'Roboto', sans-serif;
+			font-size: 14px;
+			color: gray;
+			color: rgb(53,115,19);
+			text-decoration: none;
+			&:hover, &:focus {
+				color: rgb(254,181,13);
+				text-decoration: none;
+			}
+		}
+
+		.up_footer {
+			font-family: 'Roboto', sans-serif;
+			font-size: 14px;
+			margin-top: 15px;
+			margin-bottom: 15px;
+			color: gray;
+			text-decoration: none;
+
+			a {
+				font-family: 'Roboto', sans-serif;
+				float: none;
+				font-size: 14px;
+				color: rgb(53,115,19);
+				text-decoration: none;
+				&:hover, &:focus {
+					color: rgb(254,181,13);
+					text-decoration: none;
+				}
+			}
+		}
 	}
 }
 
-
-footer > div > div > div > small {
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	margin-top: 15px;
-	margin-bottom: 15px;
-	color: gray;
-	text-decoration: none;
-}
-
-footer > div > div > div > small > a {
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	color: gray;
-	color: rgb(53,115,19);
-	text-decoration: none;
-	&:hover, &:focus {
-		color: rgb(254,181,13);
-		text-decoration: none;
-	}
-}
-
-footer > div > div > div > small.up_footer {
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	margin-top: 15px;
-	margin-bottom: 15px;
-	color: gray;
-	text-decoration: none;
-}
 
 footer > div > div > div.to_right {
 	text-align: right;
-}
-
-footer > div > div > div > small.up_footer > a {
-	font-family: 'Roboto', sans-serif;
-	float: none;
-	font-size: 14px;
-	color: rgb(53,115,19);
-	text-decoration: none;
-	&:hover, &:focus {
-		color: rgb(254,181,13);
-		text-decoration: none;
-	}
 }

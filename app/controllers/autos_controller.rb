@@ -1,5 +1,4 @@
 class AutosController < ApplicationController
-  before_action :authenticate_admin!
   before_action :set_auto, only: [:show, :edit, :update, :destroy]
 
   # GET /autos
@@ -70,6 +69,6 @@ class AutosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def auto_params
-      params.require(:auto).permit(:dx_table_id, :user_id, :admin_id, :title, :body, :param1, :param2, :param3, :param4)
+      params.require(:auto).permit(:diagcode_id, :user_id, :admin_id, :title, :body, :param1, :param2, :param3, :param4, :param5)
     end
 end

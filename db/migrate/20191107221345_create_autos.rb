@@ -1,7 +1,7 @@
 class CreateAutos < ActiveRecord::Migration[5.2]
   def change
     create_table :autos do |t|
-      t.references :dx_table, foreign_key: true
+      t.references :diagcode, foreign_key: true
       t.integer :user_id
       t.integer :admin_id
       t.string :title
@@ -10,6 +10,7 @@ class CreateAutos < ActiveRecord::Migration[5.2]
       t.string :param2
       t.string :param3
       t.string :param4
+      t.string :param5
 
       t.timestamps
     end

@@ -16,11 +16,12 @@ class AutosTest < ApplicationSystemTestCase
 
     fill_in "Admin", with: @auto.admin_id
     fill_in "Body", with: @auto.body
-    fill_in "Dx table", with: @auto.dx_table_id
+    fill_in "Diagcode", with: @auto.diagcode_id
     fill_in "Param1", with: @auto.param1
     fill_in "Param2", with: @auto.param2
     fill_in "Param3", with: @auto.param3
     fill_in "Param4", with: @auto.param4
+    fill_in "Param5", with: @auto.param5
     fill_in "Title", with: @auto.title
     fill_in "User", with: @auto.user_id
     click_on "Create Auto"
@@ -35,11 +36,12 @@ class AutosTest < ApplicationSystemTestCase
 
     fill_in "Admin", with: @auto.admin_id
     fill_in "Body", with: @auto.body
-    fill_in "Dx table", with: @auto.dx_table_id
+    fill_in "Diagcode", with: @auto.diagcode_id
     fill_in "Param1", with: @auto.param1
     fill_in "Param2", with: @auto.param2
     fill_in "Param3", with: @auto.param3
     fill_in "Param4", with: @auto.param4
+    fill_in "Param5", with: @auto.param5
     fill_in "Title", with: @auto.title
     fill_in "User", with: @auto.user_id
     click_on "Update Auto"

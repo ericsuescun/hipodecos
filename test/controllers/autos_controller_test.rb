@@ -17,7 +17,7 @@ class AutosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create auto" do
     assert_difference('Auto.count') do
-      post autos_url, params: { auto: { admin_id: @auto.admin_id, body: @auto.body, dx_table_id: @auto.dx_table_id, param1: @auto.param1, param2: @auto.param2, param3: @auto.param3, param4: @auto.param4, title: @auto.title, user_id: @auto.user_id } }
+      post autos_url, params: { auto: { admin_id: @auto.admin_id, body: @auto.body, diagcode_id: @auto.diagcode_id, param1: @auto.param1, param2: @auto.param2, param3: @auto.param3, param4: @auto.param4, param5: @auto.param5, title: @auto.title, user_id: @auto.user_id } }
     end
 
     assert_redirected_to auto_url(Auto.last)
@@ -34,7 +34,7 @@ class AutosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update auto" do
-    patch auto_url(@auto), params: { auto: { admin_id: @auto.admin_id, body: @auto.body, dx_table_id: @auto.dx_table_id, param1: @auto.param1, param2: @auto.param2, param3: @auto.param3, param4: @auto.param4, title: @auto.title, user_id: @auto.user_id } }
+    patch auto_url(@auto), params: { auto: { admin_id: @auto.admin_id, body: @auto.body, diagcode_id: @auto.diagcode_id, param1: @auto.param1, param2: @auto.param2, param3: @auto.param3, param4: @auto.param4, param5: @auto.param5, title: @auto.title, user_id: @auto.user_id } }
     assert_redirected_to auto_url(@auto)
   end
 

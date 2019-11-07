@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_191523) do
+ActiveRecord::Schema.define(version: 2019_11_07_221345) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_191523) do
   end
 
   create_table "autos", force: :cascade do |t|
-    t.integer "dx_table_id"
+    t.integer "diagcode_id"
     t.integer "user_id"
     t.integer "admin_id"
     t.string "title"
@@ -40,9 +40,10 @@ ActiveRecord::Schema.define(version: 2019_11_05_191523) do
     t.string "param2"
     t.string "param3"
     t.string "param4"
+    t.string "param5"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dx_table_id"], name: "index_autos_on_dx_table_id"
+    t.index ["diagcode_id"], name: "index_autos_on_diagcode_id"
   end
 
   create_table "blocks", force: :cascade do |t|

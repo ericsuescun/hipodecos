@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :autos
     root to: "static_pages#home"
   
     get 'static_pages/home'
@@ -73,8 +74,7 @@ Rails.application.routes.draw do
       collection {post :import}
     end
 
-    resources :autos
-    resources :diagcodes do
+      resources :diagcodes do
       collection {post :import}
     end
     

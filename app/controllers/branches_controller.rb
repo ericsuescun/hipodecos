@@ -2,6 +2,11 @@ class BranchesController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_branch, only: [:show, :edit, :update, :destroy]
 
+  def import
+    Branch.import(params[:file])
+    redirect_to branches_path, notice: "Datos importados!"
+  end
+
   # GET /branches
   # GET /branches.json
   def index

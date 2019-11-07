@@ -2,6 +2,11 @@ class PromotersController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_promoter, only: [:show, :edit, :update, :destroy]
 
+  def import
+    Promoter.import(params[:file])
+    redirect_to promoter_path, notice: "Datos importados!"
+  end
+
   # GET /promoters
   # GET /promoters.json
   def index

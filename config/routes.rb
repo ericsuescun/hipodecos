@@ -78,6 +78,14 @@ Rails.application.routes.draw do
       collection {post :import}
     end
     
+    resources :promoters do
+      collection {post :import}
+    end
+
+    resources :branches do
+      collection {post :import}
+    end
+
     resources :entities do
       resources :branches
     end

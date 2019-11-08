@@ -4,7 +4,7 @@ class PromotersController < ApplicationController
 
   def import
     Promoter.import(params[:file])
-    redirect_to promoter_path, notice: "Datos importados!"
+    redirect_to promoters_path, notice: "Datos importados!"
   end
 
   # GET /promoters

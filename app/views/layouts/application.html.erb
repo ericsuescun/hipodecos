@@ -15,7 +15,9 @@
     <!--<%= render partial: 'layouts/header' %>-->
     <% if admin_signed_in? || user_signed_in? %>
       <%= render partial: 'layouts/search_navbar' %>
-      <%= render partial: 'layouts/fast_navbar' %>
+      <% unless admin_signed_in? %>
+        <%= render partial: 'layouts/fast_navbar' %>
+      <% end %>
       <% if flash[:notice] %>
         <div class="alert alert-warning"><%= flash[:notice] %></div>
       <% end %>

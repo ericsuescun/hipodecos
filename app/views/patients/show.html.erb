@@ -58,9 +58,12 @@
               <div class="col-lg-8">
                 <div class="card-body">
                   <h5 class="card-title"><%= inform.tag_code %> recibido hace <%= time_ago_in_words(inform.receive_date) %></h5>
-                  <p class="card-text">Médico tratante: <%= inform.physician_id %></p>
-                  <p class="card-text">EPS: <%= Promoter.find(inform.promoter_id).initials %></p>
-                  <p class="card-text">Sede IPS: <%= Branch.find(inform.branch_id).initials %></p>
+                  <p class="card-text">Médico tratante:</p>
+                  <% inform.physicians.each do |physician| %>
+                    <p class="card-text"><%= physician.name %> <%= physician.lastname %></p>  
+                  <% end %>
+                  <p class="card-text">EPS: <%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></p>
+                  <p class="card-text">Sede IPS: <%= Branch.where(id: inform.branch_id).first.try(:initials) %></p>
                   <%= link_to 'Ir a informe', inform_path(inform), class: "btn btn-primary" %>
                   <p class="card-text"><small class="text-muted">Creado el <%= inform.created_at %></small></p>
                 </div>

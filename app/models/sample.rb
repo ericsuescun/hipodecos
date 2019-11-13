@@ -6,7 +6,7 @@ class Sample < ApplicationRecord
 
   has_many :pictures, as: :imageable
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(created_at: :asc) }
 
   validates :name, presence: true
 end

@@ -26,11 +26,12 @@ class BlocksController < ApplicationController
   # POST /blocks.json
   def create
     inform = Inform.find(params[:inform_id])
+    tag_shift = inform.blocks.count
     block = inform.blocks.build(block_params)
     block.user_id = current_user.id
 
     if block.save
-      block.block_tag = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
+      block.block_tag = inform.tag_code + (65 + tag_shift).chr
       block.save
       redirect_to inform, notice: 'El bloque ha sido creado exitosamente.'
     else

@@ -26,12 +26,14 @@ class SamplesController < ApplicationController
   # POST /samples.json
   def create
     inform = Inform.find(params[:inform_id])
+    tag_shift = inform.samples.count
     sample = inform.samples.build(sample_params)
     sample.user_id = current_user.id
 
 
     if sample.save
-      sample.sample_tag = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
+      # sample.sample_tag = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
+      sample.sample_tag = inform.tag_code + (65 + tag_shift).chr
       sample.save
       redirect_to inform, notice: 'La muestra ha sido exitosamente creada.'
     else

@@ -50,6 +50,9 @@ class UsersController < ApplicationController
       if params[:user][:remove_signfile] == '1'
         @user.remove_signfile!
       end
+      if params[:user][:remove_contract] == '1'
+        @user.remove_contract!
+      end
       @user.save
       redirect_to users_path, notice: 'User fue exitosamente actualizado.'
     else
@@ -75,6 +78,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email2, :tel, :cel, :birth_date, :join_date, :active, :deactivation_date, :last_admin_id, :notes, :role_id, :file_id, :address, :cvfile, :signfile)
+      params.require(:user).permit(:first_name, :last_name, :email2, :tel, :cel, :birth_date, :join_date, :active, :deactivation_date, :last_admin_id, :notes, :role_id, :file_id, :address, :cvfile, :signfile, :contract)
     end
 end

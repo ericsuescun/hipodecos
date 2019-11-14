@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   mount_uploader :cvfile, CvfileUploader
   mount_uploader :signfile, SignfileUploader
+  mount_uploader :contract, ContractUploader
 
   validates :first_name, :last_name, :tel, :cel, :address, :birth_date, :join_date, :role_id, presence: true
 

@@ -123,7 +123,7 @@
         </fieldset>
         
         <div class="row mx-auto">
-          <div class="col-12 col-lg-6 mx-auto">
+          <div class="col-12 col-lg-4 mx-auto">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Archivo de hoja de vida</h5>
@@ -137,14 +137,34 @@
                   </p>
                 <% else %>
                   <p class="card-text">Aún no cargado</p>
-                  <p class="card-text"><%= f.file_field :cvfile, class: "btn btn-primary my-3" %></p>
+                  <p class="card-text"><%= f.file_field :cvfile %></p>
                 <% end %>
               </div>
             </div>
             <%= f.submit "Guardar", class: "btn btn-primary my-3" %>
           </div>
 
-          <div class="col-12 col-lg-6 mx-auto">
+          <div class="col-12 col-lg-4 mx-auto">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Archivo de contrato</h5>
+                <% if @user.contract.file != nil %>
+                  <h6 class="card-subtitle mb-2 text-muted"><%= link_to @user.contract.file.filename , @user.contract.url %></h6>
+                  <p>
+                    <label>
+                      <%= f.check_box :remove_contract %>
+                      Borrar archivo de contrato
+                    </label>
+                  </p>
+                <% else %>
+                  <p class="card-text">Aún no cargado</p>
+                  <p class="card-text"><%= f.file_field :contract %></p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4 mx-auto">
             <% if @user.signfile.file %>
               <div class="card">
                 <img src="<%= @user.signfile.url %>" class="card-img-top" alt="...">
@@ -162,7 +182,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Archivo de firma</h5>
                   <p class="card-text">Aún no cargado</p>
-                  <p class="card-text"><%= f.file_field :signfile, class: "btn btn-primary my-3" %></p>
+                  <p class="card-text"><%= f.file_field :signfile %></p>
                 </div>
               </div>
             <% end %>

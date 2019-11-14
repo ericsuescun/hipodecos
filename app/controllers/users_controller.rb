@@ -54,7 +54,7 @@ class UsersController < ApplicationController
         @user.remove_contract!
       end
       @user.save
-      redirect_to users_path, notice: 'User fue exitosamente actualizado.'
+      redirect_to user_path(@user), notice: 'User fue exitosamente actualizado.'
     else
       render :edit
     end

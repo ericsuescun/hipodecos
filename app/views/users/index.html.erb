@@ -25,6 +25,7 @@
               <td><%= user.cel %></td>
               <td><%= user.active %></td>
               <td><%= Role.find(user.role_id.to_i).name %></td>
+              <td><%= link_to 'Detalles', user_path(user) %></td>
               <td><%= link_to 'Editar User', edit_user_registration_path(user) %></td>
               <td><%= link_to 'Editar Datos', edit_user_path(user) %></td>
             </tr>

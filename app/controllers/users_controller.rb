@@ -12,8 +12,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  # def show
-  # end
+  def show
+  end
 
   # # GET /users/new
   # def new
@@ -44,7 +44,14 @@ class UsersController < ApplicationController
   # # PATCH/PUT /users/1.json
   def update
     if @user.update(user_params)
-      redirect_to users_path, notice: 'User was successfully updated.'
+      if params[:user][:remove_cvfile] == '1'
+        @user.remove_cvfile!
+      end
+      if params[:user][:remove_signfile] == '1'
+        @user.remove_signfile!
+      end
+      @user.save
+      redirect_to users_path, notice: 'User fue exitosamente actualizado.'
     else
       render :edit
     end
@@ -68,6 +75,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email2, :tel, :cel, :birth_date, :join_date, :active, :deactivation_date, :last_admin_id, :notes, :role_id, :file_id, :address)
+      params.require(:user).permit(:first_name, :last_name, :email2, :tel, :cel, :birth_date, :join_date, :active, :deactivation_date, :last_admin_id, :notes, :role_id, :file_id, :address, :cvfile, :signfile)
     end
 end

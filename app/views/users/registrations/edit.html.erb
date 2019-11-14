@@ -77,26 +77,17 @@
             </div>
 
             <div class="row mx-auto">
-              <div class="col-12 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-6 mx-auto">
                 <div class="form-group">
-                  <%= f.label "Hoja de vida" %><br />
-                  <%= f.text_field :file_id, autocomplete: "Archivo", class: "form-control"  %>
+                  <%= f.label "Hoja de vida (Hacerlo por el menú Editar Datos)" %><br />
                 </div>
               </div>
               <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
-                  <%= f.label "Email alterno/personal" %><br />
-                  <%= f.email_field :email2, autocomplete: "email", class: "form-control"  %>
+                  <%= f.label "Archivo de firma (Hacerlo por el menú Editar Datos)" %><br />
                 </div>
               </div>
-              <div class="col-12 col-lg-4 mx-auto">
-                <% if admin_signed_in? %>
-                  <div class="form-group">
-                    <%= f.label "Notas" %><br />
-                    <%= f.text_area :notes, autocomplete: "Notas", class: "form-control"  %>
-                  </div>
-                <% end %>
-              </div>
+
             </div>
             <div class="row mx-auto">
               <div class="col-12 col-lg-6 mx-auto">
@@ -126,10 +117,18 @@
                 </div>
               </div>
               <div class="col-12 col-lg-4 mx-auto">
-
+                <div class="form-group">
+                  <%= f.label "Email alterno/personal" %><br />
+                  <%= f.email_field :email2, autocomplete: "email", class: "form-control"  %>
+                </div>
               </div>
               <div class="col-12 col-lg-4 mx-auto">
-
+                <% if admin_signed_in? %>
+                  <div class="form-group">
+                    <%= f.label "Notas" %><br />
+                    <%= f.text_area :notes, autocomplete: "Notas", class: "form-control"  %>
+                  </div>
+                <% end %>
               </div>
             </div>
 

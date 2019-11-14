@@ -1,27 +1,35 @@
-<% if admin_signed_in? %>
-  <div class="contanier" data-no-turbolink>
-    <div class="row">
-      <div class="col-12 col-lg-8 mx-auto">
-        <h2 class="edit-user">Registro de informción personal de <%= resource_name.to_s.humanize %></h2>
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "errores") %> impidieron que este Usuario fuera guardado:</h2>
 
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="contanier">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <h2 class="edit-user">Información personal de </h2>
+      <%= form_for (@user), html: { multipart: true } do |f| %>
+        <fieldset disabled="">
           <div class="alert alert-info">
-
             <div class="row mx-auto">
-              <div class="col-sm-4 mx-auto">
+              <div class="col-6 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Nombres" %><br />
                   <%= f.text_field :first_name, autofocus: true, autocomplete: "Nombres", class: "form-control"  %>
                 </div>
               </div>
-              <div class="col-4 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Apellidos" %><br />
                   <%= f.text_field :last_name, autocomplete: "Apellidos", class: "form-control"  %>
                 </div>
               </div>
-              <div class="col-4 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Cargo" %><br />
                   <%= f.select :role_id, Role.pluck(:name, :id), {prompt:"Seleccione el cargo"}, class: "form-control" %>
@@ -30,19 +38,19 @@
             </div>
 
             <div class="row mx-auto">
-              <div class="col-8 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Dirección" %><br />
                   <%= f.text_field :address, autocomplete: "Dirección", class: "form-control"  %>
                 </div>
               </div>
-              <div class="col-6 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Teléfono" %><br />
                   <%= f.text_field :tel, autocomplete: "Teléfono", class: "form-control"  %>
                 </div>
               </div>
-              <div class="col-6 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Celular" %><br />
                   <%= f.text_field :cel, autocomplete: "Celular", class: "form-control"  %>
@@ -51,35 +59,22 @@
             </div>
 
             <div class="row mx-auto">
-              <div class="col-4 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Cumpleaños" %><br />
-                  <%= f.date_field :birth_date, autocomplete: "Cumpleaños", class: "form-control"  %>
+                  <%= f.date_field :birth_date, autocomplete: "Fecha de cumpleaños", class: "form-control" %>
                 </div>
               </div>
-              <div class="col-4 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Fecha de ingreso" %><br />
-                  <%= f.date_field :join_date, autocomplete: "Ingreso", class: "form-control"  %>
+                  <%= f.date_field :join_date, autocomplete: "Fecha de ingreso", class: "form-control" %>
                 </div>
               </div>
-              <div class="col-4 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Fecha de salida" %><br />
                   <%= f.date_field :deactivation_date, autocomplete: "Fecha de desactivación", class: "form-control"  %>
-                </div>
-              </div>
-            </div>
-
-            <div class="row mx-auto">
-              <div class="col-4 col-lg-6 mx-auto">
-                <div class="form-group">
-                  <%= f.label "Hoja de vida (Una vez creado el usuario)" %><br />
-                </div>
-              </div>
-              <div class="col-4 col-lg-6 mx-auto">
-                <div class="form-group">
-                  <%= f.label "Archivo de firma (Una vez creado el usuario)" %><br />
                 </div>
               </div>
             </div>
@@ -103,65 +98,77 @@
                 </div>
               </div>
             </div>
+
             <div class="row mx-auto">
-              <div class="col-4 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.check_box :active %>
                   <%= f.label "Activo" %>
                 </div>
               </div>
-
-              <div class="col-4 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Email alterno/personal" %><br />
                   <%= f.email_field :email2, autocomplete: "email", class: "form-control"  %>
                 </div>
               </div>
-
-              <div class="col-4 col-lg-4 mx-auto">
+              <div class="col-12 col-lg-4 mx-auto">
                 <div class="form-group">
                   <%= f.label "Notas" %><br />
                   <%= f.text_area :notes, autocomplete: "Notas", class: "form-control"  %>
                 </div>
               </div>
             </div>
+          </div>  
+        </fieldset>
+        
+        <div class="row mx-auto">
+          <div class="col-12 col-lg-6 mx-auto">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Archivo de hoja de vida</h5>
+                <% if @user.cvfile.file != nil %>
+                  <h6 class="card-subtitle mb-2 text-muted"><%= link_to @user.cvfile.file.filename , @user.cvfile.url %></h6>
+                  <p>
+                    <label>
+                      <%= f.check_box :remove_cvfile %>
+                      Borrar hoja de vida
+                    </label>
+                  </p>
+                <% else %>
+                  <p class="card-text">Aún no cargado</p>
+                  <p class="card-text"><%= f.file_field :cvfile, class: "btn btn-primary my-3" %></p>
+                <% end %>
+              </div>
+            </div>
+            <%= f.submit "Guardar", class: "btn btn-primary my-3" %>
+          </div>
 
+          <div class="col-12 col-lg-6 mx-auto">
+            <% if @user.signfile.file %>
+              <div class="card">
+                <img src="<%= @user.signfile.url %>" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p>
+                    <label>
+                      <%= f.check_box :remove_signfile %>
+                      Borrar archivo de firma
+                    </label>
+                  </p>
+                </div>
+              </div>
+            <% else %>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Archivo de firma</h5>
+                  <p class="card-text">Aún no cargado</p>
+                  <p class="card-text"><%= f.file_field :signfile, class: "btn btn-primary my-3" %></p>
+                </div>
+              </div>
+            <% end %>
           </div>
-      </div>
-      <div class="col-6 col-lg-3 mx-auto">
-        <h2 class="edit-user">Guardar</h2>
-        <div class="alert alert-warning">
-          <div class="form-group">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autocomplete: "email", class: "form-control"  %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :password %>
-            <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control"  %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"  %>
-          </div>
-          <div class="actions">
-            <%= f.submit "Guardar", class: "btn btn-primary btn-block mb-3" %>
-          </div>
-          
-        <% end %> <!-- Los estilos estan traslapados con el bloque de la form, por eso deje la identación así. -->
-        <%= render "admins/shared/links" %>
         </div>
-      </div>
-
-
-      </div>
+      <% end %> 
     </div>
   </div>
-<% end %>
-
-
-
+</div>

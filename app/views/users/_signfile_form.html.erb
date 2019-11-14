@@ -1,0 +1,11 @@
+<%= form_for @user, html: { multipart: true } do |form| %>
+  
+  <div class="form-group">
+    <%= form.file_field :signfile, class: "btn btn-primary my-3" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Cargar archivo", class: "btn btn-primary my-3" %>
+  </div>
+
+<% end %>

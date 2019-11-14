@@ -11,7 +11,7 @@
 <% end %>
 <div class="contanier">
   <div class="row">
-    <div class="col-12 col-lg-8 mx-auto">
+    <div class="col-12 col-lg-10 mx-auto">
       <h2 class="edit-user">Edición de información personal de </h2>
       <%= form_for (@user), html: { multipart: true } do |f| %>
         <div class="alert alert-info">
@@ -81,28 +81,6 @@
           <div class="row mx-auto">
             <div class="col-12 col-lg-6 mx-auto">
               <div class="form-group">
-                <%= f.label "Hoja de vida" %><br />
-                <%= f.file_field :cvfile, class: "btn btn-primary my-3" %>
-              </div>
-
-              <div class="actions">
-                <%= f.submit "Cargar archivo", class: "btn btn-primary my-3" %>
-              </div>
-            </div>
-            <div class="col-12 col-lg-6 mx-auto">
-              <div class="form-group">
-                <%= f.label "Archivo de firma" %><br />
-                <%= f.file_field :signfile, class: "btn btn-primary my-3" %>
-              </div>
-
-              <div class="actions">
-                <%= f.submit "Cargar firma", class: "btn btn-primary my-3" %>
-              </div>
-            </div>
-          </div>
-          <div class="row mx-auto">
-            <div class="col-12 col-lg-6 mx-auto">
-              <div class="form-group">
                 <%= f.label "Contacto de emergencia: Nombres y apellidos" %><br />
                 <%= f.text_field :emergency_contact, autocomplete: "Contacto de emergencia", class: "form-control"  %>
               </div>
@@ -139,6 +117,71 @@
                 <%= f.label "Notas" %><br />
                 <%= f.text_area :notes, autocomplete: "Notas", class: "form-control"  %>
               </div>
+            </div>
+          </div>
+          <div class="row mx-auto">
+            <div class="col-12 col-lg-4 mx-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Archivo de hoja de vida</h5>
+                  <% if @user.cvfile.file != nil %>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= link_to @user.cvfile.file.filename , @user.cvfile.url %></h6>
+                    <p>
+                      <label>
+                        <%= f.check_box :remove_cvfile %>
+                        Borrar hoja de vida
+                      </label>
+                    </p>
+                  <% else %>
+                    <p class="card-text">Aún no cargado</p>
+                    <p class="card-text"><%= f.file_field :cvfile %></p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-4 mx-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Archivo de contrato</h5>
+                  <% if @user.contract.file != nil %>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= link_to @user.contract.file.filename , @user.contract.url %></h6>
+                    <p>
+                      <label>
+                        <%= f.check_box :remove_contract %>
+                        Borrar archivo de contrato
+                      </label>
+                    </p>
+                  <% else %>
+                    <p class="card-text">Aún no cargado</p>
+                    <p class="card-text"><%= f.file_field :contract %></p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-4 mx-auto">
+              <% if @user.signfile.file %>
+                <div class="card">
+                  <img src="<%= @user.signfile.url %>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <p>
+                      <label>
+                        <%= f.check_box :remove_signfile %>
+                        Borrar archivo de firma
+                      </label>
+                    </p>
+                  </div>
+                </div>
+              <% else %>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Archivo de firma</h5>
+                    <p class="card-text">Aún no cargado</p>
+                    <p class="card-text"><%= f.file_field :signfile %></p>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
           <div class="actions">

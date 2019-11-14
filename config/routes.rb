@@ -53,8 +53,9 @@ Rails.application.routes.draw do
     resources :pictures
     resources :obcodes
 
-    resources :users, only: [:index, :edit, :update, :show]
+    
     devise_for :users, path: 'users', controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", unlocks: "users/unlocks", confirmations: "users/confirmations" }
+    resources :users, only: [:index, :edit, :update, :show]
 
     devise_scope :user do get "users" => "users#index"
     end

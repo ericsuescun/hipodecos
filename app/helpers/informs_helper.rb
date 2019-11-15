@@ -10,6 +10,9 @@
 module InformsHelper
 	def getcodes(inform)
 		find = inform.micros.first.description
+		if find == nil
+			return []
+		end
 		find = find.downcase.gsub(/[^a-z0-9\s]/i, '')
 		a = find.split(" ")
 		b = []

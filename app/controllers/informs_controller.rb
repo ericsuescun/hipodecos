@@ -64,7 +64,7 @@ class InformsController < ApplicationController
       
       date_range = Date.today.beginning_of_year..Date.today.end_of_year
       finf = Inform.where(created_at: date_range).last #Traingo el primer informe de año en curso. Last sería el primero desde que traigo ordenado por fecha y los más recientes son los primeros, mientras que los más viejos son los últimos. IMPORTANTE: El orden en el modelo es DESCENDENTE sobre el parámetro CREATED_AT. NO FUNCIONA BIEN si no es con ese parámetro. Los id van en el orden de creación!
-      inform.regime = inform.promoter.regime
+      inform.regime = Promoter.where(id: inform.promoter_id).first.try(:regime)
       inform.tag_code = 'C' + Date.today.strftime('%y').to_s + '-' + (inform.id - finf.id + 1).to_s #Para aplicar el consecutivo, tomo el id del registro actual, le resto el del primero del año y le sumo 1. Si coinciden, es decir, estoy justo en el primer registro del año, la resta dará 0, y el consecutivo asignado será 1 ! Esto además tiene en cuenta todos los registros pues esta basado en el id.
       inform.save #Just after saving is when I get de ID, and its needed for the serial code...
       redirect_to @patient, notice: 'Inform was successfully created.'

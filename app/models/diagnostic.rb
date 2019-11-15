@@ -6,6 +6,6 @@ class Diagnostic < ApplicationRecord
 
   default_scope -> { order(created_at: :desc) }
 
-  validates :description, presence: true
+  # validates :description, presence: true
   
 end

@@ -30,7 +30,7 @@ class DiagnosticsController < ApplicationController
     diagnostic.user_id = current_user.id
     diagnostic.pss_code = Diagcode.where(id: params[:diagnostic][:diagcode_id]).first.pss_code
     diagnostic.who_code = Diagcode.where(id: params[:diagnostic][:diagcode_id]).first.who_code
-    diagnostic.description = Diagcode.where(id: params[:diagnostic][:diagcode_id]).first.description
+    diagnostic.description = Auto.where(diagcode_id: params[:diagnostic][:diagcode_id]).first.body
 
     if diagnostic.save
       redirect_to inform, notice: 'El diagnóstico ha sido creado exitosamente.'

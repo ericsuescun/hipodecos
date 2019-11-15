@@ -1,6 +1,6 @@
 class InformsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_inform, only: [:show, :edit, :update, :destroy]
+  before_action :set_inform, only: [:show, :edit, :update, :destroy, :preview]
 
   # GET /informs
   # GET /informs.json
@@ -91,6 +91,10 @@ class InformsController < ApplicationController
       format.html { redirect_to informs_url, notice: 'Inform was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def preview
+    
   end
 
   private

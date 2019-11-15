@@ -1,10 +1,11 @@
 <div class="row">
   <div class="col-12 col-lg-8">
-    <% inform.macros.each do |macro| %>
-      <p><%= macro.description %></p>
-      <div class="text-muted"><p>Por: <%= User.where(id: macro.user_id).first.try(:first_name) %></p></div>
-      <%= link_to 'Revisar', macro_path(macro) %>
-      <%= link_to 'Editar', edit_macro_path(macro) %>
+    <% inform.macros.each_with_index do |macro, n| %>
+      <p>Macro <%= n + 1 %> de <%= inform.macros.count %> procesada el <%= macro.created_at.strftime('%d/%m/%Y') %> </p>
+      <h4><%= macro.description %></h4>
+      <div class="text-muted"><p>Por: <%= User.where(id: macro.user_id).first.try(:first_name) %> <%= User.where(id: macro.user_id).first.try(:last_name) %></p></div>
+      <%= link_to 'Revisar/Cargar foto', macro_path(macro) %> |
+      <%= link_to 'Editar', edit_macro_path(macro) %> |
       <%= link_to ' Borrar', macro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
       <table>
         <tbody>
@@ -17,9 +18,30 @@
           <% end %>
         </tbody>
       </table>
+      <div class="card-group my-3">
+        <% macro.pictures.each do |pic| %>
+          <div class="col-12 col-lg-4">
+            <div class="card">
+              <div class="card-header">
+                  <%= pic.description %>
+              </div>
+              <%= link_to pic.name.url do %>
+                <img class="card-img-top" src="<%= pic.name.url %>" alt="Card image cap" >  
+              <% end %>
+              <div class="card-body">
+                <%= link_to 'Borrar', inform_picture_path(inform, pic), method: :delete, data: { confirm: 'Confirmar borrado?' }
+                 %>
+                 <div class="card-footer text-muted">
+                   Cargada por: <%= User.where(id: pic.user_id).first.try(:email) %>
+                 </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   </div>
-  <% if inform.macros.length < 1 %>
+  <% if inform.macros.length < 4 %>
     <div class="col-12 col-lg-4">
       <h4>Agregar descripción Macro</h4>
       <%= form_for [inform, inform.macros.build] do |form| %>
@@ -37,5 +59,9 @@
   <% end %>
 </div>
 <div class="row">
-
+  <div class="col-12 col-lg-4">
+    <% inform.macros.each do |macro| %>
+      
+    <% end %>
+  </div>
 </div>

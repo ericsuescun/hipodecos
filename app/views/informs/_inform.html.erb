@@ -6,5 +6,6 @@
 	<p>Teléfono: <strong><%= @inform.patient.tel %></strong> - Celular: <strong><%= @inform.patient.cel %></strong> - Dirección: <strong><%= @inform.patient.address %> - </strong>Email: <strong><%= @inform.patient.email %></strong> - Fecha de entrega: <strong><%= @inform.delivery_date %></strong> - EPS: <strong><%= Promoter.find(@inform.promoter_id).initials %></strong> - Sede IPS: <strong><%= Branch.find(@inform.branch_id).initials %></strong></p>
 
 	<%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform) %> |
-	<%= link_to 'Volver a informes', informs_path %>
+	<%= link_to 'Volver a informes', informs_path %> |
+	<%= link_to 'Previsualizar informe', preview_path %>
 </div>

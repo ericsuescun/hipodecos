@@ -41,6 +41,8 @@ Rails.application.routes.draw do
     get 'objections/delete'
     get 'objections/show'
 
+    get 'informs/preview/:id', to: 'informs#preview', as: 'preview'
+
     resources :roles
     resources :values
     resources :factors

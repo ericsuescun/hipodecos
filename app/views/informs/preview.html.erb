@@ -1,0 +1,105 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      
+        <div class="row">
+          <div class="col-12 col-lg-12 my-3">
+              <h1><strong>Informe <%= @inform.tag_code %></strong><small></h1>
+              <h1></h1>
+              <h1>Paciente: <strong><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %></strong>F. recibo: </small><%= @inform.receive_date.strftime('%d/%m/%Y') %></h1>
+              <h1> de <strong><%= @inform.patient.age_number %> <%= @inform.patient.age_type == 'A' ? 'Años' : @inform.patient.age_type == 'M' ? 'Meses' : 'Días' %> con </strong><%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong></h1>
+
+              <p>Teléfono: <strong><%= @inform.patient.tel %></strong> - Celular: <strong><%= @inform.patient.cel %></strong> - Dirección: <strong><%= @inform.patient.address %> - </strong>Email: <strong><%= @inform.patient.email %></strong> - Fecha de entrega: <strong><%= @inform.delivery_date %></strong> - EPS: <strong><%= Promoter.find(@inform.promoter_id).initials %></strong> - Sede IPS: <strong><%= Branch.find(@inform.branch_id).initials %></strong></p>
+
+              <%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform) %> |
+              <%= link_to 'Volver a informes', informs_path %> |
+              <%= link_to 'Previsualizar informe', preview_path %>
+          </div>
+        </div>
+        <div class="alert alert-success">
+          <div class="row">
+            <div class="col-12 col-lg-8 mb-3">
+              <h1>Órdenes y documentos escaneados</h1>
+              <%= render partial: "escaneos", locals: { inform: @inform } %>
+            </div>
+            <div class="col-12 col-lg-4">
+              <h4>Agregar nuevos escaner de órdenes o documentos</h4>
+              <%= render partial: "pictures/form", locals: { imageable: @inform } %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mx-auto mb-3">
+            <div class="alert alert-success">
+              <h1>Doctor</h1>
+              <%= render partial: "physician", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>CUPS</h1>
+              <%= render partial: "studies", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Muestras</h1>
+              <%= render partial: "samples", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Bloques</h1>
+            <%= render partial: "blocks", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Placas</h1>
+              <%= render partial: "slides", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Descripción Macroscópica</h1>
+            <%= render partial: "macros", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Descripción Microscópica</h1>
+            <%= render partial: "micros", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>Diagnóstico</h1>
+              <%= render partial: "diagnostics", locals: { inform: @inform } %>
+            </div>
+            
+          </div>
+        </div>       
+    </div>
+  </div>
+</div>

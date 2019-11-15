@@ -1,10 +1,11 @@
 <div class="row">
   <div class="col-12 col-lg-8">
-    <% inform.micros.each do |micro| %>
-      <p><%= micro.description %></p>
-      <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %></p></div>
-      <%= link_to 'Revisar', micro_path(micro) %>
-      <%= link_to 'Editar', edit_micro_path(micro) %>
+    <% inform.micros.each_with_index do |micro, n| %>
+      <p>Micro <%= n + 1 %> de <%= inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %> </p>
+      <h4><%= micro.description %></h4>
+      <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %></p></div>
+      <%= link_to 'Revisar/Cargar foto', micro_path(micro) %> |
+      <%= link_to 'Editar', edit_micro_path(micro) %> |
       <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
       <table>
         <tbody>
@@ -17,9 +18,30 @@
           <% end %>
         </tbody>
       </table>
+      <div class="card-group">
+        <% micro.pictures.each do |pic| %>
+          <div class="col-12 col-lg-4">
+            <div class="card">
+              <div class="card-header">
+                  <%= pic.description %>
+              </div>
+              <%= link_to pic.name.url  do %>
+                <img class="card-img-top" src="<%= pic.name.url %>" alt="Card image cap" >
+              <% end %>
+              <div class="card-body">
+                <%= link_to 'Borrar', inform_picture_path(inform, pic), method: :delete, data: { confirm: 'Confirmar borrado?' }
+                 %>
+                 <div class="card-footer text-muted">
+                   Cargada por: <%= User.where(id: pic.user_id).first.try(:email) %>
+                 </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   </div>
-  <% if inform.micros.length < 1 %>
+  <% if inform.micros.length < 4 %>
     <div class="col-12 col-lg-4">
       <h4>Agregar descripción Micro</h4>
       <%= form_for [inform, inform.micros.build] do |form| %>
@@ -37,23 +59,5 @@
   <% end %>
 </div>
 <div class="row">
-  <div class="col-12 col-lg-8 mx-auto">
-    <% inform.micros.each do |micro| %>
-      <% micro.pictures.each do |pic| %>
-        <div class="card d-inline-block mx-auto" style="width: 18rem;">
-          <div class="card-header">
-              <%= pic.description %>
-            </div>
-          <img class="card-img-top" src="<%= pic.name.url %>" alt="Card image cap" >
-          <div class="card-body">
-            <%= link_to 'Borrar', inform_picture_path(inform, pic), method: :delete, data: { confirm: 'Confirmar borrado?' }
-             %>
-             <div class="card-footer text-muted">
-               Cargada por: <%= User.find(pic.user_id).email %>
-             </div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+
 </div>

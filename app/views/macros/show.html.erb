@@ -17,6 +17,15 @@
             <p class="text-muted">Creado por: <%= User.find(@macro.user_id).email %></p>
           <% end %>
         </fieldset>
+        <% @macro.pictures.each do |picture| %>
+          <div class="card">
+            <img src="<%= picture.name.url %>" class="card-img-top" alt="<%= picture.name.filename %>">
+            <div class="card-body">
+              <p class="card-text"><%= picture.description %></p>
+              <%= link_to "Borrar", micro_picture_path(@macro, picture), method: :delete, data: { confirm: '¿Confirmar borrado?' }, class: "btn btn-danger" %>
+            </div>
+          </div>
+        <% end %>
         <h1>Cargar fotos</h1>
         <%= render partial: "pictures/form", locals: { imageable: @macro } %>
       </div>

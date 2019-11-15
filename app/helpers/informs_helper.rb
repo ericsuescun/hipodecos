@@ -25,7 +25,7 @@ module InformsHelper
 		# word = b[0]
 		# answer += Diagcode.where("description like ?", "%#{word}%")
 		b.each do |word|
-			answer += Diagcode.where("description like ?", "%#{word}%")
+			answer += Diagcode.where("description like ?", "%#{word.upcase}%")
 		end
 		return answer
 	end

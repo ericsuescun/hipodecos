@@ -1,5 +1,7 @@
 class Diagcode < ApplicationRecord
 
+	has_many :autos
+
 	require 'csv'
 
 	def self.import(file)

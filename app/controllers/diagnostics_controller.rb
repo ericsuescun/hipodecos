@@ -28,6 +28,9 @@ class DiagnosticsController < ApplicationController
     inform = Inform.find(params[:inform_id])
     diagnostic = inform.diagnostics.build(diagnostic_params)
     diagnostic.user_id = current_user.id
+    diagnostic.pss_code = Diagcode.where(id: params[:diagnostic][:diagcode_id]).first.pss_code
+    diagnostic.who_code = Diagcode.where(id: params[:diagnostic][:diagcode_id]).first.who_code
+    diagnostic.description = Diagcode.where(id: params[:diagnostic][:diagcode_id]).first.description
 
     if diagnostic.save
       redirect_to inform, notice: 'El diagnóstico ha sido creado exitosamente.'
@@ -78,6 +81,6 @@ class DiagnosticsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diagnostic_params
-      params.require(:diagnostic).permit(:inform_id, :user_id, :description)
+      params.require(:diagnostic).permit(:inform_id, :user_id, :description, :diagcode_id, :pss_code, :who_code)
     end
 end

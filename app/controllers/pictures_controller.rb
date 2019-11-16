@@ -25,7 +25,11 @@ class PicturesController < ApplicationController
   end
 
   def destroy
-    inf = @picture.imageable.inform_id  #Antes de borrar, cargo el id del inform de donde venía.
+    if @picture.imageable.class.name != "Inform"
+      inf = @picture.imageable.inform_id  #Antes de borrar, cargo el id del inform de donde venía.
+    else
+      inf = @picture.imageable.id   #Si es tipo Inform, paso el id de una
+    end
     # inf = params[:inform_id]
     @picture.destroy
     redirect_to inform_path(inf), notice: "La foto fue eliminada con éxito"

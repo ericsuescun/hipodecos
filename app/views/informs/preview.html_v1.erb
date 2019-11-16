@@ -94,17 +94,6 @@
           <div class="col-12 col-lg-12">
             Micro <%= n + 1 %> de <%= @inform.micros.length %>
             <p><%= micro.description %></p>
-            <div class="row">
-              <% micro.pictures.each do |picture| %>
-                <div class="col-12 col-lg-4 mx-auto">
-                  <div class="card">
-                    <%= link_to picture.name.url  do %>
-                      <%= image_tag picture.name.url, class: "card-img-top" %>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
           </div>
         </div>
       <% end %>

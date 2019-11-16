@@ -27,6 +27,7 @@ module InformsHelper
 		b.each do |word|
 			answer += Diagcode.where("description like ?", "%#{word.upcase}%")
 		end
+		# answer = answer.sort_by(&:organ)
 		return answer
 	end
 end

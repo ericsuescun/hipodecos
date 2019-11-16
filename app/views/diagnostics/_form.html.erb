@@ -4,11 +4,20 @@
       <%= form_with(model: diagnostic, local: true) do |form| %>
 
         <div class="form-group">
+          <h3>Opciones:</h3>
           <% Auto.where(diagcode_id: diagnostic.diagcode_id).each_with_index do |auto, n| %>
-            <p>Opción <%= n + 1 %></p>
             <p><%= auto.body %></p>
           <% end %>
-          
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Código PSS" %>
+          <%= form.text_area :pss_code, class: "form-control input" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label "Código OMS" %>
+          <%= form.text_area :who_code, class: "form-control input" %>
         </div>
 
         <div class="form-group">
@@ -21,6 +30,72 @@
         </div>
       <% end %>
 
+    </div>
+    <div class="col-12 col-lg-4">
+      <h3>Entorno superior del caso encontrado:</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>PSS</th>
+            <th>OMS</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ((diagnostic.diagcode_id - 10)..(diagnostic.diagcode_id)).each do |diag_code_id| %>
+            <% if diagnostic.diagcode_id == diag_code_id %>
+              
+                <tr>
+                  
+                    <td><div class="alert alert-success"><%= Diagcode.where(id: diag_code_id).first.try(:pss_code) %></div></td>
+
+                  <td><div class="alert alert-success"><%= Diagcode.where(id: diag_code_id).first.try(:who_code) %></div></td>
+                  <td><div class="alert alert-success"><%= Diagcode.where(id: diag_code_id).first.try(:description) %></div></td>
+                </tr>
+              
+            <% else %>
+              <tr>
+                <td><%= Diagcode.where(id: diag_code_id).first.try(:pss_code) %></td>
+                <td><%= Diagcode.where(id: diag_code_id).first.try(:who_code) %></td>
+                <td><%= Diagcode.where(id: diag_code_id).first.try(:description) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12 col-lg-4">
+      <h3>Entorno inferior del caso encontrado:</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>PSS</th>
+            <th>OMS</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ((diagnostic.diagcode_id)..(diagnostic.diagcode_id + 10)).each do |diag_code_id| %>
+            <% if diagnostic.diagcode_id == diag_code_id %>
+              
+                <tr>
+                  
+                    <td><div class="alert alert-success"><%= Diagcode.where(id: diag_code_id).first.try(:pss_code) %></div></td>
+
+                  <td><div class="alert alert-success"><%= Diagcode.where(id: diag_code_id).first.try(:who_code) %></div></td>
+                  <td><div class="alert alert-success"><%= Diagcode.where(id: diag_code_id).first.try(:description) %></div></td>
+                </tr>
+              
+            <% else %>
+              <tr>
+                <td><%= Diagcode.where(id: diag_code_id).first.try(:pss_code) %></td>
+                <td><%= Diagcode.where(id: diag_code_id).first.try(:who_code) %></td>
+                <td><%= Diagcode.where(id: diag_code_id).first.try(:description) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

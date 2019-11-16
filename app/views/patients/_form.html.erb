@@ -26,7 +26,7 @@
             <div class="col-12 col-lg-2">
               <div class="form-group">
                 <%= form.label "Tipo de id" %>
-                <%= form.select(:id_type, options_for_select([['Cédula', 'CC'], ['Cédula de extranjería', 'CE'], ['Carnet Diplomático', 'CD'], ['Pasaporte', 'PA'], ['Salvoconducto', 'SC'], ['Permiso Especial', 'PE'], ['Registro Civil', 'RC'], ['Tarjeta de Identidad', 'TI'], ['Certificado de Nacimiento', 'NC'], ['Adulto sin identificación', 'AS'], ['Menor sin identificación', 'MS']], @patient.id_type), { include_blank: true }, class: "form-control input") %>
+                <%= form.select(:id_type, options_for_select([['Cédula', 'CC'], ['Cédula de extranjería', 'CE'], ['Carnet Diplomático', 'CD'], ['Pasaporte', 'PA'], ['Salvoconducto', 'SC'], ['Permiso Especial', 'PE'], ['Registro Civil', 'RC'], ['Tarjeta de Identidad', 'TI'], ['Certificado de Nacimiento', 'NC'], ['Adulto sin identificación', 'AS'], ['Menor sin identificación', 'MS']], @patient.id_type), { include_blank: true }, class: "form-control input", autofocus: true) %>
               </div>
             </div>
             <div class="col-12 col-lg-3">

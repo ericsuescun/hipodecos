@@ -3,4 +3,4 @@
 <%= render 'form', diagnostic: @diagnostic %>
 
 <%= link_to 'Detalles', @diagnostic %> |
-<%= link_to 'Volver', diagnostics_path %>
+<%= link_to 'Volver al informe', inform_path(@diagnostic.inform_id) %>

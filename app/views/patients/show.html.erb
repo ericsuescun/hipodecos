@@ -81,7 +81,7 @@
             <div class="col-12 col-lg-3">
               <div class="form-group">
                 <%= form.label "Fecha de recepción" %>
-                <%= form.date_field :receive_date, autocomplete: "Fecha de recepción", class: "form-control input"  %>
+                <%= form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de recepción", class: "form-control input", autofocus: true  %>
               </div>
             </div>
             <div class="col-12 col-lg-3">

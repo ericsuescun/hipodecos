@@ -1,6 +1,7 @@
 es:
   activerecord:
     models:
+      inform: Informes
     attributes:
       user:
         password: Contraseña
@@ -44,8 +45,21 @@ es:
         name: Nombre
         description: Descripción
         factor: Factor
+      phisician:
+        name: Nombre
+        lastname: Apellido
+      patient:
+        age_number: Edad
+        age_type: Unidades de edad
+        sex: Sexo
+        id_type: Tipo de id
     errors:
+      models:
+        inform: Informe
+        promoter: EPS
+
       messages:
+
         record_invalid: 'La validación falló: %{errors}'
         restrict_dependent_destroy:
           has_one: El registro no puede ser eliminado pues existe un %{record} dependiente

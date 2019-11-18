@@ -53,7 +53,7 @@ class PatientsController < ApplicationController
     end
 
     @patient.informs.first.user_id = current_user.id
-    @patient.informs.first.entity_id = Branch.find(params[:patient][:informs_attributes][:"0"][:branch_id]).entity_id
+    @patient.informs.first.entity_id = Branch.where(id: params[:patient][:informs_attributes][:"0"][:branch_id]).first.try(:entity_id)
 
     if @patient.save
       @patient.informs.first.update(tag_code: ('C' + Date.today.strftime('%y').to_s + '-' + @patient.informs.first.id.to_s))

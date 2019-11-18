@@ -54,9 +54,12 @@ class PatientsController < ApplicationController
 
     @patient.informs.first.user_id = current_user.id
     @patient.informs.first.entity_id = Branch.where(id: params[:patient][:informs_attributes][:"0"][:branch_id]).first.try(:entity_id)
+    @patient.informs.first.regime = Promoter.where(id: params[:patient][:informs_attributes][:"0"][:promoter_id]).first.try(:regime)
 
     if @patient.save
-      @patient.informs.first.update(tag_code: ('C' + Date.today.strftime('%y').to_s + '-' + @patient.informs.first.id.to_s))
+      date_range = Date.today.beginning_of_year..Date.today.end_of_year
+      finf = Inform.where(created_at: date_range).last #Traingo el primer informe de año en curso. Last sería el primero desde que traigo ordenado por fecha y los más recientes son los primeros, mientras que los más viejos son los últimos. IMPORTANTE: El orden en el modelo es DESCENDENTE sobre el parámetro CREATED_AT. NO FUNCIONA BIEN si no es con ese parámetro. Los id van en el orden de creación!
+      @patient.informs.first.update(tag_code: ('C' + Date.today.strftime('%y').to_s + '-' + (@patient.informs.first.id - finf.id + 1).to_s)) #Para aplicar el consecutivo, tomo el id del registro actual, le resto el del primero del año y le sumo 1. Si coinciden, es decir, estoy justo en el primer registro del año, la resta dará 0, y el consecutivo asignado será 1 ! Esto además tiene en cuenta todos los registros pues esta basado en el id.
       redirect_to new_patient_path, notice: 'Paciente matriculado exitosamente.'
     else
       render :new

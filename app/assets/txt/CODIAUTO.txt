@@ -1,0 +1,100 @@
+&&ARCHIVO DE CODIGOS AUTOMATICOS
+
+
+
+PERICARDIO
+
+@ 06,02 say "INFLAMACION AGUDA FIBRINOSA:__1"
+@ 08,02 say "INFLAMACION AGUDA PURULENTA:__2"
+@ 10,02 say "INFLAMACION CRONICA ACTIVA:___3-4"
+
+
+ARTERIA
+
+@ 06,02 say "ARTERITIS DE CELS GIGANTES:__1"
+@ 08,02 say "ANEURISMA ARTERIOSCLEROSIS:__2"
+@ 10,02 say "ARTERIOSCLEROSIS GANGRENA:___3-4"
+@ 12,02 say "HEMANGIOMA CAPILAR:__________5"
+@ 14,02 say "HEMANGIOMA CAVERNOSO:________6"
+@ 16,02 say "GLOMANGIOMA PARAGANGLIOMA:___7"
+
+
+VENA
+
+@ 06,02 say "TROMBOEMBOLISMO:__1"
+@ 08,02 say "VARICES:__________2-3"
+@ 10,02 say "HEMORROIDES:______4-5"
+
+
+NASAL
+
+@ 06,02 say "POLIPO INFLAMATORIO:__1-2-3"
+
+
+LARINGE
+
+@ 06,02 say "NODULO-POLIPO:__1"
+@ 08,02 say "PAPILOMA:_______2"
+
+
+PULMON
+
+@ 06,02 say "HAMARTOMA:__1"
+
+
+BAZO
+
+@ 06,02 say "ESPLENOMEGALIA CONGESTIVA:__1"
+@ 08,02 say "PURPURA TROMB IDIOPATICA:___2"
+@ 10,02 say "ANEMIA HEMOLITICA:__________3"
+@ 12,02 say "RUPTURA TRAUMATICA:_________4"
+
+
+GANGLIO
+
+@ 06,02 say "HIPERPLASIA FOLICULAR:__1-4"
+@ 08,02 say "HIPERPLASIA SINUSAL:____2-5"
+@ 10,02 say "HIPERPLASIA AMIGDALA:___3"
+
+
+SALIVAR
+
+@ 06,02 say "HIPERQUERATOSIS DISPLASIA:__1"
+@ 08,02 say "TUMOR MIXTO:________________2"
+
+
+ESOFAGO
+
+@ 06,02 say "ESOFAGITIS PEPTICA: 1--2--3"
+@ 08,02 say "ESOFAGO DE BARRETT: 4--5"
+@ 10,02 say "CA ESCAMOCELULAR:   6"
+@ 12,02 say "ADENOCARCINOMA:     7"
+
+
+ESTOMAGO
+
+@ 04,02 SAY "Cronica Activa Superficial:___1-2-3-4      INFL AGUDA:___47"
+@ 06,02 SAY "Cronica Superficial:__________5-6-7"
+@ 08,02 SAY "Cronica Activa Difusa:________8-9-49"
+@ 10,02 SAY "Cronica Difusa:_______________10-11-12"
+@ 12,02 SAY "PARA COMBINAR CON LAS DE ARRIBA:"
+@ 14,02 SAY "HELICOBACTER SOLO:________________________13-14"
+@ 16,02 SAY "HIPERPLASIA LINFOIDE:_____________________15-16"
+@ 18,02 SAY "METAPLASIA INTESTINAL TIPO COMPLETA:______17-18"
+@ 20,02 SAY "METAPLASIA INTESTINAL TIPO INCOMPLETA:____19-20"
+@ 22,02 SAY "DESCRIPCIONES COMPLETAS CON HELICOBACTER"
+@ 24,02 SAY "Cronica Activa Superficial+helicobacter:__21-22"
+@ 26,02 SAY "Cronica Activa Difusa+helicobacter:_______23-24"
+@ 28,02 SAY "Cronica Superficial+helicobacter:_________25-26"
+@ 30,02 SAY "Cronica Difusa+helicobacter:______________27-28"
+@ 32,02 SAY "Cronica Activa Difusa Erosiva+helicobacter:______________________29-30"
+@ 34,02 SAY "Cronica Difusa Metaplasia Completa Displasia leve+helicobacter:__31-32"
+@ 36,02 SAY "Cronica Difusa+Metaplasia Completa:______________________________33-34"
+@ 38,02 SAY "Cronica Difusa Metaplasia Completa Displasia leve:__35-36"
+@ 40,02 SAY "Cronica Activa Difusa Erosiva:______________________37-38"
+@ 42,02 SAY "Cronica Activa Difusa+HIPERPLASIA LINFOIDE:_________39"
+@ 44,02 SAY "ULCERA PEPTICA:_______________40"
+@ 46,02 SAY "ULCERA PEPTICA+HELICOBACTER:__41"
+@ 48,02 SAY "CARCINOMA BIEN DIFERENCIADO:__42-43-51"
+@ 50,02 SAY "CARCINOMA INDIFERENCIADO:_____44-45-50"
+@ 52,02 SAY "CARCINOMA NEUROENDOCRINO:_____46-48"

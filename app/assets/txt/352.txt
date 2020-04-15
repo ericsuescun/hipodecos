@@ -1,0 +1,6 @@
+#1 MARCADO PRÓSTATA APICAL IZQUIERDA: Se reciben     fragmentos cilíndricos de tejido, el mayor de     cm. SE PROCESA TODO-A
+#2 MARCADO  PRÓSTATA MEDIAL IZQUIERDA: Se reciben     fragmentos cilíndricos de tejido, el mayor de     cm. SE PROCESA TODO-B
+#3 MARCADO  PRÓSTATA BASAL IZQUIERDA: Se reciben     fragmentos cilíndricos de tejido, el mayor de     cm. SE PROCESA TODO-C
+#4 MARCADO PRÓSTATA APICAL DERECHA: Se reciben     fragmentos cilíndricos de tejido, el mayor de     cm. SE PROCESA TODO-D
+#5 MARCADO PRÓSTATA MEDIAL DERECHA: Se reciben     fragmentos cilíndricos de tejido, el mayor de     cm. SE PROCESA TODO-E
+#6 MARCADO PRÓSTATA BASAL DERECHA: Se reciben     fragmentos cilíndricos de tejido, el mayor de     cm. SE PROCESA TODO-F

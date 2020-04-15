@@ -1,0 +1,166 @@
+
+LISTA DE CHEQUEO DE MELANOMA
+
+MACROSCÓPICO
+
+Tipo de muestra
+Escisión ___, elipse
+Escisión ___, ancho
+___ Escisión, otros (especificar): ____________________________
+___ Una nueva escisión, elipse
+___ Una nueva escisión, ancho
+___ Una nueva escisión, otros (especificar): ____________________________
+Linfadenectomía ___, del ganglio centinela (s)
+Linfadenectomía ___, ganglios regionales (especificar): ____________________________
+___ Otro (especificar): ____________________________
+___ No especificado
+
+El tumor macroscópico
+___ Presente
+___ Ausente
+___ Indeterminado
+
+Sitio del tumor
+Indique (si se conoce): ____________________________
+___ No especificado
+
+Lesión Tamaño
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+___ No puede determinarse (ver Comentario)
+
+Satélite nódulo (s)
+___ Ausente
+Presente ___ (especificar): ____________________________
+___ No puede determinarse
+
+* Pigmentación
+* ___ Ausente
+* ___ Difuso presente,
+* ___ Presente, irregular / focal
+* ___ Indeterminado
+* ___ No puede determinarse
+
+
+MICROSCÓPICA
+
+Tipo Histológico
+___ Melanoma de extensión superficial
+___ Melanoma lentigo maligno
+___ Melanoma nodular
+___ Melanoma acral lentiginoso
+___-Lentiginoso melanoma mucoso
+___ Desmoplásico (desmoplásico cabezal; neuroid) melanoma
+___ Melanoma neurotrópico
+___ Malignos nevus azules
+___ El melanoma en nevos melanocíticos congénitos
+___ Desviación mínima (nevoide) melanoma
+___ Otro (especificar): ____________________________
+Melanoma ___, tipo no se puede determinar
+
+Ulceración
+___ Presente
+___ Ausente
+
+Profundidad de la invasión
+Especificar: ___ mm
+___ No puede determinarse (ver Comentario)
+
+La estadificación patológica (pTNM)
+
+Tumor primario (pT)
+___ PTX: El tumor primario no puede ser evaluado (ver Comentario)
+___ PT0: No hay evidencia de tumor primario
+___ PTis: Melanoma in situ (es decir, no un tumor invasivo: nivel I)
+pT1: Melanoma 1,0 mm o menos de grosor, con o sin ulceración
+___ PT1a: Melanoma 1,0 mm o menos de espesor y nivel II o III, sin ulceración
+___ PT1b: Melanoma 1,0 mm o menos de espesor y nivel IV o V o con ulceración
+pT2: Melanoma 1,01 a 2 mm de espesor, con o sin ulceración
+___ PT2a: Melanoma 1,01 a 2,0 mm de grosor, sin ulceración
+___ PT2b: Melanoma 1,01 a 2,0 mm de grosor, con ulceración
+pT3: Melanoma 2,01 a 4,0 mm de espesor, con o sin ulceración
+___ PT3a: Melanoma 2,01 a 4,0 mm de grosor, sin ulceración
+___ PT3b: Melanoma 2,01 a 4,0 mm de grosor, con ulceración
+pT4: Melanoma mayor que 4,0 mm de espesor, con o sin ulceración
+___ PT4a mayor que 4,0 mm de espesor Melanoma, sin ulceración
+___ PT4b mayor de 4,0 mm de grosor del melanoma, con ulceración
+
+Ganglios linfáticos regionales (pN)
+___ PNX: Los ganglios linfáticos regionales no pueden ser evaluados
+PN0 ___: No hay metástasis a los ganglios linfáticos regionales
+pN1: Metástasis en un ganglio linfático regional
+___ PN1a: Clínicamente oculta (microscópico) metástasis
+___ PN1B: Clínicamente aparente (macroscópica) metástasis
+pN2: Metástasis en 2 a 3 ganglios linfáticos regionales o metástasis linfática intra-regional sin metástasis ganglionares
+___ PN2a: Clínicamente oculta (microscópico) metástasis
+___ PN2b: Clínicamente aparente (macroscópica) metástasis
+___ PN2c: Satélite o metástasis en tránsito sin metástasis ganglionares
+___ PN3: Metástasis en 4 o más ganglios linfáticos regionales o enmarañados ganglios metastásicos, o metástasis en tránsito o satélites (s) con metástasis en los ganglios linfáticos regionales (s)
+Número identificado: ____
+Número que contiene metástasis identificadas macroscópicamente: ____
+Número que contiene metástasis identificadas microscópicamente: ____
+Nodos con paspartú:
+___ Presente
+___ Ausente
+
+Metástasis a distancia (pM)
+___ PMX: Presencia de metástasis distante no puede ser evaluada
+___ PM1: Metástasis a distancia (documentado en este ejemplar)
+* ___ PM1a: metástasis en la piel, los tejidos subcutáneos o ganglios linfáticos distantes
+* ___ PM1b: metástasis a pulmón
+* ___ PM1c: Metástasis a otros sitios viscerales o metástasis a distancia a cualquier sitio asociado con una elevación de la deshidrogenasa láctica sérica (LDH)
+* (Sitio Otro, especifique: ____________________________)
+
+Márgenes (marque todas las que apliquen)
+
+Los márgenes laterales
+___ No puede evaluarse
+___ No afectado por melanoma invasivo
+Distancia de melanoma invasivo de margen lateral más cercano: ___ mm
+Especifique la ubicación (s), si es posible: ____________________________
+___ Participa por melanoma invasivo
+Especifique la ubicación (s), si es posible: ____________________________
+___ No afectado por melanoma in situ
+Distancia de melanoma in situ a partir margen más cercano: ___ mm
+Especifique la ubicación (s), si es posible: ____________________________
+___ Participa por melanoma in situ
+Especifique la ubicación (s), si es posible: ____________________________
+
+Margen Profundo
+___ No puede evaluarse
+___ No afectado por melanoma invasivo
+Distancia de melanoma invasivo de margen: ___ mm
+Especifique la ubicación (s), si es posible: ____________________________
+___ Participa por melanoma invasivo
+Especifique la ubicación (s), si es posible: ____________________________
+
+* Venosa (vaso grande) Invasion (V)
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Invasión perineural
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Los linfocitos infiltrantes de tumor
+* ___ Ausente
+* ___ Nonbrisk
+* ___ Brisk
+
+* La regresión del tumor
+* ___ Ausente
+* ___ Present incluyó menos de 75%
+* ___ Presente involucrando 75% o más de lesión
+
+* Índice mitótico
+* ___ Menos de 1 mitosis por mm2 figura
+* Mitótico ___ 1 o más figura por mm2
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Nevus remanente
+* ___ La queratosis actínica
+* ___ Otro (especificar): ____________________________
+
+* Comentario (s)

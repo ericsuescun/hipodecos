@@ -1,0 +1,123 @@
+Fecha de publicación del protocolo: junio de 2017.
+
+COLON Y RECTUM: Biopsia por escisión (polipectomía)
+
+Nota: este resumen de caso se recomienda para informar las muestras de biopsia, pero no se requiere para fines de acreditación.
+
+Seleccione una respuesta única a menos que se indique lo contrario.
+
+Sitio del tumor (Nota A)
+___ cecum
+___ Válvula ileocecal
+___ Colon derecho (ascendente)
+___ Ángulo hepático
+___ Colon transverso
+___ Flexura esplénica
+___ Colon izquierdo (descendente)
+___ Colon sigmoide
+___ rectosigmoide
+___ el recto
+___ Otra especificar): ________________________
+___ No especificado
+
++ Integridad del espécimen
++ ___ Intacto
++ ___ Fragmentado
+
++ Tamaño del pólipo
++ Dimensión mayor (centímetros): ___ cm
++ Dimensiones adicionales (centímetros): ___ x ___ cm
++ ___ No se puede determinar (explicar): _______________________________
+
++ Configuración de pólipos
++ ___ Pedunculado con tallo
++ Longitud del tallo (centímetros): ___ cm
++ ___ Sésil
+
++ Tamaño del carcinoma invasivo
++ Dimensión mayor (centímetros): ___ cm
++ Dimensiones adicionales (centímetros): ___x ___ cm
++ ___ No se puede determinar (explicar): _______________________________
+
+Tipo histológico (seleccione todo lo que corresponda) (Nota B)
+___ adenocarcinoma
+___ adenocarcinoma mucinoso
+___ carcinoma de células en anillo de sello
+___ carcinoma medular
+___ carcinoma micropapilar
+___ adenocarcinoma serrado
+___ carcinoma neuroendocrino de células grandes
+___ carcinoma neuroendocrino de células pequeñas
+___ Carcinoma neuroendocrino (pobremente diferenciado) #
+___ carcinoma de células escamosas
+___ carcinoma adenoescamoso
+___ carcinoma de células del huso
+___ Carcinoma adenoneuroendocrino mixto
+___ carcinoma indiferenciado
+___ Otro tipo histológico no listado (especifique): __________________________
+___ Carcinoma, no se puede determinar el tipo
+# Nota: seleccione esta opción solo si no se puede determinar la celda grande o la celda pequeña
+
+Grado histológico (Nota C)
+___ G1: bien diferenciado
+___ G2: moderadamente diferenciado
+___ G3: mal diferenciado
+___ G4: indiferenciado
+___ Otra especificar): ____________________________
+___ GX: no puede ser evaluado
+___ No aplica
+
+Extensión del tumor (Nota D)
+___ El tumor invade la lámina propia.
+___ El tumor invade la mucosa muscular.
+___ El tumor invade la submucosa.
+___ El tumor invade la musculatura propia.
+___ no puede ser evaluado
+
+Márgenes (seleccione todos los que apliquen)
+
+Margen profundo (Margen de tallo)
+___ no puede ser evaluado
+___ No involucrado por carcinoma invasivo
+Distancia del carcinoma invasivo desde el margen (milímetros o centímetros): ___ mm o ___ cm
+___ Involucrado por carcinoma invasivo
+
+Margen mucoso (requerido solo si es aplicable)
+___ no puede ser evaluado
+___ No involucrado por carcinoma invasivo
+___ Involucrado por carcinoma invasivo
+___ Involucrado por adenoma
+
+Invasión linfovascular (seleccione todas las que correspondan) (Notas D y E)
+___ No identificado
+___ presente
++ ___ Invasión linfovascular de pequeños vasos
++ ___ Invasión del vaso grande (venoso)
+___ No puede ser determinado
+
++ Florecimiento Tumoral (Nota F)
++ ___ Número de brotes tumorales en 1 campo de "zona interactiva" (especifique el número total en área = 0.785 mm2): ___________
++ ___ Puntuación baja (0-4)
++ ___ puntaje intermedio (5-9)
++ ___ Puntuación más alta (10 o más)
++ ___ No se puede determinar
++ Tipo de pólipo en el que el carcinoma invasor Arose (Nota G)
++ ___ adenoma tubular
++ ___ adenoma velloso
++ ___ adenoma tubulovilloso
++ ___ Adenoma serrado tradicional
++ ___ Adenoma serrado sésil / pólipo serrado sésil
++ ___ pólipo hamartomatoso
++ ___ Otro (especifique): ________________________________
+
++ Hallazgos patológicos adicionales (seleccione todos los que correspondan)
++ ___ Ninguno identificado
++ ___ colitis ulcerosa
++ ___ enfermedad de Crohn
++ ___ Otros pólipos (tipo [s]): ___________________________
++ ___ Otro (especifique): ___________________________
+
++ Estudios Auxiliares (Nota N)
+Nota: Para la presentación de informes de pruebas moleculares e inmunohistoquímica para las proteínas de reparación no coincidentes, y para otros resultados de pruebas de biomarcadores de cáncer, se debe utilizar la plantilla de biomarcadores colorectales de CAP. Los estudios de biomarcadores pendientes deben enumerarse en la sección de Comentarios de este informe.
+
++ Comentario (s)

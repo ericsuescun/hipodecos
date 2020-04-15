@@ -1,0 +1,125 @@
+
+LISTA CHEQUEO TUMOR PEDIATRICOS
+
+MACROSCÓPICO
+
+Tipo de muestra
+___ Nefrectomía parcial
+___ Nefrectomía Radical
+___ Otro (especificar): ____________________________
+___ No especificado
+
+Lateralidad
+___ Derecho
+___ Izquierda
+___ No especificado
+
+Tamaño del riñón
+Dimensión Renal: ___ x ___ cm x ___
+Peso: ____ gramos
+Descripción de la fascia perirrenal grasa / Gerota @ s: ____________________________
+
+* Tumor del sitio (marque todas las que apliquen)
+* ___ Polo superior
+* ___ Medio
+* ___ Polo inferior
+* ___ Otro (especificar): ____________________________
+* ___ No especificado
+
+Características del tumor
+El número de nódulos tumorales: ___
+Para cada nódulo:
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ cm X___
+___ No puede determinarse (ver Comentario)
+Localización (s) (especificar): ____________________________
+___ No puede determinarse (ver Comentario)
+
+Extensión macroscópica del tumor (marque todas las que apliquen)
+___ Fascia de Gerota intacto
+___ Fascia de Gerota interrumpido
+___ Vena renal actual invasión
+___ Invasión de la vena renal ausente
+___ Extensión del tumor suprarrenal en la actualidad
+___ Extensión del tumor suprarrenal en ausencia
+
+
+MICROSCÓPICA
+
+Tipo histológico (marque todas las que apliquen)
+___ Histología del tumor de Wilms, favorable
+___ Wilms anaplasia del tumor focal
+___ Wilms tumor anaplasia difusa
+___ Nefroma mesoblástico congénito, clásico
+___ El nefroma mesoblástico congénito, celular
+___ Nefroma mesoblástico congénito, mixto
+___ Sarcoma de células claras
+___ Tumor rabdoide
+___ Otro (especificar): ____________________________
+___ Tumor maligno tipo, no se puede determinar
+
+Nefroblastomatosis
+___ Restos nefrogénicos, intralobulares
+___ Restos nefrogénicos, perilobulares
+___ Restos nefrogénicos, no clasificados
+___ No hay restos nefrogénicos
+___ No puede determinarse
+
+Márgenes (marque todas las que apliquen)
+___ No puede evaluarse
+Márgenes ___ no afectado por el tumor
+Distancia más cercana de tumor de margen: ___ mm
+___ Margen (s) afectados por el tumor
+___ Fascia de Gerota
+___ Vasos renales (especificar): ____________________________
+___ Uréter
+
+Renal Sinusal (marque todas las que apliquen)
+___ No afectación del seno renal
+___ Renal seno del tejido blando
+___ Seno afectación vascular renal
+
+Ganglios linfáticos regionales
+___ No ganglios linfáticos presentados
+___ No puede evaluarse
+___ No linfáticos regionales Metástasis a los ganglios
+___ Linfáticos regionales Metástasis a los ganglios
+Especificar: Número de ganglios linfáticos examinados: ___
+Número de ganglios linfáticos afectados: ___
+
+Nacional de Wilms Tumor Study Group (NWTSG) Sistema de estadificación
+(Marque todo lo que corresponda de acuerdo con la etapa apropiada)
+
+Etapa I
+___ Tumor limitado al riñón y completamente resecado
+___ Cápsula intacta Renal
+Tumor ___ roto o no una biopsia antes de la retirada
+Vena renal ___ no contiene ningún tumor (participación vaso intrarrenal puede estar presente)
+___ No afectación ganglionar o metástasis a distancia
+
+Etapa II
+___ Tumor se extiende más allá del riñón pero completamente resecado
+___ Extensión regional del tumor (invasión vascular fuera del parénquima renal o en el seno renal, y / o penetración capsular con margen de escisión negativo)
+Derrame ___ tumor confinado operativo de acompañamiento y de no contaminar el peritoneo
+___ Biopsia (excepto aspiración con aguja fina) antes de la cirugía
+
+Etapa III
+Hematógeno ___ metástasis confinado al abdomen (por ejemplo, tumor en los ganglios linfáticos regionales), incluyendo implantes tumorales sobre o penetrando en el peritoneo
+___ Bruto o tumor microscópico permanece después de la operación (tumor con márgenes de resección)
+___ Derrame tumoral antes o durante la cirugía no se limita al flanco
+___ Por etapas de escisión del tumor (extirpación de tumor en más de 1 pieza)
+
+Etapa IV
+___ Metástasis hematógena o metástasis ganglionares fuera de la región abdomino-pélvica (más allá del sistema de drenaje renal, por ejemplo, pulmón, hígado)
+
+Etapa V
+___ La afectación bilateral renal al momento del diagnóstico (a cada lado también se realizaron por separado, de acuerdo con los criterios anteriores, como I a IV)
+Especificar (ambos): etapa Riñón derecho: ___
+Etapa Riñón izquierdo: ___
+
+Nota: Los informes separados se requieren para la participación bilateral. Véase el informe de patología quirúrgica para otro riñón.
+
+* Los hallazgos patológicos adicionales
+* Especifique: ______________________________
+
+* Comentario (s)

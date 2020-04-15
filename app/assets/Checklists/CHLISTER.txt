@@ -1,0 +1,124 @@
+
+LISTA DE CHEQUEO TESTICULO TUMORES
+
+MACROSCÓPICO
+
+Lateralidad
+___ Derecho
+___ Izquierda
+Ambos ___
+___ No especificado
+
+Focalidad
+___ Unifocal
+___ Multifocal
+
+Tamaño del tumor
+Mayor dimensión de la masa tumoral principal: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+Grandes dimensiones de los nódulos tumorales adicionales: ___ cm, ___ cm, etc
+___ No puede determinarse (ver Comentario)
+
+
+MICROSCÓPICA
+
+Tipo Histológico
+___ Intratubular neoplasia de células germinales, sin clasificar sólo
+___ Seminoma tipo clásico
+___ Seminoma con células sincitiotrofoblásticas
+___ Germen mixto de células tumorales (especifique los componentes y porcentajes):
+________________________________________________
+________________________________________________
+___ Carcinoma embrionario
+___ Tumor del saco vitelino
+___ El coriocarcinoma, bifásica
+___ El coriocarcinoma, monofásico
+___ Sitio placentario tumor trofoblástico
+___ Teratoma maduro
+___ Teratoma inmaduro
+___ Teratoma maligno con un componente secundario
+(Especifique el tipo): ____________________________
+___ Monodérmico teratoma, carcinoma
+___ Monodérmico teratoma, tumor neuroectodérmico primitivo
+___ Monodérmico teratoma, otros (especificar): ____________________________
+___ Poliembrioma
+___ Embryoma difusa
+___ Seminoma espermatocítico
+___ Seminoma espermatocítico con un componente sarcomatoso
+___ Cicatriz testicular
+___ Mixto de células germinales cordones sexuales del estroma tumoral, gonadoblastoma
+___ Mixto de células germinales cordones sexuales del estroma tumoral, otros
+(Especificar): ____________________________
+___ Otro (especificar): ____________________________
+___ Tumor maligno tipo, no se puede determinar
+
+La estadificación patológica (pTNM)
+
+Tumor primario (pT)
+___ PTX: No puede evaluarse
+___ PT0: No hay evidencia de tumor primario
+___ PTis: neoplasia intratubular de células germinales solamente (carcinoma in situ)
+___ PT1: Tumor limitado al testículo y epidídimo sin invasión vascular / linfática (tumor puede invadir la túnica albugínea pero no la túnica vaginal)
+___ PT2: Tumor limitado al testículo y epidídimo con invasión vascular / linfática o el tumor se extiende a través de la túnica albugínea con afectación de la túnica vaginal
+___ PT3: Tumor invade el cordón espermático con o sin invasión vascular / linfática
+___ PT4: Tumor invade el escroto con o sin invasión vascular / linfática
+
+Ganglios linfáticos regionales (pN)
+___ PNX: No puede evaluarse
+PN0 ___: No hay metástasis a los ganglios linfáticos regionales
+___ PN1: Metástasis con una masa menor de los ganglios linfáticos de 2 cm en su mayor dimensión y 5 o menos ganglios positivos, ninguno de más de 2 cm en su mayor dimensión
+___ PN2: Metástasis en un ganglio linfático mayor de 2 cm, pero no más de 5 cm en su dimensión mayor, o más de 5 ganglios positivos, ninguno mayor de 5 cm, o evidencia de extensión extranodal del tumor
+___ PN3: Metástasis en un ganglio linfático mayor de 5 cm en su mayor dimensión
+Especificar: Número examinados: ___
+Número involucrados: ___
+
+Metástasis a distancia (pM)
+___ PMX: No puede evaluarse
+pM1: presente metástasis a distancia
+___ PM1a: No ganglios linfáticos regionales o metástasis pulmonar
+___ PM1b: Metástasis a distancia que no sea a los ganglios linfáticos no regionales y los pulmones
+* Especificar sitio (s), si se conoce: ___________________________
+
+* Marcadores tumorales séricos (S)
+* ___ SX: no Estudios séricos de marcadores, o realizar
+* ___ S0: Los niveles séricos de marcadores de estudio dentro de los límites normales
+LDH HCG (mUI / mL) AFP (ng / mL)
+* ___ S1: <1,5 x nl y <5.000 y 1.000 <
+* ___ S2: 1.5-10 x nl o 5.000-50.000 o 1.000-10.000
+* ___ S3:> 10 x nl o> 50.000 o 10.000>
+
+Márgenes (marque todas las que apliquen)
+
+Margen cordón espermático
+___ No puede evaluarse
+___ No afectado por el tumor
+___ Participa por tumor
+
+Margen Otro (s)
+___ No puede evaluarse
+___ No afectado por el tumor (especificar): ____________________________
+___ Afectados por el tumor (especificar): ____________________________
+___ No se aplica
+
+Extensión directa del tumor invasivo (marque todas las que apliquen)
+* ___ Rete testis
+* ___ Epidídimo
+___ Peri-grasa hiliar
+___ Cordón espermático
+___ Túnica vaginal
+___ Pared escrotal
+___ Ninguna de las anteriores
+
+Venosa / linfática (barco grande / pequeño) Invasion (V / L)
+___ Ausente
+___ Presente
+___ Indeterminado
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Intratubular neoplasia de células germinales
+* ___ Macrófagos cargados de hemosiderina
+* ___ Atrofia
+* ___ Otro (especificar): ____________________________
+
+* Comentario (s)

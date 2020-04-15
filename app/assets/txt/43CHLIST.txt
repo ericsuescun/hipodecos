@@ -1,0 +1,67 @@
+
+LISTA DE CHEQUEO ADRENAL
+
+MACROSCÓPICO
+
+Tipo de muestra
+___ Adrenalectomía Subtotal
+___ Adrenalectomía total
+___ Otro (especificar): ____________________________
+___ No especificado
+
+Lateralidad
+___ Derecho
+___ Izquierda
+___ No especificado
+
+Tamaño del tumor
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+___ No puede determinarse (según el modelo fragmentado)
+
+El peso del tumor
+Especifique: ___ g
+
+
+MICROSCÓPICA
+
+La estadificación patológica
+
+Tumor primario
+___ I: confinado a la glándula, 5 cm o menos
+___ II: Confinado a la glándula, mayor de 5 cm
+___ III: extensión extraglandular sin afectación de otros órganos
+___ IV: metástasis a distancia o la extensión a otros órganos
+___ No puede determinarse
+
+Ganglios linfáticos regionales
+___ No puede evaluarse
+___ No linfáticos regionales Metástasis a los ganglios
+___ Linfáticos regionales Metástasis a los ganglios
+Especificar: Número examinados: ___
+Número involucrados: ___
+
+Metástasis a distancia
+___ No puede evaluarse
+___ Metástasis a distancia
+* Especificar sitio (s), si se conoce: _______________________________
+
+Márgenes
+Márgenes ___ no afectado por el tumor
+___ Margen (s) afectados por el tumor
+Especificar margen (s): ____________________________
+___ No puede determinarse
+
+* Venosa (vaso grande) Invasion
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Necrosis tumoral
+* ___ Hiperplasia
+* ___ Adenoma
+* ___ Otro (especificar): ___________________________
+
+* Comentario (s)

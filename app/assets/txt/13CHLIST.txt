@@ -1,0 +1,189 @@
+LISTA DE CHEQUEO PARA MEDULA OSEA
+
+MACROSCÓPICO
+
+Tipo de muestra
+Aspirar ___
+___ Biopsia
+___ Ambos aspirado y biopsia
+___ Sangre película
+___ Bloque celular (sección coágulo)
+___ No especificado
+
+* Biopsia del sitio
+* ___ No aplica
+* ___ Cresta ilíaca posterior derecha
+* ___ Cresta ilíaca posterior izquierda
+* ___ Otro (especificar): ___________________________
+* ___ No especificado
+
+* Sitio Aspirar
+* ___ No aplica
+* ___ Cresta ilíaca posterior derecha
+* ___ Cresta ilíaca posterior izquierda
+* ___ Esternón
+* ___ Otro (especificar): ___________________________
+* ___ No especificado
+ 
+Adecuación de la Muestra
+___ Satisfactorio
+___ Limited
+___ Insatisfactorio
+
+Fenotipificación
+___ Realiza, ver informe separado
+___ Realiza
+Especifique el método y resultados: ______________________________
+___________________________________________________
+___ No realizado
+
+Citogenética
+___ Realizado (ver informe separado)
+___ Realiza
+Especificar los resultados: ________________________________
+___ No realizado
+
+Tipo de Enfermedades (Clasificación de la OMS) (marque todo lo que corresponda)
+
+Enfermedades mieloproliferativas crónicas
+___ Leucemia mielógena crónica
+___ Leucemia neutrofílica crónica
+___ La leucemia eosinofílica crónica / síndrome hipereosinofílico
+___ La policitemia vera
+___ La mielofibrosis idiopática crónica
+___ La trombocitemia esencial
+___ Enfermedad mieloproliferativa inclasificable
+
+Mielodisplásicos / mieloproliferativos Enfermedades
+___ Leucemia mielomonocítica crónica
+___ Leucemia mieloide crónica atípica
+___ Leucemia mielomonocítica juvenil
+___ Mielodisplásicos / mieloproliferativos enfermedad, inclasificable
+
+Síndromes mielodisplásicos
+___ Anemia refractaria
+___ Anemia refractaria con sideroblastos en anillo
+___ Citopenia refractaria con displasia multilineal
+___ Citopenia refractaria con displasia multilinaje y sideroblastos en anillo
+___ Anemia refractaria con exceso de blastos (AREB)
+___ AREB-1
+___ AREB-2
+___ Síndrome mielodisplásico no clasificable
+___ Síndrome mielodisplásico relacionado con aislado del (5q)
+
+Leucemias mieloides agudas (LMA)
+___ Leucemia mieloide aguda con anomalías genéticas recurrentes
+___ LMA con t (8; 21) (q22; q22)
+___ LMA con eosinófilos anormales de la médula ósea inv (16) ot (16; 16) ot (16; 16) (p13; q22); CBF   / MYH11)
+___ La leucemia promielocítica aguda t (15; 17) (q22; q12) y variantes
+___ LMA con 11q23 (LLM) La anormalidad
+___ Leucemia mieloide aguda con displasia multilineal
+___ Después de un síndrome mielodisplásico o síndrome mielodisplásico / trastorno mieloproliferativo
+___ Sin síndrome mielodisplásico antecedente
+___ Leucemia mieloide aguda y síndromes mielodisplásicos, relacionados con el tratamiento
+___ Relación con fármacos alquilantes
+___ Topoisomerasa de tipo II relacionada con el inhibidor (algunos pueden ser linfoide)
+___ Otro tipo (especificar): _____________________________
+___ Leucemia mieloide aguda, sin otra especificación
+___ LMA mínimamente diferenciada
+___ LMA sin maduración
+___ LMA con maduración
+___ Leucemia mielomonocítica aguda
+___ Leucemia aguda monoblástica y monocítica
+___ Aguda leucemia eritroide
+___ Leucemia aguda megacarioblástica
+___ Leucemia basófila aguda
+___ Panmielosis aguda con mielofibrosis
+___ Sarcoma mieloide
+___ Leucemia aguda de linaje ambiguo
+___ Leucemia aguda indiferenciada
+___ Leucemia aguda bilinear
+___ Leucemia aguda bifenotípica
+
+Precursores de células B y células T Neoplasias
+___ Precursor B linfoblástica leucemia / linfoma linfoblástica
+___ Precursor leucemia linfoblástica T / linfoma linfoblástica
+ 
+Células B maduras Neoplasias
+___ Leucemia linfocítica crónica / linfoma linfocítico de células pequeñas
+___ Leucemia de células B prolinfocítica
+___ Linfoma linfoplasmacítico
+___ Linfoma esplénico de la zona marginal
+___ Leucemia de células pilosas
+___ Mieloma de células plasmáticas
+___ Gammapatía monoclonal de significado incierto (GMSI)
+___ Plasmocitoma solitario de hueso
+___ Extraosseus plasmocitoma
+___ La amiloidosis primaria
+___ Enfermedad de cadena pesada
+___ Extranodal de zona marginal de células B de linfoma de la mucosa asociada a tejido linfoide (MALT linfoma)
+___ Nodal de zona marginal de células B de linfoma
+___ Linfoma folicular
+___ Grado 1
+___ Grado 2
+___ Grado 3
+___ Linfoma de células del manto
+___ Difuso de células B grandes linfoma
+___ Mediastinal (tímico) de células B grandes linfoma
+___ El linfoma de efusión primaria
+___ Linfoma de Burkitt / leucemia
+
+Proliferaciones de células B de potencial maligno incierto
+___ Granulomatosis linfomatoide
+___ Post-trasplante trastorno linfoproliferativo polimórfico
+
+ 
+Neoplasias de células T maduras y células NK
+Leucémica / diseminada
+___ Leucemia de células T prolinfocítica
+___ T-cell leucemia linfocítica granular grande
+___ Agresiva leucemia de células NK
+___ Adulto leucemia de células T / linfoma
+Cutáneo
+___ Micosis fungoide
+___ Síndrome de Sézary
+___ Primaria linfoma cutáneo anaplásico de células grandes
+___ Papulosis linfomatoide
+Otros extraganglionar
+___ / NK extraganglionar de células T, tipo nasal
+___ Tipo enteropático Linfoma de células T
+___ Hepatoesplénico de células T.
+___ Subcutáneo, tipo paniculitis linfoma de células T
+Nodal
+___ Angioinmunoblástico Linfoma de células T
+___ Periférica de células T, no especificada
+___ Linfoma anaplásico de células grandes
+
+Neoplasia de Lineage incierto y etapa de diferenciación
+___ Blástica linfoma de células NK
+
+Linfoma de Hodgkin
+___ Linfoma nodular de Hodgkin con predominio de linfocitos
+___ Linfoma de Hodgkin clásico
+___ Esclerosis nodular de Hodgkin clásico Linfoma
+___ Linfoma de Hodgkin clásico rico
+___ Celularidad mixta Linfoma de Hodgkin clásico
+___ Linfoma de Hodgkin clásico empobrecido
+
+Neoplasias histiocitos y células dendríticas
+___ Sarcoma histiocítico
+___ Histiocitosis de células de Langerhans
+___ Sarcoma de células de Langerhans
+___ Interdigitación sarcoma de células dendríticas / tumor
+___ Dendríticas foliculares de células sarcoma / tumor
+___ Sarcoma de células dendríticas, no especificado
+ 
+Mastocitosis
+___ Mastocitosis sistémica indolente
+___ Mastocitosis sistémica asociada con la enfermedad clonal, hematológicas linaje no-mastocitos
+___ Mastocitosis sistémica agresiva
+___ Leucemia de mastocitos
+___ Sarcoma de mastocitos
+
+Otro
+___ Tumor maligno tipo, no se puede determinar
+
+* Los hallazgos patológicos adicionales
+* Especificar: ____________________________________
+
+* Comentario (s)

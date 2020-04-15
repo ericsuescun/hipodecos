@@ -1,0 +1,66 @@
+
+LISTA DE CHEQUEO CIRUGIA DE WHIPPLE LESION AMPULAR
+
+Tipo de muestra
+___ Pancreaticoduodenectomía
+___ Pancreaticoduodenectomía (píloro ahorrador)
+___ Otro (especificar):_____________________________ 
+
+Sitio del tumor (marque todas las que apliquen)
+___ Intra-ampular
+___ Periampular
+___ Cruce de la mucosa duodenal y ampular
+___ No especificado
+
+Tamaño del tumorMayor dimensión: ___ cm* Dimensiones adicionales: ___ cm X______ 
+No puede determinarse (ver Comentario)
+
+MICROSCÓPICA
+Tipo Histológico___ Adenocarcinoma (de otro modo no caracterizada)___ Adenocarcinoma papilar  Adenocarcinoma ___, tipo intestinal___ Adenocarcinoma, tipo gástrico foveolar___ Adenocarcinoma mucinoso___ Adenocarcinoma de células claras___ Carcinoma de células en anillo Sello ___ Carcinoma adenoescamoso___ Otro (especificar): _______________________________ 
+
+Grado histológico___ No se aplica___ GX: No puede evaluarse___ G1: Bien diferenciado___ G2: moderadamente diferenciado___ G3: mal diferenciado___ G4: Indiferenciado___ Otro (especificar): ____________________________
+
+La estadificación patológica 
+___ PTX: No puede evaluarse
+___ PT0: No hay evidencia de tumor primario
+___ PTis: carcinoma in situ
+___ PT1: Tumor limitado a la ampolla de Vater o del esfínter de Oddi
+___ PT2: Tumor invade la pared duodenal
+___ PT3: Tumor invade el páncreas
+___ PT4: Tumor invade los tejidos blandos peripancreáticos u otros órganos o estructuras adyacentes
+
+Ganglios linfáticos regionales
+___ PNX: No puede evaluarse 
+___ PN0: No hay metástasis a los ganglios linfáticos regionales
+___ PN1: Metástasis a los ganglios linfáticos regionales.  
+         Número examinados: ___. Número involucrados: ___. 
+
+Metástasis a distancia
+___ PMX: No puede evaluarse
+___ PM1: Metástasis a distancia* Especificar sitio, si se conoce: ___________________________
+
+Márgenes (marque todas las que apliquen)
+___ No puede evaluarse Márgenes 
+___ no afectado por carcinoma invasivo
+Distancia del carcinoma invasivo de margen más cercano: ___ mm.
+Especificar margen: _______________________________ 
+Carcinoma in situ ausente en margen del conducto pancreático___.
+Carcinoma in situ presente en el margen del conducto pancreático___.
+Carcinoma in situ ausente en margen de la vía biliar___.
+Carcinoma in situ presente en el margen del conducto biliar común___.
+
+Márgenes involucrados por carcinoma invasivo
+Especificar margen: ____________________________
+Invasion Venosa / linfática Ausente* ___ Presente* ___ Indeterminado* ___ 
+Invasión perineural Ausente* ___ Presente* ___ 
+
+Otros hallazgos patológicos
+___ Ninguno identificado* 
+___ Displasia / adenoma* 
+___ Ampullitis* 
+___ Adenomiosis* 
+___ Pancreatitis crónica* 
+___ Pancreatitis aguda* 
+___ Gastritis*
+___ Colecistitis 
+___ Otro (especificar): ____________

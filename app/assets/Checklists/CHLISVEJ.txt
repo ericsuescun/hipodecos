@@ -1,0 +1,189 @@
+
+LISTA CHEQUEO TUMORES VEJIGA
+
+Protocolo fecha: Junio 2012
+
+VEJIGA URINARIA: Cistectomía, parcial, total o radical; Anterior Exenteración
+Seleccione una única respuesta a menos que se indique lo contrario.
+Espécimen
+___ Vejiga
+___ Otro (especificar): ____________________________
+___ No especificado
+Procedimiento (Nota G)
+___ Cistectomía parcial
+___ Cistectomía total
+___ La cistectomía radical
+___ Cistoprostatectomía radical
+___ Anterior exenteración
+___ Otro (especificar): ____________________________
+___ No especificado
++ Tumor del sitio (seleccione todas las que correspondan)
++ ___ Trígono
++ ___ Pared lateral derecha
++ ___ Pared lateral izquierda
++ ___ Pared anterior
++ ___ Pared posterior
++ ___ Dome
++ ___ Otro (especificar): ____________________________
++ ___ No especificado
+Tamaño del tumor
+Su mayor dimensión: ___ cm
++ Dimensiones adicionales: __x___ cm
+___ No se puede determinar (ver comentario)
+Tipo histológico (Nota B)
+___ El carcinoma urotelial (células transicionales)
+___ Urotelial (células de transición) carcinoma con diferenciación escamosa
+___ Urotelial (células de transición) carcinoma con diferenciación glandular
+___ Urotelial (células transicionales) carcinoma con la variante histología (especificar): ____________________________
+___ El carcinoma de células escamosas, típico
+___ El carcinoma de células escamosas, histología variante (especificar): ____________________________
+___ Adenocarcinoma, típico
+___ Adenocarcinoma, variante de la histología (especificar): ____________________________
+___ Carcinoma de células pequeñas
+___ Carcinoma indiferenciado (especificar): ____________________________
+___ Tipo de célula mixta (especificar): ____________________________
+___ Otro (especificar): ____________________________
+___ Carcinoma, el tipo no se puede determinar
+CAP Aprobado genitourinario • vejiga urinaria
+UrinaryBladder 3.2.0.0
++ No se requieren elementos de datos precedidas por este símbolo. Sin embargo, estos elementos pueden ser
+clínicamente importante, pero aún no se han validado o regularmente utilizado en el tratamiento del paciente.
+8
+Epitelial Asociados Lesiones (seleccione todas las que correspondan) (Nota C)
+___ Ninguno identificado
+___ Urotelial (células transicionales) papiloma (Organización Mundial de la Salud [OMS] 2004 / Sociedad Internacional
+de Patología Urológica [ISUP])
+___ Urotelial (células transicionales) papiloma, tipo invertida
+___ Urotelial papilar (células transicionales) neoplasia de bajo potencial maligno (OMS 2004 / PU-RDSI)
+___ No se puede determinar
+Grado histológico (seleccione todas las que correspondan) (Nota C)
+___ No aplicable
+___ No se puede determinar
+___ Carcinoma urotelial
+___ Grado bajo
+___ Alto grado
+___ Otro (especificar): ____________________________
+___ El carcinoma de células escamosas o adenocarcinoma
+___ GX: No puede evaluarse
+___ G1: bien diferenciado
+___ G2: Moderadamente diferenciado
+___ G3: mal diferenciado
+___ Otro (especificar): ____________________________
+___ Otro carcinoma
+___ Grado bajo
+___ Alto grado
+___ Otro (especificar): ____________________________
++ Configuración del tumor (seleccione todas las que correspondan)
++ ___ Papilar
++ ___ Sólido / nódulo
++ ___ Plana
++ ___ Ulcerado
++ ___ Indeterminado
++ ___ Otro (especificar): ___________________________
+Extensión del tumor microscópico (seleccione todas las que correspondan) (Nota D)
+___ No puede ser evaluado
+___ No hay evidencia de tumor primario
+___ Carcinoma papilar no invasivo
+___ Carcinoma in situ: "tumor plano"
+___ El tumor invade la lámina propia
+___ El tumor invade la muscular propia
+___ El tumor invade la muscular propia superficial (medio interno)
+___ El tumor invade la muscular propia profunda (mitad externa)
+___ El tumor invade el tejido perivesical
+___ Microscópicamente
+___ Macroscópicamente (masa extravesical)
+CAP Aprobado genitourinario • vejiga urinaria
+UrinaryBladder 3.2.0.0
++ No se requieren elementos de datos precedidas por este símbolo. Sin embargo, estos elementos pueden ser
+clínicamente importante, pero aún no se han validado o regularmente utilizado en el tratamiento del paciente.
+9
+___ El tumor invade estructuras adyacentes
+___ Estroma prostático
+___ vesículas seminales
+___ Útero
+___ Vagina
+___ Anejos
+___ Pared Pelvis
+___ Pared abdominal
+___ Recto
+___ Otro (especifique): ______________________________
+Márgenes (seleccione todas las que correspondan) (Nota G)
+___ No puede ser evaluado
+___ Margen (s) que participan por el carcinoma invasivo
+___ Margen ureteral
+___ Margen uretral distal
+___ Margen de tejido blando profundo
+___ Otro margen (s) (especificar) #: _______________________
+___ Márgenes (s) que participan por el carcinoma in situ / carcinoma urotelial no invasivo de alto grado
+___ Margen ureteral
+___ Margen uretral distal
+___ Otro margen (s) (especificar) #: _______________________
+___ Los márgenes no mezclados por el carcinoma / carcinoma invasivo in situ / urotelial no invasivo de alto grado
+carcinoma
++ Distancia del carcinoma de margen más cercano: ___ mm
++ Especificar margen #: ____________________________
++ Otros cambios significativos en el margen (especificar margen) #: ________________________
++ ___ Displasia de bajo grado
++ ___ No invasivo de bajo grado carcinoma urotelial # Para cistectomías parciales, si la muestra se recibe identificación que excluye no orientada de los márgenes específicos,
+debe ser denotado aquí.
+La linfa-Vascular Invasion (Nota E)
+___ No identificado
+___ Presente
+___ Indeterminado
+La estadificación patológica (pTNM) (Nota F)
+TNM Descriptores (obligatorio sólo si es aplicable) (seleccione todas las que correspondan)
+___ m (múltiples tumores primarios)
+___ R (recurrente)
+___ Y (después del tratamiento)
+Tumor primario (pT)
+___ PTX: El tumor primario no puede evaluarse
+___ PT0: No hay evidencia de tumor primario
+___ PTa: carcinoma papilar no invasivo
+___ PTis: Carcinoma in situ: "tumor plano"
+___ PT1: Tumor invade el tejido conjuntivo subepitelial (lámina propia)
+pT2: Tumor invade la muscular propia (músculo detrusor)
+___ PT2a: El tumor invade la muscular propia superficial (medio interno)
+CAP Aprobado genitourinario • vejiga urinaria
+UrinaryBladder 3.2.0.0
++ No se requieren elementos de datos precedidas por este símbolo. Sin embargo, estos elementos pueden ser
+clínicamente importante, pero aún no se han validado o regularmente utilizado en el tratamiento del paciente.
+10
+___ PT2b: El tumor invade la muscular propia profunda (mitad externa)
+pT3: El tumor invade el tejido perivesical
+___ PT3a: Microscópicamente
+___ PT3b: Macroscópicamente (masa extravesicular)
+pT4: Tumor invade cualquiera de los siguientes: estroma prostático, vesículas seminales, el útero, la vagina, pared pélvica,
+pared abdominal
+___ PT4a: El tumor invade el estroma de próstata o el útero o la vagina
+___ PT4b: El tumor invade la pared pélvica o la pared abdominal
+Ganglios linfáticos regionales (PN)
+___ PNX: Los ganglios linfáticos no pueden ser evaluados
+___ PN0 Sin metástasis en los ganglios linfáticos
+___ PN1: Soltero metástasis en los ganglios linfáticos regionales en la pelvis verdadera (hipogástrico, obturador, ilíaco externo
+o ganglios linfáticos presacro)
+___ PN2: múltiple metástasis en los ganglios linfáticos regionales en la pelvis verdadera (hipogástrico, obrutrator, externa
+ilíaca o presacro metástasis ganglionares)
+___ PN3: La linfa nodo de metástasis a los ganglios linfáticos ilíacos comunes
+___ No hay nodos presentados o encontrados
+Número de ganglios linfáticos examinados
+Especifique: ____
+___ Número no se puede determinar (explicar): ______________________
+Número de ganglios linfáticos afectados (cualquier tamaño)
+Especifique: ____
+___ Número no se puede determinar (explicar): ______________________
+Metástasis a distancia (pM)
+___ No aplicable
+___ PM1: Metástasis a distancia
++ Especifique sitio (s), si se conoce: ____________________________
++ Hallazgos patológicos adicionales (seleccione todas las que correspondan)
++ ___ El adenocarcinoma de próstata (protocolo de uso para el carcinoma de próstata)
++ ___ Urotelial (células transicionales) carcinoma implica uretra, conductos prostáticos y acinos con o sin
+invasión del estroma (uso del protocolo para el carcinoma de la uretra)
++ ___ Displasia urotelial (de bajo grado neoplasia intraurotelial)
++ ___ Inflamación / cambios regenerativos
++ ___ Cambios relacionados con la Terapia-
++ ___ Cistitis quística y glandular
++ ___ Queratinizante metaplasia escamosa
++ ___ Metaplasia intestinal
++ ___ Otro (especificar): ____________________________
++ Comentario (s)

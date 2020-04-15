@@ -1,0 +1,5 @@
+MARCADO COLON (ASCENDENTE) (TRANSVERSO) (DESCENDENTE) (SIGMOIDES) (RECTO): Se recibe segmento de intestino grueso de (  )x(  )x(  ) cm, marcado en borde de resección (proximal distal) con (), viene con porción de mesocolón de (  )x(  )x(  )cm. presenta lesión tipo (úlcera) (masa) (perforación) de ()x()x() cm que (no) (compremete la pared); (no) hay compromiso de borde de resección (distal) (proximal) ... Se marcan con tinta china los bordes de resección.
+SBPR:  BORDE DE RESECCION PROXIMAL:  ()F-A  
+       MASA:  ()F-B
+       BORDE DE RESECCION DISTAL:  ()F-C  
+       MUCOSA SIN TUMOR:  ()F-D

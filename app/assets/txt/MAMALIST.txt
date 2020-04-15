@@ -1,0 +1,355 @@
+Fecha de publicación del protocolo: enero de 2018.
+
+CARCINOMA INVASIVO DE LA MAMA:
+
+Seleccione una respuesta única a menos que se indique lo contrario.
+
+Identificación de la muestra
+Los siguientes 3 elementos que identifican la muestra pueden enumerarse por separado o en 1 línea:
+
+Procedimiento (Nota A)
+___ Escisión (menos que la mastectomía total)
+___ Mastectomía total (incluida la mastectomía con preservación del pezón y la preservación de la piel)
+___ Otra especificar): ____________________________
+___ No especificado
+
+Lateralidad del espécimen
+___ Correcto
+___ Izquierda
+___ No especificado
+
++ Sitio del tumor: carcinoma invasivo (seleccione todos los que correspondan) (Nota C)
++ ___ cuadrante exterior superior
++ ___ cuadrante exterior inferior
++ ___ cuadrante interior superior
++ ___ cuadrante interior inferior
++ ___ Central
++ ___ pezón
++ ___ Posición (especifique): ___ en punto
++ ___ Otro (especifique): _____________________
++ ___ No especificado
+
+Tamaño del tumor (Nota D)
+___ Solo microinvasión (=1 mm)
+___ La dimensión más grande del foco invasivo más grande> 1 mm (especifique la medida exacta) (milímetros): ___ mm
++ Dimensiones adicionales: ___ x ___ mm
+___ No hay carcinoma residual residual
+___ El tamaño del foco invasivo más grande no se puede determinar (explicar): __________________________
+Nota: el tamaño del carcinoma invasivo debe tener en cuenta los resultados generales relacionados con el examen microscópico. Si hay múltiples focos de invasión, el tamaño listado es el tamaño del área contigua más grande de invasión. El tamaño de los carcinomas invasivos múltiples no debe sumarse. El tamaño no incluye el carcinoma ductal adyacente in situ (CDIS). Para cualquier carcinoma mayor de 1,0 mm pero menor de 1,5 mm, el tamaño no debe redondearse a 1,0 mm, sino redondearse a 2,0 mm, para garantizar que el tumor no se clasifique incorrectamente como pT1mi.
+Si ha habido una biopsia con aguja gruesa o biopsia incisional previa que muestre un área de invasión más grande que en la muestra de escisión, la dimensión más grande del carcinoma invasivo en la muestra anterior debe usarse para la clasificación T, si se conoce. Esto también se aplica si se ha extirpado todo el tumor mediante una biopsia previa.
+Si ha habido un tratamiento neoadyuvante previo y no hay carcinoma invasivo, el cáncer se clasifica como ypTis si hay DCIS residual y ypT0 si no queda carcinoma. No se requiere un protocolo si no hay cáncer presente en la muestra.
+
+Tipo histológico (Nota E)
+___ Carcinoma invasivo de ningún tipo especial (ductal, no especificado de otra manera)
+___ carcinoma microinvasivo
+___ carcinoma lobular invasivo
+___ Carcinoma invasivo con características lobulares.
+___ Carcinoma invasivo con características ductales y lobulares ("carcinoma de tipo mixto")
+___ carcinoma mucinoso
+___ carcinoma tubular
+___ Carcinoma invasivo, variante tubulo-lobular
+___ carcinoma cribriforme invasor
+___ Carcinoma micropapilar invasivo
+___ carcinoma papilar invasor
+___ carcinoma medular
+___ Carcinoma invasivo con características medulares.
+___ carcinoma metaplásico
+___ carcinoma adenoescamoso de bajo grado
+___ Carcinoma metaplásico tipo fibromatosis
+___ Carcinoma metaplásico, tipo de células fusiformes
+___ Carcinoma metaplásico, epitelial mixto y mesenquimatoso.
+___ Carcinoma invasivo con características metaplásicas.
+___ carcinoma de células escamosas
+___ carcinoma adenoide quístico
+___ Carcinoma invasivo con características apocrinas.
+___ Carcinoma invasivo con características de células claras (rico en glucógeno)
+___ Carcinoma invasivo con características neuroendocrinas.
+___ Carcinoma invasivo, con características de células en anillo de sello
+___ carcinoma secretor
+___ Carcinoma invasivo, no se puede determinar el tipo
+___ No hay carcinoma residual residual
+___ Otro tipo histológico no listado (especifique): ____________________________
+Nota: El tipo histológico corresponde al carcinoma más grande. Si hay carcinomas más pequeños de un tipo diferente, esta información debe incluirse en "Hallazgos patológicos adicionales".
+El carcinoma inflamatorio requiere la presencia de hallazgos clínicos de eritema y edema que involucren al menos un tercio o más de la piel de la mama (consulte la Nota M).
+Los carcinomas de tipo especial deben consistir en al menos un 90% de patrón puro.
+
+Grado histológico (puntuación histológica de Nottingham) (Nota F)
+
+Diferenciación glandular (acinar) / tubular
+___ Puntuación 1 (> 75% del área del tumor que forma estructuras glandulares / tubulares)
+___ Puntaje 2 (10% a 75% del área del tumor que forma estructuras glandulares / tubulares)
+___ Puntaje 3 (<10% del área del tumor que forma estructuras glandulares / tubulares)
+___ Solo microinvasión presente (no calificada)
+___ No hay carcinoma residual residual
+___ El puntaje no puede ser determinado
+
+Pleomorfismo nuclear
+___ Puntuación 1 (núcleos pequeños con poco aumento de tamaño en comparación con las células epiteliales mamarias normales, contornos regulares, cromatina nuclear uniforme, poca variación de tamaño)
+___ Puntaje 2 (células más grandes de lo normal con núcleos vesiculares abiertos, nucleolos visibles y variabilidad moderada en tamaño y forma)
+___ Puntaje 3 (núcleos vesiculares, a menudo con nucleolos prominentes, que muestran una marcada variación en tamaño y forma, ocasionalmente con formas muy grandes y extrañas)
+___ Solo microinvasión presente (no calificada)
+___ No hay carcinoma residual residual
+___ El puntaje no puede ser determinado
+
+Tasa mitótica
+___ Puntuación 1 (=3 mitosis por mm2) (ver Tabla 1)
+___ Puntaje 2 (4-7 mitosis por mm2) (ver Tabla 1)
+___ Carcinoma invasivo con características ductales y lobulares ("carcinoma de tipo mixto")
+___ carcinoma mucinoso
+___ carcinoma tubular
+___ Carcinoma invasivo, variante tubulo-lobular
+___ carcinoma cribriforme invasor
+___ Carcinoma micropapilar invasivo
+___ carcinoma papilar invasor
+___ carcinoma medular
+___ Carcinoma invasivo con características medulares.
+___ carcinoma metaplásico
+___ carcinoma adenoescamoso de bajo grado
+___ Carcinoma metaplásico tipo fibromatosis
+___ Carcinoma metaplásico, tipo de células fusiformes
+___ Carcinoma metaplásico, epitelial mixto y mesenquimatoso.
+___ Carcinoma invasivo con características metaplásicas.
+___ carcinoma de células escamosas
+___ carcinoma adenoide quístico
+___ Carcinoma invasivo con características apocrinas.
+___ Carcinoma invasivo con características de células claras (rico en glucógeno)
+___ Carcinoma invasivo con características neuroendocrinas.
+___ Carcinoma invasivo, con características de células en anillo de sello
+___ carcinoma secretor
+___ Carcinoma invasivo, no se puede determinar el tipo
+___ No hay carcinoma residual residual
+___ Otro tipo histológico no listado (especifique): ____________________________
+Nota: El tipo histológico corresponde al carcinoma más grande. Si hay carcinomas más pequeños de un tipo diferente, esta información debe incluirse en "Hallazgos patológicos adicionales".
+El carcinoma inflamatorio requiere la presencia de hallazgos clínicos de eritema y edema que involucren al menos un tercio o más de la piel de la mama (consulte la Nota M).
+Los carcinomas de tipo especial deben consistir en al menos un 90% de patrón puro.
+
+Grado histológico (puntuación histológica de Nottingham) (Nota F)
+
+Diferenciación glandular (acinar) / tubular
+___ Puntuación 1 (> 75% del área del tumor que forma estructuras glandulares / tubulares)
+___ Puntaje 2 (10% a 75% del área del tumor que forma estructuras glandulares / tubulares)
+___ Puntaje 3 (<10% del área del tumor que forma estructuras glandulares / tubulares)
+___ Solo microinvasión presente (no calificada)
+___ No hay carcinoma residual residual
+___ El puntaje no puede ser determinado
+
+Pleomorfismo nuclear
+___ Puntuación 1 (núcleos pequeños con poco aumento de tamaño en comparación con las células epiteliales mamarias normales, contornos regulares, cromatina nuclear uniforme, poca variación de tamaño)
+___ Puntaje 2 (células más grandes de lo normal con núcleos vesiculares abiertos, nucleolos visibles y variabilidad moderada en tamaño y forma)
+___ Puntaje 3 (núcleos vesiculares, a menudo con nucleolos prominentes, que muestran una marcada variación en tamaño y forma, ocasionalmente con formas muy grandes y extrañas)
+___ Solo microinvasión presente (no calificada)
+___ No hay carcinoma residual residual
+___ El puntaje no puede ser determinado
+
+Tasa mitótica
+___ Puntuación 1 (=3 mitosis por mm2) (ver Tabla 1)
+___ Puntaje 2 (4-7 mitosis por mm2) (ver Tabla 1)
++ ___ Grado I (bajo)
++ ___ Grado II (intermedio)
++ ___ Grado III (alto)
+
++ Necrosis
++ ___ No identificado
++ ___ Presente, focal (focos pequeños o necrosis de una sola célula)
++ ___ Presente, central (necrosis expansiva de "comedón")
+
++ Carcinoma lobular in situ (LCIS)
++ ___ No LCIS en espécimen
++ ___ presente
+
+Extensión del tumor (requerida solo si las estructuras están presentes e involucradas) (seleccione todas las que correspondan) (Nota I)
+
+Piel
+___ El carcinoma invasor invade directamente la dermis o la epidermis sin ulceración de la piel (esto no cambia la etapa T)
+___ El carcinoma invasor invade directamente la dermis o la epidermis con ulceración de la piel (clasificada como T4b)
+___ Hay focos cutáneos satélites de carcinoma invasivo (es decir, no contiguos con el carcinoma invasivo en la mama) (clasificado como T4b)
+Nota: los nódulos cutáneos satelitales deben estar separados del tumor primario y deben identificarse macroscópicamente para asignar una categoría como T4b. Los nódulos cutáneos identificados solo en el examen microscópico y en ausencia de ulceración epidérmica o edema cutáneo (peau d’orange clínico) no califican como T4b. Dichos tumores deben categorizarse según el tamaño del tumor.
+
+Pezón
+___ DCIS involucra epidermis del pezón (enfermedad de Paget del pezón)
+Nota: Este hallazgo no cambia la clasificación T de los carcinomas invasivos.
+
+Músculo esquelético
+___ El carcinoma invade el músculo esquelético
+___ El carcinoma invade el músculo esquelético y la pared torácica (clasificado como T4a)
+Nota: la invasión en el músculo pectoral no se considera invasión de la pared torácica, y los cánceres no se clasifican como T4a a menos que haya una invasión más profunda que este músculo.
+
+Márgenes (Nota J)
+
+Carcinoma invasivo Márgenes (requerido solo si hay carcinoma residual invasivo en la muestra)
+___ no puede ser evaluado
+___ No involucrado por carcinoma invasivo
+Distancia desde el margen más cercano (milímetros): ___ mm
+Especifique el margen más cercano: ___________________________
+___ No se puede determinar (explicar): ___________________________
+___ Positivo para carcinoma invasivo
+Especifique los márgenes: ___________________________
+___ No se puede determinar (explicar): 
+___________________________
++ Para márgenes positivos, especifique la extensión (unifocal, multifocal o extensa):
++ Anterior: ____________________________
++ Posterior: ____________________________
++ Superior: ____________________________
++ Inferior: ____________________________
++ Medial: ____________________________
++ Lateral: ____________________________
++ Otros (especifique el margen): ____________________________
+Nota: el estado del margen aparece como "positivo" si hay tinta en el carcinoma (es decir, la distancia es de 0 mm). Si el margen no es positivo, entonces se puede enumerar una distancia del margen. Las distancias pueden ser medidas específicas o expresadas como mayor o menor que una medida.
+ 
+Márgenes DCIS (requeridos solo si DCIS está presente en la muestra)
+___ no puede ser evaluado
+___ No hay DCIS en el espécimen
+___ No involucrado por DCIS (requerido solo si DCIS residual está presente en la muestra)
+Distancia desde el margen más cercano (milímetros): ___ mm
+Especifique el margen más cercano: ___________________________
+___ No se puede determinar (explicar): ___________________________
+___ Positivo para DCIS
+Especifique los márgenes: ___________________________
+___ No se puede determinar (explicar): ___________________________
+
++ Para márgenes positivos, especifique la extensión (unifocal, multifocal o extensa):
++ Anterior: ____________________________
++ Posterior: ____________________________
++ Superior: ____________________________
++ Inferior: ____________________________
++ Medial: ____________________________
++ Lateral: ____________________________
++ Otros (especifique el margen: ___________________): ____________________________
+Nota: el estado del margen aparece como "positivo" si hay tinta en el carcinoma (es decir, la distancia es de 0 mm). Si el margen no es positivo, entonces se puede enumerar una distancia del margen. Las distancias pueden ser medidas específicas o expresadas como mayor o menor que una medida.
+
+Ganglios linfáticos regionales (Notas B y J)
+
+___ No hay ganglios linfáticos enviados o encontrados
+
+___ no involucrado por células tumorales
+Número de ganglios linfáticos examinados: ____
+Número de nodos centinela examinados (si corresponde): ____
+
+___ Involucrado por células tumorales
+Número de ganglios linfáticos con macrometástasis (> 2 mm): ____
+Número de ganglios linfáticos con micrometástasis (> 0.2 mm a 2 mm y / o> 200 células): ____
+Número de ganglios linfáticos con células tumorales aisladas (=0.2 mm y =200 células) #: ____
+# Es necesario informar el número de ganglios linfáticos con células tumorales aisladas solo en ausencia de macrometástasis o micrometástasis en otros ganglios linfáticos.
+
++ Tamaño del depósito metastásico más grande (milímetros): ____mm
+
++ Extensión Extranodal:
++ ___ No identificado
++ ___ presente
++ ___ No se puede determinar
+
+Número de ganglios linfáticos examinados: ____
+Número de nodos centinela examinados (si corresponde): ____
+
+Efecto del tratamiento (Nota K)
+___ No se conoce terapia prequirúrgica
+
+Las siguientes preguntas sobre el efecto del tratamiento son necesarias solo si se sabe que el paciente recibió terapia prequirúrgica.
+
+Efecto del tratamiento en el pecho
+___ No hay respuesta definitiva a la terapia prequirúrgica en el carcinoma invasivo
+___ Respuesta probable o definitiva a la terapia prequirúrgica en el carcinoma invasivo
+___ No hay carcinoma residual invasivo en la mama después de la terapia prequirúrgica
+Nota: el foco más grande de tumor residual, si está presente, se utiliza para determinar la categoría ypT. La fibrosis relacionada con el tratamiento en el lecho tumoral adyacente al carcinoma invasivo residual no se incluye en la determinación de la dimensión ypT.
+
+Efecto del tratamiento en los ganglios linfáticos
+___ No se extraen los ganglios linfáticos
+___ No hay respuesta definitiva al tratamiento prequirúrgico en el carcinoma metastásico
+___ Respuesta probable o definitiva al tratamiento prequirúrgico en el carcinoma metastásico
+___ No hay metástasis en los ganglios linfáticos. Cicatrización fibrosa, posiblemente relacionada con metástasis previas de ganglios linfáticos con respuesta patológica completa
+___ No hay metástasis en los ganglios linfáticos y no hay cicatrices fibrosas prominentes en los ganglios
+Nota: el foco más grande de tumor residual en los ganglios linfáticos, si está presente, se utiliza para determinar la categoría ypN. La fibrosis relacionada con el tratamiento adyacente a los depósitos nodales residuales no se incluye en la determinación de la dimensión ypN.
+
++ Invasión linfovascular (Nota L)
++ ___ No identificado
++ ___ presente
++ ___ No se puede determinar
+
++ Invasión linfovascular dérmica
++ ___ No hay piel presente
++ ___ No identificado
++ ___ presente
++ ___ No se puede determinar
+
+Clasificación del estadio patológico (pTNM, AJCC 8ª edición) (Nota M)
+Nota: El informe de las categorías pT, pN y (cuando corresponda) pM se basa en la información disponible para el patólogo en el momento de la emisión del informe. Solo se requiere la categoría T, N o M aplicable para informar; sus definiciones no necesitan ser incluidas en el informe. Las categorías (con modificadores cuando corresponda) pueden enumerarse en 1 línea o más de 1 línea.
+
+Descriptores de TNM (necesarios solo si corresponde) (seleccione todos los que correspondan)
+___ m (focos múltiples de carcinoma invasivo)
+___ r (recurrente)
+___ y ??(postratamiento)
+Tumor primario (carcinoma invasivo) (pT)
+___ pTX: no se puede evaluar el tumor primario
+___ pT0: No hay evidencia de tumor primario #
+___ pTis (DCIS): carcinoma ductal in situ #
+___ pTis (Paget): enfermedad de Paget del pezón no asociada con carcinoma invasivo y / o DCIS en el parénquima mamario subyacente ##
+___ pT1: Tumor =20 mm en su dimensión mayor
+___ pT1mi: Tumor =1 mm en su dimensión mayor
+___ pT1a: Tumor> 1 mm pero =5 mm en su dimensión mayor (redondea cualquier medida> 1.0-1.9 mm a 2 mm)
+___ pT1b: Tumor> 5 mm pero =10 mm en su dimensión mayor
+___ pT1c: Tumor> 10 mm pero =20 mm en su dimensión mayor
+___ pT2: tumor> 20 mm pero =50 mm en su dimensión mayor
+___ pT3: Tumor> 50 mm en su dimensión mayor
+___ pT4: Tumor de cualquier tamaño con extensión directa a la pared torácica y / o a la piel (ulceración o nódulos cutáneos) ###
+___ pT4a: Extensión a la pared torácica; La invasión o adherencia al músculo pectoral en ausencia de invasión de las estructuras de la pared torácica no califica como T4
+___ pT4b: Ulceración y / o nódulos satelitales macroscópicos ipsilaterales y / o edema (incluyendo peau d’orange) de la piel que no cumple con los criterios para carcinoma inflamatorio
+___ pT4c: tanto T4a como T4b están presentes
+___ pT4d: carcinoma inflamatorio
+# Para los fines de este resumen de caso, estas categorías solo deben usarse en el contexto de la terapia preoperatoria (neoadyuvante) para la cual ya no se presenta un carcinoma invasivo diagnosticado previamente después del tratamiento. Los pacientes con respuesta patológica completa (ausencia de carcinoma invasivo residual tanto en la mama como en los ganglios linfáticos) deben clasificarse como ypT0N0 o ypTisN0, no ypTX.
+## Los carcinomas en el parénquima mamario asociado con la enfermedad de Paget se clasifican según el tamaño y las características de la enfermedad parenquimatosa, aunque aún debe observarse la presencia de la enfermedad de Paget.
+### Nota: La invasión de la dermis sola no califica como pT4.
+
+Ganglios linfáticos regionales (pN) (elija una categoría según los nódulos linfáticos recibidos con el espécimen; no se requieren estudios de inmunohistoquímica y / o estudios moleculares)
+
+Modificador (requerido solo si es aplicable)
+___ (sn): nodo (s) centinela evaluados. Si se eliminan 6 o más nodos (centinela o nonsentinel), este modificador no debe usarse.
+___ (f): metástasis nodal confirmada por aspiración con aguja fina o biopsia con aguja gruesa.
+Nota: el modificador (sn) se agrega a la categoría N cuando se realiza una biopsia del ganglio centinela (utilizando un tinte o un marcador) y se extraen menos de seis ganglios linfáticos (centinela y nonsentinel). El modificador (f) se agrega a la categoría N para denotar la confirmación de metástasis mediante la aspiración con aguja fina / biopsia con aguja gruesa y NO hay resección adicional de los nodos.
+Categoría (pN)
+___ pNX: los ganglios linfáticos regionales no se pueden evaluar (p. ej., no se extraen para un estudio patológico o se extraen previamente)
+___ pN0: No se identificó metástasis en los ganglios linfáticos regionales o solo ITC #
+___ pN0 (i +): solo ITC (grupos de células malignas que no superen los 0,2 mm) en los ganglios linfáticos regionales
+___ pN0 (mol +): resultados moleculares positivos por reacción en cadena de la polimerasa con transcriptasa inversa (RT PCR); no se detectan ITCs
+___ pN1mi: micrometástasis (aproximadamente 200 células, más de 0.2 mm, pero ninguna más de 2.0 mm)
+___ pN1a: metástasis en 1 a 3 ganglios linfáticos axilares, al menos 1 metástasis mayor de 2.0 mm ##
+___ pN1b: Metástasis en nódulos centinela mamarios internos ipsilaterales, excluyendo ITC
+___ pN1c: pN1a y pN1b combinados
+___ pN2a: metástasis en 4 a 9 ganglios linfáticos axilares (al menos 1 depósito de tumor mayor a 2.0 mm) ##
+___ pN2b: metástasis en los ganglios linfáticos mamarios internos clínicamente detectados con o sin confirmación microscópica; con ganglios axilares patológicamente negativos
+___ pN3a: metástasis en 10 o más ganglios linfáticos axilares (al menos 1 depósito tumoral mayor de 2,0 mm) o metástasis en los ganglios infraclaviculares (linfoma axilar de nivel III) ##
+___ pN3b: pN1a o pN2a en presencia de cN2b (ganglios mamarios internos positivos por imagen); o pN2a en presencia de pN1b
+___ pN3c: metástasis en ganglios linfáticos supraclaviculares ipsilaterales
+# Las células tumorales aisladas (ITC) se definen como pequeños grupos de células que no superan los 0,2 mm o células tumorales individuales, o un grupo de menos de 200 células en una sola sección histológica. Las ITC pueden detectarse por histología de rutina o por métodos inmunohistoquímicos (IHC). Los nodos que contienen solo ITC se excluyen del recuento total de nodos positivos para propósitos de clasificación N, pero deben incluirse en el número total de nodos evaluados.
+## Aproximadamente 1000 células tumorales están contenidas en un grupo tridimensional de 0.2 mm. Por lo tanto, si más de 200 células tumorales individuales se identifican como células tumorales dispersas individuales o como un foco elíptico o esférico casi confluente en una única sección histológica de un ganglio linfático, existe una alta probabilidad de que más de 1000 células estén presentes en la linfa nodo. En estas situaciones, el nodo debe clasificarse como que contiene una micrometástasis (pN1mi).
+___ pM1: metástasis histológicamente probadas mayores de 0.2 mm
+Especifique el sitio, si se conoce: ____________________
+
++ Hallazgos Patológicos Adicionales (Nota N)
++ Especificar: ____________________________
+
++ Estudios Auxiliares
+Nota: Para el informe de receptores hormonales y HER2, se debe usar la plantilla CAP Biomarker Biomarker. Los estudios de biomarcadores pendientes se deben incluir en la sección de Comentarios de este informe.
+
++ Microcalcificaciones (seleccione todas las que correspondan) (Nota O)
++ ___ No identificado
++ ___ Presente en DCIS
++ ___ Presente en carcinoma invasivo
++ ___ Presente en tejido no neoplásico
++ ___ Otro (especifique): ______________________________________
+
++ Historia clínica (seleccione todas las que correspondan) (Nota P)
++ Los hallazgos clínicos / radiológicos mamarios actuales para los cuales se realiza esta cirugía incluyen:
++ ___ Masa palpable
++ ___ hallazgo radiológico
++ ___ Masa o distorsión arquitectónica.
++ ___ calcificaciones
++ ___ Otro (especifique): _________________________
++ ___ Secreción del pezón
++ ___ Otro (especifique): _______________________________
+
++ ___ Historia previa de cáncer de mama
++ Especifique el sitio, el diagnóstico y el tratamiento previo: ________________________
++ ___ Terapia prequirúrgica previa (neoadyuvante) para este diagnóstico de carcinoma invasivo
++ Especificar tipo: _______________________________
+
++ Comentario (s)

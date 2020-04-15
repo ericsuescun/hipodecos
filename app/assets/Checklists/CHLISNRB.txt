@@ -1,0 +1,119 @@
+
+ LISTA DE CHEQUEO DE NEUROBLASTOMA
+ 
+ MACROSCÓPICO
+
+Tipo de muestra
+___ Adrenalectomía Subtotal
+___ Adrenalectomía total
+___ Otro (especificar): _________________________
+___ No especificado
+
+Sitio del tumor
+Especifique: _________________________
+___ No especificado
+
+Lateralidad (marque todas las que apliquen)
+___ Derecho
+___ Izquierda
+___ Midline
+___ No especificado
+
+* Tamaño de la pieza
+Mayor dimensión *: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+
+* Muestra peso
+* Especificar: ___ g
+
+Tamaño del tumor
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+___ No puede determinarse (ver Comentario)
+
+Peso del tumor (si es independiente muestra total)
+Especifique: ___ g
+
+
+MICROSCÓPICA
+
+Extensión de la invasión
+
+Tumor primario
+___ No puede evaluarse
+___ Encapsulado
+___ Extensión capsular sin afectación de otros órganos
+___ Extensión a otros órganos
+
+Ganglios linfáticos regionales (marque todas las que apliquen)
+___ No puede evaluarse
+___ No linfáticos regionales Metástasis a los ganglios
+___ Derecho linfático regional metástasis ganglionares
+Especificar: Número examinados: ___
+Número involucrados: ___
+___ Izquierda linfáticos regionales Metástasis a los ganglios
+Especificar: Número examinados: ___
+Número involucrados: ___
+
+Metástasis a distancia
+___ No puede evaluarse
+___ Metástasis a distancia
+* Especificar localización (s): ___________________________
+
+Márgenes
+___ No puede evaluarse
+Márgenes ___ no afectado por el tumor
+___ Margen (s) afectados por el tumor
+
+* Venosa / linfática (barco grande / pequeño) Invasion
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+International Neuroblastoma Pathology Classification
+
+___ No puede determinarse
+
+Favorable Histopatología
+___ Cualquier edad; ganglioneuroma (Schwannian estroma dominante); maduración o maduras
+___ Cualquier edad; ganglioneuroblastoma, entremezclados (Schwannian estroma rico)
+___ Menos de 1,5 años; neuroblastoma (Schwannian estroma de los pobres); pobremente diferenciado y de baja o intermedia de la mitosis cariorrexis (MKI)
+___ 1,5 años hasta menos de 5 años de edad; neuroblastoma (Schwannian estroma de los pobres); diferenciación y bajo MKI
+
+La histopatología desfavorable
+___ Cualquier edad; ganglioneuroblastoma, nodular (Composite, Schwannian stroma-rich/stroma-dominant y estroma pobre-)
+___ Cualquier edad; neuroblastoma (Schwannian estroma de los pobres); indiferenciado y MKI cualquier
+___ Menos de 1,5 años; neuroblastoma (Schwannian estroma de los pobres); MKI pobremente diferenciado y de alta o diferenciales y de alto MKI
+___ 1,5 años hasta menos de 5 años de edad; neuroblastoma (Schwannian estroma de los pobres); pobremente diferenciado y MKI, o cualquier diferenciación y actividad intermedia o alta MKI
+___ Igual o mayor de 5 años de edad; neuroblastoma (Schwannian estroma de los pobres), y cualquier subtipo MKI cualquier
+
+International Neuroblastoma Staging System (INSS) #
+___ Etapa 1
+o Tumor localizado con escisión macroscópica completa, con o sin enfermedad residual microscópica
+o Nódulos linfáticos ipsilaterales representativos negativas para tumor microscópicamente (nodos conectados y removidos con el tumor primario puede ser positivo)
+___ Etapa 2A
+o Tumor localizado con escisión macroscópica incompleta; representativas ganglios linfáticos ipsilaterales no adherentes negativos para el tumor microscópicamente
+___ Etapa 2B
+o tumor localizado con o sin resección completa macroscópica con ganglios linfáticos ipsilaterales no adherentes, positivos para el tumor, los ganglios linfáticos agrandados contralaterales deben ser negativos microscópicamente
+___ Etapa 3
+o tumor irresecable unilateral, infiltrante más allá de la línea media # #, con o sin afectación de ganglios linfáticos regionales
+o tumor unilateral localizado con contralateral ganglios linfáticos regionales
+o tumor línea media con extensión bilateral por infiltración (irresecable) o por afectación ganglionar
+___ Etapa 4
+o cualquier tumor primario con diseminación a los ganglios linfáticos distantes, huesos, médula ósea, el hígado, la piel y / o de otros órganos (excepto los definidos para la etapa 4S # # #)
+___ Etapa 4S
+o tumor localizado primario (tal como se define para la etapa 1, 2A, o 2B), con una difusión limitada a la piel, el hígado, y / o médula ósea # # # (limitado a niños menores de 1 año de edad)
+
+Tumores primarios # multifocales (por ejemplo, tumores bilaterales suprarrenal primaria) deben ser efectuados de acuerdo con el mayor grado de la enfermedad, como se define anteriormente, y seguida por un subíndice "M" (por ejemplo, 3M).
+
+# # La línea media se define como la columna vertebral. Los tumores que se originan en 1 lado y cruzan la línea media deben infiltrase o hacia el lado opuesto de la columna vertebral.
+
+Implicación # # # Marrow la etapa 4S debe ser mínimo, es decir, menos del 10% del total de células nucleadas identificados como malignos en biopsia de médula ósea o de aspirado de médula. Compromiso de la médula más extensa se considera la etapa 4. La tomografía MIBG (si se realiza) debe ser negativo en la médula.
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Necrosis tumoral
+* ___ Calcificación del tumor
+* ___ Otro (especificar): ______________________
+
+* Comentario (s)

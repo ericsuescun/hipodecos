@@ -1,0 +1,404 @@
+CARCINOMA INSITU de mama
+Procedimiento
+___ La escisión sin localización guiado por cable
+___ La escisión con la localización guiado por cable
+___ Mastectomía total (incluyendo el pezón y la piel)
+___ Localización de semillas radiactivas
+___ Otra especificar): ____________________________
+___ No especificado
+
+Nódulos linfáticos
+___ Ganglio linfático centinela (s)
+___ Disección axilar (disección parcial o completa)
+___ Los ganglios linfáticos presentes en la muestra de mama (es decir, los ganglios linfáticos intramamarios)
+___ Otros ganglios linfáticos (por ejemplo, supraclavicular o ubicación no identificado)
+Especifique la ubicación, si se proporciona: _________________________
+
+Espécimen lateralidad
+___ Derecho
+___ Izquierda
+___ No especificado
+
++ Tumor del sitio (seleccione todas las que correspondan)
++ ___ Cuadrante superior externo
++ ___ Cuadrante inferior externo
++ ___ Cuadrante superior interno
++ ___ Cuadrante inferior interno
++ ___ Central
++ ___ Pezón
++ Posición hora del reloj:
++ ___ Otro (especificar): 
++ ___ No especificado
+
+Tamaño estimado de DCIS al menos  mm
++ Dimensiones adicionales  x mm
++ Número de bloques con CDIS: 
++ Número de bloques que examinó: 
+
+Tipo histológico 
+___ Carcinoma ductal in situ. Clasificado como Tis (DCIS) o Tis (Paget)
+
++ Patrones de Arquitectura (seleccione todas las que correspondan)
++ ___ Comedo
++ ___ Enfermedad de Paget
++ ___ Cribiforme
++ ___ Micropapilar
++ ___ Papilar
++ ___ Sólido
++ ___ Otro (especificar: ______________________)
+
+Grado Nuclear
+___ Grado I (bajo)
+___ Grado II (intermedio)
+___ Grado III (alto)
+
+Necrosis 
+___ No identificado
+___ Presente, focal (pequeños focos o necrosis de célula única)
+___ Presente, (expansiva necrosis "comedones") centro
+
+Márgenes 
+___ Los márgenes no pueden ser evaluados
+___ Margen (s) no involucrados por CDIS
+Distancia desde el margen más cercano:  mm
++ Especificar margen más cercano: 
++ Distancia del borde superior: ___ mm
++ Distancia del margen inferior: ___ mm
++ Distancia del margen medial: ___ mm
++ Distancia del margen lateral: ___ mm
++ Distancia del margen anterior: ___ mm
++ Distancia del margen posterior: ___ mm
++ Designación de margen positivo para el CDIS
++ Especificar margen (s): _____________________________
+
++ Para márgenes positivos, especifique medida (focal, minima / moderada o extensa):
++ Anterior: 
++ Posterior: 
++ Superior: 
++ Inferior: 
++ Medial: 
++ Lateral: 
++ Otros (especificar margen: )
+Nota: estado de los bordes aparece como "positivo" si hay tinta en el carcinoma (es decir, la distancia es 0 mm). Si el margen no es positivo, entonces una distancia desde el margen se puede enumerar. Las distancias pueden ser medidas o expresado en mayor o menos de una medición específica.
+
++ Efecto del tratamiento (neoadyuvante)
++ ___ No terapia prequirúrgica conocido
++ ___ No hay respuesta definitiva a la terapia prequirúrgica
++ ___ Respuesta probable o definitiva a la terapia prequirúrgica
+
+Ganglios linfáticos (requiere sólo si los ganglios linfáticos están presentes en la muestra)
+Número total de linfáticos examinados (centinela y no centinela): 
+Número de ganglios centinela examinó: 
+
+Nódulos linfáticos positivos
+Número de ganglios linfáticos con macrometástasis (> 2 mm): 
+Número de ganglios linfáticos con micrometástasis (> 0,2 mm a 2 mm y / o> 200 células): Número de ganglios linfáticos con células tumorales aisladas (=0.2 mm y =200 células): + Tamaño de mayor depósito metastásico: 
+
+# Informar sobre el número de ganglios linfáticos con células tumorales aisladas sólo es aplicable en ausencia de macrometástasis o micrometástasis en otros ganglios linfáticos.
+Nota: El ganglio centinela es generalmente el primer ganglio linfático afectado. En la situación inusual en el que un ganglio centinela no está implicada por el carcinoma metastásico, pero un nodo no centinela está involucrado, esta información debe ser incluida en una nota.
+
++ Extensión extraganglionar:
++ ___ Presente
++ ___ No identificado
++ ___ Indeterminado
+
++ Método de Evaluación de los ganglios linfáticos centinela 
++ ___ Hematoxilina y eosina (H & E), 1 nivel
++ ___ H & E, múltiples niveles
++ ___ La inmunohistoquímica
++ ___ Biopsia del ganglio centinela no realizó
++ ___ Otro (especificar): 
+
+Clasificación patológica (pTNM)
+___ R (recurrente)
+___ Y (después del tratamiento)
+
+Tumor primario (PT)
+___ PTis (DCIS): El carcinoma ductal in situ
+___ PTis (Paget): la enfermedad de Paget del pezón no asociado con carcinoma y / o carcinoma invasivo in situ (DCIS y / o carcinoma lobulillar in situ) en el parénquima mamario subyacente.
+Nota: Si ha habido una biopsia con aguja gruesa antes, los hallazgos patológicos de la central, si está disponible, se debe incorporar en la clasificación T. Si carcinoma invasivo o microinvasión estaban presentes en el núcleo, el protocolo para carcinomas invasivos de la breast1 debe utilizarse y debe incorporar esta información.
+
+Ganglios linfáticos regionales (PN) (elija una categoría si los ganglios linfáticos recibidos con la muestra; no se requieren estudios de inmunohistoquímica y / o moleculares)
+mama in situ: 34is
+mamainvasor: 34inv
+
+Nota: Si los ganglios linfáticos mamarios internos, nodos infraclaviculares o los ganglios linfáticos supraclaviculares están incluidos en la muestra, consulte el Manual de estadificación AJCC para las categorías de los ganglios linfáticos adicionales.
+Modificador (necesario sólo si es aplicable)
+___ (Sn): Sólo ganglio centinela (s) evaluado. Si se extraen 6 o más nodos (centinela o no centinela), no se debe utilizar este modificador.
+
+Categoría (PN)
+___ No aplicable
+___ PNX: Regional ganglios linfáticos no pueden ser evaluados
+___ PN0: No metástasis
+___ PN0 (i-): No hay metástasis a los ganglios linfáticos regionales histológicamente, IHC negativo
+___ PN0 (i +): Las células malignas en los ganglios linfáticos regionales (s) no superior a 0,2 mm y no más de 200 células (detectados por H & E o IHC, incluyendo la ITC)
+___ PN0 (mol-): No hay metástasis en los ganglios linfáticos regionales histológicamente, hallazgos moleculares negativos (reacción en cadena de la polimerasa transcriptasa [RT-PCR])
+___ PN0 (mol +): hallazgos moleculares positivos (RT-PCR), pero no hay metástasis a los ganglios linfáticos regionales mediante histología o IHC
+___ PN1mi: micrometástasis (mayor que 0,2 mm y / o más de 200 células, pero ninguno superior a 2,0 mm).
+___ PN1a: Metástasis en 1 a 3 ganglios linfáticos axilares, al menos 1 metástasis superior a 2,0 mm ##
+___ PN2A: Metástasis en 4-9 ganglios linfáticos axilares (por lo menos 1 depósito tumoral mayor de 2,0 mm) ##
+___ PN3a: Metástasis en 10 o más ganglios linfáticos axilares (por lo menos 1 depósito tumoral mayor de 2,0 mm)
+Metástasis a distancia (PM) (necesario sólo si está presente)
+___ No aplicable
+___ PM1: metástasis a distancia según lo histológicamente probada mayor que 0,2 mm
+Nota: La designación MX ha sido eliminada
++ hallazgos patológicos adicionales Especificar: 
++ Estudios Auxiliares
+Nota: Para los receptores de estrógeno (ER) y del receptor de progesterona (PGR) que se informa, se debe utilizar la plantilla de biomarcadores de mama PAC. En espera de los estudios de biomarcadores deben ser listados en la sección de comentarios de este informe.
+
+Las microcalcificaciones
++ ___ No identificado
++ ___ Presente en DCIS
++ ___ Presente en el tejido no neoplásico
++ ___ Presente tanto en DCIS y el tejido no neoplásico
+
++ Historia Clínica 
++ Los hallazgos clínicos de los senos / radiológica actuales por las que se realiza esta cirugía incluyen:
++ ___ Masa palpable
++ ___ Radiológica hallazgo
++ ___ Masa o distorsión arquitectónica 
++ ___ Calcificaciones
++ ___ La secreción del pezón
++ ___ Otro (especificar): 
++ ___ Historia previa de cáncer de mama
+
+
+
+
+Carcinoma invasivo de la mama PROCEDIMIENTO: 
+
++ Historia Clínica (seleccione todas las que correspondan) (Nota Q)
++ Los hallazgos clínicos de los senos / radiológica actuales por las que se realiza esta cirugía incluyen:
++ ___ Masa palpable
++ ___ Radiológica hallazgo
++ ___ Misa o arquitectónico distorsión
++ ___ Calcificaciones
++ ___ Otro (especificar): _________________________
++ ___ La secreción del pezón
++ ___ Otro (especificar): _______________________________
++ ___ Historia previa de cáncer de mama
++ Especifique sitio, el diagnóstico y el tratamiento previo: ________________________
++ ___ (Neoadyuvante) Antes prequirúrgica para este diagnóstico de carcinoma invasivo
++ Especificar tipo: 
+COMENTARIOS
+
+Biopsia, 
+tumorectomía, 
+cuadrantectomía,
+mastectomía parcial
+contenido axilar
+mastectomía total
+radical modificada;
+Radical
+La escisión sin localización guiado por cable
+La escisión con la localización guiado por cable
+___ Otra especificar): ____________________________
+___ No especificado
+Nódulos linfáticos
+___ Ganglio linfático centinela (s)
+___ Disección axilar (disección parcial o completa)
+___ Los ganglios linfáticos presentes en la muestra de mama (es decir, los ganglios linfáticos intramamarios)
+___ Otros ganglios linfáticos Especifique la ubicación:
+Espécimen lateralidad
+___ Derecho
+___ Izquierda
+___ No especificado
++ Tumor Sitio:
++ ___ Cuadrante inferior externo
++ ___ Cuadrante superior interno
++ ___ Cuadrante inferior interno
++ ___ Central
++ ___ Pezón
++ ___ No especificado
+Tipo Histológico de carcinoma invasivo 
+___ El carcinoma invasor (NOS)
+___ El carcinoma ductal in situ con microinvasión
+___ El carcinoma lobular in situ con microinvasión
+___ El carcinoma ductal in situ que involucra piel del pezón (enfermedad de Paget) con microinvasión
+___ El carcinoma ductal invasivo (NOS)
+___ El carcinoma lobular invasivo
+___ Carcinoma invasivo ductal y lobulillar("tipo de carcinoma mixto")
+___ Carcinoma mucinoso invasivo
+___ Carcinoma medular Invasiva
+___ Carcinoma papilar invasiva
+___ Carcinoma micropapilar Invasiva
+___ Carcinoma tubular Invasiva
+___ Carcinoma cribiforme invasivo
+___ No carcinoma invasivo residual después de la terapia preoperatoria (neoadyuvante)
+___ Otro (s) (especificar): ____________________________
+___ Sólo microinvasión (=1 mm)
+Dimensión más grande de foco mayor de la invasión > 1 mm:  mm
+Grado histológico: 
+___ Puntuación 1: >75% del área del tumor formando estructuras glandulares / tubulares
+___ Puntuación 2: 10% a 75% de área del tumor formando estructuras glandulares / tubulares
+___ Puntuación 3: <10% de la superficie del tumor formando estructuras glandulares / tubulares
+___ Sólo microinvasión presente
+___ No carcinoma invasivo residual después de la terapia preoperatoria (neoadyuvante)
+___ Score no se puede determinar
+Pleomorfismo nuclear
+___ Puntuación 1: Núcleos pequeña con poco aumento de tamaño en comparación con las células epiteliales de mama normales
+___ Puntuación 2: Las células mas grandes de lo normal con núcleos abiertos vesiculares, nucleolos visibles, y variabilidad moderada en tamaño y forma
+___ Puntuación: 3 núcleos vesiculares, a menudo con nucleolos prominentes, marcada variación en tamaño y forma
+___ Sólo microinvasión presente
+Tasa mitótica
+___ Puntuación 1 (=3 mitosis por mm2) 
+___ Puntuación 2 (4-7 mitosis por mm2)
+___ Puntuación 3 (=8 mitosis por mm2) 
++ Número de mitosis por 10 campos de alta potencia: ___
++ Diámetro del campo microscópico: ___ mm
+En general Grado
+___ Grado 1: calificación de 3, 4, o 5
+___ Grado 2: calificación de 6 o 7
+___ Grado 3: calificación de 8 o 9
+___ Sólo microinvasión presente (no calificada)
+Focalidad tumoral
+___ Enfoque individual de carcinoma invasivo
+___ Múltiples focos de carcinoma invasivo
++ Número de focos: 
++ Los tamaños de los focos individuales: mm
+Carcinoma ductal in situ
+___ No DCIS está presente
+___ DCIS está presente
++ ___ Negativo para componente intraductal extenso (EIC)
++ ___ Positiva para EIC
++ ___ Sólo DCIS está presente después de la terapia preoperatoria (neoadyuvante)
++ Tamaño del CDIS al menos  mm
++ Patrones de Arquitectura
++ ___ Comedo
++ ___ Enfermedad de Paget
++ ___ Cribiforme
++ ___ Micropapilar
++ ___ Papilar
++ ___ Sólido
++ ___ Otro (especificar): ________________________
++ Grado Nuclear (véase el cuadro 2)
++ ___ Grado I (bajo)
++ ___ Grado II (intermedio)
++ ___ Grado III (alto)
++ Necrosis
++ ___ No identificado
++ ___ Presente, focal
++ ___ Presente, (expansiva necrosis "comedones")
++ Carcinoma lobular in situ (CLIS)
++ ___ No identificado
++ ___ Presente
+Extensión macroscópica y microscópica del tumor
+Piel
+El carcinoma invasor invade directamente en la dermis o epidermis sin ulceración de la piel
+El carcinoma invasor invade directamente en la dermis o epidermis con ulceración de la piel 
+Focos piel Satélite de carcinoma invasivo están presentes
+Pezón: Paget del pezón: 
+Músculo Esquelético
+___ Carcinoma invade el músculo esquelético
+___ Carcinoma invade en el músculo esquelético y pared torácica
+Márgenes
+___ Los márgenes no pueden ser evaluados
+___ Los márgenes no afectado por el carcinoma invasivo
+Distancia desde el margen más cercano: mm
++ Especificar margen: _______________________________
+___ Margen (s) positivo para el carcinoma invasivo
++ Especificar margen (s): _____________________________
++ Para márgenes positivos, especifique medida (focal, minimal / moderada o extensa):
++ Anterior: ____________________________
++ Posterior: ____________________________
++ Superior: ____________________________
++ Inferior: ____________________________
++ Medial: ____________________________
++ Lateral: ____________________________
++ Otros (especificar margen: ___________________): ____________________________
+DCIS
+___ CDIS no presente
+___ Los márgenes no involucrada por CDIS
+Distancia desde el margen más cercano:  mm
++ Especificar margen: 
+ Margen (s) positivo para el CDIS
++ Para márgenes positivos, especifique medida (focal, minimal / moderada o extensa):
++ Anterior: 
++ Posterior: 
++ Superior: 
++ Medial: 
++ Lateral: 
++ Otros 
+Ganglios linfáticos
+Número de ganglios linfáticos centinela examinó: ___
+Número total de ganglios linfáticos examinados (centinela y no centinela): ___
+Número de ganglios linfáticos con macrometástasis (> 2 mm): ___
+Número de ganglios linfáticos con micrometástasis (> 0,2 mm a 2 mm y / o> 200 células): ___
+Número de ganglios linfáticos con células tumorales aisladas (=0.2 mm y =200 células): ___
+Número de ganglios linfáticos sin células tumorales identificó: ___
++ Tamaño de mayor depósito metastásico (si existe): ___
++ Extensión extranodal
++ ___ Presente
++ ___ No identificado
++ ___ Indeterminado
++ Método de Evaluación de los ganglios linfáticos centinela (seleccione todas las que correspondan)
++ ___ Hematoxilina y eosina (H & E), 1 nivel
++ ___ H & E, múltiples niveles
++ ___ La inmunohistoquímica
++ ___ Biopsia del ganglio centinela no realizó
++ ___ Otro 
++ Efecto del tratamiento: Respuesta a neoadyuvancia
++ En la mama
++ ___ No terapia prequirúrgica conocida
++ ___ No hay respuesta definitiva a la terapia prequirúrgica en el carcinoma invasivo
++ ___ Respuesta probable o definitiva a la terapia prequirúrgica en el carcinoma invasivo
++ ___ No carcinoma invasivo residual está presente en la mama después de la terapia prequirúrgica
++ En los nodos linfáticos
++ ___ No terapia prequirúrgica conocido
++ ___ No hay ganglios linfáticos extirpados
++ ___ No hay respuesta definitiva a la terapia prequirúrgica en el carcinoma metastásico
++ ___ Respuesta probable o definitiva a la terapia prequirúrgica en el carcinoma metastásico
++ ___ No hay metástasis en los ganglios linfáticos. Cicatrización fibrosa, posiblemente relacionado con metástasis previas en los ganglios linfáticos con respuesta patológica completa
++ ___ No hay metástasis en los ganglios linfáticos y no cicatriz fibrosa prominente en los nodos
++ Invasion Linfático-vascular
++ ___ No identificado
++ ___ Presente
++ ___ Indeterminado
++ Invasion Dérmica linfático-vascular 
++ ___ No piel presente
++ ___ No identificado
++ ___ Presente
++ ___ Indeterminado
+Clasificación patológica
+TNM Descriptores (obligatorio sólo si es aplicable) (seleccione todas las que correspondan)
+___ M (múltiples focos de carcinoma invasor)
+___ R (recurrente)
+___ Y (después del tratamiento)
+Tumor primario 
+___ PTX: El tumor primario no puede evaluarse
+___ PT0: No hay evidencia de tumor primario #
+___ PTis (DCIS): El carcinoma ductal in situ #
+___ PTis (CLIS): El carcinoma lobular in situ #
+___ PTis (Paget): La enfermedad de Paget del pezón no asociado con carcinoma y / o carcinoma invasivo
+in situ (DCIS y / o carcinoma lobulillar in situ) en el subyacente parénquima mamario #
+pT1: Tumor =20 mm en su mayor dimensión
+___ PT1mi: El tumor =1 mm en su mayor dimensión (microinvasión)
+___ PT1a: Tumor> 1 mm pero =5 mm en su mayor dimensión
+___ PT1b: Tumor> 5 mm pero =10 mm en su mayor dimensión
+___ PT1c: Tumor> 10 mm pero =20 mm en su mayor dimensión
+PT2: Tumor> 20 mm pero =50 mm en su mayor dimensión
+PT3: El tumor mide> 50 mm en su mayor dimensión
+pT4: Tumor de cualquier tamaño con extensión directa a la pared torácica y / o de la piel
+___ PT4a: Extensión a la pared torácica, sin incluir el único músculo pectoral adhesión / invasión
+___ PT4b: La ulceración y / o nódulos satélites ipsilaterales y / o edema (incluyendo piel de naranja)  de la piel que no cumplen con los criterios para el carcinoma inflamatorio
+___ PT4c: Tanto T4a y T4b
+___ PT4d: El carcinoma inflamatorio
+Ganglios linfáticos regionales (PN)
+___ (Sn): Sólo ganglio centinela (s) evaluado. Si 6 o más nodos (centinela o no centinela) son
+eliminados, no se debe utilizar este modificador.
+Categoría (PN)
+___ PNX: Los ganglios linfáticos regionales no pueden evaluarse
+___ PN0: No metástasis en los ganglios identificada histológicamente
+___ PN0 (i-): No hay metástasis a los ganglios linfáticos, IHC negativo
+___ PN0 (i +): Las células malignas no son mayores que 0,2 mm y no más de 200 células (detectadas por H & E o IHC, incluyendo la ITC)
+___ PN0 (mol-): No hay metástasis a los ganglios linfáticos regionales histológicamente, hallazgos moleculares negativos (reversa transcriptasa reacción en cadena de la polimerasa [RT-PCR])
+___ PN0 (mol +): hallazgos moleculares positivos (RT-PCR), pero no hay metástasis en los ganglios linfáticos regionales detectados por histología o IHC
+___ pN1mi: micrometástasis (mayor que 0,2 mm y / o más de 200 células, pero ninguno mayor de 2,0 mm).
+___ PN1a: Metástasis en 1 a 3 ganglios linfáticos axilares, al menos 1 metástasis superior a 2,0 mm
+___ PN2A: Metástasis en 4-9 ganglios linfáticos axilares (por lo menos 1 mayor de 2,0 mm)
+___ PN3a: Metástasis en 10 o más ganglios linfáticos axilares (por lo menos 1 mayor de 2,0 mm)
+Metástasis a distancia (PM)
+___ No aplicable
+___ PM1: metástasis a distancia histológicamente probada mayor que 0,2 mm
++ hallazgos patológicos adicionales (Nota N)
++ Especificar: ____________________________

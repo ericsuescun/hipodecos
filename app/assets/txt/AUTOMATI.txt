@@ -1,0 +1,119 @@
+&& automat1: PARA DESCRIPCIONES AUTOMÁTICAS
+OPT = space(12)
+DEFINE WINDOW MARCO5 FROM 03,06 TO 09,70 DOUBLE
+ACTIVATE WINDOW MARCO5
+@ 02,02 say "ANOTE EL CODIGO CORRESPONDIENTE: .."GET OPT
+READ
+IF OPT = "            "
+   _CUROBJ = OBJNUM(DESCR)
+   DEACTIVATE WINDOW MARCO5
+RELEASE WINDOW MARCO5
+
+   RETURN
+else
+do case
+  
+  case upper(OPT) = "PERICARDIO"
+  do PERICARDIO
+
+  case upper(OPT) = "ARTERIA"
+  do ARTERIA
+
+  case upper(OPT) = "VENA"
+  do VENA
+
+  case upper(OPT) = "NASAL"
+  do NASAL
+
+  case upper(OPT) = "LARINGE"
+  do LARINGE
+
+  case upper(OPT) = "PULMON"
+  do PULMON
+
+  case upper(OPT) = "BAZO"
+  do BAZO
+
+  case UPPER(OPT) = "GANGLIO"
+  do GANGLIO
+
+  case upper(OPT) = "SALIVAR"
+  do SALIVAR
+  
+  case upper(OPT) = "ESOFAGO"
+  do ESOFAGO
+
+  case upper(OPT) = "ESTOMAGO"
+  do ESTOMAGO
+
+  case upper(OPT) = "APENDICE"
+  do APENDICE
+
+  case upper(OPT) = "COLON"
+  do COLON
+
+  case upper(OPT) = "VESICULA"
+  do VESICULA
+
+  case upper(OPT) = "VEJIGA"
+  do VEJIGA
+
+  case upper(OPT) = "TESTICULO"
+  do TESTICULO
+  
+  case upper(OPT) = "MAMA"
+  do MAMA
+
+  case upper(OPT) = "PROSTATA"
+  do PROSTATA
+
+  case upper(OPT) = "VAGINA"
+  do VAGINA
+
+  case upper(OPT) = "CERVIX"
+  do CERVIX
+
+  case upper(OPT) = "UTERO"
+  do UTERO
+
+  case upper(OPT) = "TROMPA"
+  do TROMPA
+
+  case upper(OPT) = "OVARIO"
+  do OVARIO
+
+  case upper(OPT) = "TIROIDES"
+  do TIROIDES
+
+  case upper(OPT) = "NERVIOS"
+  do NERVIOS
+
+  case upper(OPT) = "VARIOS"
+  do VARIOS
+
+  case upper(OPT) = "OIDO"
+  do OIDO
+
+  case upper(OPT) = "OJO"
+  do OJO
+
+  case upper(OPT) = "PIEL"
+  do PIEL
+
+  case upper(OPT) = "HUESO"
+  do HUESO
+
+  case upper(OPT) = "ARTICULACION"
+  do ARTICULACION
+
+  case upper(OPT) = "DIENTE"
+  do DIENTE
+
+
+  OTHERWISE
+  _CUROBJ = OBJNUM(DESCR)
+endcase
+DEACTIVATE WINDOW MARCO5
+RELEASE WINDOW MARCO5
+ENDIF  
+&&return

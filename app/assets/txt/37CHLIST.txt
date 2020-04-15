@@ -1,0 +1,133 @@
+Fecha de publicación del protocolo: agosto de 2018.
+
+CERVIX UTERINO: Escisión
+
+Nota: este resumen de caso se recomienda para informar especímenes de escisión, pero no se requiere para propósitos de acreditación.
+
+Seleccione una respuesta única a menos que se indique lo contrario.
+
+Procedimiento
+___ Escisión de cono de cuchillo frío.
+___ Procedimiento de escisión eléctrica de bucle (LEEP) / escisión de bucle grande de la zona de transformación (LLETZ)
+___ Otra especificar): ___________________________
+___ No especificado
+
++ Sitio del tumor (seleccione todo lo que corresponda) (Notas A, B y C)
++ ___ cuadrante superior (anterior) izquierdo (12 a 3 en punto)
++ ___ cuadrante inferior izquierdo (posterior) (3 a 6 en punto)
++ ___ cuadrante inferior derecho (posterior) (6 a 9 en punto)
++ ___ cuadrante superior derecho (anterior) (9 a 12 horas)
++ ___ Otro (especifique): ___________________________
++ ___ No se puede determinar (explicar): ___________________________
+
+Tamaño del tumor (Nota C)
+Dimensión mayor (centímetros): ___ cm
++ Dimensiones adicionales (centímetros): ___ x ___ cm
+___ No se puede determinar (explicar): ______________________________
+Nota: Todas las dimensiones son importantes; vea la definición de "carcinoma de células escamosas superficialmente invasivo" en T1a1 / IA1.
+
+Tipo histológico (Nota D)
+___ Carcinoma de células escamosas, NOS
+___ Carcinoma de células escamosas, queratinización.
+___ Carcinoma de células escamosas, no queratinizante
+___ Carcinoma de células escamosas, basaloide
+___ Carcinoma de células escamosas, verrugoso
+___ Carcinoma de células escamosas, verrugosa
+___ carcinoma de células escamosas, papilar
+___ Carcinoma de células escamosas, tipo linfoepitelioma
+___ Carcinoma de células escamosas, squamotransitional
+___ Adenocarcinoma endocervical, tipo usual
+___ Carcinoma mucinoso, NOS
+___ Carcinoma mucinoso, tipo intestinal
+___ Carcinoma mucinoso, tipo de células en anillo de sello
+___ Carcinoma mucinoso, tipo gástrico
+___ carcinoma de Villoglandular
+___ carcinoma endometrioide
+___ carcinoma de células claras
+___ carcinoma seroso
+___ carcinoma mesonéfrico
+___ Adenocarcinoma mezclado con carcinoma neuroendocrino
+___ carcinoma adenoescamoso
+___ Carcinoma adenoescamoso, variante de células vítreas
+___ carcinoma adenoide quístico
+___ carcinoma adenoide basal
+___ carcinoma neuroendocrino de células pequeñas
+___ carcinoma neuroendocrino de células grandes
+___ carcinoma indiferenciado
+___ Carcinosarcoma
+___ Otro tipo histológico no listado (especifique): _________________________
+___ Carcinoma, no se puede determinar el tipo
+
+Grado histológico (Nota E)
+___ G1: bien diferenciado
+___ G2: moderadamente diferenciado
+___ G3: mal diferenciado
+___ GX: no puede ser evaluado
+___ No aplica
+
+Invasión estromal (Nota C)
+
+Profundidad de invasión del estroma (milímetros): ___ mm
+___ La profundidad no se puede determinar (explicar): _________________________
+
+Extensión horizontal longitudinal / longitud (si corresponde #) (milímetros): ___ mm
+___ La extensión no se puede determinar (explicar): _________________________
+
+Extensión horizontal circunferencial / ancho (si corresponde #) (milímetros): ___ mm
+___ La extensión no se puede determinar (explicar): _________________________
+# No es aplicable en tumores más grandes que se pueden medir en forma bruta.
+
+Márgenes (Nota F) #
+
+Margen endocervical (seleccione todos los que correspondan)
+___ No se puede evaluar (explicar): _________________________
+___ No involucrado por carcinoma invasivo
++ Distancia del carcinoma invasivo desde el margen (milímetros): ___ mm
++ Especifique la ubicación: ____________________________
+___ Involucrado por carcinoma invasivo
+Especifique la ubicación, si es posible: ____________________________
+___ No involucrado por neoplasia intraepitelial
+___ Involucrado por lesión intraepitelial escamosa de alto grado (NIC 2-3)
++ Especifique la ubicación: ____________________________
+___ Involucrado por adenocarcinoma in situ (AIS)
++ Especifique la ubicación: ____________________________
+
+Margen Ectocervical (seleccione todos los que apliquen)
+___ No se puede evaluar (explicar): _________________________
+___ No involucrado por carcinoma invasivo
++ Distancia del carcinoma invasivo desde el margen (milímetros): ___ mm
++ Especifique la ubicación: ____________________________
+___ Involucrado por carcinoma invasivo
+Especifique la ubicación, si es posible: ____________________________
+___ No involucrado por neoplasia intraepitelial
+___ Involucrado por lesión intraepitelial escamosa de alto grado (NIC 2-3)
++ Especifique la ubicación: ____________________________
+___ Involucrado por adenocarcinoma in situ (AIS)
++ Especifique la ubicación: ____________________________
+Margen profundo (seleccione todos los que apliquen)
+___ No se puede evaluar (explicar): _________________________
+___ No involucrado por carcinoma invasivo
++ Distancia del carcinoma invasivo desde el margen (milímetros): ___ mm
++ Especifique la ubicación: ____________________________
+___ Involucrado por carcinoma invasivo
+Especifique la ubicación, si es posible: ____________________________
+___ No involucrado por neoplasia intraepitelial
+___ Involucrado por lesión intraepitelial escamosa de alto grado (NIC 2-3)
++ Especifique la ubicación: ____________________________
+___ Involucrado por adenocarcinoma in situ (AIS)
++ Especifique la ubicación: ____________________________
+# No se requiere el informe de lesiones intraepiteliales escamosas de alto grado (CIN 2-3) y / o AIS si el margen está afectado por un carcinoma invasivo.
+
+Invasión linfovascular (Nota G)
+___ No identificado
+___ presente
+___ No puede ser determinado
+
++ Hallazgos patológicos adicionales (seleccione todos los que correspondan)
++ ___ Ninguno identificado
++ ___ Lesión intraepitelial escamosa de bajo grado (NIC 1)
++ ___ Lesión intraepitelial escamosa de alto grado (NIC 2 o 3)
++ ___ Inflamación
++ ___ Otro (especifique): ____________________________
+
++ Comentario (s)

@@ -10,7 +10,9 @@ class AutosController < ApplicationController
   # GET /autos/1
   # GET /autos/1.json
   def show
+    
   end
+
 
   # GET /autos/new
   def new

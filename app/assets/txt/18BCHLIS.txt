@@ -1,0 +1,48 @@
+
+LISTA DE CHEQUEO PARA ESOFAGO BIOPSIAS
+
+* MACROSCÓPICO
+
+* Tipo de muestra
+* ___ Biopsia incisional
+* ___ Biopsia por escisión
+
+* Sitio del tumor
+* Especificar si se conoce: ___________________________
+* ___ No especificado
+
+
+* MICROSCÓPICA
+
+* Tipo Histológico
+* ___ Carcinoma de células escamosas
+* ___ Adenocarcinoma
+* ___ Carcinoma adenoescamoso
+* ___ Carcinoma de células pequeñas
+* ___ Carcinoma indiferenciado
+* ___ Otro (especificar): ___________________________
+* ___ Carcinoma, tipo no se puede determinar
+
+* Grado histológico
+* ___ No aplica
+* ___ GX: No puede evaluarse
+* ___ G1: Bien diferenciado
+* ___ G2: moderadamente diferenciado
+* ___ G3: mal diferenciado
+* ___ G4: Indiferenciado
+
+* Alcance de la invasión
+* ___ No puede evaluarse
+* ___ Epitelio solamente (sin invasión)
+* ___ Lámina propia
+* ___ Submucosa
+* ___ Muscular propia
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Metaplasia intestinal
+* ___ Displasia
+* ___ Esofagitis (tipo): _________________________
+* ___ Otro (especificar): __________________________
+
+* Comentario (s)

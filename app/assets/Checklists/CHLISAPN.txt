@@ -1,0 +1,169 @@
+Fecha de publicación del protocolo: junio de 2017.
+
+APÉNDICE TUMOR NEUROENDOCRINO
+
+Seleccione una respuesta única a menos que se indique lo contrario.
+
+Procedimiento
+___ apendicectomía
+___ hemicolectomía derecha
+___ Otra especificar): ____________________________
+
+Sitio del tumor (Nota A)
+___ La mitad proximal del apéndice
+___ La mitad distal del apéndice
+___ De forma difusa el apéndice
+___ Apéndice, no especificado de otra manera
+___ Otra especificar): __________________________
+
+Tamaño del tumor (Nota B)
+Dimensión mayor (centímetros): ___ cm
++ Dimensiones adicionales (centímetros): ___ x ___ cm
+___ No se puede determinar (explicar): __________________________
+
+Tipo y grado histológico (Notas C y D)
+___ G1: tumor neuroendocrino bien diferenciado
+___ G2: tumor neuroendocrino bien diferenciado
+___ G3: tumor neuroendocrino bien diferenciado
+___ Otra especificar): _________________________
+___ GX: tumor neuroendocrino bien diferenciado, no se puede evaluar el grado
+___ No aplica
+Nota: Para los carcinomas neuroendocrinos poco diferenciados (de alto grado), se debe utilizar el protocolo del College of American Pathologists (CAP) para el carcinoma del apéndice.1
+
+Se requiere la tasa mitótica y / o el índice de etiquetado Ki67 para determinar el grado histológico.
+
+Tasa Mitótica (Nota D)
+___ <2 mitosis / 2mm2
+___ 2 a 20 mitosis / 2mm2
++ Especificar mitosis por 2mm2: _____
+___> 20 mitosis por 2mm2
++ Especificar mitosis por 2mm2: _____
+___ No se puede determinar (explicar): __________________________
+___ No aplica
+Nota: La tasa mitótica debe informarse como número de mitosis por 2 mm2, al evaluar al menos 10 mm2 en la parte más mitóticamente activa del tumor (por ejemplo, si usa un microscopio con un diámetro de campo de 0.55 mm, cuente 42 de alta potencia). campos [10 mm2] y divida el número resultante de mitosis por 5 para determinar el número de mitosis por 2 mm2 necesario para asignar el grado del tumor).
+
+Índice de etiquetado Ki-67 (Nota D)
+___ <3%
+___ 3% a 20%
++ Especificar porcentaje de Ki-67: ____%
+___> 20%
++ Especificar porcentaje de Ki-67: ____%
+___ No se puede determinar (explicar): __________________________
+___ No aplica
+
+Extensión del tumor
+___ No hay evidencia de tumor primario
+___ El tumor invade la lámina propia.
+___ El tumor invade la submucosa.
+___ El tumor invade la musculatura propia.
+___ El tumor invade la subserosa / mesoapéndice sin la participación del peritoneo visceral
+___ El tumor perfora el peritoneo visceral (serosa)
+___ El tumor invade directamente otros órganos o estructuras adyacentes # (especifique): ____________________
+___ No puede ser evaluado
+# Esto excluye la extensión mural directa a la subserosa adyacente del intestino adyacente, pero puede incluir la pared abdominal y el músculo esquelético.
+
+Márgenes (Nota E)
+Nota: Use la sección solo si todos los márgenes no están involucrados y todos los márgenes se pueden evaluar.
+___ Todos los márgenes no están involucrados por el tumor
+Márgenes examinados: ___________
+Nota: Los márgenes pueden incluir proximal, distal, radial o mesentérico y otros.
++ Distancia del tumor desde el margen más cercano (milímetros o centímetros): ___ mm o ___ cm
++ Especifique el margen más cercano: __________________________
+
+Informe de margen individual requerido si hay márgenes involucrados o no se puede evaluar la participación de margen
+
+Sólo para especímenes de apendicectomía.
+
+Margen proximal
+___ No puede ser evaluado
+___ no involucrado por el tumor
+___ Involucrado por tumor
+
+Margen radial o mesentérico
+___ No puede ser evaluado
+___ no involucrado por el tumor
+___ Involucrado por tumor
+
+Otro (s) Margen (s) (requerido solo si es aplicable)
+Especifique margen (s): __________________________
+___ No puede ser evaluado
+___ no involucrado por el tumor
+___ Involucrado por tumor
+
+Solo para muestras de hemicolectomía derecha
+
+Margen proximal
+___ No puede ser evaluado
+___ no involucrado por el tumor
+___ Involucrado por tumor
+
+Margen distal
+___ No puede ser evaluado
+___ no involucrado por el tumor
+___ Involucrado por tumor
+Margen radial y mesentérico
+___ No puede ser evaluado
+___ no involucrado por el tumor
+___ Involucrado por tumor
+
+Otro (s) Margen (s) (requerido solo si es aplicable)
+Especifique margen (s): __________________________
+___ No puede ser evaluado
+___ no involucrado por el tumor
+___ Involucrado por tumor
+
+Invasión linfovascular
+___ No identificado
+___ presente
+___ No puede ser determinado
+
++ Invasión perineural
++ ___ No identificado
++ ___ presente
++ ___ No se puede determinar
+
+Ganglios linfáticos regionales
+___ No hay ganglios linfáticos enviados o encontrados
+
+Examen de ganglios linfáticos (requerido solo si los ganglios linfáticos están presentes en la muestra)
+
+Número de ganglios linfáticos involucrados: ____
+___ El número no se puede determinar (explicar): ______________________
+
+Número de ganglios linfáticos examinados: ____
+___ El número no se puede determinar (explicar): ______________________
+
+Clasificación del estadio patológico (pTNM, AJCC 8ª edición) (Nota F)
+Nota: El informe de las categorías pT, pN y (cuando corresponda) pM se basa en la información disponible para el patólogo en el momento de la emisión del informe. Solo se requiere la categoría T, N o M aplicable para informar; sus definiciones no necesitan ser incluidas en el informe. Las categorías (con modificadores cuando corresponda) pueden enumerarse en 1 línea o más de 1 línea.
+
+Descriptores de TNM (necesarios solo si corresponde) (seleccione todos los que correspondan)
+___ m (tumores primarios múltiples)
+___ r (recurrente)
+___ y ??(postratamiento)
+
+Tumor primario (pT)
+___ pTX: no se puede evaluar el tumor primario
+___ pT0: No hay evidencia de tumor primario
+___ pT1: Tumor de 2 cm o menos en su dimensión mayor
+___ pT2: tumor de más de 2 cm, pero menor o igual a 4 cm
+___ pT3: tumor de más de 4 cm o con invasión subserosal o afectación del mesoapéndice
+___ pT4: el tumor perfora el peritoneo o invade directamente otros órganos o estructuras adyacentes (excluyendo la extensión mural directa a la subserosa adyacente del intestino adyacente), por ejemplo, la pared abdominal y el músculo esquelético
+Ganglios linfáticos regionales (pN)
+___ pNX: no se pueden evaluar los ganglios linfáticos regionales
+___ pN0: no hay metástasis en los ganglios linfáticos regionales
+___ pN1: metástasis en ganglios linfáticos regionales
+
+Metástasis a distancia (requerido solo si se confirma patológicamente en este caso)
+___ pM1: metástasis a distancia
+___ pM1a: metástasis confinada al hígado
+___ pM1b: Metástasis en al menos un sitio extrahepático (p. ej., pulmón, ovario, ganglio linfático no regional, peritoneo, hueso)
+___ pM1c: metástasis hepáticas y extrahepáticas
+Especifique sitio (s), si se conoce: __________________________
+
++ Hallazgos patológicos adicionales (seleccione todos los que correspondan) (Nota G)
++ ___ Ninguno identificado
++ ___ necrosis tumoral
++ ___ apendicitis aguda
++ ___ Otro (especifique): ___________________________
+
++ Comentario (s)

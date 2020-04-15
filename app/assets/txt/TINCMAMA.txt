@@ -1,0 +1,8 @@
+MAMA IZQUIERDA: 
+
+#1 RECEPTORES ESTROGENICOS: Negativa en células neoplásicas.
+#2 RECEPTORES PROGESTAGENOS: Negativa en células  neoplásicas.
+#3 HER-2 NEU: Positiva membranosa, fuerte, definida y continua en mas del 50%  de las células neoplásicas.
+#4 Ki67: Positiva nuclear en 80 % de células neoplásicas en focos mas activos.
+
+NOTA: Las tinciones se corrieron con controles positivos en el mismo portaobjetos del caso problema.

@@ -1,0 +1,26 @@
+DO CASE
+   CASE m.codval1=      20101    "898101"
+   M.VAL1 = m.UB101
+   CASE m.codval1=      20102    "898102"
+   M.VAL1 = m.UB102
+   CASE m.codval1=      20106    "898801"
+   M.VAL1 = m.UB106
+   CASE m.codval1=      20201    "898201"
+   M.VAL1 = m.UB201
+   case m.codval1 =     20205   "898241"
+   m.val1 = m.UB205
+   case m.codval1 =     20203   "898103"
+   m.val1 = m.UB203
+   case m.codval1 =     20301   "898001"
+   m.val1 = m.UB301
+   case m.codval1 =     20301   "898001"
+   m.val1 = m.UB302
+   case m.codval1 =     20303   "898002"
+   m.val1 = m.UB303
+   case m.codval1 =     20305   "898003"
+   m.val1 = m.UB305
+   CASE m.codval1 = "      "
+   M.VAL1 = 0
+   OTHERWISE
+   DO REPCOD
+ENDCASE

@@ -1,0 +1,160 @@
+
+LISTA CHEQUEO RETINOBLASTOMA (CHLISRTB)
+
+MACROSCÓPICO
+
+Tipo de muestra
+___ Enucleación
+___ Exenteración Limited
+___ Exenteración completa
+___ Otro (especificar): ____________________________
+___ No especificado
+
+Lateralidad
+___ Derecho
+___ Izquierda
+___ No especificado
+
+Tamaño de la pieza
+
+Para Enucleación
+Diámetro anteroposterior: ___ mm
+Diámetro horizontal: ___ mm
+Diámetro vertical: ___ mm
+Longitud del nervio óptico: ___ mm
+Diámetro del nervio óptico: ___ mm
+___ No puede determinarse (ver Comentario)
+
+Para exenteración
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+___ No puede determinarse (ver Comentario)
+
+Sitio del tumor y extensión
+(Examen macroscópico / transiluminación) (marque todo lo que corresponda)
+___ No puede determinarse
+___ Superotemporal cuadrante del globo
+___ Superonasal cuadrante del globo
+___ Inferotemporal cuadrante del globo
+___ Inferonasal cuadrante del globo
+___ Cámara anterior
+___ Extensión extraescleral
+___ Nervio óptico
+
+Dimensiones tumorales basales de transiluminación
+___ No puede determinarse
+Tamaño: ___ x ___ mm
+
+Las dimensiones del tumor después de la sección
+___ No puede determinarse
+Base en el borde del corte: ___ mm
+Altura desde el borde del corte: ___ mm
+Altura máxima del tumor: ___ mm
+
+Localización del tumor después de la sección:
+___ No puede determinarse
+Distancia desde el borde anterior del tumor al limbo en el borde del corte: ___ mm
+Distancia del borde posterior de la base del tumor desde el borde del disco óptico: ___ mm
+
+Afectación tumoral o Patología de otras estructuras oculares
+(Marque todas las que apliquen)
+___ No puede determinarse
+___ Disco óptico
+___ Coroides mínima (la membrana de Bruch destruido por 3 o menos grupos de células microscópicas sin penetración más profunda)
+Coroides ___, enorme (más allá de cualquier cosa mínima)
+___ Vítreo
+___ El desprendimiento de retina
+___ Cuerpo ciliar
+___ Iris
+___ Lens
+___ Cámara anterior
+___ Angle
+___ Sclera
+___ Cornea
+
+
+MICROSCÓPICA
+
+Características histológicas (marque todo lo que corresponda)
+___ No puede determinarse
+___ No Diferenciada
+___ Diferenciados
+___ * Homer Wright rosetas
+* ___ Rosetas de Flexner-Wintersteiner
+* ___ Fleurettes
+___ Necrótico
+
+Patrón de crecimiento
+___ No puede determinarse
+___ Endofítico
+___ Exofítico
+___ Combinado exofítica / endofítica
+___ Difusa
+
+Grado de invasión del nervio óptico
+___ No puede determinarse
+___ Ninguno
+___ Anterior a la lámina cribosa
+___ En la lámina cribosa
+___ Posterior a la lámina, pero no hasta el final del nervio
+___ Para cortar final del nervio óptico
+
+La participación de otras estructuras (marque todas las que apliquen)
+___ No puede determinarse
+___ Coroides
+___ Vítreo
+___ Sclera
+___ Vortex vena
+___ Iris
+___ Otro (s) (especificar): ___________________________
+
+La estadificación patológica (pTNM)
+
+Tumor primario (pT)
+___ PTX: El tumor primario no puede ser evaluado
+___ PT0: No hay evidencia de tumor primario
+___ PT1: Tumor limitado a la retina, vítreo, o el espacio subretiniano. No nervio óptico o la invasión coroidea
+pT2: invasión mínima del nervio óptico y / o capas ópticas
+___ PT2a: El tumor invade el nervio óptico hasta, pero no por el nivel de la lámina cribosa
+___ PT2b: El tumor invade la coroides focalmente
+___ PT2c: El tumor invade el nervio óptico hasta, pero no por el nivel de la lámina cribosa e invade la coroides focalmente
+pT3: invasión significativa del nervio óptico y / o capas ópticas
+___ PT3a: Tumor invade a través del nervio óptico al nivel de la lámina cribosa, pero no a la línea de resección.
+___ PT3b: El tumor invade masivamente la coroides
+___ PT3c: El tumor invade el nervio óptico a través del nivel de la lámina cribosa, pero no a la línea de resección y masivamente invade la coroides
+___ PT4: la extensión del tumor extraocular que incluye cualquiera de los siguientes: invasión de nervio óptico de la línea de resección; invasión de la órbita a través de la esclerótica, y extensión tanto anterior o posteriormente a la órbita; extensión en el cerebro; extensión, pero no a través , el quiasma, extensión en el cerebro más allá del quiasma
+
+Ganglios linfáticos regionales (pN)
+___ PNX: Los ganglios linfáticos regionales no pueden ser evaluados
+PN0 ___: No hay metástasis a los ganglios linfáticos regionales
+___ PN1: Metástasis a los ganglios linfáticos regionales
+
+Metástasis a distancia (pM)
+___ PMX: No puede evaluarse
+pM1: Metástasis a distancia
+___ PM1a: La médula ósea
+___ PM1b: Otros sitios
+* Especificar sitio (s), si se conoce: _______________________
+
+Márgenes (marque todas las que apliquen)
+___ No puede evaluarse
+___ No tumor con márgenes
+___ Tumor presente en el margen quirúrgico del nervio óptico
+___ Extensión extraescleral (para muestras enucleación)
+___ Margen Otro implicado
+Especifique: ________________________
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Calcificaciones
+* Tasa ___ mitótico: número de mitosis por objetivo 40x
+con una zona de campo de 0,152 mm2: ___
+* ___ Necrosis
+* ___ Apoptosis
+* ___ Depósitos vasculares basofílicas
+* ___ Células inflamatorias
+* ___ Hemorragia
+* ___ Neovascularización (especificar lugar): ________________________
+* ___ Otro (especificar): __________________________
+
+* Comentario (s)

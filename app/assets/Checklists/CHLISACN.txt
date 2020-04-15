@@ -1,0 +1,118 @@
+
+LISTA DE CHEQUEO CARCINOMA DUCTAL Y OTROS DEL PANCREAS
+
+MACROSCÓPICO
+
+Tipo de muestra
+___ Pancreaticoduodenectomía (resección de Whipple), pancreatectomía parcial
+___ Pancreaticoduodenectomía (resección de Whipple), pancreatectomía total
+___ Pancreatoduodenectomía conservadora del píloro, pancreatectomía parcial
+___ Pancreatoduodenectomía conservadora del píloro, pancreatectomía total
+___ Pancreatectomía parcial, el cuerpo de páncreas
+___ Pancreatectomía parcial, cola de páncreas
+___ Otro (especificar): ____________________________
+___ No especificado
+
+Sitio del tumor (marque todas las que apliquen)
+___ Cabeza de páncreas
+___ Proceso unciforme
+___ Cuerpo de páncreas
+___ Cola del páncreas
+___ No especificado
+
+Tamaño del tumor
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+___ No puede determinarse (ver Comentario)
+
+* Otros Órganos resecadas
+* ___ Ninguno
+* ___ Bazo
+* ___ Vesícula
+* ___ Otro (s) (especificar): _________________________
+
+MICROSCÓPICA
+
+Tipo Histológico
+___ Adenocarcinoma ductal
+___ Mucinoso carcinoma enquistado
+___ Sello de carcinoma de células en anillo
+___ Carcinoma adenoescamoso
+___ Indiferenciado (anaplásico) carcinoma
+___ Carcinoma indiferenciado de tipo osteoclasto células gigantes
+___ Mixto ductal carcinoma endocrino-
+___ Cistoadenocarcinoma seroso
+___ Cistoadenocarcinoma mucinoso - invasivo
+___ Invasiva papilar carcinoma mucinoso-
+El carcinoma de células acinares ___
+___ Acinares cistoadenocarcinoma célula
+___ Mixto acinar-endocrino carcinoma
+___ Otro (especificar): ____________________________
+___ Carcinoma, tipo no se puede determinar
+
+Grado histológico (carcinoma ductal solamente)
+___ No se aplica
+___ GX: No puede evaluarse
+___ G1: Bien diferenciado
+___ G2: moderadamente diferenciado
+___ G3: mal diferenciado
+___ G4: Indiferenciado
+___ Otro (especificar): ____________________________
+
+La estadificación patológica (pTNM)
+
+Tumor primario (pT)
+___ PTX: No puede evaluarse
+___ PT0: No hay evidencia de tumor primario
+___ PTis: carcinoma in situ
+___ PT1: Tumor limitado al páncreas, de 2 cm o menos en su mayor dimensión
+___ PT2: Tumor limitado al páncreas, más de 2 cm en su mayor dimensión
+___ PT3: Tumor se extiende más allá del páncreas pero sin afectación del tronco celíaco o la arteria mesentérica superior
+___ PT4: El tumor afecta el tronco celíaco o la arteria mesentérica superior
+
+Ganglios linfáticos regionales (pN)
+___ PNX: No puede evaluarse
+PN0 ___: No hay metástasis a los ganglios linfáticos regionales
+___ PN1: Metástasis a los ganglios linfáticos regionales
+* ___ N1a: metástasis en ganglio linfático regional
+* ___ N1b: Metástasis en múltiples ganglios linfáticos regionales
+Especificar: Número examinado ___
+Número involucrados: ___
+
+Metástasis a distancia (pM)
+___ PMX: No puede evaluarse
+___ PM1: Metástasis a distancia
+* Especificar sitio (s), si se conoce: ____________________________
+
+Márgenes (marque todas las que apliquen)
+___ No puede evaluarse
+Márgenes ___ no afectado por carcinoma invasivo
+Distancia del carcinoma invasivo de margen más cercano: ___ mm
+* Especificar margen (si es posible): ____________________________
+___ Carcinoma in situ ductal ausente en los márgenes
+___ Carcinoma in situ presente en el margen del conducto biliar común
+___ Carcinoma in situ presente en el margen del parénquima pancreático
+___ Margen (s) que participan por carcinoma invasivo
+___ Retroperitoneal posterior (radial) Margen: cara posterior del páncreas
+___ Margen proceso unciforme (no peritonealized superficie de la apófisis unciforme)
+___ Margen de páncreas distal
+___ Conducto biliar común margen
+___ Margen pancreático proximal
+___ Otro (especificar): ____________________________
+
+* Venosa / linfática (barco grande / pequeño) Invasion (V / L)
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Invasión perineural
+* ___ Ausente
+* ___ Presente
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Neoplasia intraepitelial pancreática (el más alto grado: PanIN ___)
+* ___ Pancreatitis crónica
+* ___ Pancreatitis aguda
+* ___ Otro (especificar): ____________________________
+

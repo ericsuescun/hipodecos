@@ -1,0 +1,86 @@
+Fecha de publicación del protocolo: junio de 2017.
+
+TUMOR ESTRÓMAL GASTROINTESTINAL (GIST): Biopsia
+
+Nota: este resumen de caso se recomienda para informar las muestras de biopsia, pero no se requiere para fines de acreditación.
+
+Seleccione una respuesta única a menos que se indique lo contrario.
+
+Procedimiento
+___ biopsia con aguja gruesa
+___ biopsia endoscópica
+___ Otra especificar): ____________________________
+___ No especificado
+
+Sitio del tumor (Nota A)
+Especificar: ____________________________
+___ No especificado
+
+Tipo histológico
+___ Tumor estromal gastrointestinal, tipo de células fusiformes
+___ Tumor estromal gastrointestinal, tipo epitelioide
+___ Tumor estromal gastrointestinal, mixto
+___ Tumor del estroma gastrointestinal, otro (especifique): ________________________
+
+Tasa mitótica
+Especificar: ___ / 5 mm2
+___ No se puede determinar (explicar): _____________________________________________
+Nota: El recuento total requerido de mitosis es por 5 mm2 en la sección de portaobjetos de vidrio. Con el uso de microscopios de modelos más antiguos, 50 HPF es equivalente a 5 mm2. La mayoría de los microscopios modernos con lentes / campos 40X más anchos requieren aproximadamente de 20 a 25 HPF para abarcar 5 mm2. Si es necesario, mida el campo de visión para determinar con precisión la cantidad real de campos que se deben contar en los microscopios individuales para abarcar 5 mm2.
+
++ Necrosis
++ ___ No identificado
++ ___ presente
++ Extensión: ___%
++ ___ No se puede determinar
+
+Grado histológico (Nota B)
+___ G1: bajo grado; Tasa mitótica = 5/5 mm2
+___ G2: grado alto; Tasa mitótica> 5/5 mm2
+___ GX: no se puede evaluar el grado
+
+Evaluación de Riesgos (Nota C)
+___ Ninguna
+___ Muy bajo riesgo
+___ Riesgo bajo
+___ Riesgo moderado
+___ Alto riesgo
+___ de manera metastásica
+___ No puede ser determinado
++ Hallazgos Patológicos Adicionales
++ Especificar: ____________________________
+
+Estudios Auxiliares (Nota E)
+Nota: para el estudio genético molecular y otros estudios de inmunohistoquímicos, debe utilizarse la plantilla de biomarcadores CAP GIST. Los estudios de biomarcadores pendientes deben enumerarse en la sección de Comentarios de este informe.
+
+Estudios inmunohistoquímicos (seleccione todos los que correspondan)
+___ KIT (CD117)
+___ positivo
+___ Negativo
+___ PERRO1 (ANO1)
+___ positivo
+___ Negativo
+___ Otra especificar): ____________________________
+___ pendiente
+___ No realizado
+
++ Estudios de genética molecular (por ejemplo, KIT, PDGFRA, BRAF, SDHA / B / C / D, o análisis mutacional de NF1)
++ ___ Sometido para su análisis; resultados pendientes
++ ___ Realizado, ver informe separado: ____________________________
++ ___ Realizado
++ Especifique método (s) y resultados: ____________________________
++ ___ No realizado
+
++ Tratamiento Prebiopsia
++ ___ No se conoce terapia prebiopsia
++ ___ Terapia sistémica realizada (especifique el tipo): ___________________________
++ ___ Terapia realizada, tipo no especificado
++ ___ No especificado
+
+Efecto de tratamiento (Nota F)
+___ No se conoce terapia prequirúrgica
+___ No identificado
+___ presente
++ Especificar porcentaje de tumor viable: _____%
+___ No puede ser determinado
+ 
++ Comentario (s)

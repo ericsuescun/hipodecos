@@ -13,18 +13,19 @@
         <thead class="thead-dark">
           <tr>
             <tr>
-              <th>Admin</th>
-              <th>Organ</th>
-              <th>Feature1</th>
-              <th>Feature2</th>
-              <th>Feature3</th>
-              <th>Feature4</th>
-              <th>Feature5</th>
-              <th>Description</th>
+              <!-- <th>Admin</th> -->
+              <th>Órgano</th>
+              <th>Lesión</th>
+              <th>Tipo</th>
+              <th>Clase</th>
+              <!-- <th>Sub Clase 1</th> -->
+              <!-- <th>Sub Clae 2</th> -->
+              <th>Descr.</th>
               <th>Pss code</th>
-              <th>Who code</th>
-              <th>Score</th>
-              <th>Order</th>
+              <th>Archivo</th>
+              <!-- <th>Who code</th> -->
+              <!-- <th>Score</th> -->
+              <!-- <th>Order</th> -->
               <th colspan="3"></th>
             </tr>
         </thead>
@@ -32,21 +33,22 @@
         <tbody>
           <% @diagcodes.each do |diagcode| %>
             <tr>
-              <td><%= diagcode.admin_id %></td>
+              <!-- <td><%= diagcode.admin_id %></td> -->
               <td><%= diagcode.organ %></td>
               <td><%= diagcode.feature1 %></td>
               <td><%= diagcode.feature2 %></td>
               <td><%= diagcode.feature3 %></td>
-              <td><%= diagcode.feature4 %></td>
-              <td><%= diagcode.feature5 %></td>
+              <!-- <td><%= diagcode.feature4 %></td> -->
+              <!-- <td><%= diagcode.feature5 %></td> -->
               <td><%= diagcode.description %></td>
               <td><%= diagcode.pss_code %></td>
-              <td><%= diagcode.who_code %></td>
-              <td><%= diagcode.score %></td>
-              <td><%= diagcode.order %></td>
-              <td><%= link_to 'Show', diagcode %></td>
-              <td><%= link_to 'Edit', edit_diagcode_path(diagcode) %></td>
-              <td><%= link_to 'Destroy', diagcode, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+              <td><%= load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + diagcode.pss_code.to_s.strip + ".txt") %></td>
+              <!-- <td><%= diagcode.who_code %></td> -->
+              <!-- <td><%= diagcode.score %></td> -->
+              <!-- <td><%= diagcode.order %></td> -->
+              <td><%= link_to 'Detalles', diagcode %></td>
+              <td><%= link_to 'Editar', edit_diagcode_path(diagcode) %></td>
+              <td><%= link_to 'Borrar', diagcode, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
             </tr>
           <% end %>
         </tbody>

@@ -1,0 +1,270 @@
+
+LISTA CHEQUEO SNC, MEDULA, PITUITARIA
+
+Tipo de muestra / Procedimiento (Nota B)
+___ Biopsia abierta
+Resección ___
+___ Biopsia estereotáctica
+___ Otro (especificar): _____________________
+___ No especificado
+Manipulación de muestras (marque todas las que correspondan) (Nota C)
+___ Squash / citología / touch preparación
+___ Sección congelada
+___ Tejidos para microscopía electrónica
+___ Tejido congelado
+___ Unfrozen de rutina secciones de parafina permanentes
+___ Otro (especificar): _____________________
+___ No especificado
+* Tamaño de la pieza (Nota D)
+* Mayor dimensión ___: ___ cm
+* ___ Dimensiones adicionales: ___ X___ cm (para el tejido fragmentado, un tamaño de agregado puede
+ser dada)
+* ___ No puede determinarse (ver Comentario)
+Lateralidad
+___ Derecho
+___ Izquierda
+___ Bilateral
+___ No especificado
+___ No se aplica
+Sitio del tumor (marque todas las que correspondan) (Nota E)
+___ Skull
+* Especificar adicional (por ejemplo, el frontal, parietal, temporal, occipital), si se conoce:
+___________________
+___ Dura
+* Especificar adicional (por ejemplo, cráneo, cerebral [convexidad / lóbulo, hoz, tentorium, ala esfenoidal,
+base,] otro, espinal o de otro tipo), si se conoce: ___________________
+___ Leptomeninges
+* Especificar adicional (por ejemplo, cerebral [convexidad / lóbulo], espinal o de otro tipo), si se conoce:
+___________________
+___ Cerebro / cerebro
+* Especificar lóbulo (s) (por ejemplo, frontal, temporal, parietal, occipital), si se conoce:
+___________________
+___ Cerebro, otros:
+___ Ganglios basales
+___ Tálamo
+___ Hipotálamo
+___ Pineal
+___ Cerebelo
+___ Ángulo pontocerebeloso
+___ Supraselar
+___ Sella
+___ Otro (especificar, si se conoce: ___________________)
+___ Nervio craneal
+* Especificar I-XII, si se conoce: ___________________
+___ Ventrículo
+* Especificar lateral, tercero, cuarto acueducto, cerebral, si se conoce: ___________________
+___ Tronco cerebral
+* Especificar mesencéfalo, protuberancia, bulbo raquídeo o, si se conoce: ___________________
+___ Columna vertebral (columna vertebral)
+* Especificar nivel óseo (por ejemplo, C5, T2, L3), si se conoce: ___________________
+___ Médula Espinal
+* Especificar nivel óseo (por ejemplo, C5, T2, L3), si se conoce: ___________________
+* Especificar ubicación espinal (por ejemplo, extradural, intradural extramedular-, intramedular,
+cono medular, filum terminale), si se conoce: ___________________
+___ Raíz del nervio espinal (s)
+* Especificar nivel óseo (por ejemplo, C5, T2, L3), si se conoce: ___________________
+* Especificar localización (por ejemplo, intradural, foramen), si se conoce: ___________________
+___ Nervio craneal o periférico
+* Especificar el hotel, si se conoce: ___________________
+___ Ganglio
+* Especificar el hotel, si se conoce: ___________________
+___ Otro (especificar): ___________________
+___ No especificado
+Tipo histológico y grado (Organización Mundial de la Salud aplicable [de la OMS]
+clasificación y grado) (marque todas las que correspondan) (Nota F, G Nota)
+Tumores astrocíticos
+___ Astrocitoma pilocítico (grado I de la OMS)
+___ Pilomixoide astrocitoma (OMS grado II)
+___ Subependimario astrocitoma de células gigantes (grado I de la OMS)
+___ Xantoastrocitoma pleomórfico (grado II)
+___ Pleomórfico xantoastrocitoma con rasgos anaplásicos (grado OMS no asignado)
+___ Astrocitoma difuso (grado II de la OMS)
+___ Astrocitoma fibrilar (grado II)
+___ Protoplasmática astrocitoma (OMS grado II)
+___ Gemistocítico astrocitoma (OMS grado II)
+___ Astrocitoma anaplásico (grado III de la OMS)
+___ Glioblastoma (grado IV de la OMS)
+___ Glioblastoma de células gigantes (OMS grado IV)
+___ Gliosarcoma (OMS grado IV)
+___ Gliomatosis cerebral (generalmente OMS grado III, requiere diagnóstico clínico-patológica
+correlación)
+Astrocitoma ___, de otra manera no se caracteriza (grados I-IV)
+Tumores oligodendrogliales
+___ Oligodendroglioma (OMS grado II)
+___ Oligodendroglioma anaplásico (grado III de la OMS)
+Los tumores Oligoastrocytic (mixtos glioma)
+___ Oligoastrocitoma (OMS grado II)
+___ Oligoastrocitoma anaplásico (grado III de la OMS)
+Los tumores ependimales
+___ Subependimoma (grado I de la OMS)
+___ Mixopapilar ependimoma (grado I de la OMS)
+___ Ependimoma (grado II)
+___ Celular ependimoma (grado II)
+___ Ependimoma papilar (OMS grado II)
+___ Ependimoma de células claras (OMS grado II)
+___ Tanicítico ependimoma (grado II)
+___ Ependimoma anaplásico (grado III de la OMS)
+Tumores del plexo coroideo
+___ Papiloma del plexo coroideo (grado I de la OMS)
+___ Atípica Papiloma del plexo coroideo (grado II)
+___ Carcinoma del plexo coroideo (OMS grado III)
+Otros tumores neuroepiteliales
+___ Astroblastoma (OMS grado no asignado)
+___ Glioma coroide del tercer ventrículo (OMS grado II)
+___ Angiocéntrico glioma (grado I de la OMS)
+Neuronales y mixtos Tumores gliales-
+___ Gangliocitoma displásico del cerebelo (Lhermitte-Duclos) (grado I de la OMS)
+___ Astrocitoma desmoplásico infantil / ganglioglioma (grado I de la OMS)
+___ Disembrioplásico tumor neuroepitelial (grado I de la OMS)
+___ Gangliocitoma (grado I de la OMS)
+___ Ganglioglioma (grado I de la OMS)
+___ Ganglioglioma anaplásico (grado III de la OMS)
+___ Central neurocitoma (OMS grado II)
+___ Extraventricular neurocitoma (OMS grado II)
+___ Cerebelosa liponeurocitoma (OMS grado II)
+___ Tumor papilar glioneuronal (PGNT) (grado I de la OMS)
+___ Arrosetadas tumor glioneuronal del cuarto ventrículo (RGNT) (grado I de la OMS)
+___ Paraganglioma de la médula espinal (grado I de la OMS)
+Los tumores de la región pineal
+Tumores del parénquima pineal
+___ Pinealocitoma (grado I de la OMS)
+___ Tumor pineal parenquimatosos de diferenciación intermedia (OMS II-III)
+___ Pineoblastoma (grado IV de la OMS)
+___ Tumor papilar de la región pineal (OMS grado II-III)
+Los tumores embrionarios
+Meduloblastoma ___, de otra manera no caracterizado (OMS grado IV)
+___ Desmoplásico / nodular meduloblastoma (grado IV de la OMS)
+___ Meduloblastoma con nodularidad extensa (OMS grado IV)
+___ Meduloblastoma anaplásico (grado IV de la OMS)
+___ Meduloblastoma de células grandes (OMS grado IV)
+___ Del sistema nervioso central (SNC) tumor neuroectodérmico primitivo (PNET)
+(OMS grado IV)
+___ Meduloepitelioma (OMS grado IV)
+___ El neuroblastoma (OMS grado IV)
+___ Ganglioneuroblastoma (OMS grado IV)
+___ Ependimoblastoma (OMS grado IV)
+___ Atípico teratoideo / rabdoideo tumor (OMS grado IV)
+Tumores de los nervios craneales y paraespinal
+___ Schwannoma (grado I de la OMS)
+___ Celular (grado I de la OMS)
+___ Plexiforme (grado I de la OMS)
+___ Melanótico (grado I de la OMS)
+___ Neurofibroma (grado I de la OMS)
+___ Plexiforme (grado I de la OMS)
+___ Perineurioma (grado I de la OMS)
+___ Intraneural perineurioma (grado I de la OMS)
+___ Perineurioma tejido blando (grado I de la OMS)
+___ Ganglioneuroma (grado I de la OMS)
+___ Maligno tumor vaina del nervio periférico (MPNST) (OMS grado II-IV)
+(Nota H, I Nota)
+___ Epitelioide (OMS grado II-IV)
+___ MPNST con mesenquimal divergente y / o diferenciación epitelial
+(OMS grado II-IV)
+Tumores de las meninges / Células meningoteliales
+___ Meningioma (grado I de la OMS)
+___ Meningotelial (grado I de la OMS)
+___ Fibroso (fibroblástico) (grado I de la OMS)
+___ Transición (mixto) (grado I de la OMS)
+___ Psamomatosas (grado I de la OMS)
+___ Angiomatosa (grado I de la OMS)
+___ Microquístico (grado I de la OMS)
+___ Secretora (grado I de la OMS)
+___ Linfoplasmacitos-rica (linfoplasmacítico) (OMS grado I)
+___ Metaplásico (grado I de la OMS)
+___ Meningioma atípico (OMS grado II)
+___ Meningioma de células claras (OMS grado II)
+___ Coroide meningioma (OMS grado II)
+___ Meningioma anaplásico (grado III de la OMS)
+___ Meningioma papilar (OMS grado III)
+___ Rabdoideo meningioma (OMS grado III)
+___ Otro (especificar): ________________________
+Mesenquimales (no meningotelial) Tumores (Nota I)
+___ Lipoma
+___ Angiolipoma
+___ Hibernoma
+___ Liposarcoma (intracraneal)
+___ Tumor fibroso solitario
+___ Fibrosarcoma
+___ Histiocitoma fibroso maligno
+___ Leiomioma
+___ Leiomyosarcoma
+___ Rabdomioma
+___ El rabdomiosarcoma
+___ Condroma
+___ El condrosarcoma
+___ El osteosarcoma
+___ Osteocondroma
+___ Hemangioma
+___ Hemangioendotelioma epitelioide
+___ Hemangiopericitoma
+___ Angiosarcoma
+___ Sarcoma de Kaposi
+___ Cordoma
+___ Mesenquimales, tumor no meningotelial, otros (especificar tipo, si es posible):
+_______________________
+___ Sarcoma, SNC primario (especifique el tipo, si es posible): _______________________
+Los tumores primarios melanótico
+___ Melanocitosis difusa
+___ Melanocitoma
+___ El melanoma maligno
+___ Meníngea melanomatosis
+Tumores de histogénesis incierta
+___ Hemangioblastoma (grado I de la OMS)
+Linfoma y tumores hematopoyéticos
+___ Linfoma maligno (especificar tipo, si es posible): _____________________
+___ Plasmacitoma
+___ Sarcoma granulocítico
+___ Neoplasias hematopoyéticas, otros (especificar tipo, si es posible): __________________
+Los tumores de células germinales
+___ Germinoma
+___ Carcinoma embrionario
+___ Tumor del saco vitelino
+___ Coriocarcinoma
+Teratoma ___, maduro
+___ Teratoma inmaduro
+___ El teratoma con transformación maligna
+___ Maligno tumor germinal mixto de células (especificaciones de producto, por ejemplo, germinoma, embrionario,
+saco vitelino, coriocarcinoma, teratoma): __________________________
+Tumores de la región selar
+Craneofaringioma ___, adamantinomatosa (grado I de la OMS)
+___ Craneofaringioma, papilar (grado I de la OMS)
+___ Tumor de células granulares (grado I de la OMS)
+___ Pituicytoma (grado I de la OMS)
+Spindle ___ celular oncocitoma (grado I de la OMS)
+___ Adenoma hipofisario (especificar expresión funcional o de la hormona, si se conoce):
+_________________________
+___ Carcinoma pituitario
+___ Hiperplasia hipofisaria
+___ Otro (especificar): __________________________
+Otros / inclasificable
+___ Otro (s) (especificar): _________________________
+___ Tumor maligno tipo, no se puede determinar
+Grado histológico (OMS grado histológico) (Nota G)
+___ No se aplica
+___ No puede determinarse
+___ Grado I de la OMS
+___ OMS grado II
+___ OMS grado III
+___ OMS grado IV
+___ OMS no grado asignado
+___ Otro (especificar): ______________________
+Márgenes (para las resecciones de tumores malignos de la vaina nerviosa periférica solamente)
+(Nota H)
+___ No puede evaluarse
+Márgenes ___ no afectados por el tumor
+___ Márgenes afectados por el tumor
+* Especificar, si es posible: ______________________
+* Estudios secundarios (marque todas las que apliquen)
+* ___ Ninguno realizado
+* ___ Inmunohistoquímica (especificar): ____________________
+* ___ Microscopía electrónica
+* ___ Los estudios moleculares genéticos (especificar): ____________________ (Nota J)
+* ___ 1p supresión identificado
+* No ___ deleción 1p identificado
+* ___ 19q supresión identificado
+* No ___ deleción 19q identifica
+* ___ Otro (especificar): ____________________
+* ___ Otro (especificar): ____________________
+* Los hallazgos patológicos adicionales
+* Especificar: _______________________
+* Comentario (s): _______________________

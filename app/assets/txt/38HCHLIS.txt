@@ -1,0 +1,275 @@
+Fecha de publicación del protocolo: agosto de 2018.
+
+ENDOMETRIO CARCINOMA HISTERECTOMIA:
+
+Seleccione una respuesta única a menos que se indique lo contrario.
+
+Procedimiento (seleccione todo lo que corresponda) (Nota A)
+___ Histerectomía total y salpingooforectomía bilateral
+___ histerectomía radical
+___ histerectomía simple
+___ histerectomía supracervical
+___ Salpingooforectomía bilateral
+___ Salpingooforectomía derecha
+___ Salpingooforectomía izquierda
+___ Salpingooforectomía, lado no especificado
+___ ooforectomía derecha
+___ ooforectomía izquierda
+___ Ooforectomía, lado no especificado
+___ Salpingectomía bilateral
+___ Salpingectomía derecha
+___ Salpingectomía izquierda
+___ Salpingectomía, lado no especificado
+___ resección del manguito vaginal
+___ Omentectomía
+___ biopsias peritoneales
+___ lavado peritoneal
+___ Otra especificar): ____________________________
+Nota: Para obtener información sobre el muestreo de ganglios linfáticos, consulte la sección Nódulos linfáticos regionales.
+
++ Tipo de histerectomía
++ ___ Abdominal
++ ___ Vaginal
++ ___ Vaginal, asistida por laparoscopia
++ ___ Laparoscópica
++ ___ Laparoscópica, asistida por robot
++ ___ Otro (especifique): __________________________
++ ___ No especificado
+
++ Integridad del espécimen (Nota A)
++ ___ Intacto
++ ___ Abierto
++ ___ Morcelado
++ ___ Otro (especifique): ____________________________
+
++ Sitio del tumor (seleccione todos los que correspondan)
++ ___ endometrio
++ ___ Segmento uterino inferior
++ ___ pólipo endometrial
++ ___ Otro (especifique): ____________________________
++ ___ No se puede determinar
++ Tamaño del tumor
++ Dimensión mayor: ___ cm
++ Dimensiones adicionales: ___ x ___ cm
++ ___ No se puede determinar (explicar): ____________________________
+
+Tipo histológico (Nota B)
+___ Carcinoma de endometrioide, NOS
+___ Carcinoma endometrioide con diferenciación escamosa
+___ Carcinoma endometrioide, variante villoglandular
+___ Carcinoma endometrioide con diferenciación secretora
+___ Carcinoma endometrioide, otra variante (especifique): _________________
+___ Carcinoma intraepitelial endometrial seroso
+___ carcinoma seroso
+___ Carcinosarcoma (tumor de Müller mixto maligno)
+___ carcinoma mucinoso
+___ carcinoma de células claras
+___ carcinoma neuroendocrino de células pequeñas
+___ carcinoma neuroendocrino de células grandes
+___ Carcinoma de células mixtas (especifique los tipos y porcentajes): _______________________________
+___ carcinoma indiferenciado
+___ Carcinoma diferenciado
+___ Otro tipo histológico no listado (especifique): ____________________________
+
+Grado histológico (requerido solo si corresponde) (Nota C) #
+___ FIGO grado 1
+___ FIGO grado 2
+___ FIGO grado 3
+___ Otra especificar): __________________
+___ No se puede evaluar (explicar): __________________
+
+# El sistema de clasificación de la Federación Internacional de Ginecología y Obstetricia (FIGO, por sus siglas en inglés) se aplica solo a los carcinomas endometrioides y mucinosos. Los carcinomas neurosendocrinos serosos, de células claras, de transición, de células pequeñas y de células grandes, los carcinomas indiferenciados / desdiferenciados y los carcinosarcomas generalmente se consideran de alto grado y no se recomienda asignar un grado histológico a estos tipos de tumores.
+
+Invasión miometrial (Nota D)
+___ No identificado
+___ presente
+Profundidad de invasión (milímetros): ___ mm
+Espesor miometrial (milímetros): ___ mm
+Porcentaje de invasión miometrial: ____%
+
+O, si no se puede determinar el porcentaje exacto de invasión, indique:
+___ La profundidad de la invasión miometrial no se puede determinar (explicar): _______________________
+___ El grosor del miometrio no se puede determinar (explicar): ________________________
+Profundidad porcentual de invasión miometrial
+___ Se estima menos del 50% de invasión miometrial
+___ Estimación de invasión miometrial mayor o igual al 50%
+___ No se puede determinar (explicar): _______________________
+
++ Adenomiosis
++ ___ No identificado
++ ___ Presente, no afectado por carcinoma
++ ___ Presente, involucrado por carcinoma.
++ ___ No se puede determinar
+Participación de serosa uterina
+___ No identificado
+___ presente
+___ No se puede determinar (explicar): ____________________________
+
++ Participación en el segmento uterino inferior (Nota E)
++ ___ No identificado
++ ___ presente
++ ___ Superficial (no mioinvasivo)
++ ___ Myoinvasive
++ ___ No se puede determinar (explicar): ___________________________
+
+Afectación del estroma cervical (Nota F)
+___ No identificado
+___ presente
+___ No se puede determinar (explicar): ____________________________
+
+Otros tejidos / afectación de órganos (seleccione todos los que correspondan)
+Nota: Cualquier órgano no seleccionado no está involucrado o no fue enviado.
+___ No aplica
+___ No identificado
+___ ovario derecho
+___ ovario izquierdo
+___ Ovario (lado no especificado)
+___ trompa de Falopio derecha
+___ trompa de Falopio izquierda
+___ Trompa de Falopio (lado no especificado)
+___ vagina
+___ parametrio derecho
+___ parametrio izquierdo
+___ Parametrium (lado no especificado)
+___ pared pélvica
+___ pared de la vejiga
+___ mucosa de la vejiga
+___ pared rectal
+___ mucosa intestinal
+___ Omentum
+___ Otros órganos / tejidos (especifique): ________________
+___ No se puede determinar (explicar): _________________________
+
++ Fluido Peritoneal / Ascítico (Nota G)
++ ___ No enviado / desconocido
++ ___ Negativo para malignidad (normal / benigno)
++ ___ Atípico y / o sospechoso (explique): ____________________
++ ___ Maligno (positivo para malignidad)
++ ___ Insatisfactorio / no diagnóstico (explique): ______________________
++ ___ Resultados pendientes
+
+Márgenes (requerido solo si el carcinoma afecta el cuello uterino y / o el parametrio / paracervix) (Nota H)
+
+Margen Ectocervical / Vaginal Cuff
+____ No se puede evaluar (explicar): ______________________
+____ Involucrado por carcinoma
+____ No involucrado por carcinoma
++ Distancia del carcinoma invasivo desde el margen (milímetros): ___ mm
+Margen parametrial / paracervical
+____ No se puede evaluar (explicar): ______________________
+____ Involucrado por carcinoma
+____ No involucrado por carcinoma
+ + Distancia del carcinoma invasivo desde el margen (milímetros): ___ mm
+ 
+Invasión linfovascular (Nota I)
+___ No identificado
+___ presente
+___ No puede ser determinado
+
+Ganglios linfáticos regionales
+Nota: ganglios linfáticos designados como pélvicos; (parametrial, obturador, ilíaco interno (hipogástrico), ilíaco externo, ilíaco común, sacro, presacro) y paraaórtico se consideran ganglios linfáticos regionales. Cualquier otro nodo involucrado debe categorizarse como metástasis (pM1) y comentar en la sección de metástasis a distancia. La presencia de células tumorales aisladas no mayores de 0.2 mm en los ganglios linfáticos regionales se considera N0 (i +).
+
+___ No hay ganglios linfáticos enviados o encontrados
+
+Examen de ganglios linfáticos (requerido solo si los ganglios linfáticos están presentes en la muestra)
+
+___ Todos los ganglios linfáticos negativos para células tumorales
+
+___ Positivo para células tumorales (seleccione todas las que correspondan)
+Número de ganglios pélvicos con macrometástasis: ____
+Número de ganglios pélvicos con micrometástasis: ____
+Número de ganglios pélvicos con células tumorales aisladas (si corresponde): ____
+
+y / o
+
+Número de nodos paraaórticos con macrometástasis: ____
+Número de ganglios paraaórticos con micrometástasis: ____
+Número de ganglios paraaórticos con células tumorales aisladas (si corresponde): ____
+
+El número no se puede determinar (explicar): ____________________________
+Nota: macrometástasis (> 2 mm), micrometástasis (> 0,2 mm a 2 mm y / o> 200 células), células tumorales aisladas (=0,2 mm y = 200 células). Se requiere informar el número de nodos con o sin macrometástasis y micrometástasis si se presentan ganglios linfáticos pélvicos y / o paraaórticos y ambos son positivos para células tumorales. La notificación de células tumorales aisladas se requiere solo en ausencia de macrometástasis o micrometástasis
+
+Lateralidad de los nodos con células tumorales (seleccione todas las que correspondan)
+___ pélvica derecha
+___ pélvica izquierda
+___ paraaórtico derecho
+___ paraaórtico izquierdo
+___ No se puede determinar (explicar): _______________
+
+Número de ganglios linfáticos examinados (seleccione todos los que correspondan)
+Número total de nodos pélvicos examinados: ____
+Número de ganglios centinela pélvicos examinados: ____
+Número total de nodos paraaórticos examinados: ____
+Número de ganglios centinela paraaórticos examinados: ____
+Clasificación del estadio patológico (pTNM, AJCC 8ª edición) (Nota J)
+Nota: El informe de las categorías pT, pN y (cuando corresponda) pM se basa en la información disponible para el patólogo en el momento de la emisión del informe. Solo se requiere la categoría T, N o M aplicable para informar; sus definiciones no necesitan ser incluidas en el informe. Las categorías (con modificadores cuando corresponda) pueden enumerarse en 1 línea o más de 1 línea.
+
+Descriptores de TNM (necesarios solo si corresponde) (seleccione todos los que correspondan)
+___ r (recurrente)
+___ y ??(postratamiento)
+
+Tumor primario (pT)
+___ pTX: no se puede evaluar el tumor primario
+___ pT0: No hay evidencia de tumor primario
+___ pT1: tumor confinado al cuerpo uterino, incluida la afectación glandular endocervical
+___ pT1a: tumor limitado al endometrio o que invade menos de la mitad del miometrio
+___ pT1b: tumor que invade la mitad o más del miometrio
+___ pT2: tumor que invade el tejido conectivo estromal del cuello uterino pero que no se extiende más allá del útero. Esto NO incluye la participación glandular endocervical
+___ pT3: tumor que involucra serosa, anexa, vagina o parametrio
+___ pT3a: el tumor involucra serosa y / o anexa (extensión directa o metástasis)
+___ pT3b: afectación vaginal (extensión directa o metástasis) o afectación parametrial
+___ pT4: tumor que invade la mucosa de la vejiga y / o la mucosa intestinal (el edema bulloso no es suficiente para clasificar un tumor como T4)
+
+Nódulos linfáticos regionales (pN) (seleccione todos los que correspondan)
+
+ Modificador
+___ (sn) #
+# Nota: se requiere sufijo (sn), si corresponde, y se agrega a la categoría N cuando solo se realiza una biopsia de ganglio centinela. Si después de una biopsia de ganglio centinela, el paciente se somete a una disección completa de ganglios linfáticos, no se usa el sufijo (sn).
+
+Categoría (pN)
+___ pNX: no se pueden evaluar los ganglios linfáticos regionales
+___ pN0: no hay metástasis en los ganglios linfáticos regionales
+___ pN0 (i +): células tumorales aisladas en uno o más ganglios linfáticos regionales no mayores de 0.2 mm
+___ pN1: metástasis en los ganglios linfáticos regionales a los ganglios linfáticos pélvicos
+___ pN1mi: metástasis en los ganglios linfáticos regionales (mayor de 0.2 mm pero no mayor de 2 mm de diámetro) a los ganglios linfáticos pélvicos #
+___ pN1a Metástasis en los ganglios linfáticos regionales (más de 2 mm de diámetro) a los ganglios linfáticos pélvicos
+___ pN2: metástasis en los ganglios linfáticos regionales a los ganglios linfáticos paraaórticos, con o sin ganglios linfáticos pélvicos positivos
+___ pN2mi: metástasis en los ganglios linfáticos regionales (mayores de 0,2 mm pero no mayores de 2 mm de diámetro) a los ganglios linfáticos paraaórticos, con o sin ganglios linfáticos pélvicos positivos #
+___ pN2a: metástasis en los ganglios linfáticos regionales (más de 2 mm de diámetro) a los ganglios linfáticos paraaórticos, con o sin ganglios linfáticos pélvicos positivos
+# Nota: Incluso una metástasis> 2.0 mm calificaría la clasificación como pN1a y pN2a.
+
+Metástasis a distancia (pM) (requerido solo si se confirma patológicamente en este caso)
+___ pM1: metástasis a distancia (incluye metástasis a ganglios linfáticos inguinales, enfermedad intraperitoneal, pulmón, hígado o hueso. Excluye metástasis a ganglios linfáticos pélvicos o paraaórticos, vagina, serosa uterina o anexa)
+Especifique sitio (s), si se conoce: ______________________________
+
++ Etapa FIGO (Informe FIGO 2015 sobre el cáncer)
++ ___ I: tumor confinado al cuerpo uterino
++ ___ IA: ninguna o menos de la mitad de la invasión miometrial
++ ___ IB: invasión igual o superior a la mitad del miometrio
++ ___ II: el tumor invade el estroma cervical, pero no se extiende más allá del útero
++ ___ III: diseminación local y / o regional del tumor
++ ___ IIIA: el tumor invade la serosa del cuerpo uterino y / o los anexos
++ ___ IIIB: compromiso vaginal y / o compromiso parametrial
++ ___ IIIC: Metástasis en los ganglios linfáticos pélvicos y / o paraaórticos
++ ___ IIIC1: ganglios pélvicos positivos
++ ___ IIIC2: ganglios paraaórticos positivos con o sin ganglios linfáticos pélvicos positivos
++ ___ IV: el tumor invade la vejiga y / o la mucosa intestinal y / o las metástasis a distancia
++ ___ IVA: invasión tumoral de la vejiga y / o mucosa intestinal
++ ___ IVB: metástasis a distancia, incluidas metástasis intraabdominales y / o ganglios inguinales
+
++ Hallazgos patológicos adicionales (seleccione todos los que correspondan) (Nota K)
++ ___ Ninguno identificado
++ ___ Hiperplasia atípica / neoplasia intraepitelial endometrial (EIN)
++ ___ Otro (especifique): ___________________________
++ Estudios Auxiliares
+Nota: Para el informe de pruebas moleculares, inmunohistoquímica y otros resultados de pruebas de biomarcadores de cáncer, se debe utilizar la plantilla de biomarcadores de endometrio CAP. Los estudios de biomarcadores pendientes deben enumerarse en la sección de Comentarios de este informe.
+
++ Historial clínico (seleccione todos los que correspondan) (Nota L)
++ ___ síndrome de Lynch
++ ___ Otro (especifique): __________________________
+
++ Comentario (s)
+
+
+Historial clinico
+El carcinoma de colon es la neoplasia maligna más frecuente en el cáncer de colon hereditario sin poliposis (HNPCC; síndrome de Lynch (LS)). Sin embargo, el carcinoma de endometrio se desarrolla antes del carcinoma de colon en más del 50% de las mujeres con HNPCC.18-21. Sin embargo, las series reportadas de carcinomas de endometrio relacionados con HNPCC / LS son mucho más pequeñas que las reportadas para el carcinoma de colon HNPCC / LS. Las características histopatológicas que sugieren carcinoma relacionado con HNPCC / LS están bien caracterizadas en el colon, pero no tanto en el útero. Si bien los tumores del segmento uterino inferior y los tumores de alto grado en el endometrio parecen tener una mayor tasa de tumores asociados con el LS, la morfología del tumor y la ubicación anatómica del tumor no se pueden usar para seleccionar pacientes para la detección del LS. Muchos carcinomas endometriales asociados a LS se observan en probandos que no cumplen con los criterios de historia personal / familiar de Bethesda o Amsterdam para el síndrome de Lynch. Sin embargo, al examinar un carcinoma de endometrio en un paciente menor de 50 años de edad o con antecedentes personales o familiares de carcinoma de colon, es importante considerar la posibilidad de un carcinoma de endometrio relacionado con HNPCC / LS. Según la declaración de práctica clínica de la Society of Gynecology Oncology, todas las mujeres diagnosticadas con cáncer de endometrio deben someterse a un examen clínico sistemático para detectar el síndrome de Lynch y / o el examen molecular. Se recomiendan las pruebas de tumores moleculares en cánceres diagnosticados a la edad de menos de 60 años, independientemente del historial de cáncer personal o familiar. Si se dispone de recursos, la estrategia preferida es el análisis molecular universal para LS. En estos casos, el método más rentable es la detección de proteínas defectuosas de reparación de desapareamientos de ADN mediante inmunohistoquímicos (los anticuerpos MLH1, MSH2, MSH6 y PMS2 están disponibles comercialmente) .22 La pérdida de MSH2 o MSH6 en la expresión esencialmente indica siempre el síndrome de Lynch. El carcinoma de endometrio relacionado con HNPCC / LS se asocia predominantemente con mutaciones de MSH2, y las mutaciones de MSH6.18-21 La pérdida de PMS2 a menudo se asocia con la pérdida de MLH1 y solo es independiente de manera significativa si MLH1 está intacto. El análisis de hipermetilación MLH1 se debe completar en los tumores que muestran pérdida de MLH1 en IHC para ayudar a clasificar los casos apropiados para las pruebas de la línea germinal. Además, los ensayos de PCR se pueden usar para detectar altos niveles de alteraciones de microsatélite (MSI), una condición que es definitiva para la reparación defectuosa de la falta de coincidencia de ADN. Esta prueba se realiza en tejido incluido en parafina y compara los resultados del ADN tumoral con los de tejidos no neoplásicos del mismo paciente. Consulte la plantilla de informes de biomarcadores de cáncer de endometrio CAP en www.cap.org para obtener más detalles.

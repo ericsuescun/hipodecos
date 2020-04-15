@@ -1,0 +1,174 @@
+
+LISTA DE CHEQUEO TUMORES DE PIEL
+
+MACROSCÓPICO
+
+Tipo de muestra
+___ Ellipse
+___ Shavings
+___ Curettings
+___ Otro (especificar): ____________________________
+___ No especificado
+
+Sitio del tumor
+Indique, si lo conoce: ____________________________
+___ No especificado
+
+Tamaño del tumor
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ cm x__
+___ No puede determinarse (ver Comentario)
+
+* Características tumorales (marque todas las que apliquen)
+* ___ Criado
+* ___ Flat
+* ___ Ulcerado
+* ___ No pigmentado
+* ___ Pigmentada
+* ___ Necrosis
+* ___ Hemorragia
+* ___ Indeterminado
+
+
+MICROSCÓPICA
+
+Tipo histológico (marque todas las que apliquen)
+* ___ Carcinoma de células basales (BCC) (Nota: no rutinaria por etapas o informó a los registros de cáncer)
+* ___ BCC superficial
+* ___ Nodular BCC (sólido, quístico adenoide)
+* ___ Infiltrante BCC
+* ___ Esclerosante BCC (desmoplásico, morpheic)
+* ___ BCC fibroepitelial
+* ___ BCC con diferenciación anexial
+* ___ Folicular BCC
+* ___ Ecrino BCC
+* ___ Carcinoma Basosquamous
+* ___ Queratósicas BCC
+* ___ BCC pigmentada
+* ___ BCC en el síndrome de nevo de célula basal
+* ___ Otro (especificar): ____________________________
+* ___ Carcinoma de células escamosas (SCC) (Nota: no rutinaria por etapas o informó a los registros de cáncer)
+* ___ Fusocelular (sarcomatoide) SCC
+* ___ Acantolítica SCC
+* ___ Verrugoso SCC
+* ___ CCE con la formación de cuerno
+* ___ Linfoepitelial SCC
+* ___ Papilar SCC
+* ___ Células claras SCC
+* ___ Células pequeñas SCC
+* ___ Post-traumático (por ejemplo, "Marjolin úlcera")
+* ___ Metaplásico ("carcinosarcomatous") SCC
+* ___ Queratoacantoma
+* ___ Otro (especificar): ____________________________
+___ Enfermedad de Paget
+* ___ Mamaria enfermedad de Paget
+* ___ Enfermedad de Paget extramamaria
+(Especificar lugar): ____________________________
+ 
+___ Carcinoma anexial
+* ___ Carcinoma ecrino
+* ___ Esclerosante sudor conducto carcinoma (carcinoma syringomatous, carcinoma anexial microquística)
+* ___ Maligno tumor mixto de la piel (siringoma condroide maligno)
+* ___ Porocarcinoma
+* ___ Hidradenoma nodular maligno
+* ___ Maligno espiradenoma ecrino
+* ___ Mucinoso carcinoma ecrino
+* ___ Carcinoma adenoide quístico ecrino
+* ___ Agresivo adenoma papilar digitales / adenocarcinoma
+* ___ Carcinoma apocrino
+* ___ Carcinoma sebáceo
+* ___ Tricholemmocarcinoma
+* ___ Pilomatricoma maligno (carcinoma matricial)
+* ___ Otro (especificar): ____________________________
+___ Carcinoma de células de Merkel
+* ___ Actividad mitótica: menos de 10 mitosis por 10 campos de gran aumento
+* ___ Actividad mitótica: 10 o más figuras mitóticas por 10 campos de gran aumento
+___ Otro (especificar): ____________________________
+___ Carcinoma, tipo no se puede determinar
+
+Grado histológico
+___ No se aplica
+___ GX: No puede evaluarse
+___ G1: Bien diferenciado
+___ G2: moderadamente diferenciado
+___ G3: mal diferenciado
+___ G4: Indiferenciado
+
+ 
+La estadificación patológica (pTNM)
+
+Tumor primario (pT)
+___ PTX: El tumor primario no puede ser evaluado
+___ PT0: No hay evidencia de tumor primario
+___ PTis: carcinoma in situ
+___ PT1: Tumor de 2 cm o menos en su mayor dimensión
+* ___ PT1a: limitado a la dermis o 2 mm o menos de grosor
+* ___ PT1b: Limitado a dermis y más de 2 mm de grosor, pero no más de 6 mm de espesor
+* ___ PT1c: Invadiendo el tejido subcutáneo y / o de más de 6 mm de espesor
+___ PT2: Tumor mayor de 2 cm pero no más de 5 cm en su mayor dimensión
+* ___ PT2a: limitado a la dermis o 2 mm o menos de grosor
+* ___ PT2b: Limitado a dermis y más de 2 mm de grosor, pero no más de 6 mm de espesor
+* ___ PT2c: Invadiendo el tejido subcutáneo y / o de más de 6 mm de espesor
+___ PT3: Tumor mide más de 5 cm en su mayor dimensión
+* ___ PT3a: limitado a la dermis o 2 mm o menos de grosor
+* ___ PT3b: Limitado a dermis y más de 2 mm de grosor, pero no más de 6 mm de espesor
+* ___ PT3c: Invadiendo el tejido subcutáneo y / o de más de 6 mm de espesor
+___ PT4: El tumor invade el tejido extradermales profundo (por ejemplo, cartílago, músculo esquelético, hueso)
+* ___ PT4a: 6 mm o menos de grosor
+* ___ PT4b: Más de 6 mm de espesor
+
+Ganglios linfáticos regionales (pN)
+___ PNX: Los ganglios linfáticos regionales no pueden ser evaluados
+PN0 ___: No hay metástasis a los ganglios linfáticos regionales
+___ PN1: Metástasis a los ganglios linfáticos regionales
+Especificar: Número examinados: ___
+Número involucrados: ___
+
+Metástasis a distancia (pM)
+___ PMX: Presencia de metástasis distante no puede ser evaluada
+___ PM1: Metástasis a distancia
+* Especificar sitio (s), si se conoce: ____________________________
+
+ 
+Márgenes (marque todas las que apliquen)
+
+Los márgenes laterales
+___ No puede evaluarse
+___ No afectado por carcinoma invasivo
+* Distancia de carcinoma invasivo de margen lateral más cercano: ___ mm
+* Especificar localización (s), si es posible: ____________________________
+___ Participar en carcinoma invasivo
+Especifique la ubicación (s), si es posible: ____________________________
+___ No afectado por carcinoma in situ
+* La distancia de carcinoma in situ a partir de margen más cercano: ___ mm
+* Especificar localización (s), si es posible: ____________________________
+___ Participa por carcinoma in situ
+Especifique la ubicación (s), si es posible: ____________________________
+
+Margen Profundo
+___ No puede evaluarse
+___ No afectado por carcinoma invasivo
+* Distancia de carcinoma invasivo de margen: ___ mm
+* Especificar localización (s), si es posible: ____________________________
+___ Participar en carcinoma invasivo
+Especifique la ubicación (s), si es posible: ____________________________
+
+* Linfático (barco pequeño) Invasión (L)
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Venosa (vaso grande) Invasion (V)
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Invasión perineural
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Los hallazgos patológicos adicionales
+* Especifique: ____________________________
+
+* Comentario (s)

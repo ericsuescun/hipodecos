@@ -1,0 +1,4 @@
+Se reciben frascos marcados así:
+#1 ESOFAGO: Se reciben  muestras de mucosa.   SE PROCESA TODO-A
+#2 ANTRO: Se reciben  muestras de mucosa.   SE PROCESA TODO-B
+#3 DUODENO: Se reciben  muestras de mucosa.   SE PROCESA TODO-C

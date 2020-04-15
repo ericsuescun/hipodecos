@@ -1,0 +1,104 @@
+MACROSCÓPICO
+
+Tipo de muestra
+___ Pancreaticoduodenectomía
+___ Resección segmentaria de los conductos biliares (s)
+___ Resección del quiste de colédoco
+___ Otro (especificar): ____________________________
+___ No especificado
+
+Sitio del tumor (marque todas las que apliquen)
+___ Conducto hepático derecho
+___ Conducto hepático izquierdo
+___ Cruce de los conductos hepáticos derecho e izquierdo
+___ Conducto cístico
+___ Conducto biliar común
+___ Proximal
+___ Medio
+___ Distal
+___ No especificado
+
+Tamaño del tumor
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+___ No puede determinarse (ver Comentario)
+ 
+MICROSCÓPICA
+
+Tipo Histológico
+___ Adenocarcinoma (de otro modo no caracterizada)
+___ Adenocarcinoma papilar
+Adenocarcinoma ___, tipo intestinal
+___ Adenocarcinoma, tipo gástrico foveolar
+___ Adenocarcinoma mucinoso
+___ Adenocarcinoma de células claras
+___ Sello de carcinoma de células en anillo
+___ Carcinoma adenoescamoso
+___ Otro (especificar): ____________________________
+___ Carcinoma, tipo no se puede determinar
+
+Grado histológico
+___ No se aplica
+___ GX: No puede evaluarse
+___ G1: Bien diferenciado
+___ G2: moderadamente diferenciado
+___ G3: mal diferenciado
+___ G4: Indiferenciado
+
+La estadificación patológica (pTNM)
+
+Tumor primario (pT)
+___ PTX: No puede evaluarse
+___ PT0: No hay evidencia de tumor primario
+___ PTis: carcinoma in situ
+___ PT1: Tumor limitado a la vía biliar histológicamente
+___ PT2: Tumor invade más allá de la pared del conducto biliar
+___ PT3: Tumor invade el hígado, la vesícula biliar, el páncreas y / o divisiones unilaterales de la vena portal (derecha o izquierda) o la arteria hepática (derecha o izquierda)
+___ PT4: Tumor invade cualquiera de los siguientes: la vena portal principal o sus divisiones bilateralmente, la arteria hepática común u otras estructuras adyacentes, como el colon, el estómago, el duodeno o la pared abdominal
+
+Ganglios linfáticos regionales (pN)
+___ PNX: No puede evaluarse
+PN0 ___: No hay metástasis a los ganglios linfáticos regionales
+___ PN1: Metástasis a los ganglios linfáticos regionales
+Especificar: Número examinado ___
+Número involucrado ___
+
+Metástasis a distancia (pM)
+___ PMX: No puede evaluarse
+___ PM1: Metástasis a distancia
+* Especificar sitio (s), si se conoce: _________________________
+
+Márgenes (marque todas las que apliquen)
+___ No puede evaluarse
+Márgenes ___ no afectado por carcinoma invasivo
+Distancia del carcinoma invasivo de margen más cercano: ___ mm
+Especificar margen: __________________________
+___ Márgenes involucrados por carcinoma invasivo
+___ Biliar proximal margen conducto
+___ Conducto biliar distal margen
+___ Otro (especificar): _____________________________
+___ Carcinoma in situ ausente al margen de la vía biliar
+___ Carcinoma in situ presente en el margen del conducto biliar
+
+* Invasión perineural
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Venosa (vaso grande) Invasion (V)
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Linfático (barco pequeño) Invasión (L)
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Displasia
+* ___ Colangitis
+* ___ Stones
+* ___ Otro (especificar): ___________________________
+

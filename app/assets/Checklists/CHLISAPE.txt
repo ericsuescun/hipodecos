@@ -1,0 +1,153 @@
+Fecha de publicación del protocolo: junio de 2017.
+
+APÉNDICE:
+Procedimiento (Nota A)
+___ apendicectomía
+___ Apendicectomía y colectomía derecha.
+___ Otra especificar): ____________________________
+
++ Sitio del tumor (seleccione todos los que correspondan) (Nota B)
++ ___ La mitad proximal del apéndice
++ ___ Base del apéndice involucrado por tumor
++ ___ Base del apéndice no involucrado por el tumor
++ ___ No se puede evaluar la participación de la base del apéndice
++ ___ La mitad distal del apéndice
++ ___ Difusamente envolvente apéndice
++ ___ Apéndice, no especificado de otra manera
++ ___ Otro (especifique): ____________________________
+
+Tamaño del tumor  cm
+Tipo histológico (Nota C)
+___ adenocarcinoma
+___ adenocarcinoma mucinoso
+___ Neoplasia mucinosa apendicular de bajo grado
+___ Neoplasia mucinosa apendicular de grado alto
+___ carcinoma de células en anillo de sello
+___ Células carcinoides del cáliz
+___ Adenocarcinoma carcinoide de células caliciformes mixtas (adenocarcinoma carcinoide de células caliciformes)
+___ carcinoma neuroendocrino de células grandes
+___ carcinoma neuroendocrino de células pequeñas
+___ Carcinoma neuroendocrino (pobremente diferenciado) #
+___ Carcinoma adenoneuroendocrino mixto
+___ carcinoma medular
+___ carcinoma adenoescamoso
+___ carcinoma indiferenciado
+___ Otro tipo histológico no listado (especifique): ____________________________
+___ Carcinoma, no se puede determinar el tipo (explique): _______________________
+Grado histológico (Nota D)
+___ G1: bien diferenciado
+___ G2: moderadamente diferenciado
+___ G3: mal diferenciado
+___ Otra especificar): ____________________________
+___ GX: no puede ser evaluado
+___ No aplica
+Extensión del tumor (seleccione todas las que correspondan)
+___ No hay evidencia de tumor primario
+___ El tumor invade la lámina propia o la mucosa muscular.
+___ El tumor invade la submucosa.
+___ El tumor invade la musculatura propia.
+___ La mucina acelular invade subserosa o mesoapéndice, pero no se extiende a la superficie serosa
+___ El tumor invade a través de la musculatura propia hacia la subserosa o mesoapéndice, pero no se extiende a la superficie serosa.
+___ La mucina acelular invade el peritoneo visceral (serosa)
+___ El tumor invade el peritoneo visceral (serosa)
+___ El tumor invade directamente los órganos o estructuras adyacentes (especifique): _______________________
+___ no puede ser evaluado
+
+Márgenes (Nota E)
+
+Margen proximal (seleccione todos los que correspondan)
+___ no puede ser evaluado
+___ No involucrado por carcinoma invasivo
+___ Involucrado por carcinoma invasivo
+___ Involucrado por displasia de alto grado
+___ No involucrado por neoplasia mucinosa apendicular
+___ Involucrado por neoplasia mucinosa apendicular de bajo grado
+___ Involucrado por neoplasia mucinosa apendicular de alto grado
+___ Involucrado por mucina acelular.
+
+Margen mesentérico (requerido solo si corresponde) (seleccione todos los que correspondan)
+___ no puede ser evaluado
+___ No involucrado por carcinoma invasivo
++ Distancia del carcinoma invasivo desde el margen mesentérico más cercano (milímetros o centímetros):
+___ mm o ___ cm
+___ Involucrado por carcinoma invasivo
+___ No involucrado por neoplasia mucinosa apendicular
+___ Involucrado por neoplasia mucinosa apendicular de bajo grado
+___ Involucrado por neoplasia mucinosa apendicular de alto grado
+___ Involucrado por mucina acelular.
+
+Otro (s) Margen (s) (requerido solo si es aplicable)
+Especifique margen (s): ____________________________
+___ no puede ser evaluado
+___ No involucrado por carcinoma invasivo
+___ Involucrado por carcinoma invasivo
+
+Invasión linfovascular (seleccione todas las que correspondan) (Nota F)
+___ No identificado
+___ presente
+___ No puede ser determinado
+
+Depósitos tumorales (Nota G)
+___ No identificado
+___ presente
+___ Especifique el número de depósitos: ____
+___ El número de depósitos tumorales no se puede determinar (explique): ___________________________
+___ No puede ser determinado
+
+Invasión perineural (Nota H)
++ ___ No identificado
++ ___ presente
++ ___ No se puede determinar
+
+Ganglios linfáticos regionales
+___ No hay ganglios linfáticos enviados o encontrados
+
+Examen de ganglios linfáticos involucrados:  examinados: 
+Clasificación del estadio patológico
+Descriptores de TNM (necesarios solo si corresponde) (seleccione todos los que correspondan)
+___ m (tumores primarios múltiples)
+___ r (recurrente)
+___ y ??(postratamiento)
+
+Tumor primario (pT)
+___ pTX: no se puede evaluar el tumor primario
+___ pT0: No hay evidencia de tumor primario
+___ pTis: carcinoma in situ (carcinoma intramucoso; invasión de la lámina propia o extensión a la mucosa muscular, pero no a través de ella)
+___ pTis (LAMN): neoplasia mucinosa apendicular de bajo grado limitada por la musculatura propia. La mucina acelular o el epitelio mucinoso pueden invadir la muscular propia. T1 y T2 no son aplicables a LAMN. La mucina acelular o el epitelio mucinoso que se extiende hacia la subserosa o serosa deben clasificarse como T3 o T4a, respectivamente.
+___ pT1: el tumor invade la submucosa (a través de la mucosa muscular, pero no a la muscular propia)
+___ pT2: el tumor invade la musculatura propia
+___ pT3: el tumor invade a través de la musculatura propia hacia la subserosa o mesoapéndice
+___ pT4: el tumor invade el peritoneo visceral, incluida la mucina acelular o el epitelio mucinoso que afecta a la serosa del apéndice o mesoapéndice, y / o invade directamente los órganos o estructuras adyacentes
+___ pT4a: el tumor invade el peritoneo visceral, incluida la mucina acelular o el epitelio mucinoso que afecta a la serosa del apéndice o la serosa del mesoapéndice
+___ pT4b: el tumor invade directamente (o se adhiere a #) órganos o estructuras adyacentes
+
+Ganglios linfáticos regionales (pN)
+___ pNX: no se pueden evaluar los ganglios linfáticos regionales
+___ pN0: no hay metástasis en los ganglios linfáticos regionales
+___ pN1: de uno a tres ganglios linfáticos regionales son positivos (tumor en los ganglios linfáticos que miden =0.2 mm), o cualquier número de depósitos tumorales está presente, y todos los ganglios linfáticos identificables son negativos
+___ pN1a: un ganglio linfático regional es positivo
+___ pN1b: Dos o tres ganglios linfáticos regionales son positivos
+___ pN1c: ningún ganglio linfático regional es positivo, pero hay depósitos de tumores en la subserosa o mesenterio
+___ pN2: cuatro o más ganglios linfáticos regionales son positivos
+
+Metástasis a distancia (pM) (requerido solo si se confirma patológicamente en este caso)
+___ pM1: metástasis a distancia
+___ pM1a: mucina acelular intraperitoneal, sin células tumorales identificables en los depósitos mucinosos peritoneales diseminados #
+___ pM1b: solo metástasis intraperitoneal, incluidos los depósitos mucinosos peritoneales que contienen células tumorales
+___ pM1c: Metástasis a sitios distintos del peritoneo
+Especifique sitio (s), si se conoce: ______________________________
+
++ Hallazgos patológicos adicionales (seleccione todos los que correspondan) (Nota J)
++ ___ Ninguno identificado
++ ___ apendicitis
++ ___ Perforación, no en el tumor
++ ___ colitis ulcerosa
++ ___ enfermedad de Crohn
++ ___ Diverticulosis
++ ___ Otro (especifique): ___________________________
+
++ Estudios Auxiliares (Nota K)
++ Especifique: ___________________________________
++ ___ No realizado
+
++ Comentario (s)

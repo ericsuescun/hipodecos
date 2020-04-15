@@ -1,0 +1,120 @@
+
+LISTA CHEQUEO TUMORES DE TROMPA
+
+MACROSCÓPICO
+
+Tipo de muestra
+___ Salpingectomía derecha
+___ Salpingectomía izquierda
+___ Derecho salpingo-ooforectomía
+___ Izquierda salpingo-ooforectomía
+___ Histerectomía con salpingo-ooforectomía bilateral
+___ Otro (especificar): ____________________________
+___ No especificado
+
+Sitio del tumor primario (marque todas las que apliquen)
+___ Trompa de Falopio derecha
+Relación con el ovario
+___ No fusionados
+___ Fusible
+Estado de la final fimbriated
+___ Open
+___ Cerrado
+___ Trompa de Falopio izquierda
+Relación con el ovario
+___ No fusionados
+___ Fusible
+Estado de la final fimbriated
+___ Open
+___ Cerrado
+___ No especificado
+
+Muestra Integridad
+Especifique lado: _______________
+___ Intacto
+Ruptura ___
+___ Fragmentada
+___ Otro (especificar): ____________________________
+
+Localización del tumor (marque todas las que apliquen)
+___ Fimbria (e)
+___ Ampolla
+___ Porción infundibular
+___ Istmo
+
+Tamaño del tumor
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+___ No puede determinarse (ver Comentario)
+
+
+MICROSCÓPICA
+
+Tipo Histológico
+___ Carcinoma in situ
+___ Carcinoma seroso
+___ Carcinoma mucinoso
+___ Carcinoma endometrioide
+___ Carcinoma de células claras
+___ Carcinoma de células transicionales
+___ Carcinoma de células escamosas
+___ Carcinoma indiferenciado
+___ Otro (especificar): ____________________________
+___ Carcinoma, tipo no se puede determinar
+
+Grado histológico
+___ No se aplica
+___ GX: No puede evaluarse
+___ G1: Bien diferenciado
+___ G2: moderadamente diferenciado
+___ G3: mal diferenciado
+ 
+La estadificación patológica (pTNM [FIGO])
+
+Tumor primario (pT)
+___ PTX [-]: El tumor primario no puede ser evaluado
+___ PT0 [-]: No hay evidencia de tumor primario
+___ PTis [0]: Carcinoma in situ (limitado a la mucosa tubárica)
+PT1 ___ [I]: Tumor limitado a la trompa de Falopio (s)
+* ___ PT1a [IA]: Tumor limitado a un tubo sin penetrar en la superficie serosa; sin ascitis
+* ___ PT1b [ib]: Tumor limitado a ambos tubos sin penetrar en la superficie serosa; sin ascitis
+* ___ PT1c [IC]: Tumor limitado a uno o ambos tubo (s) con extensión hacia oa través de la serosa tubaria, o con células malignas en la ascitis o lavados peritoneales
+___ PT2 [II]: El tumor afecta 1 o ambos del tubo (s) con extensión pélvica
+___ PT2a [IIA]: Ampliación y / o metástasis al útero y / o de los ovarios
+___ PT2b [IIb]: Extensión a otras estructuras pélvicas
+* ___ PT2c [IIC]: extensión pélvica (T2a o T2b/IIA o IIB) con células malignas en la ascitis o lavados peritoneales
+___ PT3 y / o N1 [III]: El tumor afecta tanto 1 o tubo (s) con los implantes peritoneales fuera de la pelvis y / o metástasis de ganglio linfático regional
+___ PT3a [III]: metástasis peritoneal microscópica más allá de la pelvis
+___ PT3b [IIIB]: metástasis peritoneal macroscópica más allá de la pelvis 2 cm o menos en su mayor dimensión
+___ PT3c/NI [IIIC]: metástasis peritoneal más allá de la pelvis más de 2 cm en su mayor dimensión y / o metástasis a ganglios linfáticos regionales
+___ Cualquier T / Cualquier N y MI [IV]: Metástasis a distancia que incluye la presencia de células malignas en el líquido pleural o metástasis del parénquima hepático
+
+Ganglios linfáticos regionales (pN)
+___ PNX: No puede evaluarse
+PN0 ___: No hay metástasis a los ganglios linfáticos regionales
+___ PN1 [IIIC]: metástasis a ganglios linfáticos regionales
+Especificar: Número examinados: ___
+Número involucrados: ___
+
+Metástasis a distancia (pM)
+___ PMX: No puede evaluarse
+___ PM1 [IV]: Metástasis a distancia
+* Especificar sitio (s), si se conoce: __________________________
+
+* Resumen de órganos / tejidos afectados por el tumor microscópico
+* ___ Trompa de Falopio sólo
+* ___ Otros órganos / tejidos
+* Especificar todo: ____________________________
+
+Venosa / linfática (barco grande / pequeño) Invasion (V / L)
+___ Ausente
+___ Presente
+___ Indeterminado
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Salpingitis (tipo): ___________________________
+* ___ Displasia
+* ___ Otro (especificar): ___________________________
+
+* Comentario (s)

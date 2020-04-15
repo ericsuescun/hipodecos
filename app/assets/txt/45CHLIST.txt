@@ -1,0 +1,111 @@
+
+LISTA DE CHEQUEO TIROIDES
+
+MACROSCÓPICO
+
+Tipo de muestra
+___ Tiroidectomía total
+___ Lobectomía
+___ Istmectomía
+___ Otro (especificar): ____________________________
+___ No especificado
+
+Sitio del tumor (marque todas las que apliquen)
+___ Lóbulo derecho
+___ Lóbulo izquierdo
+___ Istmo
+___ No especificado
+
+Focalidad tumoral
+___ Unifocal
+___ Multifocal
+
+Tamaño del tumor (nódulo más grande)
+Mayor dimensión: ___ cm
+* Dimensiones adicionales: ___ x ___ cm
+___ No puede determinarse (ver Comentario)
+
+ 
+MICROSCÓPICA
+
+Tipo histológico (marque todo lo que corresponda, elige un tipo histológico y todos los subtipos aplicables)
+___ Carcinoma folicular
+Invasividad, especifique:
+___ Mínimamente invasiva
+___ Macroscópicamente encapsulado con angioinvasión
+___ Ampliamente invasiva
+* Variante, especifique:
+* ___ Oncocítico (célula de Hürthle) variante
+* ___ Variante de células claras
+___ Carcinoma papilar
+* Variante, especifique:
+* ___ Microcarcinoma (oculta, pequeñas o microscópicas)
+* ___ Variante encapsulada
+* ___ Variante folicular
+* ___ Macrofoliculares variante
+* ___ Oncocítico o oxífilas variante
+* ___ Variante de células claras
+* ___ Solid variante o inducida por radiación variante pediátrica
+* ___ Cribiforme-morular variante
+* ___ Warthin-como variante
+* ___ Variante folicular difusa
+* ___ Difusa variante esclerosante
+* ___ Variante de células altas
+* ___ Variante de células columnares
+___ Insular carcinoma (carcinoma y otro poco diferenciado)
+___ El carcinoma medular
+___ Indiferenciado (anaplásico) carcinoma
+___ Otro (especificar): ____________________________
+___ Carcinoma, tipo no se puede determinar
+
+
+ 
+La estadificación patológica (pTNM)
+
+Tumor primario (pT)
+___ PTX: No puede evaluarse
+___ PT0: No hay evidencia de tumor primario
+___ PT1: Tamaño del tumor de 2 cm o menos, limitado a la tiroides
+___ PT2: Tumor mayor de 2 cm, pero no más de 4 cm, limitado a la tiroides
+___ PT3: Tumor mayor de 4 cm limitado a la tiroides o cualquier tumor con diseminación fuera de la mínima (por ejemplo, la extensión de los músculos o tejidos esternotiroideo perithyroid blandos)
+___ PT4a: tumor de cualquier tamaño que se extiende más allá de la cápsula tiroidea hasta invadir los tejidos subcutáneos blandos, la laringe, la tráquea, el esófago o nervio laríngeo recurrente
+___ PT4b: El tumor invade la fascia prevertebral o envuelve la arteria carótida o los vasos mediastínicos.
+Carcinoma anaplásico
+___ PT4a: carcinoma anaplásico-quirúrgicamente resecable intratiroideo
+___ PT4b: carcinoma anaplásico-quirúrgicamente resecable extratiroidea
+
+Ganglios linfáticos regionales (pN)
+___ PNX: No puede evaluarse
+PN0 ___: No hay metástasis a los ganglios linfáticos regionales
+___ PN1a: metástasis ganglionares en el Nivel VI (pretraqueal, paratraqueal y prelaríngea / Delphian) ganglios linfáticos
+___ PN1B: Las metástasis unilaterales, bilaterales o contralaterales ganglios linfáticos cervicales o mediastinales superiores.
+Especificar: Número examinados: ___
+Número involucrados: ___
+
+Metástasis a distancia (pM)
+___ PMX: No puede evaluarse
+___ PM1: Metástasis a distancia
+* Especificar sitio (s), si se conoce: ____________________________
+
+Márgenes
+___ No puede evaluarse
+Márgenes ___ no afectado por carcinoma
+* Distancia de carcinoma invasivo con el margen más cercano: ___ mm
+___ Margen (s) que participan por carcinoma
+Sitio (s) de participación: ____________________________
+
+* Venosa / linfática (barco grande / pequeño) Invasion (V / L)
+ (Vasos venosos fuera de tumor o en cápsula)
+* ___ No puede evaluarse
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Bocio nodular
+* ___ Adenoma
+* ___ Tiroiditis
+* ___ Otro (especificar): ____________________________
+
+* Comentario (s)

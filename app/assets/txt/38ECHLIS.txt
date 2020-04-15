@@ -1,0 +1,47 @@
+* MACROSCÓPICO
+
+* Tipo de muestra
+* ___ Biopsia
+* ___ Curetaje
+* ___ Otro (especificar): ___________________________
+* ___ No especificado
+
+
+* MICROSCÓPICA
+
+* Tipo Histológico
+* ___ Adenocarcinoma endometrioide sin alguna otra caracterización
+* ___ Adenocarcinoma endometrioide, secretor (variante)
+* ___ Adenocarcinoma endometrioide, de células ciliadas (variante)
+* ___ Endometrioide adenocarcinoma, con metaplasia escamosa
+* ___ Carcinoma adenoescamoso
+* ___ Adenocarcinoma seroso
+* ___ Adenocarcinoma de células claras
+* ___ Adenocarcinoma mucinoso
+* ___ Carcinoma de células escamosas
+* ___ Carcinoma mixto (especificar tipos y porcentajes): ________________________
+* ___ Carcinoma indiferenciado
+* ___ Otro (especificar): ___________________________
+* ___ Carcinoma, tipo no se puede determinar
+
+ 
+* Grado histológico (si procede)
+(Sistema de evaluación a continuación se aplica sobre todo a carcinoma endometrioide)
+* ___ No aplica
+* ___ GX: No puede evaluarse
+* ___ G1: 5% o un crecimiento sólido no escamoso menos
+* ___ G2: 6% a 50% de crecimiento sólido no escamoso
+* ___ G3: Más del 50% de crecimiento sólido no escamoso
+* ___ Otro (especificar): ___________________________
+
+* Otros hallazgos patológicos (marque todo lo que corresponda)
+* ___ Ninguno identificado
+* ___ Hiperplasia
+* ___ Simple
+* ___ Compleja (adenomatosa)
+* ___ Hiperplasia atípica
+* ___ Simple
+* ___ Compleja (adenomatosa)
+* ___ Otro (especificar): ___________________________
+
+* Comentario (s)

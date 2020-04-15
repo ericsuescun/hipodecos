@@ -1,0 +1,116 @@
+
+LISTA CHEQUEO TUMORES GLANDULAS SALIVARES
+MACROSCÓPICO
+
+Tipo de muestra
+Resección ___, glándula submandibular
+Resección ___, glándula sublingual
+___ Parotidectomía superficial
+___ Parotidectomía total
+___ Otro (especificar): ____________________________
+___ No especificado
+
+Lateralidad
+___ Derecho
+___ Izquierda
+___ No especificado
+
+Tamaño del tumor
+Mayor dimensión: ___ cm
+* Dimensión adicional: ___ x ___ cm
+___ No puede determinarse (ver Comentario)
+
+
+ 
+MICROSCÓPICA
+
+Tipo Histológico
+___ Carcinoma de células acinares
+___ El carcinoma adenoide quístico
+___ Adenocarcinoma no especificado (NOS), de bajo grado
+NOS ___ Adenocarcinoma, grado intermedio
+NOS ___ Adenocarcinoma, de alto grado
+___ Carcinoma de células escamosas
+___ Carcinoma ex adenoma pleomorfo (tumor mixto maligno)
+___ Carcinosarcoma (verdadero tumor mixto maligno)
+___ El carcinoma mucoepidermoide de bajo grado
+___ El carcinoma mucoepidermoide, de grado intermedio
+___ El carcinoma mucoepidermoide de alto grado
+___ Polimorfo de bajo grado adenocarcinoma
+___ Epitelial-mioepitelial Carcinoma
+___ Adenocarcinoma de células basales
+___ Carcinoma sebáceo
+___ Cistoadenocarcinoma
+___ Carcinoma mucinoso (coloide carcinoma)
+___ Carcinoma oncocítico
+___ Carcinoma de los conductos salivales
+___ Carcinoma mioepitelial (mioepitelioma maligno)
+___ Carcinoma de células pequeñas
+___ Carcinoma indiferenciado
+___ Otro (especificar): ____________________________
+___ Carcinoma, tipo no se puede determinar
+
+Grado histológico (si procede)
+___ No se aplica
+___ GX: No puede evaluarse
+___ G1: Bien diferenciado
+___ G2: moderadamente diferenciado
+___ G3: mal diferenciado
+___ Otro (especificar): ____________________________
+
+ 
+La estadificación patológica (pTNM)
+
+Nota: Las frases en cursiva son hallazgos clínicos necesarios para la estadificación del AJCC. Esta información clínica puede ser desconocido por el patólogo. Se incluye aquí sólo por el bien de la integridad.
+
+Tumor primario (pT)
+___ PTX: No puede evaluarse
+___ PT0: No hay evidencia de tumor primario
+___ PT1: Tumor de 2 cm o menos en su mayor dimensión, sin diseminación extra parenquimatosa
+___ PT2: Tumor mayor de 2 cm pero no más de 4 cm en su mayor dimensión, sin diseminación extra parenquimatosa
+___ PT3: Tumor mayor de 4 cm y / o tumor con diseminación extra parenquimatosa
+___ PT4a: El tumor invade la piel, canal mandíbula, el oído y / o el nervio facial.
+___ PT4b: El tumor invade la base del cráneo y / o placas pterigoides y / o la arteria carótida encierra
+
+Ganglios linfáticos regionales (pN)
+___ PNX: No puede evaluarse
+PN0 ___: No hay metástasis a los ganglios linfáticos regionales
+___ PN1: Metástasis en un solo ganglio linfático ipsilateral, 3 cm o menos en su mayor dimensión
+___ PN2a: Metástasis en un solo ganglio linfático ipsilateral más de 3 cm pero no más de 6 cm en su mayor dimensión
+___ PN2b: Metástasis en múltiples ganglios linfáticos ipsilaterales, ninguno más de 6 cm en su mayor dimensión
+___ PN2c: Metástasis en ganglios linfáticos bilaterales o contralaterales, ninguno más de 6 cm en su mayor dimensión
+___ PN3: Metástasis en un ganglio linfático más de 6 cm en su mayor dimensión
+Especificar: Número examinados: ___
+Número involucrados: ___
+
+* Extensión extracapsular del tumor nodal
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+Metástasis a distancia (pM)
+___ PMX: No puede evaluarse
+___ PM1: Metástasis a distancia
+* Especificar sitio (s), si se conoce: ____________________________
+ 
+Márgenes
+___ No puede evaluarse
+Márgenes ___ no afectado por el tumor
+Distancia más cercana de tumor de margen: ___ mm
+Especificar margen, si es posible: ____________________________
+___ Margen (s) afectados por el tumor
+Especificar margen (s), si es posible: ____________________________
+
+* Venosa / linfática (barco grande / pequeño) Invasion (V / L)
+* ___ Ausente
+* ___ Presente
+* ___ Indeterminado
+
+Invasión perineural
+___ Ausente
+___ Presente
+
+* Los hallazgos patológicos adicionales
+* Especifique: ____________________________
+
+* Comentario (s)

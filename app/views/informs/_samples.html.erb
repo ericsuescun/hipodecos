@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th>Código</th>
+          <th>Órgano</th>
           <th>Nombre</th>
           <th>Descrp.</th>
           <th>Por</th>
@@ -14,6 +15,7 @@
         <% inform.samples.each do |sample| %>
           <tr>
             <td><%= sample.sample_tag %></td>
+            <td><%= sample.specimen_tag %></td>
             <td><%= sample.name %></td>
             <!-- <td><%= sample.description %></td> -->
             <td><%= User.where(id: sample.user_id).first.try(:first_name) %></td>
@@ -28,14 +30,13 @@
               <!-- <td><%= objection.description %></td> -->
             </tr>
           <% end %>
-
         <% end %>
       </tbody>
     </table>
   </div>
   <div class="col-12 col-lg-4">
     <h4>Agregar muestras</h4>
-    <%= form_for [inform, inform.samples.build] do |form| %>
+    <%= form_with model: [inform, inform.samples.build] do |form| %>
       <div class="form-group">
         <%= form.label "Nombre de muestra" %>
         <%= form.text_field :name, class: "form-control input" %>
@@ -46,6 +47,13 @@
       </div>
       <div class="actions">
         <%= form.submit "Agregar", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    <!-- <a class="btn btn-primary" href="<%= samples_path + '?organ=estomago&inform=' + params[:id] %>">+ Estomago</a> -->
+    <%= form_with model: [inform, inform.samples.build] do |form| %>
+      <div class="actions">
+        <%= form.hidden_field :specimen_tag, value: 'estomago' %>
+        <%= form.submit "+Estómago", class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>

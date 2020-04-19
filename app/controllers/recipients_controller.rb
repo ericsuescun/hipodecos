@@ -27,6 +27,13 @@ class RecipientsController < ApplicationController
     recipient.tag = recipient.tag + '-R' + (inform.recipients.count + 1).to_s
     recipient.user_id = current_user
 
+    
+    # new_sample.save
+
+    (1..params[:recipient][:samples].to_i).each do |i|
+      inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user, recipient_tag: recipient.tag, sample_tag: inform.tag_code + 'S' + i.to_s)
+    end
+      
     if recipient.save
       redirect_to inform, notice: 'El recipiente fue creado exitosamente.'
     else
@@ -52,16 +59,14 @@ class RecipientsController < ApplicationController
   # DELETE /recipients/1.json
   def destroy
     @recipient.destroy
-    respond_to do |format|
-      format.html { redirect_to recipients_url, notice: 'Recipient was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to inform_path(@inf), notice: 'Recipient was successfully destroyed.'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipient
       @recipient = Recipient.find(params[:id])
+      @inf = @recipient.inform_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

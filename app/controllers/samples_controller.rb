@@ -76,10 +76,7 @@ class SamplesController < ApplicationController
   # DELETE /samples/1.json
   def destroy
     @sample.destroy
-    respond_to do |format|
-      format.html { redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente borrada.' }
-      format.json { head :no_content }
-    end
+    redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente borrada.'
   end
 
   private

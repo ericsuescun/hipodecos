@@ -4,9 +4,9 @@
       <thead>
         <tr>
           <th>Código</th>
-          <th>Órgano</th>
+          <th>Recipiente</th>
           <th>Nombre</th>
-          <th>Descrp.</th>
+          <!-- <th>Descrp.</th> -->
           <th>Por</th>
           <th scope="2"></th>
         </tr>
@@ -15,7 +15,7 @@
         <% inform.samples.each do |sample| %>
           <tr>
             <td><%= sample.sample_tag %></td>
-            <td><%= sample.specimen_tag %></td>
+            <td><%= sample.recipient_tag %></td>
             <td><%= sample.name %></td>
             <!-- <td><%= sample.description %></td> -->
             <td><%= User.where(id: sample.user_id).first.try(:first_name) %></td>

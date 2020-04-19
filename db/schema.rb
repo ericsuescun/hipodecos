@@ -332,10 +332,10 @@ ActiveRecord::Schema.define(version: 2020_04_19_062841) do
     t.integer "user_id"
     t.string "name"
     t.text "description"
-    t.string "specimen_tag"
+    t.string "recipient_tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "recipient_tag"
+    t.string "sample_tag"
     t.index ["inform_id"], name: "index_samples_on_inform_id"
   end
 

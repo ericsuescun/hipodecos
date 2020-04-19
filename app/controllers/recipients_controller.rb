@@ -21,19 +21,16 @@ class RecipientsController < ApplicationController
   def edit
   end
 
-  # POST /recipients
-  # POST /recipients.json
   def create
-    @recipient = Recipient.new(recipient_params)
+    inform = Inform.find(params[:inform_id])
+    recipient = inform.recipients.build(recipient_params)
+    recipient.tag = recipient.tag + '-R' + (inform.recipients.count + 1).to_s
+    recipient.user_id = current_user
 
-    respond_to do |format|
-      if @recipient.save
-        format.html { redirect_to @recipient, notice: 'Recipient was successfully created.' }
-        format.json { render :show, status: :created, location: @recipient }
-      else
-        format.html { render :new }
-        format.json { render json: @recipient.errors, status: :unprocessable_entity }
-      end
+    if recipient.save
+      redirect_to inform, notice: 'El recipiente fue creado exitosamente.'
+    else
+      render :new
     end
   end
 

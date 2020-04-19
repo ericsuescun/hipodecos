@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-12 col-lg-8 mx-auto">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descr.</th>
+          <th>Muestras</th>
+          <th>Descrp.</th>
+          <th>Por</th>
+          <th scope="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% inform.recipients.each do |recipient| %>
+          <tr>
+            <td><%= recipient.tag %></td>
+            <td><%= recipient.description %></td>
+            <td><%= recipient.samples %></td>
+            <!-- <td><%= sample.description %></td> -->
+            <td><%= User.where(id: recipient.user_id).first.try(:first_name) %></td>
+            <td><%= link_to "Revisar", recipient_path(recipient) %></td>
+            <td><%= link_to "Editar", edit_recipient_path(recipient) %></td>
+            <td><%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+          </tr>
+          <% recipient.objections.each do |objection| %>
+            <tr class=<%= objection.closed == false ? "objection" : "" %> >
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+              <!-- <td><%= objection.description %></td> -->
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12 col-lg-4">
+    <div class="d-flex content-align-around">
+      <%= form_with model: [inform, inform.recipients.build] do |form| %>
+        <div class="actions">
+          <%= form.submit "1 + 1 muestra", class: "btn btn-primary mx-1" %>
+          <%= form.hidden_field :samples, value: 1 %>
+        </div>
+      <% end %>
+      <%= form_with model: [inform, inform.recipients.build] do |form| %>
+        <div class="actions">
+          <%= form.submit "1 + 2 muestras", class: "btn btn-primary mx-1" %>
+          <%= form.hidden_field :samples, value: 2 %>
+        </div>
+      <% end %>
+      <%= form_with model: [inform, inform.recipients.build] do |form| %>
+        <div class="actions">
+          <%= form.submit "1 + 3 muestras", class: "btn btn-primary mx-1" %>
+          <%= form.hidden_field :samples, value: 3 %>
+        </div>
+      <% end %>
+    </div>
+    
+    <h4>Agregar recipiente</h4>
+    <%= form_with model: [inform, inform.recipients.build] do |form| %>
+      <div class="form-group">
+        <%= form.label "Cantidad de muestras" %>
+        <%= form.number_field :samples, value: 4, class: "form-control input" %>
+      </div>
+      <div class="form-group">
+        <%= form.label "Descripción" %>
+        <%= form.text_area :description, class: "form-control input" %>
+      </div>
+      <div class="actions">
+        <%= form.submit "Agregar", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+
+</div>

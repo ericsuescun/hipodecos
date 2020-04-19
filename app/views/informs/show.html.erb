@@ -7,45 +7,33 @@
             <%= render partial: "inform" %>
           </div>
         </div>
-        <div class="alert alert-success">
-          <div class="row">
-            <div class="col-12 col-lg-8 mb-3">
-              <h1>Órdenes y documentos escaneados</h1>
-              <%= render partial: "escaneos", locals: { inform: @inform } %>
-            </div>
-            <div class="col-12 col-lg-4">
-              <h4>Agregar nuevos escaner de órdenes o documentos</h4>
-              <%= render partial: "pictures/form", locals: { imageable: @inform } %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-12 mx-auto mb-3">
-            <div class="alert alert-success">
-              <h1>Doctor</h1>
-              <%= render partial: "physician", locals: { inform: @inform } %>
-            </div>
-            
-          </div>
-        </div>
         <div class="row">
           <div class="col-12 col-lg-12 mb-3 mx-auto">
             <div class="alert alert-success">
-              <h1>CUPS</h1>
-              <%= render partial: "studies", locals: { inform: @inform } %>
+              <h1>Recipientes</h1>
+              <%= render partial: "recipients", locals: { inform: @inform } %>
             </div>
-            
           </div>
         </div>
+
         <div class="row">
           <div class="col-12 col-lg-12 mb-3 mx-auto">
             <div class="alert alert-success">
               <h1>Muestras</h1>
               <%= render partial: "samples", locals: { inform: @inform } %>
             </div>
-            
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="alert alert-success">
+              <h1>CUPS</h1>
+              <%= render partial: "studies", locals: { inform: @inform } %>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-12 col-lg-12 mb-3 mx-auto">
             <div class="alert alert-success">
@@ -90,7 +78,19 @@
             </div>
             
           </div>
-        </div>       
+        </div>   
+        <div class="alert alert-success">
+          <div class="row">
+            <div class="col-12 col-lg-8 mb-3">
+              <h1>Órdenes y documentos escaneados</h1>
+              <%= render partial: "escaneos", locals: { inform: @inform } %>
+            </div>
+            <div class="col-12 col-lg-4">
+              <h4>Agregar nuevos escaner de órdenes o documentos</h4>
+              <%= render partial: "pictures/form", locals: { imageable: @inform } %>
+            </div>
+          </div>
+        </div>    
     </div>
   </div>
 </div>

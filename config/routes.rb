@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :recipients
   resources :autos
     root to: "static_pages#home"
   
@@ -55,6 +54,8 @@ Rails.application.routes.draw do
     resources :physicians
     resources :pictures
     resources :obcodes
+    resources :recipients
+    
 
     
     devise_for :users, path: 'users', controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", unlocks: "users/unlocks", confirmations: "users/confirmations" }
@@ -96,14 +97,21 @@ Rails.application.routes.draw do
 
     resources :informs do
       resources :physicians
+      resources :recipients
       resources :samples
       resources :studies
-      resources :macros
       resources :blocks
       resources :slides
+      resources :macros
       resources :micros
       resources :diagnostics
+      
       resources :pictures, module: :informs
+    end
+
+    resources :recipients do
+      resources :objections, module: :recipients
+      resources :pictures, module: :recipients
     end
 
     resources :samples do

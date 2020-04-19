@@ -28,6 +28,7 @@ class Inform < ApplicationRecord
   has_many :micros
   has_many :diagnostics
   has_many :pictures, as: :imageable
+  has_many :recipients
 
   validates :receive_date, :promoter_id, :branch_id, presence: true
 

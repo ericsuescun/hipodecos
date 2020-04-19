@@ -1,5 +1,11 @@
-<h1>New Physician</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
 
-<%= render 'form', physician: @physician %>
+		<h1>Agregar doctor para informe <%= Inform.find(params[:inform_id]).tag_code %></h1>
 
-<%= link_to 'Back', physicians_path %>
+		<%= render 'form', physician: @physician %>
+
+    </div>
+  </div>
+</div>

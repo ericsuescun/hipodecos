@@ -25,7 +25,8 @@ class PhysiciansController < ApplicationController
   # POST /physicians
   # POST /physicians.json
   def create
-    inform = Inform.find(params[:inform_id])
+    inform = Inform.find(params[:physician][:inform_id])
+    # inform = Inform.find(params[:inform_id])
     physician = inform.physicians.build(physician_params)
     physician.user_id = current_user.id
 
@@ -76,6 +77,9 @@ class PhysiciansController < ApplicationController
       log += "\n-study2-\nSIN CAMBIOS."
     end
     log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
+
+    @physician.inform_id = params[:physician][:inform_id]
+    @physician.user_id = current_user
 
     if @physician.update(physician_params)
       @physician.objections.each do |objection|

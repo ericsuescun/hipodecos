@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_050744) do
+ActiveRecord::Schema.define(version: 2020_04_18_214531) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -301,6 +301,17 @@ ActiveRecord::Schema.define(version: 2019_11_15_050744) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "factor"
+  end
+
+  create_table "recipients", force: :cascade do |t|
+    t.integer "inform_id"
+    t.integer "user_id"
+    t.string "tag"
+    t.text "description"
+    t.integer "samples"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inform_id"], name: "index_recipients_on_inform_id"
   end
 
   create_table "roles", force: :cascade do |t|

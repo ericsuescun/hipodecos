@@ -1,49 +1,95 @@
-<div class="container">
+<%= form_with(model: physician) do |form| %>
+
+  <%= form.hidden_field :inform_id, value: params[:inform_id] %>
+
   <div class="row">
-    <div class="col-12 col-lg-4 mx-auto">
-      
-      <%= form_with(model: physician, local: true) do |form| %>
-
-        <div class="form-group">
-          <%= form.label "Nombres" %>
-          <%= form.text_field :name, class: "form-control input" %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label "Apellidos" %>
-          <%= form.text_field :lastname, class: "form-control input" %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label "Teléfono" %>
-          <%= form.text_field :tel, class: "form-control input" %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label "Celular" %>
-          <%= form.text_field :cel, class: "form-control input" %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label "Email" %>
-          <%= form.text_field :email, class: "form-control input" %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label "Especialidad" %>
-          <%= form.text_field :study1, class: "form-control input" %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label "Otro estudio/especialidad" %>
-          <%= form.text_field :study2, class: "form-control input" %>
-        </div>
-
-        <div class="actions">
-          <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
-        </div>
-      <% end %>
-
+    <div class="col-12 col-lg-6">
+      <div class="form-group">
+        <%= form.label "Nombres" %>
+        <%= form.text_field :name, class: "form-control input" %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="form-group">
+        <%= form.label "Apellidos" %>
+        <%= form.text_field :lastname, class: "form-control input" %>
+      </div>
     </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-12 col-lg-3">
+      <div class="form-group">
+        <%= form.label "Teléfono" %>
+        <%= form.text_field :tel, class: "form-control input" %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-3">
+      <div class="form-group">
+        <%= form.label "Celular" %>
+        <%= form.text_field :cel, class: "form-control input" %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="form-group">
+        <%= form.label "Email" %>
+        <%= form.text_field :email, class: "form-control input" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div class="form-group">
+        <%= form.label "Especialidad" %>
+        <%= form.text_field :study1, class: "form-control input" %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="form-group">
+        <%= form.label "Otra especialidad/estudio" %>
+        <%= form.text_field :study2, class: "form-control input" %>
+      </div>
+    </div>
+  </div>
+<!--         <div class="actions">
+    <%= form.submit "Agregar", class: "btn btn-primary" %>
+  </div> -->
+
+<!--         <div class="form-group">
+    <%= form.label "Nombres" %>
+    <%= form.text_field :name, class: "form-control input" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Apellidos" %>
+    <%= form.text_field :lastname, class: "form-control input" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Teléfono" %>
+    <%= form.text_field :tel, class: "form-control input" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Celular" %>
+    <%= form.text_field :cel, class: "form-control input" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Email" %>
+    <%= form.text_field :email, class: "form-control input" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Especialidad" %>
+    <%= form.text_field :study1, class: "form-control input" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Otro estudio/especialidad" %>
+    <%= form.text_field :study2, class: "form-control input" %>
+  </div> -->
+
+  <div class="actions">
+    <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
+  </div>
+<% end %>

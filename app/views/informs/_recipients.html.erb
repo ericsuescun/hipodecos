@@ -22,8 +22,19 @@
                   </div>
                 </h5>
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                    <% if sample.organ_code == nil %>
+                      <%= form_with model: sample do |form| %>
+                        <div class="actions">
+                          <%= form.submit "19. Estómago", class: "btn btn-primary mx-1 my-1" %>
+                          <%= form.hidden_field :organ_code, value: "Estomago" %>
+                        </div>
+                      <% end %>
+                    <% end %>
+
+                    <h5 class="card-title">Órgano: <%= sample.organ_code %></h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
                 </div>
               </div>
             <% end %>

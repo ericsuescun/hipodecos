@@ -56,7 +56,7 @@ class SamplesController < ApplicationController
     else
       log += "\n-DESCRIPCIÓN-\nSIN CAMBIOS."
     end
-    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s + "\nEtiqueta: " + sample_params[:sample_tag]
+    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s + "\nEtiqueta: " + sample_params[:sample_tag].to_s
 
     if @sample.update(sample_params)
       @sample.objections.each do |objection|
@@ -88,6 +88,6 @@ class SamplesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sample_params
-      params.require(:sample).permit(:inform_id, :user_id, :name, :description, :sample_tag, :specimen_tag)
+      params.require(:sample).permit(:inform_id, :user_id, :name, :description, :sample_tag, :recipient_tag, :organ_code)
     end
 end

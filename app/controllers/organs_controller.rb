@@ -1,5 +1,11 @@
 class OrgansController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_organ, only: [:show, :edit, :update, :destroy]
+
+  def import
+    Organ.import(params[:file])
+    redirect_to organs_path, notice: "Datos importados!"
+  end
 
   # GET /organs
   # GET /organs.json

@@ -80,7 +80,7 @@ Rails.application.routes.draw do
       collection {post :import}
     end
 
-      resources :diagcodes do
+    resources :diagcodes do
       collection {post :import}
     end
     
@@ -89,6 +89,10 @@ Rails.application.routes.draw do
     end
 
     resources :branches do
+      collection {post :import}
+    end
+
+    resources :organs do
       collection {post :import}
     end
 

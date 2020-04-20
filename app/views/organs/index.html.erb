@@ -1,31 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
 
-<h1>Organs</h1>
+      <h4>Importar datos</h4>
+      <%= form_tag import_organs_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Importar CSV" %>
+      <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Admin</th>
-      <th>Organ</th>
-      <th>Organ code</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <h1>Listado de órganos</h1>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Admin</th>
+            <th>Organ</th>
+            <th>Organ code</th>
+            <th colspan="3"></th>
+          </tr>      
+        </thead>
 
-  <tbody>
-    <% @organs.each do |organ| %>
-      <tr>
-        <td><%= organ.admin_id %></td>
-        <td><%= organ.organ %></td>
-        <td><%= organ.organ_code %></td>
-        <td><%= link_to 'Show', organ %></td>
-        <td><%= link_to 'Edit', edit_organ_path(organ) %></td>
-        <td><%= link_to 'Destroy', organ, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+          <% @organs.each do |organ| %>
+            <tr>
+              <td><%= Admin.where(id: organ.admin_id).first.try(:name) %></td>
 
-<br>
+              <td><%= organ.organ %></td>
+              <td><%= organ.organ_code %></td>
 
-<%= link_to 'New Organ', new_organ_path %>
+              <td><%= link_to 'Revisar', organ %></td>
+              <td><%= link_to 'Editar', edit_organ_path(organ) %></td>
+              <td><%= link_to 'Borrar', organ, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

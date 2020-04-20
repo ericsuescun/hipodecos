@@ -17,7 +17,11 @@
               <div class="col-12 col-lg-12">
                 <div class="card-deck">
                   <% inform.samples.where(recipient_tag: recipient.tag).each do |sample| %>
-                    <div class="col-12 col-lg-3">
+                    <% if sample.organ_code == nil %>
+                      <div class="col-12 col-lg-12">
+                    <% else %>
+                      <div class="col-12 col-lg-3">
+                    <% end %>
                       <div class="card mx-2 my-2">
                         <h5 class="card-header">Muestra: <%= sample.sample_tag %>
                           <div class="d-flex justify-content-start">
@@ -25,15 +29,25 @@
                           </div>
                         </h5>
                         <div class="card-body">
-
+                          <div class="row">
                             <% if sample.organ_code == nil %>
-                              <%= form_with model: sample do |form| %>
-                                <div class="actions">
-                                  <%= form.submit "19. Estómago", class: "btn btn-primary mx-1 my-1" %>
-                                  <%= form.hidden_field :organ_code, value: "Estomago" %>
+                              <% Organ.all.each do |organ| %>
+                              
+                                <div class="col-12 col-lg-2">
+                                  <%= form_with model: sample do |f| %>
+                                    <div class="actions">
+                                      <%= f.submit "#{organ.organ_code}. #{organ.organ}", class: "btn btn-primary mx-1 my-1" %>
+                                      <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
+                                    </div>
+                                  <% end %>
                                 </div>
+                              
+
+                                
+
                               <% end %>
                             <% end %>
+                          </div>
 
                             <h5 class="card-title">Órgano: <%= sample.organ_code %></h5>
                             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>

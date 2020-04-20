@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  admin_id: 1
+  organ: MyString
+  organ_code: MyString
+
+two:
+  admin_id: 1
+  organ: MyString
+  organ_code: MyString

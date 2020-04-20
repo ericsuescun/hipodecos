@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @organ.admin_id %>
+</p>
+
+<p>
+  <strong>Organ:</strong>
+  <%= @organ.organ %>
+</p>
+
+<p>
+  <strong>Organ code:</strong>
+  <%= @organ.organ_code %>
+</p>
+
+<%= link_to 'Edit', edit_organ_path(@organ) %> |
+<%= link_to 'Back', organs_path %>

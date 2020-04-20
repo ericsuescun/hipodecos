@@ -1,63 +1,72 @@
 <div class="row">
+  <div class="col-12 col-lg-12">
+    <!-- <div class="card-group"> -->
+
+      <% inform.recipients.each do |recipient| %>
+        <div class="card mx-2 my-2">
+          <h5 class="card-header">Recipiente: <%= recipient.tag %>
+            <div class="d-flex justify-content-start">
+              <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-success mx-2 my-2" %>
+            </div>
+          </h5>
+          <div class="card-body">
+            <h5 class="card-title">Creado por: <%= User.where(id: recipient.user_id).first.try(:first_name) %></h5>
+            <p class="card-text">Descripción: <%= recipient.description %></p>
+
+            <% inform.samples.where(recipient_tag: recipient.tag).each do |sample| %>
+              
+              <div class="card mx-2 my-2 border-primary">
+                <h5 class="card-header">Muestra: <%= sample.sample_tag %>
+                  <div class="d-flex justify-content-start">
+                    <%= link_to "Revisar", sample_path(sample), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-success mx-2 my-2" %>
+                  </div>
+                </h5>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            <% end %>
+
+            
+            
+            
+          </div>
+        </div>
+      <% end %>
+
+    <!-- </div> -->
+  </div>
+</div>
+<div class="row">
   <div class="col-12 col-lg-8 mx-auto">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Descr.</th>
-          <th>Muestras</th>
-          <th>Descrp.</th>
-          <th>Por</th>
-          <th scope="3"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% inform.recipients.each do |recipient| %>
-          <tr>
-            <td><%= recipient.tag %></td>
-            <td><%= recipient.description %></td>
-            <td><%= recipient.samples %></td>
-            <td><%= User.where(id: recipient.user_id).first.try(:first_name) %></td>
-            <td><%= link_to "Revisar", recipient_path(recipient) %></td>
-            <td><%= link_to "Editar", edit_recipient_path(recipient) %></td>
-            <td><%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-          </tr>
-          <% recipient.objections.each do |objection| %>
-            <tr class=<%= objection.closed == false ? "objection" : "" %> >
-              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-              <!-- <td><%= objection.description %></td> -->
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
+
   </div>
   <div class="col-12 col-lg-4">
     <div class="d-flex content-align-around">
       <%= form_with model: [inform, inform.recipients.build] do |form| %>
         <div class="actions">
-          <%= form.submit "1 + 1 muestra", class: "btn btn-primary mx-1" %>
+          <%= form.submit "1R + 1 Muestra", class: "btn btn-primary mx-1 my-1" %>
           <%= form.hidden_field :samples, value: 1 %>
           <%= form.hidden_field :tag, value: inform.tag_code %>
         </div>
       <% end %>
       <%= form_with model: [inform, inform.recipients.build] do |form| %>
         <div class="actions">
-          <%= form.submit "1 + 2 muestras", class: "btn btn-primary mx-1" %>
+          <%= form.submit "1R + 2M=", class: "btn btn-primary mx-1 my-1" %>
           <%= form.hidden_field :samples, value: 2 %>
           <%= form.hidden_field :tag, value: inform.tag_code %>
         </div>
       <% end %>
       <%= form_with model: [inform, inform.recipients.build] do |form| %>
         <div class="actions">
-          <%= form.submit "1 + 3 muestras", class: "btn btn-primary mx-1" %>
+          <%= form.submit "1R + 3M=", class: "btn btn-primary mx-1 my-1" %>
           <%= form.hidden_field :samples, value: 3 %>
           <%= form.hidden_field :tag, value: inform.tag_code %>
         </div>
       <% end %>
     </div>
-    
+
     <h4>Agregar recipiente</h4>
     <%= form_with model: [inform, inform.recipients.build] do |form| %>
 
@@ -76,7 +85,4 @@
       </div>
     <% end %>
   </div>
-</div>
-<div class="row">
-
 </div>

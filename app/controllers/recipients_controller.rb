@@ -25,13 +25,10 @@ class RecipientsController < ApplicationController
     inform = Inform.find(params[:inform_id])
     recipient = inform.recipients.build(recipient_params)
     recipient.tag = recipient.tag + '-R' + (inform.recipients.count + 1).to_s
-    recipient.user_id = current_user
-
-    
-    # new_sample.save
+    recipient.user_id = current_user.id
 
     (1..params[:recipient][:samples].to_i).each do |i|
-      inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user, recipient_tag: recipient.tag, sample_tag: inform.tag_code + 'S' + i.to_s)
+      inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: inform.tag_code + 'S' + i.to_s)
     end
       
     if recipient.save

@@ -3,8 +3,8 @@
     <!-- <div class="card-group"> -->
 
       <% inform.recipients.each do |recipient| %>
-        <div class="card mx-2 my-2">
-          <h5 class="card-header">Recipiente: <%= recipient.tag %>
+        <div class="card  border-success mx-2 my-2">
+          <h5 class="card-header bg-transparent border-success">Recipiente: <%= recipient.tag %>
             <div class="d-flex justify-content-start">
               <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-success mx-2 my-2" %>
             </div>
@@ -13,35 +13,38 @@
             <h5 class="card-title">Creado por: <%= User.where(id: recipient.user_id).first.try(:first_name) %></h5>
             <p class="card-text">Descripción: <%= recipient.description %></p>
 
-            <% inform.samples.where(recipient_tag: recipient.tag).each do |sample| %>
-              
-              <div class="card mx-2 my-2 border-primary">
-                <h5 class="card-header">Muestra: <%= sample.sample_tag %>
-                  <div class="d-flex justify-content-start">
-                    <%= link_to "Revisar", sample_path(sample), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-success mx-2 my-2" %>
-                  </div>
-                </h5>
-                <div class="card-body">
+            <div class="row">
+              <div class="col-12 col-lg-12">
+                <div class="card-deck">
+                  <% inform.samples.where(recipient_tag: recipient.tag).each do |sample| %>
+                    <div class="col-12 col-lg-3">
+                      <div class="card mx-2 my-2">
+                        <h5 class="card-header">Muestra: <%= sample.sample_tag %>
+                          <div class="d-flex justify-content-start">
+                            <%= link_to "Revisar", sample_path(sample), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-success mx-2 my-2" %>
+                          </div>
+                        </h5>
+                        <div class="card-body">
 
-                    <% if sample.organ_code == nil %>
-                      <%= form_with model: sample do |form| %>
-                        <div class="actions">
-                          <%= form.submit "19. Estómago", class: "btn btn-primary mx-1 my-1" %>
-                          <%= form.hidden_field :organ_code, value: "Estomago" %>
+                            <% if sample.organ_code == nil %>
+                              <%= form_with model: sample do |form| %>
+                                <div class="actions">
+                                  <%= form.submit "19. Estómago", class: "btn btn-primary mx-1 my-1" %>
+                                  <%= form.hidden_field :organ_code, value: "Estomago" %>
+                                </div>
+                              <% end %>
+                            <% end %>
+
+                            <h5 class="card-title">Órgano: <%= sample.organ_code %></h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
                         </div>
-                      <% end %>
-                    <% end %>
-
-                    <h5 class="card-title">Órgano: <%= sample.organ_code %></h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
+                      </div>
+                    </div>  
+                  <% end %>
                 </div>
               </div>
-            <% end %>
-
-            
-            
-            
+            </div>
           </div>
         </div>
       <% end %>

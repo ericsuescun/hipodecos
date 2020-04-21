@@ -16,33 +16,33 @@ class DiagcodesController < ApplicationController
   # GET /diagcodes/1
   # GET /diagcodes/1.json
   def show
-    if @diagcode.pss_code
-      @micro = load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + @diagcode.pss_code.strip + ".txt")
-      @dx = load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + @diagcode.pss_code.strip + "DX.txt")
-    end
+    # if @diagcode.pss_code
+    #   @micro = load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + @diagcode.pss_code.strip + ".txt")
+    #   @dx = load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + @diagcode.pss_code.strip + "DX.txt")
+    # end
     
-    # @test = "/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + @diagcode.pss_code + ".txt"
-    # @micro = load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/2A2.txt")
-    # basedir = "/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/"
-    files = Dir.glob("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/*.txt")
-    @opt = []
-    files.each do |filename|
-      if filename.include? @diagcode.organ.gsub(/[^a-zA-Z]/, '')[0..2]
-      # if filename.include? 'MAMA'
-        @opt << filename
-        # @opt << @diagcode.organ.gsub(/[^a-zA-Z]/, '')
-      end
-    end
+    # # @test = "/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + @diagcode.pss_code + ".txt"
+    # # @micro = load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/2A2.txt")
+    # # basedir = "/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/"
+    # files = Dir.glob("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/*.txt")
+    # @opt = []
+    # files.each do |filename|
+    #   if filename.include? @diagcode.organ.gsub(/[^a-zA-Z]/, '')[0..2]
+    #   # if filename.include? 'MAMA'
+    #     @opt << filename
+    #     # @opt << @diagcode.organ.gsub(/[^a-zA-Z]/, '')
+    #   end
+    # end
   end
 
-  def load_txt(fileName)
-    if File.file?(fileName) == true
-      file = File.read(fileName)
-      return file
-    else
-      return []
-    end
-  end
+  # def load_txt(fileName)
+  #   if File.file?(fileName) == true
+  #     file = File.read(fileName)
+  #     return file
+  #   else
+  #     return []
+  #   end
+  # end
 
   # GET /diagcodes/new
   def new

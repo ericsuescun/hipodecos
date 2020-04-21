@@ -1,6 +1,0 @@
-
-#1 PRÓSTATA: Se recibe producto de prostatectomía radical que pesa 40 gramos y mide 5x3x3 cm. se identifican vesículas seminales que en promedio miden 3x2x0.6 cm. y conductos deferentes que en promedio miden 2.5x0.5 cm. Al corte se observa parénquima multinodular. Se pinta de negro el lado derecho y amarillo el lado izquierdo.  SE BLOQUEA PARTE REPRESENTATIVA ASÍ.  LÓBULO IZQUIERDO: 6F -A.  LÓBULO DERECHO: 6F -B.  BORDE URETRAL PROXIMAL: 4F -C.  BORDE URETRAL DISTAL: 4F -D.  VESÍCULA SEMINAL Y CONDUCTO DEFERENTE IZQUIERDO: 3F -E.  VESÍCULA SEMINAL Y CONDUCTO DEFERENTE DERECHO: 3F -F.
-#2 CUELLO BORDE VESICAL: Se recibe fragmento irregular de tejido de color pardo claro de 0.5x0.3x0.3 cm.  SE PROCESA TODO: 1F -G.
-#3 GANGLIOS IZQUIERDOS: Se reciben 4 fragmentos irregulares de tejido de color pardo amarillento que en promedio miden 3x2.5x1 cm.  SE BLOQUEA PARTE REPRESENTATIVA: 8F -H.
-#4 GANGLIOS DERECHOS: Se recibe fragmento irregular de tejido de color pardo amarillento que mide 4x3x1 cm.  SE BLOQUEA PARTE REPRESENTATIVA: 8F -I.
-

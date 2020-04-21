@@ -1,7 +1,0 @@
-
-#1 Producto de Mastectomia radical: -mama (   ) marcada con () hilo en borde de resecciòn axilar y ( ) hilos en borde de resecciòn superior. Mide ()x()x() cm, esta cubierta por elipse de piel de ()x() cm sin lesiones en la superficie, pezon normal. Al corte se observa una lesiòn de aspecto tumoral, firme de color blanquecino que mide ()x()x() cm, localizada en  () a () cm del borde de resecciòn superior, a () cm del inferior, a () cm del medial, a () cm del lateral y a () cm del borde de resecciòn profundo.
-SE PROCESA PORCION REPRESENTATIVA: CUADRANTE SUPERIOR INTERNO: ()F-A  CUADRANTE INFERIOR INTERNO: 1F-B  CUADRANTE SUPERIOR EXTERNO: 1F-C     CUADRANTE INFERIOR EXTERNO: ()F-D BORDE DE RESECCION PROFUNDO: ()F-E  PIEL Y PEZON: ()F-F  TUMOR: ()F-G     SE MARCAN BORDES DE RESECCION ASI:  CON TINTA CHINA NEGRA MITAD SUPERIOR Y CON ROJA MITAD INFERIOR.
-
-#2 VACIAMIENTO AXILAR NIVEL 1 Y 2: Corresponde a un fragmento de tejido fibroadiposo que mide ()x() cm del cual se obtienen () nodulos, el mayor de ()x() cm.    SE PROCESA PORCION REPRESENTATIVA: ()F-H
-
-#3 VACIAMIENTO AXILAR NIVEL 3: Fragmento de tejido fibroadiposo de ()x() cm. SE PROCESA TODO: ()F-I

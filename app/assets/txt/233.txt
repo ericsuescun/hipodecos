@@ -1,5 +1,0 @@
-Se reciben frascos marcados así:
-#1 CIEGO:  Se reciben    muestras de mucosa.   SE PROCESA TODO-A
-#2 TRANSVERSO:  Se reciben    muestras de mucosa.   SE PROCESA TODO-B
-#3 SIGMOIDES: Se reciben    muestras de mucosa.   SE PROCESA TODO-C
-#4 RECTO:   Se reciben    muestras de mucosa.   SE PROCESA TODO-D

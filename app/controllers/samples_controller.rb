@@ -33,8 +33,8 @@ class SamplesController < ApplicationController
 
     if sample.save
       # sample.sample_tag = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
-      sample.sample_tag = inform.tag_code + (65 + tag_shift).chr
-      sample.save
+      # sample.sample_tag = inform.tag_code + (65 + tag_shift).chr
+      # sample.save
       redirect_to inform, notice: 'La muestra ha sido exitosamente creada.'
     else
       render :new
@@ -75,7 +75,14 @@ class SamplesController < ApplicationController
   # DELETE /samples/1
   # DELETE /samples/1.json
   def destroy
+    recipient = @sample.recipient_tag
     @sample.destroy
+    samples_in_recipient = Sample.where(recipient_tag: recipient)
+    if samples_in_recipient.length == 1
+      if samples_in_recipient.first.sample_tag[-1] =~ /[0-9]/
+        samples_in_recipient.first.update(sample_tag: samples_in_recipient.first.sample_tag[0..-2])
+      end
+    end
     redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente borrada.'
   end
 

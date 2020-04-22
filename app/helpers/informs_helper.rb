@@ -62,7 +62,7 @@ module InformsHelper
 		end
 	end
 
-	def next_letter_tag_exists?(inform, sample)
+	def next_number_tag_exists?(inform, sample)
 		answer = false
 		inform.samples.each do |s|
 			if generate_number_tag(sample) == s.sample_tag	#Si el tag que le sige a sample lo encuentro en otro sample de inform

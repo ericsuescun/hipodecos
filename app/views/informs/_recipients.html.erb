@@ -53,7 +53,7 @@
 
                             <h5 class="card-title"></h5>
                             <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong></p>
-                            <% if !next_letter_tag_exists?(inform, sample) %>
+                            <% if !next_number_tag_exists?(inform, sample) %>
                               <%= form_with model: [inform, inform.samples.build] do |form| %>
                                 <%= form.submit "+ Corte", class: "btn btn-primary mx-2 my-2" %>
                                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>

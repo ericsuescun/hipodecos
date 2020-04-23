@@ -19,9 +19,7 @@
             <td><%= sample.name %></td>
             <!-- <td><%= sample.description %></td> -->
             <td><%= User.where(id: sample.user_id).first.try(:first_name) %></td>
-            <td><%= link_to "Revisar", sample_path(sample) %></td>
-            <td><%= link_to "Editar", edit_sample_path(sample) %></td>
-            <td><%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+            
           </tr>
           <% sample.objections.each do |objection| %>
             <tr class=<%= objection.closed == false ? "objection" : "" %> >

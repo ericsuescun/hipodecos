@@ -28,8 +28,18 @@ class RecipientsController < ApplicationController
     recipient.user_id = current_user.id
     tag_shift = inform.samples.count
 
-    (1..params[:recipient][:samples].to_i).each do |i|
-      inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: inform.tag_code + (65 + tag_shift + i - 1).chr)
+    if params[:recipient][:samples].to_i > 20
+      tag = generate_letter_tag(inform) + '1'
+      inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: tag)
+      (22..params[:recipient][:samples].to_i).each do |i|
+        
+        inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first))
+        tag = generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first)
+      end
+    else
+      (1..params[:recipient][:samples].to_i).each do |i|
+        inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_letter_tag(inform))
+      end
     end
       
     if recipient.save
@@ -70,5 +80,34 @@ class RecipientsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipient_params
       params.require(:recipient).permit(:inform_id, :user_id, :tag, :description, :samples)
+    end
+
+    def generate_number_tag(sample)
+      if sample.sample_tag[-1] =~ /[A-Z]/
+        # sample.update(sample_tag: sample.sample_tag + '1')
+        return sample.sample_tag + '2'
+      end
+      if sample.sample_tag[-1] =~ /[0-9]/
+        return sample.sample_tag[0..-2] + (sample.sample_tag[-1].to_i + 1).to_s
+      end
+    end
+
+    def generate_letter_tag(inform)
+      next_letter = 'A'
+      answer = false
+      if inform.samples.empty?
+        return inform.tag_code + 'A'
+      end
+
+      inform.samples.length.times {
+        inform.samples.each do |sample|
+          if (sample.sample_tag == inform.tag_code + next_letter) || (sample.sample_tag == inform.tag_code + next_letter + '1')
+            next_letter = (next_letter.ord + 1).chr
+            break
+          end
+        end
+      }
+      
+      return inform.tag_code + next_letter
     end
 end

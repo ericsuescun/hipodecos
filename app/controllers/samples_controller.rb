@@ -29,7 +29,7 @@ class SamplesController < ApplicationController
     tag_shift = inform.samples.count
     sample = inform.samples.build(sample_params)
     if sample.sample_tag[-1] == '2'
-      fix_sample = Sample.find_by_sample_tag(sample.sample_tag[0..-2])
+      fix_sample = Sample.where(inform_id: params[:inform_id], sample_tag: sample.sample_tag[0..-2]).first
       if fix_sample
         fix_sample.update(sample_tag: sample.sample_tag[0..-2] + '1')
       end

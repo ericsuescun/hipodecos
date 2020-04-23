@@ -28,6 +28,12 @@ class SamplesController < ApplicationController
     inform = Inform.find(params[:inform_id])
     tag_shift = inform.samples.count
     sample = inform.samples.build(sample_params)
+    if sample.sample_tag[-1] == '2'
+      fix_sample = Sample.find_by_sample_tag(sample.sample_tag[0..-2])
+      if fix_sample
+        fix_sample.update(sample_tag: sample.sample_tag[0..-2] + '1')
+      end
+    end
     sample.user_id = current_user.id
 
 

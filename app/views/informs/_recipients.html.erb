@@ -7,13 +7,14 @@
           <h5 class="card-header">Recipiente: <%= recipient.tag %>
             <div class="d-flex justify-content-start">
               <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-success mx-2 my-2" %>
+
               <%= form_with model: [inform, inform.samples.build] do |form| %>
                 <%= form.submit "+ Muestra", class: "btn btn-primary mx-2 my-2" %>
                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                 <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
               <% end %>
+              
             </div>
-
           </h5>
           <div class="card-body">
             <h5 class="card-title">Creado por: <%= User.where(id: recipient.user_id).first.try(:first_name) %></h5>

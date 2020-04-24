@@ -5,7 +5,7 @@
         <div class="card mx-2 my-2">
           <h5 class="card-header">Recipiente: <%= recipient.tag %>
             <div class="d-flex justify-content-start">
-              <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-success mx-2 my-2 #{Sample.where(inform_id: @inform.id).count != 0 ? "disabled" : ""}" %>
+              <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-success mx-2 my-2 #{Sample.where(inform_id: @inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
 
               <%= form_with model: [@inform, @inform.samples.build] do |form| %>
                 <%= form.submit "+ Muestra", class: "btn btn-primary mx-2 my-2" %>
@@ -41,7 +41,8 @@
                                 <div class="col-12 col-lg-2">
                                   <%= form_with model: sample do |f| %>
                                     <div class="actions">
-                                      <%= f.submit "#{organ.organ_code.to_i < 56 ? organ.organ_code + "." : ""} #{organ.organ}", class: "btn btn-sm btn-#{organ.system == "Circulatorio" ? "danger" : organ.system == "Respiratorio" ? "outline-danger" : organ.system == "Digestivo" ? "warning" : organ.system == "Urinario" ? "dark" : organ.system == "Genital Femenino" ? "primary" : organ.system == "Genital Masculino" ? "success" : organ.system == "Endocrino" ? "info" : organ.system == "Nervioso" ? "outline-dark" : organ.system == "Musculo" ? "danger" : organ.system == "Osteoarticular" ? "light" : organ.system == "Dientes" ? "light" : organ.system == "SIDA" ? "info" : organ.system == "Generales" ? "dark" : "warning"} mx-1 my-1" %>
+
+                                      <%= f.submit "#{organ.organ_code.to_i < 56 ? organ.organ_code + "." : ""} #{organ.organ}", class: "btn btn-sm btn-#{organ.system == "Circulatorio" ? "danger" : organ.system == "Respiratorio" ? "outline-danger" : organ.system == "Digestivo" ? "warning" : organ.system == "Urinario" ? "dark" : organ.system == "Genital Femenino" ? "primary" : organ.system == "Genital Masculino" ? "success" : organ.system == "Endocrino" ? "info" : organ.system == "Nervioso" ? "outline-dark" : organ.system == "Musculo" ? "danger" : organ.system == "Osteoarticular" ? "light" : organ.system == "Dientes" ? "light" : organ.system == "SIDA" ? "info" : organ.system == "Generales" ? "dark" : "warning"} mx-1 my-1", id: "organ-#{organ.organ_code}" %>
                                       <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
                                     </div>
                                   <% end %>

@@ -69,7 +69,8 @@ class RecipientsController < ApplicationController
   # DELETE /recipients/1.json
   def destroy
     @recipient.destroy
-    redirect_to inform_path(@inf), notice: 'Recipient was successfully destroyed.'
+    @inform = Inform.find(@inf)
+    # redirect_to inform_path(@inf), notice: 'Recipient was successfully destroyed.'
   end
 
   private

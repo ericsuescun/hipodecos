@@ -58,6 +58,7 @@
                               <%= form_with model: [@inform, @inform.samples.build] do |form| %>
                                 <%= form.submit "+ Corte", class: "btn btn-primary mx-2 my-2" %>
                                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
+                                <%= form.hidden_field :organ_code, value: sample.organ_code %>
                                 <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
                               <% end %>
                             <% end %>

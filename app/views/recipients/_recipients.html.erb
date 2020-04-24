@@ -1,16 +1,16 @@
 <div class="recipients">
   <div class="row">
     <div class="col-12 col-lg-12">
-      <% inform.recipients.each do |recipient| %>
+      <% @inform.recipients.each do |recipient| %>
         <div class="card mx-2 my-2">
           <h5 class="card-header">Recipiente: <%= recipient.tag %>
             <div class="d-flex justify-content-start">
-              <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-success mx-2 my-2 #{Sample.where(inform_id: inform.id).count != 0 ? "disabled" : ""}" %>
+              <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-success mx-2 my-2 #{Sample.where(inform_id: @inform.id).count != 0 ? "disabled" : ""}" %>
 
-              <%= form_with model: [inform, inform.samples.build] do |form| %>
+              <%= form_with model: [@inform, @inform.samples.build] do |form| %>
                 <%= form.submit "+ Muestra", class: "btn btn-primary mx-2 my-2" %>
                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
-                <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
+                <%= form.hidden_field :sample_tag, value: generate_letter_tag(@inform) %>
               <% end %>
               
             </div>
@@ -21,7 +21,7 @@
             <div class="row">
               <div class="col-12 col-lg-12">
                 <div class="card-deck">
-                  <% inform.samples.where(recipient_tag: recipient.tag).each do |sample| %>
+                  <% @inform.samples.where(recipient_tag: recipient.tag).each do |sample| %>
                     <% if sample.organ_code == nil %>
                       <div class="col-12 col-lg-12">
                     <% else %>
@@ -53,8 +53,8 @@
 
                             <h5 class="card-title"></h5>
                             <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong></p>
-                            <% if !next_number_tag_exists?(inform, sample) %>
-                              <%= form_with model: [inform, inform.samples.build] do |form| %>
+                            <% if !next_number_tag_exists?(@inform, sample) %>
+                              <%= form_with model: [@inform, @inform.samples.build] do |form| %>
                                 <%= form.submit "+ Corte", class: "btn btn-primary mx-2 my-2" %>
                                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                                 <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
@@ -79,50 +79,50 @@
     </div>
     <div class="col-12 col-lg-4">
       <div class="d-flex content-align-around">
-        <%= form_with model: [inform, inform.recipients.build] do |form| %>
+        <%= form_with model: [@inform, @inform.recipients.build] do |form| %>
           <div class="actions">
             <%= form.submit "1R + A", class: "btn btn-primary mx-1 my-1" %>
             <%= form.hidden_field :samples, value: 1 %>
-            <%= form.hidden_field :tag, value: inform.tag_code %>
+            <%= form.hidden_field :tag, value: @inform.tag_code %>
           </div>
         <% end %>
-        <%= form_with model: [inform, inform.recipients.build] do |form| %>
+        <%= form_with model: [@inform, @inform.recipients.build] do |form| %>
           <div class="actions">
             <%= form.submit "1R + A + B", class: "btn btn-primary mx-1 my-1" %>
             <%= form.hidden_field :samples, value: 2 %>
-            <%= form.hidden_field :tag, value: inform.tag_code %>
+            <%= form.hidden_field :tag, value: @inform.tag_code %>
           </div>
         <% end %>
-        <%= form_with model: [inform, inform.recipients.build] do |form| %>
+        <%= form_with model: [@inform, @inform.recipients.build] do |form| %>
           <div class="actions">
             <%= form.submit "1R + A + B + C", class: "btn btn-primary mx-1 my-1" %>
             <%= form.hidden_field :samples, value: 3 %>
-            <%= form.hidden_field :tag, value: inform.tag_code %>
+            <%= form.hidden_field :tag, value: @inform.tag_code %>
           </div>
         <% end %>
       </div>
 
       <div class="d-flex content-align-around">
-        <%= form_with model: [inform, inform.recipients.build] do |form| %>
+        <%= form_with model: [@inform, @inform.recipients.build] do |form| %>
           <div class="actions">
             <%= form.submit "1R + A1 + A2", class: "btn btn-outline-primary mx-1 my-1" %>
             <%= form.hidden_field :samples, value: 22 %>
-            <%= form.hidden_field :tag, value: inform.tag_code %>
+            <%= form.hidden_field :tag, value: @inform.tag_code %>
           </div>
         <% end %>
-        <%= form_with model: [inform, inform.recipients.build] do |form| %>
+        <%= form_with model: [@inform, @inform.recipients.build] do |form| %>
           <div class="actions">
             <%= form.submit "1R + A1 + A2 + A3", class: "btn btn-outline-primary mx-1 my-1" %>
             <%= form.hidden_field :samples, value: 23 %>
-            <%= form.hidden_field :tag, value: inform.tag_code %>
+            <%= form.hidden_field :tag, value: @inform.tag_code %>
           </div>
         <% end %>
       </div>
 
       <h4>Agregar recipiente</h4>
-      <%= form_with model: [inform, inform.recipients.build] do |form| %>
+      <%= form_with model: [@inform, @inform.recipients.build] do |form| %>
 
-        <%= form.hidden_field :tag, value: inform.tag_code %>
+        <%= form.hidden_field :tag, value: @inform.tag_code %>
 
         <div class="form-group">
           <%= form.label "Cantidad de muestras" %>

@@ -38,9 +38,6 @@ class SamplesController < ApplicationController
 
 
     if sample.save
-      # sample.sample_tag = 'C' + Date.today.strftime('%y').to_s + '-' + inform.id.to_s
-      # sample.sample_tag = inform.tag_code + (65 + tag_shift).chr
-      # sample.save
       redirect_to inform, notice: 'La muestra ha sido exitosamente creada.'
     else
       render :new
@@ -64,18 +61,30 @@ class SamplesController < ApplicationController
     end
     log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s + "\nEtiqueta: " + sample_params[:sample_tag].to_s
 
-    if @sample.update(sample_params)
-      @sample.objections.each do |objection|
-        objection.closed = true
-        objection.close_user_id = current_user.id
-        objection.close_date = @sample.updated_at
-        objection.description = objection.description + log
-        objection.save
-      end
-      redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente actualizada.'
-    else
-      render :edit
+
+    @sample.update(sample_params)
+    @sample.objections.each do |objection|
+      objection.closed = true
+      objection.close_user_id = current_user.id
+      objection.close_date = @sample.updated_at
+      objection.description = objection.description + log
+      objection.save
     end
+
+    @inform = Inform.find(@sample.inform_id)
+
+    # if @sample.update(sample_params)
+    #   @sample.objections.each do |objection|
+    #     objection.closed = true
+    #     objection.close_user_id = current_user.id
+    #     objection.close_date = @sample.updated_at
+    #     objection.description = objection.description + log
+    #     objection.save
+    #   end
+    #   redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente actualizada.'
+    # else
+    #   render :edit
+    # end
   end
 
   # DELETE /samples/1

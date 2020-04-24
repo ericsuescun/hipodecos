@@ -22,31 +22,33 @@ class RecipientsController < ApplicationController
   end
 
   def create
-    inform = Inform.find(params[:inform_id])
-    recipient = inform.recipients.build(recipient_params)
-    recipient.tag = recipient.tag + '-R' + (inform.recipients.count + 1).to_s
+    @inform = Inform.find(params[:inform_id])
+    recipient = @inform.recipients.build(recipient_params)
+    recipient.tag = recipient.tag + '-R' + (@inform.recipients.count + 1).to_s
     recipient.user_id = current_user.id
-    tag_shift = inform.samples.count
+    tag_shift = @inform.samples.count
 
     if params[:recipient][:samples].to_i > 20
-      tag = generate_letter_tag(inform) + '1'
-      inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: tag)
+      tag = generate_letter_tag(@inform) + '1'
+      @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: tag)
       (22..params[:recipient][:samples].to_i).each do |i|
         
-        inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first))
+        @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first))
         tag = generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first)
       end
     else
       (1..params[:recipient][:samples].to_i).each do |i|
-        inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_letter_tag(inform))
+        @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_letter_tag(@inform))
       end
     end
+
+    recipient.save
       
-    if recipient.save
-      redirect_to inform, notice: 'El recipiente fue creado exitosamente.'
-    else
-      render :new
-    end
+    # if recipient.save
+    #   redirect_to inform, notice: 'El recipiente fue creado exitosamente.'
+    # else
+    #   render :new
+    # end
   end
 
   # PATCH/PUT /recipients/1

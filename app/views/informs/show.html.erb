@@ -7,23 +7,16 @@
             <%= render partial: "inform" %>
           </div>
         </div>
+        
         <div class="row">
           <div class="col-12 col-lg-12 mb-3 mx-auto">
-            <div class="alert alert-success">
+            <div class="alert alert-success recipient">
               <h1>Recipientes</h1>
               <%= render partial: "recipients", locals: { inform: @inform } %>
             </div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-12 col-lg-12 mb-3 mx-auto">
-            <div class="alert alert-success">
-              <h1>Muestras</h1>
-              <%= render partial: "samples", locals: { inform: @inform } %>
-            </div>
-          </div>
-        </div>  
     </div>
   </div>
 </div>

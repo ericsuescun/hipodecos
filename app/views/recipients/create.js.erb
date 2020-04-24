@@ -3,7 +3,7 @@
 	function refresh2() {
 	  console.log('Recipiente creado!');
 	  $('div.recipients').remove();
-	  $('div.recipient').append('<%= j render "recipients" %>');
+	  $('div.recipient').append('<%= j render "recipientsJS" %>');
 	  $('body').prepend('<%= j render "ok-create" %>');
 	}
 <% end %>

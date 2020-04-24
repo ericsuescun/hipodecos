@@ -25,23 +25,24 @@ class SamplesController < ApplicationController
   # POST /samples
   # POST /samples.json
   def create
-    inform = Inform.find(params[:inform_id])
-    tag_shift = inform.samples.count
-    sample = inform.samples.build(sample_params)
-    if sample.sample_tag[-1] == '2'
-      fix_sample = Sample.where(inform_id: params[:inform_id], sample_tag: sample.sample_tag[0..-2]).first
+    @inform = Inform.find(params[:inform_id])
+    tag_shift = @inform.samples.count
+    @sample = @inform.samples.build(sample_params)
+    if @sample.sample_tag[-1] == '2'
+      fix_sample = Sample.where(inform_id: params[:inform_id], sample_tag: @sample.sample_tag[0..-2]).first
       if fix_sample
-        fix_sample.update(sample_tag: sample.sample_tag[0..-2] + '1')
+        fix_sample.update(sample_tag: @sample.sample_tag[0..-2] + '1')
       end
     end
-    sample.user_id = current_user.id
+    @sample.user_id = current_user.id
 
+    @sample.save
 
-    if sample.save
-      redirect_to inform, notice: 'La muestra ha sido exitosamente creada.'
-    else
-      render :new
-    end
+    # if sample.save
+    #   redirect_to inform, notice: 'La muestra ha sido exitosamente creada.'
+    # else
+    #   render :new
+    # end
   end
 
   # PATCH/PUT /samples/1

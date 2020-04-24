@@ -12,5 +12,5 @@ class Sample < ApplicationRecord
 
   default_scope -> { order(created_at: :asc) }
 
-  # validates :name, presence: true
+  validates :sample_tag, presence: true
 end

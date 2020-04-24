@@ -1,17 +1,10 @@
 <% if @inform.errors.empty? %>
-	$(document).on('page:load', function() {
-		console.log('Recipiente creado!');
-		$('div.recipients').remove();
-		$('div.recipient').append('<%= j render "recipientsJS" %>');
-		$('body').prepend('<%= j render "ok-create" %>');
-	});
-	
-	// $(document).on('page:load', refreshRecipients());
+	$(document).on('page:load', refreshRecipients());
 
-	// function refreshRecipients() {
-	//   console.log('Recipiente creado!');
-	//   $('div.recipients').remove();
-	//   $('div.recipient').append('<%= j render "recipientsJS" %>');
-	//   $('body').prepend('<%= j render "ok-create" %>');
-	// }
+	function refreshRecipients() {
+	  console.log('Recipiente creado!');
+	  $('div.recipients').remove();
+	  $('div.recipient').append('<%= j render "informs/recipientsJS" %>');
+	  $('body').prepend('<%= j render "ok-create" %>');
+	}
 <% end %>

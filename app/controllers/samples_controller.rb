@@ -87,8 +87,6 @@ class SamplesController < ApplicationController
     # end
   end
 
-  # DELETE /samples/1
-  # DELETE /samples/1.json
   def destroy
     recipient = @sample.recipient_tag
     @sample.destroy
@@ -98,7 +96,8 @@ class SamplesController < ApplicationController
         samples_in_recipient.first.update(sample_tag: samples_in_recipient.first.sample_tag[0..-2])
       end
     end
-    redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente borrada.'
+    @inform = Inform.find(@sample.inform_id)
+    # redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente borrada.'
   end
 
   private

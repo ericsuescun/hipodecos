@@ -1,10 +1,8 @@
 <% if @inform.errors.empty? %>
 	$(document).on('page:load', refresh2());
 	function refresh2() {
-	  console.log('Recipiente creado!');
 	  $('div.recipients').remove();
 	  $('div.recipient').append('<%= j render "informs/recipientsJS" %>');
-	  // $('body').prepend('<%= j render "ok-create" %>');
-	  $('div.fast-bar').append('<%= j render "ok-create" %>');
+	  $('div.fast-bar').append('<%= j render "ok-destroy" %>');
 	}
 <% end %>

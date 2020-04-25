@@ -1,14 +1,14 @@
 <div class="recipients">
   <div class="row">
-    <div class="col-12 col-lg-12">
+    <div class="col-12 col-sm-12 col-lg-12">
       <% inform.recipients.each do |recipient| %>
         <div class="card mx-2 my-2">
           <h5 class="card-header">Recipiente: <%= recipient.tag %>
             <div class="d-flex justify-content-start">
-              <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-success mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
+              <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success btn-sm mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-success btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
 
               <%= form_with model: [inform, inform.samples.build] do |form| %>
-                <%= form.submit "+ Muestra", class: "btn btn-primary mx-2 my-2" %>
+                <%= form.submit "+ Muestra", class: "btn btn-primary btn-sm mx-2 my-2" %>
                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                 <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
               <% end %>
@@ -19,18 +19,18 @@
             <h5 class="card-title">Creado por: <%= User.where(id: recipient.user_id).first.try(:first_name) %></h5>
             <p class="card-text">Descripción: <%= recipient.description %></p>
             <div class="row">
-              <div class="col-12 col-lg-12">
+              <div class="col-12 col-md-12 col-lg-12">
                 <div class="card-deck">
                   <% inform.samples.where(recipient_tag: recipient.tag).each do |sample| %>
                     <% if sample.organ_code == nil %>
-                      <div class="col-12 col-lg-12">
+                      <div class="col-12 col-md-12 col-lg-12">
                     <% else %>
-                      <div class="col-12 col-lg-3">
+                      <div class="col-12 col-xs-4 col-lg-4">
                     <% end %>
                       <div class="card mx-2 my-2">
-                        <h5 class="card-header">Muestra: <%= sample.sample_tag %>
+                        <h5 class="card-header">Bloque: <%= sample.sample_tag %>
                           <div class="d-flex justify-content-start">
-                            <%= link_to "Revisar", sample_path(sample), class: "btn btn-secondary mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-secondary mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-secondary mx-2 my-2", remote: true %>
+                            <%= link_to "Revisar", sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-secondary btn-sm mx-2 my-2", remote: true %>
                           </div>
                         </h5>
                         <div class="card-body">
@@ -98,7 +98,7 @@
                             <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong></p>
                             <% if !next_number_tag_exists?(inform, sample) %>
                               <%= form_with model: [inform, inform.samples.build] do |form| %>
-                                <%= form.submit "+ Corte", class: "btn btn-primary mx-2 my-2" %>
+                                <%= form.submit "+ Corte", class: "btn btn-primary btn-sm mx-2 my-2" %>
                                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                                 <%= form.hidden_field :organ_code, value: sample.organ_code %>
                                 <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
@@ -118,10 +118,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-lg-8 mx-auto">
+    <div class="col-12 col-sm-8 col-lg-8 mx-auto">
 
     </div>
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-sm-8 col-lg-4">
       <div class="d-flex content-align-around">
         <%= form_with model: [inform, inform.recipients.build] do |form| %>
           <div class="actions">

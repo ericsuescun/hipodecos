@@ -6,5 +6,8 @@
 	  $('div.recipient').append('<%= j render "informs/recipientsJS" %>');
 	  // $('body').prepend('<%= j render "ok-create" %>');
 	  $('div.fast-bar').append('<%= j render "ok-update" %>');
+	  setTimeout(function() {
+	  	$('div.alert-growl').remove();
+	  }, 3000)
 	}
 <% end %>

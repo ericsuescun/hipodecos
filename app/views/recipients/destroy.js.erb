@@ -4,5 +4,8 @@
 	  $('div.recipients').remove();
 	  $('div.recipient').append('<%= j render "informs/recipientsJS" %>');
 	  $('div.fast-bar').append('<%= j render "ok-destroy" %>');
+	  setTimeout(function() {
+	  	$('div.alert-growl').remove();
+	  }, 3000)
 	}
 <% end %>

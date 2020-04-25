@@ -31,6 +31,7 @@ class OrgansController < ApplicationController
   # POST /organs.json
   def create
     @organ = Organ.new(organ_params)
+    @organ.admin_id = current_admin.id
 
     respond_to do |format|
       if @organ.save

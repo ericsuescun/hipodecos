@@ -1,6 +1,6 @@
 <div class="fast-bar">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Rápidos!</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light inferior">
+    <!-- <a class="navbar-brand" href="#"></a> -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,111 +8,69 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <% if user_signed_in? %>
-          <li class="nav-item mr-1">
-            <%= link_to "Hoy", informs_path + day_before_search(0), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
-          </li>
-          <li class="nav-item mr-1">
-            <%= link_to "Ayer", informs_path + day_before_search(1), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
-          </li>
-          <!-- <li class="nav-item mr-1">
-            <%= link_to "Antier", informs_path + day_before_search(2), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
-          </li> -->
-          <!-- <li class="nav-item mr-1">
-            <%= link_to "Trasantier(Puente)", informs_path + day_before_search(3), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
-          </li> -->
-          <li class="nav-item mr-1">
-            <%= link_to "Últimos 7 días", informs_path + days_ago_search(7), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
-          </li>
-          <!-- <li class="nav-item mr-1">
-            <%= link_to "Últimos 30 días", informs_path + days_ago_search(30), class: "btn btn-outline-success btn-block my-2 my-lg-0" %>
-          </li> -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Reportes de informes
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Pacientes
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", reports_status_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", reports_status_path + day_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <% (2..7).each do |day| %>
-                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_status_path + day_before_search(day), class: "dropdown-item" %>
-              <% end %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Esta semana", reports_status_path + week_before_search(0), class: "dropdown-item" %>
-              <%= link_to "La semana pasada", reports_status_path + week_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Este mes", reports_status_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", reports_status_path + month_before_search(1), class: "dropdown-item" %>
-              <% (2..6).each do |month| %>
-                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_status_path + month_before_search(month), class: "dropdown-item" %>
-              <% end %>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+              <%= link_to "Todos", patients_path, class: "dropdown-item" %>
+              <%= link_to "Hoy", patients_path + "?filter=hoy", class: "dropdown-item" %>
+              <%= link_to "Ayer", patients_path + "?filter=ayer", class: "dropdown-item" %>
+              <%= link_to "Antier", patients_path + "?filter=antier", class: "dropdown-item" %>
+              <%= link_to "Trasantier(Puente)", patients_path + "?filter=trasantier", class: "dropdown-item" %>
+              <%= link_to "últimos 7 días", patients_path + "?filter=semana", class: "dropdown-item" %>
+              <%= link_to "últimos 30 días", patients_path + "?filter=mes", class: "dropdown-item" %>
             </div>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Reportes de NC
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", reports_objections_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", reports_objections_path + day_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <% (2..7).each do |day| %>
-                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_objections_path + day_before_search(day), class: "dropdown-item" %>
-              <% end %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Esta semana", reports_objections_path + week_before_search(0), class: "dropdown-item" %>
-              <%= link_to "La semana pasada", reports_objections_path + week_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Este mes", reports_objections_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", reports_objections_path + month_before_search(1), class: "dropdown-item" %>
-              <% (2..6).each do |month| %>
-                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_objections_path + month_before_search(month), class: "dropdown-item" %>
-              <% end %>
-            </div>
+          <li class="nav-item mr-1 mt-1">
+            <%= link_to "Hoy", patients_path + day_before_search(0), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Reportes de ventas
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", reports_sales_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", reports_sales_path + day_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <% (2..7).each do |day| %>
-                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_sales_path + day_before_search(day), class: "dropdown-item" %>
-              <% end %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Esta semana", reports_sales_path + week_before_search(0), class: "dropdown-item" %>
-              <%= link_to "La semana pasada", reports_sales_path + week_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Este mes", reports_sales_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", reports_sales_path + month_before_search(1), class: "dropdown-item" %>
-              <% (2..6).each do |month| %>
-                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_sales_path + month_before_search(month), class: "dropdown-item" %>
-              <% end %>
-            </div>
+          <li class="nav-item mr-1 mt-1">
+            <%= link_to "Ayer", patients_path + day_before_search(1), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
           </li>
-        </ul>
-        <ul class="navbar-nav d-flex justify-content-end">
-          <li class="nav-item mr-1">
-            <%= link_to "Hoy", patients_path + day_before_search(0), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
-          </li>
-          <li class="nav-item mr-1">
-            <%= link_to "Ayer", patients_path + day_before_search(1), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
-          <!--<li class="nav-item mr-1">
-            <%= link_to "Antier", patients_path + day_before_search(2), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+          <!--<li class="nav-item mr-1 mt-1">
+            <%= link_to "Antier", patients_path + day_before_search(2), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
           </li> -->
-          <!-- <li class="nav-item mr-1">
-            <%= link_to "Trasantier(Puente)", patients_path + day_before_search(3), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+          <!-- <li class="nav-item mr-1 mt-1">
+            <%= link_to "Trasantier(Puente)", patients_path + day_before_search(3), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
           </li> -->
-          <li class="nav-item mr-1">
-            <%= link_to "Últimos 7 días", patients_path  + days_ago_search(7), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+          <li class="nav-item mr-1 mt-1">
+            <%= link_to "Últimos 7 días", patients_path  + days_ago_search(7), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
           </li>
-          <!-- <li class="nav-item mr-1">
-            <%= link_to "Últimos 30 días", patients_path  + days_ago_search(30), class: "btn btn-outline-primary btn-block my-2 my-lg-0" %>
+          <!-- <li class="nav-item mr-1 mt-1">
+            <%= link_to "Últimos 30 días", patients_path  + days_ago_search(30), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
           </li> -->
+          <%= form_tag new_patient_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+            <%= text_field_tag :id_number, nil, class: "form-control input mx-2", placeholder: "# identificación" %>
+            <%= submit_tag("Buscar/Matricular!", class: "btn btn-outline-primary btn-sm my-2 my-lg-0") %>
+          <% end %>
+          
         <% end %>
+      </ul>
+      <% if admin_signed_in? %>
+        <ul class="navbar-nav d-flex justify-content-end">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Admin: <%= current_admin.email %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Salir", destroy_admin_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
         </ul>
+      <% end %>
+      <% if user_signed_in? %>
+        <ul class="navbar-nav d-flex justify-content-end">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              User: <%= current_user.email %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Salir", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </nav>
 </div>

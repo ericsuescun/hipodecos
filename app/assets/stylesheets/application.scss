@@ -14,12 +14,49 @@
 @import "bootstrap";
 @import "static_pages";
 
+body {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 .navbar {
   img { width: 37px; }
 }
 
-h1 {
-	text-align: center;
+.navbar.superior {
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+}
+
+.navbar.inferior {
+	position: fixed;
+	top: 50px;
+	left: 0px;
+	z-index: 95;
+	width: 100%;
+}
+
+#info {
+	position: fixed;
+	top: 96px;
+	/*left: 0px;*/
+	z-index: 90;
+	width: 98%;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-top: 10px;
+	/*margin-left: auto;
+	margin-right: auto;*/
+	padding: 10px;
+}
+
+.recipient {
+	margin-top: 300px;
 }
 
 h2.edit-user {

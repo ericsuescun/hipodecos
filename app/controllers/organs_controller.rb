@@ -77,6 +77,6 @@ class OrgansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organ_params
-      params.require(:organ).permit(:admin_id, :organ, :organ_code, :system)
+      params.require(:organ).permit(:admin_id, :organ, :organ_code, :part)
     end
 end

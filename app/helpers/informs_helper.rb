@@ -75,4 +75,15 @@ module InformsHelper
 		end
 		return answer
 	end
+
+	def extract_part		
+		return ['Circulatorio', 'Linfatico', 'Respiratorio', 'Reticulo Endotelial', 'Digestivo', 'Urinario', 'Genital Masculino', 'Genital Femenino', 'Endocrino', 'Nervioso', 'Sentidos', 'Piel', 'Musculo', 'Osteoarticular', 'Dientes', 'SIDA', 'Generales']
+	end
 end
+
+
+
+
+
+
+

@@ -36,18 +36,61 @@
                         <div class="card-body">
                           <div class="row">
                             <% if sample.organ_code == nil %>
-                              <% Organ.all.each do |organ| %>
-                              
-                                <div class="col-12 col-lg-2">
-                                  <%= form_with model: sample do |f| %>
-                                    <div class="actions">
-                                      <%= f.submit "#{organ.organ_code.to_i < 56 ? organ.organ_code + "." : ""} #{organ.organ}", class: "btn btn-sm btn-#{organ.system == "Circulatorio" ? "danger" : organ.system == "Respiratorio" ? "outline-danger" : organ.system == "Digestivo" ? "warning" : organ.system == "Urinario" ? "dark" : organ.system == "Genital Femenino" ? "primary" : organ.system == "Genital Masculino" ? "success" : organ.system == "Endocrino" ? "info" : organ.system == "Nervioso" ? "outline-dark" : organ.system == "Musculo" ? "danger" : organ.system == "Osteoarticular" ? "light" : organ.system == "Dientes" ? "light" : organ.system == "SIDA" ? "info" : organ.system == "Generales" ? "dark" : "warning"} mx-1 my-1", id: "organ-#{organ.organ_code}" %>
-                                      <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
-                                    </div>
-                                  <% end %>
-                                </div>
 
-                              <% end %>
+                              <div class="d-flex flex-column mx-2">
+                                <% Organ.where(part: 'Circulatorio').or(Organ.where(part: 'Linfatico')).or(Organ.where(part: 'Respiratorio')).or(Organ.where(part: 'Reticulo Endotelial')).each do |organ| %>
+                                  <%= form_with model: sample do |f| %>
+                                      <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
+                                      <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
+                                  <% end %>
+                                <% end %>
+                              </div>
+
+                              <div class="d-flex flex-column mx-2">
+                                <% Organ.where(part: 'Digestivo').each do |organ| %>
+                                  <%= form_with model: sample do |f| %>
+                                      <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
+                                      <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
+                                  <% end %>
+                                <% end %>
+                              </div>
+                              
+                              <div class="d-flex flex-column mx-2">
+                                <% Organ.where(part: 'Urinario').or(Organ.where(part: 'Genital Masculino')).or(Organ.where(part: 'Genital Femenino')).each do |organ| %>
+                                  <%= form_with model: sample do |f| %>
+                                      <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
+                                      <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
+                                  <% end %>
+                                <% end %>
+                              </div>
+
+                              <div class="d-flex flex-column mx-2">
+                                <% Organ.where(part: 'Endocrino').or(Organ.where(part: 'Nervioso')).or(Organ.where(part: 'Sentidos')).or(Organ.where(part: 'Piel')).or(Organ.where(part: 'Musculo')).or(Organ.where(part: 'Osteoarticular')).or(Organ.where(part: 'Dientes')).each do |organ| %>
+                                  <%= form_with model: sample do |f| %>
+                                      <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
+                                      <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
+                                  <% end %>
+                                <% end %>
+                              </div>
+
+                              <div class="d-flex flex-column mx-2">
+                                <% Organ.where(part: 'SIDA').each do |organ| %>
+                                  <%= form_with model: sample do |f| %>
+                                      <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
+                                      <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
+                                  <% end %>
+                                <% end %>
+                              </div>
+
+                              <div class="d-flex flex-column mx-2">
+                                <% Organ.where(part: 'Generales').each do |organ| %>
+                                  <%= form_with model: sample do |f| %>
+                                      <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
+                                      <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
+                                  <% end %>
+                                <% end %>
+                              </div>
+                              
                             <% end %>
                           </div>
 

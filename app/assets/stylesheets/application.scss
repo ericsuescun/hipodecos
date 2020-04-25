@@ -33,3 +33,223 @@ h2.edit-user {
 .diagnostics {
 	font-size: 10px;
 }
+
+.alert-growl {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  /*width: 300px;*/
+  max-width: 500px;
+  z-index: 1000;
+}
+
+input.organ-Circulatorio {
+	background-color: rgba(255,0,0,0.1);
+	color: red;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+
+}
+
+input.organ-Linfatico {
+	background-color: white;
+	color: black;
+	border-radius: 10px;
+	border-style: solid;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Respiratorio {
+	background-color: rgba(0,0,255,0.1);
+	color: slateblue;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-ReticuloEndotelial {
+	background-color: rgba(255,0,255,0.1);
+	color: brown;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Digestivo {
+	background-color: rgba(255,255,0,0.1);
+	color: orange;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Urinario {
+	background-color: rgba(255,150,0,0.1);
+	color: tomato;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-GenitalMasculino {
+	background-color: rgba(0,0,255,0.1);
+	color: blue;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-GenitalFemenino {
+	background-color: rgba(255,150,255,0.1);
+	color: violet;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Endocrino {
+	background-color: rgba(255,150,255,0.1);
+	color: purple;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Nervioso {
+	background-color: rgba(0,255,0,0.1);
+	color: green;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Sentidos {
+	background-color: rgba(255,255,0,0.1);
+	color: gold;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Piel {
+	background-color: pink;
+	color: grey;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Musculo {
+	background-color: rgba(255,150,0,0.1);
+	color: tomato;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Osteoarticular {
+	background-color: rgba(0,0,0,0.1);
+	color: black;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Dientes {
+	background-color: rgba(0,0,0,0.4);
+	color: white;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-SIDA {
+	background-color: rgba(0,0,255,0.1);
+	color: dodgerblue;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+input.organ-Generales {
+	background-color: rgba(0,255,0,0.1);
+	color: mediumseagreen;
+	border-radius: 10px;
+	border-style: hidden;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 2px;
+}
+
+
+
+
+
+

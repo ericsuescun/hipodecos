@@ -15,5 +15,10 @@
   <%= @organ.organ_code %>
 </p>
 
+<p>
+  <strong>Sistema:</strong>
+  <%= @organ.part %>
+</p>
+
 <%= link_to 'Edit', edit_organ_path(@organ) %> |
 <%= link_to 'Back', organs_path %>

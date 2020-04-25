@@ -46,6 +46,7 @@ class OrgansController < ApplicationController
   # PATCH/PUT /organs/1
   # PATCH/PUT /organs/1.json
   def update
+    @organ.admin_id = current_admin.id
     respond_to do |format|
       if @organ.update(organ_params)
         format.html { redirect_to @organ, notice: 'Organ was successfully updated.' }
@@ -75,6 +76,6 @@ class OrgansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organ_params
-      params.require(:organ).permit(:admin_id, :organ, :organ_code)
+      params.require(:organ).permit(:admin_id, :organ, :organ_code, :system)
     end
 end

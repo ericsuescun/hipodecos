@@ -99,18 +99,18 @@ class RecipientsController < ApplicationController
       next_letter = 'A'
       answer = false
       if inform.samples.empty?
-        return inform.tag_code + 'A'
+        return inform.tag_code + '-A'
       end
 
       inform.samples.length.times {
         inform.samples.each do |sample|
-          if (sample.sample_tag == inform.tag_code + next_letter) || (sample.sample_tag == inform.tag_code + next_letter + '1')
+          if (sample.sample_tag == inform.tag_code + '-' + next_letter) || (sample.sample_tag == inform.tag_code + '-' + next_letter + '1')
             next_letter = (next_letter.ord + 1).chr
             break
           end
         end
       }
       
-      return inform.tag_code + next_letter
+      return inform.tag_code + '-' + next_letter
     end
 end

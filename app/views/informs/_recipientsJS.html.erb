@@ -8,7 +8,7 @@
               <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-success mx-2 my-2 #{Sample.where(inform_id: @inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
 
               <%= form_with model: [@inform, @inform.samples.build] do |form| %>
-                <%= form.submit "+ Muestra", class: "btn btn-primary mx-2 my-2" %>
+                <%= form.submit "+", class: "btn btn-primary mx-2 my-2" %>
                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                 <%= form.hidden_field :sample_tag, value: generate_letter_tag(@inform) %>
               <% end %>
@@ -97,7 +97,7 @@
                             <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong></p>
                             <% if !next_number_tag_exists?(@inform, sample) %>
                               <%= form_with model: [@inform, @inform.samples.build] do |form| %>
-                                <%= form.submit "+ Corte", class: "btn btn-primary mx-2 my-2" %>
+                                <%= form.submit "+", class: "btn btn-primary mx-2 my-2" %>
                                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                                 <%= form.hidden_field :organ_code, value: sample.organ_code %>
                                 <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>

@@ -8,7 +8,9 @@
               <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-success btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-success btn-sm mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-success btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
 
               <%= form_with model: [inform, inform.samples.build] do |form| %>
-                <%= form.submit "+ Muestra", class: "btn btn-primary btn-sm mx-2 my-2" %>
+                <%= form.submit "+", class: "btn btn-primary btn-sm mx-2 my-2" do %>
+                  <%= h 'escaping <span>&times;</span>' %>
+                <% end %>
                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                 <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
               <% end %>
@@ -98,7 +100,7 @@
                             <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong></p>
                             <% if !next_number_tag_exists?(inform, sample) %>
                               <%= form_with model: [inform, inform.samples.build] do |form| %>
-                                <%= form.submit "+ Corte", class: "btn btn-primary btn-sm mx-2 my-2" %>
+                                <%= form.submit "+", class: "btn btn-primary btn-sm mx-2 my-2" %>
                                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                                 <%= form.hidden_field :organ_code, value: sample.organ_code %>
                                 <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
@@ -122,24 +124,25 @@
 
     </div>
     <div class="col-12 col-lg-4">
-      <div class="d-flex content-align-around">
+      <h4>Atajos para recipientes</h4>
+      <div class="d-flex flex-column">
         <%= form_with model: [inform, inform.recipients.build] do |form| %>
           <div class="actions">
-            <%= form.submit "1R + A", class: "btn btn-primary mx-1 my-1" %>
+            <%= form.submit "+ 1 Recipiente + 1 Muestra", class: "btn btn-primary mx-1 my-1" %>
             <%= form.hidden_field :samples, value: 1 %>
             <%= form.hidden_field :tag, value: inform.tag_code %>
           </div>
         <% end %>
         <%= form_with model: [inform, inform.recipients.build] do |form| %>
           <div class="actions">
-            <%= form.submit "1R + A + B", class: "btn btn-primary mx-1 my-1" %>
+            <%= form.submit "+ 1 Recipiente + 2 Muestras diferentes", class: "btn btn-primary mx-1 my-1" %>
             <%= form.hidden_field :samples, value: 2 %>
             <%= form.hidden_field :tag, value: inform.tag_code %>
           </div>
         <% end %>
         <%= form_with model: [inform, inform.recipients.build] do |form| %>
           <div class="actions">
-            <%= form.submit "1R + A + B + C", class: "btn btn-primary mx-1 my-1" %>
+            <%= form.submit "+ 1 Recipiente + 3 Muestras diferentes", class: "btn btn-primary mx-1 my-1" %>
             <%= form.hidden_field :samples, value: 3 %>
             <%= form.hidden_field :tag, value: inform.tag_code %>
           </div>

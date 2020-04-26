@@ -98,7 +98,7 @@
                             </div>
 
                               <h5 class="card-title"></h5>
-                              <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong> sistema: <%= @organ %></p>
+                              <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong></p>
                               <% if !next_number_tag_exists?(inform, sample) %>
                                 <%= form_with model: [inform, inform.samples.build] do |form| %>
                                   <%= form.submit "+", class: "btn btn-primary btn-sm mx-2 my-2" %>

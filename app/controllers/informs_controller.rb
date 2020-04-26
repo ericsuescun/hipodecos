@@ -22,7 +22,6 @@ class InformsController < ApplicationController
   # GET /informs/1
   # GET /informs/1.json
   def show
-    @organ = Organ.where(organ_code: "1").first.part
     @organs = Organ.all
   end
 

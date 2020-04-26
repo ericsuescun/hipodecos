@@ -30,7 +30,7 @@
                       <% else %>
                         <div class="col-12 col-lg-4">
                       <% end %>
-                        <div class="card mx-2 my-2">
+                        <div class="card mx-2 my-2" style="background-color: <%= get_color(sample) %>">
                           <h5 class="card-header">Bloque: <%= sample.sample_tag %>
                             <div class="d-flex justify-content-start">
                               <%= link_to "Revisar", sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-secondary btn-sm mx-2 my-2", remote: true %>
@@ -98,7 +98,7 @@
                             </div>
 
                               <h5 class="card-title"></h5>
-                              <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong></p>
+                              <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong> sistema: <%= @organ %></p>
                               <% if !next_number_tag_exists?(inform, sample) %>
                                 <%= form_with model: [inform, inform.samples.build] do |form| %>
                                   <%= form.submit "+", class: "btn btn-primary btn-sm mx-2 my-2" %>
@@ -121,9 +121,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 col-lg-12">
+      <div class="col-12 col-lg-4">
         <h4>Atajos para recipientes</h4>
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-column">
           <%= form_with model: [inform, inform.recipients.build] do |form| %>
             <div class="actions">
               <%= form.submit "+ 1 Recipiente + 1 Muestra", class: "btn btn-primary mx-1 my-1" %>
@@ -147,7 +147,7 @@
           <% end %>
         </div>
 
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-column">
           <%= form_with model: [inform, inform.recipients.build] do |form| %>
             <div class="actions">
               <%= form.submit "+ 1 Recipiente + 2 cortes", class: "btn btn-outline-primary mx-1 my-1" %>
@@ -163,8 +163,9 @@
             </div>
           <% end %>
         </div>
-
-        <h4>Agregar recipiente</h4>
+      </div>
+      <div class="col-12 col-lg-4">
+        <h4>Agregar múltiples recipientes con muestras diferentes</h4>
         <%= form_with model: [inform, inform.recipients.build] do |form| %>
 
           <%= form.hidden_field :tag, value: inform.tag_code %>
@@ -173,10 +174,7 @@
             <%= form.label "Cantidad de muestras" %>
             <%= form.number_field :samples, value: 4, class: "form-control input" %>
           </div>
-          <div class="form-group">
-            <%= form.label "Descripción" %>
-            <%= form.text_area :description, class: "form-control input" %>
-          </div>
+
           <div class="actions">
             <%= form.submit "Agregar", class: "btn btn-primary" %>
           </div>

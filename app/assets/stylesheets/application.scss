@@ -62,10 +62,10 @@ body {
 	padding-left: 15px;
 	padding-right: 15px;
 }
-
+/*
 .recipient {
 	margin-top: 300px;
-}
+}*/
 
 h2.edit-user {
 	text-align: center;
@@ -81,11 +81,11 @@ h2.edit-user {
 
 .alert-growl {
   position: fixed;
-  top: 20px;
+  top: 70px;
   right: 20px;
   /*width: 300px;*/
   max-width: 500px;
-  z-index: 1000;
+  z-index: 200;
 }
 
 input.organ-Circulatorio {

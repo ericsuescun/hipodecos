@@ -18,6 +18,7 @@ body {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
+  margin-top: 150px;
 }
 
 .navbar {
@@ -33,26 +34,33 @@ body {
 }
 
 .navbar.inferior {
-	position: fixed;
-	top: 50px;
-	left: 0px;
+	/*position: fixed;*/
+	margin-top: 50px;
+	/*left: 0px;*/
 	z-index: 95;
-	width: 100%;
+	/*width: 100%;*/
 }
 
 #info {
 	position: fixed;
 	top: 96px;
-	/*left: 0px;*/
 	z-index: 90;
-	width: 98%;
-	background-color: white;
-	border: 1px solid black;
-	border-radius: 3px;
+	width: 100%;
+	background-color: rgb(246,247,249);
+	/*border: 1px solid black;*/
+	/*border-radius: 5px;*/
+	/*margin: 0px;*/
+	/*padding: 0px;*/
+	margin-left: 1px;
 	margin-top: 10px;
-	/*margin-left: auto;
-	margin-right: auto;*/
-	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+}
+
+.inform {
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .recipient {

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light superior">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <!-- <a class="navbar-brand" href="#">Isabela</a> -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentB" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -86,10 +86,10 @@
         <% end %>
         <% if user_signed_in? && !admin_signed_in? %>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSup" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Informes
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownSup">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "Matricular", new_patient_path, class: "dropdown-item" %>
               <%= link_to "Todos", informs_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
@@ -133,7 +133,7 @@
       <ul class="navbar-nav d-flex justify-content-end">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Reporte informes
+            Rep. informes
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "Hoy", reports_status_path + day_before_search(0), class: "dropdown-item" %>
@@ -155,7 +155,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Reporte calidad
+            Rep. calidad
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "Hoy", reports_objections_path + day_before_search(0), class: "dropdown-item" %>
@@ -177,7 +177,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Reporte ventas
+            Rep. ventas
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "Hoy", reports_sales_path + day_before_search(0), class: "dropdown-item" %>

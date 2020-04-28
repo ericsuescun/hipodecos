@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_25_041941) do
+ActiveRecord::Schema.define(version: 2020_04_28_015435) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -346,6 +346,7 @@ ActiveRecord::Schema.define(version: 2020_04_25_041941) do
     t.datetime "updated_at", null: false
     t.string "sample_tag"
     t.string "organ_code"
+    t.integer "fragment"
     t.index ["inform_id"], name: "index_samples_on_inform_id"
   end
 

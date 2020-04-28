@@ -99,6 +99,20 @@
 
                               <h5 class="card-title"></h5>
                               <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong></p>
+                              <% if sample.fragment == nil %>
+                                <%= form_with model: sample do |f| %>
+                                    <div class="field">
+                                      <%= f.label "Fragmentos:" %>
+                                      <%= f.number_field :fragment, class: "form-control input" %>
+                                    </div>
+                                    <div class="actions">
+                                      <%= f.submit "Guardar", class: "btn btn-primary mt-2" %>
+                                    </div>
+                                <% end %>
+                              <% else %>
+                                <p class="card-text">Fragmentos: <strong><%= sample.fragment %></strong></p>
+                              <% end %>
+                              
                               <% if !next_number_tag_exists?(inform, sample) %>
                                 <%= form_with model: [inform, inform.samples.build] do |form| %>
                                   <%= form.submit "+", class: "btn btn-primary btn-sm mx-2 my-2" %>

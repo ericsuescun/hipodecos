@@ -83,6 +83,16 @@
               <div class="dropdown-divider"></div>
             </div>
           </li>
+          <ul class="navbar-nav d-flex justify-content-end">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin: <%= current_admin.email %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Salir", destroy_admin_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </li>
+          </ul>
         <% end %>
         <% if user_signed_in? && !admin_signed_in? %>
           <li class="nav-item dropdown">

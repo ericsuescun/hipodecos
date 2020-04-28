@@ -81,6 +81,7 @@ Rails.application.routes.draw do
     end
 
     resources :diagcodes do
+      resources :autos
       collection {post :import}
     end
     

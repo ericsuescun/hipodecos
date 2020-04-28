@@ -1,25 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Descrip. micro:</strong>
-  <%= @micro %>
-</p>
-
-<p>
-  <strong>DX:</strong>
-  <%= @dx %>
-</p>
-
-<p>
-  <strong>File options:</strong>
-  <% @opt.each_with_index do |opt, index| %>
-    <p>
-      <strong>Option <%= index %></strong>
-      <%= opt[/(?=txt).*/] %>:
-      <%= openfile(opt) %>
-    </p>
-  <% end %>
-</p>
 
 <!-- 
 
@@ -76,6 +56,72 @@
   <strong>Order:</strong>
   <%= @diagcode.order %>
 </p> -->
+
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Descripción</th>
+      <th>Órgano</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @diagcode.autos.each do |a| %>
+      <tr>
+        <td><%= a.title %></td>
+        <td><%= a.body %></td>
+        <td><%= a.param1 %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= form_with model: [@diagcode, @diagcode.autos.build] do |form| %>
+
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= form.label :body %>
+      <%= form.text_area :body %>
+    </div>
+
+    <div class="field">
+      <%= form.label :param1 %>
+      <%= form.collection_select(:param1, Organ.all, :organ, :organ) %>
+    </div>
+<!-- 
+    <div class="field">
+      <%= form.label :param2 %>
+      <%= form.text_field :param2 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :param3 %>
+      <%= form.text_field :param3 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :param4 %>
+      <%= form.text_field :param4 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :param5 %>
+      <%= form.text_field :param5 %>
+    </div> -->
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+<% end %>
+
+
 
 <%= link_to 'Edit', edit_diagcode_path(@diagcode) %> |
 <%= link_to 'Back', diagcodes_path %>

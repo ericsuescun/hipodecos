@@ -1,4 +1,6 @@
 class AutosController < ApplicationController
+  # before_action :authenticate_admin!
+  before_action :authenticate_user!
   before_action :set_auto, only: [:show, :edit, :update, :destroy]
 
   # GET /autos
@@ -26,11 +28,15 @@ class AutosController < ApplicationController
   # POST /autos
   # POST /autos.json
   def create
-    @auto = Auto.new(auto_params)
+    # @auto = Auto.new(auto_params)
+    @diagcode = Diagcode.find(params[:diagcode_id])
+    @auto = @diagcode.autos.build(auto_params) 
+    @auto.user_id = current_user.id
+    @auto.admin_id = 1
 
     respond_to do |format|
       if @auto.save
-        format.html { redirect_to @auto, notice: 'Auto was successfully created.' }
+        format.html { redirect_to diagcode_path(@diagcode), notice: 'Auto was successfully created.' }
         format.json { render :show, status: :created, location: @auto }
       else
         format.html { render :new }
@@ -44,7 +50,7 @@ class AutosController < ApplicationController
   def update
     respond_to do |format|
       if @auto.update(auto_params)
-        format.html { redirect_to @auto, notice: 'Auto was successfully updated.' }
+        format.html { redirect_to diagcode_path(@diagcode), notice: 'Auto was successfully updated.' }
         format.json { render :show, status: :ok, location: @auto }
       else
         format.html { render :edit }
@@ -58,7 +64,7 @@ class AutosController < ApplicationController
   def destroy
     @auto.destroy
     respond_to do |format|
-      format.html { redirect_to autos_url, notice: 'Auto was successfully destroyed.' }
+      format.html { redirect_to diagcode_path(@diagcode), notice: 'Auto was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -16,7 +16,7 @@
     <%= form.text_field :diagcode_id %>
   </div>
 
-  <div class="field">
+<!--   <div class="field">
     <%= form.label :user_id %>
     <%= form.number_field :user_id %>
   </div>
@@ -24,7 +24,7 @@
   <div class="field">
     <%= form.label :admin_id %>
     <%= form.number_field :admin_id %>
-  </div>
+  </div> -->
 
   <div class="field">
     <%= form.label :title %>
@@ -38,7 +38,8 @@
 
   <div class="field">
     <%= form.label :param1 %>
-    <%= form.text_field :param1 %>
+    <!-- <%= form.text_field :param1 %> -->
+    <%= form.collection_select(:parm1, Organ.all, :organ, :organ) %>
   </div>
 
   <div class="field">

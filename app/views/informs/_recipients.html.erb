@@ -3,14 +3,12 @@
     <div class="row">
       <div class="col-12 col-sm-12 col-lg-12">
         <% inform.recipients.each do |recipient| %>
-          <div class="card mx-2 my-2">
+          <div class="card mx-2 my-3">
             <h5 class="card-header">Recipiente: <%= recipient.tag %>
               <div class="d-flex flex-row justify-content-between">
                 <div class="d-flex">
                   <%= form_with model: [inform, inform.samples.build] do |form| %>
-                    <%= form.submit "+ #{generate_letter_tag(inform)}", class: "btn btn-primary btn-sm mx-2 my-2" do %>
-                      <%= h 'escaping <span>&times;</span>' %>
-                    <% end %>
+                    <%= form.submit "+ Bloque", class: "btn btn-primary btn-sm mx-2 my-2" %>
                     <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                     <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
                   <% end %>
@@ -42,7 +40,7 @@
                             </div>
                             <% if !next_number_tag_exists?(inform, sample) %>
                               <%= form_with model: [inform, inform.samples.build] do |form| %>
-                                <%= form.submit "+ #{generate_number_tag(sample)}", class: "btn btn-primary btn-sm mx-2 my-2" %>
+                                <%= form.submit "+ Corte", class: "btn btn-primary btn-sm mx-2 my-2" %>
                                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                                 <%= form.hidden_field :organ_code, value: sample.organ_code %>
                                 <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
@@ -107,6 +105,14 @@
                                   <% end %>
                                 </div> -->
                                 
+                              <% else %>
+                                <% Auto.where(param1: sample.organ_code).each do |auto| %>
+                                  <%= form_with model: [inform, inform.macros.build] do |f| %>
+                                    <%= f.label auto.title %>
+                                    <%= f.text_area :description, value: auto.body, rows: "10", cols: "80" %>
+                                    <%= f.submit "Crear esta macro", class: "btn btn-primary" %>
+                                  <% end %>
+                                <% end %>
                               <% end %>
                             </div>
                             
@@ -120,7 +126,7 @@
                                       <%= f.number_field :fragment, value: 1, class: "form-control input" %>
                                     </div>
                                     <div class="actions">
-                                      <%= f.submit "Guardar", class: "btn btn-primary btn-sm mt-2" %>
+                                      <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
                                     </div>
                                 <% end %>
                               <% else %>
@@ -134,6 +140,22 @@
                       </div>  
                     <% end %>
                   </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-12 col-lg-12">
+                  <h3>Descripción Macro:</h3>
+                    <div class="row">
+                      <div class="col-12 col-lg-8">
+                        <% inform.macros.each_with_index do |macro, n| %>
+                          <p>Macro <%= n + 1 %> de <%= inform.macros.count %> procesada el <%= macro.created_at %> </p>
+                          <h4><%= macro.description %></h4>
+                          <div class="text-muted"><p>Por: <%= User.where(id: macro.user_id).first.try(:first_name) %> <%= User.where(id: macro.user_id).first.try(:last_name) %></p>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  
                 </div>
               </div>
             </div>

@@ -1,5 +1,6 @@
 class DiagcodesController < ApplicationController
-  before_action :authenticate_admin!
+  # before_action :authenticate_admin!
+  before_action :authenticate_user!
   before_action :set_diagcode, only: [:show, :edit, :update, :destroy]
 
   def import
@@ -16,23 +17,7 @@ class DiagcodesController < ApplicationController
   # GET /diagcodes/1
   # GET /diagcodes/1.json
   def show
-    # if @diagcode.pss_code
-    #   @micro = load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + @diagcode.pss_code.strip + ".txt")
-    #   @dx = load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + @diagcode.pss_code.strip + "DX.txt")
-    # end
     
-    # # @test = "/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + @diagcode.pss_code + ".txt"
-    # # @micro = load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/2A2.txt")
-    # # basedir = "/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/"
-    # files = Dir.glob("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/*.txt")
-    # @opt = []
-    # files.each do |filename|
-    #   if filename.include? @diagcode.organ.gsub(/[^a-zA-Z]/, '')[0..2]
-    #   # if filename.include? 'MAMA'
-    #     @opt << filename
-    #     # @opt << @diagcode.organ.gsub(/[^a-zA-Z]/, '')
-    #   end
-    # end
   end
 
   # def load_txt(fileName)

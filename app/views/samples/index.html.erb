@@ -21,10 +21,11 @@
     <% @samples.each do |sample| %>
       <tr>
         <td><%= sample.id %></td>
-        <td><%= sample.inform %></td>
+        <td><%= sample.inform_id %></td>
         <td><%= sample.user_id %></td>
         <!-- <td><%= sample.name %></td> -->
         <!-- <td><%= sample.description %></td> -->
+        <td><%= sample.recipient_tag %></td>
         <td><%= sample.organ_code %></td>
         <td><%= sample.sample_tag %></td>
         <td><%= link_to 'Show', sample %></td>

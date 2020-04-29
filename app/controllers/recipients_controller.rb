@@ -37,9 +37,16 @@ class RecipientsController < ApplicationController
         tag = generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first)
       end
     else
-      (1..params[:recipient][:samples].to_i).each do |i|
-        @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_letter_tag(@inform))
+      if params[:recipient][:organ] != nil
+        (1..params[:recipient][:samples].to_i).each do |i|
+          @inform.samples.create!(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_letter_tag(@inform), organ_code: params[:recipient][:organ])
+        end
+      else
+        (1..params[:recipient][:samples].to_i).each do |i|
+          @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_letter_tag(@inform))
+        end
       end
+      
     end
 
     recipient.save

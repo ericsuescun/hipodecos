@@ -26,7 +26,7 @@ class RecipientsController < ApplicationController
     @recipient = @inform.recipients.build(recipient_params)
     @recipient.tag = @recipient.tag + '-R' + (@inform.recipients.count + 1).to_s
     @recipient.user_id = current_user.id
-    tag_shift = @inform.samples.count
+    # tag_shift = @inform.samples.count
 
     @recipient.save
 
@@ -135,6 +135,99 @@ SE MARCAN BORDES DE RESECCION CON TINTA CHINA.
             organ_code: "Estomago",
             fragment: 2,
             description: "GRASA CURVATURA MENOR"
+          )
+
+        when "193"
+          @recipient.update!(description: "ESTOMAGO RESECCION
+Se recibe cuerpo y antro-gastrico de ()x()x() cms, acompaÒado de delantal epiploico de () cms de longitud.  En el antro, en contacto con el borde de resecciÛn distal se encuentra una masa circular de ()x()x() cms que ulcera la mucosa e infiltra la pared subyacente, en todo su espesor, encontrandose en contacto con la serosa. La mucosa del resto de la pieza presenta un aspecto edematoso, con exageraciÛn de los pliegues, y apariencia de empedrado.  El borde de resecciÛn proximal se encuentra respetado.
+SE MARCAN BORDES DE RESECCION CON TINTA CHINA.")
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 4,
+            description: "BORDE DE RESECCION ANTRAL"
+          )
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 2,
+            description: "MASA"
+          )
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 2,
+            description: "BORDE DE RESECCION CORPORAL"
+          )
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 1,
+            description: "MUCOSA SIN TUMOR"
+          )
+
+        when "194"
+          @recipient.update!(description: "ESOFAGO: Se reciben  muestras de mucosa.")
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Esofago",
+            fragment: 1,
+            description: "SE PROCESA TODO"
+          )
+
+          @recipient2 = @inform.recipients.build(recipient_params)
+          @recipient2.tag = @inform.tag_code + '-R' + (@inform.recipients.count + 1).to_s
+          @recipient2.user_id = current_user.id
+
+          @recipient2.description = "ANTRO: Se reciben  muestras de mucosa."
+
+          @recipient2.save
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient2.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 1,
+            description: "SE PROCESA TODO"
+          )
+
+          @recipient3 = @inform.recipients.build(recipient_params)
+          @recipient3.tag = @inform.tag_code + '-R' + (@inform.recipients.count + 1).to_s
+          @recipient3.user_id = current_user.id
+
+          @recipient3.description = "DUODENO: Se reciben  muestras de mucosa."
+
+          @recipient3.save
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient3.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Duodeno",
+            fragment: 1,
+            description: "SE PROCESA TODO"
           )
 
         when "221"

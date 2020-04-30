@@ -218,14 +218,8 @@
                 <%= form.hidden_field :tag, value: inform.tag_code %>
               </div>
             <% end %>
-            <%= form_with model: [inform, inform.recipients.build] do |form| %>
-              <div class="actions">
-                <%= form.submit "Resección Cancer 192", id: "Resección Cancer 192", class: "btn btn-warning mx-1 my-1" %>
-                <%= form.hidden_field :tag, value: inform.tag_code %>
-                <%= form.hidden_field :organ, value: "Estomago" %>
-                <%= form.hidden_field :auto, value: "192" %>
-              </div>
-            <% end %>
+
+            <h4>Atajos para Macros</h4>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#autosMacroModal">
               Autos para Macro

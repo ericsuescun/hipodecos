@@ -2,13 +2,17 @@
 	$(document).on('page:load', refreshRecipients());
 
 	function refreshRecipients() {
-	  console.log('Recipiente creado!');
-	  $('div.recipients').remove();
-	  $('div.recipient').append('<%= j render "informs/recipientsJS" %>');
-	  $('div.fast-bar').append('<%= j render "ok-create" %>');
-	  setTimeout(function() {
-	  	$('div.alert-growl').remove();
-	  }, 3000)
+
+		// modalClose();
+		
+		console.log('Recipiente creado!');
+		$('div.recipients').remove();
+		$('div.recipient').append('<%= j render "informs/recipientsJS" %>');
+		$('div.fast-bar').append('<%= j render "ok-create" %>');
+		setTimeout(function() {
+			$('div.alert-growl').remove();
+		}, 3000)
+	  
 	  // $('input#organ-1').focus();
 	}
 <% end %>

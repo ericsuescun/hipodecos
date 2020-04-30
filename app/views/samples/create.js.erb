@@ -2,15 +2,18 @@
 	$(document).on('page:load', refreshRecipients());
 
 	function refreshRecipients() {
-	  console.log('Recipiente creado!');
-	  $('div.recipients').remove();
-	  $('div.recipient').append('<%= j render "informs/recipientsJS" %>');
-	  $('div.fast-bar').append('<%= j render "ok-create" %>');
-	  setTimeout(function() {
-	  	$('div.alert-growl').remove();
-	  }, 3000)
-	  // $('body').append('<%= j render "ok-create" %>');
-	  // $('input#organ-1').focus();
+		
+		// modalClose();
+
+		console.log('Recipiente creado!');
+		$('div.recipients').remove();
+		$('div.recipient').append('<%= j render "informs/recipientsJS" %>');
+		$('div.fast-bar').append('<%= j render "ok-create" %>');
+		setTimeout(function() {
+			$('div.alert-growl').remove();
+		}, 3000)
+		// $('body').append('<%= j render "ok-create" %>');
+		// $('input#organ-1').focus();
 	}
 
 <% end %>

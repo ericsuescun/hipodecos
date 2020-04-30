@@ -1,7 +1,10 @@
 $(document).on('page:load', refresh());
 
 function refresh() {
-	console.log('Informs Show');
-
-	// $('body').prepend('<%= j render "expenses/menu" %>');
+	console.log('Estoy en show!');
+	$('button#shortcut').on('click', function(e) {
+		e.preventDefault();
+		console.log('Atajo!');
+	});
+	// $('body').find('input#1rb').submit();
 }

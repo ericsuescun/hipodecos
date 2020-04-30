@@ -4,7 +4,7 @@
       <div class="col-12 col-sm-12 col-lg-12">
         <% inform.recipients.each do |recipient| %>
           <div class="card mx-2 mb-3">
-            <h5 class="card-header">Recipiente: <%= recipient.tag %>
+            <h5 class="card-header">Recipiente: <%= recipient.tag %>, creado por: <%= User.where(id: recipient.user_id).first.try(:email) %>
               <div class="d-flex flex-row justify-content-between">
                 <div class="d-flex">
                   <%= form_with model: [inform, inform.samples.build] do |form| %>
@@ -14,16 +14,36 @@
                   <% end %>
                   
                 </div>
-                <div class="d-flex">
+               <!--  <div class="d-flex">
                   <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-primary btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
+                  
+                </div> -->
+                <div class="d-flex">
+                  <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, remote: true , class: "btn btn-outline-primary btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
                   
                 </div>
               </div>
               
             </h5>
             <div class="card-body">
-              <h5 class="card-title">Creado por: <%= User.where(id: recipient.user_id).first.try(:first_name) %></h5>
-              <p class="card-text">Descripción: <%= recipient.description %></p>
+              <h5 class="card-title"></h5>
+              <p class="card-text"></p>
+
+              <% if recipient.description == nil %>
+                <%= form_with model: recipient do |f| %>
+                    <div class="field">
+                      <%= f.label "Descripción:" %>
+                      <%= f.text_area :description, rows: "10", cols: "80", class: "form-control input" %>
+                    </div>
+                    <div class="actions">
+                      <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
+                    </div>
+                <% end %>
+              <% else %>
+                <p class="card-text"><strong>Descripción:</strong> <%= recipient.description %></p>
+              <% end %>
+
+
               <div class="row">
                 <div class="col-12 col-md-12 col-lg-12">
                   <div class="card-deck">
@@ -35,9 +55,14 @@
                       <% end %>
                         <div class="card mx-2 my-2" style="background-color: <%= get_color(sample) %>">
                           <h5 class="card-header">Bloque: <%= sample.sample_tag %>
-                            <div class="d-flex justify-content-start">
+                           <!--  <div class="d-flex justify-content-start">
                               <%= link_to "Revisar", sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-secondary btn-sm mx-2 my-2", remote: true %>
+                            </div> -->
+
+                            <div class="d-flex justify-content-start">
+                              <%= link_to "Revisar", sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, class: "btn btn-secondary btn-sm mx-2 my-2", remote: true %>
                             </div>
+
                             <% if !next_number_tag_exists?(inform, sample) %>
                               <%= form_with model: [inform, inform.samples.build] do |form| %>
                                 <%= form.submit "+ Corte", class: "btn btn-primary btn-sm mx-2 my-2" %>
@@ -106,31 +131,35 @@
                                 </div> -->
                                 
                               <% else %>
-                                <% Auto.where(param1: sample.organ_code).each do |auto| %>
+                              <!--   <% Auto.where(param1: sample.organ_code).each do |auto| %>
                                   <%= form_with model: [inform, inform.macros.build] do |f| %>
                                     <%= f.label auto.title %>
                                     <%= f.text_area :description, value: auto.body, rows: "10", cols: "80" %>
                                     <%= f.submit "Crear esta macro", class: "btn btn-primary" %>
                                   <% end %>
                                 <% end %>
-                              <% end %>
+                              <% end %> -->
                             </div>
                             
 
-                              <h5 class="card-title"></h5>
-                              <p class="card-text">Órgano: <strong><%= sample.organ_code %></strong></p>
-                              <% if sample.fragment == nil %>
+                              <h5 class="card-title"><%= sample.organ_code %> - F: <strong><%= sample.fragment %></strong></h5>
+                              <p class="card-text">Descr: <strong><%= sample.description %></strong></p>
+                              <% if sample.fragment == nil || sample.description == nil %>
                                 <%= form_with model: sample do |f| %>
                                     <div class="field">
                                       <%= f.label "Fragmentos:" %>
-                                      <%= f.number_field :fragment, value: 1, class: "form-control input" %>
+                                      <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
+                                    </div>
+                                    <div class="field">
+                                      <%= f.label "Descripción:" %>
+                                      <%= f.text_area :description, class: "form-control input" %>
                                     </div>
                                     <div class="actions">
                                       <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
                                     </div>
                                 <% end %>
                               <% else %>
-                                <p class="card-text">Fragmentos: <strong><%= sample.fragment %></strong></p>
+                                <p class="card-text"></p>
                               <% end %>
                               
                               
@@ -144,7 +173,7 @@
               </div>
               <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
-                  <h3>Descripción Macro:</h3>
+                 <!--  <h3>Descripción Macro:</h3>
                     <div class="row">
                       <div class="col-12 col-lg-8">
                         <% inform.macros.each_with_index do |macro, n| %>
@@ -155,7 +184,7 @@
                         <% end %>
                       </div>
                     </div>
-                  
+                   -->
                 </div>
               </div>
             </div>
@@ -170,7 +199,7 @@
           <div class="d-flex flex-column">
             <%= form_with model: [inform, inform.recipients.build] do |form| %>
               <div class="actions">
-                <%= form.submit "+ 1 Recipiente + 1 Bloque", class: "btn btn-primary mx-1 my-1" %>
+                <%= form.submit "+ 1 Recipiente + 1 Bloque", id: "1rb", class: "btn btn-primary mx-1 my-1" %>
                 <%= form.hidden_field :samples, value: 1 %>
                 <%= form.hidden_field :tag, value: inform.tag_code %>
               </div>
@@ -191,12 +220,19 @@
             <% end %>
             <%= form_with model: [inform, inform.recipients.build] do |form| %>
               <div class="actions">
-                <%= form.submit "Auto Estomago 192/193", class: "btn btn-warning mx-1 my-1" %>
-                <%= form.hidden_field :samples, value: 6 %>
-                <%= form.hidden_field :organ, value: "Estomago" %>
+                <%= form.submit "Resección Cancer 192", id: "Resección Cancer 192", class: "btn btn-warning mx-1 my-1" %>
                 <%= form.hidden_field :tag, value: inform.tag_code %>
+                <%= form.hidden_field :organ, value: "Estomago" %>
+                <%= form.hidden_field :auto, value: "192" %>
               </div>
             <% end %>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#autosMacroModal">
+              Autos para Macro
+            </button>
+           <!--  <div class="actions">
+              <button id="shortcut" class="btn btn-danger">Test</button>
+            </div> -->
           </div>
         </div>
 
@@ -221,6 +257,9 @@
 
       </div>
     </div>
+
+    <%= render partial: "informs/autos_modal", locals: { inform: inform } %>
+
   </div>
 </div>
 

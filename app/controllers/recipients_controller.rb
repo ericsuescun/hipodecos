@@ -23,33 +23,14 @@ class RecipientsController < ApplicationController
 
   def create
     @inform = Inform.find(params[:inform_id])
-    recipient = @inform.recipients.build(recipient_params)
-    recipient.tag = recipient.tag + '-R' + (@inform.recipients.count + 1).to_s
-    recipient.user_id = current_user.id
+    @recipient = @inform.recipients.build(recipient_params)
+    @recipient.tag = @recipient.tag + '-R' + (@inform.recipients.count + 1).to_s
+    @recipient.user_id = current_user.id
     tag_shift = @inform.samples.count
 
-    if params[:recipient][:samples].to_i > 20
-      tag = generate_letter_tag(@inform) + '1'
-      @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: tag)
-      (22..params[:recipient][:samples].to_i).each do |i|
-        
-        @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first))
-        tag = generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first)
-      end
-    else
-      if params[:recipient][:organ] != nil
-        (1..params[:recipient][:samples].to_i).each do |i|
-          @inform.samples.create!(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_letter_tag(@inform), organ_code: params[:recipient][:organ])
-        end
-      else
-        (1..params[:recipient][:samples].to_i).each do |i|
-          @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: recipient.tag, sample_tag: generate_letter_tag(@inform))
-        end
-      end
-      
-    end
+    @recipient.save
 
-    recipient.save
+    create_samples
       
     # if recipient.save
     #   redirect_to inform, notice: 'El recipiente fue creado exitosamente.'
@@ -58,8 +39,6 @@ class RecipientsController < ApplicationController
     # end
   end
 
-  # PATCH/PUT /recipients/1
-  # PATCH/PUT /recipients/1.json
   def update
     respond_to do |format|
       if @recipient.update(recipient_params)
@@ -72,8 +51,6 @@ class RecipientsController < ApplicationController
     end
   end
 
-  # DELETE /recipients/1
-  # DELETE /recipients/1.json
   def destroy
     @recipient.destroy
     @inform = Inform.find(@inf)
@@ -81,15 +58,147 @@ class RecipientsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipient
-      @recipient = Recipient.find(params[:id])
-      @inf = @recipient.inform_id
-    end
+    def create_samples
+      if params[:recipient][:auto] != nil
+        case params[:recipient][:auto]
+        when "191"
+          @recipient.update!(description: "MARCADO ANTRO: Se reciben  muestras de mucosa.  SE PROCESA TODO.")
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def recipient_params
-      params.require(:recipient).permit(:inform_id, :user_id, :tag, :description, :samples)
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 1
+          )
+
+        when "192"
+
+          @recipient.update!(description: "ESTOMAGO RESECCION
+Estomago de () cms en la curvatura mayor y () cms en la curvatura menor, presenta una lesion (ulcerada) (vegetante) de () cms de diametro localizada en el (antro) (cuerpo) (fundus) con bordes (regulares) (irregulares). Esta ubicada a () cms del borde distal y compromete principalmente la curvatura (menor) (mayor) pero se extiende a (parte de) (toda) la circunferencia.
+El resto de la mucosa est· preservada, sin otras lesiones.
+Hay adherencias del epiplon en ambas curvaturas.  En la curvatura mayor se identifican () nÛdulos, el mayor de () cm de diametro.  Todos a menos de () cms de la serosa.  En la curvatura menor (no) (si) se identifican nÛdulos.
+SE MARCAN BORDES DE RESECCION CON TINTA CHINA.
+"
+          )
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 2,
+            description: "SBPR:  BORDE DE RESECCION DISTAL Y TUMOR"
+          )
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 2,
+            description: "BORDE DE RESECCION PROXIMAL"
+          )
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 2,
+            description: "MUCOSA SANA"
+          )
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 2,
+            description: "LESION"
+          )
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 7,
+            description: "NODULOS CURVATURA MAYOR"
+          )
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Estomago",
+            fragment: 2,
+            description: "GRASA CURVATURA MENOR"
+          )
+
+        when "221"
+          @recipient.update!(description: "MARCADO APENDICE: Se recibe apendice de ()x()x() cm, serosa lisa con focos de despulimiento y congestion; al corte se aprecia pared edematosa y engrosada con luz ocupada por materias fecales liquidas. SE BLOQUEA PORCION REPRESENTATIVA.")
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Apendice",
+            fragment: 1
+          )
+
+        when "222"
+          @recipient.update!(description: "MARCADO APENDICE: Se recibe apendice de ()x()x() cm, serosa con despulimiento extenso y congestion severa y placas fibrinopurulentas superficiales; al corte se aprecia pared edematosa y engrosada con luz ocupada por materias fecales purulentas. SE BLOQUEA PORCION REPRESENTATIVA.")
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Apendice",
+            fragment: 1
+          )
+
+        when "223"
+          @recipient.update!(description: "MARCADO APENDICE: Se recibe apendice de ()x()x() cm, serosa opaca con despulimiento y congestion que presenta area sugestiva de necrosis; al corte se aprecia pared edematosa, hemorragica y engrosada con luz ocupada por materias fecales purulentas. SE BLOQUEA PORCION REPRESENTATIVA.")
+
+          @inform.samples.create!(
+            inform_id: params[:inform_id].to_i,
+            user_id: current_user.id, 
+            recipient_tag: @recipient.tag, 
+            sample_tag: generate_letter_tag(@inform), 
+            organ_code: "Apendice",
+            fragment: 3
+          )
+
+
+
+
+        end
+      else
+        if params[:recipient][:samples].to_i > 20
+          tag = generate_letter_tag(@inform) + '1'
+          @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: @recipient.tag, sample_tag: tag)
+          (22..params[:recipient][:samples].to_i).each do |i|
+            
+            @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: @recipient.tag, sample_tag: generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first))
+            tag = generate_number_tag(Sample.where(inform_id: params[:inform_id].to_i, sample_tag: tag).first)
+          end
+        else
+          if params[:recipient][:organ] != nil
+            (1..params[:recipient][:samples].to_i).each do |i|
+              @inform.samples.create!(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: @recipient.tag, sample_tag: generate_letter_tag(@inform), organ_code: params[:recipient][:organ])
+            end
+          else
+            (1..params[:recipient][:samples].to_i).each do |i|
+              @inform.samples.create(inform_id: params[:inform_id].to_i, user_id: current_user.id, recipient_tag: @recipient.tag, sample_tag: generate_letter_tag(@inform))
+            end
+          end
+        end
+      end
     end
 
     def generate_number_tag(sample)
@@ -119,5 +228,16 @@ class RecipientsController < ApplicationController
       }
       
       return inform.tag_code + '-' + next_letter
+    end
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_recipient
+      @recipient = Recipient.find(params[:id])
+      @inf = @recipient.inform_id
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def recipient_params
+      params.require(:recipient).permit(:inform_id, :user_id, :tag, :description, :samples)
     end
 end

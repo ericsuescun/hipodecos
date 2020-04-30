@@ -51,12 +51,12 @@ class SamplesController < ApplicationController
     # log = "\nCAMBIOS:\n-TITULO-\nANTES:" + @sample.name + "\n- DESPUÉS: -\n" + sample_params[:name] + ".\n-DESCRIPCIÓN-\nANTES:" + @sample.description + "\n- DESPUÉS: -\n" + sample_params[:description] + "-\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s + "\nEtiqueta: " + sample_params[:sample_tag]
     log = "\nCAMBIOS:\n"
     if @sample.name != sample_params[:name]
-      log += "\n-TITULO-\nANTES:" + @sample.name + "\n- DESPUÉS: -\n" + sample_params[:name]
+      log += "\n-TITULO-\nANTES:" + @sample.name.to_s + "\n- DESPUÉS: -\n" + sample_params[:name]
     else
       log += "\n-TITULO-\nSIN CAMBIOS."
     end
     if @sample.description != sample_params[:description]
-      log += "\n-DESCRIPCIÓN-\nANTES:" + @sample.description + "\n- DESPUÉS: -\n" + sample_params[:description]
+      log += "\n-DESCRIPCIÓN-\nANTES:" + @sample.description.to_s + "\n- DESPUÉS: -\n" + sample_params[:description]
     else
       log += "\n-DESCRIPCIÓN-\nSIN CAMBIOS."
     end

@@ -1,12 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-lg-4 mx-auto">
+      <h3><%= @sample.sample_tag %></h3>
       <%= form_with(model: sample, local: true) do |form| %>
 
-        <div class="field">
+     <!--    <div class="field">
           <%= form.label "Nombre" %>
           <%= form.text_field :name, class: "form-control input" %>
-        </div>
+        </div> -->
 
         <div class="form-group">
           <%= form.label "Descripción" %>
@@ -14,9 +15,14 @@
         </div>
 
         <div class="form-group">
+          <%= form.label "Fragmentos" %>
+          <%= form.number_field :fragment, class: "form-control input" %>
+        </div>
+
+     <!--    <div class="form-group">
           <%= form.label "Etiqueta" %>
           <%= form.text_field :sample_tag, class: "form-control input" %>
-        </div>
+        </div> -->
 
         <div class="actions">
           <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>

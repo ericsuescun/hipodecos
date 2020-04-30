@@ -11,63 +11,76 @@
       <div class="modal-body">
         ...
       </div>
-      <div class="row">
-        <div class="d-flex flex-column">
-          <%= form_with model: [inform, inform.recipients.build] do |form| %>
-            <div class="actions">
-              <%= form.submit "Estomago biopsias: (191)", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
-              <%= form.hidden_field :tag, value: inform.tag_code %>
-              <%= form.hidden_field :organ, value: "Estomago" %>
-              <%= form.hidden_field :auto, value: "191" %>
-            </div>
-            <div class="actions">
-              <%= form.submit "Resección Cancer 192", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
-              <%= form.hidden_field :tag, value: inform.tag_code %>
-              <%= form.hidden_field :organ, value: "Estomago" %>
-              <%= form.hidden_field :auto, value: "192" %>
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="d-flex flex-column">
+            <%= form_with model: [inform, inform.recipients.build] do |form| %>
+              <div class="actions">
+                <%= form.submit "Estomago biopsias: (191)", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
+                <%= form.hidden_field :tag, value: inform.tag_code %>
+                <%= form.hidden_field :organ, value: "Estomago" %>
+                <%= form.hidden_field :auto, value: "191" %>
+              </div>
+            <% end %>
+            <%= form_with model: [inform, inform.recipients.build] do |form| %>
+              <div class="actions">
+                <%= form.submit "Resección Cancer 192", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
+                <%= form.hidden_field :tag, value: inform.tag_code %>
+                <%= form.hidden_field :organ, value: "Estomago" %>
+                <%= form.hidden_field :auto, value: "192" %>
+              </div>
+            <% end %>
 
-            <div class="actions">
-              <%= form.submit "Resección Cancer 193", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
-              <%= form.hidden_field :tag, value: inform.tag_code %>
-              <%= form.hidden_field :organ, value: "Estomago" %>
-              <%= form.hidden_field :auto, value: "193" %>
-            </div>
-            <div class="actions">
-              <%= form.submit "Esofago, Est Y Duod BXS: (194)", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
-              <%= form.hidden_field :tag, value: inform.tag_code %>
-              <%= form.hidden_field :organ, value: "Estomago" %>
-              <%= form.hidden_field :auto, value: "194" %>
-            </div>
-          <% end %>
+            <%= form_with model: [inform, inform.recipients.build] do |form| %>
+              <div class="actions">
+                <%= form.submit "Resección Cancer 193", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
+                <%= form.hidden_field :tag, value: inform.tag_code %>
+                <%= form.hidden_field :organ, value: "Estomago" %>
+                <%= form.hidden_field :auto, value: "193" %>
+              </div>
+            <% end %>  
+            <%= form_with model: [inform, inform.recipients.build] do |form| %>
+              <div class="actions">
+                <%= form.submit "Esofago, Est Y Duod BXS: (194)", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
+                <%= form.hidden_field :tag, value: inform.tag_code %>
+                <%= form.hidden_field :organ, value: "Estomago" %>
+                <%= form.hidden_field :auto, value: "194" %>
+              </div>
+            <% end %>
+          </div>
         </div>
+        <div class="row">
+          <div class="d-flex flex-column">
+            <%= form_with model: [inform, inform.recipients.build] do |form| %>
+              <div class="actions">
+                <%= form.submit "Apendice AGUDA: (221)", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
+                <%= form.hidden_field :tag, value: inform.tag_code %>
+                <%= form.hidden_field :organ, value: "Apendice" %>
+                <%= form.hidden_field :auto, value: "221" %>
+              </div>
+            <% end %>
+            <%= form_with model: [inform, inform.recipients.build] do |form| %>
+              <div class="actions">
+                <%= form.submit "Apendice Purulenta: (222)", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
+                <%= form.hidden_field :tag, value: inform.tag_code %>
+                <%= form.hidden_field :organ, value: "Apendice" %>
+                <%= form.hidden_field :auto, value: "222" %>
+              </div>
+            <% end %>
+            <%= form_with model: [inform, inform.recipients.build] do |form| %>
+              <div class="actions">
+                <%= form.submit "Apendice gangrenosa: (223)", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
+                <%= form.hidden_field :tag, value: inform.tag_code %>
+                <%= form.hidden_field :organ, value: "Apendice" %>
+                <%= form.hidden_field :auto, value: "223" %>
+              </div>
+            <% end %>
+              
+          </div>
+        </div>
+        
       </div>
-      <div class="row">
-        <div class="d-flex flex-column">
-          <%= form_with model: [inform, inform.recipients.build] do |form| %>
-            <div class="actions">
-              <%= form.submit "APENDICE AGUDA: (221)", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
-              <%= form.hidden_field :tag, value: inform.tag_code %>
-              <%= form.hidden_field :organ, value: "Apendice" %>
-              <%= form.hidden_field :auto, value: "221" %>
-            </div>
-            <div class="actions">
-              <%= form.submit "Resección Cancer 192", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
-              <%= form.hidden_field :tag, value: inform.tag_code %>
-              <%= form.hidden_field :organ, value: "Apendice" %>
-              <%= form.hidden_field :auto, value: "222" %>
-            </div>
 
-            <div class="actions">
-              <%= form.submit "Resección Cancer 193", class: "organ-Digestivo mx-1 my-1", data: { toggle: 'modal', 'target': '#autosMacroModal' } %>
-              <%= form.hidden_field :tag, value: inform.tag_code %>
-              <%= form.hidden_field :organ, value: "Apendice" %>
-              <%= form.hidden_field :auto, value: "223" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      
       
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

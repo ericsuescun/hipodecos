@@ -74,7 +74,6 @@ class RecipientsController < ApplicationController
           )
 
         when "192"
-
           @recipient.update!(description: "ESTOMAGO RESECCION
 Estomago de () cms en la curvatura mayor y () cms en la curvatura menor, presenta una lesion (ulcerada) (vegetante) de () cms de diametro localizada en el (antro) (cuerpo) (fundus) con bordes (regulares) (irregulares). Esta ubicada a () cms del borde distal y compromete principalmente la curvatura (menor) (mayor) pero se extiende a (parte de) (toda) la circunferencia.
 El resto de la mucosa est· preservada, sin otras lesiones.

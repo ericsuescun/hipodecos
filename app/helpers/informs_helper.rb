@@ -1,4 +1,8 @@
 module InformsHelper
+	def get_nomen(str)
+		return str.split('-',2)[1].split('-',2)[1]
+	end
+
 	def getcodes(inform)
 		find = inform.micros.first.description
 		if find == nil

@@ -4,23 +4,33 @@
       <div class="col-12 col-sm-12 col-lg-12">
         <% inform.recipients.each do |recipient| %>
           <div class="card bg-light mx-2 mb-3">
-            <h6 class="card-header pl-1 pt-0 pb-0">Recipiente: <%= recipient.tag %>, creado por: <%= User.where(id: recipient.user_id).first.try(:email) %>
-              <div class="d-flex flex-row justify-content-between">
-                <div class="d-flex">
-                  <%= form_with model: [inform, inform.samples.build] do |form| %>
-                    <%= form.submit "+ Bloque", class: "btn btn-primary btn-sm mx-2 my-2" %>
-                    <%= form.hidden_field :recipient_tag, value: recipient.tag %>
-                    <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
-                  <% end %>
-                  
-                </div>
-                <div class="d-flex">
-                  <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-dark btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), remote: true, class: "btn btn-outline-dark btn-sm mx-2 my-2" %> <%= link_to 'Borrar', recipient, method: :delete, remote: true , class: "btn btn-outline-dark btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
-                  
-                </div>
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+
+              
+              <div class="d-flex align-items-center p-0">
+                <span class="d-flex">Recipiente: <%= recipient.tag %>, creado por: <%= User.where(id: recipient.user_id).first.try(:email) %></span>
+                <%= form_with model: [inform, inform.samples.build] do |form| %>
+                  <%= form.submit "+", class: " mx-2 mt-2", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: transparent;" %>
+                  <%= form.hidden_field :recipient_tag, value: recipient.tag %>
+                  <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
+                <% end %>
+                <%= link_to edit_recipient_path(recipient), remote: true, class: "d-flex my-0 py-0" do %>
+                  <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
+                <% end %>
+              </div>
+              <div class="d-flex">
+                <%= link_to recipient, method: :delete, remote: true, class: "mx-2 my-2 px-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
+                  <span>&times;</span>
+                <% end %>
+              </div>
+
+            </div>
+              <div class="d-flex flex-row justify-content-between align-items-center">
+                
+                
+
               </div>
               
-            </h6>
             <div class="card-body elements-in-for-<%= recipient.tag %>">
               <div class="alert alert-secondary">
                 <% if recipient.description == nil || edit_recipient_tag == recipient.tag %>
@@ -51,15 +61,20 @@
 
                         <div class="card mx-2 my-2 pb-0" id="sample-<%= sample.sample_tag %>" style="background-color: <%= get_color(sample) %>">
 
-                          <h6 class="card-header pl-1 pt-0 pb-0">Bloque: <%= sample.sample_tag %></h6>
+                          <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
 
-                            <div class="d-flex justify-content-start">
-                              <%= link_to "Revisar", sample_path(sample), class: "btn btn-outline-dark btn-sm my-2 mx-1" %> <%= link_to "Editar", edit_sample_path(sample), remote: true, class: "btn btn-outline-dark btn-sm my-2 mx-1" %> <%= link_to 'Borrar', sample, method: :delete, class: "btn btn-outline-dark btn-sm my-2 mx-1", remote: true %>
-                              
-                            </div>
+                            <span class="d-flex "><strong><%= get_nomen(sample.sample_tag) %>: <%= sample.fragment %>F</strong> - <%= sample.organ_code %></span>
 
-                            
+                            <%= link_to sample, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
+                              <span>&times;</span>
+                            <% end %>
+
+                          </div>
+
+                         
                           
+                          
+
                           <div class="card-body p-1 m-1">
                             <div class="row">
                               <% if sample.organ_code == nil %>
@@ -70,22 +85,8 @@
                               <% end %> 
                             </div>
                             
-                            <div class="d-flex flex-row">
-                              
-
-                              <h6 class="card-title my-0"><%= sample.organ_code %>: <strong><%= sample.fragment %>F</strong></h6>
-
-                              <% if !next_number_tag_exists?(inform, sample) %>
-                                <%= form_with model: [inform, inform.samples.build] do |form| %>
-                                  <%= form.submit "+", class: "btn btn-primary btn-sm mx-2 my-0" %>
-                                  <%= form.hidden_field :recipient_tag, value: recipient.tag %>
-                                  <%= form.hidden_field :organ_code, value: sample.organ_code %>
-                                  <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
-                                <% end %>
-                              <% end %>
-                            </div>
+                            <h6 class="card-title my-0"><%= sample.description %></h6>
                             
-                            <p class="card-text">Descr: <strong><%= sample.description %></strong></p>
                             <% if sample.fragment == nil || sample.description == nil || edit_sample_tag == sample.sample_tag %>
                               <%= form_with model: sample do |f| %>
                                   <div class="field">
@@ -100,9 +101,23 @@
                                     <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
                                   </div>
                               <% end %>
-                            <% else %>
-                              <p class="card-text"></p>
+                            
                             <% end %>
+                            <div class="d-flex justify-content-around align-items-center mt-1">
+                              <%= link_to edit_sample_path(sample), remote: true, class: "my-0 mx-1" do %>
+                                <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none">&#9998;</span>
+                              <% end %>
+                              
+                              <% if !next_number_tag_exists?(inform, sample) %>
+                                <%= form_with model: [inform, inform.samples.build] do |form| %>
+                                  <%= form.submit "+", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: transparent;" %>
+                                  <%= form.hidden_field :recipient_tag, value: recipient.tag %>
+                                  <%= form.hidden_field :organ_code, value: sample.organ_code %>
+                                  <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
+                                <% end %>
+                              <% end %>
+                              
+                            </div>
                           </div>
                         </div>
                       </div>  

@@ -8,7 +8,7 @@
 
               
               <div class="d-flex align-items-center p-0">
-                <span class="d-flex">Recipiente: <%= recipient.tag %>, creado por: <%= User.where(id: recipient.user_id).first.try(:email) %></span>
+                <span class="d-flex"><strong><%= recipient.tag %></strong>, creado por: <%= User.where(id: recipient.user_id).first.try(:email) %></span>
                 <%= form_with model: [inform, inform.samples.build] do |form| %>
                   <%= form.submit "+", class: " mx-2 mt-2", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: transparent;" %>
                   <%= form.hidden_field :recipient_tag, value: recipient.tag %>
@@ -141,61 +141,69 @@
         <% end %>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 col-lg-4">
-        <div class="alert alert-primary">
-          <h4>Atajos para recipientes</h4>
-          <div class="d-flex flex-column">
+    <div class="alert alert-primary pb-0 pt-1">
+      
+      <div class="row d-flex align-items-center">
+        <div class="col-12 col-lg-1 col-xl-1">
+          <h4>Atajos</h4>
+        </div>
+        <div class="col-12 col-lg-4 col-xl-3">
+          <!-- <h4>Atajos para recipientes</h4> -->
+          <div class="d-flex flex-row">
             <%= form_with model: [inform, inform.recipients.build] do |form| %>
               <div class="actions">
-                <%= form.submit "+ 1 Recipiente + 1 Bloque", id: "1rb", class: "btn btn-primary mx-1 my-1" %>
+                <%= form.submit "+ Rec +1", class: "btn btn-primary mx-1 my-1" %>
                 <%= form.hidden_field :samples, value: 1 %>
                 <%= form.hidden_field :tag, value: inform.tag_code %>
               </div>
             <% end %>
             <%= form_with model: [inform, inform.recipients.build] do |form| %>
               <div class="actions">
-                <%= form.submit "+ 1 Recipiente + 2 Bloques diferentes", class: "btn btn-primary mx-1 my-1" %>
+                <%= form.submit "+ Rec +2", class: "btn btn-primary mx-1 my-1" %>
                 <%= form.hidden_field :samples, value: 2 %>
                 <%= form.hidden_field :tag, value: inform.tag_code %>
               </div>
             <% end %>
             <%= form_with model: [inform, inform.recipients.build] do |form| %>
               <div class="actions">
-                <%= form.submit "+ 1 Recipiente + 3 Bloques diferentes", class: "btn btn-primary mx-1 my-1" %>
+                <%= form.submit "+ Rec +3", class: "btn btn-primary mx-1 my-1" %>
                 <%= form.hidden_field :samples, value: 3 %>
                 <%= form.hidden_field :tag, value: inform.tag_code %>
               </div>
             <% end %>
-
-            <h4>Atajos para Macros</h4>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#autosMacroModal">
-              Autos para Macro
-            </button>
-           <!--  <div class="actions">
-              <button id="shortcut" class="btn btn-danger">Test</button>
-            </div> -->
           </div>
         </div>
 
-      </div>
-      <div class="col-12 col-lg-4">
-        <div class="alert alert-primary">
-          <h4>Agregar 1 recipiente con bloques diferentes</h4>
+        <div class="col-12 col-lg-3 col-xl-3">
+          <!-- <h4>Mas atajos</h4> -->
           <%= form_with model: [inform, inform.recipients.build] do |form| %>
+            
+            
+            <div class="row d-flex flex-row">
+              
+              <div class="col-12 col-lg-5 col-xl-3">
+                <div class="actions mt-3">
+                  <%= form.submit "+ Rec +", class: "btn btn-primary" %>
+                </div>
+              </div>
 
+              <div class="col-12 col-lg-4 col-xl-3">
+                <div class="form-group mt-3">
+                  <%= form.number_field :samples, value: 4, class: "form-control input" %>
+                </div>
+              </div>
+              
+            </div>
             <%= form.hidden_field :tag, value: inform.tag_code %>
-
-            <div class="form-group">
-              <%= form.label "Cantidad de muestras" %>
-              <%= form.number_field :samples, value: 4, class: "form-control input" %>
-            </div>
-
-            <div class="actions">
-              <%= form.submit "Agregar", class: "btn btn-primary" %>
-            </div>
+            
           <% end %>
+        </div>
+
+        <div class="col-12 col-lg-3">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#autosMacroModal">
+            + Rec + Autos Macro
+          </button>
         </div>
 
       </div>

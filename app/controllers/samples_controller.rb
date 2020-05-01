@@ -41,19 +41,12 @@ class SamplesController < ApplicationController
     @sample.user_id = current_user.id
 
     @sample.save
-    
+
     recipient = @sample.recipient_tag
     @recipient = Recipient.where(tag: recipient).first
 
-    # if sample.save
-    #   redirect_to inform, notice: 'La muestra ha sido exitosamente creada.'
-    # else
-    #   render :new
-    # end
   end
 
-  # PATCH/PUT /samples/1
-  # PATCH/PUT /samples/1.json
   def update
     # log = "\nCAMBIOS:\n-TITULO-\nANTES:" + @sample.name + "\n- DESPUÉS: -\n" + sample_params[:name] + ".\n-DESCRIPCIÓN-\nANTES:" + @sample.description + "\n- DESPUÉS: -\n" + sample_params[:description] + "-\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s + "\nEtiqueta: " + sample_params[:sample_tag]
     log = "\nCAMBIOS:\n"
@@ -83,18 +76,6 @@ class SamplesController < ApplicationController
     recipient = @sample.recipient_tag
     @recipient = Recipient.where(tag: recipient).first
 
-    # if @sample.update(sample_params)
-    #   @sample.objections.each do |objection|
-    #     objection.closed = true
-    #     objection.close_user_id = current_user.id
-    #     objection.close_date = @sample.updated_at
-    #     objection.description = objection.description + log
-    #     objection.save
-    #   end
-    #   redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente actualizada.'
-    # else
-    #   render :edit
-    # end
   end
 
   def destroy
@@ -110,17 +91,14 @@ class SamplesController < ApplicationController
     end
     @inform = Inform.find(@sample.inform_id)
 
-    # redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente borrada.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_sample
       @sample = Sample.find(params[:id])
       @inf = @sample.inform_id
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def sample_params
       params.require(:sample).permit(:inform_id, :user_id, :name, :description, :sample_tag, :recipient_tag, :organ_code, :fragment)
     end

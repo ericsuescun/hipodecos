@@ -5,8 +5,8 @@
 		
 		console.log('Muestra en edición');
 		$('div.recipients').remove();
-		$('div.recipient').append('<%= j render "informs/recipientsJS", inform: @inform, editar: true %>');
-		$('div.fast-bar').append('<%= j render "ok-create" %>');
+		$('div.recipient').append('<%= j render "informs/recipients", inform: @inform, recipient: @recipient, edit_sample_tag: @edit_sample_tag %>');
+		// $('div.fast-bar').append('<%= j render "ok-create" %>');
 		setTimeout(function() {
 			$('div.alert-growl').remove();
 		}, 3000)

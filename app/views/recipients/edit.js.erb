@@ -1,0 +1,18 @@
+<% if @inform.errors.empty? %>
+	$(document).on('page:load', refreshRecipients());
+
+	function refreshRecipients() {
+
+		modalClose();
+		
+		console.log('Recipiente creado!');
+		$('div.recipients').remove();
+		$('div.recipient').append('<%= j render "informs/recipients", edit_recipient: true %>');
+		// $('div.fast-bar').append('<%= j render "ok-create" %>');
+		setTimeout(function() {
+			$('div.alert-growl').remove();
+		}, 3000)
+	  
+	  // $('input#organ-1').focus();
+	}
+<% end %>

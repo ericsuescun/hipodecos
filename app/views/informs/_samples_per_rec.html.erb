@@ -49,7 +49,7 @@
 
               <h5 class="card-title"><%= sample.organ_code %> - F: <strong><%= sample.fragment %></strong></h5>
               <p class="card-text">Descr: <strong><%= sample.description %></strong></p>
-              <% if sample.fragment == nil || sample.description == nil %>
+              <% if sample.fragment == nil || sample.description == nil || edit_sample == true %>
                 <%= form_with model: sample do |f| %>
                     <div class="field">
                       <%= f.label "Fragmentos:" %>

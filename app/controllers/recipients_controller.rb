@@ -76,6 +76,7 @@ Hay adherencias del epiplon en ambas curvaturas.  En la curvatura mayor se ident
 SE MARCAN BORDES DE RESECCION CON TINTA CHINA.
 "
           )
+          # @inform = Inform.find(@recipient.inform_id)
 
           @inform.samples.create!(
             inform_id: params[:inform_id].to_i,

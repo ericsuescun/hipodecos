@@ -14,10 +14,6 @@
                   <% end %>
                   
                 </div>
-               <!--  <div class="d-flex">
-                  <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), remote: true, class: "btn btn-outline-primary btn-sm mx-2 my-2 " %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-primary btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
-                  
-                </div> -->
                 <div class="d-flex">
                   <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), remote: true, class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to 'Borrar', recipient, method: :delete, remote: true , class: "btn btn-outline-primary btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
                   
@@ -129,18 +125,7 @@
               
               <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
-                 <!--  <h3>Descripción Macro:</h3>
-                    <div class="row">
-                      <div class="col-12 col-lg-8">
-                        <% inform.macros.each_with_index do |macro, n| %>
-                          <p>Macro <%= n + 1 %> de <%= inform.macros.count %> procesada el <%= macro.created_at %> </p>
-                          <h4><%= macro.description %></h4>
-                          <div class="text-muted"><p>Por: <%= User.where(id: macro.user_id).first.try(:first_name) %> <%= User.where(id: macro.user_id).first.try(:last_name) %></p>
-                          </div>
-                        <% end %>
-                      </div>
-                    </div>
-                   -->
+
                 </div>
               </div>
             </div>

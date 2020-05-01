@@ -7,13 +7,11 @@
 		
 		console.log('Recipiente creado!');
 		$('div.recipients').remove();
-		// $('div.recipient').append('<%= j render "informs/recipientsJS" %>');
 		$('div.recipient').append('<%= j render "informs/recipients", inform: @inform, recipient: @recipient, edit_sample_tag: "", edit_recipient_tag: "" %>');
 		$('div.fast-bar').append('<%= j render "ok-create" %>');
 		setTimeout(function() {
 			$('div.alert-growl').remove();
 		}, 3000)
 	  
-	  // $('input#organ-1').focus();
 	}
 <% end %>

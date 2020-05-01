@@ -41,6 +41,9 @@ class SamplesController < ApplicationController
     @sample.user_id = current_user.id
 
     @sample.save
+    
+    recipient = @sample.recipient_tag
+    @recipient = Recipient.where(tag: recipient).first
 
     # if sample.save
     #   redirect_to inform, notice: 'La muestra ha sido exitosamente creada.'

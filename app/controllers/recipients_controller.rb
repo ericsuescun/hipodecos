@@ -19,6 +19,8 @@ class RecipientsController < ApplicationController
 
   # GET /recipients/1/edit
   def edit
+    @inform = Inform.find(@recipient.inform_id)
+    @edit_recipient_tag = @recipient.tag
   end
 
   def create
@@ -40,15 +42,8 @@ class RecipientsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @recipient.update(recipient_params)
-        format.html { redirect_to @recipient, notice: 'Recipient was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recipient }
-      else
-        format.html { render :edit }
-        format.json { render json: @recipient.errors, status: :unprocessable_entity }
-      end
-    end
+    @recipient.update(recipient_params)
+    @inform = Inform.find(@recipient.inform_id)
   end
 
   def destroy

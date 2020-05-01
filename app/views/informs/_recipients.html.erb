@@ -15,11 +15,11 @@
                   
                 </div>
                <!--  <div class="d-flex">
-                  <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-primary btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
+                  <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), remote: true, class: "btn btn-outline-primary btn-sm mx-2 my-2 " %> <%= link_to 'Borrar', recipient, method: :delete, data: { confirm: '¿Confirmas la operación?', remote: true }, class: "btn btn-outline-primary btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
                   
                 </div> -->
                 <div class="d-flex">
-                  <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2 disabled" %> <%= link_to 'Borrar', recipient, method: :delete, remote: true , class: "btn btn-outline-primary btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
+                  <%= link_to "Revisar", recipient_path(recipient), class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_recipient_path(recipient), remote: true, class: "btn btn-outline-primary btn-sm mx-2 my-2" %> <%= link_to 'Borrar', recipient, method: :delete, remote: true , class: "btn btn-outline-primary btn-sm mx-2 my-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
                   
                 </div>
               </div>
@@ -29,7 +29,7 @@
               <h5 class="card-title"></h5>
               <p class="card-text"></p>
 
-              <% if recipient.description == nil %>
+              <% if recipient.description == nil || edit_recipient_tag == recipient.tag %>
                 <%= form_with model: recipient do |f| %>
                     <div class="field">
                       <%= f.label "Descripción:" %>

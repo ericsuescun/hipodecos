@@ -3,13 +3,10 @@
 
 	function refreshRecipients() {
 
-		modalClose();
-		
-		console.log('Recipiente creado!');
+		console.log('Recipiente editado!');
 		$('div.recipients').remove();
-		// $('div.recipient').append('<%= j render "informs/recipientsJS" %>');
 		$('div.recipient').append('<%= j render "informs/recipients", inform: @inform, recipient: @recipient, edit_sample_tag: "", edit_recipient_tag: "" %>');
-		$('div.fast-bar').append('<%= j render "ok-create" %>');
+		$('div.fast-bar').append('<%= j render "ok-update" %>');
 		setTimeout(function() {
 			$('div.alert-growl').remove();
 		}, 3000)

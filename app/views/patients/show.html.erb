@@ -80,6 +80,12 @@
           <div class="row">
             <div class="col-12 col-lg-3">
               <div class="form-group">
+                <%= form.label "Fecha de matrícula" %>
+                <%= form.label Date.today, class: "form-control input"  %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-3">
+              <div class="form-group">
                 <%= form.label "Fecha de recepción" %>
                 <%= form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de recepción", class: "form-control input", autofocus: true  %>
               </div>
@@ -87,27 +93,20 @@
             <div class="col-12 col-lg-3">
               <div class="form-group">
                 <%= form.label "EPS" %>
-                <%= form.select :promoter_id, Promoter.pluck(:name, :id), {prompt:"Seleccione la EPS"}, class: "form-control input" %>
+                <%= form.select :promoter_id, Promoter.pluck(:name, :id), {prompt:"Selec EPS"}, class: "form-control input" %>
               </div>
             </div>
             <div class="col-12 col-lg-3">
               <div class="form-group">
                 <%= form.label "Sede IPS" %>
-                <%= form.select :branch_id, Branch.pluck(:name, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control input" %>
-              </div>
-              
-            </div>
-            <div class="col-12 col-lg-3">
-              <div class="form-group">
-                <%= form.label "Factura" %>
-                <%= form.text_field :invoice, class: "form-control input" %>
+                <%= form.select :branch_id, Branch.pluck(:name, :id), {prompt:"Selec IPS"}, class: "form-control input" %>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-12 col-lg-3">
               <div class="form-group">
-                <%= form.label "Auth EPS/IPS" %>
+                <%= form.label "Autoriz EPS/IPS" %>
                 <%= form.text_field :prmtr_auth_code, class: "form-control input" %>
               </div>
             </div>

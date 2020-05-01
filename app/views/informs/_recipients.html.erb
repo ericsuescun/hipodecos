@@ -25,7 +25,7 @@
               </div>
               
             </h5>
-            <div class="card-body">
+            <div class="card-body elements-in-for-<%= recipient.tag %>">
               <h5 class="card-title"></h5>
               <p class="card-text"></p>
 
@@ -44,133 +44,11 @@
               <% end %>
 
 
-              <div class="row">
-                <div class="col-12 col-md-12 col-lg-12">
-                  <div class="card-deck">
-                    <% inform.samples.where(recipient_tag: recipient.tag).each do |sample| %>
-                      <% if sample.organ_code == nil %>
-                        <div class="col-12 col-md-12 col-lg-12">
-                      <% else %>
-                        <div class="col-12 col-lg-4">
-                      <% end %>
-                        <div class="card mx-2 my-2" style="background-color: <%= get_color(sample) %>">
-                          <h5 class="card-header">Bloque: <%= sample.sample_tag %>
-                           <!--  <div class="d-flex justify-content-start">
-                              <%= link_to "Revisar", sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-secondary btn-sm mx-2 my-2", remote: true %>
-                            </div> -->
+              
 
-                            <div class="d-flex justify-content-start">
-                              <%= link_to "Revisar", sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to "Editar", edit_sample_path(sample), class: "btn btn-secondary btn-sm mx-2 my-2" %> <%= link_to 'Borrar', sample, method: :delete, class: "btn btn-secondary btn-sm mx-2 my-2", remote: true %>
-                            </div>
+              <%= render partial: "informs/samples_per_rec", locals: { inform: inform, recipient: recipient } %>
 
-                            <% if !next_number_tag_exists?(inform, sample) %>
-                              <%= form_with model: [inform, inform.samples.build] do |form| %>
-                                <%= form.submit "+ Corte", class: "btn btn-primary btn-sm mx-2 my-2" %>
-                                <%= form.hidden_field :recipient_tag, value: recipient.tag %>
-                                <%= form.hidden_field :organ_code, value: sample.organ_code %>
-                                <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
-                              <% end %>
-                            <% end %>
-                          </h5>
-                          <div class="card-body">
-                            <div class="row">
-                              <% if sample.organ_code == nil %>
-
-                                <div class="d-flex flex-column mx-2">
-                                  <% Organ.where(part: 'Circulatorio').or(Organ.where(part: 'Linfatico')).or(Organ.where(part: 'Respiratorio')).or(Organ.where(part: 'Reticulo Endotelial')).each do |organ| %>
-                                    <%= form_with model: sample do |f| %>
-                                        <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
-                                        <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
-                                    <% end %>
-                                  <% end %>
-                                </div>
-
-                                <div class="d-flex flex-column mx-2">
-                                  <% Organ.where(part: 'Digestivo').or(Organ.where(part: 'Urinario')).each do |organ| %>
-                                    <%= form_with model: sample do |f| %>
-                                        <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
-                                        <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
-                                    <% end %>
-                                  <% end %>
-                                </div>
-                                
-                                <div class="d-flex flex-column mx-2">
-                                  <% Organ.where(part: 'Genital Masculino').or(Organ.where(part: 'Genital Femenino')).or(Organ.where(part: 'Endocrino')).each do |organ| %>
-                                    <%= form_with model: sample do |f| %>
-                                        <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
-                                        <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
-                                    <% end %>
-                                  <% end %>
-                                </div>
-
-                                <div class="d-flex flex-column mx-2">
-                                  <% Organ.where(part: 'Nervioso').or(Organ.where(part: 'Sentidos')).or(Organ.where(part: 'Piel')).or(Organ.where(part: 'Musculo')).or(Organ.where(part: 'SIDA')).each do |organ| %>
-                                    <%= form_with model: sample do |f| %>
-                                        <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
-                                        <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
-                                    <% end %>
-                                  <% end %>
-                                </div>
-
-                                <div class="d-flex flex-column mx-2">
-                                  <% Organ.where(part: 'Osteoarticular').or(Organ.where(part: 'Dientes')).or(Organ.where(part: 'Generales')).each do |organ| %>
-                                    <%= form_with model: sample do |f| %>
-                                        <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
-                                        <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
-                                    <% end %>
-                                  <% end %>
-                                </div>
-
-                                <!-- <div class="d-flex flex-column mx-2">
-                                  <% Organ.where(part: 'Generales').each do |organ| %>
-                                    <%= form_with model: sample do |f| %>
-                                        <%= f.submit "#{organ.organ_code.to_i < 57 ? organ.organ_code + "." : ""} #{organ.organ}", class: "organ-#{organ.part.gsub(/\s+/, '')}", id: "organ-#{organ.organ_code}" %>
-                                        <%= f.hidden_field :organ_code, value: "#{organ.organ}" %>
-                                    <% end %>
-                                  <% end %>
-                                </div> -->
-                                
-                              <% else %>
-                              <!--   <% Auto.where(param1: sample.organ_code).each do |auto| %>
-                                  <%= form_with model: [inform, inform.macros.build] do |f| %>
-                                    <%= f.label auto.title %>
-                                    <%= f.text_area :description, value: auto.body, rows: "10", cols: "80" %>
-                                    <%= f.submit "Crear esta macro", class: "btn btn-primary" %>
-                                  <% end %>
-                                <% end %>
-                              <% end %> -->
-                            </div>
-                            
-
-                              <h5 class="card-title"><%= sample.organ_code %> - F: <strong><%= sample.fragment %></strong></h5>
-                              <p class="card-text">Descr: <strong><%= sample.description %></strong></p>
-                              <% if sample.fragment == nil || sample.description == nil %>
-                                <%= form_with model: sample do |f| %>
-                                    <div class="field">
-                                      <%= f.label "Fragmentos:" %>
-                                      <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
-                                    </div>
-                                    <div class="field">
-                                      <%= f.label "Descripción:" %>
-                                      <%= f.text_area :description, class: "form-control input" %>
-                                    </div>
-                                    <div class="actions">
-                                      <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
-                                    </div>
-                                <% end %>
-                              <% else %>
-                                <p class="card-text"></p>
-                              <% end %>
-                              
-                              
-                              
-                          </div>
-                        </div>
-                      </div>  
-                    <% end %>
-                  </div>
-                </div>
-              </div>
+              
               <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
                  <!--  <h3>Descripción Macro:</h3>

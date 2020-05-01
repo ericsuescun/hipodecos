@@ -20,6 +20,7 @@ class SamplesController < ApplicationController
 
   # GET /samples/1/edit
   def edit
+    @inform = Inform.find(@sample.inform_id)
   end
 
   # POST /samples
@@ -90,14 +91,17 @@ class SamplesController < ApplicationController
 
   def destroy
     recipient = @sample.recipient_tag
+    @recipient = Recipient.where(tag: recipient).first
     @sample.destroy
     samples_in_recipient = Sample.where(recipient_tag: recipient)
-    if samples_in_recipient.length == 1
-      if samples_in_recipient.first.sample_tag[-1] =~ /[0-9]/
-        samples_in_recipient.first.update(sample_tag: samples_in_recipient.first.sample_tag[0..-2])
-      end
-    end
+
+    # if samples_in_recipient.length == 1
+    #   if samples_in_recipient.first.sample_tag[-1] =~ /[0-9]/
+    #     samples_in_recipient.first.update(sample_tag: samples_in_recipient.first.sample_tag[0..-2])
+    #   end
+    # end
     @inform = Inform.find(@sample.inform_id)
+
     # redirect_to inform_path(@inf), notice: 'La muestra ha sido exitosamente borrada.'
   end
 

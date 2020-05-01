@@ -1,0 +1,17 @@
+<% if @sample.errors.empty? %>
+	$(document).on('page:load', refreshRecipients());
+
+	function refreshRecipients() {
+		
+		console.log('Muestra en edición');
+		$('div.recipients').remove();
+		$('div.recipient').append('<%= j render "informs/recipientsJS", inform: @inform, editar: true %>');
+		$('div.fast-bar').append('<%= j render "ok-create" %>');
+		setTimeout(function() {
+			$('div.alert-growl').remove();
+		}, 3000)
+		// $('body').append('<%= j render "ok-create" %>');
+		// $('input#organ-1').focus();
+	}
+
+<% end %>

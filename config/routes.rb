@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :templates
   resources :organs
   resources :autos
     root to: "static_pages#home"

@@ -3,6 +3,7 @@ class CreateTemplates < ActiveRecord::Migration[5.2]
     create_table :templates do |t|
       t.string :organ
       t.string :title
+      t.string :template_type
 
       t.timestamps
     end

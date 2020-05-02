@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  template: one
+  script_type: MyString
+  description: MyText
+  param1: 1
+  param2: 1
+  script_order: 1
+
+two:
+  template: two
+  script_type: MyString
+  description: MyText
+  param1: 1
+  param2: 1
+  script_order: 1

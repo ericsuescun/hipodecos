@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_060405) do
+ActiveRecord::Schema.define(version: 2020_05_02_061430) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -348,6 +348,18 @@ ActiveRecord::Schema.define(version: 2020_05_02_060405) do
     t.string "organ_code"
     t.integer "fragment"
     t.index ["inform_id"], name: "index_samples_on_inform_id"
+  end
+
+  create_table "scripts", force: :cascade do |t|
+    t.integer "template_id"
+    t.string "script_type"
+    t.text "description"
+    t.integer "param1"
+    t.integer "param2"
+    t.integer "script_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["template_id"], name: "index_scripts_on_template_id"
   end
 
   create_table "slides", force: :cascade do |t|

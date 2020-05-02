@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Template:</strong>
+  <%= @script.template %>
+</p>
+
+<p>
+  <strong>Script type:</strong>
+  <%= @script.script_type %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @script.description %>
+</p>
+
+<p>
+  <strong>Param1:</strong>
+  <%= @script.param1 %>
+</p>
+
+<p>
+  <strong>Param2:</strong>
+  <%= @script.param2 %>
+</p>
+
+<p>
+  <strong>Script order:</strong>
+  <%= @script.script_order %>
+</p>
+
+<%= link_to 'Edit', edit_script_path(@script) %> |
+<%= link_to 'Back', scripts_path %>

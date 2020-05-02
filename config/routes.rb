@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :scripts
   resources :templates
   resources :organs
   resources :autos

@@ -26,7 +26,8 @@ class RecipientsController < ApplicationController
   def create
     @inform = Inform.find(params[:inform_id])
     @recipient = @inform.recipients.build(recipient_params)
-    @recipient.tag = @recipient.tag + '-R' + (@inform.recipients.count + 1).to_s
+    # @recipient.tag = @recipient.tag + '-R' + (@inform.recipients.count + 1).to_s
+    @recipient.tag = generate_rec_tag
     @recipient.user_id = current_user.id
     # tag_shift = @inform.samples.count
 
@@ -53,6 +54,25 @@ class RecipientsController < ApplicationController
   end
 
   private
+    def generate_rec_tag
+      next_number = 1
+      answer = false
+      if @inform.recipients.empty?
+        return @inform.tag_code + '-R1'
+      end
+
+      @inform.recipients.length.times {
+        @inform.recipients.each do |rec|
+          if (rec.tag == @inform.tag_code + '-R' + next_number.to_s)
+            next_number = next_number + 1
+            break
+          end
+        end
+      }
+      
+      return @inform.tag_code + '-R' + next_number.to_s
+    end
+
     def create_samples
       if params[:recipient][:auto] != nil
         case params[:recipient][:auto]

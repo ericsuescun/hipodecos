@@ -40,7 +40,7 @@ class ScriptsController < ApplicationController
   # PATCH/PUT /scripts/1.json
   def update
     if @script.update(script_params)
-      redirect_to template_path(@template), notice: 'Script editado exitosamente!'
+      redirect_to template_path(@script.template), notice: 'Script editado exitosamente!'
     else
       render :edit
     end
@@ -49,9 +49,8 @@ class ScriptsController < ApplicationController
   # DELETE /scripts/1
   # DELETE /scripts/1.json
   def destroy
-    @template = @script.template
     @script.destroy
-    redirect_to template_path(@template), notice: 'Script borrado exitosamente!'
+    redirect_to template_path(@script.template), notice: 'Script borrado exitosamente!'
   end
 
   private

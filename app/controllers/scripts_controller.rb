@@ -15,6 +15,7 @@ class ScriptsController < ApplicationController
   # GET /scripts/new
   def new
     @script = Script.new
+    @template = Template.find(params[:template_id])
   end
 
   # GET /scripts/1/edit
@@ -24,47 +25,40 @@ class ScriptsController < ApplicationController
   # POST /scripts
   # POST /scripts.json
   def create
-    @script = Script.new(script_params)
+    # @script = Script.new(script_params)
+    @template = Template.find(params[:template_id])
+    @script = @template.scripts.build(script_params)
 
-    respond_to do |format|
       if @script.save
-        format.html { redirect_to @script, notice: 'Script was successfully created.' }
-        format.json { render :show, status: :created, location: @script }
+        redirect_to template_path(@template), notice: 'Script creado exitosamente!'
       else
-        format.html { render :new }
-        format.json { render json: @script.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
   end
 
   # PATCH/PUT /scripts/1
   # PATCH/PUT /scripts/1.json
   def update
-    respond_to do |format|
-      if @script.update(script_params)
-        format.html { redirect_to @script, notice: 'Script was successfully updated.' }
-        format.json { render :show, status: :ok, location: @script }
-      else
-        format.html { render :edit }
-        format.json { render json: @script.errors, status: :unprocessable_entity }
-      end
+    if @script.update(script_params)
+      redirect_to template_path(@template), notice: 'Script editado exitosamente!'
+    else
+      render :edit
     end
   end
 
   # DELETE /scripts/1
   # DELETE /scripts/1.json
   def destroy
+    @template = @script.template
     @script.destroy
-    respond_to do |format|
-      format.html { redirect_to scripts_url, notice: 'Script was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to template_path(@template), notice: 'Script borrado exitosamente!'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_script
       @script = Script.find(params[:id])
+      # @template = Template.find(script_params[:template_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,47 +1,56 @@
-<%= form_with(model: script, local: true) do |form| %>
-  <% if script.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(script.errors.count, "error") %> prohibited this script from being saved:</h2>
+<% if script.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(script.errors.count, "error") %> prohibited this script from being saved:</h2>
 
-      <ul>
-      <% script.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :template_id %>
-    <%= form.text_field :template_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :script_type %>
-    <%= form.text_field :script_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :param1 %>
-    <%= form.number_field :param1 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :param2 %>
-    <%= form.number_field :param2 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :script_order %>
-    <%= form.number_field :script_order %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <ul>
+    <% script.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-12">
+      <%= form_with model: [@template, @template.scripts.build] do |form| %>
+        <div class="row">
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "Modelo a crear" %>
+              <%= form.select(:script_type, options_for_select([['+1 Rec', 'rec'], ['+1 Bloque', 'blo'], ['+1 Corte', 'cor']], @script.script_type), {  }, class: "form-control input") %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Fragmentos (solo para Bloques o Cortes)" %>
+              <%= form.number_field :param1, class: "form-control input" %>
+            </div>
+
+              <!-- <%= form.hidden_field :param2, value: 0 %> -->
+
+            <div class="form-group">
+              <%= form.label "Orden de ejecución (importante)" %>
+              <%= form.number_field :script_order, class: "form-control input" %>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-10">
+            <div class="form-group">
+              <%= form.label "Descripción (Recipientes, Bloques y Cortes)" %>
+              <%= form.text_area :description, rows: 14, class: "form-control input" %>
+            </div>
+            <div class="actions">
+              <%= form.submit "Guardar", class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+        
+        
+      <% end %>
+    </div>
+    
+    
+
+    </div>
+</div>
+

@@ -1,29 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <h1>Templates</h1>
 
-<h1>Templates</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Organ</th>
+            <th>Title</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Organ</th>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <tbody>
+          <% @templates.each do |template| %>
+            <tr>
+              <td><%= template.organ %></td>
+              <td><%= template.title %></td>
+              <td><%= link_to 'Show', template %></td>
+              <td><%= link_to 'Edit', edit_template_path(template) %></td>
+              <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-  <tbody>
-    <% @templates.each do |template| %>
-      <tr>
-        <td><%= template.organ %></td>
-        <td><%= template.title %></td>
-        <td><%= link_to 'Show', template %></td>
-        <td><%= link_to 'Edit', edit_template_path(template) %></td>
-        <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <br>
 
-<br>
+      <%= link_to 'New Template', new_template_path %>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'New Template', new_template_path %>

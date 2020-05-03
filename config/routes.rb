@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     resources :pictures
     resources :obcodes
     resources :recipients
+    resources :templates
     
 
     
@@ -155,6 +156,10 @@ Rails.application.routes.draw do
 
     resources :physicians do
       resources :objections, module: :physicians
+    end
+
+    resources :templates do
+      resources :scripts
     end
 
 

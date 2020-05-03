@@ -1,14 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<p>
+			  <strong>Órgano:</strong>
+			  <%= @template.organ %>
+			</p>
 
-<p>
-  <strong>Organ:</strong>
-  <%= @template.organ %>
-</p>
+			<p>
+			  <strong>Automático de:</strong>
+			  <%= @template.title %>
+			</p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @template.title %>
-</p>
+			<%= link_to new_template_script_path(@template), class: "btn btn-primary" do %>
+				&plus;
+			<% end %>
 
-<%= link_to 'Edit', edit_template_path(@template) %> |
-<%= link_to 'Back', templates_path %>
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			    	<th>Paso #</th>
+					
+					<th>Tipo</th>
+					<th>Descripción</th>
+					<th>Fragmentos</th>
+					<th>Otro</th>
+			      <th colspan="3"></th>
+			    </tr>
+			  </thead>
+
+			  <tbody>
+			    <% @template.scripts.each do |script| %>
+			      <tr>
+			      	<td><%= script.script_order %></td>
+			        
+			        <td><%= script.script_type %></td>
+			        <td><%= script.description %></td>
+			        <td><%= script.param1 %></td>
+			        <td><%= script.param2 %></td>
+			        <td><%= link_to 'Detalles', script %></td>
+			        <td><%= link_to 'Editar', edit_script_path(script) %></td>
+			        <td><%= link_to 'Borrar', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+
+			<%= link_to 'Edit', edit_template_path(@template) %> |
+			<%= link_to 'Back', templates_path %>
+
+		</div>
+	</div>
+</div>

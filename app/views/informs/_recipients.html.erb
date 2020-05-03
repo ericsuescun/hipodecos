@@ -19,9 +19,12 @@
                 <% end %>
               </div>
               <div class="d-flex">
-                <%= link_to recipient, method: :delete, remote: true, class: "mx-2 my-2 px-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
-                  <span>&times;</span>
+                <% if inform.recipients.where(tag: recipient.tag).count != 0 %>
+                  <%= link_to recipient, method: :delete, remote: true, class: "mx-2 my-2 px-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
+                    <span>&times;</span>
+                  <% end %>
                 <% end %>
+                
               </div>
 
             </div>

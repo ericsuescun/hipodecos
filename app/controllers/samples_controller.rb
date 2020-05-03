@@ -56,7 +56,7 @@ class SamplesController < ApplicationController
       log += "\n-TITULO-\nSIN CAMBIOS."
     end
     if @sample.description != sample_params[:description]
-      log += "\n-DESCRIPCIÓN-\nANTES:" + @sample.description.to_s + "\n- DESPUÉS: -\n" + sample_params[:description]
+      log += "\n-DESCRIPCIÓN-\nANTES:" + @sample.description.to_s + "\n- DESPUÉS: -\n" + sample_params[:description].to_s
     else
       log += "\n-DESCRIPCIÓN-\nSIN CAMBIOS."
     end
@@ -95,7 +95,7 @@ class SamplesController < ApplicationController
 
   private
     def set_sample
-      @sample = Sample.find(params[:id])
+      @sample = Sample.find(params[:id].to_i)
       @inf = @sample.inform_id
     end
 

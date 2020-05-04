@@ -15,6 +15,8 @@
 				&plus;
 			<% end %>
 
+			<p>Scripts/pasos asociados al automático</p>
+
 			<table class="table table-striped">
 			  <thead>
 			    <tr>
@@ -38,7 +40,7 @@
 			        <td><%= script.param1 %></td>
 			        <td><%= script.param2 %></td>
 			        <td><%= link_to 'Detalles', script_path(script) %></td>
-			        <td><%= link_to 'Editar', edit_script_path(script) %></td>
+			        <td><%= link_to 'Editar', edit_template_script_path(@template, script) %></td>
 			        <td><%= link_to 'Borrar', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			      </tr>
 			    <% end %>

@@ -20,6 +20,7 @@ class ScriptsController < ApplicationController
 
   # GET /scripts/1/edit
   def edit
+    @template = Template.find(@script.template.id)
   end
 
   # POST /scripts

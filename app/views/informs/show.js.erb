@@ -1,10 +1,13 @@
 $(document).on('page:load', refresh());
 
 function refresh() {
-	console.log('Estoy en show!');
-	$('button#shortcut').on('click', function(e) {
-		e.preventDefault();
-		console.log('Atajo!');
-	});
-	// $('body').find('input#1rb').submit();
+	modalClose();
+	
+	console.log('Auto ejecutado!');
+	$('div.recipients').remove();
+	$('div.recipient').append('<%= j render "informs/recipients", inform: @inform, edit_sample_tag: "", edit_recipient_tag: "" %>');
+	$('div.fast-bar').append('<%= j render "ok-executed" %>');
+	setTimeout(function() {
+		$('div.alert-growl').remove();
+	}, 3000)
 }

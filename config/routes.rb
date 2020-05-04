@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :organs
   resources :autos
     root to: "static_pages#home"
+
+    get 'execute_templates/create'
   
     get 'static_pages/home'
     get 'static_pages/services'

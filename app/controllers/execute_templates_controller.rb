@@ -16,7 +16,7 @@ class ExecuteTemplatesController < ApplicationController
 				@sample.user_id = current_user.id
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_letter_tag(@inform)
-				@sample.organ_code = @template.organ
+				@sample.organ_code = @template.organ == "" ? nil : @template.organ
 				@sample.description = script.description
 				@sample.fragment = script.param1
 				@sample.save
@@ -28,7 +28,7 @@ class ExecuteTemplatesController < ApplicationController
 				@sample.user_id = current_user.id
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_number_tag(@last_sample)
-				@sample.organ_code = @template.organ
+				@sample.organ_code = @template.organ == "" ? nil : @template.organ
 				@sample.description = script.description
 				@sample.fragment = script.param1
 				@sample.save

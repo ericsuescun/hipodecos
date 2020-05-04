@@ -16,6 +16,7 @@ class ScriptsController < ApplicationController
   def new
     @script = Script.new
     @template = Template.find(params[:template_id])
+    @script.script_order = @template.scripts.count + 1
   end
 
   # GET /scripts/1/edit

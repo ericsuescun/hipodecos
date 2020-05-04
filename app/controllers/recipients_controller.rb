@@ -33,7 +33,7 @@ class RecipientsController < ApplicationController
 
     @recipient.save
 
-    create_samples
+    # create_samples
       
     # if recipient.save
     #   redirect_to inform, notice: 'El recipiente fue creado exitosamente.'

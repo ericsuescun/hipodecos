@@ -2,13 +2,7 @@
 	<div class="row">
 		<div class="col-12 col-lg-12">
 			<p>
-			  <strong>Órgano:</strong>
-			  <%= @template.organ %>
-			</p>
-
-			<p>
-			  <strong>Automático de:</strong>
-			  <%= @template.title %>
+			  Automático para <strong><%= @template.organ %></strong>: <%= @template.title %>
 			</p>
 
 			<%= link_to new_template_script_path(@template), class: "btn btn-primary mb-2" do %>

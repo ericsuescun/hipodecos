@@ -161,52 +161,53 @@
                 <%= form.hidden_field :template, value: 5 %>
               </div>
             <% end %>
-            
-            <%= form_with model: [inform, inform.recipients.build] do |form| %>
+            <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
               <div class="actions">
                 <%= form.submit "+ Rec +2", class: "btn btn-primary mx-1 my-1" %>
-                <%= form.hidden_field :samples, value: 2 %>
-                <%= form.hidden_field :tag, value: inform.tag_code %>
-              </div>
-            <% end %>
-            <%= form_with model: [inform, inform.recipients.build] do |form| %>
-              <div class="actions">
-                <%= form.submit "+ Rec +3", class: "btn btn-primary mx-1 my-1" %>
-                <%= form.hidden_field :samples, value: 3 %>
-                <%= form.hidden_field :tag, value: inform.tag_code %>
+                <%= form.hidden_field :inform_id, value: inform.id %>
+                <%= form.hidden_field :template, value: 6 %>
               </div>
             <% end %>
             <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
               <div class="actions">
-                <%= form.submit "+ Rec +3", class: "btn btn-warning mx-1 my-1" %>
+                <%= form.submit "+ Rec +3", class: "btn btn-primary mx-1 my-1" %>
                 <%= form.hidden_field :inform_id, value: inform.id %>
-                <%= form.hidden_field :template, value: 1 %>
+                <%= form.hidden_field :template, value: 7 %>
               </div>
             <% end %>
+
+
           </div>
         </div>
 
-        <div class="col-12 col-lg-3 col-xl-3">
+        <div class="col-12 col-lg-4 col-xl-3">
           <!-- <h4>Mas atajos</h4> -->
-          <%= form_with model: [inform, inform.recipients.build] do |form| %>
+          <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
             
             
             <div class="row d-flex flex-row">
               
-              <div class="col-12 col-lg-5 col-xl-3">
+              <div class="col-12 col-lg-4 col-xl-3">
                 <div class="actions mt-3">
-                  <%= form.submit "+ Rec +", class: "btn btn-primary" %>
+                  <%= form.submit "+ Rec +", class: "btn btn-success" %>
                 </div>
               </div>
 
-              <div class="col-12 col-lg-4 col-xl-3">
+              <div class="col-12 col-lg-3 col-xl-3">
                 <div class="form-group mt-3">
                   <%= form.number_field :samples, value: 4, class: "form-control input" %>
                 </div>
               </div>
+
+              <div class="col-12 col-lg-4 col-xl-4">
+                <div class="form-group mt-3">
+                  <%= form.collection_select(:organ, Organ.all, :organ, :organ, {prompt: 'Órgano'}, { class: "btn btn-success form-control input" }) %>
+                </div>
+              </div>
               
             </div>
-            <%= form.hidden_field :tag, value: inform.tag_code %>
+            <%= form.hidden_field :inform_id, value: inform.id %>
+            <%= form.hidden_field :template, value: 8 %>
             
           <% end %>
         </div>

@@ -11,6 +11,25 @@ class ExecuteTemplatesController < ApplicationController
 				@recipient.description = script.description
 				@recipient.save
 
+				if params[:samples] != nil
+					params[:samples].to_i.times do |n|
+						@sample = @inform.samples.build
+						@sample.user_id = current_user.id
+						@sample.recipient_tag = @recipient.tag
+						@sample.sample_tag = generate_letter_tag(@inform)
+						if params[:organ] != "" && @template.organ == ""
+							@sample.organ_code = params[:organ]
+						else
+							@sample.organ_code = @template.organ == "" ? nil : @template.organ
+						end
+						@sample.description = script.description
+						@sample.fragment = script.param1
+						@sample.save
+
+						@last_sample = @sample
+					end
+				end
+
 			when "blo"
 				@sample = @inform.samples.build
 				@sample.user_id = current_user.id

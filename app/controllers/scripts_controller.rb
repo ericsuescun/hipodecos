@@ -30,6 +30,9 @@ class ScriptsController < ApplicationController
     # @script = Script.new(script_params)
     @template = Template.find(params[:template_id])
     @script = @template.scripts.build(script_params)
+    if @script.script_type = "rec"
+      @script.organ = ""
+    end
 
       if @script.save
         redirect_to template_path(@template), notice: 'Script creado exitosamente!'
@@ -64,6 +67,6 @@ class ScriptsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def script_params
-      params.require(:script).permit(:template_id, :script_type, :description, :param1, :param2, :script_order)
+      params.require(:script).permit(:template_id, :script_type, :description, :param1, :param2, :script_order, :organ)
     end
 end

@@ -1,4 +1,6 @@
 class ExecuteTemplatesController < ApplicationController
+	before_action :authenticate_user!
+	
 	def create
 		@inform = Inform.find(params[:inform_id])
 		@template = Template.find(params[:template])
@@ -35,7 +37,7 @@ class ExecuteTemplatesController < ApplicationController
 				@sample.user_id = current_user.id
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_letter_tag(@inform)
-				@sample.organ_code = @template.organ == "" ? nil : @template.organ
+				@sample.organ_code = script.organ == "" ? nil : script.organ
 				@sample.description = script.description
 				@sample.fragment = script.param1
 				@sample.save
@@ -47,7 +49,7 @@ class ExecuteTemplatesController < ApplicationController
 				@sample.user_id = current_user.id
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_number_tag(@last_sample)
-				@sample.organ_code = @template.organ == "" ? nil : @template.organ
+				@sample.organ_code = script.organ == "" ? nil : script.organ
 				@sample.description = script.description
 				@sample.fragment = script.param1
 				@sample.save

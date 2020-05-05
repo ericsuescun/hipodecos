@@ -15,7 +15,7 @@
 			  <thead>
 			    <tr>
 			    	<th>Paso #</th>
-					
+					<th>Órgano Ref.</th>
 					<th>Tipo</th>
 					<th>Descripción</th>
 					<th>Fragmentos</th>
@@ -28,7 +28,7 @@
 			    <% @template.scripts.each do |script| %>
 			      <tr>
 			      	<td><%= script.script_order %></td>
-			        
+			        <td><%= script.organ %></td>
 			        <td><%= script.script_type %></td>
 			        <td><%= script.description %></td>
 			        <td><%= script.param1 %></td>

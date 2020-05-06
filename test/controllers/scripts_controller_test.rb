@@ -17,7 +17,7 @@ class ScriptsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create script" do
     assert_difference('Script.count') do
-      post scripts_url, params: { script: { description: @script.description, param1: @script.param1, param2: @script.param2, script_order: @script.script_order, script_type: @script.script_type, template_id: @script.template_id } }
+      post scripts_url, params: { script: { automatic_id: @script.automatic_id, description: @script.description, organ: @script.organ, param1: @script.param1, param2: @script.param2, script_order: @script.script_order, script_type: @script.script_type } }
     end
 
     assert_redirected_to script_url(Script.last)
@@ -34,7 +34,7 @@ class ScriptsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update script" do
-    patch script_url(@script), params: { script: { description: @script.description, param1: @script.param1, param2: @script.param2, script_order: @script.script_order, script_type: @script.script_type, template_id: @script.template_id } }
+    patch script_url(@script), params: { script: { automatic_id: @script.automatic_id, description: @script.description, organ: @script.organ, param1: @script.param1, param2: @script.param2, script_order: @script.script_order, script_type: @script.script_type } }
     assert_redirected_to script_url(@script)
   end
 

@@ -5,10 +5,10 @@
 <table>
   <thead>
     <tr>
-      <th>Template</th>
+      <th>Automatic</th>
       <th>Script type</th>
-      <th>Órgano</th>
       <th>Description</th>
+      <th>Organ</th>
       <th>Param1</th>
       <th>Param2</th>
       <th>Script order</th>
@@ -19,10 +19,10 @@
   <tbody>
     <% @scripts.each do |script| %>
       <tr>
-        <td><%= script.template %></td>
+        <td><%= script.automatic %></td>
         <td><%= script.script_type %></td>
-        <td><%= script.organ %></td>
         <td><%= script.description %></td>
+        <td><%= script.organ %></td>
         <td><%= script.param1 %></td>
         <td><%= script.param2 %></td>
         <td><%= script.script_order %></td>

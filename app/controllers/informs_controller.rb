@@ -24,7 +24,7 @@ class InformsController < ApplicationController
   def show
     @organs = Organ.all
 
-    @templates = ::Template.all
+    @automatics = Automatic.all
 
     # clasify_templates
   end

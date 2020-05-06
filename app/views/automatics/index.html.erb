@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-xl-6 mx-auto">
+      <h1>Automáticos para macros</h1>
+      <%= link_to ' + ', new_automatic_path, class: "btn btn-primary mb-3" %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Órgano</th>
+            <th>Título</th>
+            <th># pasos</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @automatics.each do |automatic| %>
+            <tr>
+              <td><%= automatic.organ %></td>
+              <td><%= automatic.title %></td>
+              <td><%= automatic.scripts.count %></td>
+              <td><%= link_to 'Detalles', automatic %></td>
+              <td><%= link_to 'Editar', edit_automatic_path(automatic) %></td>
+              <td><%= link_to 'Borrar', automatic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+
+      
+
+    </div>
+  </div>
+</div>

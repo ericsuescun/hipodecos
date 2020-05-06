@@ -14,12 +14,13 @@ class ScriptsTest < ApplicationSystemTestCase
     visit scripts_url
     click_on "New Script"
 
+    fill_in "Automatic", with: @script.automatic_id
     fill_in "Description", with: @script.description
+    fill_in "Organ", with: @script.organ
     fill_in "Param1", with: @script.param1
     fill_in "Param2", with: @script.param2
     fill_in "Script order", with: @script.script_order
     fill_in "Script type", with: @script.script_type
-    fill_in "Template", with: @script.template_id
     click_on "Create Script"
 
     assert_text "Script was successfully created"
@@ -30,12 +31,13 @@ class ScriptsTest < ApplicationSystemTestCase
     visit scripts_url
     click_on "Edit", match: :first
 
+    fill_in "Automatic", with: @script.automatic_id
     fill_in "Description", with: @script.description
+    fill_in "Organ", with: @script.organ
     fill_in "Param1", with: @script.param1
     fill_in "Param2", with: @script.param2
     fill_in "Script order", with: @script.script_order
     fill_in "Script type", with: @script.script_type
-    fill_in "Template", with: @script.template_id
     click_on "Update Script"
 
     assert_text "Script was successfully updated"

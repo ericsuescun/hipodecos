@@ -3,8 +3,12 @@ class ExecuteTemplatesController < ApplicationController
 	
 	def create
 		@inform = Inform.find(params[:inform_id])
-		@template = Template.find(params[:template])
-		@template.scripts.each do |script|
+		if params[:automatic] == nil
+			@automatic = Automatic.where(title: params[:title]).first
+		else
+			@automatic = Automatic.find(params[:automatic])
+		end
+		@automatic.scripts.each do |script|
 			case script.script_type
 			when "rec"
 				@recipient = @inform.recipients.build
@@ -19,10 +23,10 @@ class ExecuteTemplatesController < ApplicationController
 						@sample.user_id = current_user.id
 						@sample.recipient_tag = @recipient.tag
 						@sample.sample_tag = generate_letter_tag(@inform)
-						if params[:organ] != "" && @template.organ == ""
+						if params[:organ] != "" && @automatic.organ == ""
 							@sample.organ_code = params[:organ]
 						else
-							@sample.organ_code = @template.organ == "" ? nil : @template.organ
+							@sample.organ_code = @automatic.organ == "" ? nil : @automatic.organ
 						end
 						@sample.description = script.description
 						@sample.fragment = script.param1

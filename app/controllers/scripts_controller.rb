@@ -15,29 +15,29 @@ class ScriptsController < ApplicationController
   # GET /scripts/new
   def new
     @script = Script.new
-    @template = Template.find(params[:template_id])
-    @script.script_order = @template.scripts.count + 1
-    @selected = @template.organ
+    @automatic = Automatic.find(params[:automatic_id])
+    @script.script_order = @automatic.scripts.count + 1
+    @selected = @automatic.organ
   end
 
   # GET /scripts/1/edit
   def edit
-    @template = Template.find(@script.template.id)
-    @selected = @template.organ
+    @automatic = Automatic.find(@script.automatic.id)
+    @selected = @automatic.organ
   end
 
   # POST /scripts
   # POST /scripts.json
   def create
     # @script = Script.new(script_params)
-    @template = Template.find(params[:template_id])
-    @script = @template.scripts.build(script_params)
+    @automatic = Automatic.find(params[:automatic_id])
+    @script = @automatic.scripts.build(script_params)
     if @script.script_type == "rec"
       @script.organ = ""
     end
 
       if @script.save
-        redirect_to template_path(@template), notice: 'Script creado exitosamente!'
+        redirect_to automatic_path(@automatic), notice: 'Script creado exitosamente!'
       else
         render :new
       end
@@ -47,7 +47,7 @@ class ScriptsController < ApplicationController
   # PATCH/PUT /scripts/1.json
   def update
     if @script.update(script_params)
-      redirect_to template_path(@script.template), notice: 'Script editado exitosamente!'
+      redirect_to automatic_path(@script.automatic), notice: 'Script editado exitosamente!'
     else
       render :edit
     end
@@ -57,18 +57,18 @@ class ScriptsController < ApplicationController
   # DELETE /scripts/1.json
   def destroy
     @script.destroy
-    redirect_to template_path(@script.template), notice: 'Script borrado exitosamente!'
+    redirect_to automatic_path(@script.automatic), notice: 'Script borrado exitosamente!'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_script
       @script = Script.find(params[:id])
-      # @template = Template.find(script_params[:template_id])
+      # @automatic = Automatic.find(script_params[:template_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def script_params
-      params.require(:script).permit(:template_id, :script_type, :description, :param1, :param2, :script_order, :organ)
+      params.require(:script).permit(:automatic_id, :script_type, :description, :param1, :param2, :script_order, :organ)
     end
 end

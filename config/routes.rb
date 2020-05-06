@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :scripts
-  resources :templates
-  resources :organs
+
   resources :autos
     root to: "static_pages#home"
 
@@ -60,7 +58,9 @@ Rails.application.routes.draw do
     resources :pictures
     resources :obcodes
     resources :recipients
-    resources :templates
+    resources :automatics
+    resources :scripts
+    resources :organs
     
 
     
@@ -160,7 +160,7 @@ Rails.application.routes.draw do
       resources :objections, module: :physicians
     end
 
-    resources :templates do
+    resources :automatics do
       resources :scripts
     end
 

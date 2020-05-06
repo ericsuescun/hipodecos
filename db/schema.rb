@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_015435) do
+ActiveRecord::Schema.define(version: 2020_05_06_123019) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 2020_04_28_015435) do
     t.datetime "remember_created_at"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "automatics", force: :cascade do |t|
+    t.string "organ"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "autos", force: :cascade do |t|
@@ -348,6 +355,19 @@ ActiveRecord::Schema.define(version: 2020_04_28_015435) do
     t.string "organ_code"
     t.integer "fragment"
     t.index ["inform_id"], name: "index_samples_on_inform_id"
+  end
+
+  create_table "scripts", force: :cascade do |t|
+    t.integer "automatic_id"
+    t.string "script_type"
+    t.text "description"
+    t.string "organ"
+    t.integer "param1"
+    t.integer "param2"
+    t.integer "script_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["automatic_id"], name: "index_scripts_on_automatic_id"
   end
 
   create_table "slides", force: :cascade do |t|

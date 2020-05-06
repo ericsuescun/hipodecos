@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_150214) do
+ActiveRecord::Schema.define(version: 2020_04_28_015435) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -350,19 +350,6 @@ ActiveRecord::Schema.define(version: 2020_05_05_150214) do
     t.index ["inform_id"], name: "index_samples_on_inform_id"
   end
 
-  create_table "scripts", force: :cascade do |t|
-    t.integer "template_id"
-    t.string "script_type"
-    t.text "description"
-    t.integer "param1"
-    t.integer "param2"
-    t.integer "script_order"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "organ"
-    t.index ["template_id"], name: "index_scripts_on_template_id"
-  end
-
   create_table "slides", force: :cascade do |t|
     t.integer "inform_id"
     t.integer "user_id"
@@ -382,14 +369,6 @@ ActiveRecord::Schema.define(version: 2020_05_05_150214) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["inform_id"], name: "index_studies_on_inform_id"
-  end
-
-  create_table "templates", force: :cascade do |t|
-    t.string "organ"
-    t.string "title"
-    t.string "template_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

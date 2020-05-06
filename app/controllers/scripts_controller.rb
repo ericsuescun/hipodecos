@@ -17,11 +17,13 @@ class ScriptsController < ApplicationController
     @script = Script.new
     @template = Template.find(params[:template_id])
     @script.script_order = @template.scripts.count + 1
+    @selected = @template.organ
   end
 
   # GET /scripts/1/edit
   def edit
     @template = Template.find(@script.template.id)
+    @selected = @template.organ
   end
 
   # POST /scripts
@@ -30,7 +32,7 @@ class ScriptsController < ApplicationController
     # @script = Script.new(script_params)
     @template = Template.find(params[:template_id])
     @script = @template.scripts.build(script_params)
-    if @script.script_type = "rec"
+    if @script.script_type == "rec"
       @script.organ = ""
     end
 

@@ -12,27 +12,28 @@
         ...
       </div>
       <div class="container">
-        <div class="row">
-          <div class="d-flex flex-column">
-            <% ::Template.where(organ: "Estomago").each do |template| %>
 
-              <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
-                <div class="actions">
-                  <%= form.submit template.title, class: "organ-#{Organ.where(organ: template.organ).first.part} mx-1 my-1" %>
-                  <%= form.hidden_field :inform_id, value: inform.id %>
-                  <%= form.hidden_field :template, value: template.id %>
-                </div>
-              <% end %>
-              
+        <div class="row">
+          <div class="d-flex flex-row">
+            <% ::Template.all.each do |plantilla| %>
+              <% if plantilla.organ != "" %>
+                <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
+                  <div class="actions">
+                    <%= form.submit plantilla.title, class: "organ-Digestivo mb-2" %>
+                    <%= form.hidden_field :inform_id, value: inform.id %>
+                    <%= form.hidden_field :template, value: plantilla.id %>
+                  </div>
+                <% end %>
+              <% end %>  
             <% end %>
           </div>
         </div>
+
       </div>
 
       
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

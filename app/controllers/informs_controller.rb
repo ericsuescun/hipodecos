@@ -23,6 +23,10 @@ class InformsController < ApplicationController
   # GET /informs/1.json
   def show
     @organs = Organ.all
+
+    @templates = ::Template.all
+
+    # clasify_templates
   end
 
   # GET /informs/new
@@ -98,7 +102,162 @@ class InformsController < ApplicationController
     
   end
 
-  private
+  # private
+    def clasify_templates
+      # @circulatorio = []
+      # Organ.where(part: "Circulatorio").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @circulatorio << template
+      #     end
+      #   end
+      # end
+
+      # @linfatico = []
+      # Organ.where(part: "Linfatico").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @linfatico << template
+      #     end
+      #   end
+      # end
+
+      # @respiratorio = []
+      # Organ.where(part: "Respiratorio").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @respiratorio << template
+      #     end
+      #   end
+      # end
+
+      # @reticuloendotelial = []
+      # Organ.where(part: "Reticulo Endotelial").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @reticuloendotelial << template
+      #     end
+      #   end
+      # end
+
+      # @digestivo = []
+      # Organ.where(part: "Digestivo").each do |organ|
+      #   ::Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @digestivo << template
+      #     end
+      #   end
+      # end
+
+      # @urinario = []
+      # Organ.where(part: "Urinario").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @urinario << template
+      #     end
+      #   end
+      # end
+
+      # @genitalmasculino = []
+      # Organ.where(part: "Genital Masculino").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @genitalmasculino << template
+      #     end
+      #   end
+      # end
+
+      # @genitalfemenino = []
+      # Organ.where(part: "Genital Femenino").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @genitalfemenino << template
+      #     end
+      #   end
+      # end
+
+      # @endocrino = []
+      # Organ.where(part: "Endocrino").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @endocrino << template
+      #     end
+      #   end
+      # end
+
+      # @nervioso = []
+      # Organ.where(part: "Nervioso").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @nervioso << template
+      #     end
+      #   end
+      # end
+
+      # @sentidos = []
+      # Organ.where(part: "Sentidos").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @sentidos << template
+      #     end
+      #   end
+      # end
+
+      # @piel = []
+      # Organ.where(part: "Piel").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @piel << template
+      #     end
+      #   end
+      # end
+
+      # @musculo = []
+      # Organ.where(part: "Musculo").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @musculo << template
+      #     end
+      #   end
+      # end
+
+      # @osteoarticular = []
+      # Organ.where(part: "Osteoarticular").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @osteoarticular << template
+      #     end
+      #   end
+      # end
+
+      # @dientes = []
+      # Organ.where(part: "Dientes").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @dientes << template
+      #     end
+      #   end
+      # end
+
+      # @sida = []
+      # Organ.where(part: "SIDA").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @sida << template
+      #     end
+      #   end
+      # end
+
+      # @generales = []
+      # Organ.where(part: "Generales").each do |organ|
+      #   Template.all.each do |template|
+      #     if template.organ == organ.organ
+      #       @generales << template
+      #     end
+      #   end
+      # end
+
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_inform
       @inform = Inform.find(params[:id])

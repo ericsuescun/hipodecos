@@ -141,9 +141,12 @@
         <% end %>
       </ul>
       <ul class="navbar-nav d-flex justify-content-end">
+        <li class="nav-item mr-2 mt-1">
+          <%= link_to "Templ.", templates_path, class: "btn btn-outline-warning btn-sm btn-block my-2 my-lg-0" %>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Rep. informes
+            Rep. I
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "Hoy", reports_status_path + day_before_search(0), class: "dropdown-item" %>
@@ -165,7 +168,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Rep. calidad
+            Rep. C
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "Hoy", reports_objections_path + day_before_search(0), class: "dropdown-item" %>
@@ -187,7 +190,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Rep. ventas
+            Rep. V
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "Hoy", reports_sales_path + day_before_search(0), class: "dropdown-item" %>

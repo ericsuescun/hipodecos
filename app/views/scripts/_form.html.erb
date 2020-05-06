@@ -28,8 +28,8 @@
 
             <div class="form-group">
               <!-- <%= form.label "Órgano" %> -->
-              <!-- <%= form.text_field :organ, class: "form-control form-control input" %> -->
-              <%= form.collection_select(:organ, Organ.all, :organ, :organ, {include_blank: true, prompt: 'Seleccione órgano'}, { class: "form-control form-control input" }) %>
+              <!-- <%= form.text_field :organ, class: "form-control input" %> -->
+              <%= form.collection_select(:organ, Organ.all, :organ, :organ, {selected: @selected, include_blank: true, prompt: 'Seleccione órgano'}, { class: "form-control input" }) %>
             </div>
 
               <!-- <%= form.hidden_field :param2, value: 0 %> -->

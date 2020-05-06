@@ -28,7 +28,7 @@ class AutomaticsController < ApplicationController
 
     respond_to do |format|
       if @automatic.save
-        format.html { redirect_to @automatic, notice: 'Automatic was successfully created.' }
+        format.html { redirect_to @automatic, notice: 'El automático fue creado exitosamente!' }
         format.json { render :show, status: :created, location: @automatic }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class AutomaticsController < ApplicationController
   def update
     respond_to do |format|
       if @automatic.update(automatic_params)
-        format.html { redirect_to @automatic, notice: 'Automatic was successfully updated.' }
+        format.html { redirect_to @automatic, notice: 'El automático fue actualizado exitosamente!' }
         format.json { render :show, status: :ok, location: @automatic }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class AutomaticsController < ApplicationController
   def destroy
     @automatic.destroy
     respond_to do |format|
-      format.html { redirect_to automatics_url, notice: 'Automatic was successfully destroyed.' }
+      format.html { redirect_to automatics_url, notice: 'El automático y sus pasos fueron borrados exitosamente!' }
       format.json { head :no_content }
     end
   end

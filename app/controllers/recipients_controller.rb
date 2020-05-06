@@ -21,6 +21,7 @@ class RecipientsController < ApplicationController
   def edit
     @inform = Inform.find(@recipient.inform_id)
     @edit_recipient_tag = @recipient.tag
+    @automatics = Automatic.all
   end
 
   def create
@@ -30,6 +31,7 @@ class RecipientsController < ApplicationController
     @recipient.tag = generate_rec_tag
     @recipient.user_id = current_user.id
     # tag_shift = @inform.samples.count
+    @automatics = Automatic.all
 
     @recipient.save
 
@@ -45,11 +47,13 @@ class RecipientsController < ApplicationController
   def update
     @recipient.update(recipient_params)
     @inform = Inform.find(@recipient.inform_id)
+    @automatics = Automatic.all
   end
 
   def destroy
     @recipient.destroy
     @inform = Inform.find(@inf)
+    @automatics = Automatic.all
     # redirect_to inform_path(@inf), notice: 'Recipient was successfully destroyed.'
   end
 

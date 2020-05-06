@@ -15,7 +15,7 @@
 
         <div class="row">
           <div class="d-flex flex-row">
-            <% Automatic.all.each do |automatic| %>
+            <% automatics.each do |automatic| %>
               <% if automatic.organ != "" %>
                 <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
                   <div class="actions">

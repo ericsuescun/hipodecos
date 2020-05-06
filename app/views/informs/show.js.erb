@@ -5,7 +5,7 @@ function refresh() {
 	
 	console.log('Auto ejecutado!');
 	$('div.recipients').remove();
-	$('div.recipient').append('<%= j render "informs/recipients", inform: @inform, edit_sample_tag: "", edit_recipient_tag: "" %>');
+	$('div.recipient').append('<%= j render "informs/recipients", inform: @inform, automatics: @automatics, edit_sample_tag: "", edit_recipient_tag: "" %>');
 	$('div.fast-bar').append('<%= j render "ok-executed" %>');
 	setTimeout(function() {
 		$('div.alert-growl').remove();

@@ -24,6 +24,7 @@ class SamplesController < ApplicationController
     recipient = @sample.recipient_tag
     @recipient = Recipient.where(tag: recipient).first
     @edit_sample_tag = @sample.sample_tag
+    @automatics = Automatic.all
   end
 
   # POST /samples
@@ -44,6 +45,7 @@ class SamplesController < ApplicationController
 
     recipient = @sample.recipient_tag
     @recipient = Recipient.where(tag: recipient).first
+    @automatics = Automatic.all
 
   end
 
@@ -75,6 +77,7 @@ class SamplesController < ApplicationController
     @inform = Inform.find(@sample.inform_id)
     recipient = @sample.recipient_tag
     @recipient = Recipient.where(tag: recipient).first
+    @automatics = Automatic.all
 
   end
 
@@ -90,6 +93,7 @@ class SamplesController < ApplicationController
       end
     end
     @inform = Inform.find(@sample.inform_id)
+    @automatics = Automatic.all
 
   end
 

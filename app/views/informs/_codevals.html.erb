@@ -1,43 +1,47 @@
-<h1>CUPS para <%= @inform.tag_code %></h1>
-<div class="row">
-  <div class="col-12 col-lg-8">
+<div class="codevals">
+  <div class="container-fluid">
     <div class="row">
-      <% @inform.studies.each do |study| %>
-        <div class="col-12 col-lg-3">
-          <div class="card text-center mt-3">
-            <div class="card-header">
-              <strong>CUPS <%= Codeval.find(study.codeval_id).code %></strong>
+      <div class="col-12 col-lg-8">
+        <div class="row">
+          <% @inform.studies.each do |study| %>
+            <div class="col-12 col-lg-3">
+              <div class="card text-center mt-3">
+                <div class="card-header p-0 m-0">
+                  <strong><%= Codeval.find(study.codeval_id).code %> x <%= study.factor %></strong>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"></h5>
+                  <%= link_to edit_study_path(study), class: "d-flex my-0 py-0" do %>
+                    <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
+                  <% end %>
+                  <%= link_to study, method: :delete, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
+                    <span>&times;</span>
+                  <% end %>
+                </div>
+              </div>
             </div>
-            <div class="card-body">
-              <h5 class="card-title"><%= study.factor %> X</h5>
-              <%= link_to "Editar", edit_study_path(study), class: 'btn btn-primary' %>
-              <%= link_to 'Borrar', study, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-            </div>
-            <div class="card-footer text-muted">
-              <p>Creada el <%= study.created_at %> por <%= User.find(study.user_id).email %></p>
-            </div>
+          <% end %>
+        </div>      
+      </div>
+      <div class="col-12 col-lg-3 mx-auto">
+        <%= form_for [@inform, @inform.studies.build] do |form| %>
+
+          <div class="form-group">
+            <%= form.label "Código CUPS" %>
+            <%= form.select :codeval_id, Codeval.pluck(:name, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
           </div>
-        </div>
-      <% end %>
-    </div>      
-  </div>
-  <div class="col-12 col-lg-3 mx-auto">
-    <%= form_for [@inform, @inform.studies.build] do |form| %>
 
-      <div class="form-group">
-        <%= form.label "Código CUPS" %>
-        <%= form.select :codeval_id, Codeval.pluck(:name, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
+          <div class="form-group">
+            <%= form.label "¿Cuántos CUPS de éste tipo requieres?" %>
+            <%= form.number_field :factor, class: "form-control input" %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
+          </div>
+
+        <% end %>
       </div>
-
-      <div class="form-group">
-        <%= form.label "¿Cuántos CUPS de éste tipo requieres?" %>
-        <%= form.number_field :factor, class: "form-control input" %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
-      </div>
-
-    <% end %>
+    </div>
   </div>
 </div>

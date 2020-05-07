@@ -1,35 +1,52 @@
 <!-- Modal -->
-<div class="modal fade" id="autosMacroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+
+<div class="modal fade bd-example-modal-xl" id="autosMacroModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
+
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Automáticos para Macro</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
       <div class="modal-body">
-        ...
-      </div>
-      <div class="container">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 col-lg-12 col-xl-12">
+              
+                <% Organ.all.each do |organ| %>
+                  <div class="d-flex flex-wrap">
 
-        <div class="row">
-          <div class="d-flex flex-row">
-            <% automatics.each do |automatic| %>
-              <% if automatic.organ != "" %>
-                <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
-                  <div class="actions">
-                    <%= form.submit automatic.title, class: "organ-Digestivo mb-2" %>
-                    <%= form.hidden_field :inform_id, value: inform.id %>
-                    <%= form.hidden_field :automatic, value: automatic.id %>
+                    <% Automatic.where(organ: organ.organ).each do |automatic| %>
+
+                      <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
+                        <div class="actions">
+                          <%= form.submit automatic.title, class: "organ-#{Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '')} mb-2" %>
+                          <%= form.hidden_field :inform_id, value: inform.id %>
+                          <%= form.hidden_field :automatic, value: automatic.id %>
+                        </div>
+                      <% end %>
+
+                    <% end %>
                   </div>
+
                 <% end %>
-              <% end %>  
-            <% end %>
+
+                
+
+                
+            </div>
+
+
           </div>
         </div>
-
+        
       </div>
+
+
+
 
       
       <div class="modal-footer">

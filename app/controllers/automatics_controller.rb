@@ -19,6 +19,7 @@ class AutomaticsController < ApplicationController
 
   # GET /automatics/1/edit
   def edit
+    @selected = @automatic.organ
   end
 
   # POST /automatics

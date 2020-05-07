@@ -66,7 +66,7 @@
 
                           <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
 
-                            <span class="d-flex "><strong><%= get_nomen(sample.sample_tag) %>: <%= sample.fragment %>F</strong> - <%= sample.organ_code %></span>
+                            <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
 
                             <%= link_to sample, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
                               <span>&times;</span>
@@ -85,11 +85,12 @@
                                 <%= render partial: "informs/organs_choice", locals: { sample: sample } %>
                                 
                               <% else %>
+
                               <% end %> 
                             </div>
                             
-                            <h6 class="card-title my-0"><%= sample.description %></h6>
-                            
+                            <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
+                            <%= sample.description %>
                             <% if sample.fragment == nil || sample.description == nil || edit_sample_tag == sample.sample_tag %>
                               <%= form_with model: sample do |f| %>
                                   <div class="field">

@@ -143,12 +143,67 @@ module InformsHelper
 		else
 			return "white"
 		end
+	end
 
+	def get_autocolor(automatic)
+		# n "rgba(255,0,0,0.1)"
 
-		
-
-
-
+		if automatic.organ != nil
+			if Organ.where(organ: automatic.organ).first.part == "Circulatorio"
+				return "rgba(255,0,0,0.1)"
+			end
+			
+			if Organ.where(organ: automatic.organ).first.part == "Linfatico"
+				return "white"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Respiratorio"
+				return "rgba(0,0,255,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Reticulo Endotelial"
+				return "rgba(255,0,255,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Digestivo"
+				return "rgba(255,255,0,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Urinario"
+				return "rgba(255,150,0,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Genital Masculino"
+				return "rgba(0,0,255,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Genital Femenino"
+				return "rgba(255,150,255,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Endocrino"
+				return "rgba(255,150,255,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Nervioso"
+				return "rgba(0,255,0,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Sentidos"
+				return "rgba(255,255,0,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Piel"
+				return "pink"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Musculo"
+				return "rgba(255,150,0,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Osteoarticular"
+				return "rgba(0,0,0,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Dientes"
+				return "rgba(0,0,0,0.4)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "SIDA"
+				return "rgba(0,0,255,0.1)"
+			end
+			if Organ.where(organ: automatic.organ).first.part == "Generales"
+				return "rgba(0,255,0,0.1)"
+			end
+		else
+			return "white"
+		end
 	end
 end
 

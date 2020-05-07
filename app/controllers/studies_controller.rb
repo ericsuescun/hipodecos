@@ -71,8 +71,8 @@ class StudiesController < ApplicationController
   # DELETE /studies/1
   # DELETE /studies/1.json
   def destroy
+    @inform = @study.inform
     @study.destroy
-    redirect_to inform_path(@inf), notice: 'CUPS exitosamente borrado.'
   end
 
   private

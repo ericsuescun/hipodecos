@@ -3,7 +3,7 @@
 	function refresh2() {
 	  $('div.codevals').remove();
 	  $('div.codeval').append('<%= j render "informs/codevals", inform: @inform, edit_study_form: nil %>');
-	  $('div.fast-bar').append('<%= j render "ok-message", message: "borrado" %>');
+	  $('div.fast-bar').append('<%= j render "ok-message", message: "editado" %>');
 	  setTimeout(function() {
 	  	$('div.alert-growl').remove();
 	  }, 3000)

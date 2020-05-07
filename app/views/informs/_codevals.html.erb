@@ -4,20 +4,56 @@
       <div class="col-12">
         <div class="row">
           <% inform.studies.each do |study| %>
-            <div class="col-12 col-lg-4">
-              <div class="card mb-2">
-                
-                <div class="card-body p-0 m-0 d-flex justify-content-between align-items-center">
-                  <%= link_to edit_study_path(study), class: "d-flex my-0 py-0" do %>
-                    <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
-                  <% end %>
-                  <strong><%= Codeval.find(study.codeval_id).code %> x <%= study.factor %></strong>
-                  <%= link_to study, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
-                    <span>&times;</span>
-                  <% end %>
-                  
+            <div class="col-12 col-lg-2">
+              <% if edit_study_form == study %>
+                <div class="card mb-2">
+                  <div class="card-body p-0 m-0 d-flex justify-content-between align-items-center">
+
+                    <%= form_for [inform, inform.studies.build] do |form| %>
+                      <div class="row d-flex flex-row">
+
+                        <div class="col-12 col-lg-4 col-xl-4 mt-3">
+                          <div class="form-group">
+                            <%= form.select :codeval_id, Codeval.pluck(:name, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
+                          </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-2 col-xl-2 mt-3">
+                          <div class="form-group">
+                            <%= form.number_field :factor, value: 1, class: "form-control input d-flex" %>
+                          </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-1 col-xl-1 mt-3">
+                          <div class="actions">
+                            <%= form.submit "Guardar", class: "btn btn-warning" %>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    <% end %>
+                    
+                    <strong><%= Codeval.find(study.codeval_id).code %> x <%= study.factor %></strong>
+
+                  </div>
                 </div>
-              </div>
+              <% else %>
+                <div class="card mb-2">
+                  <div class="card-body p-0 m-0 d-flex justify-content-between align-items-center">
+                    <%= link_to edit_study_path(study), remote: true, class: "d-flex my-0 py-0" do %>
+                      <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
+                    <% end %>
+                    <strong><%= Codeval.find(study.codeval_id).code %> x <%= study.factor %></strong>
+                    <%= link_to study, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
+                      <span>&times;</span>
+                    <% end %>
+                  </div>
+                </div>
+                
+              <% end %>
+              
+
             </div>
           <% end %>
         </div>      
@@ -33,7 +69,7 @@
             </div>
 
             <div class="col-12 col-lg-11 col-xl-11">
-              <%= form_for [inform, inform.studies.build] do |form| %>
+              <%= form_with model: [inform, inform.studies.build] do |form| %>
                 <div class="row d-flex flex-row">
 
                   <div class="col-12 col-lg-4 col-xl-4 mt-3">
@@ -44,7 +80,7 @@
                   
                   <div class="col-12 col-lg-2 col-xl-2 mt-3">
                     <div class="form-group">
-                      <%= form.number_field :factor, class: "form-control input d-flex" %>
+                      <%= form.number_field :factor, value: 1, class: "form-control input d-flex" %>
                     </div>
                   </div>
                   

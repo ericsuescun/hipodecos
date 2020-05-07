@@ -20,20 +20,18 @@ class StudiesController < ApplicationController
 
   # GET /studies/1/edit
   def edit
+    @inform = @study.inform
   end
 
   # POST /studies
   # POST /studies.json
   def create
     inform = Inform.find(params[:inform_id])
-    study = inform.studies.build(study_params)
-    study.user_id = current_user.id
+    @study = inform.studies.build(study_params)
+    @study.user_id = current_user.id
 
-    if study.save
-      redirect_to inform, notice: 'CUPS exitosamente creado.'
-    else
-      render :new
-    end
+    @inform = @study.inform
+    @study.save
   end
 
   # PATCH/PUT /studies/1
@@ -53,19 +51,16 @@ class StudiesController < ApplicationController
     end
     log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
 
-    if @study.update(study_params)
-      @study.objections.each do |objection|
-        objection.closed = true
-        objection.close_user_id = current_user.id
-        objection.close_date = @study.updated_at
-        objection.description = objection.description + log
-        objection.save
-      end
-      redirect_to inform_path(@inf), notice: 'CUPS exitosamente actualizado.'
-    else
-      render :edit
+    @inform = @study.inform
+    
+    @study.update(study_params)
+    @study.objections.each do |objection|
+      objection.closed = true
+      objection.close_user_id = current_user.id
+      objection.close_date = @study.updated_at
+      objection.description = objection.description + log
+      objection.save
     end
-
   end
 
   # DELETE /studies/1

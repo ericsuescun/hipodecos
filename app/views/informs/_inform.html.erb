@@ -10,3 +10,20 @@
 	<p><strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %> Contactos: <strong><%= physician.tel %></strong> <strong><%= physician.cel %></strong> <strong><%= physician.email %></strong> <%= link_to '+ Doctor', new_inform_physician_path(@inform) %> | <%= link_to 'Revisar', physician %> | <%= link_to 'Borrar', physician, method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'Volver a informes', informs_path %> | <%= link_to 'Previsualizar informe', preview_path %></p>
 	<% end %>
 </div>
+<div class="container-fluid">
+	<h4>Descripción Macro:</h4>
+    <% @inform.recipients.each_with_index do |recipient, n| %>
+      <p>
+        Contenido de recipiente #<%= n + 1 %>:
+        <br>
+        <%= recipient.description %> Bloqueado de la siguiente manera:
+        <br>
+        <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
+          <strong><%= sample.description %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></strong> 
+          <br>
+      </p>
+      
+      <% end %>
+    <% end %>
+    <br>
+</div>

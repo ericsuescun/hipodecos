@@ -74,23 +74,14 @@
         </div>
       </div>
 
-      <div class="container-fluid">
-        
-          <% @inform.recipients.each_with_index do |recipient, n| %>
-            <p>
-              Contenido de recipiente #<%= n + 1 %>:
-              <br>
-              <%= recipient.description %> Bloqueado de la siguiente manera:
-              <br>
-              <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
-                <strong><%= sample.description %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></strong> 
-                <br>
-            </p>
-            
-            <% end %>
-          <% end %>
-          <br>
-      </div>
+      <% @inform.macros.each_with_index do |macro, n| %>
+        <div class="row">
+          <div class="col-12 col-lg-12">
+            Macro <%= n + 1 %> de <%= @inform.macros.length %>
+            <p><%= macro.description %></p>
+          </div>
+        </div>
+      <% end %>
 
       <div class="row">
         <div class="col-12 col-lg-4">

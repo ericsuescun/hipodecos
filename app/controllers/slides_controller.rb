@@ -26,13 +26,10 @@ class SlidesController < ApplicationController
   # POST /slides.json
   def create
     inform = Inform.find(params[:inform_id])
-    tag_shift = inform.slides.count
     slide = inform.slides.build(slide_params)
     slide.user_id = current_user.id
 
     if slide.save
-      slide.slide_tag = inform.tag_code + (65 + tag_shift).chr
-      slide.save
       redirect_to inform, notice: 'La placa ha sido creada exitosamente.'
     else
       render :new

@@ -1,5 +1,14 @@
 class ExecuteTemplatesController < ApplicationController
 	before_action :authenticate_user!
+
+	def add
+		@inform = Inform.find(params[:inform_id])
+		@inform.slides.each do |slide|
+			if slide.slide_tag == params[:destination_slide]
+				slide.update(slide_tag: slide.slide_tag + "," + get_nomen(params[:sample_tag]))
+			end
+		end
+	end
 	
 	def create
 		@inform = Inform.find(params[:inform_id])
@@ -66,6 +75,10 @@ class ExecuteTemplatesController < ApplicationController
 	end
 
 	private
+		def get_nomen(str)
+			return str.split('-',2)[1].split('-',2)[1]
+		end
+
 	  def generate_rec_tag
 	    next_number = 1
 	    answer = false

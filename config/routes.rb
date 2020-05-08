@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     root to: "static_pages#home"
 
     get 'execute_templates/create'
+    get 'execute_templates/add'
   
     get 'static_pages/home'
     get 'static_pages/services'

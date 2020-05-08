@@ -130,7 +130,18 @@
                                 <%= form.submit "+S", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>
                                 <%= form.hidden_field :slide_tag, value: sample.sample_tag + "*" %>
                               <% end %>
-                              
+
+                            </div>
+                            <div class="d-flex justify-content-around align-items-center mt-1">
+                              <%= form_with url: execute_templates_add_path, method: "get" do |form| %>
+                                <div class="actions d-flex flex-row">
+                                  
+                                  <%= form.submit "+A", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>
+                                  <%= form.collection_select(:destination_slide, inform.slides, :slide_tag, :slide_tag, { prompt: 'Placa'}, { class: "form-control input" }) %>
+                                  <%= form.hidden_field :inform_id, value: inform.id %>
+                                  <%= form.hidden_field :sample_tag, value: sample.sample_tag %>
+                                </div>
+                              <% end %>
                             </div>
                           </div>
                         </div>

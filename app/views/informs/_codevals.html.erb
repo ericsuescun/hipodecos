@@ -4,41 +4,50 @@
       <div class="col-12">
         <div class="row">
           <% inform.studies.each do |study| %>
-            <div class="col-12 col-lg-2">
+            
               <% if edit_study_form == study %>
+              <div class="col-12 col-lg-6">
                 <div class="card mb-2">
-                  <div class="card-body p-0 m-0 d-flex justify-content-between align-items-center">
+                  <div class="card-body p-0 m-0 d-flex align-items-center">
 
-                    <%= form_for [inform, inform.studies.build] do |form| %>
-                      <div class="row d-flex flex-row">
+                    <%= form_with model: [inform, edit_study_form] do |form| %>
+                      <div class="row d-flex flex-row justify-content-start">
 
                         <div class="col-12 col-lg-4 col-xl-4 mt-3">
                           <div class="form-group">
-                            <%= form.select :codeval_id, Codeval.pluck(:name, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
+                            <%= form.collection_select(:codeval_id, Codeval.all, :id, :code, { prompt: 'Seleccione CUPS'}, { class: "form-control input" }) %>
                           </div>
                         </div>
                         
-                        <div class="col-12 col-lg-2 col-xl-2 mt-3">
+                        <div class="col-12 col-lg-4 col-xl-2 mt-3">
                           <div class="form-group">
-                            <%= form.number_field :factor, value: 1, class: "form-control input d-flex" %>
+                            <%= form.number_field :factor, value: edit_study_form.factor, class: "form-control input d-flex" %>
                           </div>
                         </div>
                         
-                        <div class="col-12 col-lg-1 col-xl-1 mt-3">
+                        <div class="col-12 col-lg-4 col-xl-2 mt-3">
                           <div class="actions">
                             <%= form.submit "Guardar", class: "btn btn-warning" %>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4 col-xl-2 mt-3">
+                          <div class="actions">
+                            <%= link_to study_path(study), remote: true, class: "btn btn-secondary" do %>
+                              Cancel
+                            <% end %>
                           </div>
                         </div>
 
                       </div>
 
                     <% end %>
-                    
-                    <strong><%= Codeval.find(study.codeval_id).code %> x <%= study.factor %></strong>
-
+                  
                   </div>
                 </div>
+              </div>
               <% else %>
+              <div class="col-12 col-lg-3">
                 <div class="card mb-2">
                   <div class="card-body p-0 m-0 d-flex justify-content-between align-items-center">
                     <%= link_to edit_study_path(study), remote: true, class: "d-flex my-0 py-0" do %>
@@ -50,11 +59,11 @@
                     <% end %>
                   </div>
                 </div>
-                
+              </div>    
               <% end %>
               
 
-            </div>
+            
           <% end %>
         </div>      
       </div>
@@ -74,7 +83,7 @@
 
                   <div class="col-12 col-lg-4 col-xl-4 mt-3">
                     <div class="form-group">
-                      <%= form.select :codeval_id, Codeval.pluck(:name, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
+                      <%= form.select :codeval_id, Codeval.pluck(:code, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
                     </div>
                   </div>
                   

@@ -11,6 +11,7 @@ class StudiesController < ApplicationController
   # GET /studies/1
   # GET /studies/1.json
   def show
+    @inform = @study.inform
   end
 
   # GET /studies/new

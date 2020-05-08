@@ -1,55 +1,24 @@
-<div class="row">
-  <div class="col-12 col-lg-8 mx-auto">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Descr.</th>
-          <th>Guard.</th>
-          <th>Por</th>
-          <th scope="3"></th>
-        </tr>
-      </thead>
-      <tbody>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+
+      <div class="card-deck">
         <% inform.slides.each do |slide| %>
-          <tr>
-            <td><%= slide.slide_tag %></td>
-            <td><%= slide.description %></td>
-            <td><%= slide.stored == true ? "Si" : "No" %></td>
-            <td><%= User.where(id: slide.user_id).first.try(:first_name) %></td>
-            <td><%= link_to 'Revisar', slide_path(slide) %></td>
-            <td><%= link_to 'Editar', edit_slide_path(slide) %></td>
-            <td><%= link_to 'Borrar', slide, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-          </tr>
-          <% slide.objections.each do |objection| %>
-            <tr class=<%= objection.closed == false ? "objection" : "" %> >
-              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-              <!-- <td><%= objection.description %></td> -->
-            </tr>
+          <% if slide.slide_tag != nil %> <!-- Hay instancias no en DB por las form de las Samples, solo listo las que tengan tag -->
+            <div class="col-12 col-lg-3 col-xl-3 card-in">
+              <div class="card">
+                <div class="card-header">
+                  <%= slide.slide_tag %>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text"></p>
+                </div>
+              </div>
+            </div>
           <% end %>
         <% end %>
-      </tbody>
-    </table>
+      </div>
+    </div>
   </div>
-  <div class="col-12 col-lg-4">
-    <h4>Nueva placa</h4>
-    <%= form_for [inform, inform.slides.build] do |form| %>
-      <div class="form-group">
-        <%= form.label "Descripción" %>
-        <%= form.text_area :description, class: "form-control form-control-lg input" %>
-      </div>
-
-      <div class="form-group">
-        <%= form.check_box :stored %>
-        <%= form.label "Placa guardada" %>
-      </div>
-      <div class="actions">
-        <%= form.submit "Agregar", class: "btn btn-primary" %>
-      </div>
-    <% end %>
-  </div>
-</div>
-<div class="row">
-
 </div>

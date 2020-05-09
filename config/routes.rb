@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     root to: "static_pages#home"
 
     get 'execute_templates/create'
-    get 'execute_templates/add'
+    get 'execute_templates/add_slide'
+    get 'execute_templates/add_series'
+    get 'execute_templates/associate_slide'
   
     get 'static_pages/home'
     get 'static_pages/services'

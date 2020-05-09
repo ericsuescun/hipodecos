@@ -6,14 +6,19 @@
         <div class="card-deck">
           <% inform.slides.each do |slide| %>
             <% if slide.slide_tag != nil %> <!-- Hay instancias no en DB por las form de las Samples, solo listo las que tengan tag -->
-              <div class="col-12 col-lg-3 col-xl-3 card-in">
+              <div class="col-12 col-lg-2 col-xl-2 card-in">
                 <div class="card">
-                  <div class="card-header">
+                  <div class="card-header" style="background-color: rgba(255,150,255,0.3)">
                     <%= slide.slide_tag %>
                   </div>
                   <div class="card-body">
                     <h5 class="card-title"></h5>
-                    <p class="card-text"></p>
+                    
+                    <% Sample.where(inform_id: inform.id, slide_tag: slide.slide_tag).each do |sample| %>
+                      <strong><%= sample.sample_tag %></strong>
+                      <p><%= sample.description %></p>
+                    <% end %>
+                    
                   </div>
                 </div>
               </div>

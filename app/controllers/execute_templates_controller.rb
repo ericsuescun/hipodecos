@@ -1,12 +1,26 @@
 class ExecuteTemplatesController < ApplicationController
 	before_action :authenticate_user!
 
-	def add
+	def add_slide
 		@inform = Inform.find(params[:inform_id])
-		@inform.slides.each do |slide|
-			if slide.slide_tag == params[:destination_slide]
-				slide.update(slide_tag: slide.slide_tag + "," + get_nomen(params[:sample_tag]))
-			end
+		@sample = Sample.find(params[:sample_id])
+		@inform.slides.create(slide_tag: params[:sample_tag])	#Se crea un slide con el mismo tag de la sample
+		@sample.update(slide_tag: params[:sample_tag])	#Se guarda el tag creado en la sample para que queden asociados
+	end
+
+	def add_series
+		@inform = Inform.find(params[:inform_id])
+		@inform.slides.create(slide_tag: params[:sample_tag] + "*")
+	end
+
+	def associate_slide
+		@sample = Sample.find(params[:sample_id])
+		@sample.update(slide_tag: params[:destination_slide])	#Se guarda el tag creado en la sample para que queden asociados
+		@slide = Slide.where(inform_id: params[:inform_id], slide_tag: params[:destination_slide]).first
+		new_tag = @slide.slide_tag + "-" + get_nomen(@sample.sample_tag)
+		@samples = Inform.find(params[:inform_id]).samples.where(slide_tag: @sample.sample_tag)
+		@samples.each do |sample|
+			sample.update(sample_tag: new_tag)
 		end
 	end
 	

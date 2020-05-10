@@ -4,6 +4,7 @@ class ExecuteTemplatesController < ApplicationController
 	def add_slide
 		@inform = Inform.find(params[:inform_id])
 		@sample = Sample.find(params[:sample_id])
+		@recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first
 		@inform.slides.create(slide_tag: params[:sample_tag])	#Se crea un slide con el mismo tag de la sample
 		@sample.update(slide_tag: params[:sample_tag])	#Se guarda el tag creado en la sample para que queden asociados
 	end
@@ -14,14 +15,25 @@ class ExecuteTemplatesController < ApplicationController
 	end
 
 	def associate_slide
+		@automatics = Automatic.all 	#Para poder renderizar recipients entero...
 		@sample = Sample.find(params[:sample_id])
-		@sample.update(slide_tag: params[:destination_slide])	#Se guarda el tag creado en la sample para que queden asociados
-		@slide = Slide.where(inform_id: params[:inform_id], slide_tag: params[:destination_slide]).first
-		new_tag = @slide.slide_tag + "-" + get_nomen(@sample.sample_tag)
-		@samples = Inform.find(params[:inform_id]).samples.where(slide_tag: @sample.sample_tag)
+		@inform = @sample.inform
+		@recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first
+
+		@sample.update(slide_tag: params[:destination_slide])	#Se taggea la sample actual con el slide seleccionado
+
+		@slide = Slide.where(inform_id: params[:inform_id], slide_tag: params[:destination_slide]).first	#Traigo el slide actual
+
+		new_tag = @slide.slide_tag + "-" + get_nomen(@sample.sample_tag)	#Calculo el nuevo tag
+		@slide.update(slide_tag: new_tag)	#Actualizo la slide con ese nuevo tag
+
+		@samples = Inform.find(params[:inform_id]).samples.where(slide_tag: params[:destination_slide]) #Busco todas las samples de ese informe con ese slide asociado (por el tag)
+
 		@samples.each do |sample|
-			sample.update(sample_tag: new_tag)
+			sample.update(slide_tag: new_tag)	#Actualizo todas las samples asociadas con el nuevo tag
 		end
+
+		
 	end
 	
 	def create

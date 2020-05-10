@@ -1,0 +1,22 @@
+<% if @inform.errors.empty? %>
+	$(document).on('page:load', refresh2());
+	function refresh2() {
+	  // $('div.slides').remove();
+	  // $('div#control-sample-<%= @sample.sample_tag %>').remove();
+	  // $('div#controls-sample-<%= @sample.sample_tag %>').append('<%= j render "samples/sample-controls", inform: @inform, recipient: @recipient, sample: @sample %>');
+
+	  // $('div.slide').append('<%= j render "informs/slides", inform: @inform %>');
+
+	  $('div.recipients').remove();
+	  $('div.recipient').append('<%= j render "informs/recipients", inform: @inform, automatics: @automatics, recipient: @recipient, edit_sample_tag: "", edit_recipient_tag: "" %>');
+
+	  $('div.slides').remove();
+	  $('div.slide').append('<%= j render "informs/slides", inform: @inform %>');
+
+	  
+	  $('div.fast-bar').append('<%= j render "ok-message", message: "creado" %>');
+	  setTimeout(function() {
+	  	$('div.alert-growl').remove();
+	  }, 3000)
+	}
+<% end %>

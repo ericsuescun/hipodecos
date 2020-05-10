@@ -1,0 +1,9 @@
+<%= form_with url: execute_templates_add_slide_path, method: "get", id: "sample-#{sample.sample_tag}" do |form| %>
+  <div class="actions d-flex flex-row">
+    
+    <%= form.submit "+P", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>
+    <%= form.hidden_field :inform_id, value: inform.id %>
+    <%= form.hidden_field :sample_id, value: sample.id %>
+    <%= form.hidden_field :sample_tag, value: sample.sample_tag %>
+  </div>
+<% end %>

@@ -75,13 +75,15 @@ class SlidesController < ApplicationController
   # DELETE /slides/1.json
   def destroy
     @inform = @slide.inform
-    @samples = @inform.samples.where(slide_tag: @slide.slide_tag)  #Saco una coleccion de samples asociadas al slide que voy a borrar
-    @sample = @samples.first #Es para pasarla al render en JS
-    @recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first  #Es para pasarla al render en JS
+    if @slide.slide_tag[-1] != "*"
+      @samples = @inform.samples.where(slide_tag: @slide.slide_tag)  #Saco una coleccion de samples asociadas al slide que voy a borrar
+      @sample = @samples.first #Es para pasarla al render en JS
+      @recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first  #Es para pasarla al render en JS
 
     
-    @samples.each do |sample|
-      sample.update(slide_tag: nil) #Borro todas las asociaciones encontradas en las tags de samples
+      @samples.each do |sample|
+        sample.update(slide_tag: nil) #Borro todas las asociaciones encontradas en las tags de samples
+      end
     end
     @slide.destroy
   end

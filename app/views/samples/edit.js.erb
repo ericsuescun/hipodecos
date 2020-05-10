@@ -4,8 +4,12 @@
 	function refreshRecipients() {
 		
 		console.log('Muestra en edición');
+		
+
 		$('div.recipients').remove();
 		$('div.recipient').append('<%= j render "informs/recipients", inform: @inform, automatics: @automatics, recipient: @recipient, edit_sample_tag: @edit_sample_tag, edit_recipient_tag: "" %>');
+
+		
 		// $('div.fast-bar').append('<%= j render "ok-create" %>');
 		setTimeout(function() {
 			$('div.alert-growl').remove();

@@ -6,6 +6,10 @@
 		console.log('Muestra en edición');
 		$('div.recipients').remove();
 		$('div.recipient').append('<%= j render "informs/recipients", inform: @inform, automatics: @automatics, edit_sample_tag: "", edit_recipient_tag: "" %>');
+
+		$('div.slides').remove();
+		$('div.slide').append('<%= j render "informs/slides", inform: @inform %>');
+
 		$('div.fast-bar').append('<%= j render "ok-update" %>');
 		setTimeout(function() {
 			$('div.alert-growl').remove();

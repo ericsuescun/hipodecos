@@ -1,4 +1,13 @@
 module InformsHelper
+
+	def get_slides_samples(slide)
+		if slide.slide_tag[-1] == "*"
+			return Sample.where(inform_id: slide.inform.id, sample_tag: slide.slide_tag[0..-2])
+		else
+			return Sample.where(inform_id: slide.inform.id, slide_tag: slide.slide_tag)
+		end
+	end
+
 	def get_nomen(str)
 		return str.split('-',2)[1].split('-',2)[1]
 	end

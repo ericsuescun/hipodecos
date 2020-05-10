@@ -4,5 +4,5 @@ class Slide < ApplicationRecord
   # has_many :objections, as: :objectionable, dependent: :destroy
   has_many :objections, as: :objectionable
 
-  default_scope -> { order(created_at: :asc) }
+  default_scope -> { order(slide_tag: :asc) }
 end

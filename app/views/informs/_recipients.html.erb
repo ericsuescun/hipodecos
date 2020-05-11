@@ -68,8 +68,11 @@
 
                             <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
 
-                            <%= link_to sample, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
-                              <span>&times;</span>
+                            <% if sample.slide_tag == nil %>
+
+                              <%= link_to sample, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
+                                <span>&times;</span>
+                              <% end %>
                             <% end %>
 
                           </div>

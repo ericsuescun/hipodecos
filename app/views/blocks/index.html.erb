@@ -1,33 +1,47 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-12 col-lg-12 mx-auto">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Órgano</th>
+          <th>Frag.</th>
+          <th>Por</th>
+          <th>Verif.</th>
+          <th scope="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @blocks.each do |block| %>
+          <% sample = @samples.where(sample_tag: block.block_tag).first %>
+          <tr>
+            <td><%= sample.sample_tag %></td>
+            <td><%= sample.organ_code %></td>
+            <td><%= sample.fragment %></td>
+            <td><%= User.where(id: sample.user_id).first.try(:email) %></td>
+            <td>Verif.</td>
+          </tr>
 
-<h1>Blocks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Inform</th>
-      <th>User</th>
-      <th>Block tag</th>
-      <th>Stored</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @blocks.each do |block| %>
-      <tr>
-        <td><%= block.inform %></td>
-        <td><%= block.user_id %></td>
-        <td><%= block.block_tag %></td>
-        <td><%= block.stored %></td>
-        <td><%= link_to 'Show', block %></td>
-        <td><%= link_to 'Edit', edit_block_path(block) %></td>
-        <td><%= link_to 'Destroy', block, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Block', new_block_path %>
+          <tr>
+            <td></td>
+            <td><%= block.organ_code %></td>
+            <td><%= block.fragment %></td>
+            
+            <td><%= User.where(id: block.user_id).first.try(:email) %></td>
+            <td><%= block.verified == true ? 'Si' : 'No' %></td>
+            <td><%= link_to 'Revisar', block_path(block) %></td>
+            <td><%= link_to 'Editar', edit_block_path(block) %></td>
+            <td><%= link_to 'Borrar', block, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+          </tr>
+          <% block.objections.each do |objection| %>
+            <tr class=<%= objection.closed == false ? "objection" : "" %> >
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+              <!-- <td><%= objection.description %></td> -->
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -135,6 +135,23 @@
             <%= text_field_tag :tag_code, nil, class: "form-control input mx-2", placeholder: "Código de informe" %>
             <%= submit_tag("Buscar", class: "btn btn-outline-success btn-sm my-2 my-lg-0") %>
           <% end %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Bloques
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Todos", blocks_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Hoy", blocks_path + day_before_search(0), class: "dropdown-item" %>
+              <%= link_to "Ayer", blocks_path + day_before_search(1), class: "dropdown-item" %>
+              <%= link_to "Antier", blocks_path + day_before_search(2), class: "dropdown-item" %>
+              <%= link_to "Trasantier(Puente)", blocks_path + day_before_search(3), class: "dropdown-item" %>
+              <%= link_to "Últimos 7 días", blocks_path + days_ago_search(7), class: "dropdown-item" %>
+              <%= link_to "Últimos 30 días", blocks_path + days_ago_search(30), class: "dropdown-item" %>
+              <%= link_to "Este mes", blocks_path + month_before_search(0), class: "dropdown-item" %>
+              <%= link_to "El mes pasado", blocks_path + month_before_search(1), class: "dropdown-item" %>
+            </div>
+          </li>
 
           
 

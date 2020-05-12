@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         <% inform.blocks.each do |block| %>
-          <% sample = @samples.where(inform_id: inform.id, sample_tag: block.block_tag).first %>
+          <% sample = @samples.where(sample_tag: block.block_tag).first %>
           <tr>
             <td><%= sample.sample_tag %></td>
             <td><%= sample.organ_code %></td>

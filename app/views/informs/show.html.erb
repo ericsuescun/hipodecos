@@ -27,6 +27,12 @@
 
         <div class="row">
           <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <%= render partial: "blocks", locals: { inform: @inform } %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
             <div class="slide">
               <%= render partial: "slides", locals: { inform: @inform } %>
             </div>

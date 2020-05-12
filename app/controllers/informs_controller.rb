@@ -26,6 +26,8 @@ class InformsController < ApplicationController
 
     @automatics = Automatic.all
 
+    @samples = @inform.samples
+
     # clasify_templates
   end
 

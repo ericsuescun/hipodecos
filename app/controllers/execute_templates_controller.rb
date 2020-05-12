@@ -1,6 +1,21 @@
 class ExecuteTemplatesController < ApplicationController
 	before_action :authenticate_user!
 
+	def create_blocks
+		@inform = Inform.find(params[:inform_id])
+		@samples = @inform.samples
+		@samples.each do |sample|
+			@inform.blocks.create(
+				user_id: current_user.id,
+				block_tag: sample.sample_tag,
+				description: sample.description,
+				organ_code: sample.organ_code,
+				fragment: sample.fragment,
+				slide_tag: nil
+			)
+		end
+	end
+
 	def add_slide
 		@inform = Inform.find(params[:inform_id])
 		@sample = Sample.find(params[:sample_id])
@@ -32,8 +47,6 @@ class ExecuteTemplatesController < ApplicationController
 		@samples.each do |sample|
 			sample.update(slide_tag: new_tag)	#Actualizo todas las samples asociadas con el nuevo tag
 		end
-
-		
 	end
 	
 	def create

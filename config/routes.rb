@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'execute_templates/add_slide'
     get 'execute_templates/add_series'
     get 'execute_templates/associate_slide'
+    get 'execute_templates/create_blocks'
   
     get 'static_pages/home'
     get 'static_pages/services'

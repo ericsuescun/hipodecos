@@ -69,6 +69,7 @@ class ExecuteTemplatesController < ApplicationController
 					params[:samples].to_i.times do |n|
 						@sample = @inform.samples.build
 						@sample.user_id = current_user.id
+						@sample.name = "Cassette"
 						@sample.recipient_tag = @recipient.tag
 						@sample.sample_tag = generate_letter_tag(@inform)
 						if params[:organ] != "" && @automatic.organ == ""
@@ -87,6 +88,7 @@ class ExecuteTemplatesController < ApplicationController
 			when "blo"
 				@sample = @inform.samples.build
 				@sample.user_id = current_user.id
+				@sample.name = "Cassette"
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_letter_tag(@inform)
 				@sample.organ_code = script.organ == "" ? nil : script.organ
@@ -99,6 +101,7 @@ class ExecuteTemplatesController < ApplicationController
 			when "cor"
 				@sample = @inform.samples.build
 				@sample.user_id = current_user.id
+				@sample.name = "Cassette"
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_number_tag(@last_sample)
 				@sample.organ_code = script.organ == "" ? nil : script.organ
@@ -106,7 +109,20 @@ class ExecuteTemplatesController < ApplicationController
 				@sample.fragment = script.param1
 				@sample.save
 
-				@last_sample = @sample		
+				@last_sample = @sample
+
+			when "ext"
+				@sample = @inform.samples.build
+				@sample.user_id = current_user.id
+				@sample.name = "Extendido"
+				@sample.recipient_tag = @recipient.tag
+				@sample.sample_tag = generate_number_tag(@last_sample)
+				@sample.organ_code = script.organ == "" ? nil : script.organ
+				@sample.description = script.description
+				@sample.fragment = script.param1
+				@sample.save
+
+				@last_sample = @sample	
 			end
 		end
 

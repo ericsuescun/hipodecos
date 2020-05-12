@@ -116,7 +116,7 @@ class ExecuteTemplatesController < ApplicationController
 				@sample.user_id = current_user.id
 				@sample.name = "Extendido"
 				@sample.recipient_tag = @recipient.tag
-				@sample.sample_tag = generate_number_tag(@last_sample)
+				@sample.sample_tag = generate_letter_tag(@inform)
 				@sample.organ_code = script.organ == "" ? nil : script.organ
 				@sample.description = script.description
 				@sample.fragment = script.param1

@@ -20,8 +20,9 @@
                     <h5 class="card-title"></h5>
                     
                     <% get_slides_samples(slide).each do |sample| %>
-                      <strong><%= sample.sample_tag %></strong>
-                      <p><%= sample.description %></p>
+                      <strong><%= sample.sample_tag %> <%= sample.name == "Extendido" ? "Ext" : "" %></strong>
+                      <p class="m-0 p-0"><%= sample.organ_code %></p>
+                      <p class="m-0 p-0"><%= sample.description %></p>
                     <% end %>
                     
                   </div>

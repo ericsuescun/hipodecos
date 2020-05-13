@@ -1,71 +1,77 @@
 <div class="codevals">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-        <div class="row">
-          <% inform.studies.each do |study| %>
-            
-              <% if edit_study_form == study %>
-              <div class="col-12 col-lg-6">
-                <div class="card mb-2">
-                  <div class="card-body p-0 m-0 d-flex align-items-center">
-
-                    <%= form_with model: [inform, edit_study_form] do |form| %>
-                      <div class="row d-flex flex-row justify-content-start">
-
-                        <div class="col-12 col-lg-4 col-xl-4 mt-3">
-                          <div class="form-group">
-                            <%= form.collection_select(:codeval_id, Codeval.all, :id, :code, { prompt: 'Seleccione CUPS'}, { class: "form-control input" }) %>
+      <div class="col-12 col-sm-12 col-lg-12">
+        <div class="card bg-light mx-2 mb-3">
+          <div class="card-header pl-1 pr-0 pt-0 pb-0">
+            CUPS
+          </div>
+          <div class="card-body">
+            <div class="card-deck">
+              <% inform.studies.each do |study| %>
+                <% if edit_study_form == study %>
+                  <div class="col-12 col-lg-6">
+                    <div class="card mb-2">
+                      <div class="card-body p-0 m-0 d-flex align-items-center">
+                        <%= form_with model: [inform, edit_study_form] do |form| %>
+                          <div class="row d-flex flex-row justify-content-start">
+                            <div class="col-12 col-lg-4 col-xl-4 mt-3">
+                              <div class="form-group">
+                                <%= form.collection_select(:codeval_id, Codeval.all, :id, :code, { prompt: 'Seleccione CUPS'}, { class: "form-control input" }) %>
+                              </div>
+                            </div>
+                            <div class="col-12 col-lg-4 col-xl-2 mt-3">
+                              <div class="form-group">
+                                <%= form.number_field :factor, value: edit_study_form.factor, class: "form-control input d-flex" %>
+                              </div>
+                            </div>
+                            
+                            <div class="col-12 col-lg-4 col-xl-2 mt-3">
+                              <div class="actions">
+                                <%= form.submit "Guardar", class: "btn btn-warning" %>
+                              </div>
+                            </div>
+                            <div class="col-12 col-lg-4 col-xl-2 mt-3">
+                              <div class="actions">
+                                <%= link_to study_path(study), remote: true, class: "btn btn-secondary" do %>
+                                  Cancel
+                                <% end %>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        
-                        <div class="col-12 col-lg-4 col-xl-2 mt-3">
-                          <div class="form-group">
-                            <%= form.number_field :factor, value: edit_study_form.factor, class: "form-control input d-flex" %>
-                          </div>
-                        </div>
-                        
-                        <div class="col-12 col-lg-4 col-xl-2 mt-3">
-                          <div class="actions">
-                            <%= form.submit "Guardar", class: "btn btn-warning" %>
-                          </div>
-                        </div>
-
-                        <div class="col-12 col-lg-4 col-xl-2 mt-3">
-                          <div class="actions">
-                            <%= link_to study_path(study), remote: true, class: "btn btn-secondary" do %>
-                              Cancel
-                            <% end %>
-                          </div>
-                        </div>
-
+                        <% end %>
                       </div>
-
-                    <% end %>
-                  
+                    </div>
                   </div>
+                <% else %>
+                  <div class="col-12 col-lg-3">
+                    <div class="card mb-2">
+                      <div class="card-header p-0 m-0 d-flex justify-content-between align-items-center">
+                        <%= link_to edit_study_path(study), remote: true, class: "d-flex my-0 py-0" do %>
+                          <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
+                        <% end %>
+                        <strong><%= Codeval.find(study.codeval_id).code %> x <%= study.factor %></strong>
+                        <%= link_to study, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
+                          <span>&times;</span>
+                        <% end %>
+                      </div>
+                      <div class="card-body p-0 m-0 d-flex flex-column">
+                        <span>Tarifa: <%= get_rate_name(study) %></span>
+                        <span><strong>Valor total: <%= number_to_currency(get_price(study) * study.factor.to_d, precision: 0, delimiter: '.') %></strong></span>
+                      </div>
+                    </div>
+                  </div>    
+                <% end %>
+              <% end %>
+              <div class="card mb-2">
+                <div class="card-header p-0 m-0 d-flex justify-content-between align-items-center">
+                </div>
+                <div class="card-body p-0 m-0 d-flex flex-column">
                 </div>
               </div>
-              <% else %>
-              <div class="col-12 col-lg-3">
-                <div class="card mb-2">
-                  <div class="card-body p-0 m-0 d-flex justify-content-between align-items-center">
-                    <%= link_to edit_study_path(study), remote: true, class: "d-flex my-0 py-0" do %>
-                      <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
-                    <% end %>
-                    <strong><%= Codeval.find(study.codeval_id).code %> x <%= study.factor %></strong>
-                    <%= link_to study, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
-                      <span>&times;</span>
-                    <% end %>
-                  </div>
-                </div>
-              </div>    
-              <% end %>
-              
-
-            
-          <% end %>
-        </div>      
+            </div>
+          </div>
+        </div>     
       </div>
     </div>
     <div class="row">

@@ -1,5 +1,22 @@
 module InformsHelper
 
+	def get_price(study)
+		inform = Inform.find(study.inform_id)
+		branch = Branch.find(inform.branch_id)
+		cost = Value.where(codeval_id: study.codeval_id, cost_id: branch.entity.cost_id).first.value
+		profit_margin = Factor.where(codeval_id: study.codeval_id, rate_id: branch.entity.rate_id).first.factor
+		price = cost * profit_margin
+		return price
+	end
+
+	def get_rate_name(study)
+		inform = Inform.find(study.inform_id)
+		branch = Branch.find(inform.branch_id)
+		entity = branch.entity
+		rate = Rate.find(entity.rate_id)
+		return rate.name
+	end
+
 	def get_slides_samples(slide)
 		if slide.slide_tag[-1] == "*"
 			return Sample.where(inform_id: slide.inform.id, sample_tag: slide.slide_tag[0..-2])

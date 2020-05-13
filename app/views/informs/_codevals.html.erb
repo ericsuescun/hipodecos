@@ -4,36 +4,36 @@
       <div class="col-12 col-sm-12 col-lg-12">
         <div class="card bg-light mx-2 mb-3">
           <div class="card-header pl-1 pr-0 pt-0 pb-0">
-            CUPS
+            <strong>CUPS</strong>
           </div>
           <div class="card-body">
             <div class="card-deck">
+              <% accumulated_value = 0 %>
               <% inform.studies.each do |study| %>
                 <% if edit_study_form == study %>
                   <div class="col-12 col-lg-3">
                     <%= form_with model: [inform, edit_study_form] do |form| %>
                       <div class="card mb-2">
                         <div class="card-header d-flex flex-row align-items-center justify-content-between px-1">
-                          <span class="d-flex"><strong>Nuevo CUP</strong></span>
+                          <span class="d-flex"><strong>Editar CUP</strong></span>
                           <div class="form-group m-0">
                             <%= form.collection_select(:codeval_id, Codeval.all, :id, :code, { prompt: 'CUPS'}, { class: "form-control input" }) %>
                           </div>
                         </div>
                         <div class="card-body">
                           <div class="row d-flex flex-row justify-content-around">
-                            <div class="col-12 col-lg-5 col-xl-4">
+                            <div class="col-12 col-lg-6 col-xl-4">
                               <div class="form-group">
                                 <%= form.number_field :factor, value: edit_study_form.factor, class: "form-control input d-flex" %>
                               </div>
                             </div>
-                            
-                            <div class="actions">
-                              <%= form.submit "Guardar", class: "btn btn-warning" %>
-                            </div>
                             <div class="actions">
                               <%= link_to study_path(study), remote: true, class: "btn btn-secondary" do %>
-                                Cancel
+                                x
                               <% end %>
+                            </div>
+                            <div class="actions">
+                              <%= form.submit "Guardar", class: "btn btn-warning" %>
                             </div>
                           </div>
                         </div>
@@ -55,6 +55,7 @@
                       <div class="card-body p-0 m-0 d-flex flex-column">
                         <span>Tarifa: <%= get_rate_name(study) %></span>
                         <span><strong>Valor total: <%= number_to_currency(get_price(study) * study.factor.to_d, precision: 0, delimiter: '.') %></strong></span>
+                        <% accumulated_value = accumulated_value + (get_price(study) * study.factor.to_d) %>
                       </div>
                     </div>
                   </div>    
@@ -71,7 +72,7 @@
                     </div>
                     <div class="card-body">
                       <div class="row d-flex flex-row justify-content-around">
-                        <div class="col-12 col-lg-5 col-xl-4">
+                        <div class="col-12 col-lg-6 col-xl-4">
                           <div class="form-group">
                             <%= form.number_field :factor, value: 1, class: "form-control input d-flex" %>
                           </div>
@@ -86,6 +87,7 @@
                 <% end %>
               </div>
             </div>
+            <span class="d-flex justify-content-end"><strong>Total CUPS: <%= number_to_currency(accumulated_value, precision: 0, delimiter: '.') %></strong></span>
           </div>
         </div>     
       </div>

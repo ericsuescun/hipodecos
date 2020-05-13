@@ -10,38 +10,35 @@
             <div class="card-deck">
               <% inform.studies.each do |study| %>
                 <% if edit_study_form == study %>
-                  <div class="col-12 col-lg-6">
-                    <div class="card mb-2">
-                      <div class="card-body p-0 m-0 d-flex align-items-center">
-                        <%= form_with model: [inform, edit_study_form] do |form| %>
-                          <div class="row d-flex flex-row justify-content-start">
-                            <div class="col-12 col-lg-4 col-xl-4 mt-3">
-                              <div class="form-group">
-                                <%= form.collection_select(:codeval_id, Codeval.all, :id, :code, { prompt: 'Seleccione CUPS'}, { class: "form-control input" }) %>
-                              </div>
-                            </div>
-                            <div class="col-12 col-lg-4 col-xl-2 mt-3">
+                  <div class="col-12 col-lg-3">
+                    <%= form_with model: [inform, edit_study_form] do |form| %>
+                      <div class="card mb-2">
+                        <div class="card-header d-flex flex-row align-items-center justify-content-between px-1">
+                          <span class="d-flex"><strong>Nuevo CUP</strong></span>
+                          <div class="form-group m-0">
+                            <%= form.collection_select(:codeval_id, Codeval.all, :id, :code, { prompt: 'CUPS'}, { class: "form-control input" }) %>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="row d-flex flex-row justify-content-around">
+                            <div class="col-12 col-lg-5 col-xl-4">
                               <div class="form-group">
                                 <%= form.number_field :factor, value: edit_study_form.factor, class: "form-control input d-flex" %>
                               </div>
                             </div>
                             
-                            <div class="col-12 col-lg-4 col-xl-2 mt-3">
-                              <div class="actions">
-                                <%= form.submit "Guardar", class: "btn btn-warning" %>
-                              </div>
+                            <div class="actions">
+                              <%= form.submit "Guardar", class: "btn btn-warning" %>
                             </div>
-                            <div class="col-12 col-lg-4 col-xl-2 mt-3">
-                              <div class="actions">
-                                <%= link_to study_path(study), remote: true, class: "btn btn-secondary" do %>
-                                  Cancel
-                                <% end %>
-                              </div>
+                            <div class="actions">
+                              <%= link_to study_path(study), remote: true, class: "btn btn-secondary" do %>
+                                Cancel
+                              <% end %>
                             </div>
                           </div>
-                        <% end %>
+                        </div>
                       </div>
-                    </div>
+                    <% end %>
                   </div>
                 <% else %>
                   <div class="col-12 col-lg-3">
@@ -64,59 +61,33 @@
                 <% end %>
               <% end %>
               <div class="col-12 col-lg-3">
-                <div class="card mb-2">
-                  <div class="card-header">
-                    <strong>Nuevo CUP</strong>
-                  </div>
-                  <div class="card-body p-0 m-0">
-                    <%= form_with model: [inform, inform.studies.build] do |form| %>
-                      <div class="row d-flex flex-row">
-
-                        <div class="col-12 col-lg-6 col-xl-6 mt-3">
-                          <div class="form-group">
-                            <%= form.select :codeval_id, Codeval.pluck(:code, :id), {prompt:"CUPS"}, class: "form-control ml-1" %>
-                          </div>
-                        </div>
-                        
-                        <div class="col-12 col-lg-3 col-xl-3 mt-3">
+                <%= form_with model: [inform, inform.studies.build] do |form| %>
+                  <div class="card mb-2">
+                    <div class="card-header d-flex flex-row align-items-center justify-content-between px-1">
+                      <span class="d-flex"><strong>Nuevo CUP</strong></span>
+                      <div class="form-group m-0">
+                        <%= form.select :codeval_id, Codeval.pluck(:code, :id), {prompt:"CUPS"}, class: "form-control d-flex mb-0" %>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row d-flex flex-row justify-content-around">
+                        <div class="col-12 col-lg-5 col-xl-4">
                           <div class="form-group">
                             <%= form.number_field :factor, value: 1, class: "form-control input d-flex" %>
                           </div>
                         </div>
                         
-                        <div class="col-12 col-lg-3 col-xl-3 mt-3">
-                          <div class="actions">
-                            <%= form.submit "+", class: "btn btn-outline-dark" %>
-                          </div>
+                        <div class="actions">
+                          <%= form.submit "+", class: "btn btn-outline-dark" %>
                         </div>
-
                       </div>
-                      
-                    <% end %>
+                    </div>
                   </div>
-                </div>
+                <% end %>
               </div>
             </div>
           </div>
         </div>     
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="alert alert-primary pb-0 pt-1">
-          <div class="row d-flex align-items-center">
-
-            <div class="col-12 col-lg-1 col-xl-1">
-              <h4>CUPS</h4>
-            </div>
-
-            <div class="col-12 col-lg-11 col-xl-11">
-              
-            </div>
-            
-          </div>
-        </div>
-        
       </div>
     </div>
   </div>

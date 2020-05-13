@@ -1,11 +1,57 @@
+<div class="codevals">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-lg-12">
+        <div class="card bg-light mx-2 mb-3">
+          <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+            <span><strong>Bloques</strong></span>
+            <%= form_with url: execute_templates_create_blocks_path, method: "get" do |form| %>
+              <div class="actions">
+                <%= form.submit "Crear Bloques y Verificar fragmentos", class: "btn btn-outline-dark mx-1 my-1" %>
+                <%= form.hidden_field :inform_id, value: inform.id %>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <div class="card-deck">
+              <% @blocks.each do |block| %>
+                <% sample = @samplesc.where(sample_tag: block.block_tag).first %>
+                <div class="col-12 col-lg-3">
+                  <div class="card mx-2 my-2 pb-0" style="background-color: <%= get_color(sample) %>">
+                    <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+                      <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
+                    </div>
+                    <div class="card-body p-1 m-1">
+                      <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
+                      <%= sample.description %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-3">
+                  <div class="card mx-2 my-2 pb-0">
+                    <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+                      <span class="d-flex "><strong><%= block.block_tag %>: <%= block.fragment %>F</strong></span>
+                    </div>
+                    <div class="card-body p-1 m-1">
+                      <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
+                      <div id="controls-block-<%= block.block_tag %>">
+                        <%= render partial: "blocks/block-controls", locals: { inform: inform, block: block } %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-12 col-lg-12 mx-auto">
-    <%= form_with url: execute_templates_create_blocks_path, method: "get" do |form| %>
-      <div class="actions">
-        <%= form.submit "Crear Bloques y Verificar fragmentos", class: "btn btn-primary mx-1 my-1" %>
-        <%= form.hidden_field :inform_id, value: inform.id %>
-      </div>
-    <% end %>
     <table class="table table-striped">
       <thead>
         <tr>

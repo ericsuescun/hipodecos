@@ -28,6 +28,10 @@ class InformsController < ApplicationController
 
     @samples = @inform.samples
 
+    @samplesc = @inform.samples.where(name: "Cassette")
+
+    @blocks = @inform.blocks
+
     # clasify_templates
   end
 

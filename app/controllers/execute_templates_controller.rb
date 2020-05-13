@@ -1,6 +1,18 @@
 class ExecuteTemplatesController < ApplicationController
 	before_action :authenticate_user!
 
+	def block_fp1
+		
+	end
+
+	def block_fok
+		
+	end
+
+	def block_fm1
+		
+	end
+
 	def create_blocks
 		@inform = Inform.find(params[:inform_id])
 		@samples = @inform.samples

@@ -63,10 +63,37 @@
                   </div>    
                 <% end %>
               <% end %>
-              <div class="card mb-2">
-                <div class="card-header p-0 m-0 d-flex justify-content-between align-items-center">
-                </div>
-                <div class="card-body p-0 m-0 d-flex flex-column">
+              <div class="col-12 col-lg-3">
+                <div class="card mb-2">
+                  <div class="card-header">
+                    <strong>Nuevo CUP</strong>
+                  </div>
+                  <div class="card-body p-0 m-0">
+                    <%= form_with model: [inform, inform.studies.build] do |form| %>
+                      <div class="row d-flex flex-row">
+
+                        <div class="col-12 col-lg-6 col-xl-6 mt-3">
+                          <div class="form-group">
+                            <%= form.select :codeval_id, Codeval.pluck(:code, :id), {prompt:"CUPS"}, class: "form-control ml-1" %>
+                          </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-3 col-xl-3 mt-3">
+                          <div class="form-group">
+                            <%= form.number_field :factor, value: 1, class: "form-control input d-flex" %>
+                          </div>
+                        </div>
+                        
+                        <div class="col-12 col-lg-3 col-xl-3 mt-3">
+                          <div class="actions">
+                            <%= form.submit "+", class: "btn btn-outline-dark" %>
+                          </div>
+                        </div>
+
+                      </div>
+                      
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -84,30 +111,7 @@
             </div>
 
             <div class="col-12 col-lg-11 col-xl-11">
-              <%= form_with model: [inform, inform.studies.build] do |form| %>
-                <div class="row d-flex flex-row">
-
-                  <div class="col-12 col-lg-4 col-xl-4 mt-3">
-                    <div class="form-group">
-                      <%= form.select :codeval_id, Codeval.pluck(:code, :id), {prompt:"Seleccione el CUPS"}, class: "form-control" %>
-                    </div>
-                  </div>
-                  
-                  <div class="col-12 col-lg-2 col-xl-2 mt-3">
-                    <div class="form-group">
-                      <%= form.number_field :factor, value: 1, class: "form-control input d-flex" %>
-                    </div>
-                  </div>
-                  
-                  <div class="col-12 col-lg-1 col-xl-1 mt-3">
-                    <div class="actions">
-                      <%= form.submit " + ", class: "btn btn-primary" %>
-                    </div>
-                  </div>
-
-                </div>
-                
-              <% end %>
+              
             </div>
             
           </div>

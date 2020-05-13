@@ -16,6 +16,8 @@ class Codeval < ApplicationRecord
 
 	validates :code, :name, :description, presence: true
 
+	default_scope -> { order(code: :asc)}
+
 	def self.import(file)
 		CSV.foreach(file.path, :col_sep => (";"), headers: true, encoding: 'iso-8859-1:utf-8') do |row|
 			Codeval.create!(row.to_hash.merge(admin_id: 1))

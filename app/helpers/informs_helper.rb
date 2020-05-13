@@ -112,6 +112,9 @@ module InformsHelper
 
 	def get_color(sample)
 		# return "rgba(255,0,0,0.1)"
+		if sample == nil
+			return "white"
+		end
 
 		if sample.organ_code != nil
 			if Organ.where(organ: sample.organ_code).first.part == "Circulatorio"

@@ -2,22 +2,58 @@ class ExecuteTemplatesController < ApplicationController
 	before_action :authenticate_user!
 
 	def block_fp1
-		
+		@sample = Sample.find(params[:sample_id])
+		@block = Block.find(params[:block_id])
+		@block.update(fragment: params[:fragment].to_i + 1)
+		@inform = @block.inform
+		@samplesc = @inform.samples.where(name: "Cassette")
+		@blocks = @inform.blocks
 	end
 
 	def block_fok
-		
+		@sample = Sample.find(params[:sample_id])
+		@block = Block.find(params[:block_id])
+		@sample.update(included: true)	#Marco la muestra como incluida en parafina, por lo que oficilamente el bloque queda confirmado con esos fragmentos
+		@inform = @sample.inform
+		@samplesc = @inform.samples.where(name: "Cassette")
+		@blocks = @inform.blocks
+
+		if @sample.fragment != @block.fragment
+			log = "\nCAMBIOS:\n"
+			log += "-FRAGMENTOS-\nANTES:" + @sample.fragment + "\n"
+			log += "por: " + User.where(id: @sample.user_id).first.try(:email) + " \n"
+			log += "\n- DESPUÉS: -\n" + @block.fragment
+			log += "por: " + current_user.email + " \n"
+
+			#Obcode 4 corresponde a Descripción Macro incompleta
+			objection = @block.objections.new(
+				responsible_user_id: @sample.user_id,
+				user_id: current_user.id,
+				description: log,
+				obcode_id: 4,
+				close_user_id: nil,
+				closed: false
+			) 
+			#@objectionable se crea en una version (una clase heredada) personalizada del controlador de Objection para cada tipo de modelo DESDE DONDE se le llama
+			objection.save
+		end
+		@sample.update(included: true)
 	end
 
 	def block_fm1
-		
+		@sample = Sample.find(params[:sample_id])
+		@block = Block.find(params[:block_id])
+		@block.update(fragment: params[:fragment].to_i - 1)
+		@inform = @block.inform
+		@samplesc = @inform.samples.where(name: "Cassette")
+		@blocks = @inform.blocks
 	end
 
 	def create_blocks
 		@inform = Inform.find(params[:inform_id])
-		@samples = @inform.samples
+		@samples = @inform.samples.where(name: "Cassette")
 		@samples.each do |sample|
-			@inform.blocks.create(
+			@inform.blocks.create!(
 				user_id: current_user.id,
 				block_tag: sample.sample_tag,
 				description: sample.description,
@@ -82,6 +118,7 @@ class ExecuteTemplatesController < ApplicationController
 						@sample = @inform.samples.build
 						@sample.user_id = current_user.id
 						@sample.name = "Cassette"
+						@sample.included = false
 						@sample.recipient_tag = @recipient.tag
 						@sample.sample_tag = generate_letter_tag(@inform)
 						if params[:organ] != "" && @automatic.organ == ""
@@ -101,6 +138,7 @@ class ExecuteTemplatesController < ApplicationController
 				@sample = @inform.samples.build
 				@sample.user_id = current_user.id
 				@sample.name = "Cassette"
+				@sample.included = false
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_letter_tag(@inform)
 				@sample.organ_code = script.organ == "" ? nil : script.organ
@@ -114,6 +152,7 @@ class ExecuteTemplatesController < ApplicationController
 				@sample = @inform.samples.build
 				@sample.user_id = current_user.id
 				@sample.name = "Cassette"
+				@sample.included = false
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_number_tag(@last_sample)
 				@sample.organ_code = script.organ == "" ? nil : script.organ
@@ -127,6 +166,7 @@ class ExecuteTemplatesController < ApplicationController
 				@sample = @inform.samples.build
 				@sample.user_id = current_user.id
 				@sample.name = "Extendido"
+				@sample.included = false
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_letter_tag(@inform)
 				@sample.organ_code = script.organ == "" ? nil : script.organ

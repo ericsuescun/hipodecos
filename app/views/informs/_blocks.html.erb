@@ -1,4 +1,4 @@
-<div class="codevals">
+<div class="blocks">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-sm-12 col-lg-12">
@@ -15,28 +15,44 @@
           <div class="card-body">
             <div class="card-deck">
               <% @blocks.each do |block| %>
-                <% sample = @samplesc.where(sample_tag: block.block_tag).first %>
-                <div class="col-12 col-lg-3">
-                  <div class="card mx-2 my-2 pb-0" style="background-color: <%= get_color(sample) %>">
-                    <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-                      <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
-                    </div>
-                    <div class="card-body p-1 m-1">
-                      <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
-                      <%= sample.description %>
+                <% sample = samplesc.where(sample_tag: block.block_tag).first %>
+                <% if !sample.included %>
+                  <div class="col-12 col-lg-3">
+                    <div class="card mx-2 my-2 pb-0" style="background-color: <%= get_color(sample) %>">
+                      <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+                        <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
+                      </div>
+                      <div class="card-body p-1 m-1">
+                        <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
+                        <%= sample.description %>
+                      </div>
                     </div>
                   </div>
-                </div>
+                <% end %>
+                
                 <div class="col-12 col-lg-3">
-                  <div class="card mx-2 my-2 pb-0">
+                  <% if sample.fragment == block.fragment %>
+                    <div class="card mx-2 my-2 pb-0">
+                  <% else %>
+                    <div class="card mx-2 my-2 pb-0 text-white bg-warning">
+                  <% end %>
                     <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
                       <span class="d-flex "><strong><%= block.block_tag %>: <%= block.fragment %>F</strong></span>
                     </div>
                     <div class="card-body p-1 m-1">
                       <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
-                      <div id="controls-block-<%= block.block_tag %>">
-                        <%= render partial: "blocks/block-controls", locals: { inform: inform, block: block } %>
-                      </div>
+                      <% if !sample.included %>
+                        <div id="controls-block-<%= block.block_tag %>">
+                          <%= render partial: "blocks/block-controls", locals: { inform: inform, block: block, sample: sample } %>
+                        </div>
+                      <% else %>
+
+                      <% end %>
+                      <% block.objections.each do |objection| %>
+                        Tipo: <%= Obcode.where(id: objection.obcode_id).first.try(:title) %>
+                        Descripción: <%= objection.description %>
+                      <% end %>
+                      
                     </div>
                   </div>
                 </div>
@@ -48,55 +64,53 @@
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-12 col-lg-12 mx-auto">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Órgano</th>
-          <th>Frag.</th>
-          <th>Por</th>
-          <th>Verif.</th>
-          <th scope="3"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% inform.blocks.each do |block| %>
-          <% sample = @samples.where(sample_tag: block.block_tag).first %>
-          <tr>
-            <td><%= sample.sample_tag %></td>
-            <td><%= sample.organ_code %></td>
-            <td><%= sample.fragment %></td>
-            <td><%= User.where(id: sample.user_id).first.try(:email) %></td>
-            <td>Verif.</td>
-          </tr>
 
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <table class="table table-striped">
+        <thead>
           <tr>
-            <td></td>
-            <td><%= block.organ_code %></td>
-            <td><%= block.fragment %></td>
-            
-            <td><%= User.where(id: block.user_id).first.try(:email) %></td>
-            <td><%= block.verified == true ? 'Si' : 'No' %></td>
-            <td><%= link_to 'Revisar', block_path(block) %></td>
-            <td><%= link_to 'Editar', edit_block_path(block) %></td>
-            <td><%= link_to 'Borrar', block, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+            <th>Código</th>
+            <th>Órgano</th>
+            <th>Frag.</th>
+            <th>Por</th>
+            <th>Verif.</th>
+            <th scope="3"></th>
           </tr>
-          <% block.objections.each do |objection| %>
-            <tr class=<%= objection.closed == false ? "objection" : "" %> >
-              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-              <!-- <td><%= objection.description %></td> -->
+        </thead>
+        <tbody>
+          <% inform.blocks.each do |block| %>
+            <% sample = samplesc.where(sample_tag: block.block_tag).first %>
+            <tr>
+              <td><%= sample.sample_tag %></td>
+              <td><%= sample.organ_code %></td>
+              <td><%= sample.fragment %></td>
+              <td><%= User.where(id: sample.user_id).first.try(:email) %></td>
+              <td>Verif.</td>
             </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-<div class="row">
 
+            <tr>
+              <td></td>
+              <td><%= block.organ_code %></td>
+              <td><%= block.fragment %></td>
+              
+              <td><%= User.where(id: block.user_id).first.try(:email) %></td>
+              <td><%= block.verified == true ? 'Si' : 'No' %></td>
+              <td><%= link_to 'Revisar', block_path(block) %></td>
+              <td><%= link_to 'Editar', edit_block_path(block) %></td>
+              <td><%= link_to 'Borrar', block, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+            </tr>
+            <% block.objections.each do |objection| %>
+              <tr class=<%= objection.closed == false ? "objection" : "" %> >
+                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+                <!-- <td><%= objection.description %></td> -->
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

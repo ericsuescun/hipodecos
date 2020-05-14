@@ -16,46 +16,101 @@
             <div class="card-deck">
               <% @blocks.each do |block| %>
                 <% sample = samplesc.where(sample_tag: block.block_tag).first %>
-                <% if !sample.included %>
-                  <div class="col-12 col-lg-3">
-                    <div class="card mx-2 my-2 pb-0" style="background-color: <%= get_color(sample) %>">
-                      <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-                        <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
+                <div class="col-12 col-lg-6 col-xl-6 d-flex flex-row">
+                  <% if !sample.included %>
+                    <div class="col-12 col-lg-6">
+                      <div class="card mx-2 my-2 pb-0" style="background-color: <%= get_color(sample) %>">
+                        <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-start">
+                          <span class="d-flex "><strong><%= sample.sample_tag %>: </strong></span>
+                          <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+                            <strong><%= sample.fragment %>F</strong>
+                          </span>
+                        </div>
+                        <div class="card-body p-1 m-1">
+                          <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
+                          <%= sample.description %>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                  
+                  <% if !sample.included %>
+                    <div class="col-12 col-lg-6">
+                  <% else %>
+                    <div class="col-12 col-lg-12">
+                  <% end %>
+                  
+                    <div class="card mx-2 my-2 pb-0">
+                      <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-start">
+                        <span class="d-flex "><strong><%= block.block_tag %>: </strong></span>
+                        <% if sample.included %>
+                          <span class="d-flex"><strong><%= block.fragment %>F</strong></span>
+                        <% else %>
+                          <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+                            <strong><%= block.fragment %>F</strong>
+                          </span>
+                        <% end %>
                       </div>
                       <div class="card-body p-1 m-1">
-                        <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
-                        <%= sample.description %>
-                      </div>
-                    </div>
-                  </div>
-                <% end %>
-                
-                <div class="col-12 col-lg-3">
-                  <% if sample.fragment == block.fragment %>
-                    <div class="card mx-2 my-2 pb-0">
-                  <% else %>
-                    <div class="card mx-2 my-2 pb-0 text-white bg-warning">
-                  <% end %>
-                    <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-                      <span class="d-flex "><strong><%= block.block_tag %>: <%= block.fragment %>F</strong></span>
-                    </div>
-                    <div class="card-body p-1 m-1">
-                      <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
-                      <% if !sample.included %>
-                        <div id="controls-block-<%= block.block_tag %>">
-                          <%= render partial: "blocks/block-controls", locals: { inform: inform, block: block, sample: sample } %>
-                        </div>
-                      <% else %>
+                        <h6 class="card-title my-0">Órgano: <%= block.organ_code %></h6>
+                        <% if !sample.included %>
+                          <div id="controls-block-<%= block.block_tag %>">
+                            <%= render partial: "blocks/block-controls", locals: { inform: inform, block: block, sample: sample } %>
+                          </div>
+                        <% else %>
 
-                      <% end %>
-                      <% block.objections.each do |objection| %>
-                        Tipo: <%= Obcode.where(id: objection.obcode_id).first.try(:title) %>
-                        Descripción: <%= objection.description %>
-                      <% end %>
-                      
+                        <% end %>
+                        <% block.objections.each do |objection| %>
+                          <% if edit_objection_id == nil %>
+                            <div class="d-flex flex-column">
+                              <span class="px-1 badge badge-<%= objection.closed == false ? "danger" : "warning" %>">
+                                <%= Obcode.where(id: objection.obcode_id).first.try(:title) %>
+                              </span>
+                              <span class="text-muted objection-description">
+                                <%= objection.description %>
+                              </span>
+                            </div>
+                            <% unless objection.closed %>
+                              <%= form_with url: execute_templates_review_block_path, method: "get" do |form| %>
+                                <div class="actions">
+                                  <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
+                                  <%= form.hidden_field :block_id, value: block.id %>
+                                  <%= form.hidden_field :objection_id, value: objection.id %>
+                                </div>
+                              <% end %>
+                            <% end %>
+                          <% else %>
+                            <% if edit_objection_id == objection.id %>
+                              <%= form_with url: execute_templates_anotate_block_path, method: "get" do |form| %>
+                                <div class="field">
+                                  <%= form.label "Acción de mejora:" %>
+                                  <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>
+                                </div>
+                                <div class="field">
+                                  <%= form.label "Acción de mejora:" %>
+                                  <%= form.text_area :new_description, class: "form-control input" %>
+                                </div>
+                                <div class="field">
+                                  <%= form.label "Fragmentos:" %>
+                                  <%= form.number_field :fragment, value: block.fragment, class: "form-control input" %>
+                                </div>
+                                <div class="actions">
+                                  <%= form.submit "Anotar", class: "btn btn-outline-warning mx-1 my-1" %>
+                                  <%= form.hidden_field :block_id, value: block.id %>
+                                  <%= form.hidden_field :objection_id, value: objection.id %>
+                                </div>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                        <% if block.verified %>
+                          <span><strong>Bloque verificado por: <%= current_user.email %></strong></span>
+                        <% end %>
+                      </div>
                     </div>
                   </div>
                 </div>
+                
               <% end %>
             </div>
           </div>
@@ -68,44 +123,122 @@
 
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
-      <table class="table table-striped">
+      <table class="table table-hover table-borderless">
         <thead>
           <tr>
             <th>Código</th>
             <th>Órgano</th>
             <th>Frag.</th>
-            <th>Por</th>
+            <th>Último usuario</th>
             <th>Verif.</th>
-            <th scope="3"></th>
+            <th scope="3">Controles</th>
           </tr>
         </thead>
         <tbody>
           <% inform.blocks.each do |block| %>
             <% sample = samplesc.where(sample_tag: block.block_tag).first %>
-            <tr>
-              <td><%= sample.sample_tag %></td>
-              <td><%= sample.organ_code %></td>
-              <td><%= sample.fragment %></td>
-              <td><%= User.where(id: sample.user_id).first.try(:email) %></td>
-              <td>Verif.</td>
-            </tr>
+            <% if !sample.included %>
+              <tr>
+                <td><%= sample.sample_tag %></td>
+                <td><%= sample.organ_code %></td>
+                <td>
+                  <% if sample.included %>
+                    <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+                      <%= sample.fragment %>
+                    </span>
+                  <% else %>
+                    <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+                      <%= sample.fragment %>
+                    </span>
+                  <% end %>
+                  
+                </td>
+                <td><%= User.where(id: sample.user_id).first.try(:email) %></td>
+                <td></td>
+              </tr>
+            <% end %>
+            
 
-            <tr>
-              <td></td>
+            <tr class="<%= block.verified ? "table-success" : "" %>">
+              <% if sample.included %>
+                <td><%= block.block_tag %></td>
+              <% else %>
+                <td></td>
+              <% end %>
+              
               <td><%= block.organ_code %></td>
-              <td><%= block.fragment %></td>
+              <td>
+                <% if sample.included %>
+                  <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+                    <%= block.fragment %>
+                  </span>
+                <% else %>
+                  <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+                    <%= block.fragment %>
+                  </span>
+                <% end %>
+              </td>
               
               <td><%= User.where(id: block.user_id).first.try(:email) %></td>
               <td><%= block.verified == true ? 'Si' : 'No' %></td>
-              <td><%= link_to 'Revisar', block_path(block) %></td>
-              <td><%= link_to 'Editar', edit_block_path(block) %></td>
-              <td><%= link_to 'Borrar', block, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+              <% if !sample.included %>
+                <td><%= render partial: "blocks/block-controls", locals: { inform: inform, block: block, sample: sample } %></td>
+              <% end %>
+              
             </tr>
             <% block.objections.each do |objection| %>
-              <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                <!-- <td><%= objection.description %></td> -->
+              <tr class="<%= block.verified ? "table-success" : "" %>" >
+                <td>
+                  <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">
+                    No conformidad: 
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">
+                    <%= objection_title(objection.obcode_id) %>
+                  </span>
+                  <% if edit_objection_id == nil %>
+                    <div class="d-flex flex-column">
+                      <span class="text-muted objection-description">
+                        <%= objection.description %>
+                      </span>
+                    </div>
+                    <% unless objection.closed %>
+                      <%= form_with url: execute_templates_review_block_path, method: "get" do |form| %>
+                        <div class="actions">
+                          <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
+                          <%= form.hidden_field :block_id, value: block.id %>
+                          <%= form.hidden_field :objection_id, value: objection.id %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <% if edit_objection_id == objection.id %>
+                      <%= form_with url: execute_templates_anotate_block_path, method: "get" do |form| %>
+                        <div class="field">
+                          <%= form.label "Historial:" %>
+                          <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>
+                        </div>
+                        <div class="field">
+                          <%= form.label "Acción de mejora:" %>
+                          <%= form.text_area :new_description, class: "form-control input" %>
+                        </div>
+                        <div class="field">
+                          <%= form.label "Fragmentos:" %>
+                          <%= form.number_field :fragment, value: block.fragment, class: "form-control input" %>
+                        </div>
+                        <div class="actions">
+                          <%= form.submit "Anotar", class: "btn btn-outline-warning mx-1 my-1" %>
+                          <%= form.hidden_field :block_id, value: block.id %>
+                          <%= form.hidden_field :objection_id, value: objection.id %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             <% end %>
           <% end %>

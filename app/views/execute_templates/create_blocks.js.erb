@@ -3,12 +3,17 @@
 	function refresh2() {
 
 	  $('div.blocks').remove();
-	  $('div.block').append('<%= j render "informs/blocks", inform: @inform, blocks: @blocks, samplesc: @samplesc %>');
+	  $('div.block').append('<%= j render "informs/blocks", inform: @inform, blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil %>');
 
 	  
 	  $('div.fast-bar').append('<%= j render "ok-message", message: "editado" %>');
 	  setTimeout(function() {
 	  	$('div.alert-growl').remove();
-	  }, 3000)
+	  }, 3000);
 	}
+<% else %>
+	$('div.fast-bar').append('<%= j render "blocks/block-error-message", message: "Revisar" %>');
+	setTimeout(function() {
+		$('div.alert-growl').remove();
+	}, 3000);
 <% end %>

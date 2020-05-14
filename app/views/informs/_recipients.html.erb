@@ -89,17 +89,17 @@
                             <%= sample.description %>
                             <% if sample.fragment == nil || sample.description == nil || edit_sample_tag == sample.sample_tag %>
                               <%= form_with model: sample do |f| %>
-                                  <div class="field">
-                                    <%= f.label "Fragmentos:" %>
-                                    <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
-                                  </div>
-                                  <div class="field">
-                                    <%= f.label "Descripción:" %>
-                                    <%= f.text_area :description, class: "form-control input" %>
-                                  </div>
-                                  <div class="actions">
-                                    <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
-                                  </div>
+                                <div class="field">
+                                  <%= f.label "Fragmentos:" %>
+                                  <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
+                                </div>
+                                <div class="field">
+                                  <%= f.label "Descripción:" %>
+                                  <%= f.text_area :description, class: "form-control input" %>
+                                </div>
+                                <div class="actions">
+                                  <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
+                                </div>
                               <% end %>
                             
                             <% end %>

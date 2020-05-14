@@ -3,7 +3,7 @@
 	function refresh2() {
 
 	  $('div.blocks').remove();
-	  $('div.block').append('<%= j render "informs/blocks", inform: @inform, blocks: @blocks, samplesc: @samplesc %>');
+	  $('div.block').append('<%= j render "informs/blocks", inform: @inform, blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil %>');
 
 	  
 	  $('div.fast-bar').append('<%= j render "ok-message", message: "editado" %>');

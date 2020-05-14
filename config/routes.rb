@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     get 'execute_templates/block_fp1'
     get 'execute_templates/block_fok'
     get 'execute_templates/block_fm1'
+    get 'execute_templates/review_block'
+    get 'execute_templates/anotate_block'
   
     get 'static_pages/home'
     get 'static_pages/services'

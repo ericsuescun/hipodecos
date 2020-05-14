@@ -2,10 +2,6 @@
   
   <div class="d-flex justify-content-around align-items-center mt-1">
 
-    <%= link_to edit_block_path(block), remote: true, class: "my-0 mx-1" do %>
-      <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none">&#9998;</span>
-    <% end %>
-
     <%= form_with url: execute_templates_block_fm1_path, method: "get", id: "block-#{block.block_tag}" do |form| %>
       <%= form.submit "-1", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>
       <%= form.hidden_field :sample_id, value: sample.id %>

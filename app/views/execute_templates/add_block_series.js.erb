@@ -2,9 +2,12 @@
 	$(document).on('page:load', refresh2());
 	function refresh2() {
 
+		$('div.blocks').remove();
+		$('div.block').append('<%= j render "informs/blocks", inform: @inform, blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil %>');
+
 		$('div.slides').remove();
 		$('div.slide').append('<%= j render "informs/slides", inform: @inform %>');
-
+		
 		$('div.fast-bar').append('<%= j render "ok-message", message: "creado" %>');
 		setTimeout(function() {
 			$('div.alert-growl').remove();

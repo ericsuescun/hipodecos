@@ -5,13 +5,21 @@ Rails.application.routes.draw do
     root to: "static_pages#home"
 
     get 'execute_templates/create'
+
     get 'execute_templates/add_slide'
     get 'execute_templates/add_series'
     get 'execute_templates/associate_slide'
+
+    get 'execute_templates/add_block_slide'
+    get 'execute_templates/add_block_series'
+    get 'execute_templates/associate_block_slide'
+
     get 'execute_templates/create_blocks'
+
     get 'execute_templates/block_fp1'
     get 'execute_templates/block_fok'
     get 'execute_templates/block_fm1'
+    
     get 'execute_templates/review_block'
     get 'execute_templates/anotate_block'
   

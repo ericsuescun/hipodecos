@@ -101,9 +101,27 @@ class ExecuteTemplatesController < ApplicationController
 		@sample.update(slide_tag: params[:sample_tag])	#Se guarda el tag creado en la sample para que queden asociados
 	end
 
+	def add_block_slide
+		@inform = Inform.find(params[:inform_id])
+		@sample = Sample.find(params[:sample_id])
+		@block = Block.find(params[:block_id])
+		@blocks = @inform.blocks
+		@samplesc = @inform.samples.where(name: "Cassette")
+		@recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first
+		@inform.slides.create(slide_tag: params[:block_tag])	#Se crea un slide con el mismo tag de la sample
+		@block.update(slide_tag: params[:block_tag])	#Se guarda el tag creado en el block para que queden asociados
+	end
+
 	def add_series
 		@inform = Inform.find(params[:inform_id])
 		@inform.slides.create(slide_tag: params[:sample_tag] + "*")
+	end
+
+	def add_block_series
+		@inform = Inform.find(params[:inform_id])
+		@blocks = @inform.blocks
+		@samplesc = @inform.samples.where(name: "Cassette")
+		@inform.slides.create(slide_tag: params[:block_tag] + "*")
 	end
 
 	def associate_slide
@@ -124,6 +142,30 @@ class ExecuteTemplatesController < ApplicationController
 		@samples.each do |sample|
 			sample.update(slide_tag: new_tag)	#Actualizo todas las samples asociadas con el nuevo tag
 		end
+	end
+
+	def associate_block_slide
+		@automatics = Automatic.all 	#Para poder renderizar recipients entero...
+		@sample = Sample.find(params[:sample_id])
+		@block = Block.find(params[:block_id])
+		@inform = @sample.inform
+		
+		@samplesc = @inform.samples.where(name: "Cassette")
+		@recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first
+
+		@block.update(slide_tag: params[:destination_slide])	#Se taggea la sample actual con el slide seleccionado
+
+		@slide = Slide.where(inform_id: params[:inform_id], slide_tag: params[:destination_slide]).first	#Traigo el slide actual
+
+		new_tag = @slide.slide_tag + "-" + get_nomen(@block.block_tag)	#Calculo el nuevo tag
+		@slide.update(slide_tag: new_tag)	#Actualizo la slide con ese nuevo tag
+
+		@blocks = Inform.find(params[:inform_id]).blocks.where(slide_tag: params[:destination_slide]) #Busco todas las samples de ese informe con ese slide asociado (por el tag)
+
+		@blocks.each do |block|
+			block.update(slide_tag: new_tag)	#Actualizo todas las samples asociadas con el nuevo tag
+		end
+		@blocks = @inform.blocks	#Tengo que enviar todos los blocks para renderizado!
 	end
 	
 	def create

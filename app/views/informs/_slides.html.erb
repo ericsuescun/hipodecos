@@ -19,10 +19,24 @@
                   <div class="card-body">
                     <h5 class="card-title"></h5>
                     
-                    <% get_slides_samples(slide).each do |sample| %>
-                      <strong><%= sample.sample_tag %> <%= sample.name == "Extendido" ? "Ext" : "" %></strong>
-                      <p class="m-0 p-0"><%= sample.organ_code %></p>
-                      <p class="m-0 p-0"><%= sample.description %></p>
+                    <% unless get_slides_samples(slide).empty? %>
+                      <% get_slides_samples(slide).each do |sample| %>
+                        <div class="mb-2">
+                          <strong><%= sample.sample_tag %> <%= sample.name == "Extendido" ? "Ext" : "" %></strong>
+                          <p class="m-0 p-0"><%= sample.organ_code %></p>
+                          <p class="m-0 p-0"><%= sample.description %></p>
+                        </div>
+                      <% end %>
+                    <% end %>
+
+                    <% unless get_slides_blocks(slide).empty? %>
+                      <% get_slides_blocks(slide).each do |block| %>
+                        <div class="mb-2">
+                          <strong><%= block.block_tag %></strong>
+                          <p class="m-0 p-0"><%= block.organ_code %></p>
+                          <p class="m-0 p-0"><%= block.description %></p>
+                        </div>
+                      <% end %>
                     <% end %>
                     
                   </div>

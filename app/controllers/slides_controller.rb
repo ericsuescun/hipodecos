@@ -76,15 +76,30 @@ class SlidesController < ApplicationController
   def destroy
     @inform = @slide.inform
     if @slide.slide_tag[-1] != "*"
-      @samples = @inform.samples.where(slide_tag: @slide.slide_tag)  #Saco una coleccion de samples asociadas al slide que voy a borrar
+
+      @blocks = @inform.blocks.where(slide_tag: @slide.slide_tag)  #Saco una coleccion de blocks asociadas al slide que voy a borrar
+
+      @block = @blocks.first #Es para pasarla al render en JS
+
+      @samples = @inform.samples.where(slide_tag: @slide.slide_tag, name: "Extendido")  #Saco una coleccion de samples asociadas al slide que voy a borrar
       @sample = @samples.first #Es para pasarla al render en JS
-      @recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first  #Es para pasarla al render en JS
+      # @recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first  #Es para pasarla al render en JS
+      @recipient = nil
+
+      
 
     
       @samples.each do |sample|
         sample.update(slide_tag: nil) #Borro todas las asociaciones encontradas en las tags de samples
       end
+
+      @blocks.each do |block|
+        block.update(slide_tag: nil) #Borro todas las asociaciones encontradas en las tags de samples
+      end
+
     end
+    @samplesc = @inform.samples.where(name: "Cassette")  #Saco una coleccion de samples asociadas al slide que voy a borrar
+    @blocks = @inform.blocks  #Recargo todos los block para renderizado
     @slide.destroy
   end
 

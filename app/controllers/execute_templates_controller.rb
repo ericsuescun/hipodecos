@@ -92,6 +92,7 @@ class ExecuteTemplatesController < ApplicationController
 					slide_tag: nil,
 					verified: false
 				)
+				sample.update(blocked: true)
 			end
 		end
 	end

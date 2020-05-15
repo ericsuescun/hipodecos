@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_053627) do
+ActiveRecord::Schema.define(version: 2020_05_15_093338) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -360,6 +360,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_053627) do
     t.integer "fragment"
     t.string "slide_tag"
     t.boolean "included"
+    t.boolean "blocked", default: false
     t.index ["inform_id"], name: "index_samples_on_inform_id"
   end
 

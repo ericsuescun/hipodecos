@@ -82,14 +82,17 @@ class ExecuteTemplatesController < ApplicationController
 		@blocks = @inform.blocks
 		@samplesc = @inform.samples.where(name: "Cassette")
 		@samplesc.each do |sample|
-			@inform.blocks.create!(
-				user_id: current_user.id,
-				block_tag: sample.sample_tag,
-				description: sample.description,
-				organ_code: sample.organ_code,
-				fragment: sample.fragment,
-				slide_tag: nil
-			)
+			if sample.blocked != true
+				@inform.blocks.create!(
+					user_id: current_user.id,
+					block_tag: sample.sample_tag,
+					description: sample.description,
+					organ_code: sample.organ_code,
+					fragment: sample.fragment,
+					slide_tag: nil,
+					verified: false
+				)
+			end
 		end
 	end
 

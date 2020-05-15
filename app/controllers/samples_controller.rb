@@ -104,6 +104,6 @@ class SamplesController < ApplicationController
     end
 
     def sample_params
-      params.require(:sample).permit(:inform_id, :user_id, :name, :description, :sample_tag, :recipient_tag, :organ_code, :fragment)
+      params.require(:sample).permit(:inform_id, :user_id, :name, :description, :sample_tag, :recipient_tag, :organ_code, :fragment, :included, :blocked)
     end
 end

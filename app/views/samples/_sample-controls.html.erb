@@ -2,17 +2,22 @@
 
   
   <div class="d-flex justify-content-around align-items-center mt-1">
-    <%= link_to edit_sample_path(sample), remote: true, class: "my-0 mx-1" do %>
-      <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none">&#9998;</span>
-    <% end %>
-    
-    <% if !next_number_tag_exists?(inform, sample) %>
-      <%= form_with model: [inform, inform.samples.build] do |form| %>
-        <%= form.submit "+", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: transparent;" %>
-        <%= form.hidden_field :recipient_tag, value: recipient.tag %>
-        <%= form.hidden_field :organ_code, value: sample.organ_code %>
-        <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
+    <% unless sample.blocked %>
+      <%= link_to edit_sample_path(sample), remote: true, class: "my-0 mx-1" do %>
+        <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none">&#9998;</span>
       <% end %>
+      <% if sample.slide_tag == nil %>
+        <% if !next_number_tag_exists?(inform, sample) %>
+          <%= form_with model: [inform, inform.samples.build] do |form| %>
+            <%= form.submit "+", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: transparent;" %>
+            <%= form.hidden_field :recipient_tag, value: recipient.tag %>
+            <%= form.hidden_field :organ_code, value: sample.organ_code %>
+            <%= form.hidden_field :name, value: sample.name %>
+            <%= form.hidden_field :sample_tag, value: generate_number_tag(sample) %>
+          <% end %>
+        <% end %>
+      <% end %>
+      
     <% end %>
 
     <% if sample.name == "Extendido" %>

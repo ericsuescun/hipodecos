@@ -2,49 +2,56 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-lg-12 col-xl-12">
+          <div class="card bg-light mx-2 mb-3">
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <strong>Placas</strong>
+            </div>
+            <div class="card-body">
+              <div class="card-deck">
+                <% inform.slides.each do |slide| %>
+                  <% if slide.slide_tag != nil %> <!-- Hay instancias no en DB por las form de las Samples, solo listo las que tengan tag -->
+                    <div class="col-12 col-lg-2 col-xl-2 card-in">
+                      <div class="card mb-3">
+                        <div class="card-header d-flex pl-1 pr-0 pt-0 pb-0 justify-content-between" style="background-color: rgba(255,150,255,0.3)">
+                          <span class="d-flex"><%= slide.slide_tag %></span>
 
-        <div class="card-deck">
-          <% inform.slides.each do |slide| %>
-            <% if slide.slide_tag != nil %> <!-- Hay instancias no en DB por las form de las Samples, solo listo las que tengan tag -->
-              <div class="col-12 col-lg-2 col-xl-2 card-in">
-                <div class="card">
-                  <div class="card-header d-flex pl-1 pr-0 pt-0 pb-0 justify-content-between" style="background-color: rgba(255,150,255,0.3)">
-                    <span class="d-flex"><%= slide.slide_tag %></span>
+                          <%= link_to slide, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
+                            <span>&times;</span>
+                          <% end %>
 
-                    <%= link_to slide, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
-                      <span>&times;</span>
-                    <% end %>
-
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    
-                    <% unless get_slides_samples(slide).empty? %>
-                      <% get_slides_samples(slide).each do |sample| %>
-                        <div class="mb-2">
-                          <strong><%= sample.sample_tag %> <%= sample.name == "Extendido" ? "Ext" : "" %></strong>
-                          <p class="m-0 p-0"><%= sample.organ_code %></p>
-                          <p class="m-0 p-0"><%= sample.description %></p>
                         </div>
-                      <% end %>
-                    <% end %>
+                        <div class="card-body">
+                          <h5 class="card-title"></h5>
+                          
+                          <% unless get_slides_samples(slide).empty? %>
+                            <% get_slides_samples(slide).each do |sample| %>
+                              <div class="mb-2">
+                                <strong><%= sample.sample_tag %> <%= sample.name == "Extendido" ? "Ext" : "" %></strong>
+                                <p class="m-0 p-0"><%= sample.organ_code %></p>
+                                <p class="m-0 p-0"><%= sample.description %></p>
+                              </div>
+                            <% end %>
+                          <% end %>
 
-                    <% unless get_slides_blocks(slide).empty? %>
-                      <% get_slides_blocks(slide).each do |block| %>
-                        <div class="mb-2">
-                          <strong><%= block.block_tag %></strong>
-                          <p class="m-0 p-0"><%= block.organ_code %></p>
-                          <p class="m-0 p-0"><%= block.description %></p>
+                          <% unless get_slides_blocks(slide).empty? %>
+                            <% get_slides_blocks(slide).each do |block| %>
+                              <div class="mb-2">
+                                <strong><%= block.block_tag %></strong>
+                                <p class="m-0 p-0"><%= block.organ_code %></p>
+                                <p class="m-0 p-0"><%= block.description %></p>
+                              </div>
+                            <% end %>
+                          <% end %>
+
                         </div>
-                      <% end %>
-                    <% end %>
-                    
-                  </div>
-                </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
               </div>
-            <% end %>
-          <% end %>
-        </div>
+            </div>
+          </div>
+        
       </div>
     </div>
   </div>

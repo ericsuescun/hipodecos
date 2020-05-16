@@ -40,7 +40,7 @@
                     <div class="col-12 col-lg-12">
                   <% end %>
                   
-                    <div class="card mx-2 my-2 pb-0">
+                    <div class="card mx-2 my-2 pb-0 <%= block.verified ? "border-success" : "" %>">
                       <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-start">
                         <span class="d-flex "><strong><%= block.block_tag %>: </strong></span>
                         <% if sample.included %>
@@ -191,7 +191,7 @@
                       </td>
                     <% end %>
                     <% if block.verified %>
-                      <td>
+                      <td style="width:230px;">
                         <%= render partial: "blocks/block-slide-controls", locals: { inform: inform, block: block, sample: sample } %>
                       </td>
                         

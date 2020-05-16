@@ -1,47 +1,7 @@
 <div class="row">
-  <div class="col-12 col-lg-12 mx-auto">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Órgano</th>
-          <th>Frag.</th>
-          <th>Por</th>
-          <th>Verif.</th>
-          <th scope="3"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @blocks.each do |block| %>
-          <% sample = @samples.where(sample_tag: block.block_tag).first %>
-          <tr>
-            <td><%= sample.sample_tag %></td>
-            <td><%= sample.organ_code %></td>
-            <td><%= sample.fragment %></td>
-            <td><%= User.where(id: sample.user_id).first.try(:email) %></td>
-            <td>Verif.</td>
-          </tr>
-
-          <tr>
-            <td></td>
-            <td><%= block.organ_code %></td>
-            <td><%= block.fragment %></td>
-            
-            <td><%= User.where(id: block.user_id).first.try(:email) %></td>
-            <td><%= block.verified == true ? 'Si' : 'No' %></td>
-            <td><%= link_to 'Revisar', block_path(block) %></td>
-            <td><%= link_to 'Editar', edit_block_path(block) %></td>
-            <td><%= link_to 'Borrar', block, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-          </tr>
-          <% block.objections.each do |objection| %>
-            <tr class=<%= objection.closed == false ? "objection" : "" %> >
-              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-              <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-              <!-- <td><%= objection.description %></td> -->
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="col-12 col-lg-12 mb-3 mx-auto">
+    <div class="list-block">
+      <%= render partial: "list-blocks", locals: { blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil } %>
+    </div>
   </div>
 </div>

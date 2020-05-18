@@ -90,7 +90,7 @@
                             </span>
                           </div>
                           <% unless objection.closed %>
-                            <%= form_with url: list_blocks_review_block_path, method: "get" do |form| %>
+                            <%= form_with url: list_blocks_review_block_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
                               <div class="actions">
                                 <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
                                 <%= form.hidden_field :block_id, value: block.id %>
@@ -100,7 +100,7 @@
                           <% end %>
                         <% else %>
                           <% if edit_objection_id == objection.id %>
-                            <%= form_with url: list_blocks_anotate_block_path, method: "get" do |form| %>
+                            <%= form_with url: list_blocks_anotate_block_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
                               <div class="field">
                                 <%= form.label "Historial:" %>
                                 <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>

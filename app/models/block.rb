@@ -5,5 +5,6 @@ class Block < ApplicationRecord
   # has_many :objections, as: :objectionable
 
   default_scope -> { order(block_tag: :asc) }
+  
   validates :block_tag, uniqueness: true
 end

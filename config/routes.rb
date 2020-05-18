@@ -23,12 +23,12 @@ Rails.application.routes.draw do
     get 'execute_templates/review_block'
     get 'execute_templates/anotate_block'
 
-    get 'list_blocks/block_fp1'
-    get 'list_blocks/block_fok'
-    get 'list_blocks/block_fm1'
+    post 'list_blocks/block_fp1'
+    post 'list_blocks/block_fok'
+    post 'list_blocks/block_fm1'
 
-    get 'list_blocks/review_block'
-    get 'list_blocks/anotate_block'
+    post 'list_blocks/review_block'
+    post 'list_blocks/anotate_block'
     
     get 'static_pages/home'
     get 'static_pages/services'

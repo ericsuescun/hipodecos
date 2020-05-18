@@ -1,9 +1,30 @@
 class ListBlocksController < ApplicationController
 
+	def get_samplesc_and_blocks
+		if params[:yi] != ""
+		  initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+		  final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+		  date_range = initial_date..final_date
+		  @blocks = Block.where(created_at: date_range)
+		else
+		  @blocks = Block.all
+		end
+
+		if params[:yi] != ""
+		  initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+		  final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+		  date_range = initial_date..final_date
+		  @samplesc = Sample.where(created_at: date_range, name: "Cassette")
+		else
+		  @samplesc = Sample.where(name: "Cassette")
+		end
+	end
+
 	def anotate_block
 		@block = Block.find(params[:block_id])
-		@samplesc = Sample.where(name: "Cassette")
-		@blocks = Block.all
+		# @samplesc = Sample.where(name: "Cassette")
+		# @blocks = Block.all
+		get_samplesc_and_blocks
 		@objection = Objection.find(params[:objection_id])
 		new_description = @objection.description.to_s + "FECHA: " + Date.today.to_s + " REVISIÓN: " + params[:new_description].to_s + ", por: " + current_user.email
 		@objection.update(
@@ -17,8 +38,9 @@ class ListBlocksController < ApplicationController
 
 	def review_block
 		@block = Block.find(params[:block_id])
-		@samplesc = Sample.where(name: "Cassette")
-		@blocks = Block.all
+		# @samplesc = Sample.where(name: "Cassette")
+		# @blocks = Block.all
+		get_samplesc_and_blocks
 		@objection = Objection.find(params[:objection_id])
 		
 	end
@@ -28,8 +50,9 @@ class ListBlocksController < ApplicationController
 		@block = Block.find(params[:block_id])
 		@block.update(fragment: params[:fragment].to_i + 1)
 
-		@samplesc = Sample.where(name: "Cassette")
-		@blocks = Block.all
+		# @samplesc = Sample.where(name: "Cassette")
+		# @blocks = Block.all
+		get_samplesc_and_blocks
 	end
 
 	def block_fok
@@ -37,8 +60,9 @@ class ListBlocksController < ApplicationController
 		@block = Block.find(params[:block_id])
 		@sample.update(included: true)	#Marco la muestra como incluida en parafina, por lo que oficilamente el bloque queda confirmado con esos fragmentos
 
-		@samplesc = Sample.where(name: "Cassette")
-		@blocks = Block.all
+		# @samplesc = Sample.where(name: "Cassette")
+		# @blocks = Block.all
+		get_samplesc_and_blocks
 
 		if @sample.fragment != @block.fragment
 			log = "FECHA: " + Date.today.to_s
@@ -70,7 +94,8 @@ class ListBlocksController < ApplicationController
 		@block = Block.find(params[:block_id])
 		@block.update(fragment: params[:fragment].to_i - 1)
 
-		@samplesc = Sample.where(name: "Cassette")
-		@blocks = Block.all
+		# @samplesc = Sample.where(name: "Cassette")
+		# @blocks = Block.all
+		get_samplesc_and_blocks
 	end
 end

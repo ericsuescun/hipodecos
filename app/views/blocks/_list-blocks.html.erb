@@ -24,7 +24,7 @@
                   <% sample = samplesc.where(sample_tag: block.block_tag).first %>
                   <% if !sample.included %>
                     <tr>
-                      <td>S: <%= sample.sample_tag %></td>
+                      <td><%= sample.sample_tag %></td>
                       <td><%= sample.organ_code %></td>
                       
                       <td><%= User.where(id: sample.user_id).first.try(:email) %></td>
@@ -46,12 +46,18 @@
 
                   <tr class="<%= block.verified ? "table-success" : "" %>">
                     <% if sample.included %>
-                      <td>B: <%= block.block_tag %></td>
+                      <td><%= block.block_tag %></td>
                     <% else %>
                       <td></td>
                     <% end %>
                     
-                    <td><%= block.organ_code %></td>
+                    <td>
+                      <%= block.organ_code %>
+                      <% Slide.where(slide_tag: block.block_tag) do |slide| %>
+                        <%= slide.slide_tag %>
+                      <% end %>
+                      
+                    </td>
                     <td><%= User.where(id: block.user_id).first.try(:email) %></td>
                     <td><%= block.verified == true ? 'Si' : 'No' %></td>
                     <td>
@@ -70,7 +76,12 @@
                         <%= render partial: "blocks/list-block-controls", locals: { block: block, sample: sample } %>
                       </td>
                     <% end %>
-                    
+                    <% if block.verified %>
+                      <td style="width:230px;">
+                        <%= render partial: "blocks/list-block-slide-controls", locals: { block: block, sample: sample } %>
+                      </td>
+                        
+                    <% end %>
                   </tr>
                   <% block.objections.each do |objection| %>
                     <tr class="<%= block.verified ? "table-success" : "" %>" >

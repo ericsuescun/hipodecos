@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     get 'execute_templates/review_block'
     get 'execute_templates/anotate_block'
 
+    post 'list_blocks/add_block_slide'
+    post 'list_blocks/add_block_series'
+    post 'list_blocks/associate_block_slide'
+
     post 'list_blocks/block_fp1'
     post 'list_blocks/block_fok'
     post 'list_blocks/block_fm1'

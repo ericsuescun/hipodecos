@@ -1,5 +1,51 @@
 class ListBlocksController < ApplicationController
 
+	def add_block_slide
+		@sample = Sample.find(params[:sample_id])
+		@block = Block.find(params[:block_id])
+		# @blocks = @inform.blocks
+		# @samplesc = @inform.samples.where(name: "Cassette")
+		get_samplesc_and_blocks
+		# @recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first
+		@inform = @block.inform
+		@inform.slides.create(slide_tag: params[:block_tag])	#Se crea un slide con el mismo tag de la sample
+		@block.update(slide_tag: params[:block_tag])	#Se guarda el tag creado en el block para que queden asociados
+	end
+
+	def add_block_series
+		# @blocks = @inform.blocks
+		# @samplesc = @inform.samples.where(name: "Cassette")
+		get_samplesc_and_blocks
+		@block = Block.find(params[:block_id])
+		@inform = @block.inform
+		@inform.slides.create(slide_tag: @block.block_tag + "*")
+	end
+
+	def associate_block_slide
+		# @automatics = Automatic.all 	#Para poder renderizar recipients entero...
+		@sample = Sample.find(params[:sample_id])
+		@block = Block.find(params[:block_id])
+		
+		# @samplesc = @inform.samples.where(name: "Cassette")
+		# @recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first
+
+		@block.update(slide_tag: params[:destination_slide])	#Se taggea la sample actual con el slide seleccionado
+
+		@slide = Slide.where(slide_tag: params[:destination_slide]).first	#Traigo el slide actual
+
+		new_tag = @slide.slide_tag + "-" + get_nomen(@block.block_tag)	#Calculo el nuevo tag
+		@slide.update(slide_tag: new_tag)	#Actualizo la slide con ese nuevo tag
+
+		@inform = @sample.inform
+		@blocks = @inform.blocks.where(slide_tag: params[:destination_slide]) #Busco todas las samples de ese informe con ese slide asociado (por el tag)
+
+		@blocks.each do |block|
+			block.update(slide_tag: new_tag)	#Actualizo todas las samples asociadas con el nuevo tag
+		end
+		# @blocks = @inform.blocks	#Tengo que enviar todos los blocks para renderizado!
+		get_samplesc_and_blocks
+	end
+
 	def get_samplesc_and_blocks
 		if params[:yi] != ""
 		  initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
@@ -97,5 +143,9 @@ class ListBlocksController < ApplicationController
 		# @samplesc = Sample.where(name: "Cassette")
 		# @blocks = Block.all
 		get_samplesc_and_blocks
+	end
+
+	def get_nomen(str)
+		return str.split('-',2)[1].split('-',2)[1]
 	end
 end

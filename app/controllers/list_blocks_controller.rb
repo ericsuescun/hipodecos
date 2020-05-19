@@ -8,7 +8,7 @@ class ListBlocksController < ApplicationController
 		get_samplesc_and_blocks
 		# @recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first
 		@inform = @block.inform
-		@inform.slides.create(slide_tag: params[:block_tag])	#Se crea un slide con el mismo tag de la sample
+		@inform.slides.create(slide_tag: params[:block_tag], user_id: current_user.id)	#Se crea un slide con el mismo tag de la sample
 		@block.update(slide_tag: params[:block_tag])	#Se guarda el tag creado en el block para que queden asociados
 	end
 
@@ -18,7 +18,7 @@ class ListBlocksController < ApplicationController
 		get_samplesc_and_blocks
 		@block = Block.find(params[:block_id])
 		@inform = @block.inform
-		@inform.slides.create(slide_tag: @block.block_tag + "*")
+		@inform.slides.create(slide_tag: @block.block_tag + "*", user_id: current_user.id)
 	end
 
 	def associate_block_slide
@@ -29,18 +29,18 @@ class ListBlocksController < ApplicationController
 		# @samplesc = @inform.samples.where(name: "Cassette")
 		# @recipient = Recipient.where(inform_id: @sample.inform_id, tag: @sample.recipient_tag).first
 
-		@block.update(slide_tag: params[:destination_slide])	#Se taggea la sample actual con el slide seleccionado
+		@block.update(slide_tag: params[:destination_slide], user_id: current_user.id)	#Se taggea la sample actual con el slide seleccionado
 
 		@slide = Slide.where(slide_tag: params[:destination_slide]).first	#Traigo el slide actual
 
 		new_tag = @slide.slide_tag + "-" + get_nomen(@block.block_tag)	#Calculo el nuevo tag
-		@slide.update(slide_tag: new_tag)	#Actualizo la slide con ese nuevo tag
+		@slide.update(slide_tag: new_tag, user_id: current_user.id)	#Actualizo la slide con ese nuevo tag
 
 		@inform = @sample.inform
 		@blocks = @inform.blocks.where(slide_tag: params[:destination_slide]) #Busco todas las samples de ese informe con ese slide asociado (por el tag)
 
 		@blocks.each do |block|
-			block.update(slide_tag: new_tag)	#Actualizo todas las samples asociadas con el nuevo tag
+			block.update(slide_tag: new_tag, user_id: current_user.id)	#Actualizo todas las samples asociadas con el nuevo tag
 		end
 		# @blocks = @inform.blocks	#Tengo que enviar todos los blocks para renderizado!
 		get_samplesc_and_blocks
@@ -79,7 +79,7 @@ class ListBlocksController < ApplicationController
 			close_date: Date.today,
 			closed: true
 		)
-		@block.update(verified: true, fragment: params[:fragment])
+		@block.update(verified: true, fragment: params[:fragment], user_id: current_user.id)
 	end
 
 	def review_block
@@ -94,7 +94,7 @@ class ListBlocksController < ApplicationController
 	def block_fp1
 		@sample = Sample.find(params[:sample_id])
 		@block = Block.find(params[:block_id])
-		@block.update(fragment: params[:fragment].to_i + 1)
+		@block.update(fragment: params[:fragment].to_i + 1, user_id: current_user.id)
 
 		# @samplesc = Sample.where(name: "Cassette")
 		# @blocks = Block.all
@@ -138,7 +138,7 @@ class ListBlocksController < ApplicationController
 	def block_fm1
 		@sample = Sample.find(params[:sample_id])
 		@block = Block.find(params[:block_id])
-		@block.update(fragment: params[:fragment].to_i - 1)
+		@block.update(fragment: params[:fragment].to_i - 1, user_id: current_user.id)
 
 		# @samplesc = Sample.where(name: "Cassette")
 		# @blocks = Block.all

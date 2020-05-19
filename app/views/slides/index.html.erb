@@ -1,33 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Slides</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Inform</th>
-      <th>User</th>
-      <th>Slide tag</th>
-      <th>Stored</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @slides.each do |slide| %>
-      <tr>
-        <td><%= slide.inform %></td>
-        <td><%= slide.user_id %></td>
-        <td><%= slide.slide_tag %></td>
-        <td><%= slide.stored %></td>
-        <td><%= link_to 'Show', slide %></td>
-        <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
-        <td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Slide', new_slide_path %>
+<div class="row">
+  <div class="col-12 col-lg-12 mb-3 mx-auto">
+    <div class="list-block">
+      <%= render partial: "list-slides", locals: { slides: @slides, edit_slide_id: nil, edit_objection_id: nil } %>
+    </div>
+  </div>
+</div>

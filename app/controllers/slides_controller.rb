@@ -9,9 +9,9 @@ class SlidesController < ApplicationController
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
       final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
       date_range = initial_date..final_date
-      @slides = Slide.where(created_at: date_range)
+      @slides = Slide.where(created_at: date_range).group(:inform_id)
     else
-      @slides = Slide.all
+      @slides = Slide.all.group(:inform_id)
     end
   end
 

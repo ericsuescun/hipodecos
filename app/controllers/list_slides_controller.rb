@@ -1,0 +1,2 @@
+class ListSlidesController < ApplicationController
+end

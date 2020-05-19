@@ -2,148 +2,152 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-lg-12 mx-auto">
-        <div class="card bg-light mx-2 mb-3">
-          <div class="card-header pl-1 pr-0 pt-0 pb-0">
-            <strong>Lista de bloques</strong>
-          </div>
-          <div class="card-body list-block">
-            <table class="table table-hover table-borderless list-blocks">
-              <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Órgano</th>
-                  
-                  <th>Último usuario</th>
-                  <th>Verif.</th>
-                  <th>Frag.</th>
-                  <th scope="3">Controles</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% blocks.each do |block| %>
-                  <% sample = samplesc.where(sample_tag: block.block_tag).first %>
-                  <% if !sample.included %>
-                    <tr>
-                      <td><%= sample.sample_tag %></td>
-                      <td><%= sample.organ_code %></td>
+        <% blocks2.each do |block2| %>
+          <div class="card bg-light mx-2 mb-3">
+            <div class="card-header pl-1 pr-0 pt-0 pb-0">
+              <strong>Bloques para <%= block2.inform.tag_code %></strong>
+            </div>
+            <div class="card-body list-block">
+              <table class="table table-hover table-borderless list-blocks">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Órgano</th>
+                    
+                    <th>Último usuario</th>
+                    <th>Verif.</th>
+                    <th>Frag.</th>
+                    <th scope="3">Controles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% block2.inform.blocks.each do |block| %>
+                    <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
+                    <% if !sample.included %>
+                      <tr>
+                        <td><%= sample.sample_tag %></td>
+                        <td><%= sample.organ_code %></td>
+                        
+                        <td><%= User.where(id: sample.user_id).first.try(:email) %></td>
+                        <td></td>
+                        <td>
+                          <% if sample.included %>
+                            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+                              <%= sample.fragment %>
+                            </span>
+                          <% else %>
+                            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+                              <%= sample.fragment %>
+                            </span>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                    
+
+                    <tr class="<%= block.verified ? "table-success" : "" %>">
+                      <% if sample.included %>
+                        <td><%= block.block_tag %></td>
+                      <% else %>
+                        <td></td>
+                      <% end %>
                       
-                      <td><%= User.where(id: sample.user_id).first.try(:email) %></td>
-                      <td></td>
+                      <td>
+                        <%= block.organ_code %>
+                        <% Slide.where(slide_tag: block.block_tag) do |slide| %>
+                          <%= slide.slide_tag %>
+                        <% end %>
+                        
+                      </td>
+                      <td><%= User.where(id: block.user_id).first.try(:email) %></td>
+                      <td><%= block.verified == true ? 'Si' : 'No' %></td>
                       <td>
                         <% if sample.included %>
                           <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
-                            <%= sample.fragment %>
+                            <%= block.fragment %>
                           </span>
                         <% else %>
                           <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
-                            <%= sample.fragment %>
+                            <%= block.fragment %>
                           </span>
                         <% end %>
                       </td>
+                      <% if !sample.included %>
+                        <td>
+                          <%= render partial: "blocks/list-block-controls", locals: { block: block, sample: sample } %>
+                        </td>
+                      <% end %>
+                      <% if block.verified %>
+                        <td style="width:230px;">
+                          <%= render partial: "blocks/list-block-slide-controls", locals: { block: block, sample: sample } %>
+                        </td>
+                          
+                      <% end %>
                     </tr>
-                  <% end %>
-                  
-
-                  <tr class="<%= block.verified ? "table-success" : "" %>">
-                    <% if sample.included %>
-                      <td><%= block.block_tag %></td>
-                    <% else %>
-                      <td></td>
-                    <% end %>
-                    
-                    <td>
-                      <%= block.organ_code %>
-                      <% Slide.where(slide_tag: block.block_tag) do |slide| %>
-                        <%= slide.slide_tag %>
-                      <% end %>
-                      
-                    </td>
-                    <td><%= User.where(id: block.user_id).first.try(:email) %></td>
-                    <td><%= block.verified == true ? 'Si' : 'No' %></td>
-                    <td>
-                      <% if sample.included %>
-                        <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
-                          <%= block.fragment %>
-                        </span>
-                      <% else %>
-                        <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
-                          <%= block.fragment %>
-                        </span>
-                      <% end %>
-                    </td>
-                    <% if !sample.included %>
-                      <td>
-                        <%= render partial: "blocks/list-block-controls", locals: { block: block, sample: sample } %>
-                      </td>
-                    <% end %>
-                    <% if block.verified %>
-                      <td style="width:230px;">
-                        <%= render partial: "blocks/list-block-slide-controls", locals: { block: block, sample: sample } %>
-                      </td>
-                        
-                    <% end %>
-                  </tr>
-                  <% block.objections.each do |objection| %>
-                    <tr class="<%= block.verified ? "table-success" : "" %>" >
-                      <td>
-                        <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">
-                          No conformidad: 
-                        </span>
-                      </td>
-                      <td>
-                        <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">
-                          <%= objection_title(objection.obcode_id) %>
-                        </span>
-                        <% if edit_objection_id == nil %>
-                          <div class="d-flex flex-column">
-                            <span class="text-muted objection-description">
-                              <%= objection.description %>
-                            </span>
-                          </div>
-                          <% unless objection.closed %>
-                            <%= form_with url: list_blocks_review_block_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
-                              <div class="actions">
-                                <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
-                                <%= form.hidden_field :block_id, value: block.id %>
-                                <%= form.hidden_field :objection_id, value: objection.id %>
-                              </div>
+                    <% block.objections.each do |objection| %>
+                      <tr class="<%= block.verified ? "table-success" : "" %>" >
+                        <td>
+                          <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">
+                            No conformidad: 
+                          </span>
+                        </td>
+                        <td>
+                          <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">
+                            <%= objection_title(objection.obcode_id) %>
+                          </span>
+                          <% if edit_objection_id == nil %>
+                            <div class="d-flex flex-column">
+                              <span class="text-muted objection-description">
+                                <%= objection.description %>
+                              </span>
+                            </div>
+                            <% unless objection.closed %>
+                              <%= form_with url: list_blocks_review_block_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
+                                <div class="actions">
+                                  <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
+                                  <%= form.hidden_field :block_id, value: block.id %>
+                                  <%= form.hidden_field :objection_id, value: objection.id %>
+                                </div>
+                              <% end %>
+                            <% end %>
+                          <% else %>
+                            <% if edit_objection_id == objection.id %>
+                              <%= form_with url: list_blocks_anotate_block_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
+                                <div class="field">
+                                  <%= form.label "Historial:" %>
+                                  <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>
+                                </div>
+                                <div class="field">
+                                  <%= form.label "Acción de mejora:" %>
+                                  <%= form.text_area :new_description, class: "form-control input" %>
+                                </div>
+                                <div class="field">
+                                  <%= form.label "Fragmentos:" %>
+                                  <%= form.number_field :fragment, value: block.fragment, class: "form-control input" %>
+                                </div>
+                                <div class="actions">
+                                  <%= form.submit "Anotar", class: "btn btn-outline-warning mx-1 my-1" %>
+                                  <%= form.hidden_field :block_id, value: block.id %>
+                                  <%= form.hidden_field :objection_id, value: objection.id %>
+                                </div>
+                              <% end %>
                             <% end %>
                           <% end %>
-                        <% else %>
-                          <% if edit_objection_id == objection.id %>
-                            <%= form_with url: list_blocks_anotate_block_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
-                              <div class="field">
-                                <%= form.label "Historial:" %>
-                                <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>
-                              </div>
-                              <div class="field">
-                                <%= form.label "Acción de mejora:" %>
-                                <%= form.text_area :new_description, class: "form-control input" %>
-                              </div>
-                              <div class="field">
-                                <%= form.label "Fragmentos:" %>
-                                <%= form.number_field :fragment, value: block.fragment, class: "form-control input" %>
-                              </div>
-                              <div class="actions">
-                                <%= form.submit "Anotar", class: "btn btn-outline-warning mx-1 my-1" %>
-                                <%= form.hidden_field :block_id, value: block.id %>
-                                <%= form.hidden_field :objection_id, value: objection.id %>
-                              </div>
-                            <% end %>
-                          <% end %>
-                        <% end %>
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        <% end %>
+        
+        
       </div>
     </div>
   </div>

@@ -109,6 +109,7 @@
                             <%= render partial: "blocks/block-slide-controls", locals: { inform: inform, block: block, sample: sample } %>
                           </div>
                         <% end %>
+                        Creado hace <%= time_ago_in_words(block.created_at) %>
                       </div>
                     </div>
                   </div>

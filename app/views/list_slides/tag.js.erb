@@ -1,0 +1,14 @@
+<% if @slide.errors.empty? %>
+	$(document).on('page:load', refresh2());
+	function refresh2() {
+
+	  $('div.list-slides').remove();
+	  $('div.list-slide').append('<%= j render "slides/list-slides", slides: @slides %>');
+
+	  
+	  $('div.fast-bar').append('<%= j render "ok-message", message: "rotulada" %>');
+	  setTimeout(function() {
+	  	$('div.alert-growl').remove();
+	  }, 3000)
+	}
+<% end %>

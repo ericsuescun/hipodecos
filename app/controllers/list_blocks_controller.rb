@@ -51,9 +51,9 @@ class ListBlocksController < ApplicationController
 		  initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
 		  final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
 		  date_range = initial_date..final_date
-		  @blocks = Block.where(created_at: date_range)
+		  @blocks = Block.where(created_at: date_range).group(:inform_id)
 		else
-		  @blocks = Block.all
+		  @blocks = Block.all.group(:inform_id)
 		end
 
 		if params[:yi] != ""

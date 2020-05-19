@@ -33,6 +33,10 @@ Rails.application.routes.draw do
 
     post 'list_blocks/review_block'
     post 'list_blocks/anotate_block'
+
+    post 'list_slides/color'
+    post 'list_slides/tag'
+    post 'list_slides/cover'
     
     get 'static_pages/home'
     get 'static_pages/services'

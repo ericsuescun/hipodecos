@@ -5,7 +5,7 @@
         <% blocks.each do |block2| %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0">
-              <strong>Bloques para <%= block2.inform.tag_code %></strong>
+              <strong>Bloques para informe <%= block2.inform.tag_code %></strong>
             </div>
             <div class="card-body list-block">
               <table class="table table-hover table-borderless list-blocks">
@@ -60,7 +60,7 @@
                         
                       </td>
                       <td><%= User.where(id: block.user_id).first.try(:email) %></td>
-                      <td><%= block.verified == true ? 'Si' : 'No' %></td>
+                      <td><%= block.verified == true ? 'OK' : 'Sin verificar' %></td>
                       <td>
                         <% if sample.included %>
                           <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">

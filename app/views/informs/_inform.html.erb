@@ -7,8 +7,9 @@
 	<p>Teléfono: <strong><%= @inform.patient.tel %></strong> - Celular: <strong><%= @inform.patient.cel %></strong> - Dirección: <strong><%= @inform.patient.address %> - </strong>Email: <strong><%= @inform.patient.email %></strong> - Fecha de entrega: <strong><%= @inform.delivery_date %></strong> - EPS: <strong><%= Promoter.find(@inform.promoter_id).initials %></strong> - Sede IPS: <strong><%= Branch.find(@inform.branch_id).initials %></strong> | <%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform) %></p>
 
 	<% @inform.physicians.each do |physician| %>
-	<p><strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %> Contactos: <strong><%= physician.tel %></strong> <strong><%= physician.cel %></strong> <strong><%= physician.email %></strong> <%= link_to '+ Doctor', new_inform_physician_path(@inform) %> | <%= link_to 'Revisar', physician %> | <%= link_to 'Borrar', physician, method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'Volver a informes', informs_path %> | <%= link_to 'Previsualizar informe', preview_path %></p>
+	<p><strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %> Contactos: <strong><%= physician.tel %></strong> <strong><%= physician.cel %></strong> <strong><%= physician.email %></strong> <%= link_to '+ Doctor', new_inform_physician_path(@inform) %> | <%= link_to 'Revisar', physician %> | <%= link_to 'Borrar', physician, method: :delete, data: { confirm: 'Are you sure?' } %>
 	<% end %>
+  | <%= link_to 'Volver a informes', informs_path %> | <%= link_to 'Previsualizar informe', preview_path %></p>
 </div>
 <div class="container-fluid">
 	<h4>Descripción Macro:</h4>

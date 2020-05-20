@@ -9,9 +9,9 @@ class BlocksController < ApplicationController
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
       final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
       date_range = initial_date..final_date
-      @blocks = Block.where(created_at: date_range).group(:inform_id)
+      @blocks = Block.where(created_at: date_range).select(:id, :inform_id, :user_id, :block_tag, :created_at, :description, :organ_code, :fragment, :slide_tag, :verified, :stored).group(:inform_id)
     else
-      @blocks = Block.all.group(:inform_id)
+      @blocks = Block.all.select(:id, :inform_id, :user_id, :block_tag, :created_at, :description, :organ_code, :fragment, :slide_tag, :verified, :stored).group(:inform_id)
     end
 
     if params[:yi]

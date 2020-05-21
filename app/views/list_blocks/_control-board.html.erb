@@ -1,0 +1,58 @@
+<div class="list-blocks">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12">
+        <% blocks.each do |block2| %>
+          <strong>Informe <%= block2.inform.tag_code %></strong>
+          <table class="list-blocks">
+            <thead>
+              <!-- <tr>
+                <th>Código</th>
+                <th>ENT</th>
+                <th>SAL</th>
+                <th scope="3">Controles</th>
+              </tr> -->
+            </thead>
+            <tbody>
+              <% block2.inform.blocks.each do |block| %>
+                <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
+                <tr>
+                  <td><%= block.block_tag %></td>
+                  <td>
+                    <% if sample.included %>
+                      <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+                        <%= sample.fragment %>
+                      </span>
+                    <% else %>
+                      <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+                        <%= sample.fragment %>
+                      </span>
+                    <% end %>
+                  </td>
+                  <td>
+                    <% if sample.included %>
+                      <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+                        <%= block.fragment %>
+                      </span>
+                    <% else %>
+                      <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+                        <%= block.fragment %>
+                      </span>
+                    <% end %>
+                  </td>
+                  <% if !sample.included %>
+                    <td>
+                      <%= render partial: "blocks/list-block-controls", locals: { block: block, sample: sample } %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          
+          
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

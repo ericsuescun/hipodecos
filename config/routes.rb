@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     post 'list_blocks/review_block'
     post 'list_blocks/anotate_block'
 
+    get 'list_blocks/inclusion'
+
     post 'list_slides/color'
     post 'list_slides/tag'
     post 'list_slides/cover'

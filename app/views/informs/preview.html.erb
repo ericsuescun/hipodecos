@@ -36,10 +36,21 @@
           <strong>Edad:</strong> <%= @inform.patient.age_number %> <%= @inform.patient.age_type == 'A' ? 'Años' : @inform.patient.age_type == 'M' ? 'Meses' : 'Días' %>
         </div>
         <div class="col-12 col-lg-3">
-          <strong>Teléfono:</strong> <%= @inform.patient.tel %>
+          
         </div>
         <div class="col-12 col-lg-3">
           <strong>F. infor:</strong> <%= @inform.delivery_date %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-lg-3">
+          <strong>Teléfono:</strong> <%= @inform.patient.tel %>
+        </div>
+        <div class="col-12 col-lg-3">
+          <strong>Celular:</strong> <%= @inform.patient.cel %>
+        </div>
+        <div class="col-12 col-lg-6">
+          <strong>Email:</strong> <%= @inform.patient.email %>
         </div>
       </div>
 
@@ -62,7 +73,7 @@
 
       <div class="row">
         <div class="col-12 col-lg-6">
-          <strong>Dirección:</strong> <%= @inform.patient.address %>
+          <strong>Dirección de entrega:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:address) %>
         </div>
       </div>
 

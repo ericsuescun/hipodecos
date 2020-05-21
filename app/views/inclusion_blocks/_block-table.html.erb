@@ -1,0 +1,44 @@
+<strong>Bloques de <%= block2.inform.tag_code %></strong>
+<table class="table table-hover list-blocks">
+  <thead>
+    <!-- <tr>
+      <th>Código</th>
+      <th>ENT</th>
+      <th>SAL</th>
+      <th scope="3">Controles</th>
+    </tr> -->
+  </thead>
+  <tbody>
+    <% block2.inform.blocks.each do |block| %>
+      <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
+      <tr>
+        <td class="m-0 p-0"><%= get_nomen(block.block_tag) %></td>
+        <td class="m-0 p-0">
+          <% if sample.included %>
+            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+              <%= sample.fragment %>
+            </span>
+          <% else %>
+            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+              <%= sample.fragment %>
+            </span>
+          <% end %>
+        </td>
+        <td class="m-0 p-0">
+          <% if sample.included %>
+            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+              <%= block.fragment %>
+            </span>
+          <% else %>
+            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+              <%= block.fragment %>
+            </span>
+          <% end %>
+        </td>
+        <td class="m-0 p-0">
+          <%= render partial: "inclusion_blocks/inclusion-block-controls", locals: { block: block, sample: sample } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,14 @@
+<% if @block.errors.empty? %>
+	$(document).on('page:load', refresh2());
+	function refresh2() {
+
+	  $('div.inclusion-blocks').remove();
+	  $('div.inclusion-block').append('<%= j render "inclusion_blocks/control-board", blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil %>');
+
+	  
+	  $('div.fast-bar').append('<%= j render "ok-message", message: "editado" %>');
+	  setTimeout(function() {
+	  	$('div.alert-growl').remove();
+	  }, 3000)
+	}
+<% end %>

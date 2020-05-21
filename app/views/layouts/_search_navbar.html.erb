@@ -141,7 +141,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "Bloques", blocks_path, class: "dropdown-item" %>
-              <%= link_to "Tablero de control", list_blocks_inclusion_path, class: "dropdown-item" %>
+              <%= link_to "Tablero de control", inclusion_blocks_inclusion_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Hoy", blocks_path + day_before_search(0), class: "dropdown-item" %>
               <%= link_to "Ayer", blocks_path + day_before_search(1), class: "dropdown-item" %>

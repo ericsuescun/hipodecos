@@ -15,22 +15,22 @@
         <td class="m-0 p-0"><%= get_nomen(block.block_tag) %></td>
         <td class="m-0 p-0">
           <% if sample.included %>
-            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+            <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
               <%= sample.fragment %>
             </span>
           <% else %>
-            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+            <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
               <%= sample.fragment %>
             </span>
           <% end %>
         </td>
         <td class="m-0 p-0">
           <% if sample.included %>
-            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+            <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
               <%= block.fragment %>
             </span>
           <% else %>
-            <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+            <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
               <%= block.fragment %>
             </span>
           <% end %>

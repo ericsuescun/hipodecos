@@ -6,21 +6,42 @@
           <div class="row">
             <div class="col-12 col-lg-2 col-xl-2">
               <% blocks.each_with_index do |block2, n| %>
-                <% if n < (blocks.size / 3) + 1 %>
+                <% if n <= (blocks.size / 6) %>
                   <%= render partial: "inclusion_blocks/block-table", locals: { block2: block2 } %>
                 <% end %>
               <% end %>  
             </div>
             <div class="col-12 col-lg-2 col-xl-2">
               <% blocks.each_with_index do |block2, n| %>
-                <% if n > (blocks.size / 3) + 1  && n < 2 * (blocks.size / 3) + 1 %>
+                <% if n > (blocks.size / 6)   && n <= 2 * (blocks.size / 6) %>
                   <%= render partial: "inclusion_blocks/block-table", locals: { block2: block2 } %>
                 <% end %>
               <% end %>
             </div>
             <div class="col-12 col-lg-2 col-xl-2">
               <% blocks.each_with_index do |block2, n| %>
-                <% if n > 2 * (blocks.size / 3) %>
+                <% if n > 2 * (blocks.size / 6)   && n <= 3 * (blocks.size / 6) %>
+                  <%= render partial: "inclusion_blocks/block-table", locals: { block2: block2 } %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-12 col-lg-2 col-xl-2">
+              <% blocks.each_with_index do |block2, n| %>
+                <% if n > 3 * (blocks.size / 6)   && n <= 4 * (blocks.size / 6) %>
+                  <%= render partial: "inclusion_blocks/block-table", locals: { block2: block2 } %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-12 col-lg-2 col-xl-2">
+              <% blocks.each_with_index do |block2, n| %>
+                <% if n > 4 * (blocks.size / 6)   && n <= 5 * (blocks.size / 6) %>
+                  <%= render partial: "inclusion_blocks/block-table", locals: { block2: block2 } %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-12 col-lg-2 col-xl-2">
+              <% blocks.each_with_index do |block2, n| %>
+                <% if n > 5 * (blocks.size / 6) %>
                   <%= render partial: "inclusion_blocks/block-table", locals: { block2: block2 } %>
                 <% end %>
               <% end %>

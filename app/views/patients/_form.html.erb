@@ -188,7 +188,7 @@
                 <div class="col-12 col-lg-3">
                   <div class="form-group">
                     <%= informs_form.label "Estado de embarazo" %>
-                    <%= informs_form.select(:pregnancy_status, options_for_select([['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3'], ['No Emb', '4']], @patient.informs), { include_blank: true }, class: "form-control form-control-lg input") %>
+                    <%= informs_form.select(:pregnancy_status, options_for_select([['No Emb', '4'], ['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3']], @patient.informs), {  }, class: "form-control form-control-lg input") %>
                   </div>
                 </div>
               </div>

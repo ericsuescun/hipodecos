@@ -1,5 +1,45 @@
 class InclusionBlocksController < ApplicationController
 
+	def inform_ok
+		@block = Block.find(params[:block_id])	#Este es un block tipo A o A1, pilas!
+		@sample = Sample.find(params[:sample_id])
+
+		@inform = @block.inform 	#Defino el informe sobre el que estoy trabajando
+		@blocks = @inform.blocks 	#Defino solo los bloques del informe que estoy trabajando
+		@samples = @inform.samples.where(name: "Cassette") 	#Defino solo las samples que estoy trabajando
+
+		@samples.each do |sample|	#Barro todas las muestras del informe
+			@blocks.each do |block|	#Barro todos los bloques del informe
+				if sample.sample_tag == block.block_tag	#Solo opero en las coincidencias, estoy en una collection, no en DB
+					if sample.fragment != block.fragment
+						log = "FECHA: " + Date.today.to_s
+						log += " CAMBIOS: "
+						log += " Fragmentos - ANTES: " + sample.fragment.to_s
+						log += ", por: " + User.where(id: sample.user_id).first.try(:email).to_s
+						log += " Fragmentos - DESPUES: " + block.fragment.to_s
+						log += ", por: " + current_user.email + " \n"
+
+						#Obcode 4 corresponde a Descripción Macro incompleta
+						objection = block.objections.new(
+							responsible_user_id: sample.user_id,
+							user_id: current_user.id,
+							description: log,
+							obcode_id: 4,
+							close_user_id: nil,
+							closed: false
+						) 
+						#@objectionable se crea en una version (una clase heredada) personalizada del controlador de Objection para cada tipo de modelo DESDE DONDE se le llama
+						objection.save
+					else
+						block.update(verified: true, user_id: current_user.id)
+					end
+					sample.update(included: true, user_id: current_user.id)
+				end
+			end
+		end
+		get_blocks
+	end
+
 	def inclusion
 		if params[:yi]
 		  initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day

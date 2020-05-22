@@ -1,9 +1,17 @@
 <% if get_nomen(block.block_tag) == "A" || get_nomen(block.block_tag) == "A1" %>
   <tr class="inclusion-inform p-0 m-0">
-    <td class="m-0 p-0"><strong><span class="badge badge-dark"><%= block.inform.tag_code %></strong></span></td>
+    <td class="m-0 p-0"><strong><span class="badge badge-dark"><%= block.inform.tag_code %></strong></span><span class="badge badge-dark ml-1"><strong><%= block.inform.blocks.count %></strong></span></td>
     <td class="m-0 p-0"></td>
     <td class="m-0 p-0"></td>
-    <td class="m-0 p-0"><span class="badge badge-dark"><strong><%= block.inform.blocks.count %></strong></span></td>
+    <td class="m-0 p-0">
+      <% unless all_samples_included(sample) %>
+        <%= form_with url: inclusion_blocks_inform_ok_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
+          <%= form.submit "OK", class: "ml-1 my-0 d-flex btn btn-sm btn-outline-success" %>
+          <%= form.hidden_field :sample_id, value: sample.id %>
+          <%= form.hidden_field :block_id, value: block.id %>
+        <% end %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 <tr>
@@ -14,17 +22,29 @@
     </span>
   </td>
   <td class="m-0 p-0">
-    <% if sample.included %>
-      <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
-        <%= block.fragment %>
-      </span>
+    <% if block.verified %>
+      <%= link_to inform_path(block.inform) do %>
+        <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+          <%= block.fragment %>
+        </span>
+      <% end %>      
     <% else %>
-      <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
-        <%= block.fragment %>
-      </span>
+      <% if !block.verified %>
+        <%= link_to inform_path(block.inform) do %>
+          <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+            <%= block.fragment %>
+          </span>
+        <% end %>
+      <% end %>
+      
     <% end %>
   </td>
-  <td class="m-0 p-0">
-    <%= render partial: "inclusion_blocks/inclusion-block-controls", locals: { block: block, sample: sample } %>
-  </td>
+  <% if !sample.included %>
+    <td class="m-0 p-0">
+      <%= render partial: "inclusion_blocks/inclusion-block-controls", locals: { block: block, sample: sample } %>
+    </td>
+  <% else %>
+    <td></td>
+  <% end %>
+  
 </tr>

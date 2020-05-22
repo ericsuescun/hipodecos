@@ -7,7 +7,7 @@
             <span><strong>Bloques</strong></span>
             <%= form_with url: execute_templates_create_blocks_path, method: "get" do |form| %>
               <div class="actions">
-                <%= form.submit "Crear Bloques y Verificar fragmentos", class: "btn btn-outline-dark mx-1 my-1" %>
+                <%= form.submit "Procesar Cassettes", class: "btn btn-outline-dark mx-1 my-1" %>
                 <%= form.hidden_field :inform_id, value: inform.id %>
               </div>
             <% end %>

@@ -5,7 +5,6 @@
     <%= form.hidden_field :sample_id, value: sample.id %>
     <%= form.hidden_field :block_id, value: block.id %>
     <%= form.hidden_field :fragment, value: block.fragment %>
-    
   <% end %>
 
   <%= form_with url: inclusion_blocks_block_fp1_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>

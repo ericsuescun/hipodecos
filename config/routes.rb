@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     get 'inclusion_blocks/inclusion'
 
     post 'inclusion_blocks/block_fp1'
-    post 'inclusion_blocks/block_fok'
+    post 'inclusion_blocks/inform_ok'
     post 'inclusion_blocks/block_fm1'
     
     get 'static_pages/home'

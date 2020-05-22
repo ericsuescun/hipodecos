@@ -1,0 +1,89 @@
+<div class="col-12 col-lg-2 col-xl-2">
+  <table class="table table-hover list-blocks">
+    <thead>
+    </thead>
+    <tbody>
+      <% allblocks.each_with_index do |block, n| %>
+        <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
+        <% if n <= (allblocks.size / 6) %>
+          <%= render partial: "inclusion_blocks/row", locals: { block: block, sample: sample } %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-12 col-lg-2 col-xl-2">
+  <table class="table table-hover list-blocks">
+    <thead>
+    </thead>
+    <tbody>
+      <% allblocks.each_with_index do |block, n| %>
+        <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
+        <% if n > (allblocks.size / 6)   && n <= 2 * (allblocks.size / 6) %>
+          <%= render partial: "inclusion_blocks/row", locals: { block: block, sample: sample } %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-12 col-lg-2 col-xl-2">
+  <table class="table table-hover list-blocks">
+    <thead>
+    </thead>
+    <tbody>
+      <% allblocks.each_with_index do |block, n| %>
+        <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
+        <% if n > 2 * (allblocks.size / 6)   && n <= 3 * (allblocks.size / 6) %>
+          <%= render partial: "inclusion_blocks/row", locals: { block: block, sample: sample } %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-12 col-lg-2 col-xl-2">
+  <table class="table table-hover list-blocks">
+    <thead>
+    </thead>
+    <tbody>
+      <% allblocks.each_with_index do |block, n| %>
+      <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
+      <% if n > 3 * (allblocks.size / 6)   && n <= 4 * (allblocks.size / 6) %>
+      <%= render partial: "inclusion_blocks/row", locals: { block: block, sample: sample } %>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-12 col-lg-2 col-xl-2">
+  <table class="table table-hover list-blocks">
+    <thead>
+    </thead>
+    <tbody>
+      <% allblocks.each_with_index do |block, n| %>
+      <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
+      <% if n > 4 * (allblocks.size / 6)   && n <= 5 * (allblocks.size / 6) %>
+      <%= render partial: "inclusion_blocks/row", locals: { block: block, sample: sample } %>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-12 col-lg-2 col-xl-2">
+  <table class="table table-hover list-blocks">
+    <thead>
+    </thead>
+    <tbody>
+      <% allblocks.each_with_index do |block, n| %>
+      <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
+      <% if n > 5 * (allblocks.size / 6) %>
+      <%= render partial: "inclusion_blocks/row", locals: { block: block, sample: sample } %>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

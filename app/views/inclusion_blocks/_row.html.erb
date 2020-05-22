@@ -1,0 +1,28 @@
+<tr>
+  <td class="m-0 p-0"><%= block.block_tag %></td>
+  <td class="m-0 p-0">
+    <% if sample.included %>
+      <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+        <%= sample.fragment %>
+      </span>
+    <% else %>
+      <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+        <%= sample.fragment %>
+      </span>
+    <% end %>
+  </td>
+  <td class="m-0 p-0">
+    <% if sample.included %>
+      <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+        <%= block.fragment %>
+      </span>
+    <% else %>
+      <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+        <%= block.fragment %>
+      </span>
+    <% end %>
+  </td>
+  <td class="m-0 p-0">
+    <%= render partial: "inclusion_blocks/inclusion-block-controls", locals: { block: block, sample: sample } %>
+  </td>
+</tr>

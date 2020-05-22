@@ -13,7 +13,7 @@ class InclusionBlocksController < ApplicationController
 		  @allblocks.each_with_index do |block, n|
 		  	b << block
 		  	i = i + 1
-		  	if i == 20
+		  	if i == 18
 		  		@a << b
 		  		b = []
 		  		i = 0
@@ -29,7 +29,7 @@ class InclusionBlocksController < ApplicationController
 		  @allblocks.each_with_index do |block, n|
 		  	b << block
 		  	i = i + 1
-		  	if i == 20
+		  	if i == 18
 		  		@a << b
 		  		b = []
 		  		i = 0
@@ -79,7 +79,7 @@ class InclusionBlocksController < ApplicationController
 		  @allblocks.each_with_index do |block, n|
 		  	b << block
 		  	i = i + 1
-		  	if i == 20
+		  	if i == 18
 		  		@a << b
 		  		b = []
 		  		i = 0
@@ -95,7 +95,7 @@ class InclusionBlocksController < ApplicationController
 		  @allblocks.each_with_index do |block, n|
 		  	b << block
 		  	i = i + 1
-		  	if i == 20
+		  	if i == 18
 		  		@a << b
 		  		b = []
 		  		i = 0

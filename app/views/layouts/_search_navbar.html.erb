@@ -113,24 +113,7 @@
               <%= link_to "El mes pasado", informs_path + month_before_search(1), class: "dropdown-item" %>
             </div>
           </li>
-          <li class="nav-item mr-2 mt-1">
-            <%= link_to "Hoy", informs_path + day_before_search(0), class: "btn btn-outline-success btn-sm btn-block my-2 my-lg-0" %>
-          </li>
-          <li class="nav-item mr-2 mt-1">
-            <%= link_to "Ayer", informs_path + day_before_search(1), class: "btn btn-outline-success btn-sm btn-block my-2 my-lg-0" %>
-          </li>
-          <!-- <li class="nav-item mr-2 mt-1">
-            <%= link_to "Antier", informs_path + day_before_search(2), class: "btn btn-outline-success btn-sm btn-block my-2 my-lg-0" %>
-          </li> -->
-          <!-- <li class="nav-item mr-2 mt-1">
-            <%= link_to "Trasantier(Puente)", informs_path + day_before_search(3), class: "btn btn-outline-success btn-sm btn-block my-2 my-lg-0" %>
-          </li> -->
-          <li class="nav-item mr-2 mt-1">
-            <%= link_to "Últimos 7 días", informs_path + days_ago_search(7), class: "btn btn-outline-success btn-sm btn-block my-2 my-lg-0" %>
-          </li>
-          <!-- <li class="nav-item mr-2 mt-1">
-            <%= link_to "Últimos 30 días", informs_path + days_ago_search(30), class: "btn btn-outline-success btn-sm btn-block my-2 my-lg-0" %>
-          </li> -->
+          
           <%= form_tag informs_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
             <%= text_field_tag :tag_code, nil, class: "form-control input mx-2", placeholder: "Código de informe" %>
             <%= submit_tag("Buscar", class: "btn btn-outline-success btn-sm my-2 my-lg-0") %>
@@ -141,8 +124,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "Bloques", blocks_path, class: "dropdown-item" %>
-              <%= link_to "Tablero de control", inclusion_blocks_inclusion_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
               <%= link_to "Hoy", blocks_path + day_before_search(0), class: "dropdown-item" %>
               <%= link_to "Ayer", blocks_path + day_before_search(1), class: "dropdown-item" %>
               <%= link_to "Antier", blocks_path + day_before_search(2), class: "dropdown-item" %>
@@ -162,6 +143,24 @@
               <%= link_to "Este mes", slides_path + month_before_search(0), class: "dropdown-item" %>
               <%= link_to "El mes pasado", slides_path + month_before_search(1), class: "dropdown-item" %>
             </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Tableros
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              
+              <%= link_to "Inclusion", inclusion_blocks_inclusion_path, class: "dropdown-item" %>
+              <%= link_to "Hoy", inclusion_blocks_inclusion_path + day_before_search(0), class: "dropdown-item" %>
+              <%= link_to "Ayer", inclusion_blocks_inclusion_path + day_before_search(1), class: "dropdown-item" %>
+              <%= link_to "Antier", inclusion_blocks_inclusion_path + day_before_search(2), class: "dropdown-item" %>
+              <%= link_to "Trasantier(Puente)", inclusion_blocks_inclusion_path + day_before_search(3), class: "dropdown-item" %>
+              <%= link_to "Últimos 7 días", inclusion_blocks_inclusion_path + days_ago_search(7), class: "dropdown-item" %>
+              <%= link_to "Últimos 30 días", inclusion_blocks_inclusion_path + days_ago_search(30), class: "dropdown-item" %>
+              <%= link_to "Este mes", inclusion_blocks_inclusion_path + month_before_search(0), class: "dropdown-item" %>
+              <%= link_to "El mes pasado", inclusion_blocks_inclusion_path + month_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              
           </li>
 
           

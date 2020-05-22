@@ -6,20 +6,36 @@ class InclusionBlocksController < ApplicationController
 		  final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
 		  date_range = initial_date..final_date
 		  @blocks = Block.unscoped.where(created_at: date_range).select(:inform_id).group(:inform_id).distinct
-		  @allblocks = []
-		  @blocks.each do |block2|
-		  	block2.inform.blocks.each do |block|
-		  		@allblocks << block
+		  @a = []
+		  b = []
+		  i = 0
+		  @allblocks = Block.where(created_at: date_range)
+		  @allblocks.each_with_index do |block, n|
+		  	b << block
+		  	i = i + 1
+		  	if i == 20
+		  		@a << b
+		  		b = []
+		  		i = 0
 		  	end
 		  end
+		  @a << b
 		else
 		  @blocks = Block.unscoped.all.select(:inform_id).group(:inform_id).distinct
-		  @allblocks = []
-		  @blocks.each do |block2|
-		  	block2.inform.blocks.each do |block|
-		  		@allblocks << block
+		  @a = []
+		  b = []
+		  i = 0
+		  @allblocks = Block.all
+		  @allblocks.each_with_index do |block, n|
+		  	b << block
+		  	i = i + 1
+		  	if i == 20
+		  		@a << b
+		  		b = []
+		  		i = 0
 		  	end
 		  end
+		  @a << b
 		end
 
 		if params[:yi]
@@ -56,20 +72,36 @@ class InclusionBlocksController < ApplicationController
 		  final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
 		  date_range = initial_date..final_date
 		  @blocks = Block.unscoped.where(created_at: date_range).select(:inform_id).group(:inform_id).distinct
-		  @allblocks = []
-		  @blocks.each do |block2|
-		  	block2.inform.blocks.each do |block|
-		  		@allblocks << block
+		  @a = []
+		  b = []
+		  i = 0
+		  @allblocks = Block.where(created_at: date_range)
+		  @allblocks.each_with_index do |block, n|
+		  	b << block
+		  	i = i + 1
+		  	if i == 20
+		  		@a << b
+		  		b = []
+		  		i = 0
 		  	end
 		  end
+		  @a << b
 		else
 		  @blocks = Block.unscoped.all.select(:inform_id).group(:inform_id).distinct
-		  @allblocks = []
-		  @blocks.each do |block2|
-		  	block2.inform.blocks.each do |block|
-		  		@allblocks << block
+		  @a = []
+		  b = []
+		  i = 0
+		  @allblocks = Block.all
+		  @allblocks.each_with_index do |block, n|
+		  	b << block
+		  	i = i + 1
+		  	if i == 20
+		  		@a << b
+		  		b = []
+		  		i = 0
 		  	end
 		  end
+		  @a << b
 		end
 
 		if params[:yi] != ""

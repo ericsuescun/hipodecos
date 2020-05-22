@@ -3,7 +3,7 @@
 	function refresh2() {
 
 	  $('div.inclusion-blocks').remove();
-	  $('div.inclusion-block').append('<%= j render "inclusion_blocks/control-board", blocks: @blocks, allblocks: @allblocks, samplesc: @samplesc, edit_objection_id: nil %>');
+	  $('div.inclusion-block').append('<%= j render "inclusion_blocks/control-board", blocks: @blocks, allblocks: @allblocks, a: @a, samplesc: @samplesc, edit_objection_id: nil %>');
 
 	  
 	  $('div.fast-bar').append('<%= j render "ok-message", message: "editado" %>');

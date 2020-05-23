@@ -1,0 +1,2 @@
+class ProcessingSlidesController < ApplicationController
+end

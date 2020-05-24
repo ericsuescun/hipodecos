@@ -34,15 +34,17 @@ Rails.application.routes.draw do
     post 'list_blocks/review_block'
     post 'list_blocks/anotate_block'
 
-    post 'list_slides/color'
-    post 'list_slides/tag'
-    post 'list_slides/cover'
-
     get 'inclusion_blocks/inclusion'
 
     post 'inclusion_blocks/block_fp1'
     post 'inclusion_blocks/inform_ok'
     post 'inclusion_blocks/block_fm1'
+
+    post 'list_slides/color'
+    post 'list_slides/tag'
+    post 'list_slides/cover'
+
+    get 'processing_slides/coloring_slides'
     
     get 'static_pages/home'
     get 'static_pages/services'
@@ -178,6 +180,9 @@ Rails.application.routes.draw do
 
     resources :slides do
       resources :objections, module: :slides
+      collection do
+        put :color
+      end
     end
 
     resources :macros do

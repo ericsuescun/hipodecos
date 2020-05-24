@@ -110,6 +110,12 @@ class SlidesController < ApplicationController
     @slide.destroy
   end
 
+  def color
+    # Slide.update_all( { colored: true }, { id: params[:slide_ids] } )
+    Slide.where(id: params[:slide_ids]).update_all({colored: true})
+    redirect_to processing_slides_coloring_slides_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_slide
@@ -119,6 +125,6 @@ class SlidesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def slide_params
-      params.require(:slide).permit(:inform_id, :user_id, :slide_tag, :stored, :description, :colored, :tagged, :covered)
+      params.require(:slide).permit(:inform_id, :user_id, :slide_tag, :stored, :description, :colored, :tagged, :covered, :slide_ids[])
     end
 end

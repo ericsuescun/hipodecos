@@ -1,0 +1,44 @@
+<div class="inclusion-blocks">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12">
+        <div class="row">
+          <%= form_tag color_slides_path, method: :put do %>
+            <% @matrix.each do |col| %>
+              <div class="col-12 col-lg-3 col-xl-2">
+                <table class="table table-hover list-blocks">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Código</th>
+                      <th>Coloreada</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% col.each do |slide| %>
+                      <% if get_nomen(slide.slide_tag) == "A" || get_nomen(slide.slide_tag) == "A1" %>
+                        <tr class="inclusion-inform p-0 m-0">
+                          <td class="m-0 p-0"><strong><span class="badge badge-dark"><%= slide.inform.tag_code %></strong></span><span class="badge badge-dark ml-1"><strong><%= slide.inform.slides.count %></strong></span></td>
+                        </tr>
+                      <% end %>
+                      
+                      <tr>
+                        <td><%= check_box_tag "slide_ids[]", slide.id %></td>
+                        <td class="m-0 p-0"><%= slide.slide_tag %></td>
+                        <td class="m-0 p-0"><%= "#{slide.colored ? "Si" : "No" }" %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            <% end %>
+
+            <%= submit_tag "Colorear lo chequeado" %>
+          <% end %>
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -120,6 +120,26 @@ class SlidesController < ApplicationController
     end
   end
 
+  def cover
+    # Slide.update_all( { colored: true }, { id: params[:slide_ids] } )
+    Slide.where(id: params[:slide_ids]).update_all({covered: true})
+    if params[:yi] != ""
+      redirect_to processing_slides_covering_slides_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
+    else
+      redirect_to processing_slides_covering_slides_path
+    end
+  end
+
+  def tag
+    # Slide.update_all( { colored: true }, { id: params[:slide_ids] } )
+    Slide.where(id: params[:slide_ids]).update_all({tagged: true})
+    if params[:yi] != ""
+      redirect_to processing_slides_tagging_slides_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
+    else
+      redirect_to processing_slides_tagging_slides_path
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_slide

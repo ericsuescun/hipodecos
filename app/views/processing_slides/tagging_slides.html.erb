@@ -1,10 +1,10 @@
 <div class="inclusion-blocks">
   <div class="container-fluid">
-    <%= form_tag color_slides_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: :put do %>
-    <%= submit_tag "Colorear lo chequeado", class: "btn btn-danger btn-sm mb-3" %>
+    <%= form_tag tag_slides_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: :put do %>
+    <%= submit_tag "Rotular lo chequeado", class: "btn btn-dark btn-sm mb-3" %>
       <% if @slidesc.size != 0 %>
         <div class="row">
-          <h1>Coloreadas</h1>
+          <h1>Rotuladas</h1>
           <div class="col-12 col-lg-12 col-xl-12">
             <div class="row">
               <% create_matrix(@slidesc,5).each do |col| %>
@@ -26,7 +26,7 @@
                         <% end %>
                         
                         <tr>
-                          <% if !slide.colored  %>
+                          <% if !slide.tagged  %>
                             <td class="m-0 p-0"><%= check_box_tag "slide_ids[]", slide.id, checked: true %></td>
                           <% else %>
                             <td class="m-0 p-0"></td>
@@ -70,7 +70,7 @@
                         <% end %>
                         
                         <tr>
-                          <% if !slide.colored  %>
+                          <% if !slide.tagged  %>
                             <td class="m-0 p-0"><%= check_box_tag "slide_ids[]", slide.id, checked: true %></td>
                           <% else %>
                             <td class="m-0 p-0"></td>
@@ -92,7 +92,7 @@
       <% end %>
       <% if @slides_rest.size != 0 %>
         <div class="row">
-          <h1>En espera para coloración</h1>
+          <h1>En espera para rotular</h1>
           <div class="col-12 col-lg-12 col-xl-12">
             <div class="row">
               <% create_matrix(@slides_rest,5).each do |col| %>
@@ -114,17 +114,13 @@
                         <% end %>
                         
                         <tr>
-                          <% if !slide.colored %>
+                          <% if !slide.tagged %>
                             <td class="m-0 p-0"><%= check_box_tag "slide_ids[]", slide.id %></td>
                           <% else %>
                             <td class="m-0 p-0"></td>
                           <% end %>
                           
-                          <% if slide.colored %>
-                            <td class="m-0 p-0 <%= slide.colored ? "slide-colored" : nil %> <%= slide.covered ? "slide-covered" : nil %> <%= slide.tagged ? "slide-tagged" : nil %>" >
-                          <% else %>
-                            <td class="m-0 p-0">
-                          <% end %>
+                          <td class="m-0 p-0 <%= slide.colored ? "slide-colored" : nil %> <%= slide.covered ? "slide-covered" : nil %> <%= slide.tagged ? "slide-tagged" : nil %>" >
                             <%= slide.slide_tag %>
                           </td>
                         </tr>

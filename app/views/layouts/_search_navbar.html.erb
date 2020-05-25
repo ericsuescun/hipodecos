@@ -146,11 +146,10 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Tableros
+              Bloques
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              
-              <%= link_to "Inclusion", inclusion_blocks_inclusion_path, class: "dropdown-item" %>
+              <%= link_to "Incluir", inclusion_blocks_inclusion_path, class: "dropdown-item" %>
               <%= link_to "Hoy", inclusion_blocks_inclusion_path + day_before_search(0), class: "dropdown-item" %>
               <%= link_to "Ayer", inclusion_blocks_inclusion_path + day_before_search(1), class: "dropdown-item" %>
               <%= link_to "Antier", inclusion_blocks_inclusion_path + day_before_search(2), class: "dropdown-item" %>
@@ -159,16 +158,34 @@
               <%= link_to "Últimos 30 días", inclusion_blocks_inclusion_path + days_ago_search(30), class: "dropdown-item" %>
               <%= link_to "Este mes", inclusion_blocks_inclusion_path + month_before_search(0), class: "dropdown-item" %>
               <%= link_to "El mes pasado", inclusion_blocks_inclusion_path + month_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Coloreado", processing_slides_coloring_slides_path, class: "dropdown-item" %>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Placas
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Colorear", processing_slides_coloring_slides_path, class: "dropdown-item" %>
               <%= link_to "Hoy", processing_slides_coloring_slides_path + day_before_search(0), class: "dropdown-item" %>
               <%= link_to "Ayer", processing_slides_coloring_slides_path + day_before_search(1), class: "dropdown-item" %>
               <%= link_to "Antier", processing_slides_coloring_slides_path + day_before_search(2), class: "dropdown-item" %>
               <%= link_to "Trasantier(Puente)", processing_slides_coloring_slides_path + day_before_search(3), class: "dropdown-item" %>
               <%= link_to "Últimos 7 días", processing_slides_coloring_slides_path + days_ago_search(7), class: "dropdown-item" %>
-              <%= link_to "Últimos 30 días", processing_slides_coloring_slides_path + days_ago_search(30), class: "dropdown-item" %>
-              <%= link_to "Este mes", processing_slides_coloring_slides_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", processing_slides_coloring_slides_path + month_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Cubrir", processing_slides_covering_slides_path, class: "dropdown-item" %>
+              <%= link_to "Hoy", processing_slides_covering_slides_path + day_before_search(0), class: "dropdown-item" %>
+              <%= link_to "Ayer", processing_slides_covering_slides_path + day_before_search(1), class: "dropdown-item" %>
+              <%= link_to "Antier", processing_slides_covering_slides_path + day_before_search(2), class: "dropdown-item" %>
+              <%= link_to "Trasantier(Puente)", processing_slides_covering_slides_path + day_before_search(3), class: "dropdown-item" %>
+              <%= link_to "Últimos 7 días", processing_slides_covering_slides_path + days_ago_search(7), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Rotular", processing_slides_tagging_slides_path, class: "dropdown-item" %>
+              <%= link_to "Hoy", processing_slides_tagging_slides_path + day_before_search(0), class: "dropdown-item" %>
+              <%= link_to "Ayer", processing_slides_tagging_slides_path + day_before_search(1), class: "dropdown-item" %>
+              <%= link_to "Antier", processing_slides_tagging_slides_path + day_before_search(2), class: "dropdown-item" %>
+              <%= link_to "Trasantier(Puente)", processing_slides_tagging_slides_path + day_before_search(3), class: "dropdown-item" %>
+              <%= link_to "Últimos 7 días", processing_slides_tagging_slides_path + days_ago_search(7), class: "dropdown-item" %>
+            </div>
           </li>
 
           

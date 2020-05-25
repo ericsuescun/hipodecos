@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     post 'list_slides/cover'
 
     get 'processing_slides/coloring_slides'
+    get 'processing_slides/covering_slides'
+    get 'processing_slides/tagging_slides'
     
     get 'static_pages/home'
     get 'static_pages/services'
@@ -182,6 +184,12 @@ Rails.application.routes.draw do
       resources :objections, module: :slides
       collection do
         put :color
+      end
+      collection do
+        put :cover
+      end
+      collection do
+        put :tag
       end
     end
 

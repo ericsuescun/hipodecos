@@ -8,7 +8,7 @@ class ProcessingSlidesController < ApplicationController
 		else
 		  @slides = Slide.all
 		end
-		create_matrix(@slides, 10)	#Creo la matriz con la collection de @slides correspondiente
+		create_matrix(@slides, 5)	#Creo la matriz con la collection de @slides correspondiente
 	end
 
 	def create_matrix(collection, rows)

@@ -113,7 +113,7 @@ class SlidesController < ApplicationController
   def color
     # Slide.update_all( { colored: true }, { id: params[:slide_ids] } )
     Slide.where(id: params[:slide_ids]).update_all({colored: true})
-    redirect_to processing_slides_coloring_slides_path
+    redirect_to processing_slides_coloring_slides_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
   end
 
   private

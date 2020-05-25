@@ -1,17 +1,18 @@
 <div class="inclusion-blocks">
   <div class="container-fluid">
+    <%= form_tag color_slides_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: :put do %>
+    <%= submit_tag "Colorear lo chequeado", class: "btn btn-danger btn-sm" %>
     <div class="row">
       <div class="col-12 col-lg-12 col-xl-12">
         <div class="row">
-          <%= form_tag color_slides_path, method: :put do %>
+          
             <% @matrix.each do |col| %>
-              <div class="col-12 col-lg-3 col-xl-2">
+              <div class="col-12 col-lg-2 col-xl-2">
                 <table class="table table-hover list-blocks">
                   <thead>
                     <tr>
-                      <th></th>
+                      <th>Color</th>
                       <th>Código</th>
-                      <th>Coloreada</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -23,9 +24,19 @@
                       <% end %>
                       
                       <tr>
-                        <td><%= check_box_tag "slide_ids[]", slide.id %></td>
-                        <td class="m-0 p-0"><%= slide.slide_tag %></td>
-                        <td class="m-0 p-0"><%= "#{slide.colored ? "Si" : "No" }" %></td>
+                        <% if !slide.colored %>
+                          <td class="m-0 p-0"><%= check_box_tag "slide_ids[]", slide.id, checked: true %></td>
+                        <% else %>
+                          <td></td>
+                        <% end %>
+                        
+                        <% if slide.colored %>
+                          <td class="m-0 p-0 slide-colored">
+                        <% else %>
+                        <td class="m-0 p-0">
+                        <% end %>
+                          <%= slide.slide_tag %>
+                        </td>
                       </tr>
                     <% end %>
                   </tbody>
@@ -33,12 +44,13 @@
               </div>
             <% end %>
 
-            <%= submit_tag "Colorear lo chequeado" %>
-          <% end %>
+          
           
 
         </div>
       </div>
     </div>
+
+    <% end %>
   </div>
 </div>

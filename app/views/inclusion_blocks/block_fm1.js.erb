@@ -2,8 +2,8 @@
 	$(document).on('page:load', refresh2());
 	function refresh2() {
 
-	  $('div.inclusion-blocks').remove();
-	  $('div.inclusion-block').append('<%= j render "inclusion_blocks/control-board", blocks: @blocks, allblocks: @allblocks, a: @a, samplesc: @samplesc, edit_objection_id: nil %>');
+	  $('a#remove-link-block-<%= @block.block_tag %>').remove();
+	  $('td#add-link-block-<%= @block.block_tag %>').append('<%= j render "inclusion_blocks/link-block", block: @block, sample: @sample %>');
 
 	  
 	  $('div.fast-bar').append('<%= j render "ok-message", message: "editado" %>');

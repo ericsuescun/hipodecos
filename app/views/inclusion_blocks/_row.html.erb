@@ -21,23 +21,8 @@
       <%= sample.fragment %>
     </span>
   </td>
-  <td class="m-0 p-0">
-    <% if block.verified %>
-      <%= link_to inform_path(block.inform) do %>
-        <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
-          <%= block.fragment %>
-        </span>
-      <% end %>      
-    <% else %>
-      <% if !block.verified %>
-        <%= link_to inform_path(block.inform) do %>
-          <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
-            <%= block.fragment %>
-          </span>
-        <% end %>
-      <% end %>
-      
-    <% end %>
+  <td id="add-link-block-<%= block.block_tag %>" class="m-0 p-0">
+    <%= render partial: "inclusion_blocks/link-block", locals: { sample: sample, block: block } %>
   </td>
   <% if !sample.included %>
     <td class="m-0 p-0">

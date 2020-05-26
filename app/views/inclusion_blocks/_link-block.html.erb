@@ -1,0 +1,15 @@
+<% if block.verified %>
+  <%= link_to inform_path(block.inform), id: "remove-link-block-#{block.block_tag}" do %>
+    <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "warning" %>">
+      <%= block.fragment %>
+    </span>
+  <% end %>      
+<% else %>
+  <% if !block.verified %>
+    <%= link_to inform_path(block.inform) do %>
+      <span class="d-flex pt-2 mr-1 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+        <%= block.fragment %>
+      </span>
+    <% end %>
+  <% end %>
+<% end %>

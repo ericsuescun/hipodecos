@@ -91,7 +91,7 @@ class InclusionBlocksController < ApplicationController
 	def block_fp1
 		@sample = Sample.find(params[:sample_id])
 		@block = Block.find(params[:block_id])
-		@block.update(fragment: params[:fragment].to_i + 1, user_id: current_user.id)
+		@block.update(fragment: @block.fragment + 1, user_id: current_user.id)
 		@inform = @block.inform
 		@samplesc = @inform.samples.where(name: "Cassette")
 		get_blocks
@@ -100,7 +100,7 @@ class InclusionBlocksController < ApplicationController
 	def block_fm1
 		@sample = Sample.find(params[:sample_id])
 		@block = Block.find(params[:block_id])
-		@block.update(fragment: params[:fragment].to_i - 1, user_id: current_user.id)
+		@block.update(fragment: @block.fragment - 1, user_id: current_user.id)
 		@inform = @block.inform
 		@samplesc = @inform.samples.where(name: "Cassette")
 		get_blocks

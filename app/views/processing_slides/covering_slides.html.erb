@@ -9,7 +9,7 @@
             <div class="row">
               <% create_matrix(@slidesc,5).each do |col| %>
                 <div class="col-12 col-lg-2 col-xl-2">
-                  <table class="table table-hover list-blocks">
+                  <table class="table table-hover list-covering-slides">
                     <thead>
                       <tr>
                         <th>Sel</th>
@@ -19,21 +19,21 @@
                     <tbody>
                       <% col.each do |slide| %>
                         <% if get_nomen(slide.slide_tag) == "A" || get_nomen(slide.slide_tag) == "A1" %>
-                          <tr class="inclusion-inform p-0 m-0">
-                            <td class="m-0 p-0"></td>
-                            <td class="m-0 p-0"><strong><span class="badge badge-dark"><%= slide.inform.tag_code %></strong></span><span class="badge badge-dark ml-1"><strong><%= slide.inform.slides.count %></strong></span></td>
+                          <tr>
+                            <td></td>
+                            <td><span class="badge badge-dark"><%= slide.inform.tag_code %></span><span class="badge badge-dark ml-1"><%= slide.inform.slides.count %></span></td>
                           </tr>
                         <% end %>
                         
                         <tr>
                           <% if !slide.covered  %>
-                            <td class="m-0 p-0"><%= check_box_tag "slide_ids[]", slide.id, checked: true %></td>
+                            <td><%= check_box_tag "slide_ids[]", slide.id, checked: true %></td>
                           <% else %>
-                            <td class="m-0 p-0"></td>
+                            <td></td>
                           <% end %>
                           
                           
-                          <td class="m-0 p-0 <%= slide.colored ? "slide-colored" : nil %> <%= slide.covered ? "slide-covered" : nil %> <%= slide.tagged ? "slide-tagged" : nil %>" >
+                          <td class="<%= slide.colored ? "slide-colored" : nil %> <%= slide.covered ? "slide-covered" : nil %> <%= slide.tagged ? "slide-tagged" : nil %>" >
                             <%= slide.slide_tag %>
                           </td>
                         </tr>
@@ -53,7 +53,7 @@
             <div class="row">
               <% create_matrix(@slides_first_batch,5).each do |col| %>
                 <div class="col-12 col-lg-2 col-xl-2">
-                  <table class="table table-hover list-blocks">
+                  <table class="table table-hover list-covering-slides">
                     <thead>
                       <tr>
                         <th>Sel</th>
@@ -63,21 +63,21 @@
                     <tbody>
                       <% col.each do |slide| %>
                         <% if get_nomen(slide.slide_tag) == "A" || get_nomen(slide.slide_tag) == "A1" %>
-                          <tr class="inclusion-inform p-0 m-0">
-                            <td class="m-0 p-0"></td>
-                            <td class="m-0 p-0"><strong><span class="badge badge-dark"><%= slide.inform.tag_code %></strong></span><span class="badge badge-dark ml-1"><strong><%= slide.inform.slides.count %></strong></span></td>
+                          <tr>
+                            <td></td>
+                            <td><span class="badge badge-dark"><%= slide.inform.tag_code %></span><span class="badge badge-dark ml-1"><%= slide.inform.slides.count %></span></td>
                           </tr>
                         <% end %>
                         
                         <tr>
                           <% if !slide.covered  %>
-                            <td class="m-0 p-0"><%= check_box_tag "slide_ids[]", slide.id, checked: true %></td>
+                            <td><%= check_box_tag "slide_ids[]", slide.id, checked: true %></td>
                           <% else %>
-                            <td class="m-0 p-0"></td>
+                            <td></td>
                           <% end %>
                           
                           
-                          <td class="m-0 p-0 <%= slide.colored ? "slide-colored" : nil %> <%= slide.covered ? "slide-covered" : nil %> <%= slide.tagged ? "slide-tagged" : nil %>" >
+                          <td class="<%= slide.colored ? "slide-colored" : nil %> <%= slide.covered ? "slide-covered" : nil %> <%= slide.tagged ? "slide-tagged" : nil %>" >
                             <%= slide.slide_tag %>
                           </td>
                         </tr>
@@ -97,7 +97,7 @@
             <div class="row">
               <% create_matrix(@slides_rest,5).each do |col| %>
                 <div class="col-12 col-lg-2 col-xl-2">
-                  <table class="table table-hover list-blocks">
+                  <table class="table table-hover list-covering-slides">
                     <thead>
                       <tr>
                         <th>Sel</th>
@@ -107,20 +107,20 @@
                     <tbody>
                       <% col.each do |slide| %>
                         <% if get_nomen(slide.slide_tag) == "A" || get_nomen(slide.slide_tag) == "A1" %>
-                          <tr class="inclusion-inform p-0 m-0">
-                            <td class="m-0 p-0"></td>
-                            <td class="m-0 p-0"><strong><span class="badge badge-dark"><%= slide.inform.tag_code %></strong></span><span class="badge badge-dark ml-1"><strong><%= slide.inform.slides.count %></strong></span></td>
+                          <tr>
+                            <td></td>
+                            <td><span class="badge badge-dark"><%= slide.inform.tag_code %></span><span class="badge badge-dark ml-1"><%= slide.inform.slides.count %></span></td>
                           </tr>
                         <% end %>
                         
                         <tr>
                           <% if !slide.covered %>
-                            <td class="m-0 p-0"><%= check_box_tag "slide_ids[]", slide.id %></td>
+                            <td><%= check_box_tag "slide_ids[]", slide.id %></td>
                           <% else %>
-                            <td class="m-0 p-0"></td>
+                            <td></td>
                           <% end %>
                           
-                          <td class="m-0 p-0 <%= slide.colored ? "slide-colored" : nil %> <%= slide.covered ? "slide-covered" : nil %> <%= slide.tagged ? "slide-tagged" : nil %>" >
+                          <td class="<%= slide.colored ? "slide-colored" : nil %> <%= slide.covered ? "slide-covered" : nil %> <%= slide.tagged ? "slide-tagged" : nil %>" >
                             <%= slide.slide_tag %>
                           </td>
                         </tr>

@@ -42,22 +42,23 @@
     <% end %>
   </div>
   <% if inform.micros.length < 4 %>
-    <div class="col-12 col-lg-4">
-      <h4>Agregar descripción Micro</h4>
+    <div class="col-12 col-lg-12 col-xl-12">
+      <h4>Descripción Micro</h4>
       <%= form_for [inform, inform.micros.build] do |form| %>
         <div class="form-group">
-          <%= form.label "Descripción" %>
           <%= form.text_area :description, class: "form-control form-control-lg input" %>
         </div>
         
         <div class="actions">
           <%= form.submit "Agregar", class: "btn btn-primary" %>
+          <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#MicrosModal">
+            + Automáticos
+          </button>
         </div>
 
       <% end %>
     </div>
   <% end %>
 </div>
-<div class="row">
 
-</div>
+<%= render partial: "informs/micros-modal", locals: { inform: inform, automatics: automatics } %>

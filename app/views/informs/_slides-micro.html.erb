@@ -1,0 +1,64 @@
+<div class="slides">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12">
+        <div class="card-deck">
+          <% inform.slides.each do |slide| %>
+            <% if slide.slide_tag != nil %> <!-- Hay instancias no en DB por las form de las Samples, solo listo las que tengan tag -->
+              <div class="col-12 col-lg-2 col-xl-2">
+                <div class="card mb-1 p-0 m-0">
+                  <% if slide.colored %>
+                    <div class="card-header d-flex pl-1 pr-0 pt-0 pb-0 justify-content-between <%= "#{slide.tagged ? "" : "text-muted"}" %>" style="background-color: rgba(255,150,255,0.6)">
+                  <% else %>
+                    <div class="card-header d-flex pl-1 pr-0 pt-0 pb-0 justify-content-between text-muted">
+                  <% end %>
+                  
+                  <% if slide.tagged %>
+                    <span class="d-flex"><strong><%= slide.slide_tag %></strong></span>
+                  <% else %>
+                    <span class="d-flex"><%= slide.slide_tag %></span>
+                  <% end %>
+
+                  </div>
+                  <div class="card-body p-1">
+                    <div class="cover <%= "#{slide.covered ? "alert alert-secondary" : "alert alert-light"}" %>">
+
+                      <% unless get_slides_samples(slide).empty? %>
+                        <% get_slides_samples(slide).each do |sample| %>
+                          <% if slide.colored %>
+                            <div class="mb-2" style="background-color: <%= get_color(sample) %>">
+                          <% else %>
+                            <div class="mb-2">
+                          <% end %>
+                            <strong><%= sample.sample_tag %> <%= sample.name == "Extendido" ? "Ext" : "" %></strong>
+                            <p class="m-0 p-0"><%= sample.organ_code %></p>
+                            <p class="m-0 p-0"><%= sample.description %></p>
+                          </div>
+                        <% end %>
+                      <% end %>
+
+                      <% unless get_slides_blocks(slide).empty? %>
+                        <% get_slides_blocks(slide).each do |block| %>
+                          <% if slide.colored %>
+                            <div class="mb-2" style="background-color: <%= get_color(block) %>">
+                          <% else %>
+                            <div class="mb-2">
+                          <% end %>
+                            <strong><%= block.block_tag %></strong>
+                            <p class="m-0 p-0"><%= block.organ_code %></p>
+                            <p class="m-0 p-0"><%= block.description %></p>
+                          </div>
+                        <% end %>
+                      <% end %>
+
+                    </div>                          
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

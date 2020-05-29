@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-12 col-lg-12 mx-auto">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12">
+        <%= render partial: "inform" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12 ">
+        <div class="slide">
+          <%= render partial: "slides-micro", locals: { inform: @inform } %>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-6 ">
+        <div class="container-fluid descr-micro">
+          <h4>Descripción Macro:</h4>
+            <% @inform.recipients.each_with_index do |recipient, n| %>
+              <p>
+                Contenido de recipiente #<%= n + 1 %>:
+                <br>
+                <p style="text-align: justify-all;"><%= recipient.description %></p>
+                <br>
+                Bloqueado de la siguiente manera:
+                <br>
+                <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
+                  <strong><%= sample.description %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></strong> 
+                  <br>
+              </p>
+              
+              <% end %>
+            <% end %>
+            <br>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-6 ">
+        <%= render partial: "micros", locals: { inform: @inform, automatics: @automatics } %>
+      </div>
+    </div>
+  </div>
+</div>

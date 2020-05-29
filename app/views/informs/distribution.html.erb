@@ -1,0 +1,42 @@
+<div class="container-fluid">
+	<%= form_tag assign_informs_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: :put do %>
+	
+	
+		<div class="row">
+			<div class="col-12 col-lg-6 col-xl-6 mx-auto">
+				<div class="row">
+					<div class="col-12 col-lg-6 col-xl-6">
+						<%= select_tag(:pathologist_id, options_from_collection_for_select(User.all, :id, :email), { prompt: 'Patólogo', class: "form-control"}) %>
+					</div>
+					<div class="col-12 col-lg-6 col-xl-6">
+						<%= submit_tag "Asignar lo marcado", class: "btn btn-outline-primary btn-block" %>
+					</div>
+				</div>
+				<h1>Asignación a patólogo</h1>
+				<table class="table table-hover inform-assing">
+					<thead>
+						<tr>
+							<th></th>
+							<th>id</th>
+							<th>Informe</th>
+							<th>Placas</th>
+							<th>Asignado a:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @slides.each do |slide| %>
+							<% inform = slide.inform %>
+							<tr>
+								<td><%= check_box_tag "inform_ids[]", inform.id %></td>
+								<td><%= inform.id %></td>
+								<td><%= inform.tag_code %></td>
+								<td><%= inform.slides.count %></td>
+								<td><%= User.where(id: inform.pathologist_id).first.try(:email) %></td>
+							</tr>	
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<% end %>
+</div>

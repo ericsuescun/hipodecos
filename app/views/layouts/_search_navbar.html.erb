@@ -103,6 +103,12 @@
               <%= link_to "Matricular", new_patient_path, class: "dropdown-item" %>
               <%= link_to "Todos", informs_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
+              <%= link_to "Asignar Patólogo", distribution_path, class: "dropdown-item" %>
+              <%= link_to "Asignar hoy y ayer", distribution_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Asignar semana", distribution_path + days_ago_search(7), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Micros", descr_micros_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
               <%= link_to "Hoy", informs_path + day_before_search(0), class: "dropdown-item" %>
               <%= link_to "Ayer", informs_path + day_before_search(1), class: "dropdown-item" %>
               <%= link_to "Antier", informs_path + day_before_search(2), class: "dropdown-item" %>

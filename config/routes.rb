@@ -88,6 +88,12 @@ Rails.application.routes.draw do
 
     get 'informs/preview/:id', to: 'informs#preview', as: 'preview'
 
+    get 'informs/descr_micro/:id', to: 'informs#descr_micro', as: 'descr_micro'
+
+    get 'informs/distribution', to: 'informs#distribution', as: 'distribution'
+
+    get 'informs/descr_micros', to: 'informs#descr_micros', as: 'descr_micros'
+
     resources :roles
     resources :values
     resources :factors
@@ -160,6 +166,10 @@ Rails.application.routes.draw do
       resources :diagnostics
       
       resources :pictures, module: :informs
+
+      collection do
+        put :assign
+      end
     end
 
     resources :recipients do

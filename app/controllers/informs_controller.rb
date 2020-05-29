@@ -48,10 +48,10 @@ class InformsController < ApplicationController
       final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
       date_range = initial_date..final_date
       # @informs = Inform.where(created_at: date_range).joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
-      @slides = Slide.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("inform_id").distinct
+      @slides = Slide.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
     else
       # @informs = Inform.joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
-      @slides = Slide.where(colored: true, covered: true, tagged: true).joins(:inform).select("inform_id").distinct
+      @slides = Slide.where(colored: true, covered: true, tagged: true).joins(:inform).select("slides.inform_id").distinct
     end
   end
 

@@ -4,7 +4,8 @@ class AutomaticsController < ApplicationController
   # GET /automatics
   # GET /automatics.json
   def index
-    @automatics = Automatic.all
+    @macro_automatics = Automatic.where(auto_type: "macro")
+    @micro_automatics = Automatic.where(auto_type: "micro")
   end
 
   # GET /automatics/1
@@ -26,6 +27,7 @@ class AutomaticsController < ApplicationController
   # POST /automatics.json
   def create
     @automatic = Automatic.new(automatic_params)
+    @automatic.user_id = current_user.id
 
     respond_to do |format|
       if @automatic.save
@@ -41,6 +43,8 @@ class AutomaticsController < ApplicationController
   # PATCH/PUT /automatics/1
   # PATCH/PUT /automatics/1.json
   def update
+    @automatic.user_id = current_user.id
+    
     respond_to do |format|
       if @automatic.update(automatic_params)
         format.html { redirect_to @automatic, notice: 'El automático fue actualizado exitosamente!' }
@@ -70,6 +74,6 @@ class AutomaticsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def automatic_params
-      params.require(:automatic).permit(:organ, :title)
+      params.require(:automatic).permit(:organ, :title, :auto_type)
     end
 end

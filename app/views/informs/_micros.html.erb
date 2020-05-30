@@ -1,8 +1,9 @@
 <div class="row">
   <div class="col-12 col-lg-8">
+    <h4>Descripción Micro:</h4>
     <% inform.micros.each_with_index do |micro, n| %>
-      <p>Micro <%= n + 1 %> de <%= inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %> </p>
-      <h4><%= micro.description %></h4>
+      <p><strong>Micro <%= n + 1 %> de <%= inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %></strong> </p>
+      <p><%= micro.description %></p>
       <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %></p></div>
       <%= link_to 'Revisar/Cargar foto', micro_path(micro) %> |
       <%= link_to 'Editar', edit_micro_path(micro) %> |

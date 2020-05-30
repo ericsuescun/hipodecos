@@ -1,6 +1,6 @@
-<h1>Editing Script</h1>
+<h1>Edición de automático para descripción <%= @automatic.auto_type %></h1>
 
-<%= render 'form', script: @script %>
+<%= render 'form', script: @script, automatic: @automatic, diagcodes: @diagcodes %>
 
 <%= link_to 'Show', @script %> |
 <%= link_to 'Back', scripts_path %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_29_180254) do
+ActiveRecord::Schema.define(version: 2020_05_29_215436) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_05_29_180254) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "auto_type"
+    t.integer "user_id"
   end
 
   create_table "autos", force: :cascade do |t|
@@ -134,6 +135,7 @@ ActiveRecord::Schema.define(version: 2020_05_29_180254) do
     t.integer "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "organ_code"
   end
 
   create_table "diagnostics", force: :cascade do |t|
@@ -376,6 +378,10 @@ ActiveRecord::Schema.define(version: 2020_05_29_180254) do
     t.integer "script_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.text "diagnostic"
+    t.string "pss_code"
+    t.string "who_code"
     t.index ["automatic_id"], name: "index_scripts_on_automatic_id"
   end
 

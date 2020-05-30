@@ -256,6 +256,27 @@ class ExecuteTemplatesController < ApplicationController
 		redirect_to @inform
 	end
 
+	def micro
+		@inform = Inform.find(params[:inform_id])
+		@script = Script.find(params[:script_id])
+		@micro = @inform.micros.build
+		@micro.user_id = current_user.id
+		@micro.description = @script.description
+		
+		@micro.save
+
+		@diagnostic = @inform.diagnostics.build
+		@diagnostic.user_id = current_user.id
+		@diagnostic.description = @script.diagnostic
+		@diagnostic.diagcode_id = Diagcode.where(pss_code: @script.pss_code).first.id
+		@diagnostic.pss_code = @script.pss_code
+		@diagnostic.who_code = @script.who_code
+
+		@diagnostic.save
+
+		redirect_to descr_micro_path(params[:inform_id])
+	end
+
 	private
 		def get_nomen(str)
 			return str.split('-',2)[1].split('-',2)[1]

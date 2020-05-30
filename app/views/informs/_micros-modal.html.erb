@@ -13,19 +13,36 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-12 col-lg-12 col-xl-12">
-                <% Organ.all.each do |organ| %>
-                  <div class="d-flex flex-wrap">
-                    <% Automatic.where(organ: organ.organ).each do |automatic| %>
-                      <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
-                        <div class="actions">
-                          <%= form.submit automatic.title, class: "organ-#{Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '')} mb-2" %>
-                          <%= form.hidden_field :inform_id, value: inform.id %>
-                          <%= form.hidden_field :automatic, value: automatic.id %>
-                        </div>
+              <div class="d-flex flex-wrap">
+                <% automatics.each do |automatic| %>
+                  <p><strong><%= automatic.title %></strong></p>
+                  <table class="table table-hover">
+                    <tbody>
+                      <% automatic.scripts.each_with_index do |script, n| %>
+                        <tr>
+                          <td class="p-0 m-0">
+                            <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
+                              <div class="actions">
+                                <%= form.submit "Opción #{n + 1}", class: "organ-#{Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '')} mb-1 p-1" %>
+                                <%= form.hidden_field :inform_id, value: inform.id %>
+                                <%= form.hidden_field :automatic_id, value: automatic.id %>
+                                <%= form.hidden_field :script_id, value: script.id %>
+                              </div>
+                            <% end %>
+                          </td>
+                          <td class="p-0 m-0">
+                            <details>
+                              <summary><%= script.description[0..40] + "..." %></summary>
+                              <%= script.description %>
+                            </details>
+                          </td>
+                          <td class="p-0 m-0"><%= script.diagnostic %></td>
+                        </tr>
                       <% end %>
-                    <% end %>
-                  </div>
+                    </tbody>
+                  </table>
                 <% end %>
+              </div>
             </div>
           </div>
         </div>

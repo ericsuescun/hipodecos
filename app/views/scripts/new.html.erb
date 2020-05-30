@@ -1,5 +1,9 @@
-<h1>New Script</h1>
+<h1>Nuevo automático para descripción <%= @automatic.auto_type %> de </h1>
+<h1><%= @automatic.organ %> con nombre <%= @automatic.title %></h1>
 
-<%= render 'form', script: @script %>
+<%= render 'form', script: @script, automatic: @automatic, diagcodes: @diagcodes %>
 
-<%= link_to 'Back', scripts_path %>
+<br>
+<%= link_to automatic_path(@automatic) do %>
+	Volver a automático <%= @automatic.title %>
+<% end %>

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
     get 'execute_templates/create'
 
+    get 'execute_templates/micro'
+
     get 'execute_templates/add_slide'
     get 'execute_templates/add_series'
     get 'execute_templates/associate_slide'

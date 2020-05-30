@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <% inform.micros.each_with_index do |micro, n| %>
+        <div class="card bg-light mx-2 mb-3">
+          <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+            <p>Micro <%= n + 1 %> de <%= inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %> </p>
+          </div>
+          <div class="card-body">
+            <p><strong><%= micro.description %></strong></p>
+            <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %></p></div>
+            <%= link_to 'Revisar/Cargar foto', micro_path(micro) %> |
+            <%= link_to 'Editar', edit_micro_path(micro) %> |
+            <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
+
+            <table>
+              <tbody>
+                <% micro.objections.each do |objection| %>
+                  <tr class=<%= objection.closed == false ? "objection" : "" %> >
+                    <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+                    <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+                    <!-- <td><%= objection.description %></td> -->
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+        <div class="card-group">
+          <% micro.pictures.each do |pic| %>
+            <div class="col-12 col-lg-4">
+              <div class="card">
+                <div class="card-header">
+                    <%= pic.description %>
+                </div>
+                <%= link_to pic.name.url  do %>
+                  <img class="card-img-top" src="<%= pic.name.url %>" alt="Card image cap" >
+                <% end %>
+                <div class="card-body">
+                  <%= link_to 'Borrar', inform_picture_path(inform, pic), method: :delete, data: { confirm: 'Confirmar borrado?' }
+                   %>
+                   <div class="card-footer text-muted">
+                     Cargada por: <%= User.where(id: pic.user_id).first.try(:email) %>
+                   </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+    

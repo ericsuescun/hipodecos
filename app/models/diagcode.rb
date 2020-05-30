@@ -1,6 +1,6 @@
 class Diagcode < ApplicationRecord
 
-	has_many :autos
+	has_many :autos, dependent: :destroy
 
 	require 'csv'
 

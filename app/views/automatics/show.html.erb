@@ -1,45 +1,88 @@
 <div class="container">
 	<div class="row">
 		<div class="col-12 col-lg-12 col-xl-12">
-			<p>
-			  Automático <strong><%= @automatic.title %></strong>, con órgano de referencia: <strong><%= @automatic.organ %></strong>  
-			</p>
+			<% if @automatic.auto_type == "macro" %>
+				<p>
+				  Automático Macro <strong><%= @automatic.title %></strong>, con órgano de referencia: <strong><%= @automatic.organ %></strong>  
+				</p>
 
-			<%= link_to ' + ', new_automatic_script_path(@automatic), class: "btn btn-primary" %>
-			<%= link_to 'Editar Automático', edit_automatic_path(@automatic) %> |
-			<%= link_to 'Volver a Automáticos', automatics_path %>
+				<%= link_to ' + ', new_automatic_script_path(@automatic), class: "btn btn-primary" %>
+				<%= link_to 'Editar Automático', edit_automatic_path(@automatic) %> |
+				<%= link_to 'Volver a Automáticos', automatics_path %>
 
-			<table class="table table-striped">
-			  <thead>
-			    <tr>
-			    	<th># paso</th>
-			    	<th>Órgano</th>
-					<th>Tipo</th>
-					<th>Descripción</th>
-					
-					<th>Fragmentos</th>
-			      
-					<th colspan="3"></th>
-			    </tr>
-			  </thead>
+				<table class="table table-striped">
+				  <thead>
+				    <tr>
+				    	<th># paso</th>
+				    	<th>Órgano</th>
+						<th>Tipo</th>
+						<th>Descripción</th>
+						
+						<th>Fragmentos</th>
+				      
+						<th colspan="3"></th>
+				    </tr>
+				  </thead>
 
-			  <tbody>
-			    <% @automatic.scripts.each do |script| %>
-			      <tr>
-			      	<td><%= script.script_order %></td>
-			      	<td><%= script.organ %></td>
-			        <td><%= script.script_type %></td>
-			        <td><%= script.description %></td>
-			        
-			        <td><%= script.param1 %></td>
-			        
-			        <td><%= link_to 'Show', script %></td>
-			        <td><%= link_to 'Edit', edit_script_path(script) %></td>
-			        <td><%= link_to 'Destroy', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-			      </tr>
-			    <% end %>
-			  </tbody>
-			</table>
+				  <tbody>
+				    <% @automatic.scripts.each do |script| %>
+				      <tr>
+				      	<td><%= script.script_order %></td>
+				      	<td><%= script.organ %></td>
+				        <td><%= script.script_type %></td>
+				        <td><%= script.description %></td>
+				        
+				        <td><%= script.param1 %></td>
+				        
+				        <td><%= link_to 'Show', script %></td>
+				        <td><%= link_to 'Edit', edit_script_path(script) %></td>
+				        <td><%= link_to 'Destroy', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				      </tr>
+				    <% end %>
+				  </tbody>
+				</table>
+			<% end %>
+
+			<% if @automatic.auto_type == "micro" %>
+				<p>
+				  Automático para <strong><%= @automatic.organ %></strong>, <strong><%= @automatic.title %></strong>
+				</p>
+
+				<%= link_to ' + ', new_automatic_script_path(@automatic), class: "btn btn-primary" %>
+				<%= link_to 'Editar Automático', edit_automatic_path(@automatic) %> |
+				<%= link_to 'Volver a Automáticos', automatics_path %>
+
+				<table class="table table-striped">
+				  <thead>
+				    <tr>
+				    	<th># opción</th>
+				    	<th>Órgano</th>
+				    	<th>Código PSS</th>
+				    	<th>Código OMS</th>
+						<th>Descripción</th>
+						<th>Diagnóstico</th>
+						<th colspan="3"></th>
+				    </tr>
+				  </thead>
+
+				  <tbody>
+				    <% @automatic.scripts.each do |script| %>
+				      <tr>
+				      	<td><%= script.script_order %></td>
+				      	<td><%= script.organ %></td>
+				      	<td><%= script.pss_code %></td>
+				      	<td><%= script.who_code %></td>
+				        <td><%= script.description %></td>
+				        <td><%= script.diagnostic %></td>
+				        
+				        <td><%= link_to 'Detalles', script %></td>
+				        <td><%= link_to 'Editar', edit_script_path(script) %></td>
+				        <td><%= link_to 'Borrar', script, method: :delete, data: { confirm: 'Confirmas la operación?' } %></td>
+				      </tr>
+				    <% end %>
+				  </tbody>
+				</table>
+			<% end %>
 		</div>
 	</div>
 </div>

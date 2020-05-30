@@ -86,6 +86,6 @@ class DiagcodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diagcode_params
-      params.require(:diagcode).permit(:admin_id, :organ, :feature1, :feature2, :feature3, :feature4, :feature5, :description, :pss_code, :who_code, :score, :order)
+      params.require(:diagcode).permit(:admin_id, :organ_code, :organ, :feature1, :feature2, :feature3, :feature4, :feature5, :description, :pss_code, :who_code, :score, :order)
     end
 end

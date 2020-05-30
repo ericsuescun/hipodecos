@@ -1,7 +1,6 @@
 <% if script.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(script.errors.count, "error") %> prohibited this script from being saved:</h2>
-
     <ul>
     <% script.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -14,49 +13,80 @@
   <div class="row">
     <div class="col-12 col-lg-12">
       <%= form_with model: [@automatic, @script] do |form| %>
-        <div class="row">
-          <div class="col-12 col-lg-2">
-            <div class="form-group">
-              <%= form.label "Modelo a crear" %>
-              <%= form.select(:script_type, options_for_select([['+1 Rec', 'rec'], ['+1 Bloque', 'blo'], ['+1 Corte', 'cor'], ['+1 Ext', 'ext']], @script.script_type), {  }, class: "form-control input") %>
+        <% if @automatic.auto_type == "macro" %>
+          <div class="row">
+            <div class="col-12 col-lg-2">
+              <div class="form-group">
+                <%= form.label "Modelo a crear" %>
+                <%= form.select(:script_type, options_for_select([['+1 Rec', 'rec'], ['+1 Bloque', 'blo'], ['+1 Corte', 'cor'], ['+1 Ext', 'ext']], @script.script_type), {  }, class: "form-control input") %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label "Fragmentos (solo para Bloques o Cortes)" %>
+                <%= form.number_field :param1, class: "form-control input" %>
+              </div>
+
+              <div class="form-group">
+                <!-- <%= form.label "Órgano" %> -->
+                <!-- <%= form.text_field :organ, class: "form-control input" %> -->
+                <%= form.collection_select(:organ, Organ.all, :organ, :organ, {selected: @selected, include_blank: true, prompt: 'Seleccione órgano'}, { class: "form-control input" }) %>
+              </div>
+
+                <!-- <%= form.hidden_field :param2, value: 0 %> -->
+
+              <div class="form-group">
+                <%= form.label "Orden de ejecución (importante)" %>
+                <%= form.number_field :script_order, class: "form-control input" %>
+              </div>
             </div>
 
-            <div class="form-group">
-              <%= form.label "Fragmentos (solo para Bloques o Cortes)" %>
-              <%= form.number_field :param1, class: "form-control input" %>
-            </div>
-
-            <div class="form-group">
-              <!-- <%= form.label "Órgano" %> -->
-              <!-- <%= form.text_field :organ, class: "form-control input" %> -->
-              <%= form.collection_select(:organ, Organ.all, :organ, :organ, {selected: @selected, include_blank: true, prompt: 'Seleccione órgano'}, { class: "form-control input" }) %>
-            </div>
-
-              <!-- <%= form.hidden_field :param2, value: 0 %> -->
-
-            <div class="form-group">
-              <%= form.label "Orden de ejecución (importante)" %>
-              <%= form.number_field :script_order, class: "form-control input" %>
+            <div class="col-12 col-lg-10">
+              <div class="form-group">
+                <%= form.label "Descripción (Recipientes, Bloques y Cortes)" %>
+                <%= form.text_area :description, rows: 14, class: "form-control input" %>
+              </div>
+              <div class="actions">
+                <%= form.submit "Guardar", class: "btn btn-primary" %>
+              </div>
             </div>
           </div>
-
-          <div class="col-12 col-lg-10">
-            <div class="form-group">
-              <%= form.label "Descripción (Recipientes, Bloques y Cortes)" %>
-              <%= form.text_area :description, rows: 14, class: "form-control input" %>
+        <% end %>
+        <% if @automatic.auto_type == "micro" %>
+          <div class="row">
+            <div class="col-12 col-lg-2">
+              <div class="form-group">
+                <%= form.label "Órgano" %>
+                <%= form.collection_select(:organ, Organ.all, :organ, :organ, {selected: @selected, include_blank: true, prompt: 'Seleccione órgano'}, { class: "form-control input" }) %>
+              </div>
             </div>
-            <div class="actions">
-              <%= form.submit "Guardar", class: "btn btn-primary" %>
+            <div class="col-12 col-lg-2">
+              <div class="form-group">
+                <%= form.label "Código PSS" %>
+                <%= form.collection_select(:pss_code, diagcodes, :pss_code, :description, { prompt: 'Seleccione código'}, { class: "form-control input" }) %>
+              </div>
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6 col-xl-6">
+              <div class="form-group">
+                <%= form.label "Descripción Micro" %>
+                <%= form.text_area :description, rows: 14, class: "form-control input" %>
+              </div>
+              <div class="actions">
+                <%= form.submit "Guardar", class: "btn btn-primary" %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-6">
+              <div class="form-group">
+                <%= form.label "Diagnóstico" %>
+                <%= form.text_area :diagnostic, rows: 14, class: "form-control input" %>
+              </div>
             </div>
           </div>
-        </div>
-        
-        
+        <% end %>
       <% end %>
     </div>
-    
-    
-
-    </div>
+  </div>
 </div>
 

@@ -274,7 +274,7 @@ class ExecuteTemplatesController < ApplicationController
 
 		@diagnostic.save
 
-		redirect_to descr_micro_path(params[:inform_id])
+		redirect_to descr_micro_path(@inform_id])
 	end
 
 	private

@@ -1,0 +1,10 @@
+$(document).on('page:load', refresh());
+
+function refresh() {
+	modalClose();
+	
+	
+	setTimeout(function() {
+		$('div.alert-growl').remove();
+	}, 3000)
+}

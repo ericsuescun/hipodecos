@@ -34,10 +34,10 @@ class InformsController < ApplicationController
     @organs = Organ.all
 
     @automatics = []
-    @inform.samples.select(:organ_code).distinct.each do |sample|
+    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
       Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
         @automatics << auto
-    end
+      end
     end   
 
     @samples = @inform.samples

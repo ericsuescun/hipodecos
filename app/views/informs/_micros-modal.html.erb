@@ -15,7 +15,7 @@
             <div class="col-12 col-lg-12 col-xl-12">
               <div class="d-flex flex-wrap">
                 <% automatics.each do |automatic| %>
-                  <p><strong><%= automatic.title %></strong></p>
+                  <p class="organ-<%= Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '') %> mb-1 p-1"><strong><%= automatic.title %></strong></p>
                   <table class="table table-hover">
                     <tbody>
                       <% automatic.scripts.each_with_index do |script, n| %>
@@ -23,7 +23,7 @@
                           <td class="p-0 m-0">
                             <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
                               <div class="actions">
-                                <%= form.submit "Opción #{n + 1}", class: "organ-#{Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '')} mb-1 p-1" %>
+                                <%= form.submit "Opción #{n + 1}: #{script.pss_code}", class: "btn btn-outline-dark" %>
                                 <%= form.hidden_field :inform_id, value: inform.id %>
                                 <%= form.hidden_field :automatic_id, value: automatic.id %>
                                 <%= form.hidden_field :script_id, value: script.id %>

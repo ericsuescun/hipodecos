@@ -1,0 +1,14 @@
+$(document).on('page:load', refresh());
+
+function refresh() {
+	modalMicroClose();
+
+	$('div.micros-out').remove();
+	$('div.micros-in').append('<%= j render "informs/micros", inform: @inform, automatics: @automatics %>');
+
+	
+	
+	setTimeout(function() {
+		$('div.alert-growl').remove();
+	}, 3000)
+}

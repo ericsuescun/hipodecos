@@ -274,7 +274,12 @@ class ExecuteTemplatesController < ApplicationController
 
 		@diagnostic.save
 
-		redirect_to descr_micro_path(@inform_id])
+		@automatics = []
+		@inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+		  Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+		    @automatics << auto
+		  end
+		end
 	end
 
 	private

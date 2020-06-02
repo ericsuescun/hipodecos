@@ -96,6 +96,9 @@ Rails.application.routes.draw do
 
     get 'informs/descr_micros', to: 'informs#descr_micros', as: 'descr_micros'
 
+    post 'micros/review', to: 'micros#review'
+    post 'micros/anotate', to: 'micros#anotate'
+
     resources :roles
     resources :values
     resources :factors

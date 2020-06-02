@@ -20,6 +20,13 @@ class MicrosController < ApplicationController
 
   # GET /micros/1/edit
   def edit
+    @inform = @micro.inform
+    @automatics = []
+    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+        @automatics << auto
+      end
+    end
   end
 
   # POST /micros
@@ -39,26 +46,72 @@ class MicrosController < ApplicationController
   # PATCH/PUT /micros/1
   # PATCH/PUT /micros/1.json
   def update
-    log = "\nCAMBIOS:\n"
     if @micro.description != micro_params[:description]
-      log += "\n-DESCRIPCIÓN-\nANTES:" + @micro.description + "\n- DESPUÉS: -\n" + micro_params[:description]
+      log = "FECHA: " + Date.today.to_s
+      log += " CAMBIOS: "
+      log += " Descripción - ANTES: " + @micro.description
+      log += ", por: " + User.where(id: @micro.user_id).first.try(:email).to_s
+      log += " Descripción - DESPUES: " + micro_params[:description].to_s
+      log += ", por: " + current_user.email + " \n"
+
     else
-      log += "\n-DESCRIPCIÓN-\nSIN CAMBIOS."
+      log = "FECHA: " + Date.today.to_s
+      log += " SIN CAMBIOS."
     end
 
-    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
+    #Obcode 19 corresponde a Descripción Macro o Micro mal redactada
+    @objection = @micro.objections.new(
+      responsible_user_id: @micro.user_id,
+      user_id: current_user.id,
+      description: log,
+      obcode_id: 19,
+      close_user_id: nil,
+      closed: false
+    ) 
+    #@objectionable se crea en una version (una clase heredada) personalizada del controlador de Objection para cada tipo de modelo DESDE DONDE se le llama
+    @objection.save
 
-    if @micro.update(micro_params)
-      @micro.objections.each do |objection|
-        objection.closed = true
-        objection.close_user_id = current_user.id
-        objection.close_date = @micro.updated_at
-        objection.description = objection.description + log
-        objection.save
+    @micro.update(micro_params)
+
+    @inform = @micro.inform
+    @automatics = []
+    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+        @automatics << auto
       end
-      redirect_to @micro, notice: 'Diagnostic was successfully updated.'
-    else
-      render :edit
+    end
+  end
+
+  def review
+    @objection = Objection.find(params[:objection_id])
+    @micro = Micro.find(params[:micro_id])
+    @inform = @micro.inform
+    @automatics = []
+    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+        @automatics << auto
+      end
+    end
+
+  end
+
+  def anotate
+    @objection = Objection.find(params[:objection_id])
+    @micro = Micro.find(params[:micro_id])
+    new_description = @objection.description.to_s + "FECHA: " + Date.today.to_s + " REVISIÓN: " + params[:new_description].to_s + ", por: " + current_user.email
+    @objection.update(
+      description: new_description,
+      close_user_id: current_user.id,
+      close_date: Date.today,
+      closed: true
+    )
+
+    @inform = @micro.inform
+    @automatics = []
+    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+        @automatics << auto
+      end
     end
   end
 

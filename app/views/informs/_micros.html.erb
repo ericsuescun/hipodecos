@@ -1,21 +1,68 @@
-<div class="container">
-  <div class="row micros-out">
+<div class="container micros-out">
+  <div class="row">
     <div class="col-12 col-lg-12 col-xl-12">
       <h4>Descripción Micro:</h4>
       <% inform.micros.each_with_index do |micro, n| %>
         <p><strong>Micro <%= n + 1 %> de <%= inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %></strong> </p>
-        <p><%= micro.description %></p>
+        <% if edit_micro == micro %>
+          <%= form_with model: micro do |f| %>
+            <div class="field">
+              <%= f.label "Descripción:" %>
+              <%= f.text_area :description, value: micro.description, rows: 8, class: "form-control input" %>
+            </div>
+            <div class="actions">
+              <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
+            </div>
+          <% end %>
+        <% else %>
+          <p><%= micro.description %></p>
+        <% end %>
         <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %></p></div>
         <%= link_to 'Revisar/Cargar foto', micro_path(micro) %> |
-        <%= link_to 'Editar', edit_micro_path(micro) %> |
+        <%= link_to 'Editar', edit_micro_path(micro), remote: true %> |
         <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
         <table>
           <tbody>
             <% micro.objections.each do |objection| %>
               <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                <!-- <td><%= objection.description %></td> -->
+                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></td>
+                <td>
+              </tr>
+              <tr class=<%= objection.closed == false ? "objection" : "" %> >
+                <td>
+                  <% if edit_objection_id == nil %>
+                    <div class="d-flex flex-column">
+                      <span class="text-muted objection-description">
+                        <%= objection.description %>
+                      </span>
+                    </div>
+                    <% unless objection.closed %>
+                      <%= form_with url: micros_review_path, method: "post" do |form| %>
+                        <div class="actions">
+                          <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
+                          <%= form.hidden_field :objection_id, value: objection.id %>
+                          <%= form.hidden_field :micro_id, value: micro.id %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <%= form_with url: micros_anotate_path, method: "post" do |form| %>
+                      <div class="field">
+                        <%= form.label "Historial:" %>
+                        <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>
+                      </div>
+                      <div class="field">
+                        <%= form.label "Acción de mejora:" %>
+                        <%= form.text_area :new_description, class: "form-control input" %>
+                      </div>
+                      <div class="actions">
+                        <%= form.submit "Anotar", class: "btn btn-outline-warning mx-1 my-1" %>
+                        <%= form.hidden_field :objection_id, value: objection.id %>
+                        <%= form.hidden_field :micro_id, value: micro.id %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>

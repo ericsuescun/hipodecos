@@ -47,6 +47,10 @@ class InformsController < ApplicationController
     @blocks = @inform.blocks
   end
 
+  def edit_micro
+    
+  end
+
   def distribution
     if params[:yi]
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day

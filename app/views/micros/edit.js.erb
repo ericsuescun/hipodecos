@@ -1,10 +1,9 @@
 $(document).on('page:load', refresh());
 
 function refresh() {
-	modalMicroClose();
 
 	$('div.micros-out').remove();
-	$('div.micros-in').append('<%= j render "informs/micros", inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil %>');
+	$('div.micros-in').append('<%= j render "informs/micros", inform: @inform, automatics: @automatics, edit_micro: @micro, edit_objeciton: nil %>');
 
 	
 	

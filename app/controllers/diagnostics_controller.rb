@@ -16,25 +16,13 @@ class DiagnosticsController < ApplicationController
   # GET /diagnostics/new
   def new
     @inform = Inform.find(params[:inform_id])
-    @diagcodes = []
-    @inform.samples.select(:organ_code).distinct.each do |sample|
-      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
-      Diagcode.where(organ_code: o_code).each do |diagcode|
-        @diagcodes << diagcode
-      end
-    end
+    get_diagcodes
   end
 
   # GET /diagnostics/1/edit
   def edit
     @inform = @diagnostic.inform
-    @diagcodes = []
-    @inform.samples.select(:organ_code).distinct.each do |sample|
-      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
-      Diagcode.where(organ_code: o_code).each do |diagcode|
-        @diagcodes << diagcode
-      end
-    end
+    get_diagcodes
   end
 
   # POST /diagnostics
@@ -48,13 +36,7 @@ class DiagnosticsController < ApplicationController
 
     @diagnostic.save
 
-    @diagcodes = []
-    @inform.samples.select(:organ_code).distinct.each do |sample|
-      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
-      Diagcode.where(organ_code: o_code).each do |diagcode|
-        @diagcodes << diagcode
-      end
-    end
+    get_diagcodes
   end
 
   # PATCH/PUT /diagnostics/1
@@ -107,13 +89,7 @@ class DiagnosticsController < ApplicationController
     @diagnostic.update(diagnostic_params)
 
     @inform = @diagnostic.inform
-    @diagcodes = []
-    @inform.samples.select(:organ_code).distinct.each do |sample|
-      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
-      Diagcode.where(organ_code: o_code).each do |diagcode|
-        @diagcodes << diagcode
-      end
-    end
+    get_diagcodes
   end
 
   def review
@@ -121,13 +97,7 @@ class DiagnosticsController < ApplicationController
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     @inform = @diagnostic.inform
 
-    @diagcodes = []
-    @inform.samples.select(:organ_code).distinct.each do |sample|
-      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
-      Diagcode.where(organ_code: o_code).each do |diagcode|
-        @diagcodes << diagcode
-      end
-    end
+    get_diagcodes
   end
 
   def anotate
@@ -142,13 +112,7 @@ class DiagnosticsController < ApplicationController
     )
 
     @inform = @diagnostic.inform
-    @diagcodes = []
-    @inform.samples.select(:organ_code).distinct.each do |sample|
-      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
-      Diagcode.where(organ_code: o_code).each do |diagcode|
-        @diagcodes << diagcode
-      end
-    end
+    get_diagcodes
   end
 
   
@@ -160,17 +124,21 @@ class DiagnosticsController < ApplicationController
   def destroy_diagnostic
     @diagnostic = Diagnostic.find(params[:diagnostic_id])
     @inform = @diagnostic.inform
-    @automatics = []
-    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
-      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
-        @automatics << auto
-      end
-    end
+    get_diagcodes
 
     @diagnostic.destroy
   end
 
   private
+    def get_diagcodes
+      @diagcodes = []
+      @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+        o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+        Diagcode.where(organ_code: o_code).each do |diagcode|
+          @diagcodes << diagcode
+        end
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_diagnostic
       @diagnostic = Diagnostic.find(params[:id])

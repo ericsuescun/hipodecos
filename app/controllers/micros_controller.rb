@@ -21,12 +21,7 @@ class MicrosController < ApplicationController
   # GET /micros/1/edit
   def edit
     @inform = @micro.inform
-    @automatics = []
-    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
-      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
-        @automatics << auto
-      end
-    end
+    get_automatics
     @edit_status = true
   end
 
@@ -39,12 +34,7 @@ class MicrosController < ApplicationController
 
     @micro.save
 
-    @automatics = []
-    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
-      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
-        @automatics << auto
-      end
-    end
+    get_automatics
 
   end
 
@@ -82,24 +72,14 @@ class MicrosController < ApplicationController
     @micro.update(micro_params)
 
     @inform = @micro.inform
-    @automatics = []
-    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
-      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
-        @automatics << auto
-      end
-    end
+    get_automatics
   end
 
   def review
     @objection = Objection.find(params[:objection_id])
     @micro = Micro.find(params[:micro_id])
     @inform = @micro.inform
-    @automatics = []
-    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
-      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
-        @automatics << auto
-      end
-    end
+    get_automatics
 
   end
 
@@ -115,12 +95,7 @@ class MicrosController < ApplicationController
     )
 
     @inform = @micro.inform
-    @automatics = []
-    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
-      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
-        @automatics << auto
-      end
-    end
+    get_automatics
   end
 
   # DELETE /micros/1
@@ -136,17 +111,20 @@ class MicrosController < ApplicationController
   def destroy_micro
     @micro = Micro.find(params[:micro_id])
     @inform = @micro.inform
-    @automatics = []
-    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
-      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
-        @automatics << auto
-      end
-    end
+    get_automatics
 
     @micro.destroy
   end
 
   private
+    def get_automatics
+      @automatics = []
+      @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+        Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+          @automatics << auto
+        end
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_micro
       @micro = Micro.find(params[:id])

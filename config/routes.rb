@@ -88,17 +88,6 @@ Rails.application.routes.draw do
     get 'objections/delete'
     get 'objections/show'
 
-    get 'informs/preview/:id', to: 'informs#preview', as: 'preview'
-
-    get 'informs/descr_micro/:id', to: 'informs#descr_micro', as: 'descr_micro'
-
-    get 'informs/distribution', to: 'informs#distribution', as: 'distribution'
-
-    get 'informs/descr_micros', to: 'informs#descr_micros', as: 'descr_micros'
-
-    post 'micros/review', to: 'micros#review'
-    post 'micros/anotate', to: 'micros#anotate'
-
     resources :roles
     resources :values
     resources :factors
@@ -159,6 +148,12 @@ Rails.application.routes.draw do
       resources :branches
     end
 
+    get 'informs/preview/:id', to: 'informs#preview', as: 'preview'
+    get 'informs/descr_micro/:id', to: 'informs#descr_micro', as: 'descr_micro'
+    get 'informs/distribution', to: 'informs#distribution', as: 'distribution'
+    get 'informs/descr_micros', to: 'informs#descr_micros', as: 'descr_micros'
+
+
     resources :informs do
       resources :physicians
       resources :recipients
@@ -176,6 +171,8 @@ Rails.application.routes.draw do
         put :assign
       end
     end
+
+    
 
     resources :recipients do
       resources :objections, module: :recipients
@@ -213,11 +210,19 @@ Rails.application.routes.draw do
       resources :pictures, module: :macros
     end
 
+    post 'micros/review', to: 'micros#review'
+    post 'micros/anotate', to: 'micros#anotate'
+    post 'micros/destroy_micro', to: 'micros#destroy_micro'
+
     resources :micros do
       resources :objections, module: :micros
       resources :pictures, module: :micros
     end
 
+    post 'diagnostics/review', to: 'diagnostics#review'
+    post 'diagnostics/anotate', to: 'diagnostics#anotate'
+    post 'diagnostics/destroy_diagnostic', to: 'diagnostics#destroy_diagnostic'
+    
     resources :diagnostics do
       resources :objections, module: :diagnostics
     end

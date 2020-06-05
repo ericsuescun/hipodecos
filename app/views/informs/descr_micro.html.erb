@@ -11,30 +11,20 @@
           <%= render partial: "slides-micro", locals: { inform: @inform } %>
         </div>
       </div>
-      <div class="col-12 col-lg-6 col-xl-6 ">
-        <div class="container descr-micro">
-          <h4>Descripción Macro:</h4>
-          <% @inform.recipients.each_with_index do |recipient, n| %>
-            <p>
-              Contenido de recipiente #<%= n + 1 %>:
-              <br>
-              <p style="text-align: justify-all;"><%= recipient.description %></p>
-              <br>
-              Bloqueado de la siguiente manera:
-              <br>
-              <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
-                <strong><%= sample.description %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></strong> 
-                <br>
-            </p>
-            
-            <% end %>
-          <% end %>
-          <br>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-6 col-xl-6 macros-in">
+        <%= render partial: "macros/macros", locals: { inform: @inform } %>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-6">
+        <div class="micros-in">
+          <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+        </div>
+        <div class="diagnostics-in">
+          <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
         </div>
       </div>
-      <div class="col-12 col-lg-6 col-xl-6 micros-in">
-        <%= render partial: "micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil } %>
-      </div>
+      
     </div>
   </div>
 </div>

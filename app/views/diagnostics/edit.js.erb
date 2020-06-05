@@ -1,0 +1,13 @@
+$(document).on('page:load', refresh());
+
+function refresh() {
+
+	$('div.diagnostics-out').remove();
+	$('div.diagnostics-in').append('<%= j render "diagnostics/diagnostics", inform: @inform, edit_diagnostic: @diagnostic, diagcodes: @diagcodes, edit_objection_id: nil, edit_dx_status: true %>');
+
+	
+	
+	setTimeout(function() {
+		$('div.alert-growl').remove();
+	}, 3000)
+}

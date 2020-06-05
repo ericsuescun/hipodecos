@@ -1,0 +1,127 @@
+<div class="container micros-out">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <h4>Descripción Micro:</h4>
+      <% inform.micros.each_with_index do |micro, n| %>
+        <div class="alert alert-dark">
+          <div class="d-flex flex-row justify-content-between align-items-center">
+            <strong>
+              Micro <%= n + 1 %> de <%= inform.micros.count %> para <%= inform.tag_code %>, creada el <%= micro.created_at.strftime('%d/%m/%Y') %>
+            </strong>
+            <div>
+              <%= form_with url: micros_destroy_micro_path(micro), method: "post" do |form| %>
+                <%= form.submit '&times;'.html_safe, class: "btn btn-outline-dark btn-sm" %>
+                <%= form.hidden_field :micro_id, value: micro.id %>
+              <% end %>
+            </div>
+          </div>
+          <% if edit_micro == micro %>
+            <%= form_with model: micro do |f| %>
+              <div class="field">
+                <%= f.label "Descripción:" %>
+                <%= f.text_area :description, value: micro.description, rows: 8, class: "form-control input" %>
+                <%= f.hidden_field :edit_status, value: edit_status %>
+              </div>
+              <div class="actions">
+                <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
+              </div>
+            <% end %>
+          <% else %>
+            <p>
+              <%= link_to edit_micro_path(micro), remote: true do %>
+              <span style="font-size: 25px;color: black;border: 1px solid black; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
+              <% end %><span><%= micro.description %></span>
+            </p>
+          <% end %>
+          <div class="text-muted">
+            <p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %>
+            </p>
+          </div>
+          <%= link_to 'Cargar foto', micro_path(micro) %>
+          
+          
+          <% micro.objections.each do |objection| %>
+            <div>
+              <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></span>
+            </div>
+            
+            <% if edit_objection_id == nil %>
+              <div class="d-flex flex-column">
+                <span class="text-muted objection-description">
+                  <%= objection.description %>
+                </span>
+              </div>
+              <% unless objection.closed %>
+                <%= form_with url: micros_review_path, method: "post" do |form| %>
+                  <div class="form-group">
+                    <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
+                    <%= form.hidden_field :objection_id, value: objection.id %>
+                    <%= form.hidden_field :micro_id, value: micro.id %>
+                  </div>
+                <% end %>
+              <% end %>
+            <% else %>
+              <% if edit_objection_id == objection %>
+                <%= form_with url: micros_anotate_path, method: "post" do |form| %>
+                  <div class="form-group">
+                    <%= form.label "Historial:" %>
+                    <%= form.text_area :description, value: objection.description, rows: 10, class: "form-control input disabled" %>
+                  </div>
+                  <div class="form-group">
+                    <%= form.label "Acción de mejora:" %>
+                    <%= form.text_area :new_description, rows: 2, class: "form-control input" %>
+                  </div>
+                  <div class="actions">
+                    <%= form.submit "Anotar", class: "btn btn-warning mx-1 my-1" %>
+                    <%= form.hidden_field :objection_id, value: objection.id %>
+                    <%= form.hidden_field :micro_id, value: micro.id %>
+                  </div>
+                <% end %>
+              <% end %>
+            <% end %>
+            
+          <% end %>
+          <div class="card-group">
+            <% micro.pictures.each do |pic| %>
+              <div class="col-12 col-lg-4">
+                <div class="card">
+                  <div class="card-header">
+                      <%= pic.description %>
+                  </div>
+                  <%= link_to pic.name.url  do %>
+                    <img class="card-img-top" src="<%= pic.name.url %>" alt="Card image cap" >
+                  <% end %>
+                  <div class="card-body">
+                    <%= link_to 'Borrar', inform_picture_path(inform, pic), method: :delete, data: { confirm: 'Confirmar borrado?' }
+                     %>
+                     <div class="card-footer text-muted">
+                       Cargada por: <%= User.where(id: pic.user_id).first.try(:email) %>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-12 col-xl-12 micro-form">
+      
+    </div>
+    <div class="col-12 col-lg-12 col-xl-12 d-flex flex-row justify-content-start align-items-center">
+      <div class="d-flex">
+        <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-3" do |form| %>
+          <%= form.submit " + Micro manual", class: "btn btn-outline-primary" %>
+          <%= form.hidden_field :inform_id, value: inform.id %>
+        <% end %>
+      </div>
+      <div class="d-flex">
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#MicrosModal">
+          + Automáticos
+        </button>
+      </div>
+    </div>
+  </div>
+  <%= render partial: "informs/micros-modal", locals: { inform: inform, automatics: automatics } %>
+</div>

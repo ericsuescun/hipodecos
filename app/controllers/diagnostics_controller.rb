@@ -15,61 +15,159 @@ class DiagnosticsController < ApplicationController
 
   # GET /diagnostics/new
   def new
-    @diagnostic = Diagnostic.new
+    @inform = Inform.find(params[:inform_id])
+    @diagcodes = []
+    @inform.samples.select(:organ_code).distinct.each do |sample|
+      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+      Diagcode.where(organ_code: o_code).each do |diagcode|
+        @diagcodes << diagcode
+      end
+    end
   end
 
   # GET /diagnostics/1/edit
   def edit
+    @inform = @diagnostic.inform
+    @diagcodes = []
+    @inform.samples.select(:organ_code).distinct.each do |sample|
+      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+      Diagcode.where(organ_code: o_code).each do |diagcode|
+        @diagcodes << diagcode
+      end
+    end
   end
 
   # POST /diagnostics
   # POST /diagnostics.json
   def create
-    inform = Inform.find(params[:inform_id])
-    diagnostic = inform.diagnostics.build(diagnostic_params)
-    diagnostic.user_id = current_user.id
-    diagnostic.pss_code = Diagcode.where(id: params[:diagnostic][:diagcode_id]).first.pss_code
-    diagnostic.who_code = Diagcode.where(id: params[:diagnostic][:diagcode_id]).first.who_code
-    diagnostic.description = Auto.where(diagcode_id: params[:diagnostic][:diagcode_id]).first.body
+    @inform = Inform.find(params[:inform_id])
+    @diagnostic = @inform.diagnostics.build(diagnostic_params)
+    @diagnostic.user_id = current_user.id
 
-    if diagnostic.save
-      redirect_to inform, notice: 'El diagnóstico ha sido creado exitosamente.'
-    else
-      render :new
+    @diagnostic.who_code = Diagcode.where(pss_code: @diagnostic.pss_code).first.who_code
+
+    @diagnostic.save
+
+    @diagcodes = []
+    @inform.samples.select(:organ_code).distinct.each do |sample|
+      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+      Diagcode.where(organ_code: o_code).each do |diagcode|
+        @diagcodes << diagcode
+      end
     end
   end
 
   # PATCH/PUT /diagnostics/1
   # PATCH/PUT /diagnostics/1.json
   def update
-    log = "\nCAMBIOS:\n"
-    if @diagnostic.description != diagnostic_params[:description]
-      log += "\n-DESCRIPCIÓN-\nANTES:" + @diagnostic.description + "\n- DESPUÉS: -\n" + diagnostic_params[:description]
-    else
-      log += "\n-DESCRIPCIÓN-\nSIN CAMBIOS."
+    if params[:diagnostic][:edit_dx_status] == "true"
+      log = ""
+      if @diagnostic.description != diagnostic_params[:description]
+        log += "FECHA: " + Date.today.to_s
+        log += " CAMBIOS: "
+        log += " Descripción - ANTES: " + @diagnostic.description
+        log += ", por: " + User.where(id: @diagnostic.user_id).first.try(:email).to_s
+        log += " Descripción - DESPUES: " + diagnostic_params[:description].to_s
+        log += ", por: " + current_user.email + " \n"
+
+      else
+        log += "FECHA: " + Date.today.to_s
+        log += " DECRIPCIÓN SIN CAMBIOS."
+      end
+
+      if @diagnostic.pss_code != diagnostic_params[:pss_code]
+        log += "FECHA: " + Date.today.to_s
+        log += " CAMBIOS: "
+        log += " Descripción - ANTES: " + @diagnostic.pss_code
+        log += ", por: " + User.where(id: @diagnostic.user_id).first.try(:email).to_s
+        log += " Descripción - DESPUES: " + diagnostic_params[:pss_code].to_s
+        log += ", por: " + current_user.email + " \n"
+
+      else
+        log += "FECHA: " + Date.today.to_s
+        log += " CÓDIGO PSS SIN CAMBIOS."
+      end
+
+      # Se actualiza el who_code con lo que llegue por params de cambios en pss_code
+      @diagnostic.who_code = Diagcode.where(pss_code: diagnostic_params[:pss_code]).first.who_code
+
+      #Obcode 16 corresponde a error en automatico o codigo biopsias
+      @objection = @diagnostic.objections.new(
+        responsible_user_id: @diagnostic.user_id,
+        user_id: current_user.id,
+        description: log,
+        obcode_id: 16,
+        close_user_id: nil,
+        closed: false
+      ) 
+      #@objectionable se crea en una version (una clase heredada) personalizada del controlador de Objection para cada tipo de modelo DESDE DONDE se le llama
+      @objection.save
     end
 
-    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
+    @diagnostic.update(diagnostic_params)
 
-    if @diagnostic.update(diagnostic_params)
-      @diagnostic.objections.each do |objection|
-        objection.closed = true
-        objection.close_user_id = current_user.id
-        objection.close_date = @diagnostic.updated_at
-        objection.description = objection.description + log
-        objection.save
+    @inform = @diagnostic.inform
+    @diagcodes = []
+    @inform.samples.select(:organ_code).distinct.each do |sample|
+      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+      Diagcode.where(organ_code: o_code).each do |diagcode|
+        @diagcodes << diagcode
       end
-      redirect_to @diagnostic, notice: 'Diagnostic was successfully updated.'
-    else
-      render :edit
     end
   end
 
-  # DELETE /diagnostics/1
-  # DELETE /diagnostics/1.json
+  def review
+    @objection = Objection.find(params[:objection_id])
+    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+    @inform = @diagnostic.inform
+
+    @diagcodes = []
+    @inform.samples.select(:organ_code).distinct.each do |sample|
+      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+      Diagcode.where(organ_code: o_code).each do |diagcode|
+        @diagcodes << diagcode
+      end
+    end
+  end
+
+  def anotate
+    @objection = Objection.find(params[:objection_id])
+    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+    new_description = @objection.description.to_s + "FECHA: " + Date.today.to_s + " REVISIÓN: " + params[:new_description].to_s + ", por: " + current_user.email
+    @objection.update(
+      description: new_description,
+      close_user_id: current_user.id,
+      close_date: Date.today,
+      closed: true
+    )
+
+    @inform = @diagnostic.inform
+    @diagcodes = []
+    @inform.samples.select(:organ_code).distinct.each do |sample|
+      o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+      Diagcode.where(organ_code: o_code).each do |diagcode|
+        @diagcodes << diagcode
+      end
+    end
+  end
+
+  
   def destroy
     @diagnostic.destroy
     redirect_to inform_path(@inf), notice: 'Diagnostic was successfully destroyed.'
+  end
+
+  def destroy_diagnostic
+    @diagnostic = Diagnostic.find(params[:diagnostic_id])
+    @inform = @diagnostic.inform
+    @automatics = []
+    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+        @automatics << auto
+      end
+    end
+
+    @diagnostic.destroy
   end
 
   private

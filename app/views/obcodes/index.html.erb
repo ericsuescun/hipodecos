@@ -12,6 +12,7 @@
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
+            <th>Id</th>
             <th>Admin</th>
             <th>Título</th>
             <th>Proceso</th>
@@ -23,6 +24,7 @@
         <tbody>
           <% @obcodes.each do |obcode| %>
             <tr>
+              <td><%= obcode.id %></td>
               <td><%= Admin.where(id: obcode.admin_id).first.try(:name) %></td>
               <td><%= obcode.title %></td>
               <td><%= obcode.process %></td>

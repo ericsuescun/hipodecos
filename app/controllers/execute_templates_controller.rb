@@ -280,6 +280,17 @@ class ExecuteTemplatesController < ApplicationController
 		    @automatics << auto
 		  end
 		end
+
+		# También hay que enviar diagcodes por lo que micro.js también despliega los diagnostics
+		@diagcodes = []
+		@inform.samples.select(:organ_code).distinct.each do |sample|
+		  o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+		  Diagcode.where(organ_code: o_code).each do |diagcode|
+		    @diagcodes << diagcode
+		  end
+		end
+
+		@edit_status = false
 	end
 
 	private

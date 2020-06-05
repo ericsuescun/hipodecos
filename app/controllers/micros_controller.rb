@@ -15,7 +15,7 @@ class MicrosController < ApplicationController
 
   # GET /micros/new
   def new
-    @micro = Micro.new
+    @inform = Inform.find(params[:inform_id])
   end
 
   # GET /micros/1/edit
@@ -27,49 +27,57 @@ class MicrosController < ApplicationController
         @automatics << auto
       end
     end
+    @edit_status = true
   end
 
   # POST /micros
   # POST /micros.json
   def create
-    inform = Inform.find(params[:inform_id])
-    micro = inform.micros.build(micro_params)
-    micro.user_id = current_user.id
+    @inform = Inform.find(params[:inform_id])
+    @micro = @inform.micros.build(micro_params)
+    @micro.user_id = current_user.id
 
-    if micro.save
-      redirect_to inform, notice: 'La micro ha sido creada exitosamente.'
-    else
-      render :new
+    @micro.save
+
+    @automatics = []
+    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+        @automatics << auto
+      end
     end
+
   end
 
   # PATCH/PUT /micros/1
   # PATCH/PUT /micros/1.json
   def update
-    if @micro.description != micro_params[:description]
-      log = "FECHA: " + Date.today.to_s
-      log += " CAMBIOS: "
-      log += " Descripción - ANTES: " + @micro.description
-      log += ", por: " + User.where(id: @micro.user_id).first.try(:email).to_s
-      log += " Descripción - DESPUES: " + micro_params[:description].to_s
-      log += ", por: " + current_user.email + " \n"
+    if params[:micro][:edit_status] == "true"
+      if @micro.description != micro_params[:description]
+        log = "FECHA: " + Date.today.to_s
+        log += " CAMBIOS: "
+        log += " Descripción - ANTES: " + @micro.description
+        log += ", por: " + User.where(id: @micro.user_id).first.try(:email).to_s
+        log += " Descripción - DESPUES: " + micro_params[:description].to_s
+        log += ", por: " + current_user.email + " \n"
 
-    else
-      log = "FECHA: " + Date.today.to_s
-      log += " SIN CAMBIOS."
+      else
+        log = "FECHA: " + Date.today.to_s
+        log += " SIN CAMBIOS."
+      end
+
+      #Obcode 19 corresponde a Descripción Macro o Micro mal redactada
+      @objection = @micro.objections.new(
+        responsible_user_id: @micro.user_id,
+        user_id: current_user.id,
+        description: log,
+        obcode_id: 19,
+        close_user_id: nil,
+        closed: false
+      ) 
+      #@objectionable se crea en una version (una clase heredada) personalizada del controlador de Objection para cada tipo de modelo DESDE DONDE se le llama
+      @objection.save
     end
-
-    #Obcode 19 corresponde a Descripción Macro o Micro mal redactada
-    @objection = @micro.objections.new(
-      responsible_user_id: @micro.user_id,
-      user_id: current_user.id,
-      description: log,
-      obcode_id: 19,
-      close_user_id: nil,
-      closed: false
-    ) 
-    #@objectionable se crea en una version (una clase heredada) personalizada del controlador de Objection para cada tipo de modelo DESDE DONDE se le llama
-    @objection.save
+    
 
     @micro.update(micro_params)
 
@@ -123,6 +131,19 @@ class MicrosController < ApplicationController
       format.html { redirect_to inform_path(@inf), notice: 'Micro was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def destroy_micro
+    @micro = Micro.find(params[:micro_id])
+    @inform = @micro.inform
+    @automatics = []
+    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+        @automatics << auto
+      end
+    end
+
+    @micro.destroy
   end
 
   private

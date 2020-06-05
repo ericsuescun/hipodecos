@@ -1,72 +1,32 @@
-<div class="container micros-out">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 col-xl-12">
-      <h4>Descripción Micro:</h4>
       <% inform.micros.each_with_index do |micro, n| %>
-        <p><strong>Micro <%= n + 1 %> de <%= inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %></strong> </p>
-        <% if edit_micro == micro %>
-          <%= form_with model: micro do |f| %>
-            <div class="field">
-              <%= f.label "Descripción:" %>
-              <%= f.text_area :description, value: micro.description, rows: 8, class: "form-control input" %>
-            </div>
-            <div class="actions">
-              <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
-            </div>
-          <% end %>
-        <% else %>
-          <p><%= micro.description %></p>
-        <% end %>
-        <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %></p></div>
-        <%= link_to 'Revisar/Cargar foto', micro_path(micro) %> |
-        <%= link_to 'Editar', edit_micro_path(micro), remote: true %> |
-        <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
-        <table>
-          <tbody>
-            <% micro.objections.each do |objection| %>
-              <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></td>
-                <td>
-              </tr>
-              <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                <td>
-                  <% if edit_objection_id == nil %>
-                    <div class="d-flex flex-column">
-                      <span class="text-muted objection-description">
-                        <%= objection.description %>
-                      </span>
-                    </div>
-                    <% unless objection.closed %>
-                      <%= form_with url: micros_review_path, method: "post" do |form| %>
-                        <div class="actions">
-                          <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
-                          <%= form.hidden_field :objection_id, value: objection.id %>
-                          <%= form.hidden_field :micro_id, value: micro.id %>
-                        </div>
-                      <% end %>
-                    <% end %>
-                  <% else %>
-                    <%= form_with url: micros_anotate_path, method: "post" do |form| %>
-                      <div class="field">
-                        <%= form.label "Historial:" %>
-                        <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>
-                      </div>
-                      <div class="field">
-                        <%= form.label "Acción de mejora:" %>
-                        <%= form.text_area :new_description, class: "form-control input" %>
-                      </div>
-                      <div class="actions">
-                        <%= form.submit "Anotar", class: "btn btn-outline-warning mx-1 my-1" %>
-                        <%= form.hidden_field :objection_id, value: objection.id %>
-                        <%= form.hidden_field :micro_id, value: micro.id %>
-                      </div>
-                    <% end %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="card bg-light mx-2 mb-3">
+          <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+            <p>Micro <%= n + 1 %> de <%= inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %> </p>
+          </div>
+          <div class="card-body">
+            <p><strong><%= micro.description %></strong></p>
+            <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %></p></div>
+            <%= link_to 'Revisar/Cargar foto', micro_path(micro) %> |
+            <%= link_to 'Editar', edit_micro_path(micro) %> |
+            <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
+
+            <table>
+              <tbody>
+                <% micro.objections.each do |objection| %>
+                  <tr class=<%= objection.closed == false ? "objection" : "" %> >
+                    <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+                    <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+                    <!-- <td><%= objection.description %></td> -->
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
         <div class="card-group">
           <% micro.pictures.each do |pic| %>
             <div class="col-12 col-lg-4">
@@ -90,80 +50,6 @@
         </div>
       <% end %>
     </div>
-    <div class="col-12 col-lg-12 col-xl-12">
-      <h4>Agregar descripción micro manual</h4>
-      <%= form_for [inform, inform.micros.build] do |form| %>
-        <div class="form-group">
-          <%= form.text_area :description, class: "form-control form-control-lg input" %>
-        </div>
-        
-        <div class="actions">
-          <%= form.submit "Agregar", class: "btn btn-primary" %>
-          <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#MicrosModal">
-            + Automáticos
-          </button>
-        </div>
-
-      <% end %>
-    </div>
   </div>
-  <div class="row">
-    <div class="col-12 col-lg-12 col-xl-12">
-      <% inform.diagnostics.each do |diagnostic| %>
-        <h4>Diganósticos:</h4>
-        <p>Código Patología Suescún: <%= diagnostic.pss_code %></p>
-        <p>Código OMS: <%= diagnostic.who_code %></p>
-        <p><%= diagnostic.description %></p>
-        <div class="text-muted"><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p></div>
-        <%= link_to 'Revisar', diagnostic_path(diagnostic) %>
-        <%= link_to 'Editar', edit_diagnostic_path(diagnostic) %>
-        <%= link_to ' Borrar', diagnostic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
-        <table>
-          <tbody>
-            <% diagnostic.objections.each do |objection| %>
-              <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </span></td>
-                <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></span></td>
-                <!-- <td><%= objection.description %></td> -->
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-lg-12 col-xl-12">
-      <h4>Agregar diagnóstico manual</h4>
-      <%= form_for [inform, inform.diagnostics.build] do |form| %>
-        <div class="row">
-          <div class="col-12 col-lg-12 col-xl-12">
-            <div class="form-group">
-              <%= form.text_area :description, class: "form-control form-control-lg input" %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-6 col-xl-6">
-            <div class="form-group">
-              <%= form.label "Código PSS" %>
-              <%= form.text_field :pss_code, class: "form-control form-control-lg input" %>
-            </div>
-          </div>
-          <div class="col-12 col-lg-6 col-xl-6">
-            <div class="form-group">
-              <%= form.label "Código OMS" %>
-              <%= form.text_field :who_code, class: "form-control form-control-lg input" %>
-            </div>
-          </div>
-        </div>
-        <div class="actions">
-          <%= form.submit "Agregar", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <%= render partial: "informs/micros-modal", locals: { inform: inform, automatics: automatics } %>
-
 </div>
+    

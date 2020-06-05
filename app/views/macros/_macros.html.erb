@@ -1,0 +1,19 @@
+<div class="container">
+  <h4>Descripción Macro:</h4>
+  <% @inform.recipients.each_with_index do |recipient, n| %>
+    <p>
+      Contenido de recipiente #<%= n + 1 %>:
+      <br>
+      <p style="text-align: justify-all;"><%= recipient.description %></p>
+      <br>
+      Bloqueado de la siguiente manera:
+      <br>
+      <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
+        <strong><%= sample.description %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></strong> 
+        <br>
+    </p>
+    
+    <% end %>
+  <% end %>
+  <br>
+</div>

@@ -1,0 +1,12 @@
+$(document).on('page:load', refresh());
+
+function refresh() {
+
+	$('form.micro-form-out').remove();
+	$('div.micro-form').append('<%= j render "micros/micro-form", inform: @inform %>');
+
+	
+	setTimeout(function() {
+		$('div.alert-growl').remove();
+	}, 3000)
+}

@@ -132,7 +132,8 @@ class DiagnosticsController < ApplicationController
   private
     def get_diagcodes
       @diagcodes = []
-      @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+      # @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+      Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
         o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
         Diagcode.where(organ_code: o_code).each do |diagcode|
           @diagcodes << diagcode

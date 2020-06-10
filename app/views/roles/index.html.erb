@@ -5,6 +5,7 @@
       <table class="table table-striped mx-3">
         <thead class="thead-dark">
           <tr>
+            <th>Id</th>
             <th>Admin</th>
             <th>Nombre</th>
             <th>Descripción</th>
@@ -20,6 +21,7 @@
         <tbody>
           <% @roles.each do |role| %>
             <tr>
+              <td><%= role.id %></td>
               <td><%= Admin.find(role.admin_id).email %></td>
               <td><%= role.name %></td>
               <td><%= role.description %></td>

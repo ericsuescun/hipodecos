@@ -1,6 +1,6 @@
 class InformsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_inform, only: [:show, :edit, :update, :destroy, :preview, :descr_micro]
+  before_action :set_inform, only: [:show, :show_revision, :edit, :update, :destroy, :preview, :descr_micro]
 
   # GET /informs
   # GET /informs.json
@@ -19,6 +19,28 @@ class InformsController < ApplicationController
     end
   end
 
+  def index_revision
+    if params[:yi]
+      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+      date_range = initial_date..final_date
+      @informs = Inform.where(receive_date: date_range, inf_status: "revision")
+    else
+      @informs = Inform.where(inf_status: "revision")
+    end
+  end
+
+  def index_ready
+    if params[:yi]
+      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+      date_range = initial_date..final_date
+      @informs = Inform.where(receive_date: date_range, inf_status: "ready")
+    else
+      @informs = Inform.where(inf_status: "ready")
+    end
+  end
+
   def descr_micros
     if params[:yi]
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
@@ -34,21 +56,46 @@ class InformsController < ApplicationController
     @organs = Organ.all
 
     @automatics = []
-    @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+    # @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+    Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
       Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
         @automatics << auto
       end
     end   
 
-    @samples = @inform.samples
+    # @samples = @inform.samples
 
-    @samplesc = @inform.samples.where(name: "Cassette")
+    # @samplesc = @inform.samples.where(name: "Cassette")
 
-    @blocks = @inform.blocks
+    # @blocks = @inform.blocks
   end
 
   def edit_micro
     
+  end
+
+  def set_revision
+    @inform = Inform.find(params[:inform_id])
+    @inform.update(inf_status: "revision")
+
+    redirect_to descr_micros_path
+  end
+
+  def set_ready
+    @inform = Inform.find(params[:inform_id])
+    if Role.where(id: current_user.role_id).first.name == "Patologia"
+      @inform.update(user_review_date: Date.today, pathologist_review_id: current_user.id)
+    elsif Role.where(id: current_user.role_id).first.name == "Secretaria"
+      @inform.update(user_review_date: Date.today, administrative_review_id: current_user.id)
+    elsif Role.where(id: current_user.role_id).first.name == "Jefatura de laboratorio"
+      @inform.update(user_review_date: Date.today, administrative_review_id: current_user.id)
+    end
+    
+    if @inform.pathologist_review_id != nil && @inform.administrative_review_id != nil
+      @inform.update(inf_status: "ready")
+    end
+
+    redirect_to informs_index_revision_path
   end
 
   def distribution
@@ -92,6 +139,10 @@ class InformsController < ApplicationController
     @blocks = @inform.blocks
 
     # clasify_templates
+  end
+
+  def show_revision
+    
   end
 
   # GET /informs/new

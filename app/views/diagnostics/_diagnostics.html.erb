@@ -103,7 +103,7 @@
     <div class="col-12 col-lg-12 col-xl-12 d-flex flex-row justify-content-start align-items-center">
       <div class="d-flex">
         <%= form_with url: new_diagnostic_path, method: "get", class: "diagnostic-form-out mr-3" do |form| %>
-          <%= form.submit " + Diagnóstico", class: "btn btn-outline-primary" %>
+          <%= form.submit " + Diagnóstico", class: "btn btn-outline-dark" %>
           <%= form.hidden_field :inform_id, value: inform.id %>
         <% end %>
       </div>

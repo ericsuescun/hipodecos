@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_29_215436) do
+ActiveRecord::Schema.define(version: 2020_06_09_204808) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -204,6 +204,8 @@ ActiveRecord::Schema.define(version: 2020_05_29_215436) do
     t.string "invoice"
     t.string "inf_status"
     t.integer "pathologist_id"
+    t.integer "pathologist_review_id"
+    t.integer "administrative_review_id"
     t.index ["patient_id"], name: "index_informs_on_patient_id"
   end
 

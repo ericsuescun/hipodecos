@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <h1>Informes listos para enviar</h1>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Informe</th>
+            <th>Oportunidad</th>
+            <th>Revisión Patología</th>
+            <th>Revisión Admin</th>
+            <th>Paciente</th>
+            <th>EPS</th>
+            <th>Sede IPS</th>
+            <th>Código Authoriz.</th>
+            <th scope="1"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @informs.each do |inform| %>
+            <tr>
+              <td>
+                <%= link_to show_revision_inform_path(inform), local: true  do %>
+                  <%= inform.tag_code %>
+                <% end %>
+              </td>
+              <td><%= (Date.today - inform.receive_date).to_i %></td>
+              <td><%= User.where(id: inform.pathologist_review_id).first.try(:first_name) %> <%= User.where(id: inform.pathologist_review_id).first.try(:last_name) %></td>
+              <td><%= User.where(id: inform.administrative_review_id).first.try(:first_name) %> <%= User.where(id: inform.administrative_review_id).first.try(:last_name) %></td>
+              <td>
+                <%= link_to inform.patient  do %>
+                  <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
+                  <% end %>
+              </td>
+              <td><%= Promoter.find(inform.promoter_id).initials %></td>
+              <td><%= Branch.find(inform.branch_id).initials %></td>
+              <td><%= inform.prmtr_auth_code %></td>
+              <td><%= link_to 'Borrar', inform, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

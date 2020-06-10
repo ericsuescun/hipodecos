@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-12 col-lg-12 mx-auto">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12">
+        <h3>
+          <strong><%= @inform.tag_code %></strong>: <strong><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %></strong>, <strong><%= @inform.patient.age_number %> <%= @inform.patient.age_type == 'A' ? 'Años' : @inform.patient.age_type == 'M' ? 'Meses' : 'Días' %></strong>, <%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong>, fecha: <%= @inform.receive_date.strftime('%d/%m/%Y') %>
+        </h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-6 col-xl-6">
+        <% @inform.micros.each_with_index do |micro, n| %>
+          <div class="card bg-light mx-2 mb-3">
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <p>Micro <%= n + 1 %> de <%= @inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %> </p>
+            </div>
+            <div class="card-body">
+              <p><strong><%= micro.description %></strong></p>
+              <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %></p></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-12 col-lg-6 col-xl-6">
+        <% @inform.diagnostics.each do |diagnostic| %>
+          <div class="card bg-light mx-2 mb-3">
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <p>Diganósticos</p>
+            </div>
+            <div class="card-body">
+              <p>Código Patología Suescún: <%= diagnostic.pss_code %></p>
+              <p>Código OMS: <%= diagnostic.who_code %></p>
+              <p><%= diagnostic.description %></p>
+              <div class="text-muted"><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-4 col-xl-4 mx-auto">
+        <%= form_with url: informs_set_ready_path, method: "get", local: true do |form| %>
+          <%= form.submit "Revisado por: #{current_user.email}", class: "btn btn-success btn-block mt-3" %>
+          <%= form.hidden_field :inform_id, value: @inform.id %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

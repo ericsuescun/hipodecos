@@ -101,14 +101,8 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "Matricular", new_patient_path, class: "dropdown-item" %>
-              <%= link_to "Todos", informs_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Asignar Patólogo", distribution_path, class: "dropdown-item" %>
-              <%= link_to "Asignar hoy y ayer", distribution_path + days_ago_search(1), class: "dropdown-item" %>
-              <%= link_to "Asignar semana", distribution_path + days_ago_search(7), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Micros", descr_micros_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
+              <%= link_to "Informes", informs_path, class: "dropdown-item" %>
               <%= link_to "Hoy", informs_path + day_before_search(0), class: "dropdown-item" %>
               <%= link_to "Ayer", informs_path + day_before_search(1), class: "dropdown-item" %>
               <%= link_to "Antier", informs_path + day_before_search(2), class: "dropdown-item" %>
@@ -117,6 +111,19 @@
               <%= link_to "Últimos 30 días", informs_path + days_ago_search(30), class: "dropdown-item" %>
               <%= link_to "Este mes", informs_path + month_before_search(0), class: "dropdown-item" %>
               <%= link_to "El mes pasado", informs_path + month_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Asignar Patólogo", distribution_path, class: "dropdown-item" %>
+              <%= link_to "Asignar hoy y ayer", distribution_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Asignar semana", distribution_path + days_ago_search(7), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Mis micros", descr_micros_path, class: "dropdown-item" %>
+              <%= link_to "Mis micros hoy y ayer", descr_micros_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Mis micros semana", descr_micros_path + days_ago_search(7), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Por revisar", informs_index_revision_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Listos para enviar", informs_index_ready_path, class: "dropdown-item" %>
+              
             </div>
           </li>
           

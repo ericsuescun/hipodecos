@@ -136,6 +136,11 @@ class DiagnosticsController < ApplicationController
       Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
         o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
         Diagcode.where(organ_code: o_code).each do |diagcode|
+          if diagcode.pss_code != nil
+            diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
+          else
+            diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
+          end
           @diagcodes << diagcode
         end
       end

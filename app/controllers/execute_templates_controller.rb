@@ -230,6 +230,12 @@ class ExecuteTemplatesController < ApplicationController
 				@sample.included = false
 				@sample.recipient_tag = @recipient.tag
 				@sample.sample_tag = generate_number_tag(@last_sample)
+				if @sample.sample_tag[-1] == '2'
+				  fix_sample = @last_sample
+				  if fix_sample
+				    fix_sample.update(sample_tag: @sample.sample_tag[0..-2] + '1')
+				  end
+				end
 				@sample.organ_code = script.organ == "" ? nil : script.organ
 				@sample.description = script.description
 				@sample.fragment = script.param1
@@ -288,7 +294,12 @@ class ExecuteTemplatesController < ApplicationController
 		Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
 		  o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
 		  Diagcode.where(organ_code: o_code).each do |diagcode|
-		    @diagcodes << diagcode
+		  	if diagcode.pss_code != nil
+		  	  diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
+		  	else
+		  	  diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
+		  	end
+		  	@diagcodes << diagcode
 		  end
 		end
 

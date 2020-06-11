@@ -161,7 +161,7 @@
             </div>
             <div class="row">
               <div class="col-12 col-lg-4 mx-auto">
-                <% if User.where(id: diagnostic.user_id).first.signfile != nil %>
+                <% if User.where(id: diagnostic.user_id).first.signfile.file != nil %>
                   <%= image_tag User.where(id: diagnostic.user_id).first.try(:signfile).url, class: "img-fluid" %>
                 <% else %>
                   Sin archivo de firma!

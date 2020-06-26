@@ -2,7 +2,7 @@
 <%= link_to 'Volver al listado', obcodes_path %>
 <div class="container">
   <div class="row">
-    <div class="col-12 col-lg-4 mx-auto">
+    <div class="col-4 col-lg-4 mx-auto">
       <fieldset disabled>
         <%= form_with(model: @obcode, local: true) do |form| %>
           <% if @obcode.errors.any? %>

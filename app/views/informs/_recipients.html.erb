@@ -50,7 +50,7 @@
                       <% if sample.organ_code == nil %>
                         <div class="col-12 col-md-12 col-lg-12 card-in">
                       <% else %>
-                        <div class="col-12 col-lg-3 card-in">
+                        <div class="col-3 col-lg-3 card-in">
                       <% end %>
 
                         <div class="card mx-2 my-2 pb-0" id="sample-<%= sample.sample_tag %>" style="background-color: <%= get_color(sample) %>">
@@ -113,7 +113,7 @@
                       </div>  
                     <% end %>
                   
-                    <div class="col-12 col-lg-3 card-in">
+                    <div class="col-3 col-lg-3 card-in">
                       <div class="card mx-2 my-2 pb-0">
                         <div class="card-header pt-1 pb-1">
                           <span class="d-flex "><strong>Nueva muestra</strong></span>
@@ -159,7 +159,7 @@
           <div class="card-body pt-0 pb-0">
             <div class="row d-flex align-items-center">
               
-              <div class="col-12 col-lg-5 col-xl-3">
+              <div class="col-5 col-lg-5 col-xl-3">
                 <div class="d-flex flex-row">
 
                   <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
@@ -188,7 +188,7 @@
                 </div>
               </div>
 
-              <div class="col-12 col-lg-4 col-xl-3">
+              <div class="col-4 col-lg-4 col-xl-3">
                 <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
                   
                   
@@ -198,7 +198,7 @@
                         <%= form.submit "+", class: "btn btn-outline-dark mx-1" %>
                       </div>
 
-                    <div class="col-12 col-lg-2 col-xl-3">
+                    <div class="col-2 col-lg-2 col-xl-3">
                       <div class="form-group mt-3">
                         <%= form.number_field :samples, value: 4, class: "form-control input mx-1" %>
                       </div>
@@ -206,7 +206,7 @@
 
 
 
-                    <div class="col-12 col-lg-5 col-xl-4">
+                    <div class="col-5 col-lg-5 col-xl-4">
                       <div class="form-group mt-3">
                         <%= form.collection_select(:organ, Organ.all, :organ, :organ, {prompt: 'Órgano'}, { class: "btn btn-outline-dark form-control input mx-2" }) %>
                       </div>
@@ -219,7 +219,7 @@
                 <% end %>
               </div>
 
-              <div class="col-12 col-lg-3">
+              <div class="col-3 col-lg-3">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#autosMacroModal">
                   + Automáticos

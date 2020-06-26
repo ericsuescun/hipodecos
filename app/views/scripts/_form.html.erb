@@ -15,7 +15,7 @@
       <%= form_with model: [@automatic, @script] do |form| %>
         <% if @automatic.auto_type == "macro" %>
           <div class="row">
-            <div class="col-12 col-lg-2">
+            <div class="col-2 col-lg-2">
               <div class="form-group">
                 <%= form.label "Modelo a crear" %>
                 <%= form.select(:script_type, options_for_select([['+1 Rec', 'rec'], ['+1 Bloque', 'blo'], ['+1 Corte', 'cor'], ['+1 Ext', 'ext']], @script.script_type), {  }, class: "form-control input") %>
@@ -40,7 +40,7 @@
               </div>
             </div>
 
-            <div class="col-12 col-lg-10">
+            <div class="col-10 col-lg-10">
               <div class="form-group">
                 <%= form.label "Descripción (Recipientes, Bloques y Cortes)" %>
                 <%= form.text_area :description, rows: 14, class: "form-control input" %>
@@ -53,7 +53,7 @@
         <% end %>
         <% if @automatic.auto_type == "micro" %>
           <div class="row">
-            <div class="col-12 col-lg-2">
+            <div class="col-2 col-lg-2">
               <div class="form-group">
                 <%= form.label "Órgano" %>
                 <%= form.collection_select(:organ, Organ.all, :organ, :organ, {selected: @selected, include_blank: true, prompt: 'Seleccione órgano'}, { class: "form-control input" }) %>
@@ -61,13 +61,13 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-lg-6 col-xl-6">
+            <div class="col-6 col-lg-6 col-xl-6">
               <div class="form-group">
                 <%= form.label "Descripción Micro" %>
                 <%= form.text_area :description, rows: 10, class: "form-control input" %>
               </div>
             </div>
-            <div class="col-12 col-lg-6 col-xl-6">
+            <div class="col-6 col-lg-6 col-xl-6">
               <div class="form-group">
                 <%= form.label "Diagnóstico" %>
                 <%= form.text_area :diagnostic, rows: 10, class: "form-control input" %>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-lg-6">
+            <div class="col-6 col-lg-6">
               <div class="form-group">
                 <%= form.label "Código PSS" %>
                 <%= form.collection_select(:pss_code, diagcodes, :pss_code, :description, { prompt: 'Seleccione código'}, { class: "form-control input" }) %>
@@ -83,7 +83,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-lg-2">
+            <div class="col-2 col-lg-2">
               <div class="actions">
                 <%= form.submit "Guardar", class: "btn btn-primary" %>
               </div>

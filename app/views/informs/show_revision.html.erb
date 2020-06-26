@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 col-lg-6 col-xl-6">
+      <div class="col-6 col-lg-6 col-xl-6">
         <% @inform.micros.each_with_index do |micro, n| %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
@@ -21,7 +21,7 @@
           </div>
         <% end %>
       </div>
-      <div class="col-12 col-lg-6 col-xl-6">
+      <div class="col-6 col-lg-6 col-xl-6">
         <% @inform.diagnostics.each do |diagnostic| %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 col-lg-4 col-xl-4 mx-auto">
+      <div class="col-4 col-lg-4 col-xl-4 mx-auto">
         <%= form_with url: informs_set_ready_path, method: "get", local: true do |form| %>
           <%= form.submit "Revisado por: #{current_user.email}", class: "btn btn-success btn-block mt-3" %>
           <%= form.hidden_field :inform_id, value: @inform.id %>

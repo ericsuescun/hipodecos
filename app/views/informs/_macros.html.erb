@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-12 col-lg-8">
+  <div class="col-8 col-lg-8">
     <% inform.macros.each_with_index do |macro, n| %>
       <p>Macro <%= n + 1 %> de <%= inform.macros.count %> procesada el <%= macro.created_at.strftime('%d/%m/%Y') %> </p>
       <h4><%= macro.description %></h4>
@@ -20,7 +20,7 @@
       </table>
       <div class="card-group my-3">
         <% macro.pictures.each do |pic| %>
-          <div class="col-12 col-lg-4">
+          <div class="col-4 col-lg-4">
             <div class="card">
               <div class="card-header">
                   <%= pic.description %>
@@ -42,7 +42,7 @@
     <% end %>
   </div>
   <% if inform.macros.length < 4 %>
-    <div class="col-12 col-lg-4">
+    <div class="col-4 col-lg-4">
       <h4>Agregar descripción Macro</h4>
       <%= form_for [inform, inform.macros.build] do |form| %>
         <div class="form-group">
@@ -59,7 +59,7 @@
   <% end %>
 </div>
 <div class="row">
-  <div class="col-12 col-lg-4">
+  <div class="col-4 col-lg-4">
     <% inform.macros.each do |macro| %>
       
     <% end %>

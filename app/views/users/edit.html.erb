@@ -11,7 +11,7 @@
 <% end %>
 <div class="contanier">
   <div class="row">
-    <div class="col-12 col-lg-10 mx-auto">
+    <div class="col-10 col-lg-10 mx-auto">
       <h2 class="edit-user">Edición de información personal de </h2>
       <%= form_for (@user), html: { multipart: true } do |f| %>
         <div class="alert alert-info">
@@ -22,13 +22,13 @@
                 <%= f.text_field :first_name, autofocus: true, autocomplete: "Nombres", class: "form-control"  %>
               </div>
             </div>
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Apellidos" %><br />
                 <%= f.text_field :last_name, autocomplete: "Apellidos", class: "form-control"  %>
               </div>
             </div>
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Cargo" %><br />
                 <%= f.select :role_id, Role.pluck(:name, :id), {prompt:"Seleccione el cargo"}, class: "form-control" %>
@@ -37,19 +37,19 @@
           </div>
 
           <div class="row mx-auto">
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Dirección" %><br />
                 <%= f.text_field :address, autocomplete: "Dirección", class: "form-control"  %>
               </div>
             </div>
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Teléfono" %><br />
                 <%= f.text_field :tel, autocomplete: "Teléfono", class: "form-control"  %>
               </div>
             </div>
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Celular" %><br />
                 <%= f.text_field :cel, autocomplete: "Celular", class: "form-control"  %>
@@ -58,19 +58,19 @@
           </div>
 
           <div class="row mx-auto">
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Cumpleaños" %><br />
                 <%= f.date_field :birth_date, autocomplete: "Fecha de cumpleaños", class: "form-control" %>
               </div>
             </div>
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Fecha de ingreso" %><br />
                 <%= f.date_field :join_date, autocomplete: "Fecha de ingreso", class: "form-control" %>
               </div>
             </div>
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Fecha de salida" %><br />
                 <%= f.date_field :deactivation_date, autocomplete: "Fecha de desactivación", class: "form-control"  %>
@@ -79,19 +79,19 @@
           </div>
 
           <div class="row mx-auto">
-            <div class="col-12 col-lg-6 mx-auto">
+            <div class="col-6 col-lg-6 mx-auto">
               <div class="form-group">
                 <%= f.label "Contacto de emergencia: Nombres y apellidos" %><br />
                 <%= f.text_field :emergency_contact, autocomplete: "Contacto de emergencia", class: "form-control"  %>
               </div>
             </div>
-            <div class="col-12 col-lg-3 mx-auto">
+            <div class="col-3 col-lg-3 mx-auto">
               <div class="form-group">
                 <%= f.label "Emergencia: Teléfono" %><br />
                 <%= f.text_field :emergency_tel, autocomplete: "Teléfono de emergencia", class: "form-control"  %>
               </div>
             </div>
-            <div class="col-12 col-lg-3 mx-auto">
+            <div class="col-3 col-lg-3 mx-auto">
               <div class="form-group">
                 <%= f.label "Emergencia: Celular" %><br />
                 <%= f.text_field :emergency_cel, autocomplete: "Celular de emergencia", class: "form-control"  %>
@@ -100,19 +100,19 @@
           </div>
 
           <div class="row mx-auto">
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.check_box :active %>
                 <%= f.label "Activo" %>
               </div>
             </div>
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Email alterno/personal" %><br />
                 <%= f.email_field :email2, autocomplete: "email", class: "form-control"  %>
               </div>
             </div>
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
                 <%= f.label "Notas" %><br />
                 <%= f.text_area :notes, autocomplete: "Notas", class: "form-control"  %>
@@ -120,7 +120,7 @@
             </div>
           </div>
           <div class="row mx-auto">
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Archivo de hoja de vida</h5>
@@ -140,7 +140,7 @@
               </div>
             </div>
 
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Archivo de contrato</h5>
@@ -160,7 +160,7 @@
               </div>
             </div>
 
-            <div class="col-12 col-lg-4 mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
               <% if @user.signfile.file %>
                 <div class="card">
                   <img src="<%= @user.signfile.url %>" class="card-img-top" alt="...">

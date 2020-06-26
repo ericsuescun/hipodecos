@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-12 col-lg-8 mx-auto">
+  <div class="col-8 col-lg-8 mx-auto">
     <div class="alert alert-success">
       <%= form_for @inform do |form| %>
         <div class="row">
-          <div class="col-12 col-lg-6 mx-auto">
+          <div class="col-6 col-lg-6 mx-auto">
 
             <div class="form-group">
               <%= form.label "Fecha de recepción" %>
@@ -24,7 +24,7 @@
               <%= form.text_field :invoice, class: "form-control form-control-lg input" %>
             </div>
           </div>
-          <div class="col-12 col-lg-6">
+          <div class="col-6 col-lg-6">
             <div class="form-group">
               <%= form.label "Estado del paciente" %>
               <%= form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @inform.status), { include_blank: true }, class: "form-control form-control-lg input") %>
@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-lg-4 mx-auto">
+          <div class="col-4 col-lg-4 mx-auto">
             <div class="actions">
               <%= form.submit "Guardar", class: "btn btn-primary btn-block" %>
             </div>

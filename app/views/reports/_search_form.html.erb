@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="row">
-		<div class="col-12 col-lg-8 mx-auto">
+		<div class="col-8 col-lg-8 mx-auto">
 			<h1>Informes</h1>
-			<div class="col-12 col-lg-8 mx-auto">
+			<div class="col-8 col-lg-8 mx-auto">
 				<%= form_tag reports_status_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
 				  <%= date_field_tag :init_date, pre_date, class: "form-control input mx-2", placeholder: "Fecha inicio" %>
 				  <%= date_field_tag :final_date, post_date, class: "form-control input mx-2", placeholder: "Fecha fin" %>
@@ -12,7 +12,7 @@
 			
 			<br>
 			<h1>No Conformidades</h1>
-			<div class="col-12 col-lg-8 mx-auto">
+			<div class="col-8 col-lg-8 mx-auto">
 				<%= form_tag reports_objections_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
 				  <%= date_field_tag :init_date, pre_date, class: "form-control input mx-2", placeholder: "Fecha inicio" %>
 				  <%= date_field_tag :final_date, post_date, class: "form-control input mx-2", placeholder: "Fecha fin" %>

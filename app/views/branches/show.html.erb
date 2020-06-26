@@ -7,7 +7,7 @@
       <fieldset disabled>
       <%= form_with(model: @branch, local: true) do |form| %>
         <div class="row">
-          <div class="col-12 col-lg-8 mx-auto">
+          <div class="col-8 col-lg-8 mx-auto">
             <div class="form-group">
               <%= form.label "IPS a la que pertenece" %><br />
               <%= form.select :entity_id, Entity.pluck(:name, :id), {prompt:"Seleccione la IPS"}, class: "form-control form-control-lg" %>
@@ -16,7 +16,7 @@
         </div>
         
         <div class="row">
-          <div class="col-6 col-lg-4 offset-lg-2">
+          <div class="col-4 col-lg-4 offset-lg-2">
             <div class="form-group">
               <%= form.label "Nombre" %>
               <%= form.text_field :name, class: 'form-control form-control-lg input' %>
@@ -48,7 +48,7 @@
             </div>
           </div>
                 
-          <div class="col-6 col-lg-4">
+          <div class="col-4 col-lg-4">
 
             <div class="form-group">
               <%= form.label "Celular" %>

@@ -13,10 +13,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 col-lg-6 col-xl-6 macros-in">
+      <div class="col-6 col-lg-6 col-xl-6 macros-in">
         <%= render partial: "macros/macros", locals: { inform: @inform } %>
       </div>
-      <div class="col-12 col-lg-6 col-xl-6">
+      <div class="col-6 col-lg-6 col-xl-6">
         <div class="micros-in">
           <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
         </div>
@@ -27,7 +27,7 @@
       
     </div>
     <div class="row">
-      <div class="col-12 col-lg-4 col-xl-4 mx-auto">
+      <div class="col-4 col-lg-4 col-xl-4 mx-auto">
         <%= form_with url: informs_set_revision_path, method: "get", local: true do |form| %>
           <%= form.submit "OK para Revisión", class: "btn btn-success btn-block mt-3" %>
           <%= form.hidden_field :inform_id, value: @inform.id %>

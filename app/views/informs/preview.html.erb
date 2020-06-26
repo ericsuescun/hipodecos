@@ -3,76 +3,76 @@
 <%= link_to 'Volver a informe', inform_path(@inform) %>
 <div class="container">
   <div class="row">
-    <div class="col-12 col-lg-8 mx-auto">
+    <div class="col-8 col-lg-8 mx-auto">
       <br>
       <div class="row">
         <div class="col-12 col-lg-4">
           <%= image_tag "logo.JPG", class: "img-fluid" %>
         </div>
-        <div class="col-12 col-lg-4 offset-lg-4">
+        <div class="col-4 col-lg-4 offset-lg-4">
           <%= image_tag "datos.JPG", class: "img-fluid" %>
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-lg-4 mx-auto">
+        <div class="col-4 col-lg-4 mx-auto">
           <strong>Informe número</strong> <%= @inform.tag_code %>
         </div>
       </div>
       
       <div class="row">
-        <div class="col-12 col-lg-6">
+        <div class="col-6 col-lg-6">
           <strong>Paciente:</strong> <%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %>
         </div>
-        <div class="col-12 col-lg-4 offset-lg-2 text-right">
+        <div class="col-4 col-lg-4 offset-lg-2 text-right">
           <strong>F. recibo:</strong> <%= @inform.receive_date.strftime('%d/%m/%Y') %>
         </div>
       </div>
       
       <div class="row">
-        <div class="col-12 col-lg-3">
+        <div class="col-3 col-lg-3">
           <strong><%= @inform.patient.id_type %>:</strong> <%= @inform.patient.id_number %>
         </div>
-        <div class="col-12 col-lg-3">
+        <div class="col-3 col-lg-3">
           <strong>Edad:</strong> <%= @inform.patient.age_number %> <%= @inform.patient.age_type == 'A' ? 'Años' : @inform.patient.age_type == 'M' ? 'Meses' : 'Días' %>
         </div>
-        <div class="col-12 col-lg-3">
+        <div class="col-3 col-lg-3">
           
         </div>
-        <div class="col-12 col-lg-3">
+        <div class="col-3 col-lg-3">
           <strong>F. infor:</strong> <%= @inform.delivery_date %>
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-lg-3">
+        <div class="col-3 col-lg-3">
           <strong>Teléfono:</strong> <%= @inform.patient.tel %>
         </div>
-        <div class="col-12 col-lg-3">
+        <div class="col-3 col-lg-3">
           <strong>Celular:</strong> <%= @inform.patient.cel %>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-6 col-lg-6">
           <strong>Email:</strong> <%= @inform.patient.email %>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-12 col-lg-3">
+        <div class="col-3 col-lg-3">
           <strong>Clínica:</strong> <%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>
         </div>
-        <div class="col-12 col-lg-4">
+        <div class="col-4 col-lg-4">
           <strong>Entidad:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:initials) %>
         </div>
       </div>
 
       <% @inform.physicians.each do |physician| %>
         <div class="row">
-          <div class="col-12 col-lg-6">
+          <div class="col-6 col-lg-6">
             <strong>Doctor:</strong> <%= physician.name %> <%= physician.lastname %>
           </div>
         </div>
       <% end %>
 
       <div class="row">
-        <div class="col-12 col-lg-6">
+        <div class="col-6 col-lg-6">
           <strong>Dirección de entrega:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:address) %>
         </div>
       </div>
@@ -80,7 +80,7 @@
       <br>
 
       <div class="row">
-        <div class="col-12 col-lg-4">
+        <div class="col-4 col-lg-4">
           <strong>Descripción Macroscópica</strong>
         </div>
       </div>
@@ -104,7 +104,7 @@
       </div>
       
       <div class="row">
-        <div class="col-12 col-lg-4">
+        <div class="col-4 col-lg-4">
           <strong>Descripción Microscópica</strong>
         </div>
       </div>
@@ -116,7 +116,7 @@
             <p><%= micro.description %></p>
             <div class="row">
               <% micro.pictures.each do |picture| %>
-                <div class="col-12 col-lg-4 mx-auto">
+                <div class="col-4 col-lg-4 mx-auto">
                   <div class="card">
                     <%= link_to picture.name.url  do %>
                       <%= image_tag picture.name.url, class: "card-img-top" %>
@@ -149,18 +149,18 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-lg-6">
+              <div class="col-6 col-lg-6">
                 <strong>Códigos:</strong> <%= diagnostic.pss_code %>
                 <p><strong>Patólogo:</strong> <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p>
                 <p><strong>Bloques:</strong> <%= blocks_stored(@inform) == true ? "Si" : "No" %></p>
               </div>
-              <div class="col-12 col-lg-6 text-right">
+              <div class="col-6 col-lg-6 text-right">
                 <strong>DX:</strong> <%= diagnostic.who_code %>
                 <p><strong>Secretaria:</strong> <%= User.where(id: @inform.user_id).first.try(:first_name) %> <%= User.where(id: @inform.user_id).first.try(:last_name) %></p>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 col-lg-4 mx-auto">
+              <div class="col-4 col-lg-4 mx-auto">
                 <% if User.where(id: diagnostic.user_id).first.signfile.file != nil %>
                   <%= image_tag User.where(id: diagnostic.user_id).first.try(:signfile).url, class: "img-fluid" %>
                 <% else %>

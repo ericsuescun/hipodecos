@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 col-lg-8 mx-auto">
+    <div class="col-8 col-lg-8 mx-auto">
       <%= form_with(model: entity, local: true) do |form| %>
 
       <% if entity.errors.any? %>
@@ -17,7 +17,7 @@
 
 
       <div class="row">
-        <div class="col-12 col-lg-6 mx-auto">
+        <div class="col-6 col-lg-6 mx-auto">
           <div class="form-group">
             <%= form.label "Nombre" %>
             <%= form.text_field :name, class: "form-control form-control-lg input" %>

@@ -66,8 +66,9 @@
 				  </thead>
 
 				  <tbody>
-				    <% @automatic.scripts.each do |script| %>
+				    <% @automatic.scripts.each_with_index do |script, n| %>
 				      <tr>
+				      	<td><%= n + 1 %></td>
 				      	<td><%= script.script_order %></td>
 				      	<td><%= script.organ %></td>
 				      	<td><%= script.pss_code %></td>

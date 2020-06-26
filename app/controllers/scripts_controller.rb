@@ -18,16 +18,16 @@ class ScriptsController < ApplicationController
     @automatic = Automatic.find(params[:automatic_id])
     @script.script_order = @automatic.scripts.count + 1
     @selected = @automatic.organ
-    o_code = Organ.where(organ: @selected).first.organ_code.to_i
-    @diagcodes = Diagcode.where(organ_code: o_code)
+    @o_code = Organ.where(organ: @selected).first.organ_code.to_i
+    get_diagcodes
   end
 
   # GET /scripts/1/edit
   def edit
     @automatic = Automatic.find(@script.automatic.id)
     @selected = @automatic.organ
-    o_code = Organ.where(organ: @selected).first.organ_code.to_i
-    @diagcodes = Diagcode.where(organ_code: o_code)
+    @o_code = Organ.where(organ: @selected).first.organ_code.to_i
+    get_diagcodes
   end
 
   # POST /scripts
@@ -70,6 +70,17 @@ class ScriptsController < ApplicationController
   end
 
   private
+    def get_diagcodes
+      @diagcodes = []
+      Diagcode.where(organ_code: @o_code).each do |diagcode|
+        if diagcode.pss_code != nil
+          diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
+        else
+          diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
+        end
+        @diagcodes << diagcode
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_script
       @script = Script.find(params[:id])

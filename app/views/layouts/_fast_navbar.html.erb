@@ -8,42 +8,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <% if user_signed_in? %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Pacientes
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Todos", patients_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", patients_path + "?filter=hoy", class: "dropdown-item" %>
-              <%= link_to "Ayer", patients_path + "?filter=ayer", class: "dropdown-item" %>
-              <%= link_to "Antier", patients_path + "?filter=antier", class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", patients_path + "?filter=trasantier", class: "dropdown-item" %>
-              <%= link_to "últimos 7 días", patients_path + "?filter=semana", class: "dropdown-item" %>
-              <%= link_to "últimos 30 días", patients_path + "?filter=mes", class: "dropdown-item" %>
-            </div>
-          </li>
-          <li class="nav-item mr-1 mt-1">
-            <%= link_to "Hoy", patients_path + day_before_search(0), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
-          </li>
-          <li class="nav-item mr-1 mt-1">
-            <%= link_to "Ayer", patients_path + day_before_search(1), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
-          </li>
-          <!--<li class="nav-item mr-1 mt-1">
-            <%= link_to "Antier", patients_path + day_before_search(2), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
-          </li> -->
-          <!-- <li class="nav-item mr-1 mt-1">
-            <%= link_to "Trasantier(Puente)", patients_path + day_before_search(3), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
-          </li> -->
-          <li class="nav-item mr-1 mt-1">
-            <%= link_to "Últimos 7 días", patients_path  + days_ago_search(7), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
-          </li>
-          <!-- <li class="nav-item mr-1 mt-1">
-            <%= link_to "Últimos 30 días", patients_path  + days_ago_search(30), class: "btn btn-outline-primary btn-sm btn-block my-2 my-lg-0" %>
-          </li> -->
-          <%= form_tag new_patient_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
-            <%= text_field_tag :id_number, nil, class: "form-control input mx-2", placeholder: "# identificación" %>
-            <%= submit_tag("Buscar/Matricular!", class: "btn btn-outline-primary btn-sm my-2 my-lg-0") %>
-          <% end %>
+          
+          
+          
           
         <% end %>
       </ul>
@@ -61,14 +28,16 @@
       <% end %>
       <% if user_signed_in? %>
         <ul class="navbar-nav d-flex justify-content-end">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              User: <%= current_user.email %>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Salir", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-            </div>
-          </li>
+          
+          <%= form_tag informs_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+            <!-- <%= submit_tag("Buscar", class: "btn btn-outline-success my-2 my-lg-0") %> -->
+            <%= text_field_tag :tag_code, nil, class: "form-control input mx-2", placeholder: "código para buscar" %>
+          <% end %>
+          <%= form_tag new_patient_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+            
+            <!-- <%= submit_tag("Matric.", class: "btn btn-outline-primary my-2 my-lg-0") %> -->
+            <%= text_field_tag :id_number, nil, class: "form-control input mx-2", placeholder: "# identificación" %>
+          <% end %>
         </ul>
       <% end %>
     </div>

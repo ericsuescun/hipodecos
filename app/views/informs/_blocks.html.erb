@@ -54,7 +54,7 @@
                       <div class="card-body p-1 m-1">
                         <h6 class="card-title my-0">Órgano: <%= block.organ_code %></h6>
                         <% if !sample.included %>
-                          <div id="controls-block-<%= block.block_tag %>">
+                          <div id="controls-block-<%= block.block_tag %>" class="mb-2">
                             <%= render partial: "blocks/block-controls", locals: { inform: inform, block: block, sample: sample } %>
                           </div>
                         <% end %>
@@ -71,7 +71,7 @@
                             <% unless objection.closed %>
                               <%= form_with url: execute_templates_review_block_path, method: "get" do |form| %>
                                 <div class="actions">
-                                  <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
+                                  <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-2" %>
                                   <%= form.hidden_field :block_id, value: block.id %>
                                   <%= form.hidden_field :objection_id, value: objection.id %>
                                 </div>

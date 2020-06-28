@@ -21,7 +21,7 @@
           <% @informs.each do |inform| %>
             <tr>
               <td>
-                <%= link_to show_revision_inform_path(inform), local: true  do %>
+                <%= link_to inform_path(inform), local: true  do %>
                   <%= inform.tag_code %>
                 <% end %>
               </td>
@@ -36,7 +36,7 @@
               <td><%= Promoter.find(inform.promoter_id).initials %></td>
               <td><%= Branch.find(inform.branch_id).initials %></td>
               <td><%= inform.prmtr_auth_code %></td>
-              <td><%= link_to 'Borrar', inform, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+              <td><%= link_to "Revisar", show_revision_inform_path(inform), local: true %></td>
             </tr>
           <% end %>
         </tbody>

@@ -37,13 +37,52 @@
         <% end %>
       </div>
     </div>
-    <div class="row">
-      <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-        <%= form_with url: informs_set_ready_path, method: "get", local: true do |form| %>
-          <%= form.submit "Revisado por: #{current_user.email}", class: "btn btn-success btn-block mt-3" %>
-          <%= form.hidden_field :inform_id, value: @inform.id %>
-        <% end %>
+
+    <% if role_path_allowed? %>
+      <% if @inform.pathologist_review_id == nil %>
+        <div class="row">
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <%= link_to "Marcar como listo para entrega", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <div class="alert alert-success">
+              <h4>Revisado por: <%= User.where(id: @inform.pathologist_review_id).first.try(:email) %></h4>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    <% end %>
+
+    <% if role_admin_allowed? %>
+      <% if @inform.administrative_review_id == nil %>
+        <div class="row">
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <%= link_to "Marcar como listo para entrega", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <div class="alert alert-success">
+              <h4>Revisado por: <%= User.where(id: @inform.administrative_review_id).first.try(:email) %></h4>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if role_path_allowed? %>
+      <div class="row">
+        <div class="col-4 col-lg-4 col-xl-4 mx-auto mt-2">
+          <%= link_to "Eliminar estado de revisión y editar", clear_revision_inform_path(@inform), class: "btn btn-warning btn-block mt-3" %>
+        </div>
       </div>
-    </div>
+    <% end %>
+    
+    
   </div>
 </div>

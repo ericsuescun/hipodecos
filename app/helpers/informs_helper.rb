@@ -1,5 +1,23 @@
 module InformsHelper
 
+	def role_path_allowed?
+		actual_role = Role.where(id: current_user.role_id).first.name
+		if actual_role == "Patologia"
+			return true
+		else
+			return false
+		end
+	end
+
+	def role_admin_allowed?
+		actual_role = Role.where(id: current_user.role_id).first.name
+		if actual_role == "Secretaria" || actual_role == "Jefatura de laboratorio"
+			return true
+		else
+			return false
+		end
+	end
+
 	def get_price(study)
 		inform = Inform.find(study.inform_id)
 		branch = Branch.find(inform.branch_id)

@@ -28,10 +28,7 @@
     </div>
     <div class="row">
       <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-        <%= form_with url: informs_set_revision_path, method: "get", local: true do |form| %>
-          <%= form.submit "OK para Revisión", class: "btn btn-success btn-block mt-3" %>
-          <%= form.hidden_field :inform_id, value: @inform.id %>
-        <% end %>
+        <%= link_to "OK para revisión", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
       </div>
     </div>
   </div>

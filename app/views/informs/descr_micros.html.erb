@@ -17,7 +17,7 @@
           <% @informs.each do |inform| %>
             <tr>
               <td>
-                <%= link_to descr_micro_path(inform)  do %>
+                <%= link_to descr_micro_inform_path(inform)  do %>
                   <%= inform.tag_code %>
                 <% end %>
               </td>

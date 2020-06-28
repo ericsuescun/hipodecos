@@ -114,11 +114,11 @@
               <%= link_to "Asignar hoy y ayer", distribution_path + days_ago_search(1), class: "dropdown-item" %>
               <%= link_to "Asignar semana", distribution_path + days_ago_search(7), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Mis micros", descr_micros_path, class: "dropdown-item" %>
-              <%= link_to "Mis micros hoy y ayer", descr_micros_path + days_ago_search(1), class: "dropdown-item" %>
-              <%= link_to "Mis micros semana", descr_micros_path + days_ago_search(7), class: "dropdown-item" %>
+              <%= link_to "Mis micros", descr_micros_informs_path, class: "dropdown-item" %>
+              <%= link_to "Mis micros hoy y ayer", descr_micros_informs_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Mis micros semana", descr_micros_informs_path + days_ago_search(7), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Por revisar", informs_index_revision_path, class: "dropdown-item" %>
+              <%= link_to "Por revisar", index_revision_informs_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Listos para enviar", informs_index_ready_path, class: "dropdown-item" %>
               
@@ -280,17 +280,20 @@
           </li>
         <% end %>
       </ul>
-      <ul class="navbar-nav d-flex justify-content-end">
-        
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Usuario: <%= current_user.first_name %> <%= current_user.last_name %>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to "Salir", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          </div>
-        </li>
-      </ul>
+      <% if user_signed_in? %>
+        <ul class="navbar-nav d-flex justify-content-end">
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Usuario: <%= current_user.first_name %> <%= current_user.last_name %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Salir", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+        </ul>
+      <% end %>
+      
       
       
       <% unless user_signed_in? || admin_signed_in? %>

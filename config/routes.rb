@@ -149,13 +149,13 @@ Rails.application.routes.draw do
     end
 
     get 'informs/preview/:id', to: 'informs#preview', as: 'preview'
-    get 'informs/descr_micro/:id', to: 'informs#descr_micro', as: 'descr_micro'
+    # get 'informs/descr_micro/:id', to: 'informs#descr_micro', as: 'descr_micro'
     get 'informs/distribution', to: 'informs#distribution', as: 'distribution'
-    get 'informs/descr_micros', to: 'informs#descr_micros', as: 'descr_micros'
-    get 'informs/set_revision', to: 'informs#set_revision', as: 'informs_set_revision'
-    get 'informs/index_revision', to: 'informs#index_revision', as: 'informs_index_revision'
+    # get 'informs/descr_micros', to: 'informs#descr_micros', as: 'descr_micros'
+    # get 'informs/set_revision', to: 'informs#set_revision', as: 'informs_set_revision'
+    # get 'informs/index_revision', to: 'informs#index_revision', as: 'informs_index_revision'
 
-    get 'informs/set_ready', to: 'informs#set_ready', as: 'informs_set_ready'
+    # get 'informs/set_ready', to: 'informs#set_ready', as: 'informs_set_ready'
     get 'informs/index_ready', to: 'informs#index_ready', as: 'informs_index_ready'
 
 
@@ -174,10 +174,16 @@ Rails.application.routes.draw do
 
       collection do
         put :assign
+        get :descr_micros
+        get :index_revision
       end
 
       member do
         get :show_revision
+        get :clear_revision
+        get :descr_micro
+        get :set_revision
+        get :set_ready
       end
     end
 

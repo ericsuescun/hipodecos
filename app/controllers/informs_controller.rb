@@ -1,6 +1,6 @@
 class InformsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_inform, only: [:show, :show_revision, :edit, :update, :destroy, :preview, :descr_micro]
+  before_action :set_inform, only: [:show, :show_revision, :edit, :update, :destroy, :preview, :descr_micro, :clear_revision, :set_revision, :set_ready]
 
   # GET /informs
   # GET /informs.json
@@ -75,14 +75,19 @@ class InformsController < ApplicationController
   end
 
   def set_revision
-    @inform = Inform.find(params[:inform_id])
     @inform.update(inf_status: "revision")
 
-    redirect_to descr_micros_path
+    redirect_to descr_micros_informs_path
+  end
+
+  def clear_revision
+    @inform.update(inf_status: nil, pathologist_review_id: nil, administrative_review_id: nil)
+
+    redirect_to descr_micro_inform_path(@inform)
   end
 
   def set_ready
-    @inform = Inform.find(params[:inform_id])
+    
     if Role.where(id: current_user.role_id).first.name == "Patologia"
       @inform.update(user_review_date: Date.today, pathologist_review_id: current_user.id)
     elsif Role.where(id: current_user.role_id).first.name == "Secretaria"
@@ -95,7 +100,7 @@ class InformsController < ApplicationController
       @inform.update(inf_status: "ready")
     end
 
-    redirect_to informs_index_revision_path
+    redirect_to index_revision_informs_path
   end
 
   def distribution

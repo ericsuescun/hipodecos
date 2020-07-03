@@ -416,3 +416,60 @@ table.inform-assing td {
 	margin: 0px;
 }
 
+.preview {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	/*display: flex;*/
+	justify-content: all;
+	text-align: justify;
+}
+
+.test {
+	border: 5px solid red;
+}
+
+.diagnostic {
+	text-transform: uppercase;
+}
+
+@media print {
+	header, footer, aside, form, nav, a, … {
+		display: none;
+	}
+
+	article {
+		width: 100%!important;
+		padding: 0!important;
+		margin: 0!important;
+		page-break-inside: auto;
+	}
+
+	section {
+		width: 100%!important;
+		padding: 0!important;
+		margin: 0!important;
+		page-break-inside: auto;
+	}
+
+
+
+	.preview {
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		padding-top: 0px;
+		padding-bottom: 0px;
+		/*display: flex;*/
+		justify-content: all;
+		text-align: justify;
+		page-break-inside: auto;
+	}
+}
+

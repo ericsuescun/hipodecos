@@ -220,7 +220,12 @@ class InformsController < ApplicationController
   end
 
   def preview
-    
+    @pathologists = []
+    @inform.diagnostics.each do |diagnostic|
+      @pathologists << User.where(id: diagnostic.user_id).first
+    end
+    @pathologists = @pathologists.uniq
+
   end
 
   # private

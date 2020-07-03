@@ -148,7 +148,7 @@ Rails.application.routes.draw do
       resources :branches
     end
 
-    get 'informs/preview/:id', to: 'informs#preview', as: 'preview'
+    # get 'informs/preview/:id', to: 'informs#preview', as: 'preview'
     # get 'informs/descr_micro/:id', to: 'informs#descr_micro', as: 'descr_micro'
     get 'informs/distribution', to: 'informs#distribution', as: 'distribution'
     # get 'informs/descr_micros', to: 'informs#descr_micros', as: 'descr_micros'
@@ -184,6 +184,7 @@ Rails.application.routes.draw do
         get :descr_micro
         get :set_revision
         get :set_ready
+        get :preview
       end
     end
 

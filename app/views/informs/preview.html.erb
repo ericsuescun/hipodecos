@@ -1,12 +1,14 @@
-<%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform) %> |
-<%= link_to 'Volver a informes', informs_path %> |
-<%= link_to 'Volver a informe', inform_path(@inform) %>
+<header>
+  <%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform) %> |
+  <%= link_to 'Volver a informes', informs_path %> |
+  <%= link_to 'Volver a informe', inform_path(@inform) %>
+</header>
 <div class="container">
   <div class="row">
-    <div class="col-8 col-lg-8 mx-auto">
+    <div class="col-10 col-lg-10 mx-auto">
       <br>
-      <div class="row">
-        <div class="col-12 col-lg-4">
+      <div class="row d-flex flex-row">
+        <div class="col-4 col-lg-4">
           <%= image_tag "logo.JPG", class: "img-fluid" %>
         </div>
         <div class="col-4 col-lg-4 offset-lg-4">
@@ -23,7 +25,7 @@
         <div class="col-6 col-lg-6">
           <strong>Paciente:</strong> <%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %>
         </div>
-        <div class="col-4 col-lg-4 offset-lg-2 text-right">
+        <div class="col-3 col-lg-3 offset-lg-3">
           <strong>F. recibo:</strong> <%= @inform.receive_date.strftime('%d/%m/%Y') %>
         </div>
       </div>
@@ -85,24 +87,29 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-12 col-lg-12 col-xl-12">
-          <% @inform.recipients.each_with_index do |recipient, n| %>
-            <p>
-              Contenido de recipiente #<%= n + 1 %>:
+      <% @inform.recipients.each_with_index do |recipient, n| %>
+        <div class="row">
+          <div class="col-12 col-lg-12 col-xl-12">
+            <div class="preview">
               <br>
-              <%= recipient.description %> Bloqueado de la siguiente manera:
-              <br>
-              <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
-                <strong><%= sample.description %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></strong> 
-                <br>
-            </p>
-            
-            <% end %>
-          <% end %>
+              <div><i>Contenido de recipiente #<%= n + 1 %>:</i></div>
+              <div class="preview"><%= recipient.description %></div>
+            </div>
+            <div>Bloqueado de la siguiente manera:</div>
+          </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 col-xl-12">
+            <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
+              <div class="preview ">
+                <i><strong><%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></strong></i>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
       
+      <br>
       <div class="row">
         <div class="col-4 col-lg-4">
           <strong>Descripción Microscópica</strong>
@@ -112,8 +119,14 @@
       <% @inform.micros.each_with_index do |micro, n| %>
         <div class="row">
           <div class="col-12 col-lg-12">
-            Micro <%= n + 1 %> de <%= @inform.micros.length %>
-            <p><%= micro.description %></p>
+            <%= micro.description %>
+          </div>
+        </div>
+      <% end %>
+
+      <% @inform.micros.each_with_index do |micro, n| %>
+        <div class="row">
+          <div class="col-12 col-lg-12">
             <div class="row">
               <% micro.pictures.each do |picture| %>
                 <div class="col-4 col-lg-4 mx-auto">
@@ -129,48 +142,42 @@
         </div>
       <% end %>
 
-      <br>
-
       <div class="row">
-        <div class="col-12 d-flex justify-content-around">
-          <strong>Diagnóstico y procedimientos</strong>
-        </div>
-      </div>
-
-      <% @inform.diagnostics.each_with_index do |diagnostic, n| %>
-        <div class="row">
-          <div class="col-12 col-lg-12">
-            <div class="row">
-              <div class="col-12 col-lg-12 d-flex justify-content-around">
-                Diagnóstico <%= n + 1 %> de <%= @inform.diagnostics.length %>
-              </div>
-              <div class="col-12 col-lg-12 d-flex justify-content-around">
-                <p><strong><%= diagnostic.description %></strong></p>
-              </div>
+        <div class="col-12 col-lg-12">
+          <div class="card mt-3">
+            <div class="card-header text-center">
+              <strong>DIAGNÓSTICO Y PROCEDIMIENTOS</strong>
             </div>
-            <div class="row">
-              <div class="col-6 col-lg-6">
-                <strong>Códigos:</strong> <%= diagnostic.pss_code %>
-                <p><strong>Patólogo:</strong> <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p>
-                <p><strong>Bloques:</strong> <%= blocks_stored(@inform) == true ? "Si" : "No" %></p>
-              </div>
-              <div class="col-6 col-lg-6 text-right">
-                <strong>DX:</strong> <%= diagnostic.who_code %>
-                <p><strong>Secretaria:</strong> <%= User.where(id: @inform.user_id).first.try(:first_name) %> <%= User.where(id: @inform.user_id).first.try(:last_name) %></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4 col-lg-4 mx-auto">
-                <% if User.where(id: diagnostic.user_id).first.signfile.file != nil %>
-                  <%= image_tag User.where(id: diagnostic.user_id).first.try(:signfile).url, class: "img-fluid" %>
-                <% else %>
-                  Sin archivo de firma!
+            <div class="card-body">
+              <% @inform.diagnostics.each do |diagnostic| %>
+                <h5 class="card-title diagnostic"><strong><%= diagnostic.description %></strong></h5>
+              <% end %>
+              <div class="row d-flex flex-row">
+                <% @pathologists.each do |pathologist| %>
+                  <div class="col-4 col-lg-4 mt-3">
+                    <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
+                    <% if pathologist.signfile.file != nil %>
+                      <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
+                    <% else %>
+                      Sin archivo de firma!
+                    <% end %>
+                  </div>
                 <% end %>
+              </div>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-between">
+              <div>
+                <% @inform.diagnostics.each do |diagnostic| %>
+                  <strong>Código:</strong> <%= diagnostic.pss_code %> <strong>DX:</strong> <%= diagnostic.who_code %>
+                <% end %>
+              </div>
+              <div>
+                <strong>Secretaria:</strong> <%= User.where(id: @inform.user_id).first.try(:first_name) %> <%= User.where(id: @inform.user_id).first.try(:last_name) %>
               </div>
             </div>
           </div>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

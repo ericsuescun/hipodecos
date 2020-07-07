@@ -97,7 +97,11 @@
           <div class="col-12 col-lg-12 col-xl-12">
             <div class="preview">
               <br>
-              <div><i>Contenido de recipiente #<%= n + 1 %>:</i></div>
+              <div>
+                
+                  Contenido de recipiente #<%= n + 1 %>:
+                
+              </div>
               <div class="preview"><%= recipient.description %></div>
             </div>
             <div>Bloqueado de la siguiente manera:</div>
@@ -107,7 +111,7 @@
           <div class="col-12 col-lg-12 col-xl-12">
             <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
               <div class="preview ">
-                <i><strong><%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></strong></i>
+                <strong><i><%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></i></strong>
               </div>
             <% end %>
           </div>
@@ -147,7 +151,7 @@
         </div>
       <% end %>
 
-      <div class="row">
+      <div class="row diagnostic">
         <div class="col-12 col-lg-12">
           <div class="card mt-3">
             <div class="card-header text-center">
@@ -155,7 +159,7 @@
             </div>
             <div class="card-body">
               <% @inform.diagnostics.each do |diagnostic| %>
-                <h5 class="card-title diagnostic"><strong><%= diagnostic.description %></strong></h5>
+                <h5 class="card-title"><strong><%= diagnostic.description %></strong></h5>
               <% end %>
               <div class="row d-flex flex-row">
                 <% @pathologists.each do |pathologist| %>

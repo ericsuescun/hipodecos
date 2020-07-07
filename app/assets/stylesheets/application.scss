@@ -437,6 +437,10 @@ table.inform-assing td {
 	text-transform: uppercase;
 }
 
+strong {
+	font-weight: bold;
+}
+
 @media print {
 	header, footer, aside, form, nav, a, … {
 		display: none;
@@ -456,7 +460,9 @@ table.inform-assing td {
 		page-break-inside: auto;
 	}
 
-
+	strong {
+		font-weight: bold;
+	}
 
 	.preview {
 		width: 100%;

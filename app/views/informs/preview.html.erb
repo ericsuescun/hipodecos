@@ -1,7 +1,8 @@
 <header>
   <%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform) %> |
   <%= link_to 'Volver a informes', informs_path %> |
-  <%= link_to 'Volver a informe', inform_path(@inform) %>
+  <%= link_to 'Volver a informe', inform_path(@inform) %> |
+  <%= link_to 'Descargar en PDF', preview_inform_path(@inform, format: "pdf") %>
 </header>
 <div class="container">
   <div class="row">
@@ -11,7 +12,9 @@
         <div class="col-4 col-lg-4">
           <%= image_tag "logo.JPG", class: "img-fluid" %>
         </div>
-        <div class="col-4 col-lg-4 offset-lg-4">
+        <div class="col-4 col-lg-4">
+        </div>
+        <div class="col-4 col-lg-4">
           <%= image_tag "datos.JPG", class: "img-fluid" %>
         </div>
       </div>
@@ -25,7 +28,9 @@
         <div class="col-6 col-lg-6">
           <strong>Paciente:</strong> <%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %>
         </div>
-        <div class="col-3 col-lg-3 offset-lg-3">
+        <div class="col-3 col-lg-3">
+        </div>
+        <div class="col-3 col-lg-3">
           <strong>F. recibo:</strong> <%= @inform.receive_date.strftime('%d/%m/%Y') %>
         </div>
       </div>

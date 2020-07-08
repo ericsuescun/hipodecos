@@ -113,8 +113,10 @@ Rails.application.routes.draw do
     end
 
     resources :admins, only: [:index]
+
     devise_for :admins, path: 'admins', controllers: { sessions: "admins/sessions", passwords: "admins/passwords", unlocks: "admins/unlocks", confirmations: "admins/confirmations" }
     
+    devise_for :patients, path: 'patients', controllers: { sessions: "patients/sessions" }
 
 
     resources :codevals do

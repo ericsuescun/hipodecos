@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-4 col-lg-4 col-xl-4 offset-4">
+    <h2>Resultados</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group">
+        <%= f.label "Número de identificación" %><br />
+        <%= f.email_field :id_number, autofocus: true, autocomplete: "Identificación", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label "Contraseña" %><br />
+        <%= f.password_field :password, autocomplete: "Contraseña", class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            <%= f.check_box :remember_me, class: "form-check-input" %>
+            <%= f.label "Recuérdame", class: "form-check-label" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "Ingresar", class: "btn btn-primary btn-block mb-3" %>
+      </div>
+    <% end %>
+
+    <%= render "patients/shared/links" %>
+
+  </div>
+</div>

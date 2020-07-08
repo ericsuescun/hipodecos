@@ -1,5 +1,9 @@
 class Patient < ApplicationRecord
 	# has_many :informs, dependent: :destroy
+
+	devise :database_authenticatable, :timeoutable,
+	       :rememberable, :authentication_keys => [:id_number]
+
 	has_many :informs
 
 	has_many :diganostics, through: :informs

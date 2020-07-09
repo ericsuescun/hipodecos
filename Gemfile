@@ -38,7 +38,7 @@ gem 'redcarpet'
 gem 'coderay'
 gem 'devise'
 gem 'sendgrid-ruby'
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-heroku'
 gem 'pdfkit'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

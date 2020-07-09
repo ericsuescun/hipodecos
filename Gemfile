@@ -38,7 +38,6 @@ gem 'redcarpet'
 gem 'coderay'
 gem 'devise'
 gem 'sendgrid-ruby'
-gem 'wkhtmltopdf-heroku'
 gem 'pdfkit'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -62,6 +61,7 @@ group :development do
   gem 'minitest-reporters',       '1.1.14'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
+  gem 'wkhtmltopdf-binary'
 end
 
 group :test do
@@ -83,4 +83,5 @@ group :production do
   gem 'rails_12factor'
   gem 'fog', '1.42'
   gem 'pg'
+  gem 'wkhtmltopdf-heroku'
 end

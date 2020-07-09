@@ -1,8 +1,9 @@
 class Patient < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :timeoutable,
+         :rememberable, :authentication_keys => [:id_number]
 	# has_many :informs, dependent: :destroy
-
-	devise :database_authenticatable, :timeoutable,
-	       :rememberable, :authentication_keys => [:id_number]
 
 	has_many :informs
 

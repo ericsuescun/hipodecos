@@ -18,6 +18,7 @@ class StaticPagesController < ApplicationController
   end
 
   def results
+    redirect_to new_patient_session_path
   end
 
   def tech
@@ -38,4 +39,8 @@ class StaticPagesController < ApplicationController
   def news
     
   end
+
+  def welcome_user
+  end
+
 end

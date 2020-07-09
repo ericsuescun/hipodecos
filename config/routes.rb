@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   resources :autos
     root to: "static_pages#home"
 
@@ -62,6 +61,7 @@ Rails.application.routes.draw do
     get 'static_pages/portfolio'
     get 'static_pages/science'
     get 'static_pages/news'
+    get 'static_pages/welcome_user'
 
     get 'reports/status'
     get 'reports/objections'
@@ -103,10 +103,12 @@ Rails.application.routes.draw do
     resources :automatics
     resources :scripts
     resources :organs
+    resources :results
     
 
     
     devise_for :users, path: 'users', controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", unlocks: "users/unlocks", confirmations: "users/confirmations" }
+
     resources :users, only: [:index, :edit, :update, :show]
 
     devise_scope :user do get "users" => "users#index"
@@ -118,6 +120,11 @@ Rails.application.routes.draw do
     
     devise_for :patients, path: 'patients', controllers: { sessions: "patients/sessions" }
 
+    resources :patients do
+      resources :informs do
+        resources :physicians
+      end
+    end
 
     resources :codevals do
       resources :factors
@@ -252,14 +259,5 @@ Rails.application.routes.draw do
     resources :automatics do
       resources :scripts
     end
-
-
-
-    resources :patients do
-      resources :informs do
-        resources :physicians
-      end
-    end
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

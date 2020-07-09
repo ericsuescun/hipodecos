@@ -441,11 +441,6 @@ strong {
 	font-weight: bold;
 }
 
-.logos {
-	display: inline-block;
-	width: 16rem;
-}
-
 @media print {
 	header, footer, aside, form, nav, a, … {
 		display: none;
@@ -463,11 +458,6 @@ strong {
 		padding: 0!important;
 		margin: 0!important;
 		page-break-inside: auto;
-	}
-
-	.logos {
-		display: inline-block;
-		width: 16rem;
 	}
 
 	.diagnostic {

@@ -6,6 +6,7 @@
         <thead class="thead-dark">
           <tr>
             <th>Informe</th>
+            <th>Tipo</th>
             <th>Ingreso PSS</th>
             <th>User PSS</th>
             <th>Paciente</th>
@@ -24,6 +25,7 @@
                   <%= inform.tag_code %>
                 <% end %>
               </td>
+              <td><%= inform.inf_type %></td>
               <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
               <td><%= User.find(inform.user_id).first_name %></td>
               <td>

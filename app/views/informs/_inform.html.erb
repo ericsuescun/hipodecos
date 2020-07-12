@@ -1,4 +1,4 @@
-<div id="info">
+<div class="info">
 	<h3>
 		<strong><%= @inform.tag_code %></strong>: <strong><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %></strong>, <strong><%= @inform.patient.age_number %> <%= @inform.patient.age_type == 'A' ? 'Años' : @inform.patient.age_type == 'M' ? 'Meses' : 'Días' %></strong>, <%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong>, fecha: <%= @inform.receive_date.strftime('%d/%m/%Y') %>
 	</h3>

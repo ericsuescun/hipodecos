@@ -19,6 +19,15 @@ class PatientsController < ApplicationController
     end
   end
 
+  def last20
+    @informs = Inform.order(created_at: :desc).limit(20)
+    @patients = []
+    @informs.each do |inform|
+      @patients << inform.patient
+    end
+    @patients = @patients.uniq
+  end
+
   # GET /patients/1
   # GET /patients/1.json
   def show

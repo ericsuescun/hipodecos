@@ -1,6 +1,10 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    
+  end
+
   def status
     if params[:yi]
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day

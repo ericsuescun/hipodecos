@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <h1>Últimos 20 informes ingresados</h1>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Informe</th>
+            <th>Ingreso PSS</th>
+            <th>User PSS</th>
+            <th>Paciente</th>
+            <th>EPS</th>
+            <th>Sede IPS</th>
+            <th>Código Authoriz.</th>
+            <th scope="1"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @informs.each do |inform| %>
+            <tr>
+              <td>
+                <%= link_to inform  do %>
+                  <%= inform.tag_code %>
+                <% end %>
+              </td>
+              <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
+              <td><%= User.find(inform.user_id).first_name %></td>
+              <td>
+                <%= link_to inform.patient  do %>
+                  <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
+                  <% end %>
+              </td>
+              <td><%= Promoter.find(inform.promoter_id).initials %></td>
+              <td><%= Branch.find(inform.branch_id).initials %></td>
+              <td><%= inform.prmtr_auth_code %></td>
+              <td><%= link_to 'Borrar', inform, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

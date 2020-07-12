@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-lg-8 col-xl-8 mx-auto">
+			<div class="jumbotron">
+			  <h1 class="display-4">Matrícula</h1>
+			  <p class="lead">Escribe la cédula del paciente e indica qué tipo de informe vamos a producir</p>
+			  <%= form_tag new_patient_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+			    <%= text_field_tag :id_number, nil, class: "form-control input mx-2", placeholder: "# identificación" %>
+			  <% end %>
+			  <hr class="my-4">
+			  <p>Clínicas</p>
+			  <a class="btn btn-primary btn-lg" href="#" role="button">Clínica</a>
+			  <p>Hospital San Vicente Fundación</p>
+			  <a class="btn btn-primary btn-lg" href="#" role="button">Hospital</a>
+			  <p>Citologías</p>
+			  <a class="btn btn-primary btn-lg" href="#" role="button">Citologías</a>
+			</div>
+		</div>
+	</div>
+</div>

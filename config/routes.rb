@@ -61,7 +61,9 @@ Rails.application.routes.draw do
     get 'static_pages/science'
     get 'static_pages/news'
     get 'static_pages/welcome_user'
+    get 'static_pages/matriculate'
 
+    get 'reports/index'
     get 'reports/status'
     get 'reports/objections'
     get 'reports/sales'
@@ -119,6 +121,10 @@ Rails.application.routes.draw do
     resources :patients do
       resources :informs do
         resources :physicians
+      end
+
+      collection do
+        get :last20
       end
     end
 
@@ -181,6 +187,7 @@ Rails.application.routes.draw do
         put :assign
         get :descr_micros
         get :index_revision
+        get :last20
       end
 
       member do

@@ -12,8 +12,11 @@
   </head>
 
   <body>
-    <% if admin_signed_in? || user_signed_in? %>
-      <%= render partial: 'layouts/search_navbar' %>
+    <% if user_signed_in? %>
+      <%= render partial: 'layouts/blocks_navbar' %>
+      <% unless admin_signed_in? %>
+        
+      <% end %>
       <% if flash[:notice] %>
         <div class="alert alert-warning"><%= flash[:notice] %></div>
       <% end %>
@@ -35,3 +38,4 @@
     <% end %>
   </body>
 </html>
+

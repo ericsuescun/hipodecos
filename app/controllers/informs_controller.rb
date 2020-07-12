@@ -19,6 +19,10 @@ class InformsController < ApplicationController
     end
   end
 
+  def last20
+    @informs = Inform.limit(20)
+  end
+
   def index_revision
     if params[:yi]
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day

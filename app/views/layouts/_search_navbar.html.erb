@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <!-- <a class="navbar-brand" href="#">Isabela</a> -->
+    <a class="navbar-brand" href="#">Inicio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentB" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -95,186 +95,22 @@
           </ul>
         <% end %>
         <% if user_signed_in? && !admin_signed_in? %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Informes
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Informes", informs_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", informs_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", informs_path + day_before_search(1), class: "dropdown-item" %>
-              <%= link_to "Antier", informs_path + day_before_search(2), class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", informs_path + day_before_search(3), class: "dropdown-item" %>
-              <%= link_to "Últimos 7 días", informs_path + days_ago_search(7), class: "dropdown-item" %>
-              <%= link_to "Últimos 30 días", informs_path + days_ago_search(30), class: "dropdown-item" %>
-              <%= link_to "Este mes", informs_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", informs_path + month_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Asignar Patólogo", distribution_path, class: "dropdown-item" %>
-              <%= link_to "Asignar hoy y ayer", distribution_path + days_ago_search(1), class: "dropdown-item" %>
-              <%= link_to "Asignar semana", distribution_path + days_ago_search(7), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Mis micros", descr_micros_informs_path, class: "dropdown-item" %>
-              <%= link_to "Mis micros hoy y ayer", descr_micros_informs_path + days_ago_search(1), class: "dropdown-item" %>
-              <%= link_to "Mis micros semana", descr_micros_informs_path + days_ago_search(7), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Por revisar", index_revision_informs_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Listos para enviar", informs_index_ready_path, class: "dropdown-item" %>
-              
-            </div>
+          <li class="nav-item">
+            <%= link_to "Matrícula", static_pages_matriculate_path, class: "nav-link" %>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Pacientes
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Todos", patients_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", patients_path + "?filter=hoy", class: "dropdown-item" %>
-              <%= link_to "Ayer", patients_path + "?filter=ayer", class: "dropdown-item" %>
-              <%= link_to "Antier", patients_path + "?filter=antier", class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", patients_path + "?filter=trasantier", class: "dropdown-item" %>
-              <%= link_to "últimos 7 días", patients_path + "?filter=semana", class: "dropdown-item" %>
-              <%= link_to "últimos 30 días", patients_path + "?filter=mes", class: "dropdown-item" %>
-            </div>
+          <li class="nav-item">
+            <%= link_to "Informes", last20_informs_path, class: "nav-link" %>
           </li>
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Producción
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Bloques", blocks_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", blocks_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", blocks_path + day_before_search(1), class: "dropdown-item" %>
-              <%= link_to "Antier", blocks_path + day_before_search(2), class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", blocks_path + day_before_search(3), class: "dropdown-item" %>
-              <%= link_to "Últimos 7 días", blocks_path + days_ago_search(7), class: "dropdown-item" %>
-              <%= link_to "Últimos 30 días", blocks_path + days_ago_search(30), class: "dropdown-item" %>
-              <%= link_to "Este mes", blocks_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", blocks_path + month_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Placas", slides_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", slides_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", slides_path + day_before_search(1), class: "dropdown-item" %>
-              <%= link_to "Antier", slides_path + day_before_search(2), class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", slides_path + day_before_search(3), class: "dropdown-item" %>
-              <%= link_to "Últimos 7 días", slides_path + days_ago_search(7), class: "dropdown-item" %>
-              <%= link_to "Últimos 30 días", slides_path + days_ago_search(30), class: "dropdown-item" %>
-              <%= link_to "Este mes", slides_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", slides_path + month_before_search(1), class: "dropdown-item" %>
-            </div>
+          <li class="nav-item">
+            <%= link_to "Pacientes", last20_patients_path, class: "nav-link" %>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Bloques
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Incluir", inclusion_blocks_inclusion_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", inclusion_blocks_inclusion_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", inclusion_blocks_inclusion_path + day_before_search(1), class: "dropdown-item" %>
-              <%= link_to "Antier", inclusion_blocks_inclusion_path + day_before_search(2), class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", inclusion_blocks_inclusion_path + day_before_search(3), class: "dropdown-item" %>
-              <%= link_to "Últimos 7 días", inclusion_blocks_inclusion_path + days_ago_search(7), class: "dropdown-item" %>
-              <%= link_to "Últimos 30 días", inclusion_blocks_inclusion_path + days_ago_search(30), class: "dropdown-item" %>
-              <%= link_to "Este mes", inclusion_blocks_inclusion_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", inclusion_blocks_inclusion_path + month_before_search(1), class: "dropdown-item" %>
-            </div>
+          <li class="nav-item">
+            <%= link_to "Producción", blocks_path + days_ago_search(7), class: "nav-link" %>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Placas
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Colorear", processing_slides_coloring_slides_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", processing_slides_coloring_slides_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", processing_slides_coloring_slides_path + day_before_search(1), class: "dropdown-item" %>
-              <%= link_to "Antier", processing_slides_coloring_slides_path + day_before_search(2), class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", processing_slides_coloring_slides_path + day_before_search(3), class: "dropdown-item" %>
-              <%= link_to "Últimos 7 días", processing_slides_coloring_slides_path + days_ago_search(7), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Cubrir", processing_slides_covering_slides_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", processing_slides_covering_slides_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", processing_slides_covering_slides_path + day_before_search(1), class: "dropdown-item" %>
-              <%= link_to "Antier", processing_slides_covering_slides_path + day_before_search(2), class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", processing_slides_covering_slides_path + day_before_search(3), class: "dropdown-item" %>
-              <%= link_to "Últimos 7 días", processing_slides_covering_slides_path + days_ago_search(7), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Rotular", processing_slides_tagging_slides_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", processing_slides_tagging_slides_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", processing_slides_tagging_slides_path + day_before_search(1), class: "dropdown-item" %>
-              <%= link_to "Antier", processing_slides_tagging_slides_path + day_before_search(2), class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", processing_slides_tagging_slides_path + day_before_search(3), class: "dropdown-item" %>
-              <%= link_to "Últimos 7 días", processing_slides_tagging_slides_path + days_ago_search(7), class: "dropdown-item" %>
-            </div>
+          <li class="nav-item">
+            <%= link_to "Reportes", "reports/index", class: "nav-link" %>
           </li>
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Rep. I
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", reports_status_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", reports_status_path + day_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <% (2..7).each do |day| %>
-                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_status_path + day_before_search(day), class: "dropdown-item" %>
-              <% end %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Esta semana", reports_status_path + week_before_search(0), class: "dropdown-item" %>
-              <%= link_to "La semana pasada", reports_status_path + week_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Este mes", reports_status_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", reports_status_path + month_before_search(1), class: "dropdown-item" %>
-              <% (2..6).each do |month| %>
-                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_status_path + month_before_search(month), class: "dropdown-item" %>
-              <% end %>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Rep. C
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", reports_objections_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", reports_objections_path + day_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <% (2..7).each do |day| %>
-                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_objections_path + day_before_search(day), class: "dropdown-item" %>
-              <% end %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Esta semana", reports_objections_path + week_before_search(0), class: "dropdown-item" %>
-              <%= link_to "La semana pasada", reports_objections_path + week_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Este mes", reports_objections_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", reports_objections_path + month_before_search(1), class: "dropdown-item" %>
-              <% (2..6).each do |month| %>
-                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_objections_path + month_before_search(month), class: "dropdown-item" %>
-              <% end %>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Rep. V
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", reports_sales_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", reports_sales_path + day_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <% (2..7).each do |day| %>
-                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_sales_path + day_before_search(day), class: "dropdown-item" %>
-              <% end %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Esta semana", reports_sales_path + week_before_search(0), class: "dropdown-item" %>
-              <%= link_to "La semana pasada", reports_sales_path + week_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Este mes", reports_sales_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", reports_sales_path + month_before_search(1), class: "dropdown-item" %>
-              <% (2..6).each do |month| %>
-                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_sales_path + month_before_search(month), class: "dropdown-item" %>
-              <% end %>
-            </div>
-          </li>
+         
           <li class="nav-item mr-2 mt-1">
             <%= link_to "Autos.", automatics_path, class: "btn btn-primary btn-sm btn-block my-2 my-lg-0" %>
           </li>

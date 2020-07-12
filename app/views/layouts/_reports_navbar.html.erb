@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/">Inicio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentB" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContentB">
+      <ul class="navbar-nav mr-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Informes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Hoy", reports_status_path + day_before_search(0), class: "dropdown-item" %>
+              <%= link_to "Ayer", reports_status_path + day_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <% (2..7).each do |day| %>
+                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_status_path + day_before_search(day), class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Esta semana", reports_status_path + week_before_search(0), class: "dropdown-item" %>
+              <%= link_to "La semana pasada", reports_status_path + week_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Este mes", reports_status_path + month_before_search(0), class: "dropdown-item" %>
+              <%= link_to "El mes pasado", reports_status_path + month_before_search(1), class: "dropdown-item" %>
+              <% (2..6).each do |month| %>
+                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_status_path + month_before_search(month), class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Calidad
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Hoy", reports_objections_path + day_before_search(0), class: "dropdown-item" %>
+              <%= link_to "Ayer", reports_objections_path + day_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <% (2..7).each do |day| %>
+                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_objections_path + day_before_search(day), class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Esta semana", reports_objections_path + week_before_search(0), class: "dropdown-item" %>
+              <%= link_to "La semana pasada", reports_objections_path + week_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Este mes", reports_objections_path + month_before_search(0), class: "dropdown-item" %>
+              <%= link_to "El mes pasado", reports_objections_path + month_before_search(1), class: "dropdown-item" %>
+              <% (2..6).each do |month| %>
+                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_objections_path + month_before_search(month), class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ventas
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Hoy", reports_sales_path + day_before_search(0), class: "dropdown-item" %>
+              <%= link_to "Ayer", reports_sales_path + day_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <% (2..7).each do |day| %>
+                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_sales_path + day_before_search(day), class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Esta semana", reports_sales_path + week_before_search(0), class: "dropdown-item" %>
+              <%= link_to "La semana pasada", reports_sales_path + week_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Este mes", reports_sales_path + month_before_search(0), class: "dropdown-item" %>
+              <%= link_to "El mes pasado", reports_sales_path + month_before_search(1), class: "dropdown-item" %>
+              <% (2..6).each do |month| %>
+                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_sales_path + month_before_search(month), class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </li>
+            
+        <% end %>
+      </ul>
+      <% if user_signed_in? %>
+        <ul class="navbar-nav d-flex justify-content-end">
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Usuario: <%= current_user.first_name %> <%= current_user.last_name %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Salir", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </nav>
+</div>

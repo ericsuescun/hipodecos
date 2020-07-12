@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/">Inicio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentB" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContentB">
+      <ul class="navbar-nav mr-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Informes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Informes", informs_path, class: "dropdown-item" %>
+              <%= link_to "Hoy", informs_path + day_before_search(0), class: "dropdown-item" %>
+              <%= link_to "Ayer", informs_path + day_before_search(1), class: "dropdown-item" %>
+              <%= link_to "Antier", informs_path + day_before_search(2), class: "dropdown-item" %>
+              <%= link_to "Trasantier(Puente)", informs_path + day_before_search(3), class: "dropdown-item" %>
+              <%= link_to "Últimos 7 días", informs_path + days_ago_search(7), class: "dropdown-item" %>
+              <%= link_to "Últimos 30 días", informs_path + days_ago_search(30), class: "dropdown-item" %>
+              <%= link_to "Este mes", informs_path + month_before_search(0), class: "dropdown-item" %>
+              <%= link_to "El mes pasado", informs_path + month_before_search(1), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              
+              
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Revisión
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+              <%= link_to "Asignar Patólogo", distribution_path, class: "dropdown-item" %>
+              <%= link_to "Asignar hoy y ayer", distribution_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Asignar semana", distribution_path + days_ago_search(7), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Mis micros", descr_micros_informs_path, class: "dropdown-item" %>
+              <%= link_to "Mis micros hoy y ayer", descr_micros_informs_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Mis micros semana", descr_micros_informs_path + days_ago_search(7), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Por revisar", index_revision_informs_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Listos para enviar", informs_index_ready_path, class: "dropdown-item" %>
+            </div>
+          </li>
+
+          <li class="nav-item mr-2 mt-1">
+            <%= link_to "Autos.", automatics_path, class: "btn btn-primary btn-sm btn-block my-2 my-lg-0" %>
+          </li>
+          <ul class="navbar-nav d-flex justify-content-end">
+            <%= form_tag informs_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+              <!-- <%= submit_tag("Buscar", class: "btn btn-outline-success my-2 my-lg-0") %> -->
+              <%= text_field_tag :tag_code, nil, class: "form-control input mx-2", placeholder: "código para buscar" %>
+            <% end %>
+          </ul>
+        <% end %>
+      </ul>
+      <% if user_signed_in? %>
+        <ul class="navbar-nav d-flex justify-content-end">
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Usuario: <%= current_user.first_name %> <%= current_user.last_name %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Salir", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </nav>
+</div>

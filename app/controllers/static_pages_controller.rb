@@ -43,4 +43,8 @@ class StaticPagesController < ApplicationController
   def welcome_user
   end
 
+  def matriculate
+    
+  end
+
 end

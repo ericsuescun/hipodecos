@@ -30,6 +30,6 @@ class Inform < ApplicationRecord
   has_many :pictures, as: :imageable
   has_many :recipients
 
-  validates :receive_date, presence: true
+  validates :receive_date, :inf_type, presence: true
 
 end

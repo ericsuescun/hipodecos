@@ -1,0 +1,305 @@
+
+https://stackoverflow.com/questions/7097921/devise-how-to-change-setting-so-that-email-addresses-dont-need-to-be-unique
+
+
+20200712071722_update_index_on_patients.rb
+
+class UpdateIndexOnPatients < ActiveRecord::Migration[5.2]
+  def up
+    sql = 'DROP INDEX index_patients_on_email'
+    sql << ' ON patients' if Rails.env == 'production' # Heroku pg
+    ActiveRecord::Base.connection.execute(sql)
+  end
+end
+
+
+
+Running rails db:migrate on ⬢ hipodecos... up, run.5921 (Free)
+   (0.6ms)  SELECT pg_try_advisory_lock(2738126851773897885)
+   (1.8ms)  SELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC
+Migrating to AddPAgeToInforms (20200712050634)
+   (0.5ms)  BEGIN
+== 20200712050634 AddPAgeToInforms: migrating =================================
+-- add_column(:informs, :p_age, :integer)
+   (1.5ms)  ALTER TABLE "informs" ADD "p_age" integer
+   -> 0.0018s
+== 20200712050634 AddPAgeToInforms: migrated (0.0019s) ========================
+
+  ActiveRecord::SchemaMigration Create (1.5ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712050634"]]
+   (2.0ms)  COMMIT
+Migrating to AddPAgeTypeToInforms (20200712050838)
+   (0.4ms)  BEGIN
+== 20200712050838 AddPAgeTypeToInforms: migrating =============================
+-- add_column(:informs, :p_age_type, :string)
+   (1.0ms)  ALTER TABLE "informs" ADD "p_age_type" character varying
+   -> 0.0012s
+== 20200712050838 AddPAgeTypeToInforms: migrated (0.0013s) ====================
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712050838"]]
+   (1.4ms)  COMMIT
+Migrating to AddPAddressToInforms (20200712051744)
+   (0.4ms)  BEGIN
+== 20200712051744 AddPAddressToInforms: migrating =============================
+-- add_column(:informs, :p_address, :string)
+   (1.1ms)  ALTER TABLE "informs" ADD "p_address" character varying
+   -> 0.0013s
+== 20200712051744 AddPAddressToInforms: migrated (0.0013s) ====================
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712051744"]]
+   (1.5ms)  COMMIT
+Migrating to AddPEmailToInforms (20200712051823)
+   (0.5ms)  BEGIN
+== 20200712051823 AddPEmailToInforms: migrating ===============================
+-- add_column(:informs, :p_email, :string)
+   (0.9ms)  ALTER TABLE "informs" ADD "p_email" character varying
+   -> 0.0011s
+== 20200712051823 AddPEmailToInforms: migrated (0.0012s) ======================
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712051823"]]
+   (1.5ms)  COMMIT
+Migrating to AddPTelToInforms (20200712051842)
+   (0.5ms)  BEGIN
+== 20200712051842 AddPTelToInforms: migrating =================================
+-- add_column(:informs, :p_tel, :string)
+   (0.8ms)  ALTER TABLE "informs" ADD "p_tel" character varying
+   -> 0.0010s
+== 20200712051842 AddPTelToInforms: migrated (0.0011s) ========================
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712051842"]]
+   (1.4ms)  COMMIT
+Migrating to AddPCelToInforms (20200712051852)
+   (0.5ms)  BEGIN
+== 20200712051852 AddPCelToInforms: migrating =================================
+-- add_column(:informs, :p_cel, :string)
+   (0.9ms)  ALTER TABLE "informs" ADD "p_cel" character varying
+   -> 0.0011s
+== 20200712051852 AddPCelToInforms: migrated (0.0012s) ========================
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712051852"]]
+   (1.7ms)  COMMIT
+Migrating to AddPOccupationToInforms (20200712052013)
+   (0.5ms)  BEGIN
+== 20200712052013 AddPOccupationToInforms: migrating ==========================
+-- add_column(:informs, :p_occupation, :string)
+   (0.9ms)  ALTER TABLE "informs" ADD "p_occupation" character varying
+   -> 0.0011s
+== 20200712052013 AddPOccupationToInforms: migrated (0.0012s) =================
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712052013"]]
+   (1.6ms)  COMMIT
+Migrating to AddPResidenceCodeToInforms (20200712052058)
+   (0.5ms)  BEGIN
+== 20200712052058 AddPResidenceCodeToInforms: migrating =======================
+-- add_column(:informs, :p_residence_code, :string)
+   (1.0ms)  ALTER TABLE "informs" ADD "p_residence_code" character varying
+   -> 0.0013s
+== 20200712052058 AddPResidenceCodeToInforms: migrated (0.0013s) ==============
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712052058"]]
+   (1.4ms)  COMMIT
+Migrating to AddPMunicipalityToInforms (20200712052133)
+   (0.4ms)  BEGIN
+== 20200712052133 AddPMunicipalityToInforms: migrating ========================
+-- add_column(:informs, :p_municipality, :string)
+   (1.0ms)  ALTER TABLE "informs" ADD "p_municipality" character varying
+   -> 0.0013s
+== 20200712052133 AddPMunicipalityToInforms: migrated (0.0014s) ===============
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712052133"]]
+   (1.4ms)  COMMIT
+Migrating to AddPDepartmentToInforms (20200712052219)
+   (0.5ms)  BEGIN
+== 20200712052219 AddPDepartmentToInforms: migrating ==========================
+-- add_column(:informs, :p_department, :string)
+   (1.3ms)  ALTER TABLE "informs" ADD "p_department" character varying
+   -> 0.0016s
+== 20200712052219 AddPDepartmentToInforms: migrated (0.0017s) =================
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712052219"]]
+   (1.9ms)  COMMIT
+Migrating to AddInfTypeToInforms (20200712052651)
+   (0.4ms)  BEGIN
+== 20200712052651 AddInfTypeToInforms: migrating ==============================
+-- add_column(:informs, :inf_type, :string)
+   (1.0ms)  ALTER TABLE "informs" ADD "inf_type" character varying
+   -> 0.0013s
+== 20200712052651 AddInfTypeToInforms: migrated (0.0014s) =====================
+
+  ActiveRecord::SchemaMigration Create (0.6ms)  INSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"  [["version", "20200712052651"]]
+   (1.6ms)  COMMIT
+Migrating to UpdateIndexOnPatients (20200712071722)
+   (0.4ms)  BEGIN
+== 20200712071722 UpdateIndexOnPatients: migrating ============================
+   (1.2ms)  DROP INDEX index_patients_on_email ON patients
+   (6.1ms)  ROLLBACK
+   (0.6ms)  SELECT pg_advisory_unlock(2738126851773897885)
+rails aborted!
+StandardError: An error has occurred, this and all later migrations canceled:
+
+PG::SyntaxError: ERROR:  syntax error at or near "ON"
+LINE 1: DROP INDEX index_patients_on_email ON patients
+                                           ^
+: DROP INDEX index_patients_on_email ON patients
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:75:in `exec'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:75:in `block (2 levels) in execute'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies/interlock.rb:48:in `block in permit_concurrent_loads'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies/interlock.rb:47:in `permit_concurrent_loads'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:74:in `block in execute'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract_adapter.rb:581:in `block (2 levels) in log'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract_adapter.rb:580:in `block in log'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract_adapter.rb:571:in `log'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:73:in `execute'
+/app/db/migrate/20200712071722_update_index_on_patients.rb:5:in `up'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:817:in `exec_migration'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:798:in `block (2 levels) in migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:797:in `block in migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `with_connection'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:796:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:977:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1292:in `block in execute_migration_in_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1343:in `block in ddl_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `block in transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/transaction.rb:239:in `block in within_new_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/transaction.rb:236:in `within_new_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/transactions.rb:212:in `transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1343:in `ddl_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1291:in `execute_migration_in_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1263:in `block in migrate_without_lock'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1262:in `each'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1262:in `migrate_without_lock'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1210:in `block in migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1363:in `with_advisory_lock'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1210:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1036:in `up'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1011:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/tasks/database_tasks.rb:172:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/railties/databases.rake:60:in `block (2 levels) in <top (required)>'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/commands/rake/rake_command.rb:23:in `block in perform'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/commands/rake/rake_command.rb:20:in `perform'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/command.rb:48:in `invoke'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/commands.rb:18:in `<top (required)>'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `require'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `block in require_with_bootsnap_lfi'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/loaded_features_index.rb:92:in `register'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:22:in `require_with_bootsnap_lfi'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:31:in `require'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies.rb:291:in `block in require'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies.rb:257:in `load_dependency'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies.rb:291:in `require'
+/app/bin/rails:9:in `<main>'
+
+Caused by:
+ActiveRecord::StatementInvalid: PG::SyntaxError: ERROR:  syntax error at or near "ON"
+LINE 1: DROP INDEX index_patients_on_email ON patients
+                                           ^
+: DROP INDEX index_patients_on_email ON patients
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:75:in `exec'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:75:in `block (2 levels) in execute'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies/interlock.rb:48:in `block in permit_concurrent_loads'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies/interlock.rb:47:in `permit_concurrent_loads'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:74:in `block in execute'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract_adapter.rb:581:in `block (2 levels) in log'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract_adapter.rb:580:in `block in log'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract_adapter.rb:571:in `log'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:73:in `execute'
+/app/db/migrate/20200712071722_update_index_on_patients.rb:5:in `up'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:817:in `exec_migration'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:798:in `block (2 levels) in migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:797:in `block in migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `with_connection'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:796:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:977:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1292:in `block in execute_migration_in_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1343:in `block in ddl_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `block in transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/transaction.rb:239:in `block in within_new_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/transaction.rb:236:in `within_new_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/transactions.rb:212:in `transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1343:in `ddl_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1291:in `execute_migration_in_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1263:in `block in migrate_without_lock'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1262:in `each'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1262:in `migrate_without_lock'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1210:in `block in migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1363:in `with_advisory_lock'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1210:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1036:in `up'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1011:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/tasks/database_tasks.rb:172:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/railties/databases.rake:60:in `block (2 levels) in <top (required)>'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/commands/rake/rake_command.rb:23:in `block in perform'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/commands/rake/rake_command.rb:20:in `perform'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/command.rb:48:in `invoke'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/commands.rb:18:in `<top (required)>'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `require'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `block in require_with_bootsnap_lfi'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/loaded_features_index.rb:92:in `register'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:22:in `require_with_bootsnap_lfi'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:31:in `require'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies.rb:291:in `block in require'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies.rb:257:in `load_dependency'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies.rb:291:in `require'
+/app/bin/rails:9:in `<main>'
+
+Caused by:
+PG::SyntaxError: ERROR:  syntax error at or near "ON"
+LINE 1: DROP INDEX index_patients_on_email ON patients
+                                           ^
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:75:in `exec'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:75:in `block (2 levels) in execute'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies/interlock.rb:48:in `block in permit_concurrent_loads'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/concurrency/share_lock.rb:187:in `yield_shares'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies/interlock.rb:47:in `permit_concurrent_loads'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:74:in `block in execute'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract_adapter.rb:581:in `block (2 levels) in log'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract_adapter.rb:580:in `block in log'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract_adapter.rb:571:in `log'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/postgresql/database_statements.rb:73:in `execute'
+/app/db/migrate/20200712071722_update_index_on_patients.rb:5:in `up'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:817:in `exec_migration'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:798:in `block (2 levels) in migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:797:in `block in migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:416:in `with_connection'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:796:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:977:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1292:in `block in execute_migration_in_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1343:in `block in ddl_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `block in transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/transaction.rb:239:in `block in within_new_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/transaction.rb:236:in `within_new_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/connection_adapters/abstract/database_statements.rb:267:in `transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/transactions.rb:212:in `transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1343:in `ddl_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1291:in `execute_migration_in_transaction'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1263:in `block in migrate_without_lock'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1262:in `each'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1262:in `migrate_without_lock'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1210:in `block in migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1363:in `with_advisory_lock'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1210:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1036:in `up'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/migration.rb:1011:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/tasks/database_tasks.rb:172:in `migrate'
+/app/vendor/bundle/ruby/2.5.0/gems/activerecord-5.2.4.3/lib/active_record/railties/databases.rake:60:in `block (2 levels) in <top (required)>'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/commands/rake/rake_command.rb:23:in `block in perform'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/commands/rake/rake_command.rb:20:in `perform'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/command.rb:48:in `invoke'
+/app/vendor/bundle/ruby/2.5.0/gems/railties-5.2.4.3/lib/rails/commands.rb:18:in `<top (required)>'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `require'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:23:in `block in require_with_bootsnap_lfi'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/loaded_features_index.rb:92:in `register'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:22:in `require_with_bootsnap_lfi'
+/app/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:31:in `require'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies.rb:291:in `block in require'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies.rb:257:in `load_dependency'
+/app/vendor/bundle/ruby/2.5.0/gems/activesupport-5.2.4.3/lib/active_support/dependencies.rb:291:in `require'
+/app/bin/rails:9:in `<main>'
+Tasks: TOP => db:migrate
+(See full trace by running task with --trace)

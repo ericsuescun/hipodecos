@@ -21,6 +21,7 @@ class InformsController < ApplicationController
 
   def last20
     @informs = Inform.limit(20)
+    # @informs = []
   end
 
   def index_revision

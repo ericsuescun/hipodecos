@@ -1,7 +1,7 @@
 class Inform < ApplicationRecord
   belongs_to :patient, optional: true
 
-  default_scope -> { order(created_at: :desc) }
+  # default_scope -> { order(created_at: :desc) }
 
   # has_many :physicians, dependent: :destroy
 
@@ -30,6 +30,6 @@ class Inform < ApplicationRecord
   has_many :pictures, as: :imageable
   has_many :recipients
 
-  validates :receive_date, :inf_type, presence: true
+  # validates :receive_date, :inf_type, presence: true
 
 end

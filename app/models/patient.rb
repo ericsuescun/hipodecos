@@ -1,8 +1,21 @@
 class Patient < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :timeoutable,
-         :rememberable, :authentication_keys => [:id_number]
+	def email_required?
+	  false
+	end
+
+	def email_changed?
+	  false
+	end
+
+	# For ActiveRecord 5.1+
+	def will_save_change_to_email?
+	  false
+	end
+	
+	# Include default devise modules. Others available are:
+	# :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+	devise :database_authenticatable, :timeoutable,
+	     :rememberable, :authentication_keys => [:id_number]
          
 	has_many :informs, dependent: :destroy
 
@@ -20,17 +33,6 @@ class Patient < ApplicationRecord
 
 	validates :id_number, uniqueness: true
 
-	def email_required?
-	  false
-	end
 
-	def email_changed?
-	  false
-	end
-
-	# For ActiveRecord 5.1+
-	def will_save_change_to_email?
-	  false
-	end
 	
 end

@@ -89,21 +89,21 @@ class PatientsController < ApplicationController
 
     # byebug
 
-    # consecutive = Inform.where(created_at: date_range).count + 1
-    # @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+    @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
 
-    # if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
-    #     consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
-    #     @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-    # else
-    #   if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
-    #     consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
-    #     @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-    #   else
-    #     consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
-    #     @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-    #   end #La instancia de inform hace que se el conteo COUNT de +1. Por eso consecutive no le sumo 1
-    # end
+    if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
+        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+        @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    else
+      if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
+        consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
+        @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+      else
+        consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
+        @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+      end #La instancia de inform hace que se el conteo COUNT de +1. Por eso consecutive no le sumo 1
+    end
 
     if @patient.save
       redirect_to inform_path(@patient.informs.first), notice: 'Paciente matriculado exitosamente.'

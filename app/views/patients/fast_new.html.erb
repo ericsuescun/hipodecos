@@ -1,0 +1,70 @@
+<% if @patient.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@patient.errors.count, "error") %> impidieron que este paciente fuera matriculado:</h2>
+
+    <ul>
+    <% @patient.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="container">
+  <h1>Matrícula rápida</h1>
+  <div class="row">
+    <div class="col-12 col-lg-6 col-xl-6">
+      <%= form_with(model: @patient, local: true) do |form| %>
+        <div class="alert alert-primary">
+          <h5>Datos del paciente</h5>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <%= form.label "# de identificación" %>
+                <%= form.text_field :id_number, class: "form-control input" %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <%= form.label "Tipo de id" %>
+                <%= form.select(:id_type, options_for_select([['Cédula', 'CC'], ['Cédula de extranjería', 'CE'], ['Carnet Diplomático', 'CD'], ['Pasaporte', 'PA'], ['Salvoconducto', 'SC'], ['Permiso Especial', 'PE'], ['Registro Civil', 'RC'], ['Tarjeta de Identidad', 'TI'], ['Certificado de Nacimiento', 'NC'], ['Adulto sin identificación', 'AS'], ['Menor sin identificación', 'MS']], @patient.id_type), { include_blank: true }, class: "form-control input", autofocus: true) %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div class="col-12 col-lg-6 col-xl-6">
+      <%= form.fields_for :informs do |informs_form| %>
+        <div class="alert alert-success mb-3">
+          <h5>Datos del informe:</h5>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <%= informs_form.label "Tipo Informe" %>
+                <%= informs_form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']], @patient.informs), { include_blank: true }, class: "form-control form-control input") %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <%= informs_form.label "Fecha recepción" %>
+                <%= informs_form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de nacimiento", class: "form-control input"  %>
+              </div>
+            </div>
+          </div> 
+        </div> 
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-4 mx-auto">
+      <div class="actions">
+        <%= form.submit "Guardar", class: 'btn btn-primary btn-block' %>
+      </div>
+    </div>
+  </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

@@ -48,6 +48,23 @@ class PatientsController < ApplicationController
     end
   end
 
+  def fast_new_form
+
+  end
+
+  def fast_new
+    patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
+
+    if patients.length > 0
+      @patient = patients.first
+      @inform = patients.first.informs.build.physicians.build #Creo la instancia para physician para la form
+      redirect_to patient_path(patients.first)
+    else
+      @patient = Patient.new(id_number: params[:id_number])
+      @inform = @patient.informs.build.physicians.build #Creo la instancia para physician para la form
+    end
+  end
+
   # GET /patients/1/edit
   def edit
   end
@@ -71,10 +88,22 @@ class PatientsController < ApplicationController
     if @patient.save
       date_range = Date.today.beginning_of_year..Date.today.end_of_year
       finf = Inform.where(created_at: date_range).last #Traingo el primer informe de año en curso. Last sería el primero desde que traigo ordenado por fecha y los más recientes son los primeros, mientras que los más viejos son los últimos. IMPORTANTE: El orden en el modelo es DESCENDENTE sobre el parámetro CREATED_AT. NO FUNCIONA BIEN si no es con ese parámetro. Los id van en el orden de creación!
-      @patient.informs.first.update(tag_code: ('C' + Date.today.strftime('%y').to_s + '-' + (@patient.informs.first.id - finf.id + 1).to_s)) #Para aplicar el consecutivo, tomo el id del registro actual, le resto el del primero del año y le sumo 1. Si coinciden, es decir, estoy justo en el primer registro del año, la resta dará 0, y el consecutivo asignado será 1 ! Esto además tiene en cuenta todos los registros pues esta basado en el id.
-      redirect_to new_patient_path, notice: 'Paciente matriculado exitosamente.'
+      if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
+        #@patient.informs.first.update(tag_code: ('C' + Date.today.strftime('%y').to_s + '-' + (@patient.informs.first.id - finf.id + 1).to_s)) #Para aplicar el consecutivo, tomo el id del registro actual, le resto el del primero del año y le sumo 1. Si coinciden, es decir, estoy justo en el primer registro del año, la resta dará 0, y el consecutivo asignado será 1 ! Esto además tiene en cuenta todos los registros pues esta basado en el id.
+        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count
+        @patient.informs.first.update(tag_code: ("C" + Date.today.strftime('%y').to_s + '-' + (consecutive).to_s))
+      else
+        if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
+          consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count
+          @patient.informs.first.update(tag_code: ("H" + Date.today.strftime('%y').to_s + '-' + (consecutive).to_s))
+        else
+          consecutive = Inform.where(inf_type: "cito", created_at: date_range).count
+          @patient.informs.first.update(tag_code: ("K" + Date.today.strftime('%y').to_s + '-' + (consecutive).to_s))
+        end #La instancia de inform hace que se el conteo COUNT de +1. Por eso consecutive no le sumo 1
+      end
+      redirect_to inform_path(@patient.informs.first), notice: 'Paciente matriculado exitosamente.'
     else
-      render :new
+      render :fast_new
     end
   end
 

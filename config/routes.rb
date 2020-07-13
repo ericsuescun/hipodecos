@@ -118,6 +118,9 @@ Rails.application.routes.draw do
     
     devise_for :patients, path: 'patients', controllers: { sessions: "patients/sessions" }
 
+    get 'patients/fast_new_form'
+    get 'patients/fast_new', to: 'patients#fast_new'
+    
     resources :patients do
       resources :informs do
         resources :physicians

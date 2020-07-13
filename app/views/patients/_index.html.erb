@@ -1,11 +1,9 @@
 <div class="container-fluid">
-  <h1>Matricular o buscar un paciente</h1>
-  <%= form_tag new_patient_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
-    <%= text_field_tag :id_number, nil, class: "form-control input mx-2", placeholder: "# identificación" %>
-  <% end %>
   <div class="row">
-    <div class="col-12 col-lg-12 mx-auto mt-3">
-      <h1>Últimos 20 pacientes atendidos</h1>
+    <div class="col-12 col-lg-12 mx-auto">
+      <div class="alert alert-primary">
+        <h1>Pacientes</h1>
+      </div>
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>

@@ -1,0 +1,11 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-lg-8 col-xl-8 mx-auto">
+			<h1>Matrícula rápida de nuevo paciente</h1>
+			<%= form_tag patients_fast_new_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+			  <%= text_field_tag :id_number, nil, class: "form-control input mx-2", placeholder: "# identificación" %>
+			<% end %>
+		</div>
+	</div>
+</div>
+

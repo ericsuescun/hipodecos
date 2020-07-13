@@ -7,7 +7,7 @@ class Micro < ApplicationRecord
   # has_many :pictures, as: :imageable, dependent: :destroy
   has_many :pictures, as: :imageable
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(created_at: :asc) }
 
   validates :description, presence: true
 end

@@ -99,6 +99,7 @@ class PatientsController < ApplicationController
           @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
         end #La instancia de inform hace que se el conteo COUNT de +1. Por eso consecutive no le sumo 1
       end
+    end
 
     if @patient.save
       redirect_to inform_path(@patient.informs.first), notice: 'Paciente matriculado exitosamente.'

@@ -85,22 +85,22 @@ class PatientsController < ApplicationController
     @patient.password = params[:patient][:id_number]
     @patient.password_confirmation = params[:patient][:id_number]
 
-    if @patient.save
-      date_range = Date.today.beginning_of_year..Date.today.end_of_year
-      finf = Inform.where(created_at: date_range).last #Traingo el primer informe de año en curso. Last sería el primero desde que traigo ordenado por fecha y los más recientes son los primeros, mientras que los más viejos son los últimos. IMPORTANTE: El orden en el modelo es DESCENDENTE sobre el parámetro CREATED_AT. NO FUNCIONA BIEN si no es con ese parámetro. Los id van en el orden de creación!
-      if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
-        #@patient.informs.first.update(tag_code: ('C' + Date.today.strftime('%y').to_s + '-' + (@patient.informs.first.id - finf.id + 1).to_s)) #Para aplicar el consecutivo, tomo el id del registro actual, le resto el del primero del año y le sumo 1. Si coinciden, es decir, estoy justo en el primer registro del año, la resta dará 0, y el consecutivo asignado será 1 ! Esto además tiene en cuenta todos los registros pues esta basado en el id.
-        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count
-        @patient.informs.first.update(tag_code: ("C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s))
+    date_range = Date.today.beginning_of_year..Date.today.end_of_year
+
+    if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
+        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+        @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
       else
         if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
-          consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count
-          @patient.informs.first.update(tag_code: ("H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s))
+          consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
+          @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
         else
-          consecutive = Inform.where(inf_type: "cito", created_at: date_range).count
-          @patient.informs.first.update(tag_code: ("K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s))
+          consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
+          @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
         end #La instancia de inform hace que se el conteo COUNT de +1. Por eso consecutive no le sumo 1
       end
+
+    if @patient.save
       redirect_to inform_path(@patient.informs.first), notice: 'Paciente matriculado exitosamente.'
     else
       render :fast_new

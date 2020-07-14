@@ -2,11 +2,11 @@ class Codeval < ApplicationRecord
 
 	require 'csv'
 
-	# has_many :factors, dependent: :destroy	#Se harán dificiles de borrar para evitar catástrofes
-	has_many :factors
+	has_many :factors, dependent: :destroy	#Se harán dificiles de borrar para evitar catástrofes
+	# has_many :factors
 
-	# has_many :values, dependent: :destroy
-	has_many :values
+	has_many :values, dependent: :destroy
+	# has_many :values
 
 	# has_many :rates, through: :factors, dependent: :destroy
 	has_many :rates, through: :factors

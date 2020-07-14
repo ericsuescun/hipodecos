@@ -1,24 +1,13 @@
 <%= form_with(model: automatic, local: true) do |form| %>
-  <% if automatic.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(automatic.errors.count, "error") %> prohibited this automatic from being saved:</h2>
+  <%= render "shared/error_messages", target: automatic %>
 
-      <ul>
-      <% automatic.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form.hidden_field :auto_type, value: automatic.auto_type %>
 
-  <div class="form-group">
-    <%= form.label "Tipo de automático" %>
-    <%= form.select(:auto_type, options_for_select([['Micro', 'micro'], ['Macro', 'macro']], @automatic.auto_type), { include_blank: true }, class: "form-control input", autofocus: true) %>
-  </div>
+
 
   <div class="form-group">
     <%= form.label "Título o nombre del automático" %>
-    <%= form.text_field :title, class: "form-control input" %>
+    <%= form.text_field :title, class: "form-control input", autofocus: true %>
   </div>
 
   <div class="form-group">

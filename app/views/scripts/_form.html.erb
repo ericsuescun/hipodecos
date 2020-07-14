@@ -1,13 +1,5 @@
 <% if script.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(script.errors.count, "error") %> prohibited this script from being saved:</h2>
-    <ul>
-    <% script.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+  <%= render "shared/error_messages", target: script %>
 
 <div class="container">
   <div class="row">

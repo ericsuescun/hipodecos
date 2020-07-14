@@ -18,6 +18,14 @@ class AutomaticsController < ApplicationController
     @automatic = Automatic.new
   end
 
+  def new_micro
+    @automatic = Automatic.new(auto_type: 'micro')
+  end
+
+  def new_macro
+    @automatic = Automatic.new(auto_type: 'macro')
+  end
+
   # GET /automatics/1/edit
   def edit
     @selected = @automatic.organ

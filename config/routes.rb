@@ -102,6 +102,9 @@ Rails.application.routes.draw do
     resources :pictures
     resources :obcodes
     resources :recipients
+
+    get 'automatics/new_micro', to: 'automatics#new_micro'
+    get 'automatics/new_macro', to: 'automatics#new_macro'
     resources :automatics
     resources :scripts
     resources :organs

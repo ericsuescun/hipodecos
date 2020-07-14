@@ -4,8 +4,8 @@ class Macro < ApplicationRecord
   has_many :objections, as: :objectionable, dependent: :destroy
   # has_many :objections, as: :objectionable
 
-  # has_many :pictures, as: :imageable, dependent: :destroy
-  has_many :pictures, as: :imageable
+  has_many :pictures, as: :imageable, dependent: :destroy
+  # has_many :pictures, as: :imageable
 
   default_scope -> { order(created_at: :desc) }
 

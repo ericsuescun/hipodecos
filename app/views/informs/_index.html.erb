@@ -29,9 +29,7 @@
               <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
               <td><%= User.where(id: inform.user_id).first.try(:first_name) %></td>
               <td>
-                <%= link_to inform.patient  do %>
-                  <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
-                  <% end %>
+                
               </td>
               <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
               <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>

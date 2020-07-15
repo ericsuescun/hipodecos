@@ -1,54 +1,21 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
-      <div class="alert alert-primary mt-3">
-        <h1>Paciente: <strong><%= @patient.name1 %> <%= @patient.name2 %> <%= @patient.lastname1 %> <%= @patient.lastname2 %></strong> - <%= @patient.id_type %>: <strong><%= @patient.id_number %></strong></h1>
-        <br>
-        <div class="row mt-3">
-          <div class="col-4 col-lg-4">
-            <h5>Características</h5>
-            <br>
-            <p>Sexo: <strong><%= @patient.sex %></strong></p>
-            <p>F. Nac: <strong><%= @patient.birth_date || "sin fecha" %></strong></p>
-            <p>Edad: <strong><%= @patient.age_number || '#' %> <%= @patient.age_type || '#' %></strong></p>
-            <p>Ocupación: <strong><%= @patient.occupation %></strong></p>
-            <p>Creado el: <strong><%= @patient.created_at.strftime("%d/%m/%Y") %></strong></p>
-            <p>Modificado el: <strong><%= @patient.updated_at.strftime("%d/%m/%Y") %></strong></p>
-          </div>
-          <div class="col-4 col-lg-4">
-            <h5>Contacto</h5>
-            <br>
-            <p>Tel: <strong><%= @patient.tel %></strong></p>
-            <p>Cel: <strong><%= @patient.cel %></strong></p>
-            <p>Email: <strong><%= @patient.email %></strong></p>
-            <p>Dirección: <strong><%= @patient.address %></strong></p>
-            <p>Municipio: <strong><%= @patient.municipality %></strong></p>
-            <p>Departamento: <strong><%= @patient.department %></strong></p>
-            <p>Código Res: <strong><%= @patient.residence_code %></strong></p>
-          </div>
-          <div class="col-4 col-lg-4">
-            <h5>Diagnósticos previos encontrados</h5>
-            <br>
-            <% if @patient.informs.length == 0%>
-              <h4>No se encuentran diagnósticos previos para este paciente</h4>
-            <% else %>
-              <% @patient.informs.each do |inform| %>
-                <% inform.diagnostics.each do |diagnostic| %>
-                  <p>Dx: <strong><%= diagnostic.description %></strong></p>
-                  <p><small>Fecha: <strong><%= diagnostic.created_at.strftime("%d/%m/%Y") %></strong></small></p>
-                  <%= link_to "Ver informe", inform_path(inform), class: "btn btn-info" %>
-                <% end %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <%= link_to 'Editar paciente', edit_patient_path(@patient) %> |
-        <%= link_to 'Regresar a pacientes', patients_path %>
-      </div>      
-    </div>
+      <h3>
+        <strong><%= @patient.name1 %> <%= @patient.name2 %> <%= @patient.lastname1 %> <%= @patient.lastname2 %></strong>, <strong><%= @patient.age_number %> <%= @patient.age_type == 'A' ? 'Años' : @patient.age_type == 'M' ? 'Meses' : 'Días' %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
+      </h3>
+      
+      <div class="inform">
+        <p>Teléfono: <strong><%= @patient.tel %></strong> - Celular: <strong><%= @patient.cel %></strong> - Dirección: <strong><%= @patient.address %> - </strong>Email: <strong><%= @patient.email %></strong>
 
+        </p>
+      </div>
+      <%= link_to 'Editar paciente', edit_patient_path(@patient) %> |
+      <%= link_to 'Regresar a pacientes', patients_path %>
+    </div>      
   </div>
-  <div class="row">
+</div>
+  <!-- <div class="row">
     <div class="col-4 col-lg-4">
       <div class="alert alert-secondary">
         <h1>Informes previos</h1>
@@ -72,126 +39,156 @@
           </div>
         <% end %>
       </div>
-    </div>
-    <div class="col-8 col-lg-8">
-      <div class="alert alert-success">
-        <h1>Nuevo informe</h1>
-        <%= form_for [@patient, @patient.informs.build] do |form| %>
-          <div class="row">
-            <div class="col-3 col-lg-3">
-              <div class="form-group">
-                <%= form.label "Fecha de matrícula" %>
-                <%= form.label Date.today, class: "form-control input"  %>
-              </div>
-            </div>
-            <div class="col-3 col-lg-3">
-              <div class="form-group">
-                <%= form.label "Fecha de recepción" %>
-                <%= form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de recepción", class: "form-control input", autofocus: true  %>
-              </div>
-            </div>
-            <div class="col-3 col-lg-3">
-              <div class="form-group">
-                <%= form.label "EPS" %>
-                <%= form.select :promoter_id, Promoter.pluck(:name, :id), {prompt:"Selec EPS"}, class: "form-control input" %>
-              </div>
-            </div>
-            <div class="col-3 col-lg-3">
-              <div class="form-group">
-                <%= form.label "Sede IPS" %>
-                <%= form.select :branch_id, Branch.pluck(:name, :id), {prompt:"Selec IPS"}, class: "form-control input" %>
-              </div>
+    </div> -->
+<div class="row">
+  <div class="col-8 col-lg-8">
+    <div class="alert alert-dark ml-1">
+      <h3>Nuevo informe</h3>
+      <%= form_for [@patient, @patient.informs.build] do |form| %>
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Fecha de matrícula" %>
+              <%= form.label Date.today, class: "form-control input"  %>
             </div>
           </div>
-          <div class="row">
-            <div class="col-3 col-lg-3">
-              <div class="form-group">
-                <%= form.label "Autoriz EPS/IPS" %>
-                <%= form.text_field :prmtr_auth_code, class: "form-control input" %>
-              </div>
-            </div>
-            <div class="col-3 col-lg-3">
-              <div class="form-group">
-                <%= form.label "Estado del paciente" %>
-                <%= form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @patient.informs), { include_blank: true }, class: "form-control input") %>
-              </div>
-            </div>
-            <div class="col-3 col-lg-3">
-              <div class="form-group">
-                <%= form.label "Tipo de zona" %>
-                <%= form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']], @patient.informs), { include_blank: true }, class: "form-control input") %>
-              </div>
-            </div>
-            <div class="col-3 col-lg-3">
-              <% if @patient.sex == 'F' %>
-                <div class="form-group">
-                  <%= form.label "Estado de embarazo" %>
-                  <%= form.select(:pregnancy_status, options_for_select([['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3'], ['No Emb', '4']], @patient.informs), { include_blank: true }, class: "form-control input") %>
-                </div>
-              <% else %>
-                <div class="form-group">
-                  <%= form.label "Estado de embarazo" %>
-                  <fieldset disabled>
-                    <%= form.select(:pregnancy_status, options_for_select([['No Emb', '4']], @patient.informs), { include_blank: false }, class: "form-control input") %>
-                  </fieldset>
-                </div>
-              <% end %>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Fecha de recepción" %>
+              <%= form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de recepción", class: "form-control input", autofocus: true  %>
             </div>
           </div>
-            <%= form.fields_for [@patient, @patient.informs.build.physicians.build] do |phy_form| %>
-              <h5>Médico tratante</h5>
-              <div class="row">
-                <div class="col-4 col-lg-4">
-                  <div class="form-group">
-                    <%= phy_form.label "Nombre" %>
-                    <%= phy_form.text_field :name, class: "form-control input" %>
-                  </div>
-                </div>
-                <div class="col-4 col-lg-4">
-                  <div class="form-group">
-                    <%= phy_form.label "Apellido" %>
-                    <%= phy_form.text_field :lastname, class: "form-control input" %>
-                  </div>
-                </div>
-                <div class="col-2 col-lg-2">
-                  <div class="form-group">
-                    <%= phy_form.label "Teléfono" %>
-                    <%= phy_form.text_field :tel, class: "form-control input" %>
-                  </div>
-                </div>
-                <div class="col-2 col-lg-2">
-                  <div class="form-group">
-                    <%= phy_form.label "Celular" %>
-                    <%= phy_form.text_field :cel, class: "form-control input" %>
-                  </div>
-                </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Tipo Informe" %>
+              <%= form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']], @patient.informs), { prompt:"Selecciona" }, class: "form-control form-control input") %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <div class="form-group">
+              <%= form.label "EPS" %>
+              <%= form.select :promoter_id, Promoter.pluck(:name, :id), {prompt:"Selec EPS"}, class: "form-control input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="form-group">
+              <%= form.label "Sede IPS" %>
+              <%= form.select :branch_id, Branch.pluck(:name, :id), {prompt:"Selec IPS"}, class: "form-control input" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Autoriz EPS/IPS" %>
+              <%= form.text_field :prmtr_auth_code, class: "form-control input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Estado del paciente" %>
+              <%= form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @patient.informs), { include_blank: true }, class: "form-control input") %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Tipo de zona" %>
+              <%= form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']], @patient.informs), { include_blank: true }, class: "form-control input") %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <% if @patient.sex == 'F' %>
+              <div class="form-group">
+                <%= form.label "Estado de embarazo" %>
+                <%= form.select(:pregnancy_status, options_for_select([['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3'], ['No Emb', '4']], @patient.informs), { include_blank: true }, class: "form-control input") %>
               </div>
-              <div class="row">
-                <div class="col-4 col-lg-4">
-                  <%= phy_form.label "email" %>
-                  <%= phy_form.text_field :email, class: "form-control input" %>
-                </div>
-                <div class="col-4 col-lg-4">
-                  <%= phy_form.label "Especialidad" %>
-                  <%= phy_form.text_field :study1, class: "form-control input" %>
-                </div>
-                <div class="col-4 col-lg-4">
-                  <%= phy_form.label "Otro estudio/especialidad" %>
-                  <%= phy_form.text_field :study2, class: "form-control input" %>
-                </div>
+            <% else %>
+              <div class="form-group">
+                <%= form.label "Estado de embarazo" %>
+                <fieldset disabled>
+                  <%= form.select(:pregnancy_status, options_for_select([['No Emb', '4']], @patient.informs), { include_blank: false }, class: "form-control input") %>
+                </fieldset>
               </div>
             <% end %>
-
-          <div class="row">
-            <div class="col-4 col-lg-4 mx-auto">
-              <div class="actions">
-                <%= form.submit "Guardar", class: "btn btn-primary btn-block mt-3" %>
+          </div>
+        </div>
+          <%= form.fields_for [@patient, @patient.informs.build.physicians.build] do |phy_form| %>
+            <h5>Médico tratante</h5>
+            <div class="row">
+              <div class="col-12 col-lg-4">
+                <div class="form-group">
+                  <%= phy_form.label "Nombre" %>
+                  <%= phy_form.text_field :name, class: "form-control input" %>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="form-group">
+                  <%= phy_form.label "Apellido" %>
+                  <%= phy_form.text_field :lastname, class: "form-control input" %>
+                </div>
+              </div>
+              <div class="col-12 col-lg-2">
+                <div class="form-group">
+                  <%= phy_form.label "Teléfono" %>
+                  <%= phy_form.text_field :tel, class: "form-control input" %>
+                </div>
+              </div>
+              <div class="col-12 col-lg-2">
+                <div class="form-group">
+                  <%= phy_form.label "Celular" %>
+                  <%= phy_form.text_field :cel, class: "form-control input" %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
-      </div>
+            <div class="row">
+              <div class="col-12 col-lg-4">
+                <%= phy_form.label "email" %>
+                <%= phy_form.text_field :email, class: "form-control input" %>
+              </div>
+              <div class="col-12 col-lg-4">
+                <%= phy_form.label "Especialidad" %>
+                <%= phy_form.text_field :study1, class: "form-control input" %>
+              </div>
+              <div class="col-12 col-lg-4">
+                <%= phy_form.label "Otro estudio/especialidad" %>
+                <%= phy_form.text_field :study2, class: "form-control input" %>
+              </div>
+            </div>
+          <% end %>
 
+        <div class="row">
+          <div class="col-12 col-lg-4 mx-auto">
+            <div class="actions">
+              <%= form.submit "Guardar", class: "btn btn-primary btn-block mt-3" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="col-4 col-lg-4">
+    <div class="alert alert-info mr-1">
+      <h3>Diagnósticos previos encontrados</h3>
+      <br>
+      <% if @patient.informs.length == 0%>
+        <h4>No se encuentran diagnósticos previos para este paciente</h4>
+      <% else %>
+        <% @patient.informs.each do |inform| %>
+          <ul>
+            <% inform.diagnostics.each do |diagnostic| %>
+              <li>
+                <span class="diagnostic"><strong><%= diagnostic.description %></strong></span>
+                <p><small>Fecha: <strong><%= diagnostic.created_at.strftime("%d/%m/%Y") %></strong></small> | <%= link_to "Ver informe", inform_path(inform) %></p>
+              </li>
+            <% end %>
+          </ul>
+          
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
+

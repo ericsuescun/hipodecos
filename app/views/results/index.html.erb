@@ -25,14 +25,14 @@
                 <% end %>
               </td>
               <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
-              <td><%= User.find(inform.user_id).first_name %></td>
+              <td><%= User.where(id: inform.user_id).first.try(:first_name) %></td>
               <td>
                 <%= link_to inform.patient  do %>
                   <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
                   <% end %>
               </td>
-              <td><%= Promoter.find(inform.promoter_id).initials %></td>
-              <td><%= Branch.find(inform.branch_id).initials %></td>
+              <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
+              <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
               <td><%= inform.prmtr_auth_code %></td>
               <td><%= link_to 'Borrar', inform, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
             </tr>

@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8 col-lg-8 mx-auto">
+      <%= form_with(model: micro, local: true) do |form| %>
+
+        <div class="form-group">
+          <%= form.label "Descripción" %>
+          <%= form.text_area :description, class: "form-control input" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Guardar", class: "btn btn-primary my-3" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

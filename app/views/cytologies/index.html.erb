@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Micros</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Inform</th>
+      <th>User</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @micros.each do |micro| %>
+      <tr>
+        <td><%= micro.inform %></td>
+        <td><%= micro.user_id %></td>
+        <td><%= micro.description %></td>
+        <td><%= link_to 'Show', micro %></td>
+        <td><%= link_to 'Edit', edit_micro_path(micro) %></td>
+        <td><%= link_to 'Destroy', micro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Micro', new_micro_path %>

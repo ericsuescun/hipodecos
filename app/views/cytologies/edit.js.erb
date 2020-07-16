@@ -1,0 +1,13 @@
+$(document).on('page:load', refresh());
+
+function refresh() {
+
+	$('div.micros-out').remove();
+	$('div.micros-in').append('<%= j render "micros/micros", inform: @inform, automatics: @automatics, edit_micro: @micro, edit_objection_id: nil, edit_status: true %>');
+
+	
+	
+	setTimeout(function() {
+		$('div.alert-growl').remove();
+	}, 3000)
+}

@@ -1,0 +1,51 @@
+<%= link_to 'Editar micro de informe' + take_inf.tag_code, edit_micro_path(@micro) %> |
+<%= link_to 'Volver al informe', inform_path(@inf) %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6 col-lg-6 offset-lg-1">
+      <div class="alert alert-success">
+        <h1>Micro</h1>
+        <fieldset disabled>
+          <%= form_with(model: @micro, local: true) do |form| %>
+
+            <div class="form-group">
+              <%= form.label "Descripción" %>
+              <%= form.text_area :description, class: "form-control input" %>
+            </div>
+
+            <p class="text-muted">Creado por: <%= User.find(@micro.user_id).email %></p>
+          <% end %>
+        </fieldset>
+        <% @micro.pictures.each do |picture| %>
+          <div class="card">
+            <img src="<%= picture.name.url %>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text"><%= picture.description %></p>
+              <%= link_to "Borrar", micro_picture_path(@micro, picture), method: :delete, data: { confirm: '¿Confirmar borrado?' }, class: "btn btn-danger" %>
+            </div>
+          </div>
+        <% end %>
+        <h1>Cargar fotos</h1>
+        <%= render partial: "pictures/form", locals: { imageable: @micro } %>
+      </div>
+      
+    </div>
+    <div class="col-4 col-lg-4">
+      <div class="alert alert-warning">
+        <h1>Revisión</h1>
+        <%= render partial: "objections/form", locals: { objectionable: @micro } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="alert alert-warning">
+        <%= render partial: "objections/objections_list", locals: { objectionable: @micro } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

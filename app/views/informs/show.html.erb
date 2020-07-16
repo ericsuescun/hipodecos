@@ -16,6 +16,15 @@
             </div>
           </div>
         </div>
+        <% if @inform.inf_type == 'cito' %>
+          <div class="row">
+            <div class="col-12 col-lg-12 mb-3 mx-auto">
+              <div class="cytology">
+                <%= render partial: "cytologies", locals: { inform: @inform, edit_cytology_form: nil } %>
+              </div>
+            </div>
+          </div>
+        <% end %>
 
         <div class="row">
           <div class="col-12 col-lg-12 mb-3 mx-auto">
@@ -30,14 +39,6 @@
             <div class="col-12 col-lg-12 mb-3 mx-auto">
               <div class="block">
                 <%= render partial: "blocks", locals: { inform: @inform, blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil } %>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <div class="row">
-            <div class="col-12 col-lg-12 mb-3 mx-auto">
-              <div class="cytology">
-                <%= render partial: "cytologies", locals: { inform: @inform } %>
               </div>
             </div>
           </div>

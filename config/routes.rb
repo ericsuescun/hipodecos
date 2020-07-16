@@ -109,6 +109,7 @@ Rails.application.routes.draw do
     resources :scripts
     resources :organs
     resources :results
+    resources :cytologies
     
     devise_for :users, path: 'users', controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", unlocks: "users/unlocks", confirmations: "users/confirmations" }
 

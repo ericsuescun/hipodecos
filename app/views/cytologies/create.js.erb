@@ -2,8 +2,8 @@ $(document).on('page:load', refresh());
 
 function refresh() {
 
-	$('div.micros-out').remove();
-	$('div.micros-in').append('<%= j render "micros/micros", inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil %>');
+	$('div.cytologies').remove();
+	$('div.cytology').append('<%= j render "inform/cytologies", inform: @inform, edit_cytology_form: nil %>');
 
 	
 	

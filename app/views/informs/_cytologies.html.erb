@@ -1,55 +1,153 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12 col-lg-12 col-xl-12">
-      <% inform.cytologies.each_with_index do |micro, n| %>
+<div class="cytologies">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-lg-12">
         <div class="card bg-light mx-2 mb-3">
-          <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-            <p>Citologías <%= n + 1 %> de <%= inform.cytologies.count %> procesada el <%= cytology.created_at.strftime('%d/%m/%Y') %> </p>
+          <div class="card-header pl-1 pr-0 pt-0 pb-0">
+            <strong>Citología</strong>
           </div>
           <div class="card-body">
-            <p><strong>Descripción</strong></p>
-            <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %></p></div>
-            <%= link_to 'Revisar/Cargar foto', micro_path(micro) %> |
-            <%= link_to 'Editar', edit_micro_path(micro) %> |
-            <%= link_to ' Borrar', micro, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
-
-            <table>
-              <tbody>
-                <% micro.objections.each do |objection| %>
-                  <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                    <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                    <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                    <!-- <td><%= objection.description %></td> -->
-                  </tr>
+            <div class="card-deck">
+              <% inform.cytologies.each do |cytology| %>
+                <% if edit_cytology_form == cytology %>
+                  <div class="col-12 col-lg-3">
+                    <%= form_with model: [inform, edit_cytology_form] do |form| %>
+                      <%= render "shared/error_messages", target: cytology %>
+                      <div class="card mb-2">
+                        <div class="card-header d-flex flex-row align-items-center justify-content-between px-1">
+                          <span class="d-flex"><strong>Editar citología</strong></span>
+                          
+                        </div>
+                        <div class="card-body">
+                          <div class="row d-flex flex-row justify-content-around">
+                            <div class="col-12 col-lg-6 col-xl-4">
+                              <div class="form-group">
+                                <%= f.label "Embarazos:" %>
+                                <%= form.number_field :pregnancies, value: edit_cytology_form.pregnancies, class: "form-control input d-flex" %>
+                              </div>
+                              <div class="form-group">
+                                <%= f.label "Fecha última menstruación:" %>
+                                <%= form.text_field :last_mens, value: edit_cytology_form.last_mens, class: "form-control input d-flex" %>
+                              </div>
+                              <div class="form-group">
+                                <%= f.label "Fecha cita anterior:" %>
+                                <%= form.text_field :prev_appo, value: edit_cytology_form.prev_appo, class: "form-control input d-flex" %>
+                              </div>
+                              <div class="form-group">
+                                <%= f.label "Fecha de toma de la muestra:" %>
+                                <%= form.date_field :sample_date, value: edit_cytology_form.sample_date, class: "form-control input d-flex" %>
+                              </div>
+                              <div class="form-group">
+                                <%= f.label "Resultado:" %>
+                                <%= form.text_field :result, value: edit_cytology_form.result, class: "form-control input d-flex" %>
+                              </div>
+                              <div class="form-group">
+                                <%= f.label "Planifica:" %>
+                                <%= form.number_field :birth_control, value: edit_cytology_form.birth_control, class: "form-control input d-flex" %>
+                              </div>
+                              <div class="form-group">
+                                <%= f.label "Sugerencias:" %>
+                                <%= form.text_field :suggestion, value: edit_cytology_form.suggestion, class: "form-control input d-flex" %>
+                              </div>
+                            </div>
+                            
+                            <div class="actions">
+                              <%= form.submit "Guardar", class: "btn btn-warning" %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="col-12 col-lg-12 p-0">
+                    <div class="card mb-2">
+                      <div class="card-header p-0 m-0 d-flex justify-content-between align-items-center">
+                        <%= link_to edit_cytology_path(cytology), remote: true, class: "d-flex my-0 py-0" do %>
+                          <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
+                        <% end %>
+                        <span><strong>Última menstruación:</strong> <%= cytology.last_mens %> - <strong>Fecha de cita anterior:</strong> <%= cytology.prev_appo %> - <strong>Fecha de toma de la muestra:</strong> <%= cytology.sample_date %></span>
+                        <%= link_to cytology, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
+                          <span>&times;</span>
+                        <% end %>
+                      </div>
+                      <div class="card-body p-1 m-0 d-flex flex-column">
+                        <p></p>
+                        <p><span><strong>Número de embarazos:</strong> <%= cytology.pregnancies %> <strong>Desde que edad planifica:</strong> <%= cytology.birth_control %> - <strong>Resultado:</strong> <%= cytology.result %></span></p>
+                        
+                        <p><strong>Sugerencias:</strong> <%= cytology.suggestion %></p>
+                      </div>
+                    </div>
+                  </div>    
                 <% end %>
-              </tbody>
-            </table>
-
-          </div>
-        </div>
-        <div class="card-group">
-          <% micro.pictures.each do |pic| %>
-            <div class="col-4 col-lg-4">
-              <div class="card">
-                <div class="card-header">
-                    <%= pic.description %>
-                </div>
-                <%= link_to pic.name.url  do %>
-                  <img class="card-img-top" src="<%= pic.name.url %>" alt="Card image cap" >
+              <% end %>
+              <div class="col-12 col-lg-12 col-xl-12 p-0">
+                <%= form_with model: [inform, inform.cytologies.build] do |form| %>
+                  <div class="card mb-2">
+                    <div class="card-header d-flex flex-row align-items-center justify-content-between m-0 p-0">
+                      <span class="d-flex"><strong>Nueva citología</strong></span>
+                      
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12 col-lg-3 col-xl-3">
+                          <div class="form-group">
+                            <%= form.label "Fecha últ menst:" %>
+                            <%= form.text_field :last_mens, class: "form-control input" %>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-3 col-xl-3">
+                          <div class="form-group">
+                            <%= form.label "Fecha toma muestra:" %>
+                            <%= form.date_field :sample_date, class: "form-control input" %>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-3 col-xl-3">
+                          <div class="form-group">
+                            <%= form.label "Fecha cita anterior:" %>
+                            <%= form.text_field :prev_appo, class: "form-control input" %>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-3 col-xl-3">
+                          <div class="form-group">
+                            <%= form.label "Resultado:" %>
+                            <%= form.text_field :result, class: "form-control input" %>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-3 col-xl-3">
+                          <div class="form-group">
+                            <%= form.label "Emb:" %>
+                            <%= form.number_field :pregnancies, class: "form-control input" %>
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-3 col-xl-3">
+                          <div class="form-group">
+                            <%= form.label "Planif:" %>
+                            <%= form.number_field :birth_control, class: "form-control input" %>
+                          </div>
+                          
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-6">
+                          <div class="form-group">
+                            <%= form.label "Sugerencias:" %>
+                            <%= form.text_area :suggestion, rows: 3, class: "form-control input" %>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="actions">
+                          <%= form.submit "+", class: "btn btn-outline-dark" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 <% end %>
-                <div class="card-body">
-                  <%= link_to 'Borrar', inform_picture_path(inform, pic), method: :delete, data: { confirm: 'Confirmar borrado?' }
-                   %>
-                   <div class="card-footer text-muted">
-                     Cargada por: <%= User.where(id: pic.user_id).first.try(:email) %>
-                   </div>
-                </div>
               </div>
             </div>
-          <% end %>
-        </div>
-      <% end %>
+          </div>
+        </div>     
+      </div>
     </div>
   </div>
 </div>
-    
+

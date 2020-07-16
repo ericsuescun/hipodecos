@@ -132,6 +132,6 @@ class CytologiesController < ApplicationController
 
 	  # Never trust parameters from the scary internet, only allow the white list through.
 	  def cytology_params
-	    params.require(:cytology).permit(:inform_id, :preganancies, :last_mens, :prev_appo, :sample_date, :result, :birth_control)
+	    params.require(:cytology).permit(:inform_id, :preganancies, :last_mens, :prev_appo, :sample_date, :result, :birth_control, :user_id, :suggestion)
 	  end
 end

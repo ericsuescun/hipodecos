@@ -15,9 +15,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-lg-6 col-xl-6 macros-in">
-        <%= render partial: "macros/macros", locals: { inform: @inform } %>
-      </div>
+      <% if @inform.inf_status == 'clin' || @inform.inf_status == 'hosp' %>
+        <div class="col-6 col-lg-6 col-xl-6 macros-in">
+          <%= render partial: "macros/macros", locals: { inform: @inform } %>
+        </div>
+      <% end %>
       <div class="col-6 col-lg-6 col-xl-6">
         <div class="micros-in">
           <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>

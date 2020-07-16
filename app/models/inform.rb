@@ -11,8 +11,13 @@ class Inform < ApplicationRecord
   has_many :micros, dependent: :destroy
   has_many :diagnostics, dependent: :destroy
   has_many :recipients, dependent: :destroy
+
   has_many :physicians, dependent: :destroy
   accepts_nested_attributes_for :physicians, allow_destroy: true
+  
+  has_many :cytologies, dependent: :destroy
+  accepts_nested_attributes_for :cytologies, allow_destroy: true
+
   has_many :pictures, as: :imageable, dependent: :destroy
 
 

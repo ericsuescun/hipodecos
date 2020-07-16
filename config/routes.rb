@@ -186,6 +186,7 @@ Rails.application.routes.draw do
       resources :macros
       resources :micros
       resources :diagnostics
+      resources :cytologies
       
       resources :pictures, module: :informs
 

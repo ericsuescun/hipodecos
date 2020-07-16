@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_052651) do
+ActiveRecord::Schema.define(version: 2020_07_15_160515) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -120,6 +120,19 @@ ActiveRecord::Schema.define(version: 2020_07_12_052651) do
     t.decimal "factor"
   end
 
+  create_table "cytologies", force: :cascade do |t|
+    t.integer "inform_id"
+    t.integer "pregnancies"
+    t.string "last_mens"
+    t.string "prev_appo"
+    t.date "sample_date"
+    t.string "result"
+    t.integer "birth_control"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inform_id"], name: "index_cytologies_on_inform_id"
+  end
+
   create_table "diagcodes", force: :cascade do |t|
     t.integer "admin_id"
     t.string "organ"
@@ -217,6 +230,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_052651) do
     t.string "p_municipality"
     t.string "p_department"
     t.string "inf_type"
+    t.integer "cytologist"
     t.index ["patient_id"], name: "index_informs_on_patient_id"
   end
 

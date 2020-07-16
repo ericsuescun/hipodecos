@@ -25,13 +25,15 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-12 col-lg-12 mb-3 mx-auto">
-            <div class="block">
-              <%= render partial: "blocks", locals: { inform: @inform, blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil } %>
+        <% if @inform.inf_type == 'hosp' || @inform.inf_type == 'clin' %>
+          <div class="row">
+            <div class="col-12 col-lg-12 mb-3 mx-auto">
+              <div class="block">
+                <%= render partial: "blocks", locals: { inform: @inform, blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil } %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
 
         <div class="row">
           <div class="col-12 col-lg-12 mb-3 mx-auto">

@@ -148,7 +148,9 @@ class InformsController < ApplicationController
 
     @blocks = @inform.blocks
 
-    # clasify_templates
+    if @inform.inf_type == 'cito'
+      @cytologies = @inform.cytologies
+    end
   end
 
   def show_revision

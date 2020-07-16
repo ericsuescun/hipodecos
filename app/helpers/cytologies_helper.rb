@@ -1,0 +1,2 @@
+module CytologiesHelper
+end

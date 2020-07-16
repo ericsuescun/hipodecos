@@ -33,6 +33,14 @@
               </div>
             </div>
           </div>
+        <% else %>
+          <div class="row">
+            <div class="col-12 col-lg-12 mb-3 mx-auto">
+              <div class="cytology">
+                <%= render partial: "cytologies", locals: { inform: @inform } %>
+              </div>
+            </div>
+          </div>
         <% end %>
 
         <div class="row">

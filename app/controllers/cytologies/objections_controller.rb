@@ -1,4 +1,4 @@
-class Citologies::ObjectionsController < ObjectionsController
+class Cytologies::ObjectionsController < ObjectionsController
 	before_action :set_objectionable
 
 	private

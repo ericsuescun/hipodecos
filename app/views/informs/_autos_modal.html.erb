@@ -18,8 +18,7 @@
               
                 <% Organ.all.each do |organ| %>
                   <div class="d-flex flex-wrap">
-
-                    <% @automatics_macro.where(organ: organ.organ).each do |automatic| %>
+                    <% Automatic.where(organ: organ.organ).each do |automatic| %>
 
                       <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
                         <div class="actions">

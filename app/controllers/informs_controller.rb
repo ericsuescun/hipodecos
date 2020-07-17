@@ -142,6 +142,8 @@ class InformsController < ApplicationController
   def show
     @organs = Organ.all
 
+    # byebug
+
     @automatics = Automatic.all
     @automatics_macro = Automatic.where(auto_type: "macro")
     @automatics_micro = Automatic.where(auto_type: "micro")

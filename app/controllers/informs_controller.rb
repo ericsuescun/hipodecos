@@ -175,7 +175,7 @@ class InformsController < ApplicationController
     # inform = @patient.informs.build(inform_params)
     inform.user_id = current_user.id
     
-    byebug
+    # byebug
 
     entity = Branch.where(id: inform.branch_id).first
     if entity == nil

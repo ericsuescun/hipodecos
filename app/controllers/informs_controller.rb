@@ -169,9 +169,9 @@ class InformsController < ApplicationController
   def edit
   end
 
+  def create
   # POST /informs
   # POST /informs.json
-  def create
     # @inform = Inform.new(inform_params)
     @patient = Patient.find(params[:patient_id])
     inform = @patient.informs.build(inform_params)
@@ -179,42 +179,49 @@ class InformsController < ApplicationController
     if @patient.sex == 'M'
       inform.pregnancy_status = '4'
     end
-    inform.entity_id = Branch.find(inform.branch_id).entity.id
+    byebug
 
+    entity = Branch.where(id: inform.branch_id).first
+    if entity == nil
+      inform.entity_id = nil
+    else
+      inform.entity_id = entity.id
+    end  
+    
     inform.regime = Promoter.where(id: inform.promoter_id).first.try(:regime)
 
     date_range = Date.today.beginning_of_year..Date.today.end_of_year
-    
+
     if params[:inform][:inf_type] == "clin"
-        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
-        inform.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+       consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+       inform.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
     else
-      if params[:inform][:inf_type] == "hosp"
-        consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
-        inform.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-      else
-        consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
-        inform.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-      end
+     if params[:inform][:inf_type] == "hosp"
+       consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
+       inform.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+     else
+       consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
+       inform.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+     end
     end
 
     if inform.save
 
-      # if !params[:inform][:physician].blank?
-      #   pnew = Physician.new
-      #   pnew.name = params[:inform][:physician][:name]
-      #   pnew.lastname = params[:inform][:physician][:lastname]
-      #   pnew.tel = params[:inform][:physician][:tel]
-      #   pnew.cel = params[:inform][:physician][:cel]
-      #   pnew.email = params[:inform][:physician][:email]
-      #   pnew.study1 = params[:inform][:physician][:study1]
-      #   pnew.study2 = params[:inform][:physician][:study2]
-      #   pnew.inform_id = inform.id
-      #   pnew.user_id = current_user.id
-      #   pnew.save
-      # end
+      if !params[:inform][:physician].blank?
+        pnew = Physician.new
+        pnew.name = params[:inform][:physician][:name]
+        pnew.lastname = params[:inform][:physician][:lastname]
+        pnew.tel = params[:inform][:physician][:tel]
+        pnew.cel = params[:inform][:physician][:cel]
+        pnew.email = params[:inform][:physician][:email]
+        pnew.study1 = params[:inform][:physician][:study1]
+        pnew.study2 = params[:inform][:physician][:study2]
+        pnew.inform_id = inform.id
+        pnew.user_id = current_user.id
+        pnew.save
+      end
       
-      redirect_to inform, notice: 'Inform was successfully created.'
+      redirect_to @patient, notice: 'Inform was successfully created.'
     else
       render :new
     end

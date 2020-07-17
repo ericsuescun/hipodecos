@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
@@ -15,36 +16,13 @@
     </div>      
   </div>
 </div>
-  <!-- <div class="row">
-    <div class="col-4 col-lg-4">
-      <div class="alert alert-secondary">
-        <h1>Informes previos</h1>
-        <% @patient.informs.each do |inform| %>
-          <div class="card mb-3">
-            <div class="row no-gutters">
-              <div class="col-lg-8">
-                <div class="card-body">
-                  <h5 class="card-title"><%= inform.tag_code %> recibido hace <%= time_ago_in_words(inform.receive_date) %></h5>
-                  <p class="card-text">Médico tratante:</p>
-                  <% inform.physicians.each do |physician| %>
-                    <p class="card-text"><%= physician.name %> <%= physician.lastname %></p>  
-                  <% end %>
-                  <p class="card-text">EPS: <%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></p>
-                  <p class="card-text">Sede IPS: <%= Branch.where(id: inform.branch_id).first.try(:initials) %></p>
-                  <%= link_to 'Ir a informe', inform_path(inform), class: "btn btn-primary" %>
-                  <p class="card-text"><small class="text-muted">Creado el <%= inform.created_at %></small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div> -->
+
 <div class="row">
   <div class="col-8 col-lg-8">
     <div class="alert alert-dark ml-1">
       <h3>Nuevo informe</h3>
-      <%= form_for [@patient, @patient.informs.build] do |form| %>
+      <%= form_with model: @inform, local: true do |form| %>
+        <%= form.hidden_field :patient_id, value: @patient.id %>
         <div class="row">
           <div class="col-12 col-lg-3">
             <div class="form-group">
@@ -61,7 +39,7 @@
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= form.label "Tipo Informe" %>
-              <%= form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']], @patient.informs), { prompt:"Selecciona" }, class: "form-control form-control input") %>
+              <%= form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']]), { prompt:"Selecciona" }, class: "form-control form-control input") %>
             </div>
           </div>
         </div>
@@ -89,32 +67,32 @@
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= form.label "Estado del paciente" %>
-              <%= form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @patient.informs), { include_blank: true }, class: "form-control input") %>
+              <%= form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']]), { include_blank: true }, class: "form-control input") %>
             </div>
           </div>
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= form.label "Tipo de zona" %>
-              <%= form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']], @patient.informs), { include_blank: true }, class: "form-control input") %>
+              <%= form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']]), { include_blank: true }, class: "form-control input") %>
             </div>
           </div>
           <div class="col-12 col-lg-3">
             <% if @patient.sex == 'F' %>
               <div class="form-group">
                 <%= form.label "Estado de embarazo" %>
-                <%= form.select(:pregnancy_status, options_for_select([['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3'], ['No Emb', '4']], @patient.informs), { include_blank: true }, class: "form-control input") %>
+                <%= form.select(:pregnancy_status, options_for_select([['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3'], ['No Emb', '4']]), { include_blank: true }, class: "form-control input") %>
               </div>
             <% else %>
               <div class="form-group">
                 <%= form.label "Estado de embarazo" %>
                 <fieldset disabled>
-                  <%= form.select(:pregnancy_status, options_for_select([['No Emb', '4']], @patient.informs), { include_blank: false }, class: "form-control input") %>
+                  <%= form.select(:pregnancy_status, options_for_select([['No Emb', '4']]), { include_blank: false }, class: "form-control input") %>
                 </fieldset>
               </div>
             <% end %>
           </div>
         </div>
-          <%= form.fields_for [@patient, @patient.informs.build.physicians.build] do |phy_form| %>
+          <%= form.fields_for :physicians do |phy_form| %>
             <h5>Médico tratante</h5>
             <div class="row">
               <div class="col-12 col-lg-4">
@@ -191,4 +169,6 @@
     </div>
   </div>
 </div>
+
+
 

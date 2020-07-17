@@ -31,7 +31,8 @@ class PatientsController < ApplicationController
   # GET /patients/1
   # GET /patients/1.json
   def show
-    
+    @inform = Inform.new
+    @physician = @inform.physicians.build
   end
 
   # GET /patients/new

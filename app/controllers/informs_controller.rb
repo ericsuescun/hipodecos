@@ -170,15 +170,11 @@ class InformsController < ApplicationController
   end
 
   def create
-  # POST /informs
-  # POST /informs.json
-    # @inform = Inform.new(inform_params)
-    @patient = Patient.find(params[:patient_id])
-    inform = @patient.informs.build(inform_params)
+    inform = Inform.new(inform_params)
+    inform.patient_id = params[:inform][:patient_id]
+    # inform = @patient.informs.build(inform_params)
     inform.user_id = current_user.id
-    if @patient.sex == 'M'
-      inform.pregnancy_status = '4'
-    end
+    
     byebug
 
     entity = Branch.where(id: inform.branch_id).first
@@ -206,22 +202,7 @@ class InformsController < ApplicationController
     end
 
     if inform.save
-
-      if !params[:inform][:physician].blank?
-        pnew = Physician.new
-        pnew.name = params[:inform][:physician][:name]
-        pnew.lastname = params[:inform][:physician][:lastname]
-        pnew.tel = params[:inform][:physician][:tel]
-        pnew.cel = params[:inform][:physician][:cel]
-        pnew.email = params[:inform][:physician][:email]
-        pnew.study1 = params[:inform][:physician][:study1]
-        pnew.study2 = params[:inform][:physician][:study2]
-        pnew.inform_id = inform.id
-        pnew.user_id = current_user.id
-        pnew.save
-      end
-      
-      redirect_to @patient, notice: 'Inform was successfully created.'
+      redirect_to inform, notice: 'Inform was successfully created.'
     else
       render :new
     end

@@ -95,6 +95,8 @@ class InformsController < ApplicationController
     
     if Role.where(id: current_user.role_id).first.name == "Patologia"
       @inform.update(user_review_date: Date.today, pathologist_review_id: current_user.id)
+    elsif Role.where(id: current_user.role_id).first.name == "CTO"
+      @inform.update(user_review_date: Date.today, pathologist_review_id: current_user.id)
     elsif Role.where(id: current_user.role_id).first.name == "Secretaria"
       @inform.update(user_review_date: Date.today, administrative_review_id: current_user.id)
     elsif Role.where(id: current_user.role_id).first.name == "Jefatura de laboratorio"
@@ -198,19 +200,19 @@ class InformsController < ApplicationController
 
     if inform.save
 
-      if !params[:inform][:physician].blank?
-        pnew = Physician.new
-        pnew.name = params[:inform][:physician][:name]
-        pnew.lastname = params[:inform][:physician][:lastname]
-        pnew.tel = params[:inform][:physician][:tel]
-        pnew.cel = params[:inform][:physician][:cel]
-        pnew.email = params[:inform][:physician][:email]
-        pnew.study1 = params[:inform][:physician][:study1]
-        pnew.study2 = params[:inform][:physician][:study2]
-        pnew.inform_id = inform.id
-        pnew.user_id = current_user.id
-        pnew.save
-      end
+      # if !params[:inform][:physician].blank?
+      #   pnew = Physician.new
+      #   pnew.name = params[:inform][:physician][:name]
+      #   pnew.lastname = params[:inform][:physician][:lastname]
+      #   pnew.tel = params[:inform][:physician][:tel]
+      #   pnew.cel = params[:inform][:physician][:cel]
+      #   pnew.email = params[:inform][:physician][:email]
+      #   pnew.study1 = params[:inform][:physician][:study1]
+      #   pnew.study2 = params[:inform][:physician][:study2]
+      #   pnew.inform_id = inform.id
+      #   pnew.user_id = current_user.id
+      #   pnew.save
+      # end
       
       redirect_to inform, notice: 'Inform was successfully created.'
     else

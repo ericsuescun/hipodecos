@@ -6,6 +6,7 @@ class AutomaticsController < ApplicationController
   def index
     @macro_automatics = Automatic.where(auto_type: "macro")
     @micro_automatics = Automatic.where(auto_type: "micro")
+    @automatics = Automatic.all
   end
 
   def index_macro

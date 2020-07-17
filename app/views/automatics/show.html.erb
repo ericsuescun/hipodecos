@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-10 col-lg-10 col-xl-10 mx-auto">
+		<div class="col-12 col-lg-12 col-xl-12 mx-auto">
 			<% if @automatic.auto_type == "macro" %>
 				<p>
 				  Automático Macro <strong><%= @automatic.title %></strong>, con órgano de referencia: <strong><%= @automatic.organ %></strong>  
@@ -8,7 +8,13 @@
 
 				<%= link_to ' + ', new_automatic_script_path(@automatic), class: "btn btn-primary" %>
 				<%= link_to 'Editar Automático', edit_automatic_path(@automatic) %> |
-				<%= link_to 'Volver a Automáticos', automatics_path %>
+				<% if @automatic.auto_type == "micro" %>
+					<%= link_to 'Volver a Automáticos para Micro', automatics_index_micro_path %>
+				<% end %>
+				<% if @automatic.auto_type == "macro" %>
+					<%= link_to 'Volver a Automáticos para Macro', automatics_index_macro_path %>
+				<% end %>
+				
 
 				<table class="table table-striped">
 				  <thead>
@@ -34,9 +40,9 @@
 				        
 				        <td><%= script.param1 %></td>
 				        
-				        <td><%= link_to 'Show', script %></td>
-				        <td><%= link_to 'Edit', edit_script_path(script) %></td>
-				        <td><%= link_to 'Destroy', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				        <td><%= link_to 'Detalles', script %></td>
+				        <td><%= link_to 'Editar', edit_script_path(script) %></td>
+				        <td><%= link_to 'Borrar', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 				      </tr>
 				    <% end %>
 				  </tbody>
@@ -50,13 +56,17 @@
 
 				<%= link_to ' + ', new_automatic_script_path(@automatic), class: "btn btn-primary" %>
 				<%= link_to 'Editar Automático', edit_automatic_path(@automatic) %> |
-				<%= link_to 'Volver a Automáticos', automatics_path %>
+				<% if @automatic.auto_type == "micro" %>
+					<%= link_to 'Volver a Automáticos para Micro', automatics_index_micro_path %>
+				<% end %>
+				<% if @automatic.auto_type == "macro" %>
+					<%= link_to 'Volver a Automáticos para Macro', automatics_index_macro_path %>
+				<% end %>
 
 				<table class="table table-striped">
 				  <thead>
 				    <tr>
 				    	<th># opción</th>
-				    	<th>Órgano</th>
 				    	<th>Código PSS</th>
 				    	<th>Código OMS</th>
 						<th>Descripción</th>
@@ -69,7 +79,6 @@
 				    <% @automatic.scripts.each_with_index do |script, n| %>
 				      <tr>
 				      	<td><%= n + 1 %></td>
-				      	<td><%= script.script_order %></td>
 				      	<td><%= script.organ %></td>
 				      	<td><%= script.pss_code %></td>
 				      	<td><%= script.who_code %></td>

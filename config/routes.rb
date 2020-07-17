@@ -105,6 +105,9 @@ Rails.application.routes.draw do
 
     get 'automatics/new_micro', to: 'automatics#new_micro'
     get 'automatics/new_macro', to: 'automatics#new_macro'
+    get 'automatics/index_macro', to: 'automatics#index_macro'
+    get 'automatics/index_micro', to: 'automatics#index_micro'
+
     resources :automatics
     resources :scripts
     resources :organs

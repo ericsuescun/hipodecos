@@ -111,6 +111,18 @@
           <li class="nav-item mr-2 mt-1">
             <%= link_to "Autos.", automatics_path, class: "btn btn-primary btn-sm btn-block my-2 my-lg-0" %>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Automáticos
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Macro", automatics_index_macro_path, class: "dropdown-item" %>
+              <%= link_to "+ Auto para Macro", automatics_new_macro_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Micro", automatics_index_micro_path, class: "dropdown-item" %>
+              <%= link_to "+ Auto para Micro", automatics_new_micro_path, class: "dropdown-item" %>
+            </div>
+          </li>
         <% end %>
       </ul>
       <% if user_signed_in? %>

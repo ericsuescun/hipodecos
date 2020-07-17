@@ -143,6 +143,9 @@ class InformsController < ApplicationController
     @organs = Organ.all
 
     @automatics = Automatic.all
+    @automatics_macro = Automatic.where(auto_type: "macro")
+    @automatics_micro = Automatic.where(auto_type: "micro")
+
 
     @samples = @inform.samples
 

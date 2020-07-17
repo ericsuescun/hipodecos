@@ -8,6 +8,14 @@ class AutomaticsController < ApplicationController
     @micro_automatics = Automatic.where(auto_type: "micro")
   end
 
+  def index_macro
+    @macro_automatics = Automatic.where(auto_type: "macro")
+  end
+
+  def index_micro
+    @micro_automatics = Automatic.where(auto_type: "micro")
+  end
+
   # GET /automatics/1
   # GET /automatics/1.json
   def show

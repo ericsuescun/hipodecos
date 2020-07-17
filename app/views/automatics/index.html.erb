@@ -1,62 +1,10 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-6 col-lg-6 col-xl-6">
-      <h1>Automáticos para macros</h1>
-      <%= link_to ' + ', automatics_new_macro_path, class: "btn btn-primary mb-3" %>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Órgano Ref.</th>
-            <th>Título</th>
-            <th># pasos</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @macro_automatics.each do |automatic| %>
-            <tr>
-              <td><%= automatic.organ %></td>
-              <td><%= automatic.title %></td>
-              <td><%= automatic.scripts.count %></td>
-              <td><%= link_to 'Detalles', automatic %></td>
-              <td><%= link_to 'Editar', edit_automatic_path(automatic) %></td>
-              <td><%= link_to 'Borrar', automatic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-      <br>
+    <div class="col-12 col-lg-6 col-xl-6">
+      <%= render 'index_macro', automatics: @macro_automatics %>
     </div>
-    <div class="col-6 col-lg-6 col-xl-6">
-      <h1>Automáticos para micros</h1>
-      <%= link_to ' + ', automatics_new_micro_path, class: "btn btn-primary mb-3" %>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Órgano Ref.</th>
-            <th>Título</th>
-            <th># opciones</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @micro_automatics.each do |automatic| %>
-            <tr>
-              <td><%= automatic.organ %></td>
-              <td><%= automatic.title %></td>
-              <td><%= automatic.scripts.count %></td>
-              <td><%= link_to 'Detalles', automatic %></td>
-              <td><%= link_to 'Editar', edit_automatic_path(automatic) %></td>
-              <td><%= link_to 'Borrar', automatic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-      <br>
+    <div class="col-12 col-lg-6 col-xl-6">
+      <%= render 'index_micro', automatics: @micro_automatics %>
     </div>
   </div>
 </div>

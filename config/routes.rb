@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get 'execute_templates/create'
 
     get 'execute_templates/micro'
+    get 'execute_templates/micro_new'
 
     get 'execute_templates/add_slide'
     get 'execute_templates/add_series'
@@ -208,6 +209,7 @@ Rails.application.routes.draw do
         get :set_revision
         get :set_ready
         get :preview
+        get :autos_micro
       end
     end
 

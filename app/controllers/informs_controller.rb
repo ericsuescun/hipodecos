@@ -1,6 +1,6 @@
 class InformsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_inform, only: [:show, :show_revision, :edit, :update, :destroy, :preview, :descr_micro, :clear_revision, :set_revision, :set_ready]
+  before_action :set_inform, only: [:show, :show_revision, :edit, :update, :destroy, :preview, :descr_micro, :clear_revision, :set_revision, :set_ready, :autos_micro]
 
   # GET /informs
   # GET /informs.json
@@ -162,6 +162,18 @@ class InformsController < ApplicationController
 
   def show_revision
     
+  end
+
+  def autos_micro
+    @organs = Organ.all
+
+    @automatics = []
+    # @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+    Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
+      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+        @automatics << auto
+      end
+    end 
   end
 
   # GET /informs/new

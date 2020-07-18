@@ -1,0 +1,51 @@
+<%= render "shared/error_messages", target: @inform %>
+
+<div class="row">
+  <div class="col-12 col-lg-12 mx-auto">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12">
+        <div class="info">
+          <h3>
+            <strong><%= @inform.tag_code %></strong>: <strong><%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %></strong>, <strong><%= @inform.patient.age_number %> <%= @inform.patient.age_type == 'A' ? 'Años' : @inform.patient.age_type == 'M' ? 'Meses' : 'Días' %></strong>, <%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong>, fecha: <%= @inform.receive_date.strftime('%d/%m/%Y') %>
+          </h3>
+        </div>
+        <div class="inform">
+          <p>Teléfono: <strong><%= @inform.patient.tel %></strong> - Celular: <strong><%= @inform.patient.cel %></strong> - Dirección: <strong><%= @inform.patient.address %> - </strong>Email: <strong><%= @inform.patient.email %></strong> - Fecha de entrega: <strong><%= @inform.delivery_date %></strong> - EPS: <strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %></strong> - Sede IPS: <strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %></strong> | <%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform) %></p>
+
+          <% @inform.physicians.each do |physician| %>
+          <p><strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %> Contactos: <strong><%= physician.tel %></strong> <strong><%= physician.cel %></strong> <strong><%= physician.email %></strong> <%= link_to '+ Doctor', new_inform_physician_path(@inform) %> | <%= link_to 'Revisar', physician %> | <%= link_to 'Borrar', physician, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+          | <%= link_to 'Volver a informes', informs_path %> </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12 ">
+        <div class="slide">
+          <%= render partial: "informs/slides-micro", locals: { inform: @inform } %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <% if @inform.inf_status == 'clin' || @inform.inf_status == 'hosp' %>
+        <div class="col-6 col-lg-6 col-xl-6 macros-in">
+          <%= render partial: "macros/macros", locals: { inform: @inform } %>
+        </div>
+      <% end %>
+      <div class="col-6 col-lg-6 col-xl-6">
+        <div class="micros-in">
+          <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: @micro, edit_objection_id: nil, edit_status: false } %>
+        </div>
+        <div class="diagnostics-in">
+          <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: @diagnostic, edit_objection_id: nil, edit_dx_status: false } %>
+        </div>
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+        <%= link_to "OK para revisión", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+      </div>
+    </div>
+  </div>
+</div>

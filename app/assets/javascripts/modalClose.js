@@ -11,3 +11,7 @@ function modalMicroClose() {
 	$('body').removeClass('modal-open');
 	$('div.modal-backdrop').remove();
 }
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

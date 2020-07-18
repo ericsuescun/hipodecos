@@ -306,6 +306,52 @@ class ExecuteTemplatesController < ApplicationController
 		@edit_status = false
 	end
 
+		def micro_new
+		@inform = Inform.find(params[:inform_id])
+		@script = Script.find(params[:script_id])
+		@micro = @inform.micros.build
+		@micro.user_id = current_user.id
+		@micro.description = @script.description
+		
+		@micro.save
+
+		@diagnostic = @inform.diagnostics.build
+		@diagnostic.user_id = current_user.id
+		@diagnostic.description = @script.diagnostic
+		@diagnostic.diagcode_id = Diagcode.where(pss_code: @script.pss_code).first.id
+		@diagnostic.pss_code = @script.pss_code
+		@diagnostic.who_code = @script.who_code
+
+		@diagnostic.save
+
+		@automatics = []
+		# @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+		Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
+		  Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+		    @automatics << auto
+		  end
+		end
+
+		# También hay que enviar diagcodes por lo que micro.js también despliega los diagnostics
+		@diagcodes = []
+		# @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+		Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
+		  o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+		  Diagcode.where(organ_code: o_code).each do |diagcode|
+		  	if diagcode.pss_code != nil
+		  	  diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
+		  	else
+		  	  diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
+		  	end
+		  	@diagcodes << diagcode
+		  end
+		end
+
+		@edit_status = false
+		
+
+	end
+
 	private
 		def get_nomen(str)
 			return str.split('-',2)[1].split('-',2)[1]

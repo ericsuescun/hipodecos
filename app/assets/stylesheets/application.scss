@@ -361,6 +361,211 @@ h2.edit-user {
 	}
 }
 
+.m-organ-Circulatorio {
+	background-color: rgba(255,0,0,0.3);
+	color: red;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+
+}
+
+.m-organ-Linfatico {
+	background-color: white;
+	color: black;
+	border-radius: 3px;
+	border-style: solid;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Respiratorio {
+	background-color: rgba(0,0,255,0.3);
+	color: slateblue;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-ReticuloEndotelial {
+	background-color: rgba(255,0,255,0.3);
+	color: brown;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Digestivo {
+	background-color: rgba(255,255,0,0.3);
+	color: orange;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Urinario {
+	background-color: rgba(255,150,0,0.3);
+	color: tomato;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-GenitalMasculino {
+	background-color: rgba(0,0,255,0.3);
+	color: blue;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-GenitalFemenino {
+	background-color: rgba(255,150,255,0.6);
+	color: purple;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Endocrino {
+	background-color: rgba(0,0,255,0.1);
+	color: dodgerblue;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Nervioso {
+	background-color: rgba(0,255,0,0.3);
+	color: green;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Sentidos {
+	background-color: rgba(255,255,0,0.6);
+	color: rgba(100,100,100,1);
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Piel {
+	background-color: pink;
+	color: grey;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Musculo {
+	background-color: rgba(255,150,0,0.3);
+	color: tomato;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Osteoarticular {
+	background-color: rgba(0,0,0,0.3);
+	color: black;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Dientes {
+	background-color: rgba(0,0,0,0.4);
+	color: white;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-SIDA {
+	background-color: rgba(255,150,255,0.3);
+	color: purple;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.m-organ-Generales {
+	background-color: rgba(0,255,0,0.3);
+	color: mediumseagreen;
+	border-radius: 3px;
+	border-style: hidden;
+	
+	&:hover, &:focus {
+		color: black;
+		text-decoration: none;
+	}
+}
+
 table.select-micro td {
 	margin-top: 0px;
 	padding-top: 0px;

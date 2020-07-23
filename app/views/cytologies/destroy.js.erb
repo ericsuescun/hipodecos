@@ -3,7 +3,7 @@ $(document).on('page:load', refresh());
 function refresh() {
 
 	$('div.cytologies').remove();
-	$('div.cytology').append('<%= j render "informs/cytologies", inform: @inform, edit_cytology_form: @cytology, edit_objection_id: nil %>');
+	$('div.cytology').append('<%= j render "informs/cytologies", inform: @inform, automatics: @automatics, edit_cytology_form: nil, edit_objection_id: nil %>');
 
 	
 	

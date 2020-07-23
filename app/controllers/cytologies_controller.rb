@@ -19,8 +19,7 @@ class CytologiesController < ApplicationController
 	# GET /cytologies/1/edit
 	def edit
 	  @inform = @cytology.inform
-	  # get_automatics
-	  # @edit_status = true
+	  @edit_status = true
 	end
 
 	# POST /cytologies
@@ -29,7 +28,7 @@ class CytologiesController < ApplicationController
 	  @inform = Inform.find(params[:inform_id])
 	  @cytology = @inform.cytologies.build(cytology_params)
 	  # @cytology.user_id = current_user.id
-
+	  # @automatics = Automatic.where(auto_type: "micro")
 	  @cytology.save
 
 	  # get_automatics
@@ -99,11 +98,9 @@ class CytologiesController < ApplicationController
 	# DELETE /cytologies/1
 	# DELETE /cytologies/1.json
 	def destroy
-	  @cytology.destroy
-	  respond_to do |format|
-	    format.html { redirect_to inform_path(@inf), notice: 'Cytology was successfully destroyed.' }
-	    format.json { head :no_content }
-	  end
+		@inform = @cytology.inform
+		@automatics = Automatic.where(auto_type: "micro")
+		@cytology.destroy
 	end
 
 	def destroy_micro
@@ -132,6 +129,6 @@ class CytologiesController < ApplicationController
 
 	  # Never trust parameters from the scary internet, only allow the white list through.
 	  def cytology_params
-	    params.require(:cytology).permit(:inform_id, :preganancies, :last_mens, :prev_appo, :sample_date, :result, :birth_control, :user_id, :suggestion)
+	    params.require(:cytology).permit(:inform_id, :pregnancies, :last_mens, :prev_appo, :sample_date, :result, :birth_control, :user_id, :suggestion)
 	  end
 end

@@ -27,6 +27,7 @@ class CytologiesController < ApplicationController
 	def create
 	  @inform = Inform.find(params[:inform_id])
 	  @cytology = @inform.cytologies.build(cytology_params)
+	  @cytology.user_id = current_user.id
 	  # @cytology.user_id = current_user.id
 	  # @automatics = Automatic.where(auto_type: "micro")
 	  @cytology.save
@@ -38,47 +39,139 @@ class CytologiesController < ApplicationController
 	# PATCH/PUT /cytologies/1
 	# PATCH/PUT /cytologies/1.json
 	def update
-	  # if params[:cytology][:edit_status] == "true"
-	  #   if @cytology.description != cytology_params[:description]
-	  #     log = "FECHA: " + Date.today.to_s
-	  #     log += " CAMBIOS: "
-	  #     log += " Descripción - ANTES: " + @cytology.description
-	  #     log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
-	  #     log += " Descripción - DESPUES: " + cytology_params[:description].to_s
-	  #     log += ", por: " + current_user.email + " \n"
+		byebug
+	  if params[:cytology][:edit_status] == "true"
+	  	log = "SUGERENCIA: "
+	    if @cytology.suggestion != cytology_params[:suggestion]
+	      log += "FECHA: " + Date.today.to_s
+	      
+	      log += " Descripción - ANTES: " + @cytology.suggestion
+	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
+	      log += " Descripción - DESPUES: " + cytology_params[:suggestion].to_s
+	      log += ", por: " + current_user.email + " \n"
+	    else
+	      log = "FECHA: " + Date.today.to_s
+	      log += " SIN CAMBIOS."
+	    end
 
-	  #   else
-	  #     log = "FECHA: " + Date.today.to_s
-	  #     log += " SIN CAMBIOS."
-	  #   end
+	    log += "EMBARAZOS: "
+	    if @cytology.pregnancies != cytology_params[:pregnancies]
+	      log += "FECHA: " + Date.today.to_s
+	      log += " Descripción - ANTES: " + @cytology.pregnancies.to_s
+	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
+	      log += " Descripción - DESPUES: " + cytology_params[:pregnancies].to_s
+	      log += ", por: " + current_user.email + " \n"
 
-	  #   #Obcode 19 corresponde a Descripción Macro o cytology mal redactada
-	  #   @objection = @cytology.objections.new(
-	  #     responsible_user_id: @cytology.user_id,
-	  #     user_id: current_user.id,
-	  #     description: log,
-	  #     obcode_id: 19,
-	  #     close_user_id: nil,
-	  #     closed: false
-	  #   ) 
+	    else
+	      log = "FECHA: " + Date.today.to_s
+	      log += " SIN CAMBIOS."
+	    end
+
+	    log += "FECHA ULTIMA MENSTRUACIÓN: "
+	    if @cytology.last_mens != cytology_params[:last_mens]
+	      log += "FECHA: " + Date.today.to_s
+	      log += " Descripción - ANTES: " + @cytology.last_mens
+	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
+	      log += " Descripción - DESPUES: " + cytology_params[:last_mens].to_s
+	      log += ", por: " + current_user.email + " \n"
+
+	    else
+	      log = "FECHA: " + Date.today.to_s
+	      log += " SIN CAMBIOS."
+	    end
+
+	    log += "CITA ANTERIOR: "
+	    if @cytology.prev_appo != cytology_params[:prev_appo]
+	      log += "FECHA: " + Date.today.to_s
+	      log += " Descripción - ANTES: " + @cytology.prev_appo
+	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
+	      log += " Descripción - DESPUES: " + cytology_params[:prev_appo].to_s
+	      log += ", por: " + current_user.email + " \n"
+
+	    else
+	      log = "FECHA: " + Date.today.to_s
+	      log += " SIN CAMBIOS."
+	    end
+
+	    log += "FECHA DE LA TOMA: "
+	    if @cytology.sample_date != cytology_params[:sample_date]
+	      log += "FECHA: " + Date.today.to_s
+	      log += " Descripción - ANTES: " + @cytology.sample_date.to_s
+	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
+	      log += " Descripción - DESPUES: " + cytology_params[:samle_date].to_s
+	      log += ", por: " + current_user.email + " \n"
+
+	    else
+	      log = "FECHA: " + Date.today.to_s
+	      log += " SIN CAMBIOS."
+	    end
+
+	    log += "RESULTADO: "
+	    if @cytology.result != cytology_params[:result]
+	      log += "FECHA: " + Date.today.to_s
+	      log += " Descripción - ANTES: " + @cytology.result
+	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
+	      log += " Descripción - DESPUES: " + cytology_params[:result].to_s
+	      log += ", por: " + current_user.email + " \n"
+
+	    else
+	      log = "FECHA: " + Date.today.to_s
+	      log += " SIN CAMBIOS."
+	    end
+
+	    log += "PLANIFICA: "
+	    if @cytology.birth_control != cytology_params[:birth_control]
+	      log += "FECHA: " + Date.today.to_s
+	      log += " Descripción - ANTES: " + @cytology.birth_control.to_s
+	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
+	      log += " Descripción - DESPUES: " + cytology_params[:birth_control].to_s
+	      log += ", por: " + current_user.email + " \n"
+
+	    else
+	      log = "FECHA: " + Date.today.to_s
+	      log += " SIN CAMBIOS."
+	    end
+
+	    #Obcode 19 corresponde a Descripción Macro o cytology mal redactada
+	    @objection = @cytology.objections.new(
+	      responsible_user_id: @cytology.user_id,
+	      user_id: current_user.id,
+	      description: log,
+	      obcode_id: 19,
+	      close_user_id: nil,
+	      closed: false
+	    ) 
 	    
-	  #   @objection.save
-	  # end
+	    @objection.save
+	  end
 	  
 
 	  @cytology.update(cytology_params)
+	  
 
 	  @inform = @cytology.inform
 	  # get_automatics
 	end
 
-	# def review
-	#   @objection = Objection.find(params[:objection_id])
-	#   @cytology = Cytology.find(params[:micro_id])
-	#   @inform = @cytology.inform
-	#   get_automatics
+	def review
+	  @objection = Objection.find(params[:objection_id])
+	  @cytology = Cytology.find(params[:cytology_id])
+	  @inform = @cytology.inform
+	end
 
-	# end
+	def anotate
+	  @objection = Objection.find(params[:objection_id])
+	  @cytology = Cytology.find(params[:cytology_id])
+	  new_description = @objection.description.to_s + " FECHA: " + Date.today.to_s + " REVISIÓN: " + params[:new_description].to_s + ", por: " + current_user.email
+	  @objection.update(
+	    description: new_description,
+	    close_user_id: current_user.id,
+	    close_date: Date.today,
+	    closed: true
+	  )
+
+	  @inform = @cytology.inform
+	end
 
 	# def anotate
 	#   @objection = Objection.find(params[:objection_id])

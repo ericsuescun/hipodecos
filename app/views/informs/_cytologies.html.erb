@@ -13,6 +13,7 @@
                   <div class="col-12 col-lg-12 col-xl-12">
                     <%= form_with model: cytology do |form| %>
                       <%= render "shared/error_messages", target: cytology %>
+                      <%= form.hidden_field :edit_status, value: true %>
                       <div class="card mb-2">
                         <div class="card-header d-flex flex-row align-items-center justify-content-between px-1">
                           <span class="d-flex"><strong>Editar citología</strong></span>
@@ -93,6 +94,47 @@
                         <p><span><strong>Número de embarazos:</strong> <%= cytology.pregnancies %> <strong>Desde que edad planifica:</strong> <%= cytology.birth_control %> - <strong>Resultado:</strong> <%= cytology.result %></span></p>
                         
                         <p><strong>Sugerencias:</strong> <%= cytology.suggestion %></p>
+
+                        <% cytology.objections.each do |objection| %>
+                          <% if edit_objection_id == nil %>
+                            <div class="d-flex flex-column">
+                              <span class="px-1 badge badge-<%= objection.closed == false ? "danger" : "warning" %>">
+                                <%= Obcode.where(id: objection.obcode_id).first.try(:title) %>
+                              </span>
+                              <span class="text-muted objection-description">
+                                <%= objection.description %>
+                              </span>
+                            </div>
+                            <% unless objection.closed %>
+                              <%= form_with url: review_cytology_path, method: "get" do |form| %>
+                                <div class="actions">
+                                  <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-2" %>
+                                  <%= form.hidden_field :cytology_id, value: cytology.id %>
+                                  <%= form.hidden_field :objection_id, value: objection.id %>
+                                </div>
+                              <% end %>
+                            <% end %>
+                          <% else %>
+                            <% if edit_objection_id == objection %>
+                              <%= form_with url: anotate_cytology_path, method: "get" do |form| %>
+                                <div class="field">
+                                  <%= form.label "Acción de mejora:" %>
+                                  <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>
+                                </div>
+                                <div class="field">
+                                  <%= form.label "Acción de mejora:" %>
+                                  <%= form.text_area :new_description, class: "form-control input" %>
+                                </div>
+                                
+                                <div class="actions">
+                                  <%= form.submit "Anotar", class: "btn btn-outline-warning mx-1 my-1" %>
+                                  <%= form.hidden_field :cytology_id, value: cytology.id %>
+                                  <%= form.hidden_field :objection_id, value: objection.id %>
+                                </div>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% end %>
                       </div>
                     </div>
                   </div>    

@@ -114,6 +114,13 @@ Rails.application.routes.draw do
     resources :organs
     resources :results
     resources :cytologies
+
+    resources :cytologies do
+      member do
+        get :review
+        get :anotate
+      end
+    end
     
     devise_for :users, path: 'users', controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", unlocks: "users/unlocks", confirmations: "users/confirmations" }
 

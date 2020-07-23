@@ -55,7 +55,7 @@ class CytologiesController < ApplicationController
 	    end
 
 	    log += "EMBARAZOS: "
-	    if @cytology.pregnancies != cytology_params[:pregnancies]
+	    if @cytology.pregnancies.to_s != cytology_params[:pregnancies]
 	      log += "FECHA: " + Date.today.to_s
 	      log += " Descripción - ANTES: " + @cytology.pregnancies.to_s
 	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
@@ -94,7 +94,7 @@ class CytologiesController < ApplicationController
 	    end
 
 	    log += "FECHA DE LA TOMA: "
-	    if @cytology.sample_date != cytology_params[:sample_date]
+	    if @cytology.sample_date.to_s != cytology_params[:sample_date]
 	      log += "FECHA: " + Date.today.to_s
 	      log += " Descripción - ANTES: " + @cytology.sample_date.to_s
 	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
@@ -120,7 +120,7 @@ class CytologiesController < ApplicationController
 	    end
 
 	    log += "PLANIFICA: "
-	    if @cytology.birth_control != cytology_params[:birth_control]
+	    if @cytology.birth_control.to_s != cytology_params[:birth_control]
 	      log += "FECHA: " + Date.today.to_s
 	      log += " Descripción - ANTES: " + @cytology.birth_control.to_s
 	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s

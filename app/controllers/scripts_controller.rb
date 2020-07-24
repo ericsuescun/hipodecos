@@ -73,7 +73,6 @@ class ScriptsController < ApplicationController
 
   private
     def get_diagcodes
-      byebug
       if @automatic.auto_type == 'cito'
         @diagcodes = Citocode.all
         

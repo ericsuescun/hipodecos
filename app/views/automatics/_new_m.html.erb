@@ -6,7 +6,15 @@
 
 		<%= render 'form', automatic: automatic %>
 
-		<%= link_to 'Volver a Automaticos', automatics_path %>
+		<% if @automatic.auto_type == "micro" %>
+			<%= link_to 'Volver a Automáticos para Micro', automatics_index_micro_path %>
+		<% end %>
+		<% if @automatic.auto_type == "macro" %>
+			<%= link_to 'Volver a Automáticos para Macro', automatics_index_macro_path %>
+		<% end %>
+		<% if @automatic.auto_type == "cito" %>
+			<%= link_to 'Volver a Automáticos para Cito', automatics_index_cito_path %>
+		<% end %>
 
     </div>
   </div>

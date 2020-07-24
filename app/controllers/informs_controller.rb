@@ -63,8 +63,14 @@ class InformsController < ApplicationController
     @automatics = []
     # @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
     Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
-      Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
-        @automatics << auto
+      if @inform.inf_type == "cito"
+        Automatic.where(auto_type: "cito", organ: sample.organ_code).each do |auto|
+          @automatics << auto
+        end
+      else
+        Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+          @automatics << auto
+        end
       end
     end   
 

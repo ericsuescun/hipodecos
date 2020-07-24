@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :citocodes
+  resources :citocodes do
+    collection {post :import}
+  end
     root to: "static_pages#home"    
 
     get 'execute_templates/create'

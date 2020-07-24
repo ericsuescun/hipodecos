@@ -1,5 +1,11 @@
 class CitocodesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_citocode, only: [:show, :edit, :update, :destroy]
+
+  def import
+    Citocode.import(params[:file])
+    redirect_to citocodes_path, notice: "Datos importados!"
+  end
 
   # GET /citocodes
   # GET /citocodes.json

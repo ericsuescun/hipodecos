@@ -37,7 +37,9 @@ class ScriptsController < ApplicationController
     @automatic = Automatic.find(params[:automatic_id])
     @script = @automatic.scripts.build(script_params)
     @script.user_id = current_user.id
-    @script.who_code = Diagcode.where(pss_code: @script.pss_code).first.who_code
+    unless @automatic.auto_type == 'cito'
+      @script.who_code = Diagcode.where(pss_code: @script.pss_code).first.who_code
+    end
 
     if @script.script_type == "rec"
       @script.organ = ""
@@ -71,8 +73,10 @@ class ScriptsController < ApplicationController
 
   private
     def get_diagcodes
+      byebug
       if @automatic.auto_type == 'cito'
-        @diagcodes = []
+        @diagcodes = Citocode.all
+        
       else
         @diagcodes = []
         Diagcode.where(organ_code: @o_code).each do |diagcode|

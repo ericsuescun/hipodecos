@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_070655) do
+ActiveRecord::Schema.define(version: 2020_07_24_082208) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -86,6 +86,17 @@ ActiveRecord::Schema.define(version: 2020_07_24_070655) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["entity_id"], name: "index_branches_on_entity_id"
+  end
+
+  create_table "citocodes", force: :cascade do |t|
+    t.integer "admin_id"
+    t.string "cito_code"
+    t.text "description"
+    t.string "result_type"
+    t.decimal "score"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "codevals", force: :cascade do |t|

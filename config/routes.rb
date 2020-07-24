@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :citocodes
     root to: "static_pages#home"    
 
     get 'execute_templates/create'
@@ -106,8 +107,10 @@ Rails.application.routes.draw do
 
     get 'automatics/new_micro', to: 'automatics#new_micro'
     get 'automatics/new_macro', to: 'automatics#new_macro'
+    get 'automatics/new_cito', to: 'automatics#new_cito'
     get 'automatics/index_macro', to: 'automatics#index_macro'
     get 'automatics/index_micro', to: 'automatics#index_micro'
+    get 'automatics/index_cito', to: 'automatics#index_cito'
 
     resources :automatics
     resources :scripts

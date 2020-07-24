@@ -1,0 +1,47 @@
+<%= form_with(model: citocode, local: true) do |form| %>
+  <% if citocode.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(citocode.errors.count, "error") %> prohibited this citocode from being saved:</h2>
+
+      <ul>
+      <% citocode.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :admin_id %>
+    <%= form.number_field :admin_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cito_code %>
+    <%= form.text_field :cito_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :result_type %>
+    <%= form.text_field :result_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :score %>
+    <%= form.text_field :score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order %>
+    <%= form.number_field :order %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

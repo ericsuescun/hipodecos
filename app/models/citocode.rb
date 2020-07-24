@@ -1,0 +1,2 @@
+class Citocode < ApplicationRecord
+end

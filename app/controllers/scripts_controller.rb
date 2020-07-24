@@ -71,14 +71,18 @@ class ScriptsController < ApplicationController
 
   private
     def get_diagcodes
-      @diagcodes = []
-      Diagcode.where(organ_code: @o_code).each do |diagcode|
-        if diagcode.pss_code != nil
-          diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
-        else
-          diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
+      if @automatic.auto_type == 'cito'
+        @diagcodes = []
+      else
+        @diagcodes = []
+        Diagcode.where(organ_code: @o_code).each do |diagcode|
+          if diagcode.pss_code != nil
+            diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
+          else
+            diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
+          end
+          @diagcodes << diagcode
         end
-        @diagcodes << diagcode
       end
     end
     # Use callbacks to share common setup or constraints between actions.
@@ -89,6 +93,6 @@ class ScriptsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def script_params
-      params.require(:script).permit(:automatic_id, :script_type, :description, :param1, :param2, :script_order, :organ, :diagnostic, :pss_code, :who_code)
+      params.require(:script).permit(:automatic_id, :script_type, :description, :param1, :param2, :script_order, :organ, :diagnostic, :pss_code, :who_code, :suggestion)
     end
 end

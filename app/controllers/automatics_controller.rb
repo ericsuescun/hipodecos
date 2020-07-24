@@ -17,6 +17,10 @@ class AutomaticsController < ApplicationController
     @micro_automatics = Automatic.where(auto_type: "micro")
   end
 
+  def index_cito
+    @cito_automatics = Automatic.where(auto_type: "cito")
+  end
+
   # GET /automatics/1
   # GET /automatics/1.json
   def show
@@ -33,6 +37,10 @@ class AutomaticsController < ApplicationController
 
   def new_macro
     @automatic = Automatic.new(auto_type: 'macro')
+  end
+
+  def new_cito
+    @automatic = Automatic.new(auto_type: 'cito')
   end
 
   # GET /automatics/1/edit

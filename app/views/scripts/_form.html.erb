@@ -82,6 +82,52 @@
             
           </div>
         <% end %>
+        <% if @automatic.auto_type == "cito" %>
+          <div class="row">
+            <div class="col-2 col-lg-2">
+              <div class="form-group">
+                <%= form.label "Órgano" %>
+                <%= form.collection_select(:organ, Organ.all, :organ, :organ, {selected: @selected, include_blank: true, prompt: 'Seleccione órgano'}, { class: "form-control input" }) %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-4 col-xl-4">
+              <div class="form-group">
+                <%= form.label "Descripción" %>
+                <%= form.text_area :description, rows: 10, class: "form-control input" %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-xl-4">
+              <div class="form-group">
+                <%= form.label "Diagnóstico" %>
+                <%= form.text_area :diagnostic, rows: 10, class: "form-control input" %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 col-xl-4">
+              <div class="form-group">
+                <%= form.label "Sugerencia" %>
+                <%= form.text_area :suggestion, rows: 10, class: "form-control input" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-lg-6">
+              <div class="form-group">
+                <%= form.label "Código PSS" %>
+                <%= form.collection_select(:pss_code, diagcodes, :pss_code, :description, { prompt: 'Seleccione código'}, { class: "form-control input" }) %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2 col-lg-2">
+              <div class="actions">
+                <%= form.submit "Guardar", class: "btn btn-primary" %>
+              </div>
+            </div>
+            
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

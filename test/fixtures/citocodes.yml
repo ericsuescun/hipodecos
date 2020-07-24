@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  admin_id: 1
+  cito_code: MyString
+  description: MyText
+  result_type: MyString
+  score: 9.99
+  order: 1
+
+two:
+  admin_id: 1
+  cito_code: MyString
+  description: MyText
+  result_type: MyString
+  score: 9.99
+  order: 1

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @citocode.admin_id %>
+</p>
+
+<p>
+  <strong>Cito code:</strong>
+  <%= @citocode.cito_code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @citocode.description %>
+</p>
+
+<p>
+  <strong>Result type:</strong>
+  <%= @citocode.result_type %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @citocode.score %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @citocode.order %>
+</p>
+
+<%= link_to 'Edit', edit_citocode_path(@citocode) %> |
+<%= link_to 'Back', citocodes_path %>

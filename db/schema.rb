@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_16_025342) do
+ActiveRecord::Schema.define(version: 2020_07_24_070655) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -416,6 +416,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_025342) do
     t.text "diagnostic"
     t.string "pss_code"
     t.string "who_code"
+    t.text "suggestion"
     t.index ["automatic_id"], name: "index_scripts_on_automatic_id"
   end
 

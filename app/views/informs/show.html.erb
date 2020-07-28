@@ -68,6 +68,16 @@
           </div>
         </div>
 
+        <% if @inform.inf_type == 'cito' %>
+          <div class="row">
+            <div class="col-12 col-lg-12 mb-3 mx-auto">
+              <div class="cytology">
+                <%= render partial: "suggestions", locals: { inform: @inform, edit_suggestion: nil, edit_objection_id: nil } %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
     </div>
   </div>
 <!-- </div> -->

@@ -23,7 +23,7 @@
           <div class="micros-in">
             <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
           </div>
-          <div class="diagnostics-in">
+          <div class="diagnostics-in mt-3">
             <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
           </div>
         </div>
@@ -43,14 +43,8 @@
           </div>
         </div>
         <div class="col-12 col-lg-4 col-xl-4">
-          <div class="suggestion-in">
-            <h4>Sugerencias:</h4>
-            <% @inform.cytologies.each_with_index do |cytology, n| %>
-              <div class="alert alert-dark">
-                <%= cytology.suggestion %>
-                <div>Resultado: <%= cytology.result %></div>
-              </div>
-            <% end %>
+          <div class="cytologies-in">
+            <%= render partial: "cytologies/cytologies", locals: { inform: @inform, edit_cytology: nil, edit_objection_id: nil, edit_cy_status: false } %>
           </div>
         </div>
       </div>

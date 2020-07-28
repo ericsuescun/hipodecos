@@ -1,0 +1,10 @@
+<h4>Agregar sugerencia manual</h4>
+<%= form_with model: [inform, inform.cytologies.build] do |form| %>
+  <div class="form-group">
+    <%= form.text_area :suggestion, class: "form-control form-control-lg input" %>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit "Agregar", class: "btn btn-outline-primary mb-3" %>
+  </div>
+<% end %>

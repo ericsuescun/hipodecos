@@ -148,8 +148,6 @@ class InformsController < ApplicationController
   def show
     @organs = Organ.all
 
-    # byebug
-
     @automatics = Automatic.all
     @automatics_macro = Automatic.where(auto_type: "macro")
     @automatics_micro = Automatic.where(auto_type: "micro")
@@ -197,8 +195,7 @@ class InformsController < ApplicationController
     inform.patient_id = params[:inform][:patient_id]
     # inform = @patient.informs.build(inform_params)
     inform.user_id = current_user.id
-    
-    # byebug
+  
 
     entity = Branch.where(id: inform.branch_id).first
     if entity == nil

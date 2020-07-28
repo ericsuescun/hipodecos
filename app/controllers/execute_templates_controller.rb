@@ -263,7 +263,7 @@ class ExecuteTemplatesController < ApplicationController
 	end
 
 	def micro
-		byebug
+		
 		@inform = Inform.find(params[:inform_id])
 		@script = Script.find(params[:script_id])
 		@micro = @inform.micros.build
@@ -328,7 +328,7 @@ class ExecuteTemplatesController < ApplicationController
 	end
 
 	def micro_new
-		byebug
+		
 		@inform = Inform.find(params[:inform_id])
 		@script = Script.find(params[:script_id])
 		@micro = @inform.micros.build

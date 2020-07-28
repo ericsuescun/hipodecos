@@ -19,7 +19,7 @@ class CytologiesController < ApplicationController
 	# GET /cytologies/1/edit
 	def edit
 	  @inform = @cytology.inform
-	  @edit_status = true
+	  @edit_cy_status = true
 	end
 
 	# POST /cytologies
@@ -196,8 +196,8 @@ class CytologiesController < ApplicationController
 		@cytology.destroy
 	end
 
-	def destroy_micro
-	  @cytology = Cytology.find(params[:micro_id])
+	def destroy_cytology
+	  @cytology = Cytology.find(params[:cytology_id])
 	  @inform = @cytology.inform
 	  # get_automatics
 

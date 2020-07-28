@@ -1,0 +1,12 @@
+$(document).on('page:load', refresh());
+
+function refresh() {
+
+	$('div.suggestions-out').remove();
+	$('div.suggestions-in').append('<%= j render "suggestions/suggestions", inform: @inform, edit_suggestion: nil, edit_objection_id: @objection, edit_su_status: false %>');
+
+	
+	setTimeout(function() {
+		$('div.alert-growl').remove();
+	}, 3000)
+}

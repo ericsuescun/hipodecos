@@ -70,8 +70,23 @@ class DiagnosticsController < ApplicationController
         log += " CÓDIGO PSS SIN CAMBIOS."
       end
 
-      # Se actualiza el who_code con lo que llegue por params de cambios en pss_code
-      @diagnostic.who_code = Diagcode.where(pss_code: diagnostic_params[:pss_code]).first.who_code
+      if @diagnostic.result != diagnostic_params[:result]
+        log += "FECHA: " + Date.today.to_s
+        log += " CAMBIOS: "
+        log += " Descripción - ANTES: " + @diagnostic.result
+        log += ", por: " + User.where(id: @diagnostic.user_id).first.try(:email).to_s
+        log += " Descripción - DESPUES: " + diagnostic_params[:result].to_s
+        log += ", por: " + current_user.email + " \n"
+
+      else
+        log += "FECHA: " + Date.today.to_s
+        log += " CÓDIGO PSS SIN CAMBIOS."
+      end
+
+      if @diagnostic.inform.inf_type != "cito"
+        # Se actualiza el who_code con lo que llegue por params de cambios en pss_code
+        @diagnostic.who_code = Diagcode.where(pss_code: diagnostic_params[:pss_code]).first.who_code
+      end
 
       #Obcode 16 corresponde a error en automatico o codigo biopsias
       @objection = @diagnostic.objections.new(
@@ -134,15 +149,23 @@ class DiagnosticsController < ApplicationController
       @diagcodes = []
       # @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
       Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
-        o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
-        Diagcode.where(organ_code: o_code).each do |diagcode|
-          if diagcode.pss_code != nil
-            diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
-          else
-            diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
+        if @inform.inf_type != 'cito'
+          o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+          Diagcode.where(organ_code: o_code).each do |diagcode|
+            if diagcode.pss_code != nil
+              diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
+            else
+              diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
+            end
+            @diagcodes << diagcode
           end
-          @diagcodes << diagcode
+        else
+          Citocode.all.each do |citocode|
+            citocode.description = citocode.cito_code.to_s + ". " + citocode.description
+            @diagcodes << citocode
+          end
         end
+        
       end
     end
     # Use callbacks to share common setup or constraints between actions.
@@ -153,6 +176,6 @@ class DiagnosticsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diagnostic_params
-      params.require(:diagnostic).permit(:inform_id, :user_id, :description, :diagcode_id, :pss_code, :who_code)
+      params.require(:diagnostic).permit(:inform_id, :user_id, :description, :diagcode_id, :pss_code, :who_code, :result)
     end
 end

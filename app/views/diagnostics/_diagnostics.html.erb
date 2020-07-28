@@ -24,25 +24,39 @@
                     <%= form.hidden_field :edit_dx_status, value: edit_dx_status %>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-6 col-lg-6 col-xl-6">
-                  <div class="form-group">
-                    <% if inform.inf_type != "cito" %>
+                <% if inform.inf_type != 'cito' %>
+                  <div class="col-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
                       <%= form.collection_select(:pss_code, diagcodes, :pss_code, :description, { prompt: 'Código PSS'}, { class: "form-control input" }) %>
-                    <% else %>
-                      <%= form.collection_select(:pss_code, diagcodes, :cito_code, :description, { prompt: 'Código PSS'}, { class: "form-control input" }) %>
-                    <% end %>
-                    
+                    </div>
                   </div>
-                </div>
+                <% end %>
+                <% if inform.inf_type == 'cito' %>
+                  <div class="col-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <%= form.label "Código cito:" %>
+                      <%= form.collection_select(:pss_code, diagcodes, :cito_code, :description, { prompt: 'Código PSS'}, { class: "form-control input" }) %>
+                    </div>
+                    <div class="form-group">
+                      <%= form.label "Resultado:" %>
+                      <%= form.select(:result, options_for_select([['Positiva', 'positiva'], ['Negativa', 'negativa']]), { prompt: "Selecciona" }, class: "form-control form-control input") %>
+                    </div>
+                  </div>
+                <% end %>
               </div>
+              
               <div class="actions">
                 <%= form.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
               </div>
             <% end %>
           <% else %>
-            <p>Código Patología Suescún: <%= diagnostic.pss_code %> - Código OMS: <%= diagnostic.who_code %></p>
+            <% if inform.inf_type != 'cito' %>
+              <p>Código Patología Suescún: <%= diagnostic.pss_code %> - Código OMS: <%= diagnostic.who_code %></p>
+            <% else %>
+              <p>Código Patología Suescún para citología: <%= diagnostic.pss_code %></p>
+              <p>Resultado: <strong><%= diagnostic.result %></strong></p>
+            <% end %>
+            
             <p>
               <%= link_to edit_diagnostic_path(diagnostic), remote: true do %>
               <span style="font-size: 25px;color: black;border: 1px solid black; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>

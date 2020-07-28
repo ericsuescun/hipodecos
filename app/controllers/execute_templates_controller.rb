@@ -263,13 +263,11 @@ class ExecuteTemplatesController < ApplicationController
 	end
 
 	def micro
-		
 		@inform = Inform.find(params[:inform_id])
 		@script = Script.find(params[:script_id])
 		@micro = @inform.micros.build
 		@micro.user_id = current_user.id
 		@micro.description = @script.description
-		
 		@micro.save
 
 		@diagnostic = @inform.diagnostics.build
@@ -282,10 +280,12 @@ class ExecuteTemplatesController < ApplicationController
 			@diagnostic.who_code = @script.who_code
 		else
 			@diagnostic.diagcode_id = Citocode.where(cito_code: @script.pss_code).first.id
-			@cytology = @inform.cytologies.first
-			@cytology.suggestion = @script.suggestion
-			@cytology.result = Citocode.where(cito_code: @script.pss_code).first.result_type
-			@cytology.save
+			@diagnostic.result = Citocode.where(cito_code: @script.pss_code).first.result_type
+
+			@suggestion = @inform.suggestions.build
+			@suggestion.user_id = current_user.id
+			@suggestion.description = @script.suggestion
+			@suggestion.save
 		end
 
 		@diagnostic.save
@@ -334,7 +334,6 @@ class ExecuteTemplatesController < ApplicationController
 		@micro = @inform.micros.build
 		@micro.user_id = current_user.id
 		@micro.description = @script.description
-		
 		@micro.save
 
 		@diagnostic = @inform.diagnostics.build
@@ -347,13 +346,16 @@ class ExecuteTemplatesController < ApplicationController
 			@diagnostic.who_code = @script.who_code
 		else
 			@diagnostic.diagcode_id = Citocode.where(cito_code: @script.pss_code).first.id
-			@cytology = @inform.cytologies.first
-			@cytology.suggestion = @script.suggestion
-			@cytology.result = Citocode.where(cito_code: @script.pss_code).first.result_type
-			@cytology.save
+			@diagnostic.result = Citocode.where(cito_code: @script.pss_code).first.result_type
+
+			@suggestion = @inform.suggestions.build
+			@suggestion.user_id = current_user.id
+			@suggestion.description = @script.suggestion
+			@suggestion.save
 		end
 
 		@diagnostic.save
+
 
 		@automatics = []
 		# @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|

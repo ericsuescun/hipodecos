@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+  post 'suggestions/review', to: 'suggestions#review'
+  post 'suggestions/anotate', to: 'suggestions#anotate'
   resources :suggestions
   resources :citocodes do
     collection {post :import}

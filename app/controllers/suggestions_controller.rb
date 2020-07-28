@@ -19,6 +19,7 @@ class SuggestionsController < ApplicationController
 
   # GET /suggestions/1/edit
   def edit
+    @inform = @suggestion.inform
   end
 
   # POST /suggestions
@@ -40,25 +41,64 @@ class SuggestionsController < ApplicationController
   # PATCH/PUT /suggestions/1
   # PATCH/PUT /suggestions/1.json
   def update
-    respond_to do |format|
-      if @suggestion.update(suggestion_params)
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully updated.' }
-        format.json { render :show, status: :ok, location: @suggestion }
+    if params[:suggestion][:edit_su_status] == "true"
+      log = ""
+      if @suggestion.description != suggestion_params[:description]
+        log += "FECHA: " + Date.today.to_s
+        log += " CAMBIOS: "
+        log += " Descripción - ANTES: " + @suggestion.description
+        log += ", por: " + User.where(id: @suggestion.user_id).first.try(:email).to_s
+        log += " Descripción - DESPUES: " + suggestion_params[:description].to_s
+        log += ", por: " + current_user.email + " \n"
+
       else
-        format.html { render :edit }
-        format.json { render json: @suggestion.errors, status: :unprocessable_entity }
+        log += "FECHA: " + Date.today.to_s
+        log += " SUGERENCIA SIN CAMBIOS."
       end
+
+      #Obcode 16 corresponde a error en automatico o codigo biopsias
+      @objection = @suggestion.objections.new(
+        responsible_user_id: @suggestion.user_id,
+        user_id: current_user.id,
+        description: log,
+        obcode_id: 16,
+        close_user_id: nil,
+        closed: false
+      ) 
+      #@objectionable se crea en una version (una clase heredada) personalizada del controlador de Objection para cada tipo de modelo DESDE DONDE se le llama
+      @objection.save
     end
+
+    @suggestion.update(suggestion_params)
+
+    @inform = @suggestion.inform
+  end
+
+  def review
+    @objection = Objection.find(params[:objection_id])
+    @suggestion = Suggestion.find(params[:suggestion_id])
+    @inform = @suggestion.inform
+  end
+
+  def anotate
+    @objection = Objection.find(params[:objection_id])
+    @suggestion = Suggestion.find(params[:suggestion_id])
+    new_description = @objection.description.to_s + "FECHA: " + Date.today.to_s + " REVISIÓN: " + params[:new_description].to_s + ", por: " + current_user.email
+    @objection.update(
+      description: new_description,
+      close_user_id: current_user.id,
+      close_date: Date.today,
+      closed: true
+    )
+
+    @inform = @suggestion.inform
   end
 
   # DELETE /suggestions/1
   # DELETE /suggestions/1.json
   def destroy
+    @inform = @suggestion.inform
     @suggestion.destroy
-    respond_to do |format|
-      format.html { redirect_to suggestions_url, notice: 'Suggestion was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private

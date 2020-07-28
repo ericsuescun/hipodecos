@@ -8,7 +8,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-lg-6 col-xl-6">
+      <% unless @inform.inf_type == "cito" %>
+        <div class="col-12 col-lg-6 col-xl-6">
+      <% else %>
+        <div class="col-12 col-lg-4 col-xl-4">
+      <% end %>
         <% @inform.micros.each_with_index do |micro, n| %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
@@ -21,7 +25,11 @@
           </div>
         <% end %>
       </div>
-      <div class="col-6 col-lg-6 col-xl-6">
+      <% unless @inform.inf_type == "cito" %>
+        <div class="col-12 col-lg-6 col-xl-6">
+      <% else %>
+        <div class="col-12 col-lg-4 col-xl-4">
+      <% end %>
         <% @inform.diagnostics.each do |diagnostic| %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
@@ -36,13 +44,28 @@
           </div>
         <% end %>
       </div>
+      <% if @inform.inf_type == "cito" %>
+        <div class="col-12 col-lg-4 col-xl-4">
+          <% @inform.suggestions.each do |suggestion| %>
+            <div class="card bg-light mx-2 mb-3">
+              <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+                <p>Sugerencia</p>
+              </div>
+              <div class="card-body">
+                <p><%= suggestion.description %></p>
+                <div class="text-muted"><p>Por: <%= User.where(id: suggestion.user_id).first.try(:first_name) %> <%= User.where(id: suggestion.user_id).first.try(:last_name) %></p></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <% if role_path_allowed? %>
       <% if @inform.pathologist_review_id == nil %>
         <div class="row">
           <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-            <%= link_to "Marcar como listo para entrega", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+            <%= link_to "Patólogo: Marcar como listo para entrega", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
           </div>
         </div>
       <% else %>
@@ -61,7 +84,7 @@
       <% if @inform.administrative_review_id == nil %>
         <div class="row">
           <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-            <%= link_to "Marcar como listo para entrega", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+            <%= link_to "Admin: Marcar como listo para entrega", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
           </div>
         </div>
       <% else %>

@@ -18,6 +18,8 @@ class Inform < ApplicationRecord
   has_many :cytologies, dependent: :destroy
   accepts_nested_attributes_for :cytologies
 
+  has_many :suggestions, dependent: :destroy
+
   has_many :pictures, as: :imageable, dependent: :destroy
 
 

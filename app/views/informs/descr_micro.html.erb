@@ -43,11 +43,12 @@
           </div>
         </div>
         <div class="col-12 col-lg-4 col-xl-4">
-          <div class="cytologies-in">
-            <%= render partial: "cytologies/cytologies", locals: { inform: @inform, edit_cytology: nil, edit_objection_id: nil, edit_cy_status: false } %>
+          <div class="suggestions-in">
+            <%= render partial: "suggestions/suggestions", locals: { inform: @inform, edit_suggestion: nil, edit_objection_id: nil, edit_su_status: false } %>
           </div>
         </div>
       </div>
+      
     <% end %>
     
     <div class="row">

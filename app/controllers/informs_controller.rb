@@ -103,6 +103,7 @@ class InformsController < ApplicationController
       @inform.update(user_review_date: Date.today, pathologist_review_id: current_user.id)
     elsif Role.where(id: current_user.role_id).first.name == "CTO"
       @inform.update(user_review_date: Date.today, pathologist_review_id: current_user.id)
+      @inform.update(user_review_date: Date.today, administrative_review_id: current_user.id)
     elsif Role.where(id: current_user.role_id).first.name == "Secretaria"
       @inform.update(user_review_date: Date.today, administrative_review_id: current_user.id)
     elsif Role.where(id: current_user.role_id).first.name == "Jefatura de laboratorio"

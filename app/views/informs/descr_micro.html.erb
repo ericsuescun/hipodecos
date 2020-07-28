@@ -7,45 +7,70 @@
         <%= render partial: "inform" %>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 col-lg-12 col-xl-12 ">
-        <div class="slide">
-          <%= render partial: "slides-micro", locals: { inform: @inform } %>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-lg-6 col-xl-6 macros-in">
-        <%= render partial: "macros/macros", locals: { inform: @inform } %>
-      </div>
-      <div class="col-12 col-lg-6 col-xl-6">
-        <div class="micros-in">
-          <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
-        </div>
-        <div class="diagnostics-in">
-          <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
-        </div>
-        <% if @inform.inf_type == "cito" %>
-          <div class="suggestion-in">
-            <div class="container micros-out">
-              <div class="row">
-                <div class="col-12 col-lg-12 col-xl-12">
-                  <h4>Sugerencias:</h4>
-                  <% @inform.cytologies.each_with_index do |cytology, n| %>
-                    <div class="alert alert-dark">
-                      <%= cytology.suggestion %>
-                      <div>Resultado: <%= cytology.result %></div>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            </div>
+    <% if @inform.inf_type != "cito" %>
+      <div class="row">
+        <div class="col-12 col-lg-12 col-xl-12 ">
+          <div class="slide">
+            <%= render partial: "slides-micro", locals: { inform: @inform } %>
           </div>
-        <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-lg-6 col-xl-6 macros-in">
+          <%= render partial: "macros/macros", locals: { inform: @inform } %>
+        </div>
+        <div class="col-12 col-lg-6 col-xl-6">
+          <div class="micros-in">
+            <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+          </div>
+          <div class="diagnostics-in">
+            <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
+          </div>
+        </div>
+      </div>
+
+    <% else %>
+
+      <div class="row">
+        <div class="col-12 col-lg-4 col-xl-4">
+          <div class="micros-in">
+            <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-xl-4">
+          <div class="diagnostics-in">
+            <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-xl-4">
+          <div class="suggestion-in">
+            
+            <h4>Sugerencias:</h4>
+            <% @inform.cytologies.each_with_index do |cytology, n| %>
+              <div class="alert alert-dark">
+                <%= cytology.suggestion %>
+                <div>Resultado: <%= cytology.result %></div>
+              </div>
+            <% end %>
+          
+          </div>
+
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 col-lg-12 col-xl-12">
+            
+          </div>
+        </div>
       </div>
       
       
-    </div>
+    <% end %>
+    
+    <% if @inform.inf_type == "cito" %>
+      
+    <% end %>
     <div class="row">
       <div class="col-4 col-lg-4 col-xl-4 mx-auto">
         <%= link_to "OK para revisión", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>

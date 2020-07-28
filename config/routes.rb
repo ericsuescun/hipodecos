@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :suggestions
   resources :citocodes do
     collection {post :import}
   end

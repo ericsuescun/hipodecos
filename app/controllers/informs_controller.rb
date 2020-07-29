@@ -128,6 +128,12 @@ class InformsController < ApplicationController
       # @informs = Inform.joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
       @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true).joins(:inform).select("slides.inform_id").distinct
     end
+    @informs = []
+    @slides.each do |slide|
+      if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
+        @informs << slide.inform
+      end
+    end
     @users = User.where(role_id: 6)
   end
 
@@ -141,6 +147,12 @@ class InformsController < ApplicationController
     else
       # @informs = Inform.joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
       @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true).joins(:inform).select("slides.inform_id").distinct
+    end
+    @informs = []
+    @slides.each do |slide|
+      if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
+        @informs << slide.inform
+      end
     end
     @users = User.where(role_id: 4)
   end

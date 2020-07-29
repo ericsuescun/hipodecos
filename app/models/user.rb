@@ -10,4 +10,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :tel, :cel, :address, :birth_date, :join_date, :role_id, presence: true
 
+  def fullname
+    [first_name, last_name].join(' ')
+  end
+
 end

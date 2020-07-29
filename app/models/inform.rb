@@ -3,6 +3,12 @@ class Inform < ApplicationRecord
 
   default_scope -> { order(created_at: :desc) }
 
+  scope :cyto, -> { where(inf_type: 'cito') }
+  scope :biop, -> { where("inf_type != 'cito'") }
+  scope :hosp, -> { where(inf_type: 'hosp') }
+  scope :clin, -> { where(inf_type: 'clin') }
+  scope :ready, -> { where(inf_status: 'ready')}
+
   has_many :samples, dependent: :destroy  #Dificulto el borrado automático para evitar catástrofes
   has_many :studies, dependent: :destroy
   has_many :macros, dependent: :destroy

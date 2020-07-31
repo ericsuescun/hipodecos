@@ -43,7 +43,7 @@
 				</table>
 			</div>
 			<div class="col-12 col-lg-6 col-xl-6">
-				<h1>Citologías</h1>
+				<h1>Citologías para revisión</h1>
 				<table class="table table-hover inform-assing">
 					<thead>
 						<tr>
@@ -52,8 +52,8 @@
 							<th>Informe</th>
 							<th>Placas</th>
 							<th>Placas listas</th>
-							<th>Revisa citología:</th>
-							<th>Resultado (solo Cito)</th>
+							<th>Revisa</th>
+							<th>Resultado</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -66,12 +66,16 @@
 									<td><%= inform.slides.count %></td>
 									<td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td>
 									<td><%= User.where(id: inform.pathologist_id).first.try(:fullname) %></td>
-									<td><%= inform.diagnostics.first.try(:result) %></td>
+									<td class="alert alert-<%= inform.diagnostics.first.try(:result) == 'positiva' ? 'danger' : inform.diagnostics.first.try(:result) == 'negativa' ? 'success' : 'warning'%>">
+										<%= inform.diagnostics.first.try(:result) %>
+											
+									</td>
 								</tr>	
 							<% end %>
 						<% end %>
 					</tbody>
 				</table>
+				<h1>Citologías negativas</h1>
 				<table class="table table-secondary inform-assing">
 					<thead>
 						<tr>
@@ -80,8 +84,7 @@
 							<th>Informe</th>
 							<th>Placas</th>
 							<th>Placas listas</th>
-							<th>Revisa citología:</th>
-							<th>Resultado (solo Cito)</th>
+							<th>Resultado</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -93,7 +96,6 @@
 									<td><%= inform.tag_code %></td>
 									<td><%= inform.slides.count %></td>
 									<td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td>
-									<td>-no seleccionada-</td>
 									<td><%= inform.diagnostics.first.try(:result) %></td>
 								</tr>	
 							<% end %>

@@ -57,6 +57,17 @@ class InformsController < ApplicationController
     end
   end
 
+  def descr_micros_cyto
+    if params[:yi]
+      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+      date_range = initial_date..final_date
+      @informs = Inform.where(receive_date: date_range, inf_status: nil, cytologist: current_user.id)
+    else
+      @informs = Inform.where(inf_status: nil, cytologist: current_user.id)
+    end
+  end
+
   def descr_micro
     @organs = Organ.all
 
@@ -86,7 +97,14 @@ class InformsController < ApplicationController
   end
 
   def set_revision
-    @inform.update(inf_status: "revision")
+    if @inform.inf_type == 'cito'
+      if pathologist_id != nil && cytologist != nil
+        @inform.update(inf_status: "revision")
+      end
+    else
+      @inform.update(inf_status: "revision")
+    end
+    
 
     redirect_to descr_micros_informs_path
   end
@@ -131,9 +149,59 @@ class InformsController < ApplicationController
     @informs = []
     @slides.each do |slide|
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
-        @informs << slide.inform
+        if slide.inform.inf_type != 'cito'
+          @informs << slide.inform
+        end
       end
     end
+
+    @informs2 = []
+    @slides.each do |slide|
+      if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
+        if slide.inform.inf_type == 'cito'
+          @informs2 << slide.inform
+        end
+      end
+    end
+
+    @already_negative = 0
+    @negative_cytos = []
+    if @informs2 != nil
+      @informs2.each do |inform|
+        if inform.diagnostics != []
+          if inform.diagnostics.first.result != nil
+            if inform.diagnostics.first.result == 'positiva'
+              @informs << inform
+            end
+            if inform.diagnostics.first.result == 'negativa'
+              if inform.pathologist_id != nil
+                @informs << inform
+                @already_negative = @already_negative + 1
+              else
+                @negative_cytos << inform
+              end
+              
+            end
+          end
+        end
+      end
+      proportion = 0.1
+      negative_pick = (@negative_cytos.count * proportion).ceil  #Obtengo el 10% round up de las negativas
+
+      if @already_negative < negative_pick
+        negative_pick.times do
+          n = rand(1..@negative_cytos.length) - 1
+          while @informs.last == @negative_cytos[n]
+            n = rand(1..@negative_cytos.length) - 1 #No es posible repetir numero
+          end
+          @informs << @negative_cytos[n]
+          @negative_cytos.delete_at(n)
+        end
+      end
+      
+    end
+    
+
     @users = User.where(role_id: 6)
   end
 
@@ -158,7 +226,7 @@ class InformsController < ApplicationController
   end
 
   def assign
-    Inform.where(id: params[:inform_ids]).update_all({pathologist_id: params[:pathologist_id].to_i})
+    Inform.where(id: params[:inform_ids]).update_all({pathologist_id: params[:pathologist_id].to_i == 0 ? nil : params[:pathologist_id].to_i })
 
     if params[:yi] != ""
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
@@ -168,6 +236,20 @@ class InformsController < ApplicationController
       redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
     else
       redirect_to distribution_path
+    end
+  end
+
+  def assign_cyto
+    Inform.where(id: params[:inform_ids]).update_all({cytologist: params[:cytologist].to_i == 0 ? nil : params[:cytologist].to_i })
+
+    if params[:yi] != ""
+      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+      date_range = initial_date..final_date
+      
+      redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
+    else
+      redirect_to distribution_cyto_path
     end
   end
 
@@ -296,6 +378,6 @@ class InformsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def inform_params
-      params.require(:inform).permit(:patient_id, :user_id, :physician_id, :tag_code, :receive_date, :delivery_date, :user_review_date, :prmtr_auth_code, :zone_type, :pregnancy_status, :status, :regime, :promoter_id, :entity_id, :branch_id, :copayment, :cost, :price, :invoice, :p_age, :p_age_type, :p_address, :p_email, :p_tel, :p_cel, :p_occupation, :p_residence_code, :p_municipality, :p_department, :inf_type, physicians_attributes: [:id, :inform_id, :user_id, :name, :lastname, :tel, :cel, :email, :study1, :study2 ] )
+      params.require(:inform).permit(:patient_id, :user_id, :physician_id, :tag_code, :receive_date, :delivery_date, :user_review_date, :prmtr_auth_code, :zone_type, :pregnancy_status, :status, :regime, :promoter_id, :entity_id, :branch_id, :copayment, :cost, :price, :invoice, :p_age, :p_age_type, :p_address, :p_email, :p_tel, :p_cel, :p_occupation, :p_residence_code, :p_municipality, :p_department, :inf_type, :cytologist, physicians_attributes: [:id, :inform_id, :user_id, :name, :lastname, :tel, :cel, :email, :study1, :study2 ] )
     end
 end

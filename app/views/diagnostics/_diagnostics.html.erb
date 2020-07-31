@@ -1,7 +1,12 @@
 <div class="container diagnostics-out">
   <div class="row">
     <div class="col-12 col-lg-12 col-xl-12">
-      <h4>Diganósticos:</h4>
+      <% if inform.inf_type != 'cito' %>
+        <h4>Diganósticos:</h4>
+      <% else %>
+        <h4>Resultados:</h4>
+      <% end %>
+      
       <% inform.diagnostics.each_with_index do |diagnostic, n| %>
         <div class="alert alert-dark">
           <div class="d-flex flex-row justify-content-between align-items-center">
@@ -54,7 +59,19 @@
               <p>Código Patología Suescún: <%= diagnostic.pss_code %> - Código OMS: <%= diagnostic.who_code %></p>
             <% else %>
               <p>Código Patología Suescún para citología: <%= diagnostic.pss_code %></p>
-              <p>Resultado: <strong><%= diagnostic.result %></strong></p>
+              <% if diagnostic.result == "negativa" %>
+                <div class="alert alert-success">
+              <% else %>
+                <% if diagnostic.result == "insatisfactoria" %>
+                  <div class="alert alert-warning">
+                <% else %>
+                  <div class="alert alert-danger">
+                <% end %>
+              <% end %>
+              
+                <p>Resultado: <strong><%= diagnostic.result %></strong></p>
+              </div>
+              
             <% end %>
             
             <p>
@@ -65,9 +82,7 @@
           <% end %>
 
 
-          <div class="text-muted"><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p></div>
-          <%= link_to 'Revisar', diagnostic_path(diagnostic) %>
-          <%= link_to 'Editar', edit_diagnostic_path(diagnostic) %>
+          <div class="text-muted"><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:fullname) %></p></div>
           
           <% diagnostic.objections.each do |objection| %>
             <div>

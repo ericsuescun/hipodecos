@@ -32,6 +32,8 @@
               </p>
             <% end %>
 
+            <div class="text-muted"><p>Por: <%= User.where(id: suggestion.user_id).first.try(:fullname) %></p></div>
+
             <% suggestion.objections.each do |objection| %>
               <div>
                 <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></span>

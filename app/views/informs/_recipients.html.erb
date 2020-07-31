@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-sm-12 col-lg-12">
-        <% inform.recipients.each do |recipient| %>
+        <% inform.recipients.each_with_index do |recipient, n| %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
               <div class="d-flex align-items-center p-0">
                 <span class="d-flex">
-                  <strong><%= recipient.tag %></strong>, creado por: <%= User.where(id: recipient.user_id).first.try(:email) %>
+                  <strong>Recipiente <%= n + 1 %> de <%= inform.recipients.count %>: <%= recipient.tag %></strong>, creado por: <%= User.where(id: recipient.user_id).first.try(:fullname) %>
                 </span>
               </div>
               <div class="d-flex">

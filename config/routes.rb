@@ -208,7 +208,9 @@ Rails.application.routes.draw do
 
       collection do
         put :assign
+        put :assign_cyto
         get :descr_micros
+        get :descr_micros_cyto
         get :index_revision
         get :last20
       end

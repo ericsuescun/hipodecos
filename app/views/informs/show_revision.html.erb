@@ -14,13 +14,24 @@
         <div class="col-12 col-lg-4 col-xl-4">
       <% end %>
         <% @inform.micros.each_with_index do |micro, n| %>
-          <div class="card bg-light mx-2 mb-3">
+          <% if @inform.inf_type == 'cito' && (micro.cyto_status == 'correct' || micro.cyto_status == 'confirmed') %>
+            <div class="card bg-success mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type == 'cito' && micro.cyto_status == 'uncorrect' %>
+            <div class="card bg-warning mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type == 'cito' && micro.cyto_status == nil %>
+            <div class="card bg-dark mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type != 'cito' %>
+            <div class="card bg-light mx-2 mb-3">
+          <% end %>
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
               <p>Micro <%= n + 1 %> de <%= @inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %> </p>
             </div>
             <div class="card-body">
               <p><strong><%= micro.description %></strong></p>
-              <div class="text-muted"><p>Por: <%= User.where(id: micro.user_id).first.try(:first_name) %> <%= User.where(id: micro.user_id).first.try(:last_name) %></p></div>
+              <div><p>Por: <%= User.where(id: micro.user_id).first.try(:fullname) %></p></div>
             </div>
           </div>
         <% end %>
@@ -31,7 +42,18 @@
         <div class="col-12 col-lg-4 col-xl-4">
       <% end %>
         <% @inform.diagnostics.each do |diagnostic| %>
-          <div class="card bg-light mx-2 mb-3">
+          <% if @inform.inf_type == 'cito' && (diagnostic.cyto_status == 'correct' || diagnostic.cyto_status == 'confirmed') %>
+            <div class="card bg-success mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type == 'cito' && diagnostic.cyto_status == 'uncorrect' %>
+            <div class="card bg-warning mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type == 'cito' && diagnostic.cyto_status == nil %>
+            <div class="card bg-dark mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type != 'cito' %>
+            <div class="card bg-light mx-2 mb-3">
+          <% end %>
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
               <p>Diganósticos</p>
             </div>
@@ -39,7 +61,7 @@
               <p>Código Patología Suescún: <%= diagnostic.pss_code %></p>
               <p>Código OMS: <%= diagnostic.who_code %></p>
               <p><%= diagnostic.description %></p>
-              <div class="text-muted"><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p></div>
+              <div><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p></div>
             </div>
           </div>
         <% end %>
@@ -47,13 +69,24 @@
       <% if @inform.inf_type == "cito" %>
         <div class="col-12 col-lg-4 col-xl-4">
           <% @inform.suggestions.each do |suggestion| %>
-            <div class="card bg-light mx-2 mb-3">
+            <% if @inform.inf_type == 'cito' && (suggestion.cyto_status == 'correct' || suggestion.cyto_status == 'confirmed') %>
+              <div class="card bg-success mx-2 mb-3">
+            <% end %>
+            <% if @inform.inf_type == 'cito' && suggestion.cyto_status == 'uncorrect' %>
+              <div class="card bg-warning mx-2 mb-3">
+            <% end %>
+            <% if @inform.inf_type == 'cito' && suggestion.cyto_status == nil %>
+              <div class="card bg-dark mx-2 mb-3">
+            <% end %>
+            <% if @inform.inf_type != 'cito' %>
+              <div class="card bg-light mx-2 mb-3">
+            <% end %>
               <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
                 <p>Sugerencia</p>
               </div>
               <div class="card-body">
                 <p><%= suggestion.description %></p>
-                <div class="text-muted"><p>Por: <%= User.where(id: suggestion.user_id).first.try(:first_name) %> <%= User.where(id: suggestion.user_id).first.try(:last_name) %></p></div>
+                <div><p>Por: <%= User.where(id: suggestion.user_id).first.try(:first_name) %> <%= User.where(id: suggestion.user_id).first.try(:last_name) %></p></div>
               </div>
             </div>
           <% end %>

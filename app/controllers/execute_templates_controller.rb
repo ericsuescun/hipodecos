@@ -290,6 +290,8 @@ class ExecuteTemplatesController < ApplicationController
 
 		@diagnostic.save
 
+		check_cyto_parity
+
 		@automatics = []
 		# @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
 		Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
@@ -356,6 +358,8 @@ class ExecuteTemplatesController < ApplicationController
 
 		@diagnostic.save
 
+		check_cyto_parity
+
 
 		@automatics = []
 		# @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
@@ -397,6 +401,33 @@ class ExecuteTemplatesController < ApplicationController
 	end
 
 	private
+
+		def check_cyto_parity
+			if @inform.inf_type == "cito" && @inform.diagnostics.count > 1
+				result_cyto = @inform.diagnostics.first.pss_code
+				result_path = @inform.diagnostics.second.pss_code
+				if result_cyto != result_path
+					@inform.diagnostics.second.update(cyto_status: "correct")
+					@inform.diagnostics.first.update(cyto_status: "uncorrect")
+
+					@inform.micros.second.update(cyto_status: "correct")
+					@inform.micros.first.update(cyto_status: "uncorrect")
+
+					@inform.suggestions.second.update(cyto_status: "correct")
+					@inform.suggestions.first.update(cyto_status: "uncorrect")
+				else
+					@inform.diagnostics.second.update(cyto_status: "correct")
+					@inform.diagnostics.first.update(cyto_status: "confirmed")
+
+					@inform.micros.second.update(cyto_status: "correct")
+					@inform.micros.first.update(cyto_status: "confirmed")
+					
+					@inform.suggestions.second.update(cyto_status: "correct")
+					@inform.suggestions.first.update(cyto_status: "confirmed")
+				end
+			end
+		end
+
 		def get_nomen(str)
 			return str.split('-',2)[1].split('-',2)[1]
 		end

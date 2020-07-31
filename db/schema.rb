@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_120250) do
+ActiveRecord::Schema.define(version: 2020_07_31_161426) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -174,6 +174,7 @@ ActiveRecord::Schema.define(version: 2020_07_28_120250) do
     t.string "pss_code"
     t.string "who_code"
     t.string "result"
+    t.string "cyto_status"
     t.index ["inform_id"], name: "index_diagnostics_on_inform_id"
   end
 
@@ -263,6 +264,7 @@ ActiveRecord::Schema.define(version: 2020_07_28_120250) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cyto_status"
     t.index ["inform_id"], name: "index_micros_on_inform_id"
   end
 
@@ -462,6 +464,7 @@ ActiveRecord::Schema.define(version: 2020_07_28_120250) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cyto_status"
     t.index ["inform_id"], name: "index_suggestions_on_inform_id"
   end
 

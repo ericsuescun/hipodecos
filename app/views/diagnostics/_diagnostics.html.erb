@@ -8,7 +8,15 @@
       <% end %>
       
       <% inform.diagnostics.each_with_index do |diagnostic, n| %>
-        <div class="alert alert-dark">
+        <% if inform.inf_type == 'cito' && (diagnostic.cyto_status == 'correct' || diagnostic.cyto_status == 'confirmed') %>
+          <div class="alert alert-success">
+        <% end %>
+        <% if inform.inf_type == 'cito' && diagnostic.cyto_status == 'uncorrect' %>
+          <div class="alert alert-warning">
+        <% end %>
+        <% if inform.inf_type == 'cito' && diagnostic.cyto_status == nil %>
+          <div class="alert alert-dark">
+        <% end %>
           <div class="d-flex flex-row justify-content-between align-items-center">
             <strong>Diagnóstico <%= n + 1 %> de <%= inform.diagnostics.count %> creado el <%= diagnostic.created_at.strftime('%d/%m/%Y') %>
             </strong>
@@ -133,14 +141,17 @@
       
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 col-lg-12 col-xl-12 d-flex flex-row justify-content-start align-items-center">
-      <div class="d-flex">
-        <%= form_with url: new_diagnostic_path, method: "get", class: "diagnostic-form-out mr-3" do |form| %>
-          <%= form.submit " + Diagnóstico", class: "btn btn-outline-dark" %>
-          <%= form.hidden_field :inform_id, value: inform.id %>
-        <% end %>
+  <% if (inform.inf_type == 'cito' && inform.micros.count < 1) || inform.pathologist_id == current_user.id %>
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12 d-flex flex-row justify-content-start align-items-center">
+        <div class="d-flex">
+          <%= form_with url: new_diagnostic_path, method: "get", class: "diagnostic-form-out mr-3" do |form| %>
+            <%= form.submit " + Diagnóstico", class: "btn btn-outline-dark" %>
+            <%= form.hidden_field :inform_id, value: inform.id %>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
+  
 </div>

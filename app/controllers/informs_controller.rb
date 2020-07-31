@@ -51,9 +51,9 @@ class InformsController < ApplicationController
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
       final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
       date_range = initial_date..final_date
-      @informs = Inform.where(receive_date: date_range, inf_status: nil, pathologist_id: current_user.id)
+      @informs = Inform.where(receive_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.where(receive_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
     else
-      @informs = Inform.where(inf_status: nil, pathologist_id: current_user.id)
+      @informs = Inform.where(inf_status: nil, pathologist_id: current_user.id).or(Inform.where(inf_status: "revision_cyto", pathologist_id: current_user.id))
     end
   end
 
@@ -98,15 +98,18 @@ class InformsController < ApplicationController
 
   def set_revision
     if @inform.inf_type == 'cito'
-      if pathologist_id != nil && cytologist != nil
+      if @inform.pathologist_id == nil && @inform.cytologist != nil
+        @inform.update(inf_status: "revision_cyto")
+        redirect_to descr_micros_cyto_informs_path
+      end
+      if @inform.pathologist_id != nil
         @inform.update(inf_status: "revision")
+        redirect_to descr_micros_informs_path
       end
     else
       @inform.update(inf_status: "revision")
+      redirect_to descr_micros_informs_path
     end
-    
-
-    redirect_to descr_micros_informs_path
   end
 
   def clear_revision
@@ -171,6 +174,9 @@ class InformsController < ApplicationController
         if inform.diagnostics != []
           if inform.diagnostics.first.result != nil
             if inform.diagnostics.first.result == 'positiva'
+              @informs << inform
+            end
+            if inform.diagnostics.first.result == 'insatisfactoria'
               @informs << inform
             end
             if inform.diagnostics.first.result == 'negativa'

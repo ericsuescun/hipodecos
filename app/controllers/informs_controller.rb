@@ -365,11 +365,24 @@ class InformsController < ApplicationController
   end
 
   def preview
-    @pathologists = []
-    @inform.diagnostics.each do |diagnostic|
+    if @inform.inf_type != 'cito'
+      @pathologists = []
+      @inform.diagnostics.each do |diagnostic|
+        @pathologists << User.where(id: diagnostic.user_id).first
+      end
+      @pathologists = @pathologists.uniq
+    else
+      @pathologists = []
+
+      diagnostic = @inform.diagnostics.last
       @pathologists << User.where(id: diagnostic.user_id).first
+
+      @pathologists = @pathologists.uniq
+      @cytologist = User.where(id: @inform.cytologist).first
+
+      @cytology = @inform.cytologies.first
     end
-    @pathologists = @pathologists.uniq
+    
 
   end
 

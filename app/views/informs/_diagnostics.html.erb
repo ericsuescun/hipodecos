@@ -3,32 +3,61 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 col-xl-12">
-      <% inform.diagnostics.each do |diagnostic| %>
-        <div class="card bg-light mx-2 mb-3">
-          <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-            <p>Diganósticos</p>
+      <% if inform.inf_type != 'cito' %>
+        <% inform.diagnostics.each do |diagnostic| %>
+          <div class="card bg-light mx-2 mb-3">
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <p>Diganósticos</p>
+            </div>
+            <div class="card-body">
+              <p>Código Patología Suescún: <%= diagnostic.pss_code %></p>
+              <p>Código OMS: <%= diagnostic.who_code %></p>
+              <p><%= diagnostic.description %></p>
+              <div class="text-muted"><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p></div>
+              <%= link_to 'Revisar', diagnostic_path(diagnostic) %>
+              <%= link_to 'Editar', edit_diagnostic_path(diagnostic) %>
+              <%= link_to ' Borrar', diagnostic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
+              <table>
+                <tbody>
+                  <% diagnostic.objections.each do |objection| %>
+                    <tr class=<%= objection.closed == false ? "objection" : "" %> >
+                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+                      <!-- <td><%= objection.description %></td> -->
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="card-body">
-            <p>Código Patología Suescún: <%= diagnostic.pss_code %></p>
-            <p>Código OMS: <%= diagnostic.who_code %></p>
-            <p><%= diagnostic.description %></p>
-            <div class="text-muted"><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p></div>
-            <%= link_to 'Revisar', diagnostic_path(diagnostic) %>
-            <%= link_to 'Editar', edit_diagnostic_path(diagnostic) %>
-            <%= link_to ' Borrar', diagnostic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
-            <table>
-              <tbody>
-                <% diagnostic.objections.each do |objection| %>
-                  <tr class=<%= objection.closed == false ? "objection" : "" %> >
-                    <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
-                    <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
-                    <!-- <td><%= objection.description %></td> -->
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
+        <% end %>
+      <% else %>
+          <% diagnostic = inform.diagnostics.last %>
+          <div class="card bg-light mx-2 mb-3">
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <p>Diganósticos</p>
+            </div>
+            <div class="card-body">
+              <p>Código Patología Suescún: <%= diagnostic.pss_code %></p>
+              <p>Código OMS: <%= diagnostic.who_code %></p>
+              <p><%= diagnostic.description %></p>
+              <div class="text-muted"><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p></div>
+              <%= link_to 'Revisar', diagnostic_path(diagnostic) %>
+              <%= link_to 'Editar', edit_diagnostic_path(diagnostic) %>
+              <%= link_to ' Borrar', diagnostic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %>
+              <table>
+                <tbody>
+                  <% diagnostic.objections.each do |objection| %>
+                    <tr class=<%= objection.closed == false ? "objection" : "" %> >
+                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: </td>
+                      <td><span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>"><%= objection_title(objection.obcode_id) %></td>
+                      <!-- <td><%= objection.description %></td> -->
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
       <% end %>
     </div>
   </div>

@@ -51,6 +51,7 @@
           </div>
         <% end %>
       <% else %>
+        <% if inform.micros != [] %>
           <% micro = inform.micros.last %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
@@ -98,6 +99,8 @@
               </div>
             <% end %>
           </div>
+        <% end %>
+          
         
       <% end %>
       

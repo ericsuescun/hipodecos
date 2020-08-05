@@ -104,13 +104,13 @@
                 <div class="col-12 col-lg-2">
                   <div class="form-group">
                     <%= form.label "Edad" %>
-                    <%= form.number_field :p_age_number, class: "form-control input" %>
+                    <%= form.number_field :p_age, class: "form-control input" %>
                   </div>
                 </div>
                 <div class="col-12 col-lg-1">
                   <div class="form-group">
                     <%= form.label "Tiempo" %>
-                    <%= form.select(:p_age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']], @patient.age_type), { include_blank: true }, class: "form-control input") %>
+                    <%= form.select(:p_age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']]), { include_blank: true }, class: "form-control input") %>
                   </div>
                 </div>
                 <div class="col-12 col-lg-2">

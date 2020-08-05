@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_31_161426) do
+ActiveRecord::Schema.define(version: 2020_08_05_164211) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 2020_07_31_161426) do
     t.string "last_mens"
     t.string "prev_appo"
     t.date "sample_date"
-    t.string "result"
+    t.string "last_result"
     t.integer "birth_control"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

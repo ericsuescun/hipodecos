@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-12 col-lg-3 col-xl-3">
                               <div class="form-group">
-                                <%= form.label "última menst:" %>
+                                <%= form.label "Última menstruación:" %>
                                 <%= form.text_field :last_mens, class: "form-control input" %>
                               </div>
                             </div>
@@ -41,19 +41,19 @@
                             </div>
                             <div class="col-12 col-lg-3 col-xl-3">
                               <div class="form-group">
-                                <%= form.label "Resultado:" %>
-                                <%= form.text_field :result, class: "form-control input" %>
+                                <%= form.label "Último resultado:" %>
+                                <%= form.text_field :last_result, class: "form-control input" %>
                               </div>
                             </div>
                             <div class="col-12 col-lg-3 col-xl-3">
                               <div class="form-group">
-                                <%= form.label "Emb:" %>
+                                <%= form.label "Embarazos:" %>
                                 <%= form.number_field :pregnancies, class: "form-control input" %>
                               </div>
                             </div>
                             <div class="col-12 col-lg-3 col-xl-3">
                               <div class="form-group">
-                                <%= form.label "Planif:" %>
+                                <%= form.label "Planifica:" %>
                                 <%= form.number_field :birth_control, class: "form-control input" %>
                               </div>
                             </div>
@@ -83,7 +83,7 @@
                       </div>
                       <div class="card-body p-1 m-0 d-flex flex-column">
                         <p></p>
-                        <p><span><strong>Número de embarazos:</strong> <%= cytology.pregnancies %> <strong>Desde que edad planifica:</strong> <%= cytology.birth_control %> - <strong>Resultado:</strong> <%= cytology.result %></span></p>
+                        <p><span><strong>Número de embarazos:</strong> <%= cytology.pregnancies %> <strong>Desde que edad planifica:</strong> <%= cytology.birth_control %> - <strong>Último resultado:</strong> <%= cytology.last_result %></span></p>
                         
                         <p><strong>Sugerencias:</strong> <%= cytology.suggestion %></p>
 
@@ -162,8 +162,8 @@
                           </div>
                           <div class="col-12 col-lg-3 col-xl-3">
                             <div class="form-group">
-                              <%= form.label "Resultado:" %>
-                              <%= form.text_field :result, class: "form-control input" %>
+                              <%= form.label "Último resultado:" %>
+                              <%= form.text_field :last_result, class: "form-control input" %>
                             </div>
                           </div>
                         </div>

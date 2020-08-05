@@ -207,8 +207,8 @@ class InformsController < ApplicationController
       
     end
     
-
-    @users = User.where(role_id: 6)
+    pahtologist_role_id = Role.where(name: "Patologia").first.id
+    @users = User.where(role_id: pahtologist_role_id)
   end
 
   def distribution_cyto
@@ -228,7 +228,9 @@ class InformsController < ApplicationController
         @informs << slide.inform
       end
     end
-    @users = User.where(role_id: 4)
+    
+    cytologist_role_id = Role.where(name: "Citologia").first.id
+    @users = User.where(role_id: cytologist_role_id)
   end
 
   def assign

@@ -7,7 +7,7 @@
         <% inform.diagnostics.each do |diagnostic| %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-              <p>Diganósticos</p>
+              <p>Diganóstico producido el <%= diagnostic.created_at.strftime('%d/%m/%Y') %></p>
             </div>
             <div class="card-body">
               <p>Código Patología Suescún: <%= diagnostic.pss_code %></p>
@@ -36,7 +36,7 @@
           <% diagnostic = inform.diagnostics.last %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-              <p>Diganósticos</p>
+              <p>Resultado producido el <%= diagnostic.created_at.strftime('%d/%m/%Y') %></p>
             </div>
             <div class="card-body">
               <p>Código Patología Suescún: <%= diagnostic.pss_code %></p>

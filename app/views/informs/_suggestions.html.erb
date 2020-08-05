@@ -2,95 +2,29 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-sm-12 col-lg-12">
-        <% if inform.inf_type != 'cito' %>
-         
-        <% else %>
-          <% if inform.suggestions != [] %>
-            <% suggestion = inform.suggestions.last %>
-            <div class="card bg-light mx-2 mb-3">
-              <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-                <div class="d-flex flex-row justify-content-between align-items-center">
-                  <strong>
-                    Sugerencia para <%= inform.tag_code %>, creada el <%= suggestion.created_at.strftime('%d/%m/%Y') %>
-                  </strong>
-                    <%= link_to suggestion, method: :delete, remote: true, class: "btn btn-outline-dark btn-sm" do %>
-                      <span>&times;</span>
-                    <% end %>
-                </div>
-              </div>
-              <div class="card-body">
-                
-                  
-                  <% if edit_suggestion == suggestion %>
-                      <%= form_with model: suggestion do |f| %>
-                        <div class="field">
-                          <%= f.label "Sugerencia:" %>
-                          <%= f.text_area :description, value: suggestion.description, rows: 8, class: "form-control input" %>
-                          <%= f.hidden_field :edit_su_status, value: edit_su_status %>
-                        </div>
-                        <div class="actions">
-                          <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
-                        </div>
-                      <% end %>
-                  <% else %>
-                    <p>
-                      <%= link_to edit_suggestion_path(suggestion), remote: true do %>
-                      <span style="font-size: 25px;color: black;border: 1px solid black; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
-                      <% end %>
-                      <span><%= suggestion.description %>
-                    </p>
-                  <% end %>
-
-                  <% suggestion.objections.each do |objection| %>
-                    <div>
-                      <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></span>
-                    </div>
-                    
-                    <% if edit_objection_id == nil %>
-                      <div class="d-flex flex-column">
-                        <span class="text-muted objection-description">
-                          <%= objection.description %>
-                        </span>
-                      </div>
-                      <% unless objection.closed %>
-                        <%= form_with url: suggestions_review_path, method: "post" do |form| %>
-                          <div class="form-group">
-                            <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
-                            <%= form.hidden_field :objection_id, value: objection.id %>
-                            <%= form.hidden_field :suggestion_id, value: suggestion.id %>
-                          </div>
-                        <% end %>
-                      <% end %>
-                    <% else %>
-                      <% if edit_objection_id == objection %>
-                        <%= form_with url: suggestions_anotate_path, method: "post" do |form| %>
-                          <div class="form-group">
-                            <%= form.label "Historial:" %>
-                            <%= form.text_area :description, value: objection.description, rows: 10, class: "form-control input disabled" %>
-                          </div>
-                          <div class="form-group">
-                            <%= form.label "Acción de mejora:" %>
-                            <%= form.text_area :new_description, rows: 2, class: "form-control input" %>
-                          </div>
-                          <div class="actions">
-                            <%= form.submit "Anotar", class: "btn btn-warning mx-1 my-1" %>
-                            <%= form.hidden_field :objection_id, value: objection.id %>
-                            <%= form.hidden_field :suggestion_id, value: suggestion.id %>
-                          </div>
-                        <% end %>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-
-                
-
+        <% if inform.suggestions != [] %>
+          <% suggestion = inform.suggestions.last %>
+          <div class="card bg-light mx-2 mb-3">
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <div class="d-flex flex-row justify-content-between align-items-center">
+                <p>Sugerencia producida el <%= suggestion.created_at.strftime('%d/%m/%Y') %></p>
               </div>
             </div>
-          <% end %>
-            
+            <div class="card-body">
+              <p><%= suggestion.description %></p>
+              <% suggestion.objections.each do |objection| %>
+                <div>
+                  <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></span>
+                </div>
+                <div class="d-flex flex-column">
+                  <span class="text-muted objection-description">
+                    <%= objection.description %>
+                  </span>
+                </div>
+              <% end %>
+            </div>
+          </div>
         <% end %>
-        
-        
       </div>
     </div>
   </div>

@@ -1,8 +1,12 @@
 <div class="container-fluid">
   <h1>Matricular o buscar un paciente</h1>
-  <%= form_tag new_patient_path, method: "get", class: "form-inline my-2 my-lg-0" do %>
+  <h6>Escribe la cédula o el número de identificación donde dice: # identificación y haz clic en Buscar / Matricular</h6>
+  <%= form_tag new_patient_path, method: "get", class: "form-inline my-3 my-lg-0" do %>
     <%= text_field_tag :id_number, nil, class: "form-control input mx-2", placeholder: "# identificación" %>
+    <button class="btn btn-primary my-2 my-3" type="submit">Buscar / Matricular</button>
   <% end %>
+  <h6>Si tenemos el paciente, te lo muestro con opción de crear informe.</h6>
+  <h6>Si no, te muestro como crearlo!</h6>
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto mt-3">
       <h1>Últimos 20 pacientes atendidos</h1>

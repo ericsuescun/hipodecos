@@ -3,13 +3,17 @@
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
       <h3>
-        <strong><%= @patient.name1 %> <%= @patient.name2 %> <%= @patient.lastname1 %> <%= @patient.lastname2 %></strong>, <strong><%= @patient.age_number %> <%= @patient.age_type == 'A' ? 'Años' : @patient.age_type == 'M' ? 'Meses' : 'Días' %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
+        <strong><%= @patient.name1 %> <%= @patient.name2 %> <%= @patient.lastname1 %> <%= @patient.lastname2 %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
       </h3>
       
       <div class="inform">
-        <p>Teléfono: <strong><%= @patient.tel %></strong> - Celular: <strong><%= @patient.cel %></strong> - Dirección: <strong><%= @patient.address %> - </strong>Email: <strong><%= @patient.email %></strong>
-
-        </p>
+        <% if @patient.informs.count > 0 %>
+          <p>
+            <strong>Datos del último informe:</strong> <strong><%= @patient.informs.first.p_age %> <%= @patient.informs.first.p_age_type == 'A' ? 'Años' : @patient.informs.first.p_age_type == 'M' ? 'Meses' : 'Días' %></strong>, 
+          Teléfono: <strong><%= @patient.informs.first.p_tel %></strong> - Celular: <strong><%= @patient.informs.first.p_cel %></strong> - Dirección: <strong><%= @patient.informs.first.p_address %> - </strong>Email: <strong><%= @patient.informs.first.p_email %></strong>
+          </p>
+        <% end %>
+        
       </div>
       <%= link_to 'Editar paciente', edit_patient_path(@patient) %> |
       <%= link_to 'Regresar a pacientes', patients_path %>

@@ -1,40 +1,31 @@
 <div class="container-fluid">
 	<%= form_tag assign_informs_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: :put do %>
-		
-
-		<div class="row mb-3">
-			<div class="col-12 col-lg-4 col-xl-4 offset-lg-2">
-				<%= select_tag(:pathologist_id, options_from_collection_for_select(@users, :id, :fullname), { prompt: 'Seleccionar o dejar así para desasignar', class: "form-control"}) %>
-			</div>
-			<div class="col-12 col-lg-4 col-xl-4">
-				<%= submit_tag "Asignar lo marcado", class: "btn btn-outline-primary btn-block" %>
-			</div>
-		</div>
-	
 		<div class="row">
-			<div class="col-12 col-lg-6 col-xl-6">
-				<h1>Biopsias</h1>
+			<div class="col-12 col-lg-4 col-xl-4">
+				<h3>Asignar biopsias a patología</h3>
 				<table class="table table-hover inform-assing">
 					<thead>
 						<tr>
-							<th></th>
-							<th>id</th>
+							
+							<!-- <th>id</th> -->
 							<th>Informe</th>
-							<th>Placas</th>
-							<th>Placas listas</th>
+							<!-- <th>Placas</th> -->
+							<!-- <th>Placas listas</th> -->
 							<th>Hace patología</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<% @informs.each do |inform| %>
 							<% if inform.inf_type != 'cito' %>
 								<tr>
-									<td><%= check_box_tag "inform_ids[]", inform.id %></td>
-									<td><%= inform.id %></td>
+									
+									<!-- <td><%= inform.id %></td> -->
 									<td><%= inform.tag_code %></td>
-									<td><%= inform.slides.count %></td>
-									<td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td>
+									<!-- <td><%= inform.slides.count %></td> -->
+									<!-- <td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td> -->
 									<td><%= User.where(id: inform.pathologist_id).first.try(:fullname) %></td>
+									<td><%= check_box_tag "inform_ids[]", inform.id %></td>
 								</tr>
 							<% end %>
 							
@@ -42,49 +33,57 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="col-12 col-lg-6 col-xl-6">
-				<h1>Citologías para revisión</h1>
+			<div class="col-12 col-lg-4 col-xl-4">
+				<h3>Asignar citologías para revisión</h3>
 				<table class="table table-hover inform-assing">
 					<thead>
 						<tr>
-							<th></th>
-							<th>id</th>
-							<th>Informe</th>
-							<th>Placas</th>
-							<th>Placas listas</th>
-							<th>Revisa</th>
+							
+							<!-- <th>id</th> -->
+							<th>Citología</th>
 							<th>Resultado</th>
+							<!-- <th>Placas</th> -->
+							<!-- <th>Placas listas</th> -->
+							<th>Revisa</th>
+							
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<% @informs.each do |inform| %>
 							<% if inform.inf_type == 'cito' %>
 								<tr>
-									<td><%= check_box_tag "inform_ids[]", inform.id %></td>
-									<td><%= inform.id %></td>
+									
+									<!-- <td><%= inform.id %></td> -->
 									<td><%= inform.tag_code %></td>
-									<td><%= inform.slides.count %></td>
-									<td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td>
-									<td><%= User.where(id: inform.pathologist_id).first.try(:fullname) %></td>
 									<td class="alert alert-<%= inform.diagnostics.first.try(:result) == 'positiva' ? 'danger' : inform.diagnostics.first.try(:result) == 'negativa' ? 'success' : 'warning'%>">
 										<%= inform.diagnostics.first.try(:result) %>
 											
 									</td>
+									<!-- <td><%= inform.slides.count %></td> -->
+									<!-- <td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td> -->
+									<td><%= User.where(id: inform.pathologist_id).first.try(:fullname) %></td>
+									
+									<td><%= check_box_tag "inform_ids[]", inform.id %></td>
 								</tr>	
 							<% end %>
 						<% end %>
 					</tbody>
 				</table>
-				<h1>Citologías negativas</h1>
-				<table class="table table-secondary inform-assing">
+				
+			</div>
+			<div class="col-12 col-lg-4 col-xl-4">
+				<h3>Citologías no seleccionadas</h3>
+				<table class="table table-hover inform-assing">
 					<thead>
 						<tr>
 							<th></th>
-							<th>id</th>
-							<th>Informe</th>
-							<th>Placas</th>
-							<th>Placas listas</th>
+							<!-- <th>id</th> -->
+							<th>Citoloogía</th>
 							<th>Resultado</th>
+							<!-- <th>Placas</th> -->
+							<!-- <th>Placas listas</th> -->
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -92,16 +91,30 @@
 							<% if inform.inf_type == 'cito' %>
 								<tr>
 									<td></td>
-									<td><%= inform.id %></td>
+									<!-- <td><%= inform.id %></td> -->
 									<td><%= inform.tag_code %></td>
-									<td><%= inform.slides.count %></td>
-									<td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td>
 									<td><%= inform.diagnostics.first.try(:result) %></td>
+									<!-- <td><%= inform.slides.count %></td> -->
+									<!-- <td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td> -->
+									
 								</tr>	
 							<% end %>
 						<% end %>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-12 col-lg-4 col-xl-4 mx-auto">
+				<div class="alert alert-primary">
+					<div class="form-group">
+						<strong><%= label_tag "Selecciona recurso de patología" %></strong>
+						<%= select_tag(:pathologist_id, options_from_collection_for_select(@users, :id, :fullname), { include_blank: true, class: "form-control mb-3"}) %>
+						<p>Para desasignar, deja en blanco el recurso de patología</p>
+						<%= submit_tag "Asignar lo marcado", class: "btn btn-primary btn-block" %>
+					</div>
+				</div>
 			</div>
 		</div>
 	<% end %>

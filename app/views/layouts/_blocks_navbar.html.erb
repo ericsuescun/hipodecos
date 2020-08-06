@@ -95,7 +95,20 @@
               <%= link_to "Últimos 7 días", processing_slides_tagging_slides_path + days_ago_search(7), class: "dropdown-item" %>
             </div>
           </li>
-            
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Asignar recurso
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+              <%= link_to "Asignar biopsias/citos", distribution_path, class: "dropdown-item" %>
+              <%= link_to "Asignar hoy y ayer", distribution_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Asignar semana", distribution_path + days_ago_search(7), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Asignar citologías", distribution_cyto_path, class: "dropdown-item" %>
+              <%= link_to "Asignar hoy y ayer", distribution_cyto_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Asignar semana", distribution_cyto_path + days_ago_search(7), class: "dropdown-item" %>
+            </div>
+          </li>
         <% end %>
       </ul>
       <% if user_signed_in? %>

@@ -32,16 +32,9 @@
               Patología
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Asignar biopsias/citos", distribution_path, class: "dropdown-item" %>
-              <%= link_to "Asignar hoy y ayer", distribution_path + days_ago_search(1), class: "dropdown-item" %>
-              <%= link_to "Asignar semana", distribution_path + days_ago_search(7), class: "dropdown-item" %>
-              
-              <div class="dropdown-divider"></div>
               <%= link_to "Leer material", descr_micros_informs_path, class: "dropdown-item" %>
               <%= link_to "Leer material hoy y ayer", descr_micros_informs_path + days_ago_search(1), class: "dropdown-item" %>
               <%= link_to "Leer material semana", descr_micros_informs_path + days_ago_search(7), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Por revisar", index_revision_informs_path, class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -49,15 +42,19 @@
               Citología
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Asignar citologías", distribution_cyto_path, class: "dropdown-item" %>
-              <%= link_to "Asignar hoy y ayer", distribution_cyto_path + days_ago_search(1), class: "dropdown-item" %>
-              <%= link_to "Asignar semana", distribution_cyto_path + days_ago_search(7), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
               <%= link_to "Leer material", descr_micros_cyto_informs_path, class: "dropdown-item" %>
               <%= link_to "Leer material hoy y ayer", descr_micros_cyto_informs_path + days_ago_search(1), class: "dropdown-item" %>
               <%= link_to "Leer material semana", descr_micros_cyto_informs_path + days_ago_search(7), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Por revisar", index_revision_informs_path, class: "dropdown-item" %>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Revisión
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+              <%= link_to "Por revisar (todos)", index_revision_informs_path, class: "dropdown-item" %>
+              <%= link_to "Lo hoy y ayer", index_revision_informs_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Lo de la semana", index_revision_informs_path + days_ago_search(7), class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown">

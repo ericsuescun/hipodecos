@@ -27,33 +27,38 @@
               
             </div>
           </li>
+          <% if role_path_allowed? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Leer material
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+                <%= link_to "Leer material (todos)", descr_micros_informs_path, class: "dropdown-item" %>
+                <%= link_to "Leer material hoy y ayer", descr_micros_informs_path + days_ago_search(1), class: "dropdown-item" %>
+                <%= link_to "Leer material semana", descr_micros_informs_path + days_ago_search(7), class: "dropdown-item" %>
+              </div>
+            </li>
+          <% end %>
+          <% if role_cyto_allowed? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Leer material Cito
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+                <%= link_to "Leer material (todos)", descr_micros_cyto_informs_path, class: "dropdown-item" %>
+                <%= link_to "Leer material hoy y ayer", descr_micros_cyto_informs_path + days_ago_search(1), class: "dropdown-item" %>
+                <%= link_to "Leer material semana", descr_micros_cyto_informs_path + days_ago_search(7), class: "dropdown-item" %>
+              </div>
+            </li>
+          <% end %>
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Patología
+              Verificación
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Leer material", descr_micros_informs_path, class: "dropdown-item" %>
-              <%= link_to "Leer material hoy y ayer", descr_micros_informs_path + days_ago_search(1), class: "dropdown-item" %>
-              <%= link_to "Leer material semana", descr_micros_informs_path + days_ago_search(7), class: "dropdown-item" %>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Citología
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Leer material", descr_micros_cyto_informs_path, class: "dropdown-item" %>
-              <%= link_to "Leer material hoy y ayer", descr_micros_cyto_informs_path + days_ago_search(1), class: "dropdown-item" %>
-              <%= link_to "Leer material semana", descr_micros_cyto_informs_path + days_ago_search(7), class: "dropdown-item" %>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Revisión
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Por revisar (todos)", index_revision_informs_path, class: "dropdown-item" %>
-              <%= link_to "Lo hoy y ayer", index_revision_informs_path + days_ago_search(1), class: "dropdown-item" %>
+              <%= link_to "Por verificar (todos)", index_revision_informs_path, class: "dropdown-item" %>
+              <%= link_to "Lo de hoy y ayer", index_revision_informs_path + days_ago_search(1), class: "dropdown-item" %>
               <%= link_to "Lo de la semana", index_revision_informs_path + days_ago_search(7), class: "dropdown-item" %>
             </div>
           </li>

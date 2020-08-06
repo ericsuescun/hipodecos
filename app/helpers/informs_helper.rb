@@ -2,7 +2,16 @@ module InformsHelper
 
 	def role_path_allowed?
 		actual_role = Role.where(id: current_user.role_id).first.name
-		if actual_role == "Patologia" || actual_role == "CTO"
+		if actual_role == "Patologia" || actual_role == "CTO" || actual_role == "Jefatura de laboratorio"
+			return true
+		else
+			return false
+		end
+	end
+
+	def role_cyto_allowed?
+		actual_role = Role.where(id: current_user.role_id).first.name
+		if actual_role == "Citologia" || actual_role == "CTO" || actual_role == "Jefatura de laboratorio"
 			return true
 		else
 			return false

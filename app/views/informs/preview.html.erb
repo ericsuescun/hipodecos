@@ -72,17 +72,21 @@
 
       <% if @inform.inf_type == 'cito' %>
         <div class="row">
+          <% if @cytology != nil %>
+            <div class="col-12 col-lg-3 col-xl-3">
+              <strong>Emb:</strong> <%= @cytology.pregnancies %>
+            </div>
+            <div class="col-12 col-lg-3 col-xl-3">
+              <strong>FUM:</strong> <%= @cytology.last_mens %>
+            </div>
+            <div class="col-12 col-lg-3 col-xl-3">
+              <strong>Ult Cit:</strong> <%= @cytology.prev_appo %>
+            </div>
+          <% end %>
           <div class="col-12 col-lg-3 col-xl-3">
-            <strong>Emb:</strong> <%= @cytology.pregnancies %>
-          </div>
-          <div class="col-12 col-lg-3 col-xl-3">
-            <strong>FUM:</strong> <%= @cytology.last_mens %>
-          </div>
-          <div class="col-12 col-lg-3 col-xl-3">
-            <strong>Ult Cit:</strong> <%= @cytology.prev_appo %>
-          </div>
-          <div class="col-12 col-lg-3 col-xl-3">
-            <strong>Resultado:</strong> <%= @inform.diagnostics.last.result %>
+            <% if @inform.diagnostics != [] %>
+              <strong>Resultado:</strong> <%= @inform.diagnostics.last.result %>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -101,7 +105,9 @@
         </div>
         <% if @inform.inf_type == 'cito' %>
           <div class="col-6 col-lg-6">
-            <strong>Fecha de muestra:</strong> <%= @cytology.sample_date %>
+            <% if @cytology != nil %>
+              <strong>Fecha de muestra:</strong> <%= @cytology.sample_date %>
+            <% end %>
           </div>
         <% end %>
       </div>    
@@ -177,7 +183,9 @@
         </div>
         <div class="row">
           <div class="col-12 col-lg-12">
-            <%= @inform.micros.last.description %>
+            <% if @inform.micros != [] %>
+              <%= @inform.micros.last.description %>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -202,22 +210,24 @@
           </div>
         <% end %>
       <% else %>
-        <% micro = @inform.micros.last %>
-        <div class="row">
-          <div class="col-12 col-lg-12">
-            <div class="row">
-              <% micro.pictures.each do |picture| %>
-                <div class="col-4 col-lg-4 mx-auto">
-                  <div class="card">
-                    <%= link_to picture.name.url  do %>
-                      <%= image_tag picture.name.url, class: "card-img-top" %>
-                    <% end %>
+        <% if @inform.micros != [] %>
+          <% micro = @inform.micros.last %>
+          <div class="row">
+            <div class="col-12 col-lg-12">
+              <div class="row">
+                <% micro.pictures.each do |picture| %>
+                  <div class="col-4 col-lg-4 mx-auto">
+                    <div class="card">
+                      <%= link_to picture.name.url  do %>
+                        <%= image_tag picture.name.url, class: "card-img-top" %>
+                      <% end %>
+                    </div>
                   </div>
-                </div>
-              <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
 
       
@@ -251,30 +261,31 @@
                   <% end %>
                 </div>
               <% else %>
-                <% diagnostic = @inform.diagnostics.last %>
-                <h5 class="card-title"><strong><%= diagnostic.description %></strong></h5>
-                <div class="row d-flex flex-row">
-                  <% @pathologists.each do |pathologist| %>
+                <% if @inform.diagnostics != [] %>
+                  <% diagnostic = @inform.diagnostics.last %>
+                  <h5 class="card-title"><strong><%= diagnostic.description %></strong></h5>
+                  <div class="row d-flex flex-row">
+                    <% @pathologists.each do |pathologist| %>
+                      <div class="col-4 col-lg-4 mt-3">
+                        <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
+                        <% if pathologist.signfile.file != nil %>
+                          <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
+                        <% else %>
+                          Sin archivo de firma!
+                        <% end %>
+                      </div>
+                    <% end %>
                     <div class="col-4 col-lg-4 mt-3">
-                      <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
-                      <% if pathologist.signfile.file != nil %>
-                        <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
+                      <h5 class="card-title"><strong>Citóloga:</strong> <%= @cytologist.fullname %></h5>
+                      <% if @cytologist.signfile.file != nil %>
+                        <%= image_tag @cytologist.signfile.url, class: "img-fluid" %>
                       <% else %>
                         Sin archivo de firma!
                       <% end %>
                     </div>
-                  <% end %>
-                  <div class="col-4 col-lg-4 mt-3">
-                    <h5 class="card-title"><strong>Citóloga:</strong> <%= @cytologist.fullname %></h5>
-                    <% if @cytologist.signfile.file != nil %>
-                      <%= image_tag @cytologist.signfile.url, class: "img-fluid" %>
-                    <% else %>
-                      Sin archivo de firma!
-                    <% end %>
                   </div>
-                </div>
+                <% end %>
               <% end %>
-              
             </div>
             <div class="card-footer text-muted d-flex justify-content-between">
               <div>
@@ -283,8 +294,11 @@
                     <strong>Código:</strong> <%= diagnostic.pss_code %> <strong>DX:</strong> <%= diagnostic.who_code %>
                   <% end %>
                 <% else %>
-                  <% diagnostic = @inform.diagnostics.last %>
-                  <strong>Código:</strong> <%= diagnostic.pss_code %>
+                  <% if @inform.diagnostics != [] %>
+                    <% diagnostic = @inform.diagnostics.last %>
+                    <strong>Código:</strong> <%= diagnostic.pss_code %>
+                  <% end %>
+                  
                 <% end %>
                 
               </div>

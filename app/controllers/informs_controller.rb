@@ -383,6 +383,7 @@ class InformsController < ApplicationController
       @cytologist = User.where(id: @inform.cytologist).first
 
       @cytology = @inform.cytologies.first
+
     end
     
 

@@ -4,7 +4,7 @@
     <%= submit_tag "Rotular lo chequeado", class: "btn btn-dark btn-sm mb-3" %>
       <% if @slidesc.size != 0 %>
         <div class="row">
-          <h1>Rotuladas</h1>
+          <h4>Rotuladas <%= search_range %></h4>
           <div class="col-12 col-lg-12 col-xl-12">
             <div class="row">
               <% create_matrix(@slidesc,5).each do |col| %>
@@ -48,7 +48,7 @@
       <% end %>
       <% if @slides_first_batch.size != 0 %>
         <div class="row">
-          <h1>Canastilla</h1>
+          <h4>Canastilla <%= search_range %></h4>
           <div class="col-12 col-lg-12 col-xl-12">
             <div class="row">
               <% create_matrix(@slides_first_batch,5).each do |col| %>
@@ -92,7 +92,7 @@
       <% end %>
       <% if @slides_rest.size != 0 %>
         <div class="row">
-          <h1>En espera para rotular</h1>
+          <h4>En espera para rotular <%= search_range %></h4>
           <div class="col-12 col-lg-12 col-xl-12">
             <div class="row">
               <% create_matrix(@slides_rest,5).each do |col| %>

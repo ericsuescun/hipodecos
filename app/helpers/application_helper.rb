@@ -17,14 +17,17 @@ module ApplicationHelper
 	end
 
 	def search_range
-		date_init = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i)
-		date_final = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i)
+		if params[:yi]
+			date_init = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i)
+			date_final = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i)
 
-		if date_init == date_final
-			"En " + date_init.strftime('%b %d de %Y')
-		else
-			"Entre " + date_init.strftime('%b %d de %Y') + " y " + date_final.strftime('%b %d de %Y')
+			if date_init == date_final
+				"en " + date_init.strftime('%b %d de %Y')
+			else
+				"entre " + date_init.strftime('%b %d de %Y') + " y " + date_final.strftime('%b %d de %Y')
+			end
 		end
+		
 	end
 
 	def objection_title(id)

@@ -41,14 +41,20 @@
                   <% end %>
                   
                     <div class="card mx-2 my-2 pb-0 <%= block.verified ? "border-success" : "" %>">
-                      <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-start">
-                        <span class="d-flex "><strong><%= block.block_tag %>: </strong></span>
-                        <% if sample.included %>
-                          <span class="d-flex"><strong><%= block.fragment %>F</strong></span>
-                        <% else %>
-                          <span class="d-flex pt-2 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
-                            <strong><%= block.fragment %>F</strong>
+                      <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+                        <div class="d-flex justify-content-start">
+                          <span class="d-flex "><strong><%= block.block_tag %>: </strong></span>
+                          <% if sample.included %>
+                            <span class="d-flex"><strong><%= block.fragment %>F</strong></span>
+                          <% else %>
+                            <span class="d-flex pt-2 mb-3 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
+                              <strong><%= block.fragment %>F</strong>
+                        </div>
+                        
                           </span>
+                          <%= link_to block, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
+                            <span>&times;</span>
+                          <% end %>
                         <% end %>
                       </div>
                       <div class="card-body p-1 m-1">

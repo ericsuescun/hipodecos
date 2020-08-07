@@ -144,14 +144,22 @@ Rails.application.routes.draw do
 
     get 'patients/fast_new_form'
     get 'patients/fast_new', to: 'patients#fast_new'
+    get 'patients/new_series', to: 'patients#new_series'
+    post 'patients/create_series', to: 'patients#create_series'
     
     resources :patients do
       resources :informs do
         resources :physicians
       end
 
+      member do
+        post :matriculate
+
+      end
+
       collection do
         get :last20
+        get :matriculate_series
       end
     end
 

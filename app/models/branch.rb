@@ -1,8 +1,8 @@
 class Branch < ApplicationRecord
   belongs_to :entity
 
-  validates :name, :initials, :code, presence: true
-  validates :code, uniqueness: true
+  validates :name, :initials, presence: true
+  
 
   default_scope -> { order(initials: :asc) }
 

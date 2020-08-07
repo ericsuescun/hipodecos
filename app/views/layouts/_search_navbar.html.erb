@@ -96,7 +96,7 @@
         <% end %>
         <% if user_signed_in? && !admin_signed_in? %>
           <li class="nav-item">
-            <%= link_to "Pacientes", last20_patients_path, class: "nav-link" %>
+            <%= link_to "Pacientes", matriculate_series_patients_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Informes", last20_informs_path, class: "nav-link" %>

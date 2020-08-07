@@ -28,6 +28,15 @@ class PatientsController < ApplicationController
     @patients = @patients.uniq
   end
 
+  def matriculate_series
+    @informs = Inform.order(created_at: :desc).limit(20)
+    @patients = []
+    @informs.each do |inform|
+      @patients << inform.patient
+    end
+    @patients = @patients.uniq
+  end
+
   # GET /patients/1
   # GET /patients/1.json
   def show
@@ -37,6 +46,19 @@ class PatientsController < ApplicationController
 
   # GET /patients/new
   def new
+    patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
+
+    if patients.length > 0
+      @patient = patients.first
+      @inform = patients.first.informs.build.physicians.build #Creo la instancia para physician para la form
+      redirect_to patient_path(patients.first)
+    else
+      @patient = Patient.new(id_number: params[:id_number])
+      @inform = @patient.informs.build.physicians.build #Creo la instancia para physician para la form
+    end
+  end
+
+  def new_series
     patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
 
     if patients.length > 0
@@ -113,6 +135,47 @@ class PatientsController < ApplicationController
     end
   end
 
+  def create_series
+    @patient = Patient.new(patient_params)
+
+    if @patient.sex == 'M'
+      @patient.informs.first.pregnancy_status = '4'
+    end
+
+    @patient.informs.first.user_id = current_user.id
+    @patient.informs.first.entity_id = Branch.where(id: params[:patient][:informs_attributes][:"0"][:branch_id]).first.try(:entity_id)
+    @patient.informs.first.regime = Promoter.where(id: params[:patient][:informs_attributes][:"0"][:promoter_id]).first.try(:regime)
+
+    @patient.password = params[:patient][:id_number]
+    @patient.password_confirmation = params[:patient][:id_number]
+
+    date_range = Date.today.beginning_of_year..Date.today.end_of_year
+
+    # byebug
+
+    # consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+    # @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+
+    if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
+        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+        @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    else
+      if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
+        consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
+        @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+      else
+        consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
+        @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+      end
+    end
+
+    if @patient.save
+      redirect_to matriculate_series_patients_path, notice: 'Paciente matriculado exitosamente.'
+    else
+      render :fast_new
+    end
+  end
+
   def update
     if @patient.update(patient_params)
       redirect_to @patient, notice: 'Patient was successfully updated.'
@@ -125,7 +188,7 @@ class PatientsController < ApplicationController
   # DELETE /patients/1.json
   def destroy
     @patient.destroy
-    redirect_to patients_url, notice: 'Patient was successfully destroyed.'
+    redirect_to matriculate_series_patients_path, notice: 'Patient was successfully destroyed.'
   end
 
   private

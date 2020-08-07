@@ -22,7 +22,16 @@
               <%= link_to "últimos 30 días", patients_path + "?filter=mes", class: "dropdown-item" %>
             </div>
           </li>
-
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Matrícula
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+              <%= link_to "En serie", matriculate_series_patients_path, class: "dropdown-item" %>
+              <%= link_to "Uno y al informe", last20_patients_path + "?filter=hoy", class: "dropdown-item" %>
+              
+            </div>
+          </li>
           
           <!-- <ul class="navbar-nav d-flex justify-content-end">
             <%= form_tag new_patient_path, method: "get", class: "form-inline my-2 my-lg-0" do %>

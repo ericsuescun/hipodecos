@@ -149,7 +149,9 @@
         </div>
       <% end %>
     </div>
-
+    <div>
+      <%= link_to 'Borrar paciente', @patient, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-danger" %>
+    </div>
   </div>
   <div class="col-4 col-lg-4">
     <div class="alert alert-info mr-1">

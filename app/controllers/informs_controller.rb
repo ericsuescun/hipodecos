@@ -340,7 +340,7 @@ class InformsController < ApplicationController
     end
 
     if inform.save
-      redirect_to inform, notice: 'Inform was successfully created.'
+      redirect_to inform, notice: 'Informe exitosamente creado.'
     else
       render :new
     end
@@ -350,7 +350,7 @@ class InformsController < ApplicationController
   # PATCH/PUT /informs/1.json
   def update
     if @inform.update(inform_params)
-      redirect_to @inform, notice: 'Inform was successfully updated.'
+      redirect_to @inform, notice: 'Informe exitosamente actualizado.'
     else
       render :edit
     end
@@ -361,9 +361,14 @@ class InformsController < ApplicationController
   def destroy
     @inform.destroy
     respond_to do |format|
-      format.html { redirect_to informs_url, notice: 'Inform was successfully destroyed.' }
+      format.html { redirect_to informs_url, notice: 'Informe exitosamente borrado.' }
       format.json { head :no_content }
     end
+  end
+
+  def anulate
+    @inform.update(inf_status: "anulado")
+    redirect_to informs_url, notice: 'Informe exitosamente anulado.'
   end
 
   def preview

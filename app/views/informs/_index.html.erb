@@ -21,9 +21,18 @@
           <% informs.each do |inform| %>
             <tr>
               <td>
-                <%= link_to inform  do %>
-                  <%= inform.tag_code %>
+                <% if inform.inf_status == "anulado" %>
+                  <del class="alert alert-warning">
+                    <%= link_to inform  do %>
+                      <%= inform.tag_code %>
+                    <% end %>
+                  </del>
+                <% else %>
+                  <%= link_to inform  do %>
+                    <%= inform.tag_code %>
+                  <% end %>
                 <% end %>
+                
               </td>
               <td><%= inform.inf_type %></td>
               <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
@@ -36,7 +45,12 @@
               <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
               <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
               <td><%= inform.prmtr_auth_code %></td>
-              <td><%= link_to 'Borrar', inform, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+              <% if inform.inf_status == "anulado" %>
+                <td><%= link_to 'Restaurar', anulate_inform_path(inform), data: { confirm: '¿Confirmas la operación?' } %></td>
+              <% else %>
+                <td><%= link_to 'Anular', anulate_inform_path(inform), data: { confirm: '¿Confirmas la operación?' } %></td>
+              <% end %>
+              
             </tr>
           <% end %>
         </tbody>

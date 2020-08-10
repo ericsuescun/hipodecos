@@ -231,6 +231,7 @@ Rails.application.routes.draw do
         get :set_ready
         get :preview
         get :autos_micro
+        get :anulate
       end
     end
 

@@ -1,6 +1,6 @@
 class InformsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_inform, only: [:show, :show_revision, :edit, :update, :destroy, :preview, :descr_micro, :clear_revision, :set_revision, :set_ready, :autos_micro]
+  before_action :set_inform, only: [:show, :show_revision, :edit, :update, :destroy, :preview, :descr_micro, :clear_revision, :set_revision, :set_ready, :autos_micro, :anulate]
 
   # GET /informs
   # GET /informs.json
@@ -367,7 +367,12 @@ class InformsController < ApplicationController
   end
 
   def anulate
-    @inform.update(inf_status: "anulado")
+    if @inform.inf_status == "anulado"
+      @inform.update(inf_status: nil, user_id: current_user.id)
+    else
+      @inform.update(inf_status: "anulado", user_id: current_user.id)
+    end
+    
     redirect_to informs_url, notice: 'Informe exitosamente anulado.'
   end
 

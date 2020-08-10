@@ -161,7 +161,7 @@ class DiagnosticsController < ApplicationController
           end
         else
           Citocode.all.each do |citocode|
-            citocode.description = citocode.cito_code.to_s + ". " + citocode.description
+            citocode.description = citocode.result_type + " " + citocode.cito_code.to_s + ". " + citocode.description
             @diagcodes << citocode
           end
         end

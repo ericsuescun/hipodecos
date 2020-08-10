@@ -265,74 +265,80 @@ class ExecuteTemplatesController < ApplicationController
 	end
 
 	def micro
-		@inform = Inform.find(params[:inform_id])
-		@script = Script.find(params[:script_id])
-		@micro = @inform.micros.build
-		@micro.user_id = current_user.id
-		@micro.description = @script.description
-		@micro.save
 
-		@diagnostic = @inform.diagnostics.build
-		@diagnostic.user_id = current_user.id
-		@diagnostic.description = @script.diagnostic
-		@diagnostic.pss_code = @script.pss_code
+		all_micro
+		# @inform = Inform.find(params[:inform_id])
+		# @script = Script.find(params[:script_id])
+		# @micro = @inform.micros.build
+		# @micro.user_id = current_user.id
+		# @micro.description = @script.description
+		# @micro.save
 
-		if @inform.inf_type != "cito"
-			@diagnostic.diagcode_id = Diagcode.where(pss_code: @script.pss_code).first.id
-			@diagnostic.who_code = @script.who_code
-		else
-			@diagnostic.diagcode_id = Citocode.where(cito_code: @script.pss_code).first.id
-			@diagnostic.result = Citocode.where(cito_code: @script.pss_code).first.result_type
+		# @diagnostic = @inform.diagnostics.build
+		# @diagnostic.user_id = current_user.id
+		# @diagnostic.description = @script.diagnostic
+		# @diagnostic.pss_code = @script.pss_code
 
-			@suggestion = @inform.suggestions.build
-			@suggestion.user_id = current_user.id
-			@suggestion.description = @script.suggestion
-			@suggestion.save
-		end
+		# if @inform.inf_type != "cito"
+		# 	@diagnostic.diagcode_id = Diagcode.where(pss_code: @script.pss_code).first.id
+		# 	@diagnostic.who_code = @script.who_code
+		# else
+		# 	@diagnostic.diagcode_id = Citocode.where(cito_code: @script.pss_code).first.id
+		# 	@diagnostic.result = Citocode.where(cito_code: @script.pss_code).first.result_type
 
-		@diagnostic.save
+		# 	@suggestion = @inform.suggestions.build
+		# 	@suggestion.user_id = current_user.id
+		# 	@suggestion.description = @script.suggestion
+		# 	@suggestion.save
+		# end
 
-		check_cyto_parity
+		# @diagnostic.save
 
-		@automatics = []
-		# @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
-		Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
-			if @inform.inf_type != "cito"
-				Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
-			    	@automatics << auto
-				end
-			else
-				Automatic.where(auto_type: "cito", organ: sample.organ_code).each do |auto|
-					@automatics << auto
-				end
-			end
-		end
+		# check_cyto_parity
 
-		# También hay que enviar diagcodes por lo que micro.js también despliega los diagnostics
-		@diagcodes = []
-		# @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
-		Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
-			if @inform.inf_type != "cito"
-				o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
-				Diagcode.where(organ_code: o_code).each do |diagcode|
-					if diagcode.pss_code != nil
-					  diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
-					else
-					  diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
-					end
-					@diagcodes << diagcode
-				end
-			else
-				@diagcodes = Citocode.all
-			end
+		# @automatics = []
+		# # @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+		# Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
+		# 	if @inform.inf_type != "cito"
+		# 		Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
+		# 	    	@automatics << auto
+		# 		end
+		# 	else
+		# 		Automatic.where(auto_type: "cito", organ: sample.organ_code).each do |auto|
+		# 			@automatics << auto
+		# 		end
+		# 	end
+		# end
+
+		# # También hay que enviar diagcodes por lo que micro.js también despliega los diagnostics
+		# @diagcodes = []
+		# # @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
+		# Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
+		# 	if @inform.inf_type != "cito"
+		# 		o_code = Organ.where(organ: sample.organ_code).first.organ_code.to_i
+		# 		Diagcode.where(organ_code: o_code).each do |diagcode|
+		# 			if diagcode.pss_code != nil
+		# 			  diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
+		# 			else
+		# 			  diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
+		# 			end
+		# 			@diagcodes << diagcode
+		# 		end
+		# 	else
+		# 		@diagcodes = Citocode.all
+		# 	end
 		  
-		end
+		# end
 
-		@edit_status = false
+		# @edit_status = false
 	end
 
 	def micro_new
 		
+		all_micro
+	end
+
+	def all_micro
 		@inform = Inform.find(params[:inform_id])
 		@script = Script.find(params[:script_id])
 		@micro = @inform.micros.build
@@ -392,7 +398,11 @@ class ExecuteTemplatesController < ApplicationController
 					@diagcodes << diagcode
 				end
 			else
-				@diagcodes = Citocode.all
+				# @diagcodes = Citocode.all
+				Citocode.all.each do |citocode|
+				  citocode.description = citocode.result_type + " " + citocode.cito_code.to_s + ". " + citocode.description
+				  @diagcodes << citocode
+				end
 			end
 		  
 		end
@@ -400,6 +410,7 @@ class ExecuteTemplatesController < ApplicationController
 		@edit_status = false
 		
 
+		
 	end
 
 	private

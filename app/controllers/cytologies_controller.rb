@@ -39,22 +39,9 @@ class CytologiesController < ApplicationController
 	# PATCH/PUT /cytologies/1
 	# PATCH/PUT /cytologies/1.json
 	def update
-		byebug
 	  if params[:cytology][:edit_status] == "true"
-	  	log = "SUGERENCIA: "
-	    if @cytology.suggestion != cytology_params[:suggestion]
-	      log += "FECHA: " + Date.today.to_s
-	      
-	      log += " Descripción - ANTES: " + @cytology.suggestion
-	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
-	      log += " Descripción - DESPUES: " + cytology_params[:suggestion].to_s
-	      log += ", por: " + current_user.email + " \n"
-	    else
-	      log = "FECHA: " + Date.today.to_s
-	      log += " SIN CAMBIOS."
-	    end
 
-	    log += "EMBARAZOS: "
+	    log = "EMBARAZOS: "
 	    if @cytology.pregnancies.to_s != cytology_params[:pregnancies]
 	      log += "FECHA: " + Date.today.to_s
 	      log += " Descripción - ANTES: " + @cytology.pregnancies.to_s
@@ -63,7 +50,7 @@ class CytologiesController < ApplicationController
 	      log += ", por: " + current_user.email + " \n"
 
 	    else
-	      log = "FECHA: " + Date.today.to_s
+	      log += "FECHA: " + Date.today.to_s
 	      log += " SIN CAMBIOS."
 	    end
 
@@ -76,7 +63,7 @@ class CytologiesController < ApplicationController
 	      log += ", por: " + current_user.email + " \n"
 
 	    else
-	      log = "FECHA: " + Date.today.to_s
+	      log += "FECHA: " + Date.today.to_s
 	      log += " SIN CAMBIOS."
 	    end
 
@@ -89,7 +76,7 @@ class CytologiesController < ApplicationController
 	      log += ", por: " + current_user.email + " \n"
 
 	    else
-	      log = "FECHA: " + Date.today.to_s
+	      log += "FECHA: " + Date.today.to_s
 	      log += " SIN CAMBIOS."
 	    end
 
@@ -102,16 +89,16 @@ class CytologiesController < ApplicationController
 	      log += ", por: " + current_user.email + " \n"
 
 	    else
-	      log = "FECHA: " + Date.today.to_s
+	      log += "FECHA: " + Date.today.to_s
 	      log += " SIN CAMBIOS."
 	    end
 
-	    log += "RESULTADO: "
-	    if @cytology.result != cytology_params[:result]
+	    log += "ÚLTIMO RESULTADO: "
+	    if @cytology.last_result != cytology_params[:last_result]
 	      log += "FECHA: " + Date.today.to_s
-	      log += " Descripción - ANTES: " + @cytology.result
+	      log += " Descripción - ANTES: " + @cytology.last_result
 	      log += ", por: " + User.where(id: @cytology.user_id).first.try(:email).to_s
-	      log += " Descripción - DESPUES: " + cytology_params[:result].to_s
+	      log += " Descripción - DESPUES: " + cytology_params[:last_result].to_s
 	      log += ", por: " + current_user.email + " \n"
 
 	    else

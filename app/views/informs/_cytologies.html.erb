@@ -53,8 +53,8 @@
                             </div>
                             <div class="col-12 col-lg-3 col-xl-3">
                               <div class="form-group">
-                                <%= form.label "Planifica:" %>
-                                <%= form.number_field :birth_control, class: "form-control input" %>
+                                <%= form.label "Método de planificación:" %>
+                                <%= form.text_field :birth_control, class: "form-control input" %>
                               </div>
                             </div>
                           </div>
@@ -73,20 +73,18 @@
                   <div class="col-12 col-lg-12 p-0">
                     <div class="card mb-2">
                       <div class="card-header p-0 m-0 d-flex justify-content-between align-items-center">
-                        <%= link_to edit_cytology_path(cytology), remote: true, class: "d-flex my-0 py-0" do %>
+                        <%= link_to edit_cytology_path(cytology), remote: true, class: "d-flex my-0 py-0 mx-2" do %>
                           <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
                         <% end %>
-                        <span><strong>Última menstruación:</strong> <%= cytology.last_mens %> - <strong>Fecha de cita anterior:</strong> <%= cytology.prev_appo %> - <strong>Fecha de toma de la muestra:</strong> <%= cytology.sample_date %></span>
+                        
                         <%= link_to cytology, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
                           <span>&times;</span>
                         <% end %>
                       </div>
                       <div class="card-body p-1 m-0 d-flex flex-column">
-                        <p></p>
-                        <p><span><strong>Número de embarazos:</strong> <%= cytology.pregnancies %> <strong>Desde que edad planifica:</strong> <%= cytology.birth_control %> - <strong>Último resultado:</strong> <%= cytology.last_result %></span></p>
+                        <p><span><strong>Última menstruación:</strong> <%= cytology.last_mens %> - <strong>Fecha de cita anterior:</strong> <%= cytology.prev_appo %> - <strong>Fecha de toma de la muestra:</strong> <%= cytology.sample_date %></span></p>
+                        <p><span><strong>Número de embarazos:</strong> <%= cytology.pregnancies %> - <strong>Método de planificación:</strong> <%= get_birth_control(cytology.birth_control) %> - <strong>Último resultado:</strong> <%= cytology.last_result %></span></p>
                         
-                        <p><strong>Sugerencias:</strong> <%= cytology.suggestion %></p>
-
                         <% cytology.objections.each do |objection| %>
                           <% if edit_objection_id == nil %>
                             <div class="d-flex flex-column">
@@ -150,7 +148,7 @@
                           </div>
                           <div class="col-12 col-lg-3 col-xl-3">
                             <div class="form-group">
-                              <%= form.label "Última menst:" %>
+                              <%= form.label "Última menstruación:" %>
                               <%= form.text_field :last_mens, class: "form-control input" %>
                             </div>
                           </div>
@@ -170,14 +168,14 @@
                         <div class="row">
                           <div class="col-12 col-lg-3 col-xl-3">
                             <div class="form-group">
-                              <%= form.label "Emb:" %>
+                              <%= form.label "Embarazos:" %>
                               <%= form.number_field :pregnancies, class: "form-control input" %>
                             </div>
                           </div>
                           <div class="col-12 col-lg-3 col-xl-3">
                             <div class="form-group">
-                              <%= form.label "Planif:" %>
-                              <%= form.number_field :birth_control, class: "form-control input" %>
+                              <%= form.label "Método de planificación:" %>
+                              <%= form.text_field :birth_control, class: "form-control input" %>
                             </div>
                           </div>
                           

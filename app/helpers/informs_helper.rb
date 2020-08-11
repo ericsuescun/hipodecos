@@ -1,5 +1,28 @@
 module InformsHelper
 
+	def get_birth_control(n)
+		case n
+		when "0"
+			"Pastillas"
+		when "1"
+			"DIU"
+		when "2"
+			"Condón"
+		when "3"
+			"Implante"
+		when "4"
+			"Óvulos"
+		when "5"
+			"Tubectomía"
+		when "6"
+			"Inyección"
+		when "7"
+			"Otro"
+		else
+			"Ninguno"
+		end
+	end
+
 	def role_path_allowed?
 		actual_role = Role.where(id: current_user.role_id).first.name
 		if actual_role == "Patologia" || actual_role == "CTO" || actual_role == "Jefatura de laboratorio"

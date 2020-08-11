@@ -386,13 +386,23 @@ class InformsController < ApplicationController
     else
       @pathologists = []
 
-      diagnostic = @inform.diagnostics.last
-      @pathologists << User.where(id: diagnostic.user_id).first
-
-      @pathologists = @pathologists.uniq
+      if @inform.diagnostics != []
+        diagnostic = @inform.diagnostics.last
+        @pathologists << User.where(id: diagnostic.user_id).first
+        @pathologists = @pathologists.uniq
+      else
+        diagnostic = nil
+        @pathologists = []
+      end
+      
       @cytologist = User.where(id: @inform.cytologist).first
 
-      @cytology = @inform.cytologies.first
+      if @inform.cytologies != []
+        @cytology = @inform.cytologies.first
+      else
+        @cytology = nil
+      end
+      
 
     end
     

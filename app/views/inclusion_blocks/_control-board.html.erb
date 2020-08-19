@@ -29,6 +29,7 @@
                       </tr>
                     <% end %>
                     <tr>
+
                       <td class="m-0 p-0"><%= block.block_tag %></td>
                       <td class="m-0 p-0">
                         <span class="d-flex pt-2 mr-1 badge badge-primary">
@@ -38,6 +39,7 @@
                       <td id="add-link-block-<%= block.block_tag %>" class="m-0 p-0">
                         <%= render partial: "inclusion_blocks/link-block", locals: { sample: sample, block: block } %>
                       </td>
+                      <td class="m-0 p-0"><%= check_box_tag "block_ids[]", block.id, checked: true %></td>
                       <% if !sample.included %>
                         <td class="m-0 p-0">
                           <%= render partial: "inclusion_blocks/inclusion-block-controls", locals: { block: block, sample: sample } %>

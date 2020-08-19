@@ -1,0 +1,65 @@
+<div class="inclusion-blocks">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12">
+        
+        <div class="row">
+          <%= form_with url: inclusion_blocks_massive_inclusion_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
+
+            <%= form.submit "Incluir lo marcado", class: "ml-1 my-0 d-flex btn btn-sm btn-outline-success" %>
+            <% create_matrix(inclusion,17).each do |col| %>
+              <div class="col-3 col-lg-3 col-xl-2">
+                <table class="table table-hover list-blocks">
+                  
+                  <tbody>
+                    <% col.each do |row| %>
+                      <% block = row[0] %>
+                      <% sample = row[1] %>
+                      <%= form.hidden_field :sample_id, value: sample.id %>
+                      <%= form.hidden_field :block_id, value: block.id %>
+                      <% if get_nomen(block.block_tag) == "A" || get_nomen(block.block_tag) == "A1" %>
+                        <tr class="inclusion-inform p-0 m-0">
+                          <td class="m-0 p-0"><strong><span class="badge badge-dark"><%= block.inform.tag_code %></strong></span><span class="badge badge-dark ml-1"><strong><%= block.inform.blocks.count %></strong></span></td>
+                          <td class="m-0 p-0"></td>
+                          <td class="m-0 p-0"></td>
+                          <td class="m-0 p-0"></td>
+                        </tr>
+                      <% end %>
+                      <tr>
+
+                        <td class="m-0 p-0"><%= block.block_tag %></td>
+                        <td class="m-0 p-0">
+                          <span class="d-flex pt-2 mr-1 badge badge-primary">
+                            <%= sample.fragment %>
+                          </span>
+                        </td>
+                        <td id="add-link-block-<%= block.block_tag %>" class="m-0 p-0">
+                          <%= render partial: "inclusion_blocks/link-block", locals: { sample: sample, block: block } %>
+                        </td>
+                        <% if sample.included == true %>
+                          <td class="m-0 p-0"></td>
+                        <% else %>
+                          <td class="m-0 p-0"><%= check_box_tag "block_ids[]", block.id, checked: true %></td>
+                        <% end %>
+                        
+                        <% if !sample.included %>
+                          <td class="m-0 p-0">
+                            <%= render partial: "inclusion_blocks/inclusion-block-controls", locals: { block: block, sample: sample } %>
+                          </td>
+                        <% else %>
+                          <td></td>
+                        <% end %>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            <% end %>
+          <% end %>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

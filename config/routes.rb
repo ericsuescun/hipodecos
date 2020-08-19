@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     post 'inclusion_blocks/block_fp1'
     post 'inclusion_blocks/inform_ok'
     post 'inclusion_blocks/block_fm1'
+    post 'inclusion_blocks/massive_inclusion'
 
     post 'list_slides/color'
     post 'list_slides/tag'
@@ -252,6 +253,9 @@ Rails.application.routes.draw do
     end
 
     resources :blocks do
+      collection do
+        put :massive_inclusion
+      end
       resources :objections, module: :blocks
     end
 

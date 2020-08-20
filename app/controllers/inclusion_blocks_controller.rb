@@ -105,7 +105,8 @@ class InclusionBlocksController < ApplicationController
 	    initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
 	    final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
 	    date_range = initial_date..final_date
-	    @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag").select("blocks.block_tag, blocks.fragment")
+	    # @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag").select("blocks.block_tag, blocks.fragment")
+	    @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
 	    @samplesc = Sample.where(created_at: date_range, name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
 
 	    @inclusion = []
@@ -124,12 +125,12 @@ class InclusionBlocksController < ApplicationController
 
 	  end
 
-	  if params[:yi] != ""
-	  	redirect_to inclusion_blocks_inclusion_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
+	  # if params[:yi] != ""
+	  # 	redirect_to inclusion_blocks_inclusion_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
 	    
-	  else
-	  	# redirect_to inclusion_blocks_inclusion_path
-	  end
+	  # else
+	  # 	redirect_to inclusion_blocks_inclusion_path
+	  # end
 
 	end
 

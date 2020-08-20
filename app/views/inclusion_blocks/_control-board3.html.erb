@@ -1,0 +1,18 @@
+<div class="inclusion-blocks">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12">
+        
+        <div class="row">
+          <h1>Test!</h1>
+          <%= inclusion.first[0].block_tag %>
+          <%= inclusion.first[1].sample_tag %>
+          <%= form_with url: inclusion_blocks_massive_inclusion_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
+          <% end %>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

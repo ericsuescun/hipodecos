@@ -1,19 +1,9 @@
-<% if @block.errors.empty? %>
-	$(document).on('page:load', refresh2());
-	function refresh2() {
 
-	  $('div.inclusion-blocks').remove();
-	  $('div.inclusion-block').append('<%= j render "inclusion_blocks/control-board2", inclusion: @inclusion %>');
-	  // $('div.inclusion-block').append('<%= j render "inclusion_blocks/control-board3" %>');
+$(document).on('page:load', refresh2());
+function refresh2() {
 
-	  
-	  $('nav.navbar').append('<%= j render "ok-message", message: "Bloques incluidos!" %>');
-	  setTimeout(function() {
-	  	$('div.alert-growl').remove();
-	  }, 3000)
-	}
-<% else %>
-	$('div.inclusion-blocks').remove();
-	// $('div.inclusion-block').append('<%= j render "inclusion_blocks/control-board2", inclusion: @inclusion %>');
-	// $('div.inclusion-block').append('<%= j render "inclusion_blocks/control-board3" %>');
-<% end %>
+  $('div.inclusion-blocks').remove();
+  $('div.inclusion-block').append('<%= j render "inclusion_blocks/control-board2", inclusion: @inclusion %>');
+
+  
+}

@@ -100,38 +100,7 @@ class InclusionBlocksController < ApplicationController
 	  	end
 	  	@sample.update(included: true, user_id: current_user.id)
 	  end
-
-	  if params[:yi] != ""
-	    initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-	    final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-	    date_range = initial_date..final_date
-	    # @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag").select("blocks.block_tag, blocks.fragment")
-	    @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
-	    @samplesc = Sample.where(created_at: date_range, name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
-
-	    @inclusion = []
-	    @blocks.each_with_index do |block, n|
-	    	@inclusion << [ block, @samplesc[n], block.block_tag, @samplesc[n].fragment, block.fragment ]
-	    end
-
-	  else
-	    @blocks = Block.joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
-	    @samplesc = Sample.where(name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
-
-	    @inclusion = []
-	    @blocks.each_with_index do |block, n|
-	    	@inclusion << [ block, @samplesc[n], block.block_tag, @samplesc[n].fragment, block.fragment ]
-	    end
-
-	  end
-
-	  # if params[:yi] != ""
-	  # 	redirect_to inclusion_blocks_inclusion_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
-	    
-	  # else
-	  # 	redirect_to inclusion_blocks_inclusion_path
-	  # end
-
+	  get_blocks
 	end
 
 	def block_fp1
@@ -157,7 +126,8 @@ class InclusionBlocksController < ApplicationController
 		  initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
 		  final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
 		  date_range = initial_date..final_date
-		  @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag").select("blocks.block_tag, blocks.fragment")
+		  @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
+		  # @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag").select("blocks.block_tag, blocks.fragment")
 		  @samplesc = Sample.where(created_at: date_range, name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
 		  build_inclusion
 		else

@@ -49,12 +49,11 @@
                           <% else %>
                             <span class="d-flex pt-2 mb-3 badge badge-<%= block.fragment == sample.fragment ? "success" : "danger" %>">
                               <strong><%= block.fragment %>F</strong>
-                        </div>
-                        
-                          </span>
-                          <%= link_to block, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
-                            <span>&times;</span>
+                            </span>
                           <% end %>
+                        </div>
+                        <%= link_to block, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
+                          <span>&times;</span>
                         <% end %>
                       </div>
                       <div class="card-body p-1 m-1">

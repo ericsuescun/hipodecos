@@ -242,7 +242,7 @@
               <% if @inform.inf_type != 'cito' %>
                 <strong>DIAGNÓSTICO Y PROCEDIMIENTOS</strong>
               <% else %>
-                <strong>INTERPRETCIÓN Y RESULTADO</strong>
+                <strong>INTERPRETACIÓN Y RESULTADO</strong>
               <% end %>
               
             </div>
@@ -295,6 +295,12 @@
                 <% if @inform.inf_type != 'cito' %>
                   <% @inform.diagnostics.each do |diagnostic| %>
                     <strong>Código:</strong> <%= diagnostic.pss_code %> <strong>DX:</strong> <%= diagnostic.who_code %>
+                  <% end %>
+                  <% if @inform.blocks.where(stored: true) != [] %>
+                    Se guarda 
+                    <% @inform.blocks.where(stored: true).each do |stored_block| %>
+                      <strong><%= stored_block.block_tag %> </strong>
+                    <% end %>
                   <% end %>
                 <% else %>
                   <% if @inform.diagnostics != [] %>

@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     post 'inclusion_blocks/inform_ok'
     post 'inclusion_blocks/block_fm1'
     post 'inclusion_blocks/massive_inclusion'
+    post 'inclusion_blocks/block_store'
 
     post 'list_slides/color'
     post 'list_slides/tag'

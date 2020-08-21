@@ -103,6 +103,17 @@ class InclusionBlocksController < ApplicationController
 	  get_blocks
 	end
 
+	def block_store
+		@inform = Inform.find(params[:inform_id])
+		ids = @inform.block_ids
+		@blocks = Block.where(id: ids)
+		@blocks.update_all(stored: false)
+
+		@blocks = Block.where(id: params[:block_ids])
+		@blocks.update_all(stored: true)
+
+	end
+
 	def block_fp1
 		@sample = Sample.find(params[:sample_id])
 		@block = Block.find(params[:block_id])

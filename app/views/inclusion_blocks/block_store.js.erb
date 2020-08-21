@@ -1,0 +1,9 @@
+
+$(document).on('page:load', refresh2());
+function refresh2() {
+
+  $('div.slides').remove();
+  $('div.slide').append('<%= j render "informs/slides-micro", inform: @inform %>');
+
+  
+}

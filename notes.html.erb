@@ -1,0 +1,231 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Oldrecords</h1>
+
+<h4>Importar datos</h4>
+<%= form_tag import_oldrecords_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Importar CSV" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clave</th>
+      <th>Numero</th>
+      <th>Fecharec</th>
+      <th>Fecha</th>
+      <th>Apellido</th>
+      <th>Apellido2</th>
+      <th>Nombre</th>
+      <th>Nombre2</th>
+      <th>Identif</th>
+      <th>Cedula</th>
+      <th>Historia</th>
+      <th>Uniedad</th>
+      <th>Edad</th>
+      <th>Sexo</th>
+      <th>Clinica</th>
+      <th>Entidad</th>
+      <th>Entad</th>
+      <th>Codval1</th>
+      <th>Por1</th>
+      <th>Codval2</th>
+      <th>Por2</th>
+      <th>Codval3</th>
+      <th>Por3</th>
+      <th>Saldo</th>
+      <th>Descr</th>
+      <th>Diagnostic</th>
+      <th>Codigo</th>
+      <th>Codigo1</th>
+      <th>Codigo2</th>
+      <th>Codigo3</th>
+      <th>Codigo4</th>
+      <th>Codigo5</th>
+      <th>Prestador</th>
+      <th>Factura</th>
+      <th>Autoriz</th>
+      <th>Usuario</th>
+      <th>Ocupacion</th>
+      <th>Residencia</th>
+      <th>Zona</th>
+      <th>Emb</th>
+      <th>Estado</th>
+      <th>Telefono</th>
+      <th>Dnombre</th>
+      <th>Dapellido</th>
+      <th>Oficina</th>
+      <th>Bloque</th>
+      <th>Patologo</th>
+      <th>Secretaria</th>
+      <th>Tipo</th>
+      <th>Imprimir</th>
+      <th>Secretauno</th>
+      <th>Fecha1</th>
+      <th>Firma</th>
+      <th>Rango</th>
+      <th>Dx</th>
+      <th>Revisor</th>
+      <th>Tiempo</th>
+      <th>Sincroniza</th>
+      <th>Fsincro</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @oldrecords.each do |oldrecord| %>
+      <tr>
+        <td><%= oldrecord.clave %></td>
+        <td><%= oldrecord.numero %></td>
+        <td><%= oldrecord.fecharec %></td>
+        <td><%= oldrecord.fecha %></td>
+        <td><%= oldrecord.apellido %></td>
+        <td><%= oldrecord.apellido2 %></td>
+        <td><%= oldrecord.nombre %></td>
+        <td><%= oldrecord.nombre2 %></td>
+        <td><%= oldrecord.identif %></td>
+        <td><%= oldrecord.cedula %></td>
+        <td><%= oldrecord.historia %></td>
+        <td><%= oldrecord.uniedad %></td>
+        <td><%= oldrecord.edad %></td>
+        <td><%= oldrecord.sexo %></td>
+        <td><%= oldrecord.clinica %></td>
+        <td><%= oldrecord.entidad %></td>
+        <td><%= oldrecord.entad %></td>
+        <td><%= oldrecord.codval1 %></td>
+        <td><%= oldrecord.por1 %></td>
+        <td><%= oldrecord.codval2 %></td>
+        <td><%= oldrecord.por2 %></td>
+        <td><%= oldrecord.codval3 %></td>
+        <td><%= oldrecord.por3 %></td>
+        <td><%= oldrecord.saldo %></td>
+        <td><%= oldrecord.descr %></td>
+        <td><%= oldrecord.diagnostic %></td>
+        <td><%= oldrecord.codigo %></td>
+        <td><%= oldrecord.codigo1 %></td>
+        <td><%= oldrecord.codigo2 %></td>
+        <td><%= oldrecord.codigo3 %></td>
+        <td><%= oldrecord.codigo4 %></td>
+        <td><%= oldrecord.codigo5 %></td>
+        <td><%= oldrecord.prestador %></td>
+        <td><%= oldrecord.factura %></td>
+        <td><%= oldrecord.autoriz %></td>
+        <td><%= oldrecord.usuario %></td>
+        <td><%= oldrecord.ocupacion %></td>
+        <td><%= oldrecord.residencia %></td>
+        <td><%= oldrecord.zona %></td>
+        <td><%= oldrecord.emb %></td>
+        <td><%= oldrecord.estado %></td>
+        <td><%= oldrecord.telefono %></td>
+        <td><%= oldrecord.dnombre %></td>
+        <td><%= oldrecord.dapellido %></td>
+        <td><%= oldrecord.oficina %></td>
+        <td><%= oldrecord.bloque %></td>
+        <td><%= oldrecord.patologo %></td>
+        <td><%= oldrecord.secretaria %></td>
+        <td><%= oldrecord.tipo %></td>
+        <td><%= oldrecord.imprimir %></td>
+        <td><%= oldrecord.secretauno %></td>
+        <td><%= oldrecord.fecha1 %></td>
+        <td><%= oldrecord.firma %></td>
+        <td><%= oldrecord.rango %></td>
+        <td><%= oldrecord.dx %></td>
+        <td><%= oldrecord.revisor %></td>
+        <td><%= oldrecord.tiempo %></td>
+        <td><%= oldrecord.sincroniza %></td>
+        <td><%= oldrecord.fsincro %></td>
+        <td><%= link_to 'Show', oldrecord %></td>
+        <td><%= link_to 'Edit', edit_oldrecord_path(oldrecord) %></td>
+        <td><%= link_to 'Destroy', oldrecord, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Oldrecord', new_oldrecord_path %>
+
+
+class OldrecordsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_oldrecord, only: [:show, :edit, :update, :destroy]
+
+  def import
+    Oldrecord.import(params[:file])
+    redirect_to oldrecords_path, notice: "Datos importados!"
+  end
+
+  # GET /oldrecords
+  # GET /oldrecords.json
+  def index
+    @oldrecords = Oldrecord.all
+  end
+
+  # GET /oldrecords/1
+  # GET /oldrecords/1.json
+  def show
+  end
+
+  # GET /oldrecords/new
+  def new
+    @oldrecord = Oldrecord.new
+  end
+
+  # GET /oldrecords/1/edit
+  def edit
+  end
+
+  # POST /oldrecords
+  # POST /oldrecords.json
+  def create
+    @oldrecord = Oldrecord.new(oldrecord_params)
+
+    respond_to do |format|
+      if @oldrecord.save
+        format.html { redirect_to @oldrecord, notice: 'Oldrecord was successfully created.' }
+        format.json { render :show, status: :created, location: @oldrecord }
+      else
+        format.html { render :new }
+        format.json { render json: @oldrecord.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /oldrecords/1
+  # PATCH/PUT /oldrecords/1.json
+  def update
+    respond_to do |format|
+      if @oldrecord.update(oldrecord_params)
+        format.html { redirect_to @oldrecord, notice: 'Oldrecord was successfully updated.' }
+        format.json { render :show, status: :ok, location: @oldrecord }
+      else
+        format.html { render :edit }
+        format.json { render json: @oldrecord.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /oldrecords/1
+  # DELETE /oldrecords/1.json
+  def destroy
+    @oldrecord.destroy
+    respond_to do |format|
+      format.html { redirect_to oldrecords_url, notice: 'Oldrecord was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_oldrecord
+      @oldrecord = Oldrecord.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def oldrecord_params
+      params.require(:oldrecord).permit(:clave, :numero, :fecharec, :fecha, :apellido, :apellido2, :nombre, :nombre2, :identif, :cedula, :historia, :uniedad, :edad, :sexo, :clinica, :entidad, :entad, :codval1, :por1, :codval2, :por2, :codval3, :por3, :saldo, :descr, :diagnostic, :codigo, :codigo1, :codigo2, :codigo3, :codigo4, :codigo5, :prestador, :factura, :autoriz, :usuario, :ocupacion, :residencia, :zona, :emb, :estado, :telefono, :dnombre, :dapellido, :oficina, :bloque, :patologo, :secretaria, :tipo, :imprimir, :secretauno, :fecha1, :firma, :rango, :dx, :revisor, :tiempo, :sincroniza, :fsincro)
+    end
+end

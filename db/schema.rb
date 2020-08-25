@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_215710) do
+ActiveRecord::Schema.define(version: 2020_08_24_164658) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -291,6 +291,70 @@ ActiveRecord::Schema.define(version: 2020_08_10_215710) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["objectionable_type", "objectionable_id"], name: "index_objections_on_objectionable_type_and_objectionable_id"
+  end
+
+  create_table "oldrecords", force: :cascade do |t|
+    t.string "clave"
+    t.string "numero"
+    t.string "fecharec"
+    t.string "fecha"
+    t.string "apellido"
+    t.string "apellido2"
+    t.string "nombre"
+    t.string "nombre2"
+    t.string "identif"
+    t.string "cedula"
+    t.string "historia"
+    t.string "uniedad"
+    t.string "edad"
+    t.string "sexo"
+    t.string "clinica"
+    t.string "entidad"
+    t.string "entad"
+    t.string "codval1"
+    t.string "por1"
+    t.string "codval2"
+    t.string "por2"
+    t.string "codval3"
+    t.string "por3"
+    t.string "saldo"
+    t.text "descr"
+    t.text "diagnostic"
+    t.string "codigo"
+    t.string "codigo1"
+    t.string "codigo2"
+    t.string "codigo3"
+    t.string "codigo4"
+    t.string "codigo5"
+    t.string "prestador"
+    t.string "factura"
+    t.string "autoriz"
+    t.string "usuario"
+    t.string "ocupacion"
+    t.string "residencia"
+    t.string "zona"
+    t.string "emb"
+    t.string "estado"
+    t.string "telefono"
+    t.string "dnombre"
+    t.string "dapellido"
+    t.string "oficina"
+    t.string "bloque"
+    t.string "patologo"
+    t.string "secretaria"
+    t.string "tipo"
+    t.string "imprimir"
+    t.string "secretauno"
+    t.string "fecha1"
+    t.string "firma"
+    t.string "rango"
+    t.string "dx"
+    t.string "revisor"
+    t.string "tiempo"
+    t.string "sincroniza"
+    t.string "fsincro"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "organs", force: :cascade do |t|

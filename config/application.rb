@@ -17,7 +17,7 @@ module Hipodecos
     config.i18n.default_locale = :es
     config.i18n.enforce_available_locales = true
 
-    config.middleware.use PDFKit::Middleware, :print_media_type => true
+    # config.middleware.use PDFKit::Middleware, :print_media_type => true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

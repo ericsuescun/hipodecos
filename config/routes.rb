@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-
+  resources :oldrecords do
+    collection {post :import}
+  end
+  
   post 'suggestions/review', to: 'suggestions#review'
   post 'suggestions/anotate', to: 'suggestions#anotate'
   resources :suggestions

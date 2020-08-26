@@ -3,8 +3,8 @@ class CreateOldrecords < ActiveRecord::Migration[5.2]
     create_table :oldrecords do |t|
       t.string :clave
       t.string :numero
-      t.string :fecharec
-      t.string :fecha
+      t.date :fecharec
+      t.date :fecha
       t.string :apellido
       t.string :apellido2
       t.string :nombre
@@ -52,14 +52,14 @@ class CreateOldrecords < ActiveRecord::Migration[5.2]
       t.string :tipo
       t.string :imprimir
       t.string :secretauno
-      t.string :fecha1
+      t.date :fecha1
       t.string :firma
       t.string :rango
       t.string :dx
       t.string :revisor
       t.string :tiempo
       t.string :sincroniza
-      t.string :fsincro
+      t.date :fsincro
 
       t.timestamps
     end

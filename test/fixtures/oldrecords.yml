@@ -3,8 +3,8 @@
 one:
   clave: MyString
   numero: MyString
-  fecharec: MyString
-  fecha: MyString
+  fecharec: 2020-08-26
+  fecha: 2020-08-26
   apellido: MyString
   apellido2: MyString
   nombre: MyString
@@ -52,20 +52,20 @@ one:
   tipo: MyString
   imprimir: MyString
   secretauno: MyString
-  fecha1: MyString
+  fecha1: 2020-08-26
   firma: MyString
   rango: MyString
   dx: MyString
   revisor: MyString
   tiempo: MyString
   sincroniza: MyString
-  fsincro: MyString
+  fsincro: 2020-08-26
 
 two:
   clave: MyString
   numero: MyString
-  fecharec: MyString
-  fecha: MyString
+  fecharec: 2020-08-26
+  fecha: 2020-08-26
   apellido: MyString
   apellido2: MyString
   nombre: MyString
@@ -113,11 +113,11 @@ two:
   tipo: MyString
   imprimir: MyString
   secretauno: MyString
-  fecha1: MyString
+  fecha1: 2020-08-26
   firma: MyString
   rango: MyString
   dx: MyString
   revisor: MyString
   tiempo: MyString
   sincroniza: MyString
-  fsincro: MyString
+  fsincro: 2020-08-26

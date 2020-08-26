@@ -1,5 +1,4 @@
 class OldrecordsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_oldrecord, only: [:show, :edit, :update, :destroy]
 
   def import

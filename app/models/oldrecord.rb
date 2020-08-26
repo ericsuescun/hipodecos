@@ -7,4 +7,10 @@ class Oldrecord < ApplicationRecord
 			Oldrecord.create!(row.to_hash)
 		end
 	end
+
+	default_scope -> { order(fecharec: :desc) }
+
+	def fullname
+	  [nombre, nombre2, apellido, apellido2].join(' ')
+	end
 end

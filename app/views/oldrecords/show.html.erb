@@ -1,19 +1,22 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Clave:</strong>
-  <%= @oldrecord.clave %>
-</p>
+<div class="info">
+  <h3>
+    <strong><%= @oldrecord.clave.to_s + @oldrecord.fecharec.strftime('%y') + "-" + @oldrecord.numero.to_s %></strong>: <strong><%= @oldrecord.fullname.to_s %></strong>, <strong><%= @oldrecord.edad.to_s + " " + (@oldrecord.uniedad.to_s == "1" ? "A" : (@oldrecord.uniedad.to_s == "2" ? "M" : "D")) %></strong>, sexo: <strong><%= @oldrecord.sexo.to_s %></strong>, <%= @oldrecord.identif.to_s %>: <strong><%= @oldrecord.cedula.to_s + @oldrecord.historia.to_s %> </strong>, fecha: <%= @oldrecord.fecharec.to_s %>
+  </h3>
+</div>
+<div class="inform">
+  </strong> - Dirección: <strong><%= @oldrecord.residencia %> - </strong> - Fecha de entrega: <strong><%= @oldrecord.fecha1 %></strong> - EPS: <strong><%= @oldrecord.entidad %></strong> - Sede IPS: <strong><%= @oldrecord.clinica %></strong></p>
 
-<p>
-  <strong>Numero:</strong>
-  <%= @oldrecord.numero %>
-</p>
+  
+  <p><strong>Médico tratante:</strong> <%= @oldrecord.dnombre %> <%= @oldrecord.dapellido %> Contactos: <strong><%= @oldrecord.oficina %></strong> <strong><%= @oldrecord.telefono %></strong> <strong><%= @oldrecord.telefono %></strong>
+  
+  | <%= link_to 'Volver a informes', informs_path %> | <%= link_to 'Previsualizar informe', preview_inform_path %></p>
+  <p>
+    <strong>Prestador: </strong><%= @oldrecord.prestador %><strong>Factura: </strong><%= @oldrecord.factura %> <strong>Autoriz: </strong><%= @oldrecord.autoriz %> <strong>Saldo: </strong><%= @oldrecord.saldo %>
+  </p>
 
-<p>
-  <strong>Fecharec:</strong>
-  <%= @oldrecord.fecharec %>
-</p>
+</div>
+
 
 <p>
   <strong>Fecha:</strong>
@@ -21,209 +24,43 @@
 </p>
 
 <p>
-  <strong>Apellido:</strong>
-  <%= @oldrecord.apellido %>
+  <strong>Codval1: </strong><%= @oldrecord.codval1 %> x <%= @oldrecord.por1 %> <strong>Codval2: </strong><%= @oldrecord.codval2 %> x <%= @oldrecord.por2 %> <strong>Codval3: </strong><%= @oldrecord.codval3 %> x <%= @oldrecord.por3 %>
 </p>
 
-<p>
-  <strong>Apellido2:</strong>
-  <%= @oldrecord.apellido2 %>
-</p>
-
-<p>
-  <strong>Nombre:</strong>
-  <%= @oldrecord.nombre %>
-</p>
-
-<p>
-  <strong>Nombre2:</strong>
-  <%= @oldrecord.nombre2 %>
-</p>
-
-<p>
-  <strong>Identif:</strong>
-  <%= @oldrecord.identif %>
-</p>
-
-<p>
-  <strong>Cedula:</strong>
-  <%= @oldrecord.cedula %>
-</p>
-
-<p>
-  <strong>Historia:</strong>
-  <%= @oldrecord.historia %>
-</p>
-
-<p>
-  <strong>Uniedad:</strong>
-  <%= @oldrecord.uniedad %>
-</p>
-
-<p>
-  <strong>Edad:</strong>
-  <%= @oldrecord.edad %>
-</p>
-
-<p>
-  <strong>Sexo:</strong>
-  <%= @oldrecord.sexo %>
-</p>
-
-<p>
-  <strong>Clinica:</strong>
-  <%= @oldrecord.clinica %>
-</p>
-
-<p>
-  <strong>Entidad:</strong>
-  <%= @oldrecord.entidad %>
-</p>
-
-<p>
-  <strong>Entad:</strong>
-  <%= @oldrecord.entad %>
-</p>
-
-<p>
-  <strong>Codval1:</strong>
-  <%= @oldrecord.codval1 %>
-</p>
-
-<p>
-  <strong>Por1:</strong>
-  <%= @oldrecord.por1 %>
-</p>
-
-<p>
-  <strong>Codval2:</strong>
-  <%= @oldrecord.codval2 %>
-</p>
-
-<p>
-  <strong>Por2:</strong>
-  <%= @oldrecord.por2 %>
-</p>
-
-<p>
-  <strong>Codval3:</strong>
-  <%= @oldrecord.codval3 %>
-</p>
-
-<p>
-  <strong>Por3:</strong>
-  <%= @oldrecord.por3 %>
-</p>
-
-<p>
-  <strong>Saldo:</strong>
-  <%= @oldrecord.saldo %>
-</p>
-
-<p>
-  <strong>Descr:</strong>
-  <%= @oldrecord.descr %>
-</p>
-
-<p>
-  <strong>Diagnostic:</strong>
-  <%= @oldrecord.diagnostic %>
-</p>
-
-<p>
-  <strong>Codigo:</strong>
-  <%= @oldrecord.codigo %>
-</p>
-
-<p>
-  <strong>Codigo1:</strong>
-  <%= @oldrecord.codigo1 %>
-</p>
-
-<p>
-  <strong>Codigo2:</strong>
-  <%= @oldrecord.codigo2 %>
-</p>
-
-<p>
-  <strong>Codigo3:</strong>
-  <%= @oldrecord.codigo3 %>
-</p>
-
-<p>
-  <strong>Codigo4:</strong>
-  <%= @oldrecord.codigo4 %>
-</p>
-
-<p>
-  <strong>Codigo5:</strong>
-  <%= @oldrecord.codigo5 %>
-</p>
-
-<p>
-  <strong>Prestador:</strong>
-  <%= @oldrecord.prestador %>
-</p>
-
-<p>
-  <strong>Factura:</strong>
-  <%= @oldrecord.factura %>
-</p>
-
-<p>
-  <strong>Autoriz:</strong>
-  <%= @oldrecord.autoriz %>
-</p>
-
-<p>
-  <strong>Usuario:</strong>
-  <%= @oldrecord.usuario %>
-</p>
-
-<p>
-  <strong>Ocupacion:</strong>
-  <%= @oldrecord.ocupacion %>
-</p>
-
-<p>
-  <strong>Residencia:</strong>
-  <%= @oldrecord.residencia %>
-</p>
-
-<p>
-  <strong>Zona:</strong>
-  <%= @oldrecord.zona %>
-</p>
-
-<p>
-  <strong>Emb:</strong>
-  <%= @oldrecord.emb %>
-</p>
-
-<p>
-  <strong>Estado:</strong>
-  <%= @oldrecord.estado %>
-</p>
-
-<p>
-  <strong>Telefono:</strong>
-  <%= @oldrecord.telefono %>
-</p>
-
-<p>
-  <strong>Dnombre:</strong>
-  <%= @oldrecord.dnombre %>
-</p>
-
-<p>
-  <strong>Dapellido:</strong>
-  <%= @oldrecord.dapellido %>
-</p>
-
-<p>
-  <strong>Oficina:</strong>
-  <%= @oldrecord.oficina %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <div class="card bg-light mx-2 mb-3">
+        <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+          <p>Descripción</p>
+        </div>
+        <div class="card-body">
+          <p><%= @oldrecord.descr %></p>
+          <div class="text-muted"><p>Por: <%= @oldrecord.patologo %></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <div class="card bg-light mx-2 mb-3">
+        <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+          <p>Diganóstico producido el <%= @oldrecord.fecha1 %></p>
+        </div>
+        <div class="card-body">
+          <p>Código Patología Suescún: <%= @oldrecord.codigo %>, <%= @oldrecord.codigo1 %>, <%= @oldrecord.codigo2 %>, <%= @oldrecord.codigo3 %>, <%= @oldrecord.codigo4 %>, <%= @oldrecord.codigo5 %></p>
+          <p>Código OMS: <%= @oldrecord.dx %></p>
+          <p><%= @oldrecord.diagnostic %></p>
+          <div class="text-muted"><p>Por: <%= @oldrecord.firma %></p></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <p>
   <strong>Bloque:</strong>
@@ -231,69 +68,14 @@
 </p>
 
 <p>
-  <strong>Patologo:</strong>
-  <%= @oldrecord.patologo %>
+  <strong>Firma: </strong>
+   <strong>Secretaria: </strong><%= @oldrecord.secretaria %>
 </p>
 
 <p>
-  <strong>Secretaria:</strong>
-  <%= @oldrecord.secretaria %>
+  <strong>Revisor científico:</strong><%= @oldrecord.revisor %>
+  <strong>Revisor admin: </strong><%= @oldrecord.secretauno %>
 </p>
 
-<p>
-  <strong>Tipo:</strong>
-  <%= @oldrecord.tipo %>
-</p>
 
-<p>
-  <strong>Imprimir:</strong>
-  <%= @oldrecord.imprimir %>
-</p>
-
-<p>
-  <strong>Secretauno:</strong>
-  <%= @oldrecord.secretauno %>
-</p>
-
-<p>
-  <strong>Fecha1:</strong>
-  <%= @oldrecord.fecha1 %>
-</p>
-
-<p>
-  <strong>Firma:</strong>
-  <%= @oldrecord.firma %>
-</p>
-
-<p>
-  <strong>Rango:</strong>
-  <%= @oldrecord.rango %>
-</p>
-
-<p>
-  <strong>Dx:</strong>
-  <%= @oldrecord.dx %>
-</p>
-
-<p>
-  <strong>Revisor:</strong>
-  <%= @oldrecord.revisor %>
-</p>
-
-<p>
-  <strong>Tiempo:</strong>
-  <%= @oldrecord.tiempo %>
-</p>
-
-<p>
-  <strong>Sincroniza:</strong>
-  <%= @oldrecord.sincroniza %>
-</p>
-
-<p>
-  <strong>Fsincro:</strong>
-  <%= @oldrecord.fsincro %>
-</p>
-
-<%= link_to 'Edit', edit_oldrecord_path(@oldrecord) %> |
 <%= link_to 'Back', oldrecords_path %>

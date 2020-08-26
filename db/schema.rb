@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_164658) do
+ActiveRecord::Schema.define(version: 2020_08_26_162717) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -296,8 +296,8 @@ ActiveRecord::Schema.define(version: 2020_08_24_164658) do
   create_table "oldrecords", force: :cascade do |t|
     t.string "clave"
     t.string "numero"
-    t.string "fecharec"
-    t.string "fecha"
+    t.date "fecharec"
+    t.date "fecha"
     t.string "apellido"
     t.string "apellido2"
     t.string "nombre"
@@ -345,14 +345,14 @@ ActiveRecord::Schema.define(version: 2020_08_24_164658) do
     t.string "tipo"
     t.string "imprimir"
     t.string "secretauno"
-    t.string "fecha1"
+    t.date "fecha1"
     t.string "firma"
     t.string "rango"
     t.string "dx"
     t.string "revisor"
     t.string "tiempo"
     t.string "sincroniza"
-    t.string "fsincro"
+    t.date "fsincro"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

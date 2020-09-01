@@ -33,6 +33,8 @@ class Patient < ApplicationRecord
 
 	validates :id_number, uniqueness: true
 
-
+	def fullname
+	  [name1, name2, lastname1, lastname2].join(' ')
+	end
 	
 end

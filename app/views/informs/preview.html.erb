@@ -18,103 +18,32 @@
           <%= image_tag "datos.JPG", class: "img-fluid" %>
         </div>
       </div>
-      <div class="row">
-        <div class="col-4 col-lg-4 mx-auto">
-          <strong>Informe número</strong> <%= @inform.tag_code %>
-        </div>
-      </div>
       
-      <div class="row">
-        <div class="col-6 col-lg-6">
-          <strong>Paciente:</strong> <%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %>
-        </div>
-        <div class="col-3 col-lg-3">
-        </div>
-        <div class="col-3 col-lg-3">
-          <strong>Fecha de recibo:</strong> <%= @inform.receive_date.strftime('%d/%m/%Y') %>
-        </div>
-      </div>
+      <h3 class="preview-center">Informe <strong><%= @inform.tag_code %></strong>, <%= @inform.delivery_date == nil ? "-en progreso-" : "entregado el #{@inform.delivery_date}" %></h3>
+      <h3 class="preview-center"><strong><%= @inform.patient.fullname %></strong>, <%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %>, <%= @inform.patient.id_type %>: <%= @inform.patient.id_number %></h3>
+      <p class="preview-center"><strong>Teléfono:</strong> <%= @inform.p_tel %>, <strong>Celular:</strong> <%= @inform.p_cel %>, <strong>Email:</strong> <%= @inform.p_email %></p>
       
-      <div class="row">
-        <div class="col-3 col-lg-3">
-          <strong><%= @inform.patient.id_type %>:</strong> <%= @inform.patient.id_number %>
-        </div>
-        <div class="col-3 col-lg-3">
-          <!-- <strong>Edad:</strong> <%= @inform.patient.age_number %> <%= @inform.patient.age_type == 'A' ? 'Años' : @inform.patient.age_type == 'M' ? 'Meses' : 'Días' %> -->
-          <strong>Edad:</strong> <%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %>
-        </div>
-        <div class="col-3 col-lg-3">
-          
-        </div>
-        <div class="col-3 col-lg-3">
-          <strong>Fecha de informe:</strong> <%= @inform.delivery_date %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-3 col-lg-3">
-          <strong>Teléfono:</strong> <%= @inform.p_tel %>
-        </div>
-        <div class="col-3 col-lg-3">
-          <strong>Celular:</strong> <%= @inform.p_cel %>
-        </div>
-        <div class="col-6 col-lg-6">
-          <strong>Email:</strong> <%= @inform.p_email %>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-3 col-lg-3">
-          <strong>Clínica:</strong> <%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>
-        </div>
-        <div class="col-4 col-lg-4">
-          <strong>Entidad:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:initials) %>
-        </div>
-      </div>
+      <p class="preview-center">Recibido el <%= @inform.receive_date.strftime('%d/%m/%Y') %>, <strong>EPS: </strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>, <strong>IPS: </strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %>, dirección: <%= Branch.where(id: @inform.branch_id).first.try(:address) %></p>
 
       <% if @inform.inf_type == 'cito' %>
-        <div class="row">
           <% if @cytology != nil %>
-            <div class="col-12 col-lg-3 col-xl-3">
-              <strong>Emb:</strong> <%= @cytology.pregnancies %>
-            </div>
-            <div class="col-12 col-lg-3 col-xl-3">
-              <strong>FUM:</strong> <%= @cytology.last_mens %>
-            </div>
-            <div class="col-12 col-lg-3 col-xl-3">
-              <strong>Ult Cit:</strong> <%= @cytology.prev_appo %>
-            </div>
+              <p class="preview-center">
+                <strong>Emb:</strong> <%= @cytology.pregnancies %>, <strong>FUM:</strong> <%= @cytology.last_mens %>, <strong>Última cita:</strong> <%= @cytology.prev_appo %>, <strong>Fecha de muestra:</strong> <%= @cytology.sample_date %>
+              </p>
           <% end %>
-          <div class="col-12 col-lg-3 col-xl-3">
-            <% if @inform.diagnostics != [] %>
-              <strong>Resultado:</strong> <%= @inform.diagnostics.last.result %>
-            <% end %>
-          </div>
-        </div>
+          <% if @inform.diagnostics != [] %>
+            <p class="preview-center"><strong>Resultado: <%= @inform.diagnostics.last.result %></strong></p>
+          <% end %>
       <% end %>
 
-      <% @inform.physicians.each do |physician| %>
-        <div class="row">
-          <div class="col-6 col-lg-6">
-            <strong>Doctor:</strong> <%= physician.name %> <%= physician.lastname %>
-          </div>
-        </div>
-      <% end %>
-
-      <div class="row">
-        <div class="col-6 col-lg-6">
-          <div><strong>Sede de entrega:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:initials) %></div>
-          <div><strong>Dirección:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:address) %></div>
-          
-        </div>
-        <% if @inform.inf_type == 'cito' %>
-          <div class="col-6 col-lg-6">
-            <% if @cytology != nil %>
-              <strong>Fecha de muestra:</strong> <%= @cytology.sample_date %>
-            <% end %>
-          </div>
+      <p class="preview-center">
+        <% @inform.physicians.each do |physician| %>
+          <strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %>
         <% end %>
-      </div>    
-
+      </p>
+      <p class="preview-center"><strong>Dirección de entrega: </strong><%= @inform.p_address %></p>
+      
       <br>
 
       <% if @inform.inf_type != 'cito' %>
@@ -154,14 +83,11 @@
       <% end %>
 
       <br>
-      <div class="row">
-        <div class="col-12 col-lg-6 col-xl-6 mx-auto">
-          <% if @inform.inf_type == 'cito' %>
-            <h4>CITOLOGÍA CERVICO-UTERINA</h4>
-            <h5>(INFORME TIPO BETHESDA 2001)</h5>
-          <% end %>
-        </div>
-      </div>
+      <% if @inform.inf_type == 'cito' %>
+        <h4 class="preview-center">CITOLOGÍA CERVICO-UTERINA</h4>
+        <h5 class="preview-center">(INFORME TIPO BETHESDA 2001)</h5>
+      <% end %>
+      
       
 
 

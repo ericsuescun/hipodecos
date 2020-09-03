@@ -65,6 +65,6 @@ class PromotersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def promoter_params
-      params.require(:promoter).permit(:name, :initials, :code, :regime)
+      params.require(:promoter).permit(:name, :initials, :code, :regime, :enabled)
     end
 end

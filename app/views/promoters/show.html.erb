@@ -16,6 +16,11 @@
 			  <%= @promoter.code %>
 			</p>
 
+			<p>
+			  <strong>Sale en Matricula:</strong>
+			  <%= @promoter.enabled == true ? "Si" : "No" %>
+			</p>
+
 			<%= link_to 'Editar', edit_promoter_path(@promoter) %> |
 			<%= link_to "Regresar a EPS's", promoters_path %>
 

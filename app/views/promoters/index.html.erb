@@ -17,6 +17,7 @@
             <th>Código</th>
             <th>Nombre</th>
             <th>Siglas</th>
+            <th>Usar en matrícula</th>
             <th colspan="3"></th>
           </tr>
         </thead>
@@ -28,6 +29,7 @@
               <td><%= promoter.code %></td>
               <td><%= promoter.name %></td>
               <td><%= promoter.initials %></td>
+              <td><%= promoter.enabled == true ? "Si" : "No" %></td>
               <td><%= link_to 'Editar', edit_promoter_path(promoter) %></td>
               <td><%= link_to 'Borrar', promoter, method: :delete, data: { confirm: '¿Confirmas la acción?' } %></td>
             </tr>

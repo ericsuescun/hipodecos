@@ -11,10 +11,13 @@ class InformsController < ApplicationController
       date_range = initial_date..final_date
       @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type])
     else
-      if !params[:tag_code].blank?
-        @informs = Inform.all
+      initial_date = 1.year.ago.beginning_of_day
+      final_date = Date.today.end_of_day
+      date_range = initial_date..final_date
+      if params[:tag_code].blank?
+        @informs = Inform.where(receive_date: date_range)
       else
-        @informs = Inform.all
+        @informs = Inform.where(tag_code: params[:tag_code])
       end
     end
   end

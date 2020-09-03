@@ -32,7 +32,7 @@
 
         <div class="form-group">
           <%= form.label "Régimen" %>
-          <%= form.select(:regime, options_for_select([['Contributivo', 'Contributivo'], ['Subsidiado', 'Subsidiado'], ['Particular', 'Particular'], ['Vinculado', 'Vinculado']], @promoter.regime), { include_blank: true }, class: "form-control form-control-lg input") %>
+          <%= form.select(:regime, options_for_select([['Contributivo', 'Contributivo'], ['Subsidiado', 'Subsidiado'], ['Particular', 'Particular'], ['Vinculado', 'Vinculado'], ['Especial', 'Especial']], @promoter.regime), { include_blank: true }, class: "form-control form-control-lg input") %>
         </div>
 
         <div class="actions">

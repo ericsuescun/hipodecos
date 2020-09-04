@@ -60,18 +60,22 @@
                           <% else %>
                             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
                           <% end %>
+                        
+                          <% if sample.name == "Cassette" %>
+                            <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
+                          <% else %>
+                            <span class="d-flex "><strong><%= sample.sample_tag %></strong></span>
+                          <% end %>
                           
 
-                            <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
-
-                            <span class="mr-3"><strong><%= sample.name == "Extendido" ? sample.name[0..2] : "" %></strong></span>
-                            <% unless sample.blocked %>
-                              <% if sample.slide_tag == nil %>
-                                <%= link_to sample, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
-                                  <span>&times;</span>
-                                <% end %>
+                          <span class="mr-3"><strong><%= sample.name == "Extendido" ? sample.name[0..2] : "" %></strong></span>
+                          <% unless sample.blocked %>
+                            <% if sample.slide_tag == nil %>
+                              <%= link_to sample, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
+                                <span>&times;</span>
                               <% end %>
                             <% end %>
+                          <% end %>
                           </div>
 
                           <div class="card-body p-1 m-1 sample-card-<%= sample.sample_tag %>">
@@ -90,7 +94,7 @@
                             <% if sample.fragment == nil || sample.description == nil || edit_sample_tag == sample.sample_tag %>
                               <%= form_with model: sample do |f| %>
                                 <div class="field">
-                                  <% if inform.inf_type == 'cito' %>
+                                  <% if inform.inf_type == 'cito' || sample.name == "Extendido" %>
                                     <%= f.label "Extendidos:" %>
                                   <% else %>
                                     <%= f.label "Fragmentos:" %>

@@ -74,7 +74,11 @@
             <div class="col-12 col-lg-12 col-xl-12">
               <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
                 <div class="preview ">
-                  <%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %>
+                  <% if sample.name == "Cassette" %>
+                    <%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %>
+                  <% else %>
+                    <%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.name == "Cassette" ? sample.fragment : "" %> - <%= get_nomen(sample.sample_tag) %>
+                  <% end %>
                 </div>
               <% end %>
             </div>

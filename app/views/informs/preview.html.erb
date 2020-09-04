@@ -77,7 +77,7 @@
                   <% if sample.name == "Cassette" %>
                     <%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %>
                   <% else %>
-                    <%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.name == "Cassette" ? sample.fragment : "" %> - <%= get_nomen(sample.sample_tag) %>
+                    <%= sample.description %> <%= sample.name == "Cassette" ? sample.fragment : "" %> - <%= get_nomen(sample.sample_tag) %>
                   <% end %>
                 </div>
               <% end %>

@@ -40,6 +40,9 @@ class SamplesController < ApplicationController
       end
     end
     @sample.user_id = current_user.id
+    if params[:sample][:name] == "Extendido"
+      @sample.fragment = 1  #Almaceno un dato en este campo por compatibilidad con la vista en la edición: que permita editar y que al hacerlo, pueda cerrar la edición. Sin fragmento no deja cerrar la edición
+    end
 
     @sample.save
 

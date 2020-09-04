@@ -90,7 +90,11 @@
                             </div>
                             
                             <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
-                            <%= sample.description %>
+
+                            <% if edit_sample_tag == "" %>
+                              <%= sample.description %>
+                            <% end %>
+                            
                             <% if sample.fragment == nil || sample.description == nil || edit_sample_tag == sample.sample_tag %>
                               <%= form_with model: sample do |f| %>
                                 <div class="field">

@@ -42,12 +42,15 @@ class PatientsController < ApplicationController
   def show
     @inform = Inform.new
     @physician = @inform.physicians.build
+    @promoters = Promoter.where(enabled: true).pluck(:initials, :id)
   end
 
   # GET /patients/new
   def new
     patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
 
+    @promoters = Promoter.where(enabled: true).pluck(:initials, :id)
+    
     if patients.length > 0
       @patient = patients.first
       @inform = patients.first.informs.build.physicians.build #Creo la instancia para physician para la form
@@ -60,6 +63,7 @@ class PatientsController < ApplicationController
 
   def new_series
     patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
+    @promoters = Promoter.where(enabled: true).pluck(:initials, :id)
 
     if patients.length > 0
       @patient = patients.first

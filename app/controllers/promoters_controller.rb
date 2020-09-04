@@ -17,6 +17,7 @@ class PromotersController < ApplicationController
   # GET /promoters/1
   # GET /promoters/1.json
   def show
+    
   end
 
   # GET /promoters/new

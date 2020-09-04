@@ -98,13 +98,12 @@
                             <% if sample.fragment == nil || sample.description == nil || edit_sample_tag == sample.sample_tag %>
                               <%= form_with model: sample do |f| %>
                                 <div class="field">
-                                  <% if inform.inf_type == 'cito' || sample.name == "Extendido" %>
-                                    <%= f.label "Extendidos:" %>
-                                  <% else %>
+                                  <% if sample.name == "Cassette" %>
                                     <%= f.label "Fragmentos:" %>
+                                    <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
                                   <% end %>
                                   
-                                  <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
+                                  
                                 </div>
                                 <div class="field">
                                   <%= f.label "Descripción:" %>

@@ -309,6 +309,11 @@ class InformsController < ApplicationController
 
   # GET /informs/1/edit
   def edit
+    @promoters = Promoter.where(enabled: true)
+    @promoters.each do |promoter|
+      promoter.initials = promoter.regime[0] + "-" + promoter.initials
+    end
+    @promoters = @promoters.pluck(:initials, :id)
   end
 
   def create

@@ -26,12 +26,12 @@
         </div>
 
         <div class="form-group">
-          <%= form.label "Base" %>
-          <%= form.select :base, Cost.pluck(:name, :id), {prompt:"Seleccione la tabla de costo base"}, class: "form-control form-control-lg input" %>
+          <%= form.label "Base: Puedes usar una tabla ya creada" %>
+          <%= form.select :base, Cost.pluck(:name, :id), {include_blank: true}, class: "form-control form-control-lg input" %>
         </div>
 
         <div class="form-group">
-          <%= form.label "Aplicar factor (1 si no va a ver cambio)" %>
+          <%= form.label "Aplicar factor (1 si no hay cambio)" %>
           <%= form.number_field :factor, step: :any, class: "form-control form-control-lg input" %>
         </div>
 

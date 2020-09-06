@@ -56,9 +56,16 @@ class CostsController < ApplicationController
   # PATCH/PUT /costs/1.json
   def update
 
-    @cost.values.each do |value|
-      value.update(value: (Value.find(cost_params[:base]).value * cost_params[:factor].to_d), admin_id: current_admin.id, description: cost_params[:description])
+    if cost_params[:base] != ""
+      @cost.values.each do |value|
+        value.update(value: (Value.where(cost_id: cost_params[:base], codeval_id: value.codeval_id).first.value * cost_params[:factor].to_d), admin_id: current_admin.id, description: cost_params[:description])
+      end
+    else
+      @cost.values.each do |value|
+        value.update(value: 0, admin_id: current_admin.id, description: cost_params[:description])
+      end
     end
+    
 
     if @cost.update(cost_params)
       redirect_to @cost, notice: 'Tabla de costos exitosamente actualizada.'

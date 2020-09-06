@@ -67,6 +67,10 @@ module InformsHelper
 		return rate.name
 	end
 
+	def get_cup(study)
+		return Codeval.find(study.codeval_id).code
+	end
+
 	def get_slides_samples(slide)
 		if slide.slide_tag[-1] == "*"
 			return Sample.where(inform_id: slide.inform.id, sample_tag: slide.slide_tag[0..-2], name: "Extendido")

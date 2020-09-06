@@ -2,7 +2,7 @@
 	$(document).on('page:load', refresh2());
 	function refresh2() {
 	  $('div.codevals').remove();
-	  $('div.codeval').append('<%= j render "informs/codevals", inform: @inform, edit_study_form: @study %>');
+	  $('div.codeval').append('<%= j render "informs/codevals", inform: @inform, edit_study_form: @study, all_cups_price: @all_cups_price %>');
 	  // $('div.fast-bar').append('<%= j render "ok-message", message: "editado" %>');
 	  setTimeout(function() {
 	  	$('div.alert-growl').remove();

@@ -12,6 +12,10 @@ class StudiesController < ApplicationController
   # GET /studies/1.json
   def show
     @inform = @study.inform
+    @all_cups_price = 0
+    @inform.studies.each do |study|
+      @all_cups_price += study.price * study.factor
+    end
   end
 
   # GET /studies/new
@@ -22,6 +26,10 @@ class StudiesController < ApplicationController
   # GET /studies/1/edit
   def edit
     @inform = @study.inform
+    @all_cups_price = 0
+    @inform.studies.each do |study|
+      @all_cups_price += study.price * study.factor
+    end
   end
 
   # POST /studies
@@ -31,7 +39,28 @@ class StudiesController < ApplicationController
     @study = inform.studies.build(study_params)
     @study.user_id = current_user.id
 
+    branch = Branch.find(inform.branch_id)
+    entity = branch.entity
+
+    @study.cost = Value.where(codeval_id: @study.codeval_id, cost_id: branch.entity.cost_id).first.value
+    profit_margin = Factor.where(codeval_id: @study.codeval_id, rate_id: branch.entity.rate_id).first.factor
+    @study.price =  @study.cost * profit_margin
+    @study.margin =  @study.cost * (profit_margin - 1)
+
+    cost_description = Cost.where(id: branch.entity.cost_id).first.try(:name)
+    value_description = Value.where(codeval_id: @study.codeval_id, cost_id: branch.entity.cost_id).first.try(:description)
+    rate_description = Rate.where(id: branch.entity.rate_id).first.try(:name)
+    factor_description = Factor.where(codeval_id: @study.codeval_id, rate_id: branch.entity.rate_id).first.try(:description)
+
+    @study.price_description = cost_description + ". " + rate_description + ". Notas costo: " + value_description + ". Notas factor: " + factor_description
+
     @inform = @study.inform
+
+    @all_cups_price = 0
+    @inform.studies.each do |study|
+      @all_cups_price += study.price * study.factor
+    end
+
     @study.save
   end
 
@@ -62,6 +91,10 @@ class StudiesController < ApplicationController
       objection.description = objection.description + log
       objection.save
     end
+    @all_cups_price = 0
+    @inform.studies.each do |study|
+      @all_cups_price += study.price * study.factor
+    end
   end
 
   # DELETE /studies/1
@@ -69,6 +102,11 @@ class StudiesController < ApplicationController
   def destroy
     @inform = @study.inform
     @study.destroy
+
+    @all_cups_price = 0
+    @inform.studies.each do |study|
+      @all_cups_price += study.price * study.factor
+    end
   end
 
   private

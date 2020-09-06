@@ -280,6 +280,11 @@ class InformsController < ApplicationController
 
     @blocks = @inform.blocks
 
+    @all_cups_price = 0
+    @inform.studies.each do |study|
+      @all_cups_price += study.price * study.factor
+    end
+
     if @inform.inf_type == 'cito'
       @cytologies = @inform.cytologies
     end

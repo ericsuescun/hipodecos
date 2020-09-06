@@ -47,15 +47,14 @@
                         <%= link_to edit_study_path(study), remote: true, class: "d-flex my-0 py-0" do %>
                           <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
                         <% end %>
-                        <strong><%= Codeval.find(study.codeval_id).code %> x <%= study.factor %></strong>
+                        <strong><%= get_cup(study) %> x <%= study.factor %></strong>
                         <%= link_to study, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
                           <span>&times;</span>
                         <% end %>
                       </div>
                       <div class="card-body p-0 m-0 d-flex flex-column">
-                        <span>Tarifa: <%= get_rate_name(study) %></span>
-                        <span><strong>Valor total: <%= number_to_currency(get_price(study) * study.factor.to_d, precision: 0, delimiter: '.') %></strong></span>
-                        <% accumulated_value = accumulated_value + (get_price(study) * study.factor.to_d) %>
+                        <span><%= study.price_description[0..40] + "..." %></span>
+                        <span><strong>Valor total: <%= number_to_currency(study.price * study.factor, precision: 0, delimiter: '.') %></strong></span>
                       </div>
                     </div>
                   </div>    
@@ -87,7 +86,7 @@
                 <% end %>
               </div>
             </div>
-            <span class="d-flex justify-content-end"><strong>Total CUPS: <%= number_to_currency(accumulated_value, precision: 0, delimiter: '.') %></strong></span>
+            <span class="d-flex justify-content-end"><strong>Total CUPS: <%= number_to_currency(all_cups_price, precision: 0, delimiter: '.') %></strong></span>
           </div>
         </div>     
       </div>

@@ -2,13 +2,13 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-lg-12 col-xl-12">
-        <% inform.slides.each do |slide| %>
-          <div class="card bg-light mx-2 mb-3">
-            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-              <strong>Placas</strong>
-            </div>
-            <div class="card-body">
-              <div class="card-deck">
+        <div class="card bg-light mx-2 mb-3">
+          <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+            <strong>Placas</strong>
+          </div>
+          <div class="card-body">
+            <div class="card-deck">
+              <% inform.slides.each do |slide| %>
                 <% if slide.slide_tag != nil %> <!-- Hay instancias no en DB por las form de las Samples, solo listo las que tengan tag -->
                   <div class="col-3 col-lg-3 col-xl-2 card-in">
                     <div class="card mb-3">
@@ -65,10 +65,11 @@
                     </div>
                   </div>
                 <% end %>
-              </div>
+              <% end %>
+              
             </div>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>

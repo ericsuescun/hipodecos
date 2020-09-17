@@ -24,10 +24,12 @@
                         <span class="d-flex"><%= slide.slide_tag %></span>
                       <% end %>
                       
-
-                      <%= link_to slide, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
-                          <span>&times;</span>
+                      <% unless slide.colored && slide.covered && slide.tagged && current_user.id == inform.pathologist_id %>
+                        <%= link_to slide, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
+                            <span>&times;</span>
                         <% end %>
+                      <% end %>
+                      
 
                       </div>
                       <div class="card-body">

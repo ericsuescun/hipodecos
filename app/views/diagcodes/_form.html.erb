@@ -11,67 +11,54 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :admin_id %>
-    <%= form.number_field :admin_id %>
-  </div>
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div class="form-group">
+        <%= form.label "Órgano" %>
+        <%= form.text_field :organ, class: "form-control input", placeholder: "Ej: 1. Corazon (sin tildes)" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :organ %>
-    <%= form.text_field :organ %>
-  </div>
+      <div class="form-group">
+        <%= form.label "Lesión" %>
+        <%= form.text_field :feature1, class: "form-control input", placeholder: "Ej: A. Inflamacion" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :feature1 %>
-    <%= form.text_field :feature1 %>
-  </div>
+      <div class="form-group">
+        <%= form.label "Tipo" %>
+        <%= form.text_field :feature2, class: "form-control input", placeholder: "Ej: 1. Reumatica" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :feature2 %>
-    <%= form.text_field :feature2 %>
-  </div>
+      <div class="form-group">
+        <%= form.label "Clase" %>
+        <%= form.text_field :feature3, class: "form-control input", placeholder: "Ej: D. Micotico" %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
 
-  <div class="field">
-    <%= form.label :feature3 %>
-    <%= form.text_field :feature3 %>
-  </div>
+      <div class="form-group">
+        <%= form.label "Código del órgano" %>
+        <%= form.text_field :feature1, class: "form-control input", placeholder: "(número): Ej: 1 es corazón" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :feature4 %>
-    <%= form.text_field :feature4 %>
-  </div>
+      <div class="form-group">
+        <%= form.label "Código PSS" %>
+        <%= form.text_field :pss_code, class: "form-control input" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :feature5 %>
-    <%= form.text_field :feature5 %>
-  </div>
+      <div class="form-group">
+        <%= form.label "Código OMS" %>
+        <%= form.text_field :who_code, class: "form-control input" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+      <div class="form-group">
+        <%= form.label "Descripción" %>
+        <%= form.text_area :description, class: "form-control input", placeholder: "Puedes complementar" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :pss_code %>
-    <%= form.text_field :pss_code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :who_code %>
-    <%= form.text_field :who_code %>
-  </div>
-
-  <div class="field">
-    <%= form.label :score %>
-    <%= form.text_field :score %>
-  </div>
-
-  <div class="field">
-    <%= form.label :order %>
-    <%= form.number_field :order %>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Guardar", class: "btn btn-primary mb-2" %>
   </div>
 <% end %>

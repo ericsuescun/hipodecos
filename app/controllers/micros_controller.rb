@@ -101,11 +101,16 @@ class MicrosController < ApplicationController
   # DELETE /micros/1
   # DELETE /micros/1.json
   def destroy
+    # @micro.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to inform_path(@inf), notice: 'Micro was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
+    
+    @inform = @micro.inform
+    get_automatics
+
     @micro.destroy
-    respond_to do |format|
-      format.html { redirect_to inform_path(@inf), notice: 'Micro was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   def destroy_micro

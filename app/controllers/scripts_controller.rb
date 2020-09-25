@@ -80,7 +80,8 @@ class ScriptsController < ApplicationController
         @diagcodes = []
         Diagcode.where(organ_code: @o_code).each do |diagcode|
           if diagcode.pss_code != nil
-            diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
+            # diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.description.to_s 
+            diagcode.description = diagcode.pss_code.to_s + " - " + diagcode.organ.to_s + " " + diagcode.feature1.to_s + " "  + diagcode.feature2.to_s + " "  + diagcode.feature3.to_s + " " + diagcode.feature4.to_s + " " + diagcode.feature5.to_s
           else
             diagcode.description = " ---- " + diagcode.description.to_s + " ---- "
           end

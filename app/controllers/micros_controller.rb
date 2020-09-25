@@ -40,7 +40,7 @@ class MicrosController < ApplicationController
 
   # PATCH/PUT /micros/1
   # PATCH/PUT /micros/1.json
-  def update
+  def update_old
     if params[:micro][:edit_status] == "true"
       if @micro.description != micro_params[:description]
         log = "FECHA: " + Date.today.to_s
@@ -71,6 +71,12 @@ class MicrosController < ApplicationController
 
     @micro.update(micro_params)
 
+    @inform = @micro.inform
+    get_automatics
+  end
+
+  def update
+    @micro.update(micro_params)
     @inform = @micro.inform
     get_automatics
   end
@@ -106,7 +112,7 @@ class MicrosController < ApplicationController
     #   format.html { redirect_to inform_path(@inf), notice: 'Micro was successfully destroyed.' }
     #   format.json { head :no_content }
     # end
-    
+
     @inform = @micro.inform
     get_automatics
 

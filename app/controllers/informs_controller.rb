@@ -392,10 +392,19 @@ class InformsController < ApplicationController
   def preview
     if @inform.inf_type != 'cito'
       @pathologists = []
+
+      @micro_text = ""
+      @inform.micros.each do |micro|
+        @micro_text = @micro_text + micro.description + " "
+      end
+
+      @diagnostic_text = ""
       @inform.diagnostics.each do |diagnostic|
         @pathologists << User.where(id: diagnostic.user_id).first
+        @diagnostic_text = @diagnostic_text + diagnostic.description + " "
       end
       @pathologists = @pathologists.uniq
+      
     else
       @pathologists = []
 

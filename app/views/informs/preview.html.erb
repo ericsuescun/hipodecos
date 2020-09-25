@@ -101,13 +101,8 @@
             <strong>Descripción Microscópica</strong>
           </div>
         </div>
-        <% @inform.micros.each_with_index do |micro, n| %>
-          <div class="row">
-            <div class="col-12 col-lg-12 d-flex flex-row">
-              <span class="d-flex"><%= micro.description %></span>
-            </div>
-          </div>
-        <% end %>
+        <%= @micro_text %>
+        
       <% else %>
         <div class="row">
           <div class="col-12 col-lg-12">
@@ -178,9 +173,10 @@
             </div>
             <div class="card-body">
               <% if @inform.inf_type != 'cito' %>
-                <% @inform.diagnostics.each do |diagnostic| %>
-                  <h5 class="card-title"><strong><%= diagnostic.description %></strong></h5>
-                <% end %>
+                <div class="d-flex flex-row">
+                  <h5 class="card-title mr-2"><strong><%= @diagnostic_text %></strong></h5>
+                </div>
+                
                 <div class="row d-flex flex-row">
                   <% @pathologists.each do |pathologist| %>
                     <div class="col-4 col-lg-4 mt-3">

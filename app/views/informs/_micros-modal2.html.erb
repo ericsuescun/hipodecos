@@ -28,9 +28,14 @@
                             <%= automatic.title %>
                             <% automatic.scripts.each_with_index do |script, n| %>
                               <% if n == 0 %>
+
                                 <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
+
                                   <div class="actions">
-                                    <%= form.submit "Opción #{n + 1}: #{script.pss_code}", { class: "m-0 p-0", "data-toggle":"tooltip", "data-placement": "top", "data-html": "true", title: "#{script.description} DX: <b>#{script.diagnostic}</b>" } %>
+                                    <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
+                                      <%= "Opción #{n + 1}: #{script.description[0..25]}..." %>
+                                    </span>
+                                    <%= form.submit "#{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
                                     <%= form.hidden_field :inform_id, value: @inform.id %>
                                     <%= form.hidden_field :automatic_id, value: automatic.id %>
                                     <%= form.hidden_field :script_id, value: script.id %>
@@ -48,7 +53,10 @@
                               <span class="d-flex flex-row justify-content-end">
                                 <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
                                   <div class="actions">
-                                    <%= form.submit "Opción #{n + 1}: #{script.pss_code}", { class: "m-0 p-0", "data-toggle":"tooltip", "data-placement": "top", "data-html": "true", title: "#{script.description} DX: <b>#{script.diagnostic}</b>" } %>
+                                    <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
+                                      <%= "Opción #{n + 1}: #{script.description[0..25]}..." %>
+                                    </span>
+                                    <%= form.submit "#{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
                                     <%= form.hidden_field :inform_id, value: @inform.id %>
                                     <%= form.hidden_field :automatic_id, value: automatic.id %>
                                     <%= form.hidden_field :script_id, value: script.id %>
@@ -82,7 +90,10 @@
                               <% if n == 0 %>
                                 <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
                                   <div class="actions">
-                                    <%= form.submit "Opción #{n + 1}: #{script.pss_code}", { class: "m-0 p-0", "data-toggle":"tooltip", "data-placement": "top", "data-html": "true", title: "#{script.description} DX: <b>#{script.diagnostic}</b>" } %>
+                                    <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
+                                      <%= "Opción #{n + 1}: #{script.description[0..25]}..." %>
+                                    </span>
+                                    <%= form.submit "#{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
                                     <%= form.hidden_field :inform_id, value: @inform.id %>
                                     <%= form.hidden_field :automatic_id, value: automatic.id %>
                                     <%= form.hidden_field :script_id, value: script.id %>
@@ -100,7 +111,10 @@
                               <span class="d-flex flex-row justify-content-end">
                                 <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
                                   <div class="actions">
-                                    <%= form.submit "Opción #{n + 1}: #{script.pss_code}", { class: "m-0 p-0", "data-toggle":"tooltip", "data-placement": "top", "data-html": "true", title: "#{script.description} DX: <b>#{script.diagnostic}</b>" } %>
+                                    <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
+                                      <%= "Opción #{n + 1}: #{script.description[0..25]}..." %>
+                                    </span>
+                                    <%= form.submit "#{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
                                     <%= form.hidden_field :inform_id, value: @inform.id %>
                                     <%= form.hidden_field :automatic_id, value: automatic.id %>
                                     <%= form.hidden_field :script_id, value: script.id %>

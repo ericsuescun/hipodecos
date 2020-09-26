@@ -39,9 +39,14 @@ class DiagnosticsController < ApplicationController
     get_diagcodes
   end
 
-  # PATCH/PUT /diagnostics/1
-  # PATCH/PUT /diagnostics/1.json
   def update
+    @diagnostic.update(diagnostic_params)
+
+    @inform = @diagnostic.inform
+    get_diagcodes
+  end
+
+  def update_old
     if params[:diagnostic][:edit_dx_status] == "true"
       log = ""
       if @diagnostic.description != diagnostic_params[:description]
@@ -132,8 +137,10 @@ class DiagnosticsController < ApplicationController
 
   
   def destroy
+    @inform = @diagnostic.inform
+    get_diagcodes
+
     @diagnostic.destroy
-    redirect_to inform_path(@inf), notice: 'Diagnostic was successfully destroyed.'
   end
 
   def destroy_diagnostic

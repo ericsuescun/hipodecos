@@ -3,7 +3,7 @@
     <%= form_with url: inclusion_blocks_block_store_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
 
       <% if inform.inf_type != 'cito' %>
-        <%= form.submit "Guardar bloques marcados", class: "ml-1 my-0 d-flex btn btn-sm btn-outline-success mb-3" %>
+        <%= form.submit "Guardar bloques marcados", class: "ml-1 my-0 d-flex btn btn-sm btn-primary mb-3" %>
         <%= form.hidden_field :inform_id, value: inform.id %>
       <% end %>
 

@@ -3,8 +3,8 @@
     <div class="col-12 col-lg-12 col-xl-12">
       <div class="d-flex justify-content-start align-items-center">
         <span>
-          <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-3 mb-1" do |form| %>
-            <%= form.submit " + ", class: "btn btn-primary" %>
+          <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-1 my-1 ml-1" do |form| %>
+            <%= form.submit "+", class: "btn btn-primary btn-sm" %>
             <%= form.hidden_field :inform_id, value: inform.id %>
           <% end %>
         </span>
@@ -12,50 +12,52 @@
         
       </div>
       
-      
-      <% inform.micros.each_with_index do |micro, n| %>
-        <% if inform.inf_type == 'cito' && (micro.cyto_status == 'correct' || micro.cyto_status == 'confirmed') %>
-          <div class="alert alert-success">
-        <% end %>
-        <% if inform.inf_type == 'cito' && micro.cyto_status == 'uncorrect' %>
-          <div class="alert alert-warning">
-        <% end %>
-        <% if inform.inf_type == 'cito' && micro.cyto_status == nil %>
-          <div class="alert alert-dark">
-        <% end %>
-        <% if inform.inf_type != 'cito'  %>
-          <div>
-        <% end %>
-          <% if edit_micro == micro %>
-            <%= form_with model: micro do |f| %>
-              <div class="field">
-                <%= f.label "Descripción:" %>
-                <%= f.text_area :description, value: micro.description, rows: 8, class: "form-control input" %>
-                <%= f.hidden_field :edit_status, value: edit_status %>
-              </div>
-              <div class="actions">
-                <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
+      <div class="ml-1">
+        <% inform.micros.each_with_index do |micro, n| %>
+          <% if inform.inf_type == 'cito' && (micro.cyto_status == 'correct' || micro.cyto_status == 'confirmed') %>
+            <div class="alert alert-success">
+          <% end %>
+          <% if inform.inf_type == 'cito' && micro.cyto_status == 'uncorrect' %>
+            <div class="alert alert-warning">
+          <% end %>
+          <% if inform.inf_type == 'cito' && micro.cyto_status == nil %>
+            <div class="alert alert-dark">
+          <% end %>
+          <% if inform.inf_type != 'cito'  %>
+            <div>
+          <% end %>
+            <% if edit_micro == micro %>
+              <%= form_with model: micro do |f| %>
+                <div class="form-group">
+                  <%= f.label "Descripción:" %>
+                  <%= f.text_area :description, value: micro.description, rows: 8, class: "form-control input" %>
+                  <%= f.hidden_field :edit_status, value: edit_status %>
+                </div>
+                <div class="actions">
+                  <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="mb-1">
+                <%= link_to edit_micro_path(micro), remote: true, class: "btn btn-outline-primary btn-sm" do %>
+                  <span>&#9998;</span>
+                <% end %>
+                <%= link_to '+foto', micro_path(micro), class: "btn btn-outline-dark btn-sm" %>
+                <%= link_to micro, method: :delete, remote: true, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-danger btn-sm" do %>
+                  <span>&times;</span>
+                <% end %>
+                <span class="text-muted">
+                  [ - el <%= micro.created_at.strftime('%d/%m/%Y') %> <%= User.where(id: micro.user_id).first.try(:fullname) %> agregó ]
+                </span>
+                <span>
+                  <%= micro.description %>
+                </span>
               </div>
             <% end %>
-          <% else %>
-            <div class="mb-1">
-              <%= link_to edit_micro_path(micro), remote: true, class: "btn btn-outline-primary btn-sm" do %>
-                <span>&#9998;</span>
-              <% end %>
-              <%= link_to '+foto', micro_path(micro), class: "btn btn-outline-dark btn-sm" %>
-              <%= link_to micro, method: :delete, remote: true, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-danger btn-sm" do %>
-                <span>&times;</span>
-              <% end %>
-              <span class="text-muted">
-                [ - el <%= micro.created_at.strftime('%d/%m/%Y') %> <%= User.where(id: micro.user_id).first.try(:fullname) %> agregó ]
-              </span>
-              <span>
-                <%= micro.description %>
-              </span>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+          </div>
+        <% end %>
+      </div>
+      
     </div>
     <div class="col-12 col-lg-12 col-xl-12 micro-form">
       <!-- Esto se deja para poder alojar una forma manual -->

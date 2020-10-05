@@ -291,7 +291,27 @@ class InformsController < ApplicationController
   end
 
   def show_revision
-    
+    @organs = Organ.all
+
+    @automatics = Automatic.all
+    @automatics_macro = Automatic.where(auto_type: "macro")
+    @automatics_micro = Automatic.where(auto_type: "micro")
+
+
+    @samples = @inform.samples
+
+    @samplesc = @inform.samples.where(name: "Cassette")
+
+    @blocks = @inform.blocks
+
+    @all_cups_price = 0
+    @inform.studies.each do |study|
+      @all_cups_price += study.price * study.factor
+    end
+
+    if @inform.inf_type == 'cito'
+      @cytologies = @inform.cytologies
+    end
   end
 
   def autos_micro

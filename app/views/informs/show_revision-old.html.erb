@@ -1,0 +1,142 @@
+<div class="row">
+  <div class="col-12 col-lg-12 mx-auto">
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xl-12">
+        <%= render partial: "patient-bar" %>
+      </div>
+    </div>
+    <div class="row">
+      <% unless @inform.inf_type == "cito" %>
+        <div class="col-12 col-lg-6 col-xl-6">
+      <% else %>
+        <div class="col-12 col-lg-4 col-xl-4">
+      <% end %>
+        <% @inform.micros.each_with_index do |micro, n| %>
+          <% if @inform.inf_type == 'cito' && (micro.cyto_status == 'correct' || micro.cyto_status == 'confirmed') %>
+            <div class="card bg-success mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type == 'cito' && micro.cyto_status == 'uncorrect' %>
+            <div class="card bg-warning mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type == 'cito' && micro.cyto_status == nil %>
+            <div class="card bg-dark mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type != 'cito' %>
+            <div class="card bg-light mx-2 mb-3">
+          <% end %>
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <p>Micro <%= n + 1 %> de <%= @inform.micros.count %> procesada el <%= micro.created_at.strftime('%d/%m/%Y') %> </p>
+            </div>
+            <div class="card-body">
+              <p><strong><%= micro.description %></strong></p>
+              <div><p>Por: <%= User.where(id: micro.user_id).first.try(:fullname) %></p></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <% unless @inform.inf_type == "cito" %>
+        <div class="col-12 col-lg-6 col-xl-6">
+      <% else %>
+        <div class="col-12 col-lg-4 col-xl-4">
+      <% end %>
+        <% @inform.diagnostics.each do |diagnostic| %>
+          <% if @inform.inf_type == 'cito' && (diagnostic.cyto_status == 'correct' || diagnostic.cyto_status == 'confirmed') %>
+            <div class="card bg-success mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type == 'cito' && diagnostic.cyto_status == 'uncorrect' %>
+            <div class="card bg-warning mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type == 'cito' && diagnostic.cyto_status == nil %>
+            <div class="card bg-dark mx-2 mb-3">
+          <% end %>
+          <% if @inform.inf_type != 'cito' %>
+            <div class="card bg-light mx-2 mb-3">
+          <% end %>
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <p>Diganósticos</p>
+            </div>
+            <div class="card-body">
+              <p>Código Patología Suescún: <%= diagnostic.pss_code %></p>
+              <p>Código OMS: <%= diagnostic.who_code %></p>
+              <p><%= diagnostic.description %></p>
+              <div><p>Por: <%= User.where(id: diagnostic.user_id).first.try(:first_name) %> <%= User.where(id: diagnostic.user_id).first.try(:last_name) %></p></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <% if @inform.inf_type == "cito" %>
+        <div class="col-12 col-lg-4 col-xl-4">
+          <% @inform.suggestions.each do |suggestion| %>
+            <% if @inform.inf_type == 'cito' && (suggestion.cyto_status == 'correct' || suggestion.cyto_status == 'confirmed') %>
+              <div class="card bg-success mx-2 mb-3">
+            <% end %>
+            <% if @inform.inf_type == 'cito' && suggestion.cyto_status == 'uncorrect' %>
+              <div class="card bg-warning mx-2 mb-3">
+            <% end %>
+            <% if @inform.inf_type == 'cito' && suggestion.cyto_status == nil %>
+              <div class="card bg-dark mx-2 mb-3">
+            <% end %>
+            <% if @inform.inf_type != 'cito' %>
+              <div class="card bg-light mx-2 mb-3">
+            <% end %>
+              <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+                <p>Sugerencia</p>
+              </div>
+              <div class="card-body">
+                <p><%= suggestion.description %></p>
+                <div><p>Por: <%= User.where(id: suggestion.user_id).first.try(:first_name) %> <%= User.where(id: suggestion.user_id).first.try(:last_name) %></p></div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if role_path_allowed? %>
+      <% if @inform.pathologist_review_id == nil %>
+        <div class="row">
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <%= link_to "Patólogo: Marcar como listo para entrega", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <div class="alert alert-success">
+              <h4>Revisado por: <%= User.where(id: @inform.pathologist_review_id).first.try(:email) %></h4>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    <% end %>
+
+    <% if role_admin_allowed? %>
+      <% if @inform.administrative_review_id == nil %>
+        <div class="row">
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <%= link_to "Admin: Marcar como listo para entrega", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <div class="alert alert-success">
+              <h4>Revisado por: <%= User.where(id: @inform.administrative_review_id).first.try(:email) %></h4>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if role_path_allowed? %>
+      <div class="row">
+        <div class="col-4 col-lg-4 col-xl-4 mx-auto mt-2">
+          <%= link_to "Eliminar estado de revisión y editar", clear_revision_inform_path(@inform), class: "btn btn-warning btn-block mt-3" %>
+        </div>
+      </div>
+    <% end %>
+    
+    
+  </div>
+</div>

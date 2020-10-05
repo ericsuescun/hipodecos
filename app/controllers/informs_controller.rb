@@ -156,7 +156,9 @@ class InformsController < ApplicationController
     @slides.each do |slide|
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
         if slide.inform.inf_type != 'cito'
-          @informs << slide.inform
+          unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded"
+            @informs << slide.inform
+          end
         end
       end
     end
@@ -165,7 +167,9 @@ class InformsController < ApplicationController
     @slides.each do |slide|
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
         if slide.inform.inf_type == 'cito'
-          @informs2 << slide.inform
+          unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded"
+            @informs2 << slide.inform
+          end
         end
       end
     end

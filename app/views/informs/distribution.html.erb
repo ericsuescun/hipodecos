@@ -2,13 +2,13 @@
 	<%= form_tag assign_informs_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: :put do %>
 		<div class="row">
 			<div class="col-12 col-lg-4 col-xl-4">
-				<h3>Asignar biopsias a patología</h3>
+				<!-- <h3>Asignar biopsias a patología</h3> -->
 				<table class="table table-hover inform-assing">
 					<thead>
 						<tr>
 							
 							<!-- <th>id</th> -->
-							<th>Informe</th>
+							<th>Biopsia</th>
 							<!-- <th>Placas</th> -->
 							<!-- <th>Placas listas</th> -->
 							<th>Hace patología</th>
@@ -34,7 +34,7 @@
 				</table>
 			</div>
 			<div class="col-12 col-lg-4 col-xl-4">
-				<h3>Asignar citologías para revisión</h3>
+				<!-- <h3>Asignar citologías para revisión</h3> -->
 				<table class="table table-hover inform-assing">
 					<thead>
 						<tr>
@@ -70,11 +70,7 @@
 						<% end %>
 					</tbody>
 				</table>
-				
-			</div>
-			<div class="col-12 col-lg-4 col-xl-4">
-				<h3>Citologías no seleccionadas</h3>
-				<table class="table table-hover inform-assing">
+				<table class="table table-dark inform-assing">
 					<thead>
 						<tr>
 							<th></th>
@@ -102,11 +98,10 @@
 						<% end %>
 					</tbody>
 				</table>
+				
 			</div>
-		</div>
-		
-		<div class="row mt-3">
-			<div class="col-12 col-lg-4 col-xl-4 mx-auto">
+			<div class="col-12 col-lg-4 col-xl-4">
+				<!-- <h3>Citologías no seleccionadas</h3> -->
 				<div class="alert alert-primary">
 					<div class="form-group">
 						<strong><%= label_tag "Selecciona recurso de patología" %></strong>
@@ -115,6 +110,12 @@
 						<%= submit_tag "Asignar lo marcado", class: "btn btn-primary btn-block" %>
 					</div>
 				</div>
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-12 col-lg-4 col-xl-4 mx-auto">
+				
 			</div>
 		</div>
 	<% end %>

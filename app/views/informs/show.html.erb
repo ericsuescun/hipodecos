@@ -8,17 +8,14 @@
           </div>
         </div>
         
-        <% unless @inform.pathologist_id == current_user.id %>
-          <div class="row">
-            <div class="col-12 col-lg-12 mb-3 mx-auto">
-              <div class="recipient">
-                <!-- <h1>Recipientes</h1> -->
-                <%= render partial: "recipients", locals: { inform: @inform, edit_sample_tag: "", edit_recipient_tag: "", automatics: @automatics } %>
-              </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="recipient">
+              <!-- <h1>Recipientes</h1> -->
+              <%= render partial: "recipients", locals: { inform: @inform, edit_sample_tag: "", edit_recipient_tag: "", automatics: @automatics } %>
             </div>
           </div>
-        <% end %>
-        
+        </div>
 
         <% if @inform.inf_type == 'cito' %>
           <div class="row">
@@ -30,27 +27,22 @@
           </div>
         <% end %>
 
-        <% unless @inform.pathologist_id == current_user.id %>
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="codeval">
+              <%= render partial: "codevals", locals: { inform: @inform, edit_study_form: nil, all_cups_price: @all_cups_price } %>
+            </div>
+          </div>
+        </div>
+
+        <% if @inform.inf_type == 'hosp' || @inform.inf_type == 'clin' %>
           <div class="row">
             <div class="col-12 col-lg-12 mb-3 mx-auto">
-              <div class="codeval">
-                <%= render partial: "codevals", locals: { inform: @inform, edit_study_form: nil, all_cups_price: @all_cups_price } %>
+              <div class="block">
+                <%= render partial: "blocks", locals: { inform: @inform, blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil } %>
               </div>
             </div>
           </div>
-        <% end %>
-        
-
-        <% unless @inform.pathologist_id == current_user.id %>
-          <% if @inform.inf_type == 'hosp' || @inform.inf_type == 'clin' %>
-            <div class="row">
-              <div class="col-12 col-lg-12 mb-3 mx-auto">
-                <div class="block">
-                  <%= render partial: "blocks", locals: { inform: @inform, blocks: @blocks, samplesc: @samplesc, edit_objection_id: nil } %>
-                </div>
-              </div>
-            </div>
-          <% end %>
         <% end %>
 
         <div class="row">

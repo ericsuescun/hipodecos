@@ -387,7 +387,12 @@ class InformsController < ApplicationController
   # PATCH/PUT /informs/1.json
   def update
     if @inform.update(inform_params)
-      redirect_to @inform, notice: 'Informe exitosamente actualizado.'
+      if @inform.inf_status == "revision"
+        redirect_to show_revision_inform_path(@inform), notice: 'Informe exitosamente actualizado.'
+      else
+        redirect_to @inform, notice: 'Informe exitosamente actualizado.'
+      end
+      
     else
       render :edit
     end

@@ -3,6 +3,9 @@
 <div class="row">
   <div class="col-12 col-lg-12 mx-auto">
     <%= form_with(model: patient, local: true) do |form| %>
+      <% if params[:inform] != nil %>
+        <%= form.hidden_field :inform, value: params[:inform] %>
+      <% end %>
       <div class="alert alert-primary">
         <h5>Datos del paciente</h5>
         <div class="row">

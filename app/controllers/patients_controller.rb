@@ -195,7 +195,18 @@ class PatientsController < ApplicationController
 
   def update
     if @patient.update(patient_params)
-      redirect_to @patient, notice: 'Patient was successfully updated.'
+      if params[:patient][:inform] != nil
+        inform = Inform.find(params[:patient][:inform])
+        if inform.inf_status == "revision"
+          redirect_to show_revision_inform_path(inform), notice: 'Informe exitosamente actualizado.'
+        else
+          redirect_to @patient, notice: 'Paciente exitosamente editado.'
+        end
+      else
+        redirect_to @patient, notice: 'Paciente exitosamente editado.'
+      end
+      
+      
     else
       render :edit
     end

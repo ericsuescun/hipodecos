@@ -1,3 +1,6 @@
 <h5>
+	<%= link_to edit_patient_path(@inform.patient, inform: @inform.id), local: true, class: "btn btn-outline-primary btn-sm" do %>
+	  <span>&#9998;</span>
+	<% end %>
 	<strong><%= @inform.tag_code %></strong>: <strong><%= @inform.patient.fullname %></strong>, <strong><%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %></strong>, <%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong>, recibido el: <%= @inform.receive_date.strftime('%d/%m/%Y') %>
 </h5>

@@ -1,31 +1,34 @@
 <div class="info">
 	<%= render partial: "patient-bar" %>
 </div>
-<div class="inform">
-	<div class="row">
-		 <div class="col-12 col-lg-8">
-		 	<p>
-		 		<%= link_to edit_inform_path(@inform), local: true, class: "btn btn-outline-primary btn-sm" do %>
-		 		  <span>&#9998;</span>
-		 		<% end %>
-		 		Teléfono: <strong><%= @inform.p_tel %></strong> - Celular: <strong><%= @inform.p_cel %></strong> - Dirección: <strong><%= @inform.p_address %> - </strong>Email: <strong><%= @inform.p_email %></strong> - Fecha de entrega: <strong><%= @inform.delivery_date %></strong> - EPS: <strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %></strong> - Sede IPS: <strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %></strong>
-		 	</p>
-		 </div>
-		 <div class="col-12 col-lg-4 d-flex justify-content-end align-items-start">
-		 	<%= link_to 'Volver a informes', informs_path, class: "btn btn-primary btn-sm mr-1" %>
-		 	
-		 	<%= link_to 'Previsualizar', preview_inform_path, class: "btn btn-primary btn-sm mr-1" %>
-		 </div>
-	</div>
-	
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-lg-12">
+    	<div class="card mx-2">
+    		<div class="card-header p-0 m-0 pl-1">
+    		    <strong>Información general</strong>
+    		  </div>
+    	  <div class="card-body">
+    	    <p class="card-text">
+    	    	<%= link_to edit_inform_path(@inform), local: true, class: "btn btn-outline-primary btn-sm" do %>
+    	    	  <span>&#9998;</span>
+    	    	<% end %>
+    	    	Teléfono: <strong><%= @inform.p_tel %></strong> - Celular: <strong><%= @inform.p_cel %></strong> - Dirección: <strong><%= @inform.p_address %> - </strong>Email: <strong><%= @inform.p_email %></strong> - Fecha de entrega: <strong><%= @inform.delivery_date %></strong> - EPS: <strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %></strong> - Sede IPS: <strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %></strong>
+    	    	<% @inform.physicians.each do |physician| %>
+    	    		<div>
+    	    			<%= link_to '+', new_inform_physician_path(@inform), class: "btn btn-primary btn-sm mr-1" %>
+    	    			<strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %> - <strong>Contacto:</strong> <%= physician.tel %>, <%= physician.cel %>, <%= physician.email %> | <%= link_to 'Revisar', physician %> | <%= link_to 'Borrar', physician, method: :delete, data: { confirm: 'Are you sure?' } %>
+    	    		</div>
+    	    		
+    	    	<% end %>
+    	    </p>
+    	    <%= link_to 'Volver a informes', informs_path, class: "btn btn-primary btn-sm mr-1" %>
+    	    		 	
+    	    		 	<%= link_to 'Previsualizar', preview_inform_path, class: "btn btn-primary btn-sm mr-1" %>
+    	  </div>
+    	</div>
 
-	<% @inform.physicians.each do |physician| %>
-		<div>
-			<%= link_to '+', new_inform_physician_path(@inform), class: "btn btn-primary btn-sm mr-1" %>
-			<strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %> - <strong>Contacto:</strong> <%= physician.tel %>, <%= physician.cel %>, <%= physician.email %> | <%= link_to 'Revisar', physician %> | <%= link_to 'Borrar', physician, method: :delete, data: { confirm: 'Are you sure?' } %>
-		</div>
-		
-	<% end %>
-	
-
+    </div>
+  </div>
 </div>
+

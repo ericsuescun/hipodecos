@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-sm-12 col-lg-12">
-    	<div class="card mx-2">
+    	<div class="card">
     		<div class="card-header p-0 m-0 pl-1">
     		    <strong>Información general</strong>
     		  </div>
@@ -14,17 +14,39 @@
     	    	  <span>&#9998;</span>
     	    	<% end %>
     	    	Teléfono: <strong><%= @inform.p_tel %></strong> - Celular: <strong><%= @inform.p_cel %></strong> - Dirección: <strong><%= @inform.p_address %> - </strong>Email: <strong><%= @inform.p_email %></strong> - Fecha de entrega: <strong><%= @inform.delivery_date %></strong> - EPS: <strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %></strong> - Sede IPS: <strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %></strong>
-    	    	<% @inform.physicians.each do |physician| %>
-    	    		<div>
-    	    			<%= link_to '+', new_inform_physician_path(@inform), class: "btn btn-primary btn-sm mr-1" %>
-    	    			<strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %> - <strong>Contacto:</strong> <%= physician.tel %>, <%= physician.cel %>, <%= physician.email %> | <%= link_to 'Revisar', physician %> | <%= link_to 'Borrar', physician, method: :delete, data: { confirm: 'Are you sure?' } %>
-    	    		</div>
-    	    		
-    	    	<% end %>
+                <div class="row">
+                    <div class="col-12 col-lg-6 col-xl-6">
+                        <%= link_to new_inform_physician_path(@inform), class: "btn btn-primary btn-sm mr-1 mb-1" do %>
+                            <span>+</span>
+                        <% end %>
+                        <strong>Médico tratante:</strong>
+                        <% @inform.physicians.each do |physician| %>
+                            <div>
+                                <%= link_to edit_physician_path(physician, inform_id: @inform.id), local: true, class: "btn btn-outline-primary btn-sm" do %>
+                                  <span>&#9998;</span>
+                                <% end %>
+                                <%= link_to physician, method: :delete, data: { confirm: 'Are you sure?' }, local: true, class: "btn btn-outline-danger btn-sm" do %>
+                                    <span>&times;</span>
+                                <% end %>
+                                
+                                 <strong><%= physician.name %> <%= physician.lastname %></strong> - Contacto: <strong><%= physician.tel %></strong>, <strong><%= physician.cel %></strong>, <strong><%= physician.email %></strong> 
+                            </div>
+                            
+                        <% end %>
+                    </div>
+                    <div class="col-12 col-lg-6 col-xl-6 d-flex justify-content-end align-items-end">
+                        <div>
+                            <%= link_to 'Volver a informes', informs_path, class: "btn btn-primary btn-sm mr-1" %>
+                        </div>
+                        <div>
+                            <%= link_to 'Previsualizar', preview_inform_path, class: "btn btn-primary btn-sm mr-1" %>
+                        </div>
+                        
+                    </div>
+                </div>
+                
     	    </p>
-    	    <%= link_to 'Volver a informes', informs_path, class: "btn btn-primary btn-sm mr-1" %>
-    	    		 	
-    	    		 	<%= link_to 'Previsualizar', preview_inform_path, class: "btn btn-primary btn-sm mr-1" %>
+    	    
     	  </div>
     	</div>
 

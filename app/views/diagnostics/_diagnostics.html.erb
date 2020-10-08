@@ -1,149 +1,154 @@
 <div class="container diagnostics-out">
   <div class="row">
     <div class="col-12 col-lg-12 col-xl-12">
-      <% if inform.inf_type != 'cito' %>
-        <div class="d-flex justify-content-start align-items-center">
-          <%= form_with url: new_diagnostic_path, method: "get", class: "diagnostic-form-out mr-3 mb-1" do |form| %>
-            <%= form.submit "+", class: "btn btn-primary btn-sm ml-1" %>
-            <%= form.hidden_field :inform_id, value: inform.id %>
-          <% end %>
-          <h4>Diganósticos</h4>
-          
-        </div>
-      <% else %>
-        <div class="d-flex justify-content-start align-items-center">
-          <h4>Resultados</h4>
-          <%= form_with url: new_diagnostic_path, method: "get", class: "diagnostic-form-out mr-3" do |form| %>
-            <%= form.submit " + DX manual", class: "btn btn-primary" %>
-            <%= form.hidden_field :inform_id, value: inform.id %>
-          <% end %>
-        </div>
-      <% end %>
-      <div class="ml-1">
-        <% inform.diagnostics.each_with_index do |diagnostic, n| %>
-          <% if inform.inf_type == 'cito' && (diagnostic.cyto_status == 'correct' || diagnostic.cyto_status == 'confirmed') %>
-            <div class="alert alert-success">
-          <% end %>
-          <% if inform.inf_type == 'cito' && diagnostic.cyto_status == 'uncorrect' %>
-            <div class="alert alert-warning">
-          <% end %>
-          <% if inform.inf_type == 'cito' && diagnostic.cyto_status == nil %>
-            <div class="alert alert-dark">
-          <% end %>
-          <% if inform.inf_type != 'cito'  %>
-            <div>
-          <% end %>
-            
-
-            <% if edit_diagnostic == diagnostic %>
-              <%= form_with model: diagnostic do |form| %>
-                <div class="row">
-                  <div class="col-12 col-lg-12 col-xl-12">
-                    <div class="form-group">
-                      <%= form.text_area :description, class: "form-control form-control-lg input" %>
-                      <%= form.hidden_field :edit_dx_status, value: edit_dx_status %>
-                    </div>
-                  </div>
-                  <% if inform.inf_type != 'cito' %>
-                    <div class="col-12 col-lg-12 col-xl-12">
-                      <div class="form-group">
-                        <%= form.collection_select(:pss_code, diagcodes, :pss_code, :description, { prompt: 'Código PSS'}, { class: "form-control input" }) %>
-                      </div>
-                    </div>
-                  <% end %>
-                  <% if inform.inf_type == 'cito' %>
-                    <div class="col-12 col-lg-12 col-xl-12">
-                      <div class="form-group">
-                        <%= form.label "Código cito:" %>
-                        <%= form.collection_select(:pss_code, diagcodes, :cito_code, :description, { prompt: 'Código PSS'}, { class: "form-control input" }) %>
-                      </div>
-                      <div class="form-group">
-                        <%= form.label "Resultado:" %>
-                        <%= form.select(:result, options_for_select([['Positiva', 'positiva'], ['Negativa', 'negativa'], ['Insatisfactoria', 'insatisfactoria']]), { prompt: "Selecciona" }, class: "form-control form-control input") %>
-                      </div>
-                    </div>
-                  <% end %>
-                </div>
-                
-                <div class="actions">
-                  <%= form.submit "Guardar", class: "btn btn-warning btn-sm my-2" %>
-                </div>
+      <div class="card w-100">
+        <div class="card-header m-0 p-0">
+          <% if inform.inf_type != 'cito' %>
+            <div class="d-flex justify-content-start align-items-center">
+              <%= form_with url: new_diagnostic_path, method: "get", class: "diagnostic-form-out mr-3 mb-1" do |form| %>
+                <%= form.submit "+", class: "btn btn-primary btn-sm ml-1" %>
+                <%= form.hidden_field :inform_id, value: inform.id %>
               <% end %>
-            <% else %>
-              <% if inform.inf_type != 'cito' %>
-                <div class="mb-1">
-                  <%= link_to edit_diagnostic_path(diagnostic), remote: true, class: "btn btn-outline-primary btn-sm" do %>
-                    <span>&#9998;</span>
-                  <% end %>
-                  <%= link_to diagnostic, method: :delete, remote: true, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-danger btn-sm" do %>
-                    <span>&times;</span>
-                  <% end %>
-                  <span>
-                    <%= diagnostic.description %> <strong>[<%= diagnostic.pss_code %> / <%= diagnostic.who_code %>]</strong>
-                  </span>
-                </div>
-              <% else %>
-                <p>Código Patología Suescún para citología: <%= diagnostic.pss_code %></p>
-                <% if diagnostic.result == "negativa" %>
-                  <div class="alert alert-success">
-                <% else %>
-                  <% if diagnostic.result == "insatisfactoria" %>
-                    <div class="alert alert-warning">
-                  <% else %>
-                    <div class="alert alert-danger">
-                  <% end %>
-                <% end %>
-                
-                  <p>Resultado: <strong><%= diagnostic.result %></strong></p>
-                </div>
-                
-              <% end %>
-            <% end %>
-            
-            <% diagnostic.objections.each do |objection| %>
-              <div>
-                <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></span>
-              </div>
+              <strong>Diganósticos</strong>
               
-              <% if edit_objection_id == nil %>
-                <div class="d-flex flex-column">
-                  <span class="text-muted objection-description">
-                    <%= objection.description %>
-                  </span>
-                </div>
-                <% unless objection.closed %>
-                  <%= form_with url: diagnostics_review_path, method: "post" do |form| %>
-                    <div class="form-group">
-                      <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
-                      <%= form.hidden_field :objection_id, value: objection.id %>
-                      <%= form.hidden_field :diagnostic_id, value: diagnostic.id %>
-                    </div>
-                  <% end %>
-                <% end %>
-              <% else %>
-                <% if edit_objection_id == objection %>
-                  <%= form_with url: diagnostics_anotate_path, method: "post" do |form| %>
-                    <div class="form-group">
-                      <%= form.label "Historial:" %>
-                      <%= form.text_area :description, value: objection.description, rows: 4, class: "form-control input disabled" %>
-                    </div>
-                    <div class="form-group">
-                      <%= form.label "Acción de mejora:" %>
-                      <%= form.text_area :new_description, rows: 2, class: "form-control input" %>
-                    </div>
-                    <div class="actions">
-                      <%= form.submit "Anotar", class: "btn btn-warning mx-1 my-1" %>
-                      <%= form.hidden_field :objection_id, value: objection.id %>
-                      <%= form.hidden_field :diagnostic_id, value: diagnostic.id %>
-                    </div>
-                  <% end %>
-                <% end %>
+            </div>
+          <% else %>
+            <div class="d-flex justify-content-start align-items-center">
+              <strong>Resultados</strong>
+              <%= form_with url: new_diagnostic_path, method: "get", class: "diagnostic-form-out mr-3" do |form| %>
+                <%= form.submit " + DX manual", class: "btn btn-primary" %>
+                <%= form.hidden_field :inform_id, value: inform.id %>
               <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <% inform.diagnostics.each_with_index do |diagnostic, n| %>
+              <% if inform.inf_type == 'cito' && (diagnostic.cyto_status == 'correct' || diagnostic.cyto_status == 'confirmed') %>
+                <div class="alert alert-success">
+              <% end %>
+              <% if inform.inf_type == 'cito' && diagnostic.cyto_status == 'uncorrect' %>
+                <div class="alert alert-warning">
+              <% end %>
+              <% if inform.inf_type == 'cito' && diagnostic.cyto_status == nil %>
+                <div class="alert alert-dark">
+              <% end %>
+              <% if inform.inf_type != 'cito'  %>
+                <div>
+              <% end %>
+                
+
+                <% if edit_diagnostic == diagnostic %>
+                  <%= form_with model: diagnostic do |form| %>
+                    <div class="row">
+                      <div class="col-12 col-lg-12 col-xl-12">
+                        <div class="form-group">
+                          <%= form.text_area :description, class: "form-control form-control-lg input" %>
+                          <%= form.hidden_field :edit_dx_status, value: edit_dx_status %>
+                        </div>
+                      </div>
+                      <% if inform.inf_type != 'cito' %>
+                        <div class="col-12 col-lg-12 col-xl-12">
+                          <div class="form-group">
+                            <%= form.collection_select(:pss_code, diagcodes, :pss_code, :description, { prompt: 'Código PSS'}, { class: "form-control input" }) %>
+                          </div>
+                        </div>
+                      <% end %>
+                      <% if inform.inf_type == 'cito' %>
+                        <div class="col-12 col-lg-12 col-xl-12">
+                          <div class="form-group">
+                            <%= form.label "Código cito:" %>
+                            <%= form.collection_select(:pss_code, diagcodes, :cito_code, :description, { prompt: 'Código PSS'}, { class: "form-control input" }) %>
+                          </div>
+                          <div class="form-group">
+                            <%= form.label "Resultado:" %>
+                            <%= form.select(:result, options_for_select([['Positiva', 'positiva'], ['Negativa', 'negativa'], ['Insatisfactoria', 'insatisfactoria']]), { prompt: "Selecciona" }, class: "form-control form-control input") %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                    
+                    <div class="actions">
+                      <%= form.submit "Guardar", class: "btn btn-warning btn-sm my-2" %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <% if inform.inf_type != 'cito' %>
+                    <div class="mb-1">
+                      <%= link_to edit_diagnostic_path(diagnostic), remote: true, class: "btn btn-outline-primary btn-sm" do %>
+                        <span>&#9998;</span>
+                      <% end %>
+                      <%= link_to diagnostic, method: :delete, remote: true, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-danger btn-sm" do %>
+                        <span>&times;</span>
+                      <% end %>
+                      <span>
+                        <%= diagnostic.description %> <strong>[<%= diagnostic.pss_code %> / <%= diagnostic.who_code %>]</strong>
+                      </span>
+                    </div>
+                  <% else %>
+                    <p>Código Patología Suescún para citología: <%= diagnostic.pss_code %></p>
+                    <% if diagnostic.result == "negativa" %>
+                      <div class="alert alert-success">
+                    <% else %>
+                      <% if diagnostic.result == "insatisfactoria" %>
+                        <div class="alert alert-warning">
+                      <% else %>
+                        <div class="alert alert-danger">
+                      <% end %>
+                    <% end %>
+                    
+                      <p>Resultado: <strong><%= diagnostic.result %></strong></p>
+                    </div>
+                    
+                  <% end %>
+                <% end %>
+                
+                <% diagnostic.objections.each do |objection| %>
+                  <div>
+                    <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></span>
+                  </div>
+                  
+                  <% if edit_objection_id == nil %>
+                    <div class="d-flex flex-column">
+                      <span class="text-muted objection-description">
+                        <%= objection.description %>
+                      </span>
+                    </div>
+                    <% unless objection.closed %>
+                      <%= form_with url: diagnostics_review_path, method: "post" do |form| %>
+                        <div class="form-group">
+                          <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
+                          <%= form.hidden_field :objection_id, value: objection.id %>
+                          <%= form.hidden_field :diagnostic_id, value: diagnostic.id %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <% if edit_objection_id == objection %>
+                      <%= form_with url: diagnostics_anotate_path, method: "post" do |form| %>
+                        <div class="form-group">
+                          <%= form.label "Historial:" %>
+                          <%= form.text_area :description, value: objection.description, rows: 4, class: "form-control input disabled" %>
+                        </div>
+                        <div class="form-group">
+                          <%= form.label "Acción de mejora:" %>
+                          <%= form.text_area :new_description, rows: 2, class: "form-control input" %>
+                        </div>
+                        <div class="actions">
+                          <%= form.submit "Anotar", class: "btn btn-warning mx-1 my-1" %>
+                          <%= form.hidden_field :objection_id, value: objection.id %>
+                          <%= form.hidden_field :diagnostic_id, value: diagnostic.id %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
             <% end %>
-          </div>
-        <% end %>
+          </p>
+        </div>
       </div>
-      
     </div>
     <div class="col-12 col-lg-12 col-xl-12 diagnostic-form">
       <!-- Esto se deja para poder alojar una forma manual -->

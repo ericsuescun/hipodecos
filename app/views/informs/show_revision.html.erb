@@ -7,48 +7,51 @@
       </div>
     </div>
     <br>
-    <% if @inform.inf_type != "cito" %>
-      
-      <div class="row">
-        <!-- <div class="col-12 col-lg-4 col-xl-4 macros-in">
-          <%= render partial: "macros/macros", locals: { inform: @inform } %>
-        </div> -->
-        <div class="col-12 col-lg-6 col-xl-6">
-          <div class="row">
+    <div class="container-fluid">
+      <% if @inform.inf_type != "cito" %>
+        
+        <div class="row">
+          <!-- <div class="col-12 col-lg-4 col-xl-4 macros-in">
+            <%= render partial: "macros/macros", locals: { inform: @inform } %>
+          </div> -->
+          <div class="col-12 col-lg-6 col-xl-6">
+            <div class="row">
+              <div class="micros-in">
+                <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 col-xl-6">
+            <div class="row">
+              <div class="diagnostics-in">
+                <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
+              </div>
+            </div>          
+          </div>
+        </div>
+      <% else %>
+
+        <div class="row">
+          <div class="col-12 col-lg-4 col-xl-4">
             <div class="micros-in">
               <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-lg-6 col-xl-6">
-          <div class="row">
+          <div class="col-12 col-lg-4 col-xl-4">
             <div class="diagnostics-in">
               <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
             </div>
-          </div>          
-        </div>
-      </div>
-    <% else %>
-
-      <div class="row">
-        <div class="col-12 col-lg-4 col-xl-4">
-          <div class="micros-in">
-            <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+          </div>
+          <div class="col-12 col-lg-4 col-xl-4">
+            <div class="suggestions-in">
+              <%= render partial: "suggestions/suggestions", locals: { inform: @inform, edit_suggestion: nil, edit_objection_id: nil, edit_su_status: false } %>
+            </div>
           </div>
         </div>
-        <div class="col-12 col-lg-4 col-xl-4">
-          <div class="diagnostics-in">
-            <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
-          </div>
-        </div>
-        <div class="col-12 col-lg-4 col-xl-4">
-          <div class="suggestions-in">
-            <%= render partial: "suggestions/suggestions", locals: { inform: @inform, edit_suggestion: nil, edit_objection_id: nil, edit_su_status: false } %>
-          </div>
-        </div>
-      </div>
-      
-    <% end %>
+        
+      <% end %>
+    </div>
+    
     
     <% if role_admin_allowed? %>
       <% if @inform.administrative_review_id == nil %>

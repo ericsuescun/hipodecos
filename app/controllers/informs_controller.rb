@@ -424,7 +424,12 @@ class InformsController < ApplicationController
 
       @micro_text = ""
       @inform.micros.each do |micro|
-        @micro_text = @micro_text + micro.description + " "
+        if micro.description.size > 500
+          @micro_text = @micro_text + "\n" + "\n" + micro.description + "\n "
+        else
+          @micro_text = @micro_text + micro.description + " "  
+        end
+        
       end
 
       @diagnostic_text = ""

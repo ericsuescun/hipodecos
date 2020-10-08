@@ -101,7 +101,11 @@
             <strong>Descripción Microscópica</strong>
           </div>
         </div>
-        <%= @micro_text %>
+        <div class="preview">
+          <%= simple_format(@micro_text) %>
+        </div>
+        
+        <!-- <%= text_area_tag :micro, @micro_text, size: "95x60" %> -->
         
       <% else %>
         <div class="row">

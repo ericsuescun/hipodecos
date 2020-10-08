@@ -52,9 +52,9 @@
                     <span class="text-muted">
                       [ - el <%= micro.created_at.strftime('%d/%m/%Y') %> <%= User.where(id: micro.user_id).first.try(:fullname) %> agregó ]
                     </span>
-                    <span>
-                      <%= micro.description %>
-                    </span>
+                    <div>
+                      <%= simple_format(micro.description) %>
+                    </div>
                   </div>
                 <% end %>
               </div>

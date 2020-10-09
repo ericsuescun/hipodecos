@@ -28,6 +28,8 @@ class Inform < ApplicationRecord
 
   has_many :pictures, as: :imageable, dependent: :destroy
 
+  has_many :objections, as: :objectionable, dependent: :destroy
+
 
   # has_many :samples
   # has_many :studies

@@ -9,7 +9,7 @@
       <% if sample.slide_tag == nil %>
         <% if !next_number_tag_exists?(inform, sample) %>
           <%= form_with model: [inform, inform.samples.build] do |form| %>
-            <%= form.submit "+", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: transparent;" %>
+            <%= form.submit " + ", class: "mx-2 my-0 d-flex btn btn-primary btn-sm" %>
             <%= form.hidden_field :recipient_tag, value: recipient.tag %>
             <%= form.hidden_field :organ_code, value: sample.organ_code %>
             <%= form.hidden_field :name, value: sample.name %>

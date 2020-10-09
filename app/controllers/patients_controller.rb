@@ -42,6 +42,8 @@ class PatientsController < ApplicationController
   def show
     @inform = Inform.new
     @physician = @inform.physicians.build
+
+    @objections = @patient.objections
     
     @promoters = Promoter.where(enabled: true)
     @promoters.each do |promoter|
@@ -194,7 +196,76 @@ class PatientsController < ApplicationController
   end
 
   def update
+    
+    log = "\nCAMBIOS:\n"
+
+    if @patient.id_number != params[:patient][:id_number]
+      log += "IDENTIFICACION: ANTES:" + @patient.id_number + " DESPUÉS: " + params[:patient][:id_number] + "\n"
+    else
+      log += "IDENTIFICACION: SIN CAMBIOS." + "\n"
+    end
+
+    if @patient.id_type != params[:patient][:id_type]
+      log += "TIPO DE IDENTIFICACION: ANTES:" + @patient.id_type + " DESPUÉS: " + params[:patient][:id_type] + "\n"
+    else
+      log += "TIPO DE IDENTIFICACION: SIN CAMBIOS." + "\n"
+    end
+
+    if @patient.birth_date != params[:patient][:birth_date]
+      log += "FECHA DE NACIMIENTO: ANTES:" + @patient.birth_date.to_s + " DESPUÉS: " + params[:patient][:birth_date].to_s + "\n"
+    else
+      log += "FECHA DE NACIMIENTO: SIN CAMBIOS." + "\n"
+    end
+
+    if @patient.name1 != params[:patient][:name1]
+      log += "PRIMER NOMBRE: ANTES:" + @patient.name1 + " DESPUÉS: " + params[:patient][:name1] + "\n"
+    else
+      log += "PRIMER NOMBRE: nSIN CAMBIOS." + "\n"
+    end
+
+    if @patient.name2 != params[:patient][:name2]
+      log += "SEGUNDO NOMBRE: ANTES:" + @patient.name2 + " DESPUÉS: " + params[:patient][:name2] + "\n"
+    else
+      log += "SEGUNDO NOMBRE: SIN CAMBIOS." + "\n"
+    end
+
+    if @patient.lastname1 != params[:patient][:lastname1]
+      log += "PRIMER APELLIDO: ANTES:" + @patient.lastname1 + " DESPUÉS: " + params[:patient][:lastname1] + "\n"
+    else
+      log += "PRIMER APELLIDO: SIN CAMBIOS." + "\n"
+    end
+
+    if @patient.lastname2 != params[:patient][:lastname2]
+      log += "SEGUNDO APELLIDO: ANTES:" + @patient.lastname2 + " DESPUÉS: " + params[:patient][:lastname2] + "\n"
+    else
+      log += "SEGUNDO APELLIDO:SIN CAMBIOS." + "\n"
+    end
+
+    if @patient.sex != params[:patient][:sex]
+      log += "SEXO: ANTES:" + @patient.sex + " DESPUÉS: " + params[:patient][:sex] + "\n"
+    else
+      log += "SEXO: SIN CAMBIOS." + "\n"
+    end
+
+    if @patient.gender != params[:patient][:gender]
+      log += "GÉNERO: ANTES:" + @patient.gender + " DESPUÉS: " + params[:patient][:gender] + "\n"
+    else
+      log += "GÉNERO: SIN CAMBIOS." + "\n"
+    end
+
+    log += "\nFECHA: " + DateTime.now.to_s + "\nUSUARIO: " + current_user.email.to_s
+
     if @patient.update(patient_params)
+
+      objection = @patient.objections.build(
+          user_id: current_user.id,
+          obcode_id: 23,
+          responsible_user_id: nil, #@patient.user_id,
+          description: log
+
+        )
+      objection.save
+
       if params[:patient][:inform_id] != nil
         inform = Inform.find(params[:patient][:inform_id])
         if inform.inf_status == "revision"
@@ -216,7 +287,7 @@ class PatientsController < ApplicationController
   # DELETE /patients/1.json
   def destroy
     @patient.destroy
-    redirect_to matriculate_series_patients_path, notice: 'Patient was successfully destroyed.'
+    redirect_to matriculate_series_patients_path, notice: 'Paciente exitosamente borrado.'
   end
 
   private

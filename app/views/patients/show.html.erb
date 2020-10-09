@@ -229,6 +229,47 @@
     </div>
   </div>
 </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <div class="alert alert-primary">
+        <h4>No conformidades <%= search_range %></h4>
+      </div>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Revisor</th>
+            <th>Responsable</th>
+            <th>Cierra</th>
+            <th>NC</th>
+            <th>Proceso</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @objections.each do |objection| %>
+            <tr>
+              <td><%= objection.created_at.strftime("%d/%m/%Y") %></td>
+              <td><%= objection.closed == true ? "Cerrada" : "Abierta" %></td>
+              <td><%= User.where(id: objection.user_id).first.try(:fullname) %></td>
+              <td><%= User.where(id: objection.responsible_user_id).first.try(:fullname) %></td>
+              <td><%= User.where(id: objection.close_user_id).first.try(:fullname) %></td>
+              <td><%= Obcode.where(id: objection.obcode_id).first.try(:title) %></td>
+              <td><%= Obcode.where(id: objection.obcode_id).first.try(:process) %></td>
+              <td><%= link_to "Detalles", objection_path(objection) %></td>
+              <% if admin_signed_in? %>
+                <td><%= link_to 'Borrar', objection, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 
 

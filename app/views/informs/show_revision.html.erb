@@ -75,7 +75,7 @@
       <% if @inform.pathologist_review_id == nil %>
         <div class="row">
           <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-            <%= link_to "Patología: Marcar como listo para entrega", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+            <%= link_to "Patología: Listo para publicar!", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
           </div>
         </div>
       <% else %>

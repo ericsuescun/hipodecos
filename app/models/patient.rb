@@ -22,6 +22,8 @@ class Patient < ApplicationRecord
 	# has_many :informs
 
 	has_many :diganostics, through: :informs
+
+	has_many :objections, as: :objectionable, dependent: :destroy
 	
 	# accepts_nested_attributes_for :informs, allow_destroy: true
 	accepts_nested_attributes_for :informs

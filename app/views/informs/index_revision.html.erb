@@ -6,14 +6,16 @@
         <thead class="thead-dark">
           <tr>
             <th>Informe</th>
-            <th>Oportunidad</th>
+            <th>Días</th>
             <th>Revisión Patología</th>
             <th>Revisión Admin</th>
+            <th>Identificación</th>
             <th>Paciente</th>
+            <th>Edad</th>
             <th>EPS</th>
             <th>Sede IPS</th>
             <th>Código Authoriz.</th>
-            <th scope="1"></th>
+            
           </tr>
         </thead>
 
@@ -28,15 +30,17 @@
               <td><%= (Date.today - inform.receive_date).to_i %></td>
               <td><%= User.where(id: inform.pathologist_review_id).first.try(:first_name) %> <%= User.where(id: inform.pathologist_review_id).first.try(:last_name) %></td>
               <td><%= User.where(id: inform.administrative_review_id).first.try(:first_name) %> <%= User.where(id: inform.administrative_review_id).first.try(:last_name) %></td>
+              <td><%= inform.patient.id_type + " " + inform.patient.id_number %></td>
               <td>
                 <%= link_to inform.patient  do %>
-                  <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
-                  <% end %>
+                  <%= inform.patient.fullname %> 
+                <% end %>
               </td>
+              <td><%= inform.p_age %></td>
               <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
               <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
               <td><%= inform.prmtr_auth_code %></td>
-              <td><%= link_to 'Borrar', inform, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+              
             </tr>
           <% end %>
         </tbody>

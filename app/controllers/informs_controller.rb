@@ -411,9 +411,24 @@ class InformsController < ApplicationController
   def anulate
     if @inform.inf_status == "anulado"
       @inform.update(inf_status: nil, user_id: current_user.id)
+      objection = @inform.objections.build(
+          user_id: current_user.id,
+          obcode_id: 22,
+          responsible_user_id: @inform.user_id,
+          description: "Se restaura informe. Fecha: " + DateTime.now.to_s
+
+        )
     else
       @inform.update(inf_status: "anulado", user_id: current_user.id)
+      objection = @inform.objections.build(
+          user_id: current_user.id,
+          obcode_id: 22,
+          responsible_user_id: @inform.user_id,
+          description: "Se anula informe. Fecha: " + DateTime.now.to_s
+
+        )
     end
+    objection.save
     
     redirect_to informs_url, notice: 'Informe exitosamente anulado.'
   end

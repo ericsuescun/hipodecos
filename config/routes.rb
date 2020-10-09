@@ -93,14 +93,7 @@ Rails.application.routes.draw do
     get 'pictures/delete'
     get 'pictures/show'
 
-
-    get 'objections/index'
-    get 'objections/new'
-    get 'objections/create'
-    get 'objections/edit'
-    get 'objections/update'
-    get 'objections/delete'
-    get 'objections/show'
+    resources :objections
 
     resources :autos
     resources :roles

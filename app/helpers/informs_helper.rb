@@ -1,5 +1,15 @@
 module InformsHelper
 
+	def codevals
+		codevals = Codeval.all
+		new_codevals = []
+		codevals.each do |codeval|
+			codeval.code = codeval.code + "-" + codeval.name
+			new_codevals << codeval
+		end
+		return new_codevals
+	end
+
 	def get_birth_control(n)
 		case n
 		when "0"

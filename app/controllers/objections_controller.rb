@@ -14,7 +14,7 @@ class ObjectionsController < ApplicationController
     objection.user_id = current_user.id
     objection.closed = false
     if objection.save
-      redirect_to @objectionable, notice: "No conformidad levantada!"
+      redirect_to @objectionable, notice: "No conformidad creada!"
     else
       redirect_to @objectionable, notice: "No conformidad vacía!"
     end

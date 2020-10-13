@@ -35,7 +35,7 @@
           <% @cost.values.each do |value| %>
   					<tr>
   						<td><%= value.codeval.code %></td>
-  						<td><%= number_to_currency(value.value, precision: 0, delimiter: ',') %></td>
+  						<td><%= number_to_currency(value.value, precision: 0, delimiter: '.') %></td>
   						<td><%= Admin.find(value.admin_id).name %></td>
               <td><%= value.description %></td>
               <td><%= link_to "Editar", edit_value_path(value) %></td>

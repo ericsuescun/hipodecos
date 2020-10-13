@@ -21,7 +21,7 @@
   </div>
   <div class="row">
     <div class="col-10 col-lg-10 mx-auto">
-      <% @codeval.costs.each do |cost| %>
+      
         <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
@@ -33,15 +33,17 @@
             
           </thead>
           <tbody>
-            <tr>
-              <td><%= cost.name %></td>
-              <td><%= @codeval.values[0].value %></td>
-              <td><%= Admin.find(cost.admin_id).name %></td>
-              <td><%= cost.description %></td>
-            </tr>
+            <% @codeval.costs.each do |cost| %>
+              <tr>
+                <td><%= cost.name %></td>
+                <td><%= number_to_currency(Value.where(codeval_id: @codeval.id, cost_id: cost.id).first.value, precision: 0, delimiter: '.') %></td>
+                <td><%= Admin.find(cost.admin_id).name %></td>
+                <td><%= cost.description %></td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
-      <% end %>
+      
     </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-8 col-lg-8 mx-auto">
-      <div class="card text-center mt-3">
+    <div class="col-12 col-lg-12">
+      <div class="card mt-3">
         <div class="card-header">
           IPS: <strong><%= @entity.initials %></strong> Costo base: <strong><%= cost %></strong> Tarifas: <strong><%= rate %></strong>
         </div>
@@ -11,7 +11,33 @@
           <p class="card-text">Teléfono: <%= @entity.mgr_tel %>, Celular: <%= @entity.mgr_cel %></p>
           <%= link_to "Editar", edit_entity_path(@entity), class: 'btn btn-primary' %>
           <%= link_to 'Borrar', @entity, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
+
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>CUPS</th>
+                    <th>Costo</th>
+                    <th>Margen</th>
+                    <th>Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% Codeval.all.each do |codeval| %>
+                    <tr>
+                      <td><%= codeval.code %></td>
+                      <td><%= number_to_currency(Value.where(codeval_id: codeval.id, cost_id: @entity.cost_id).first.value, precision: 0, delimiter: '.') %></td>
+                      <td><%= number_to_currency(Value.where(codeval_id: codeval.id, cost_id: @entity.cost_id).first.value * Factor.where(codeval_id: codeval.id, rate_id: @entity.rate_id).first.factor - Value.where(codeval_id: codeval.id, cost_id: @entity.cost_id).first.value, precision: 0, delimiter: '.') %></td>
+                      <td><%= number_to_currency(Value.where(codeval_id: codeval.id, cost_id: @entity.cost_id).first.value * Factor.where(codeval_id: codeval.id, rate_id: @entity.rate_id).first.factor, precision: 0, delimiter: '.')  %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+
         <div class="card-footer text-muted">
           Entidad <%= @entity.entype %>
           <%= @entity.address %>, <%= @entity.municipality %>, <%= @entity.department %>
@@ -20,112 +46,114 @@
     </div>
   </div>
   <div class="row">
-    <% @branches.each do |branch| %>
-      <div class="col-2 col-lg-2 mx-auto">
-        <div class="card text-center mt-3">
-          <div class="card-header">
-            Sede: <strong><%= branch.initials %></strong>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"><%= branch.name %> - <%= branch.code %></h5>
-            <p class="card-text">Gerente: <%= branch.mgr_name %>, <%= branch.mgr_email %></p>
-            <p class="card-text">Teléfono: <%= branch.mgr_tel %>, Celular: <%= branch.mgr_cel %></p>
-            <%= link_to "Editar", edit_branch_path(branch), class: 'btn btn-primary' %>
-            <%= link_to 'Borrar', branch, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
-          </div>
-          <div class="card-footer text-muted">
-            <p>Entidad <%= branch.entype %></p>
-            <p><%= branch.address %>, <%= branch.municipality %>, <%= branch.department %></p>
+    <div class="card-deck">
+      <% @branches.each do |branch| %>
+        <div class="col-12 col-lg-4 col-xl-3">
+          <div class="card mt-3">
+            <div class="card-header">
+              Sede: <strong><%= branch.initials %></strong>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= branch.name %> - <%= branch.code %></h5>
+              <p class="card-text">Gerente: <%= branch.mgr_name %>, <%= branch.mgr_email %></p>
+              <p class="card-text">Teléfono: <%= branch.mgr_tel %>, Celular: <%= branch.mgr_cel %></p>
+              <%= link_to "Editar", edit_branch_path(branch), class: 'btn btn-primary' %>
+              <%= link_to 'Borrar', branch, method: :delete, data: { confirm: '¿Confirmas la operación?' }, class: 'btn btn-primary' %>
+            </div>
+            <div class="card-footer text-muted">
+              <p>Entidad <%= branch.entype %></p>
+              <p><%= branch.address %>, <%= branch.municipality %>, <%= branch.department %></p>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
   
-    <div class="row">
-      <div class="col-8 col-lg-8 mx-auto mt-3">
-        <div class="alert alert-info">
-          <div class="row">
-            <div class="col-12 col-lg-8 mx-auto">
-              <h1>Crear sede para <%= @entity.initials %></h1>
-            </div>
+  <div class="row">
+    <div class="col-8 col-lg-8 mx-auto mt-3">
+      <div class="alert alert-info">
+        <div class="row">
+          <div class="col-12 col-lg-8 mx-auto">
+            <h1>Crear sede para <%= @entity.initials %></h1>
           </div>
-          <%= form_for [@entity, @entity.branches.build] do |form| %>
-          <div class="row">
-            <div class="col-6 col-lg-6">
-              <div class="form-group">
-                <%= form.label "Nombre" %>
-                <%= form.text_field :name, class: 'form-control form-control-lg input' %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "Iniciales" %>
-                <%= form.text_field :initials, class: 'form-control form-control-lg input' %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "Código" %>
-                <%= form.text_field :code, class: 'form-control form-control-lg input' %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "Contacto" %>
-                <%= form.text_field :mgr_name, class: 'form-control form-control-lg input' %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "Email" %>
-                <%= form.text_field :mgr_email, class: 'form-control form-control-lg input' %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "Teléfono" %>
-                <%= form.text_field :mgr_tel, class: 'form-control form-control-lg input' %>
-              </div>
-            </div>
-                  
-            <div class="col-6 col-lg-6">
-
-              <div class="form-group">
-                <%= form.label "Celular" %>
-                <%= form.text_field :mgr_cel, class: 'form-control form-control-lg input' %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "Municipio" %>
-                <%= form.text_field :municipality, class: 'form-control form-control-lg input' %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "Departamento" %>
-                <%= form.text_field :department, class: 'form-control form-control-lg input' %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "Dirección" %>
-                <%= form.text_field :address, class: 'form-control form-control-lg input' %>
-              </div>
-
-              <div class="form-group">
-                <%= form.label "Tipo de entidad" %>
-                <%= form.text_field :entype, class: 'form-control form-control-lg input' %>
-              </div>
-
-
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-4 col-lg-4 mx-auto">
-              <div class="actions">
-                <%= form.submit "Guardar", class: 'btn btn-primary btn-block' %>
-              </div>                
-            </div>
-
-          </div>
-          <% end %>
-          
         </div>
+        <%= form_for [@entity, @entity.branches.build] do |form| %>
+        <div class="row">
+          <div class="col-6 col-lg-6">
+            <div class="form-group">
+              <%= form.label "Nombre" %>
+              <%= form.text_field :name, class: 'form-control form-control-lg input' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Iniciales" %>
+              <%= form.text_field :initials, class: 'form-control form-control-lg input' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Código" %>
+              <%= form.text_field :code, class: 'form-control form-control-lg input' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Contacto" %>
+              <%= form.text_field :mgr_name, class: 'form-control form-control-lg input' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Email" %>
+              <%= form.text_field :mgr_email, class: 'form-control form-control-lg input' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Teléfono" %>
+              <%= form.text_field :mgr_tel, class: 'form-control form-control-lg input' %>
+            </div>
+          </div>
+                
+          <div class="col-6 col-lg-6">
+
+            <div class="form-group">
+              <%= form.label "Celular" %>
+              <%= form.text_field :mgr_cel, class: 'form-control form-control-lg input' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Municipio" %>
+              <%= form.text_field :municipality, class: 'form-control form-control-lg input' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Departamento" %>
+              <%= form.text_field :department, class: 'form-control form-control-lg input' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Dirección" %>
+              <%= form.text_field :address, class: 'form-control form-control-lg input' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Tipo de entidad" %>
+              <%= form.text_field :entype, class: 'form-control form-control-lg input' %>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 col-lg-4 mx-auto">
+            <div class="actions">
+              <%= form.submit "Guardar", class: 'btn btn-primary btn-block' %>
+            </div>                
+          </div>
+
+        </div>
+        <% end %>
+        
       </div>
-    </div>  
+    </div>
+  </div>  
   
 </div>

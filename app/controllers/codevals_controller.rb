@@ -30,7 +30,7 @@ class CodevalsController < ApplicationController
 
   # POST /codevals
   # POST /codevals.json
-  def create
+  def create_old
     @codeval = Codeval.new(codeval_params)
     @codeval.admin_id = current_admin.id
 
@@ -39,6 +39,38 @@ class CodevalsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def create
+    @codeval = Codeval.new(codeval_params)
+    @codeval.admin_id = current_admin.id
+    @costs = Cost.all
+    @rates = Rate.all
+
+    if @costs.count == 0
+      if @codeval.save
+        redirect_to @codeval, notice: 'CUPS exitosamente creado.'
+      else
+        render :new
+      end
+    else
+      if @codeval.save
+        @costs.each do |cost|
+          value = Value.new(codeval_id: @codeval.id, cost_id: cost.id, value: params[:codeval][:value], description: cost.description, admin_id: current_admin.id)
+          value.save
+        end
+        if @rates.count != 0
+          @rates.each do |rate|
+            factor = Factor.new(codeval_id: @codeval.id, rate_id: rate.id, factor: rate.factor, description: rate.description, admin_id: current_admin.id)
+            factor.save
+          end
+        end
+        redirect_to @codeval, notice: 'CUPS exitosamente creado. Tablas de costos y tarifas actualizadas.'
+      end
+    end
+
+
+    
   end
 
   # PATCH/PUT /codevals/1

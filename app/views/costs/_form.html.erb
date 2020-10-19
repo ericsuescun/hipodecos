@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-          <%= form.label "Base: Puedes usar una tabla ya creada (deja vacío para arrancar con $0)" %>
+          <%= form.label "Base: Puedes usar una tabla ya creada (deja vacío para arrancar con $0, o, si ya esta creada, deja vacío para no modificar los valores y solo cambiar la descripción)" %>
           <%= form.select :base, Cost.pluck(:name, :id), {include_blank: true}, class: "form-control form-control-lg input" %>
         </div>
 

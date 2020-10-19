@@ -6,6 +6,9 @@
       <th>Órgano Ref.</th>
       <th>Título</th>
       <th># pasos</th>
+      <th>Por:</th>
+      <th>Creación</th>
+      <th>Modificación</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +19,9 @@
         <td><%= automatic.organ %></td>
         <td><%= automatic.title %></td>
         <td><%= automatic.scripts.count %></td>
+        <td><%= User.where(id: automatic.user_id).first.try(:fullname) %></td>
+        <td><%= automatic.created_at.strftime('%d/%m/%Y') %></td>
+        <td><%= automatic.updated_at.strftime('%d/%m/%Y') %></td>
         <td><%= link_to 'Detalles', automatic %></td>
         <td><%= link_to 'Editar', edit_automatic_path(automatic) %></td>
         <td><%= link_to 'Borrar', automatic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>

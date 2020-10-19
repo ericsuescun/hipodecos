@@ -46,4 +46,31 @@
       
     </div>
   </div>
+  <div class="row">
+    <div class="col-10 col-lg-10 mx-auto">
+      
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>Tarifa</th>
+              <th>Precios asociado</th>
+              <th>Asigando por:</th>
+              <th>Comentarios</th>
+            </tr>
+            
+          </thead>
+          <tbody>
+            <% @codeval.rates.each do |rate| %>
+              <tr>
+                <td><%= rate.name %></td>
+                <td><%= number_to_currency(Factor.where(codeval_id: @codeval.id, rate_id: rate.id).first.price, precision: 0, delimiter: '.') %></td>
+                <td><%= Admin.find(rate.admin_id).name %></td>
+                <td><%= rate.description %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      
+    </div>
+  </div>
 </div>

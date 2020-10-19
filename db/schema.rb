@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_003422) do
+ActiveRecord::Schema.define(version: 2020_10_17_022152) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -204,6 +204,8 @@ ActiveRecord::Schema.define(version: 2020_09_06_003422) do
     t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cost_id"
+    t.decimal "price"
     t.index ["codeval_id"], name: "index_factors_on_codeval_id"
     t.index ["rate_id"], name: "index_factors_on_rate_id"
   end
@@ -438,6 +440,7 @@ ActiveRecord::Schema.define(version: 2020_09_06_003422) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "factor"
+    t.integer "cost_id"
   end
 
   create_table "recipients", force: :cascade do |t|

@@ -9,8 +9,9 @@
           Tarifa: <strong><%= @rate.name %></strong>
         </div>
         <div class="card-body">
-          <h5 class="card-title"><%= Admin.find(@rate.admin_id).name %> definió en general un factor de: <%= @rate.factor %></h5>
+          <h5 class="card-title"><%= Admin.find(@rate.admin_id).name %> definió un <%= @rate.factor %>%</h5>
           <p class="card-text"><%= @rate.description %></p>
+          <p class="card-text">Asociada a la tabla de costo <%= Cost.where(id: @rate.cost_id).first.try(:name) %></p>
         </div>
         <div class="card-footer text-muted">
         	Fecha de creación: <%= @rate.created_at %> - Fecha de modificación: <%= @rate.updated_at %>
@@ -24,7 +25,10 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>CUPS</th>
-						<th>Factor asociado</th>
+            <th>Costo</th>
+						<th>%</th>
+            <th>Margen</th>
+            <th>Precio</th>
 						<th>Asigando por:</th>
             <th>Comentarios</th>
             <th scope="1"></th>
@@ -34,7 +38,10 @@
           <% @rate.factors.each do |factor| %>
   					<tr>
   						<td><%= factor.codeval.code %></td>
-  						<td><%= factor.factor %></td>
+              <td><%= number_to_currency(rate_cost(factor), precision: 0, delimiter: '.') %></td>
+              <td><%= '%.1f' % factor.factor %>%</td>
+              <td><%= number_to_currency(rate_cost(factor) * (factor.factor / 100), precision: 0, delimiter: '.') %></td>
+              <td><%= number_to_currency(factor.price, precision: 0, delimiter: '.') %></td>
   						<td><%= Admin.find(factor.admin_id).name %></td>
               <td><%= factor.description %></td>
               <td><%= link_to "Editar", edit_factor_path(factor) %></td>

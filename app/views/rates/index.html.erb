@@ -9,7 +9,7 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Último Admin</th>
-            <th>Factor original</th>
+            <th>%</th>
             <th>Fecha modificación</th>
             <th>Fecha de creación</th>
             <th colspan="3"></th>
@@ -22,7 +22,7 @@
               <td><%= rate.name %></td>
               <td><%= rate.description %></td>
               <td><%= Admin.find(rate.admin_id).name %></td>
-              <td><%= rate.factor %></td>
+              <td><%= rate.factor %>%</td>
               <td><%= rate.updated_at %></td>
               <td><%= rate.created_at %></td>
               <td><%= link_to 'Mostrar tarifa', rate_path(rate) %></td>

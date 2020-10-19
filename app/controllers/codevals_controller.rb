@@ -61,7 +61,7 @@ class CodevalsController < ApplicationController
         end
         if @rates.count != 0
           @rates.each do |rate|
-            factor = Factor.new(codeval_id: @codeval.id, rate_id: rate.id, factor: rate.factor, description: rate.description, admin_id: current_admin.id)
+            factor = Factor.new(codeval_id: @codeval.id, rate_id: rate.id, factor: rate.factor, description: rate.description, admin_id: current_admin.id, cost_id: rate.cost_id, price: params[:codeval][:value].to_f * (1 + (rate.factor.to_f / 100)) )
             factor.save
           end
         end

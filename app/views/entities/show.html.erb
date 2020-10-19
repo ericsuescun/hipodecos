@@ -27,9 +27,9 @@
                   <% Codeval.all.each do |codeval| %>
                     <tr>
                       <td><%= codeval.code %></td>
-                      <td><%= number_to_currency(Value.where(codeval_id: codeval.id, cost_id: @entity.cost_id).first.value, precision: 0, delimiter: '.') %></td>
-                      <td><%= number_to_currency(Value.where(codeval_id: codeval.id, cost_id: @entity.cost_id).first.value * Factor.where(codeval_id: codeval.id, rate_id: @entity.rate_id).first.factor - Value.where(codeval_id: codeval.id, cost_id: @entity.cost_id).first.value, precision: 0, delimiter: '.') %></td>
-                      <td><%= number_to_currency(Value.where(codeval_id: codeval.id, cost_id: @entity.cost_id).first.value * Factor.where(codeval_id: codeval.id, rate_id: @entity.rate_id).first.factor, precision: 0, delimiter: '.')  %></td>
+                      <td><%= number_to_currency(Value.where(codeval_id: codeval.id, cost_id: Rate.where(id: @entity.rate_id).first.cost_id).first.value, precision: 0, delimiter: '.') %></td>
+                      <td><%= number_to_currency(Factor.where(codeval_id: codeval.id, rate_id: @entity.rate_id).first.price - Value.where(codeval_id: codeval.id, cost_id: Rate.where(id: @entity.rate_id).first.cost_id).first.value, precision: 0, delimiter: '.') %></td>
+                      <td><%= number_to_currency(Factor.where(codeval_id: codeval.id, rate_id: @entity.rate_id).first.price, precision: 0, delimiter: '.')  %></td>
                     </tr>
                   <% end %>
                 </tbody>

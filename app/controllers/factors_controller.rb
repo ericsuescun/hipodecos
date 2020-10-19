@@ -28,7 +28,7 @@ class FactorsController < ApplicationController
     @factor = Factor.new(factor_params)
 
     if @factor.save
-      redirect_to @factor, notice: 'Factor exitosamente creado.'
+      redirect_to @factor, notice: 'Tarifa exitosamente creada.'
     else
       render :new
     end
@@ -37,8 +37,14 @@ class FactorsController < ApplicationController
   # PATCH/PUT /factors/1
   # PATCH/PUT /factors/1.json
   def update
-    if @factor.update(factor_params)
-      redirect_to rate_path(@factor.rate_id), notice: 'Factor exitosamente actualizado.'
+    @factor.admin_id = current_admin.id
+    @factor.description = params[:factor][:description]
+    cost = Value.where(codeval_id: @factor.codeval_id, cost_id: @factor.cost_id).first.value
+    @factor.factor = 100 * (params[:factor][:price].to_f - cost) / cost
+    @factor.price = params[:factor][:price]
+
+    if @factor.save
+      redirect_to rate_path(@factor.rate_id), notice: 'Tarifa exitosamente actualizada.'
     else
       render :edit
     end
@@ -49,7 +55,7 @@ class FactorsController < ApplicationController
   def destroy
     @factor.destroy
     respond_to do |format|
-      format.html { redirect_to factors_url, notice: 'Factor exitosamente borrado.' }
+      format.html { redirect_to factors_url, notice: 'Tarifa exitosamente borrada.' }
       format.json { head :no_content }
     end
   end
@@ -62,6 +68,6 @@ class FactorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def factor_params
-      params.require(:factor).permit(:codeval_id, :rate_id, :factor, :description, :admin_id)
+      params.require(:factor).permit(:codeval_id, :rate_id, :factor, :description, :admin_id, :cost_id, :price)
     end
 end

@@ -41,6 +41,8 @@ class RatesController < ApplicationController
       factor.factor = @rate.factor
       factor.description = @rate.description
       factor.admin_id = current_admin.id
+      factor.price = Value.where(codeval_id: codeval.id, cost_id: params[:rate][:cost_id]).first.value * (1 + (factor.factor / 100))
+      factor.cost_id = params[:rate][:cost_id]
       factor.save
     end
 
@@ -50,11 +52,16 @@ class RatesController < ApplicationController
   # PATCH/PUT /rates/1
   # PATCH/PUT /rates/1.json
   def update
-
-    @rate.admin_id = current_admin.id
-    
+        
     @rate.factors.each do |factor|
-      factor.update(factor: rate_params[:factor], description: rate_params[:description])
+      # factor.update(factor: rate_params[:factor], description: rate_params[:description])
+
+      factor.factor = params[:rate][:factor]
+      factor.description = params[:rate][:description]
+      factor.admin_id = current_admin.id
+      factor.price = Value.where(codeval_id: factor.codeval_id, cost_id: params[:rate][:cost_id]).first.value * (1 + (params[:rate][:factor].to_f / 100))
+      factor.cost_id = params[:rate][:cost_id]
+      factor.save      
     end #Traigo toda la colecciones de factores para la Rate actual y los recorro
 
 
@@ -81,6 +88,6 @@ class RatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rate_params
-      params.require(:rate).permit(:name, :description, :admin_id, :factor)
+      params.require(:rate).permit(:name, :description, :admin_id, :factor, :cost_id)
     end
 end

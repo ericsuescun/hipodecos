@@ -42,13 +42,15 @@ class StudiesController < ApplicationController
     branch = Branch.find(inform.branch_id)
     entity = branch.entity
 
-    @study.cost = Value.where(codeval_id: @study.codeval_id, cost_id: branch.entity.cost_id).first.value
-    profit_margin = Factor.where(codeval_id: @study.codeval_id, rate_id: branch.entity.rate_id).first.factor
-    @study.price =  @study.cost * profit_margin
-    @study.margin =  @study.cost * (profit_margin - 1)
+    @study.cost = Value.where(codeval_id: @study.codeval_id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
+    # profit_margin = Factor.where(codeval_id: @study.codeval_id, rate_id: branch.entity.rate_id).first.factor
+    # @study.price =  @study.cost * profit_margin
+    @study.price =  Factor.where(codeval_id: @study.codeval_id, rate_id: branch.entity.rate_id).first.price
+    # @study.margin =  @study.cost * (profit_margin - 1)
+    @study.margin =  @study.price - @study.cost
 
-    cost_description = Cost.where(id: branch.entity.cost_id).first.try(:name)
-    value_description = Value.where(codeval_id: @study.codeval_id, cost_id: branch.entity.cost_id).first.try(:description)
+    cost_description = Cost.where(id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:name)
+    value_description = Value.where(codeval_id: @study.codeval_id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:description)
     rate_description = Rate.where(id: branch.entity.rate_id).first.try(:name)
     factor_description = Factor.where(codeval_id: @study.codeval_id, rate_id: branch.entity.rate_id).first.try(:description)
 
@@ -67,30 +69,28 @@ class StudiesController < ApplicationController
   # PATCH/PUT /studies/1
   # PATCH/PUT /studies/1.json
   def update
-
-    log = "\nCAMBIOS:\n"
-    if @study.codeval_id != study_params[:codeval_id]
-      log += "\n-CUPS-\nANTES:" + Codeval.find(@study.codeval_id).code.to_s + "\n- DESPUÉS: -\n" + Codeval.find(study_params[:codeval_id]).code.to_s
-    else
-      log += "\n-CUPS-\nSIN CAMBIOS."
-    end
-    if @study.factor != study_params[:factor]
-      log += "\n-FACTOR-\nANTES:" + @study.factor.to_s + "\n- DESPUÉS: -\n" + study_params[:factor].to_s
-    else
-      log += "\n-FACTOR-\nSIN CAMBIOS."
-    end
-    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
-
     @inform = @study.inform
-    
-    @study.update(study_params)
-    @study.objections.each do |objection|
-      objection.closed = true
-      objection.close_user_id = current_user.id
-      objection.close_date = @study.updated_at
-      objection.description = objection.description + log
-      objection.save
-    end
+        
+    @study.user_id = current_user.id
+
+    branch = Branch.find(@inform.branch_id)
+    entity = branch.entity
+
+    @study.cost = Value.where(codeval_id: params[:study][:codeval_id], cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
+    @study.price =  Factor.where(codeval_id: params[:study][:codeval_id], rate_id: branch.entity.rate_id).first.price
+    @study.margin =  @study.price - @study.cost
+    @study.factor = params[:study][:factor]
+    @study.codeval_id = params[:study][:codeval_id]
+
+    cost_description = Cost.where(id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:name)
+    value_description = Value.where(codeval_id: params[:study][:codeval_id], cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:description)
+    rate_description = Rate.where(id: branch.entity.rate_id).first.try(:name)
+    factor_description = Factor.where(codeval_id: params[:study][:codeval_id], rate_id: branch.entity.rate_id).first.try(:description)
+
+    @study.price_description = cost_description + ". " + rate_description + ". Notas costo: " + value_description + ". Notas factor: " + factor_description
+
+    @study.save
+
     @all_cups_price = 0
     @inform.studies.each do |study|
       @all_cups_price += study.price * study.factor

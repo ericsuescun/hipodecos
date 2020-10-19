@@ -41,7 +41,7 @@ class CostsController < ApplicationController
       if @cost.base == nil
         value.value = 0
       else
-        value.value = codeval.values.find_by_cost_id(@cost.base.to_i).value * @cost.factor
+        value.value = codeval.values.find_by_cost_id(@cost.base.to_i).value * (1 + (@cost.factor.to_f / 100))
       end
       value.description = @cost.description
       value.admin_id = current_admin.id
@@ -58,17 +58,25 @@ class CostsController < ApplicationController
 
     if cost_params[:base] != ""
       @cost.values.each do |value|
-        value.update(value: (Value.where(cost_id: cost_params[:base], codeval_id: value.codeval_id).first.value * cost_params[:factor].to_d), admin_id: current_admin.id, description: cost_params[:description])
+        value.update(value: (Value.where(cost_id: cost_params[:base], codeval_id: value.codeval_id).first.value * (1 + (cost_params[:factor].to_f / 100))), admin_id: current_admin.id, description: cost_params[:description])
       end
+      
     else
       @cost.values.each do |value|
         value.update(value: 0, admin_id: current_admin.id, description: cost_params[:description])
       end
     end
     
+    Rate.all.each do |rate|
+      if rate.cost_id == params[:id].to_i
+        rate.factors.each do |factor|
+          factor.update(price: Value.where(cost_id: params[:id].to_i, codeval_id: factor.codeval_id).first.value * (1 + (factor.factor / 100)), description: factor.description)
+        end
+      end
+    end
 
     if @cost.update(cost_params)
-      redirect_to @cost, notice: 'Tabla de costos exitosamente actualizada.'
+      redirect_to @cost, notice: 'Tabla de costos y sus tarifas asociadas exitosamente actualizadas.'
     else
       render :edit
     end

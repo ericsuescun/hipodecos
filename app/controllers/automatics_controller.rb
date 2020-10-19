@@ -99,6 +99,6 @@ class AutomaticsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def automatic_params
-      params.require(:automatic).permit(:organ, :title, :auto_type)
+      params.require(:automatic).permit(:organ, :title, :auto_type, :user_id)
     end
 end

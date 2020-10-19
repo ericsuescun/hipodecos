@@ -62,9 +62,12 @@ class CostsController < ApplicationController
       end
       
     else
-      @cost.values.each do |value|
-        value.update(value: 0, admin_id: current_admin.id, description: cost_params[:description])
+      if @cost.values.count == 0  #Solo pone en 0 los valores si NO hay ya unos costos/values
+        @cost.values.each do |value|
+          value.update(value: 0, admin_id: current_admin.id, description: cost_params[:description])
+        end
       end
+      
     end
     
     Rate.all.each do |rate|

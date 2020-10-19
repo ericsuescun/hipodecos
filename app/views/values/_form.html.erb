@@ -3,6 +3,8 @@
     <div class="col-4 col-lg-4 mx-auto">
       <%= form_with(model: value, local: true) do |form| %>
 
+        <%= form.hidden_field :admin_id, value: current_admin.id, class: "form-control input" %>
+
         <div class="form-group">
           <%= form.label "Costo" %>
           <%= form.text_field :value, class: "form-control input" %>

@@ -41,13 +41,16 @@ class ValuesController < ApplicationController
   # PATCH/PUT /values/1
   # PATCH/PUT /values/1.json
   def update
-    @value.admin_id = current_admin.id
-
     if @value.update(value_params)
-      redirect_to cost_path(@value.cost_id), notice: 'Valor modificado exitosamente.'
+      redirect_to cost_path(@value.cost_id), notice: 'Costo y tarifas asociadas modificados exitosamente.'
     else
       render :edit
     end
+
+    Factor.where(codeval_id: @value.codeval_id, cost_id: @value.cost_id).each do |factor|
+      factor.update(price: Value.where(codeval_id: @value.codeval_id, cost_id: @value.cost_id).first.value * (1 + (factor.factor / 100)))
+    end
+
   end
 
   # DELETE /values/1

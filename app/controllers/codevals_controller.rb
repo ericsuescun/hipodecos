@@ -4,6 +4,11 @@ class CodevalsController < ApplicationController
 
   def import
     Codeval.import(params[:file])
+    
+    Codeval.where(admin_id: 0).update_all(admin_id: current_admin.id)
+    Value.where(admin_id: 0).update_all(admin_id: current_admin.id)
+    Factor.where(admin_id: 0).update_all(admin_id: current_admin.id)
+
     redirect_to codevals_path, notice: "Datos importados!"
   end
 

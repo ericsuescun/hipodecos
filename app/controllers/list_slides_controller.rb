@@ -1,4 +1,6 @@
 class ListSlidesController < ApplicationController
+	before_action :authenticate_user!
+	
 	def color
 		@slide = Slide.find(params[:slide_id])
 		@slide.update(colored: !@slide.colored)

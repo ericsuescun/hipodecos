@@ -1,4 +1,6 @@
 class ProcessingSlidesController < ApplicationController
+	before_action :authenticate_user!
+	
 	def coloring_slides
 		if params[:yi]
 		  initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day

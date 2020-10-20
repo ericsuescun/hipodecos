@@ -1,4 +1,5 @@
 class InclusionBlocksController < ApplicationController
+	before_action :authenticate_user!
 
 	def inclusion
 		if params[:yi]

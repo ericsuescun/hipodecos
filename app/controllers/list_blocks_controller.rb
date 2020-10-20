@@ -1,4 +1,5 @@
 class ListBlocksController < ApplicationController
+	before_action :authenticate_user!
 
 	def add_block_slide
 		@sample = Sample.find(params[:sample_id])

@@ -28,6 +28,22 @@ class ImportsController < ApplicationController
 
 			id_number = oldrecord.cedula
 			id_type = oldrecord.identif
+			if oldrecord.identif == nil
+				id_type = "**"
+			end
+			if oldrecord.edad != nil
+				if oldrecord.uniedad == 1 && oldrecord.edad > 17
+					id_type = "CC"
+				else
+					id_type = "TI"
+				end
+			end
+			if oldrecord.uniedad != nil
+				if oldrecord.uniedad != 1
+					id_type = "TI"
+				end
+			end
+			
 			name1 = oldrecord.nombre
 			name2 = oldrecord.nombre2
 			lastname1 = oldrecord.apellido

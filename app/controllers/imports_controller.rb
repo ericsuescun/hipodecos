@@ -24,30 +24,23 @@ class ImportsController < ApplicationController
 		@oldrecords = Oldrecord.where(fecharec: date_range)
 
 		@oldrecords.each do |oldrecord|
-			patients = Patient.where(id_number: oldrecord.cedula)
-			if patients.count == 0
 
-				id_number = oldrecord.cedula
-				id_type = oldrecord.identif
+			id_number = oldrecord.cedula
+			id_type = oldrecord.identif
+			name1 = oldrecord.nombre
+			name2 = oldrecord.nombre2
+			lastname1 = oldrecord.apellido
+			lastname2 = oldrecord.apellido2
+			sex = oldrecord.sexo
 
-				if oldrecord.cedula == nil && oldrecord.historia != nil
+			if oldrecord.cedula == nil
+				if oldrecord.historia == nil
+					id_number = "REV-" + oldrecord.id	#Asigno un número que sería unico que es el id
+					id_type = "**"	#Marco el registro para el futuro
+				else
 					id_number = oldrecord.historia
 					id_type == "**"
 				end
-
-				if oldrecord.cedula == nil && oldrecord.historia == nil
-					id_number = "REV-" + oldrecord.identif	#Asigno un número que sería unico que es el id
-					id_type = "**"	#Marco el registro para el futuro
-				end
-
-
-				name1 = oldrecord.nombre
-				name2 = oldrecord.nombre2
-				lastname1 = oldrecord.apellido
-				lastname2 = oldrecord.apellido2
-
-				sex = oldrecord.sexo
-
 				patient = Patient.new(
 					id_number: id_number,
 					id_type: id_type,
@@ -63,7 +56,25 @@ class ImportsController < ApplicationController
 
 				oldrecord.update(patient_id: patient.id)
 			else
-				oldrecord.update(patient_id: patients.first.id)
+				patients = Patient.where(id_number: oldrecord.cedula)
+				if patients.count != 0 
+					oldrecord.update(patient_id: patients.first.id)	#Si encuentra alguna cedula, debe ser única!
+				else
+					patient = Patient.new(
+						id_number: id_number,
+						id_type: id_type,
+						name1: name1,
+						name2: name2,
+						lastname1: lastname1,
+						lastname2: lastname2,
+						sex: sex,
+						password: id_number,
+						password_confirmation: id_number
+						)
+					patient.save
+
+					oldrecord.update(patient_id: patient.id)
+				end
 			end
 		end
 		render :import_index

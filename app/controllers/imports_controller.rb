@@ -35,10 +35,10 @@ class ImportsController < ApplicationController
 
 			if oldrecord.cedula == nil
 				if oldrecord.historia == nil
-					id_number = "REV-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
+					id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
 					id_type = "**"	#Marco el registro para el futuro
 				else
-					id_number = "REV-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
+					id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
 					id_type == "**"
 				end
 				patient = Patient.new(

@@ -77,7 +77,7 @@ class ImportsController < ApplicationController
 				end
 			end
 		end
-		redirect_ro import_index_path
+		redirect_ro imports_import_index_path
 	end
 
 end

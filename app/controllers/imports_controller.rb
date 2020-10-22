@@ -11,6 +11,7 @@ class ImportsController < ApplicationController
 			@oldrecords = Oldrecord.where(patient_id: nil)
 			@oldrecordsl = Oldrecord.where(patient_id: nil).limit(20)
 		end
+		@patient = Patient.first
 	end
 
 	def import_date_filter

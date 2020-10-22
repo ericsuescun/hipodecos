@@ -207,7 +207,7 @@
     <div class="alert alert-secondary mr-1">
       <h3>Diagnósticos previos encontrados</h3>
       <br>
-      <% if @patient.informs.length == 0%>
+      <% if @patient.informs.length == 0 && @oldrecords.length == 0 %>
         <h4>No se encuentran diagnósticos previos para este paciente</h4>
       <% else %>
         <% @patient.informs.each do |inform| %>
@@ -225,7 +225,22 @@
           </ul>
           
         <% end %>
+        <p>Sistema FoxPro</p>
+        <ul>
+          <% @oldrecords.each do |oldrecord| %>
+            <li>
+              <span class="diagnostic"><strong><%= oldrecord.diagnostic %></strong></span>
+              <p>
+                <small>Fecha: <strong>
+                  <%= oldrecord.fecharec.strftime("%d/%m/%Y") %></strong></small> | <%= link_to oldrecord_path(oldrecord) do %>Ver informe <%= oldrecord.clave %><%= oldrecord.fecharec.strftime("%y") %>-<%= oldrecord.numero %> <% end %>
+
+              </p>
+            </li>
+          <% end %>
+        </ul>
       <% end %>
+      
+      
     </div>
   </div>
 </div>

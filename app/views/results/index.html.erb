@@ -17,6 +17,26 @@
         </thead>
 
         <tbody>
+          <% @oldrecords.each do |oldrecord| %>
+            <tr>
+              <td>
+                <%= link_to show_oldrecord_result_path(oldrecord)  do %>
+                  <%= oldrecord.clave %><%= oldrecord.fecharec.strftime("%y") %>-<%= oldrecord.numero %>
+                <% end %>
+              </td>
+              <td><%= oldrecord.fecharec.strftime('%d/%m/%Y') %></td>
+              <td><%= oldrecord.secretauno %></td>
+              <td>
+                <%= link_to patient_path(oldrecord.patient_id)  do %>
+                  <%= Patient.where(id: oldrecord.patient_id).first.fullname %> 
+                  <% end %>
+              </td>
+              <td><%= oldrecord.prestador %></td>
+              <td><%= oldrecord.clinica %></td>
+              <td><%= oldrecord.autoriz %></td>
+              
+            </tr>  
+          <% end %>
           <% @informs.each do |inform| %>
             <tr>
               <td>

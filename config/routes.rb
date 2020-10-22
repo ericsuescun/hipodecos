@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'imports/import_index'
+  get 'imports/import_date_filter'
+  get 'imports/import_patient'
+
   resources :oldrecords do
     collection {post :import}
   end
@@ -119,7 +123,11 @@ Rails.application.routes.draw do
     resources :automatics
     resources :scripts
     resources :organs
-    resources :results
+    resources :results do
+      member do
+        get :show_oldrecord
+      end
+    end
     resources :cytologies
 
     resources :cytologies do

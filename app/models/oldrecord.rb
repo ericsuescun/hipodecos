@@ -13,4 +13,8 @@ class Oldrecord < ApplicationRecord
 	def fullname
 	  [nombre, nombre2, apellido, apellido2].join(' ')
 	end
+
+	def oldrecord_tag
+		[clave, fecharec.strftime("%y"), "-", numero].join('')
+	end
 end

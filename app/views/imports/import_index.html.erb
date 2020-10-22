@@ -1,0 +1,45 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<% if params[:init_date] != nil %>
+				<h1><%= @oldrecords.count %> records FoxPro no importados entre: <%= Date.parse(params[:init_date]).strftime("%d/%m/%Y") %> y <%= Date.parse(params[:final_date]).strftime("%d/%m/%Y") %></h1>
+				<p>Solo se muestran 20</p>
+				<%= link_to "Importar", imports_import_patient_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date], class: "btn btn-primary my-3" %>
+			<% end %>
+			
+			
+
+			<table class="table table-striped">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th>Informe</th>
+			      <th>Tipo</th>
+			      <th>Ingreso PSS</th>
+			      <th>User PSS</th>
+			      <th>Nombre</th>
+			      <th>Id</th>
+			      <th>EPS</th>
+			      <th>Sede IPS</th>
+			    </tr>
+			  </thead>
+
+			  <tbody>
+			    <% @oldrecordsl.each do |oldrecord| %>
+			      <tr>
+			        <td><%= oldrecord.clave + oldrecord.fecharec.strftime('%y') + "-" + oldrecord.numero %></td>
+			        <td><%= oldrecord.clave %></td>
+			        <td><%= oldrecord.fecharec.strftime('%d/%m/%Y') %></td>
+			        <td><%= oldrecord.secretauno %></td>
+			        <td><%= oldrecord.fullname %></td>
+			        <td><%= oldrecord.cedula %></td>
+			        <td><%= oldrecord.entidad %></td>
+			        <td><%= oldrecord.clinica %></td>
+			        
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<%= form_tag "import_index", method: "get" do %>
+				<%= date_field_tag(:init_date) %>
+				<%= date_field_tag(:final_date) %>
+				<%= submit_tag("Importar") %>
+			<% end %>
+		</div>
+	</div>
+</div>

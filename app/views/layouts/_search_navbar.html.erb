@@ -127,6 +127,16 @@
               <%= link_to "+ Auto para Cito", automatics_new_cito_path, class: "dropdown-item" %>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              FoxPro
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Informes Fox", imports_import_index_path, class: "dropdown-item" %>
+              <%= link_to "Buscar por fecha", imports_import_date_filter_path, class: "dropdown-item" %>
+              
+            </div>
+          </li>
         <% end %>
       </ul>
       <% if user_signed_in? %>

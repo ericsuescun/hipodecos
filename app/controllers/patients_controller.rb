@@ -50,6 +50,8 @@ class PatientsController < ApplicationController
       promoter.initials = promoter.regime[0] + "-" + promoter.initials
     end
     @promoters = @promoters.pluck(:initials, :id)
+
+    @oldrecords = Oldrecord.where(patient_id: @patient.id)
   end
 
   # GET /patients/new

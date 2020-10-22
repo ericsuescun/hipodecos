@@ -77,7 +77,7 @@ class ImportsController < ApplicationController
 				end
 			end
 		end
-		render :import_index
+		redirect_ro import_index_path
 	end
 
 end

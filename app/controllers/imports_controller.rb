@@ -39,11 +39,6 @@ class ImportsController < ApplicationController
 						id_type = "TI"
 					end
 				end
-				if oldrecord.uniedad != nil
-					if oldrecord.uniedad != "1"
-						id_type = "TI"
-					end
-				end
 			end
 			
 			

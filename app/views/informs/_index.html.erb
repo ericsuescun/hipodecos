@@ -57,6 +57,46 @@
           <% end %>
         </tbody>
       </table>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Informe</th>
+            <th>Tipo</th>
+            <th>Ingreso PSS</th>
+            <th>User PSS</th>
+            <th>Paciente</th>
+            <th>EPS</th>
+            <th>Sede IPS</th>
+            <th>Código Authoriz.</th>
+            <th scope="1"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% oldrecords.each do |oldrecord| %>
+            <tr>
+              <td>
+                <%= link_to oldrecord  do %>
+                  <%= oldrecord.tag_code %>
+                <% end %>
+              </td>
+              <td><%= oldrecord.clave %></td>
+              <td><%= oldrecord.fecharec.strftime('%d/%m/%Y') %></td>
+              <td><%= oldrecord.secretaria %></td>
+              <td>
+                <%= link_to Patient.where(id: oldrecord.patient_id).first  do %>
+                  <%= Patient.where(id: oldrecord.patient_id).first.fullname %>
+                  <% end %>
+              </td>
+              <td><%= oldrecord.entidad %></td>
+              <td><%= oldrecord.clinica %></td>
+              <td><%= oldrecord.autoriz %></td>
+              
+              
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

@@ -35,6 +35,16 @@ class PatientsController < ApplicationController
       @patients << inform.patient
     end
     @patients = @patients.uniq
+    if params[:init_date] != nil
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+      @oldrecords = Oldrecord.where(fecharec: date_range)
+      @patients = []
+      @oldrecords.each do |oldrecord|
+        @patients << Patient.where(id: oldrecord.patient_id).first
+      end
+    end
   end
 
   # GET /patients/1

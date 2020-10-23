@@ -1,3 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-6 mx-auto">
+      <%= form_tag matriculate_series_patients_path, method: "get" do %>
+        
+        <%= date_field_tag :init_date, value: Date.parse(params[:init_date]), class: "form-control input mx-2" %>
+        <%= date_field_tag :final_date, class: "form-control input mx-2" %>
+
+        
+        <%= submit_tag "Filtrar", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
 <div class="container-fluid">
   <h1>Matricular pacientes en serie</h1>
   <h6>Escribe la cédula o el número de identificación donde dice: # identificación y haz clic en Buscar / Matricular</h6>
@@ -9,11 +23,13 @@
   <h6>Si no, te muestro como crearlo!</h6>
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto mt-3">
-      <h1>Últimos 20 pacientes atendidos</h1>
+      <h1>Últimos 20 pacientes atendidos (en revisión)</h1>
+      <p><%= @patients.count %> registros</p>
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
             <th># id</th>
+            <th>Nombre</th>
             <th>Sexo</th>
             <th>Dirección</th>
             <th>Email</th>

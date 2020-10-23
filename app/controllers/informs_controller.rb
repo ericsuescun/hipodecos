@@ -10,12 +10,14 @@ class InformsController < ApplicationController
       final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
       date_range = initial_date..final_date
       @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type])
+      @oldrecords = Oldrecord.where(fecharec: date_range)
     else
       initial_date = 1.year.ago.beginning_of_day
       final_date = Date.today.end_of_day
       date_range = initial_date..final_date
       if params[:tag_code].blank?
-        @informs = Inform.where(receive_date: date_range)
+        @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type])
+        @oldrecords = Oldrecord.where(fecharec: date_range)
       else
         @informs = Inform.where(tag_code: params[:tag_code])
       end
@@ -24,6 +26,7 @@ class InformsController < ApplicationController
 
   def last20
     @informs = Inform.all.limit(20)
+    @oldrecords = Oldrecord.all.limit(20)
     # @informs = []
   end
 

@@ -214,7 +214,7 @@
           <ul>
             <% inform.diagnostics.each do |diagnostic| %>
               <li>
-                <span class="diagnostic"><strong><%= diagnostic.description %></strong></span>
+                <span class="diagnostic"><strong><%= fix_accent(diagnostic.description) %></strong></span>
                 <p>
                   <small>Fecha: <strong>
                     <%= diagnostic.created_at.strftime("%d/%m/%Y") %></strong></small> | <%= link_to inform_path(inform) do %>Ver informe <%= diagnostic.inform.tag_code %> <% end %>
@@ -229,7 +229,7 @@
         <ul>
           <% @oldrecords.each do |oldrecord| %>
             <li>
-              <span class="diagnostic"><strong><%= oldrecord.diagnostic %></strong></span>
+              <span class="diagnostic"><strong><%= fix_accent(oldrecord.diagnostic) %></strong></span>
               <p>
                 <small>Fecha: <strong>
                   <%= oldrecord.fecharec.strftime("%d/%m/%Y") %></strong></small> | <%= link_to oldrecord_path(oldrecord) do %>Ver informe <%= oldrecord.clave %><%= oldrecord.fecharec.strftime("%y") %>-<%= oldrecord.numero %> <% end %>

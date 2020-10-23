@@ -17,4 +17,8 @@ class Oldrecord < ApplicationRecord
 	def oldrecord_tag
 		[clave, fecharec.strftime("%y"), "-", numero].join('')
 	end
+
+	def tag_code
+		[clave, fecharec.strftime("%y"), "-", numero].join('')
+	end
 end

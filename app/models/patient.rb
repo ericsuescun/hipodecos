@@ -53,6 +53,8 @@ class Patient < ApplicationRecord
 			descr.gsub!("Ã\u008B","Ó")
 
 			descr.gsub!("Â·", "ú")
+
+			descr.gsub!("Ã\u0090", "Ñ")
 			
 			return descr
 		end

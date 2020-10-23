@@ -92,6 +92,8 @@ class ImportsController < ApplicationController
 			descr.gsub!("√ê", "Ñ")
 
 			descr.gsub!("/", "Ñ")
+
+			descr.gsub!("I–ì—í", "Ñ")
 			
 			return descr
 		end

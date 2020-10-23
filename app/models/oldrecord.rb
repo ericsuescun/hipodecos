@@ -8,7 +8,7 @@ class Oldrecord < ApplicationRecord
 		end
 	end
 
-	default_scope -> { order(fecharec: :desc) }
+	default_scope -> { order(numero: :desc) }
 
 	def fullname
 	  [nombre, nombre2, apellido, apellido2].join(' ')

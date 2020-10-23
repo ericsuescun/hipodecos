@@ -3,7 +3,7 @@
     <div class="col-12 col-lg-6 mx-auto">
       <%= form_tag matriculate_series_patients_path, method: "get" do %>
         
-        <%= date_field_tag :init_date, value: Date.parse(params[:init_date]), class: "form-control input mx-2" %>
+        <%= date_field_tag :init_date, class: "form-control input mx-2" %>
         <%= date_field_tag :final_date, class: "form-control input mx-2" %>
 
         

@@ -41,23 +41,26 @@
 
         <tbody>
           <% @patients.each do |patient| %>
-            <tr>
-              <td><%= patient.id_type %>
-                <%= link_to patient do %>
-                   <%= patient.id_number %>
+            <% if patient %>
+              <tr>
+                <td><%= patient.id_type %>
+                  <%= link_to patient do %>
+                     <%= patient.id_number %>
+                  <% end %>
+                </td>
+                <td><%= patient.fullname %></td>
+                <td><%= patient.sex %></td>
+                <td><%= patient.informs.first.try(:p_address) %></td>
+                <td><%= patient.informs.first.try(:p_email) %></td>
+                <td><%= patient.informs.first.try(:p_tel) %></td>
+                <td><%= patient.informs.first.try(:p_cel) %></td>
+                <td><%= link_to 'Editar', edit_patient_path(patient) %></td>
+                <% if admin_signed_in? %>
+                  <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 <% end %>
-              </td>
-              <td><%= patient.fullname %></td>
-              <td><%= patient.sex %></td>
-              <td><%= patient.informs.first.try(:p_address) %></td>
-              <td><%= patient.informs.first.try(:p_email) %></td>
-              <td><%= patient.informs.first.try(:p_tel) %></td>
-              <td><%= patient.informs.first.try(:p_cel) %></td>
-              <td><%= link_to 'Editar', edit_patient_path(patient) %></td>
-              <% if admin_signed_in? %>
-                <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              <% end %>
-            </tr>
+              </tr>
+            <% end %>
+            
           <% end %>
         </tbody>
       </table>

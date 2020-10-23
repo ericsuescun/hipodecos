@@ -8,6 +8,7 @@
         <%= file_field_tag :file, class: "form-control input mb-3" %>
         <%= submit_tag "Importar CSV", class: "btn btn-primary" %>
       <% end %>
+      <p><%= @oldrecords.count %> registros</p>
 
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -25,7 +26,7 @@
         </thead>
 
         <tbody>
-          <% @oldrecords.each do |oldrecord| %>
+          <% @oldrecords.limit(20).each do |oldrecord| %>
             <tr>
               <td><%= oldrecord.clave + oldrecord.fecharec.strftime('%y') + "-" + oldrecord.numero %></td>
               <td><%= oldrecord.clave %></td>

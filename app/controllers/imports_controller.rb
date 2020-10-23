@@ -43,10 +43,10 @@ class ImportsController < ApplicationController
 			end
 			
 			
-			@patient.name1 = oldrecord.nombre
-			@patient.name2 = oldrecord.nombre2
-			@patient.lastname1 = oldrecord.apellido
-			@patient.lastname2 = oldrecord.apellido2
+			@patient.name1 = fix_accent(oldrecord.nombre)
+			@patient.name2 = fix_accent(oldrecord.nombre2)
+			@patient.lastname1 = fix_accent(oldrecord.apellido)
+			@patient.lastname2 = fix_accent(oldrecord.apellido2)
 			@patient.sex = oldrecord.sexo
 
 			if oldrecord.cedula == nil
@@ -75,5 +75,25 @@ class ImportsController < ApplicationController
 		end
 		redirect_to imports_import_index_path
 	end
+
+	private
+		def fix_accent(descr)
+			
+			descr.gsub!("Ã\u009F","á")
+			
+			descr.gsub!("Ã\u009A","é")
+			
+			descr.gsub!("Ã\u009D","í")
+
+			descr.gsub!("Â¾","ó")
+
+			descr.gsub!("Ã\u008B","Ó")
+
+			descr.gsub!("√ê", "Ñ")
+
+			descr.gsub!("/", "Ñ")
+			
+			return descr
+		end
 
 end

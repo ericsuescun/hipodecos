@@ -26,47 +26,38 @@ class ImportsController < ApplicationController
 
 		@oldrecords.each do |oldrecord|
 
-			id_number = oldrecord.cedula
-			id_type = oldrecord.identif
+			@patient = Patient.new
+			@patient.id_number = oldrecord.cedula
+			@patient.id_type = oldrecord.identif
 			if oldrecord.identif == nil
 				
-				id_type = "**"
+				@patient.id_type = "**"
 				
 				if oldrecord.edad != nil
 					if oldrecord.edad.to_i > 17
-						id_type = "CC"
+						@patient.id_type = "CC"
 					else
-						id_type = "TI"
+						@patient.id_type = "TI"
 					end
 				end
 			end
 			
 			
-			name1 = oldrecord.nombre
-			name2 = oldrecord.nombre2
-			lastname1 = oldrecord.apellido
-			lastname2 = oldrecord.apellido2
-			sex = oldrecord.sexo
+			@patient.name1 = oldrecord.nombre
+			@patient.name2 = oldrecord.nombre2
+			@patient.lastname1 = oldrecord.apellido
+			@patient.lastname2 = oldrecord.apellido2
+			@patient.sex = oldrecord.sexo
 
 			if oldrecord.cedula == nil
 				if oldrecord.historia == nil
-					id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
-					id_type = "**"	#Marco el registro para el futuro
+					@patient.id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
+					@patient.id_type = "**"	#Marco el registro para el futuro
 				else
-					id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
-					id_type == "**"
+					@patient.id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
+					@patient.id_type == "**"
 				end
-				@patient = Patient.new(
-					id_number: id_number,
-					id_type: id_type,
-					name1: name1,
-					name2: name2,
-					lastname1: lastname1,
-					lastname2: lastname2,
-					sex: sex,
-					password: id_number,
-					password_confirmation: id_number
-					)
+				
 				@patient.save
 
 				oldrecord.update(patient_id: @patient.id)
@@ -75,17 +66,7 @@ class ImportsController < ApplicationController
 				if patients.count != 0 
 					oldrecord.update(patient_id: patients.first.id)	#Si encuentra alguna cedula, debe ser única!
 				else
-					@patient = Patient.new(
-						id_number: id_number,
-						id_type: id_type,
-						name1: name1,
-						name2: name2,
-						lastname1: lastname1,
-						lastname2: lastname2,
-						sex: sex,
-						password: id_number,
-						password_confirmation: id_number
-						)
+					
 					@patient.save
 
 					oldrecord.update(patient_id: @patient.id)

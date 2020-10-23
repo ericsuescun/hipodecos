@@ -33,7 +33,7 @@ class ImportsController < ApplicationController
 				id_type = "**"
 				
 				if oldrecord.edad != nil
-					if oldrecord.uniedad == "1" && oldrecord.edad.to_i > 17
+					if oldrecord.edad.to_i > 17
 						id_type = "CC"
 					else
 						id_type = "TI"

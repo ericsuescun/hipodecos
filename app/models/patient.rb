@@ -36,27 +36,7 @@ class Patient < ApplicationRecord
 	validates :id_number, uniqueness: true
 
 	def fullname
-	  [name1, name2, fix_accent(lastname1), fix_accent(lastname2)].join(' ')
+	  [name1, name2, lastname1, lastname2].join(' ')
 	end
-
-	private
-		def fix_accent(descr)
-			
-			descr.gsub!("Ã\u009F","á")
-			
-			descr.gsub!("Ã\u009A","é")
-			
-			descr.gsub!("Ã\u009D","í")
-
-			descr.gsub!("Â¾","ó")
-
-			descr.gsub!("Ã\u008B","Ó")
-
-			descr.gsub!("Â·", "ú")
-
-			descr.gsub!("Ã\u0090", "Ñ")
-			
-			return descr
-		end
-	
+		
 end

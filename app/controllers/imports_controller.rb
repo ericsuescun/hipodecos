@@ -43,10 +43,10 @@ class ImportsController < ApplicationController
 			end
 			
 			
-			@patient.name1 = fix_accent(oldrecord.nombre)
-			@patient.name2 = fix_accent(oldrecord.nombre2)
-			@patient.lastname1 = fix_accent(oldrecord.apellido)
-			@patient.lastname2 = fix_accent(oldrecord.apellido2)
+			@patient.name1 = oldrecord.nombre
+			@patient.name2 = oldrecord.nombre2
+			@patient.lastname1 = oldrecord.apellido
+			@patient.lastname2 = oldrecord.apellido2
 			@patient.sex = oldrecord.sexo
 
 			if oldrecord.cedula == nil

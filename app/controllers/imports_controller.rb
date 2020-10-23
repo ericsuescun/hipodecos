@@ -57,6 +57,9 @@ class ImportsController < ApplicationController
 					@patient.id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
 					# @patient.id_type == "**"
 				end
+
+				@patient.password = @patient.id_number
+				@patient.password_confirmation = @patient.id_number
 				
 				@patient.save
 
@@ -66,6 +69,8 @@ class ImportsController < ApplicationController
 				if patients.count != 0 
 					oldrecord.update(patient_id: patients.first.id)	#Si encuentra alguna cedula, debe ser única!
 				else
+					@patient.password = @patient.id_number
+					@patient.password_confirmation = @patient.id_number
 					
 					@patient.save
 

@@ -10,6 +10,8 @@ module ResultsHelper
 		descr.gsub!("Â¾","ó")
 
 		descr.gsub!("Ã\u008B","Ó")
+
+		descr.gsub!("Â·", "ú")
 		
 		return descr
 	end

@@ -33,7 +33,7 @@ class ImportsController < ApplicationController
 				
 				@patient.id_type = "**"
 				
-				if oldrecord.edad != nil
+				if oldrecord.uniedad == "1" && oldrecord.edad != nil
 					if oldrecord.edad.to_i > 17
 						@patient.id_type = "CC"
 					else
@@ -52,10 +52,10 @@ class ImportsController < ApplicationController
 			if oldrecord.cedula == nil
 				if oldrecord.historia == nil
 					@patient.id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
-					@patient.id_type = "**"	#Marco el registro para el futuro
+					# @patient.id_type = "**"	#Marco el registro para el futuro
 				else
 					@patient.id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
-					@patient.id_type == "**"
+					# @patient.id_type == "**"
 				end
 				
 				@patient.save

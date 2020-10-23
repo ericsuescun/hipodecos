@@ -35,7 +35,7 @@
           <p>Descripción</p>
         </div>
         <div class="card-body">
-          <p><%= @oldrecord.descr %></p>
+          <p><%= fix_accent(@oldrecord.descr) %></p>
           <div class="text-muted"><p>Por: <%= @oldrecord.patologo %></p></div>
         </div>
       </div>
@@ -52,7 +52,7 @@
         </div>
         <div class="card-body">
           <p>Código Patología Suescún: <%= @oldrecord.codigo %>, <%= @oldrecord.codigo1 %>, <%= @oldrecord.codigo2 %>, <%= @oldrecord.codigo3 %>, <%= @oldrecord.codigo4 %>, <%= @oldrecord.codigo5 %></p>
-          <p>Código OMS: <%= @oldrecord.dx %></p>
+          <p>Código OMS: <%= fix_accent(@oldrecord.dx) %></p>
           <p><%= @oldrecord.diagnostic %></p>
           <div class="text-muted"><p>Por: <%= @oldrecord.firma %></p></div>
           

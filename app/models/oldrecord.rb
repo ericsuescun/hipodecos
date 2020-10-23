@@ -11,7 +11,7 @@ class Oldrecord < ApplicationRecord
 	default_scope -> { order(numero: :desc) }
 
 	def fullname
-	  [nombre, nombre2, apellido, apellido2].join(' ')
+	  [nombre, nombre2, fix_accent(apellido), fix_accent(apellido2)].join(' ')
 	end
 
 	def oldrecord_tag
@@ -21,4 +21,24 @@ class Oldrecord < ApplicationRecord
 	def tag_code
 		[clave, fecharec.strftime("%y"), "-", numero].join('')
 	end
+
+	private
+		def fix_accent(descr)
+			
+			descr.gsub!("Ã\u009F","á")
+			
+			descr.gsub!("Ã\u009A","é")
+			
+			descr.gsub!("Ã\u009D","í")
+
+			descr.gsub!("Â¾","ó")
+
+			descr.gsub!("Ã\u008B","Ó")
+
+			descr.gsub!("Â·", "ú")
+
+			descr.gsub!("Ã\u0090", "Ñ")
+			
+			return descr
+		end
 end

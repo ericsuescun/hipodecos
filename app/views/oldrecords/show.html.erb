@@ -1,7 +1,7 @@
 
 <div class="info">
   <h3>
-    <strong><%= @oldrecord.clave.to_s + @oldrecord.fecharec.strftime('%y') + "-" + @oldrecord.numero.to_s %></strong>: <strong><%= @oldrecord.fullname.to_s %></strong>, <strong><%= @oldrecord.edad.to_s + " " + (@oldrecord.uniedad.to_s == "1" ? "A" : (@oldrecord.uniedad.to_s == "2" ? "M" : "D")) %></strong>, sexo: <strong><%= @oldrecord.sexo.to_s %></strong>, <%= @oldrecord.identif.to_s %>: <strong><%= @oldrecord.cedula.to_s + @oldrecord.historia.to_s %> </strong>, fecha: <%= @oldrecord.fecharec.to_s %>
+    <strong><%= @oldrecord.tag_code %></strong>: <strong><%= @oldrecord.fullname.to_s %></strong>, <strong><%= @oldrecord.edad.to_s + " " + (@oldrecord.uniedad.to_s == "1" ? "A" : (@oldrecord.uniedad.to_s == "2" ? "M" : "D")) %></strong>, sexo: <strong><%= @oldrecord.sexo.to_s %></strong>, <%= @oldrecord.identif.to_s %>: <strong><%= @oldrecord.cedula.to_s + @oldrecord.historia.to_s %> </strong>, fecha: <%= @oldrecord.fecharec.to_s %>
   </h3>
 </div>
 <div class="inform">

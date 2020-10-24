@@ -5,13 +5,12 @@ class ImportsController < ApplicationController
 			initial_date = Date.parse(params[:init_date]).beginning_of_day
 			final_date = Date.parse(params[:final_date]).end_of_day
 			date_range = initial_date..final_date
-			@oldrecords = Oldrecord.where(fecharec: date_range, patient_id: nil)
-			@oldrecordsl = Oldrecord.where(fecharec: date_range, patient_id: nil).limit(20)
+			@oldrecords = Oldrecord.where(fecharec: date_range, patient_id: nil).paginate(page: params[:page], per_page: 60)
+			
 		else
-			@oldrecords = Oldrecord.where(patient_id: nil)
-			@oldrecordsl = Oldrecord.where(patient_id: nil).limit(20)
+			@oldrecords = Oldrecord.where(patient_id: nil).paginate(page: params[:page], per_page: 60)
+			
 		end
-		@patient = Patient.first
 	end
 
 	def import_date_filter

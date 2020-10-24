@@ -1,10 +1,10 @@
 <div class="container">
 	<div class="row">
-		<div class="col-12">
+		<div class="col-12 col-lg-8 mx-auto">
 			<%= form_tag "import_index", method: "get" do %>
 				<%= date_field_tag(:init_date) %>
 				<%= date_field_tag(:final_date) %>
-				<%= submit_tag("Importar") %>
+				<%= submit_tag("Filtrar por fecha", class: "btn btn-primary") %>
 			<% end %>
 		</div>
 	</div>

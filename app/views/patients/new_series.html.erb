@@ -1,3 +1,4 @@
+<%= render "shared/error_messages", target: @patient %>
 <div class="row">
   <div class="col-12 col-lg-12 mx-auto">
     <%= form_with(model: @patient, url: patients_create_series_path, local: true) do |form| %>

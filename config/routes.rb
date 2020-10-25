@@ -164,8 +164,7 @@ Rails.application.routes.draw do
       end
 
       collection do
-        get :last20
-        get :matriculate_series
+        get :index_one
       end
     end
 

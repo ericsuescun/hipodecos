@@ -1,1 +1,69 @@
-<%= render 'index', patients: @patients %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h4>Pacientes creados <%= new_search_range %></h4>
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <%= form_tag patients_new_series_path, method: "get", class: "form-inline my-3" do %>
+            <%= text_field_tag :id_number, nil, class: "form-control input", placeholder: "# identificación" %>
+            <button class="btn btn-primary ml-3" type="submit">Buscar / Matricular varios</button>
+          <% end %>
+        </div>
+        <div class="col-12 col-lg-6">
+          <%= form_tag patients_path, method: "get", class: "form-inline" do %>
+            <div class="form-group mr-1">
+              <%= date_field_tag :init_date, class: "form-control mb-3" %>
+              
+            </div>
+            <div class="form-group mr-1">
+              
+              <%= date_field_tag :final_date, class: "form-control mb-3" %>
+            </div>
+            <%= submit_tag("Buscar", class: "btn btn-primary my-3") %>
+          <% end %>
+        </div>
+        
+      </div>
+      
+      <%= will_paginate @patients, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th># id</th>
+            <th>Nombre</th>
+            <th>Sexo</th>
+            <th>Dirección</th>
+            <th>Email</th>
+            <th>Tel</th>
+            <th>Cel</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @patients.each do |patient| %>
+            <tr>
+              <td><%= patient.id_type %>
+                <%= link_to patient do %>
+                   <%= patient.id_number %>
+                <% end %>
+              </td>
+              <td><%= patient.fullname %></td>
+              <td><%= patient.sex %></td>
+              <td><%= patient.informs.first.try(:p_address) %></td>
+              <td><%= patient.informs.first.try(:p_email) %></td>
+              <td><%= patient.informs.first.try(:p_tel) %></td>
+              <td><%= patient.informs.first.try(:p_cel) %></td>
+              <td><%= link_to 'Editar', edit_patient_path(patient) %></td>
+              <% if admin_signed_in? %>
+                <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @patients, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    </div>
+  </div>
+</div>
+

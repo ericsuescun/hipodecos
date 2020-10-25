@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Inicio</a>
+    <a class="navbar-brand" href="/">Inicio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContentB" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -97,7 +97,7 @@
         <% end %>
         <% if user_signed_in? && !admin_signed_in? %>
           <li class="nav-item">
-            <%= link_to "Pacientes", matriculate_series_patients_path, class: "nav-link" %>
+            <%= link_to "Pacientes", patients_path + "?init_date=" + 2.weeks.ago.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item", class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Informes", last20_informs_path, class: "nav-link" %>

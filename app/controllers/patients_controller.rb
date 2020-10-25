@@ -5,47 +5,38 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    if params[:yi]
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-      date_range = initial_date..final_date
-      @patients = Patient.where(created_at: date_range)
-    else
-      if !params[:id_number].blank?
-        @patients = Patient.where(id_number: params[:tag_code])
-      else
-        @patients = Patient.all
-      end
-    end
-  end
-
-  def last20
-    @informs = Inform.order(created_at: :desc).limit(20)
-    @patients = []
-    @informs.each do |inform|
-      @patients << inform.patient
-    end
-    @patients = @patients.uniq
-  end
-
-  def matriculate_series
-    @informs = Inform.order(created_at: :desc).limit(20)
-    @patients = []
-    @informs.each do |inform|
-      @patients << inform.patient
-    end
-    @patients = @patients.uniq
-    if params[:init_date] != nil
+    @tab = :series
+    if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @oldrecords = Oldrecord.where(fecharec: date_range)
-      @patients = []
-      @oldrecords.each do |oldrecord|
-        @patients << Patient.where(id: oldrecord.patient_id).first
-      end
+      @patients = Patient.where(created_at: date_range).paginate(page: params[:page], per_page: 30)
+     else
+      @patients = Patient.where(created_at: 2.weeks.ago..Time.now).paginate(page: params[:page], per_page: 30)
+    end
+    
+  end
+
+  def index_one
+    @tab = :one
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+      @patients = Patient.where(created_at: date_range).paginate(page: params[:page], per_page: 30)
+     else
+      @patients = Patient.where(created_at: 2.weeks.ago..Time.now).paginate(page: params[:page], per_page: 30)
     end
   end
+
+  # def matriculate_series
+  #   @informs = Inform.order(created_at: :desc).limit(100)
+  #   @patients = []
+  #   @informs.each do |inform|
+  #     @patients << inform.patient
+  #   end
+  #   @patients = @patients.uniq
+  # end
 
   # GET /patients/1
   # GET /patients/1.json
@@ -102,22 +93,22 @@ class PatientsController < ApplicationController
     end
   end
 
-  def fast_new_form
+  # def fast_new_form
 
-  end
+  # end
 
-  def fast_new
-    patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
+  # def fast_new
+  #   patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
 
-    if patients.length > 0
-      @patient = patients.first
-      @inform = patients.first.informs.build.physicians.build #Creo la instancia para physician para la form
-      redirect_to patient_path(patients.first)
-    else
-      @patient = Patient.new(id_number: params[:id_number])
-      @inform = @patient.informs.build.physicians.build #Creo la instancia para physician para la form
-    end
-  end
+  #   if patients.length > 0
+  #     @patient = patients.first
+  #     @inform = patients.first.informs.build.physicians.build #Creo la instancia para physician para la form
+  #     redirect_to patient_path(patients.first)
+  #   else
+  #     @patient = Patient.new(id_number: params[:id_number])
+  #     @inform = @patient.informs.build.physicians.build #Creo la instancia para physician para la form
+  #   end
+  # end
 
   # GET /patients/1/edit
   def edit
@@ -201,7 +192,7 @@ class PatientsController < ApplicationController
     end
 
     if @patient.save
-      redirect_to matriculate_series_patients_path, notice: 'Paciente matriculado exitosamente.'
+      redirect_to patients_path, notice: 'Paciente matriculado exitosamente.'
     else
       render :fast_new
     end

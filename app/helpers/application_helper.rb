@@ -30,6 +30,19 @@ module ApplicationHelper
 		
 	end
 
+	def new_search_range
+		if params[:init_date]
+			init_date = Date.parse(params[:init_date])
+			final_date = Date.parse(params[:final_date])
+
+			if init_date == final_date
+				"en " + final_date.strftime('%b %d de %Y')
+			else
+				"entre " + init_date.strftime('%b %d de %Y') + " y " + final_date.strftime('%b %d de %Y')
+			end
+		end
+	end
+
 	def objection_title(id)
 		Obcode.where(id: id).first.try(:title)
 	end

@@ -23,7 +23,7 @@ class ImportsController < ApplicationController
 		date_range = initial_date..final_date
 		@oldrecords = Oldrecord.where(fecharec: date_range)
 
-		@oldrecords.each do |oldrecord|
+		@oldrecords.find_each(batch_size: 100) do |oldrecord|
 
 			@patient = Patient.new
 			@patient.id_number = oldrecord.cedula

@@ -15,19 +15,21 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/admins">Admins</a>
               <a class="dropdown-item" href="/admins/sign_in">Ingresar</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Usuarios
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-divider"></div>
               <%= link_to "Usuarios", users_path, class: "dropdown-item" %>
               <%= link_to "Ingresar", new_user_session_path, class: "dropdown-item" %>
               <%= link_to "Nuevo Usuario", new_user_registration_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Perfiles", roles_path, class: "dropdown-item" %>
               <%= link_to 'Nuevo Perfil', new_role_path, class: "dropdown-item" %>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Reportes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              
             </div>
           </li>
           <li class="nav-item dropdown">

@@ -1,4 +1,5 @@
 class ImportsController < ApplicationController
+	before_action :authenticate_user!
 
 	def import_index
 		if params[:init_date] != nil

@@ -2,9 +2,12 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
-      <h3>
-        <strong><%= @patient.name1 %> <%= @patient.name2 %> <%= @patient.lastname1 %> <%= @patient.lastname2 %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
-      </h3>
+      <div class="info">
+        <h5>
+          <strong><%= @patient.name1 %> <%= @patient.name2 %> <%= @patient.lastname1 %> <%= @patient.lastname2 %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
+        </h5>
+      </div>
+      
       
       <div class="inform">
         <% if @patient.informs.count > 0 %>

@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_20_215506) do
+ActiveRecord::Schema.define(version: 2020_10_31_213623) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "autos", force: :cascade do |t|
-    t.integer "diagcode_id"
+    t.bigint "diagcode_id"
     t.integer "user_id"
     t.integer "admin_id"
     t.string "title"
@@ -56,7 +59,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "blocks", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.string "block_tag"
     t.boolean "stored"
@@ -71,7 +74,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "branches", force: :cascade do |t|
-    t.integer "entity_id"
+    t.bigint "entity_id"
     t.string "name"
     t.string "initials"
     t.string "code"
@@ -112,7 +115,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
 
   create_table "comments", force: :cascade do |t|
     t.string "commentable_type"
-    t.integer "commentable_id"
+    t.bigint "commentable_id"
     t.integer "user_id"
     t.string "title"
     t.text "body"
@@ -132,7 +135,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "cytologies", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "pregnancies"
     t.string "last_mens"
     t.string "prev_appo"
@@ -165,7 +168,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "diagnostics", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.text "description"
     t.datetime "created_at", null: false
@@ -197,8 +200,8 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "factors", force: :cascade do |t|
-    t.integer "codeval_id"
-    t.integer "rate_id"
+    t.bigint "codeval_id"
+    t.bigint "rate_id"
     t.decimal "factor"
     t.text "description"
     t.integer "admin_id"
@@ -211,7 +214,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "informs", force: :cascade do |t|
-    t.integer "patient_id"
+    t.bigint "patient_id"
     t.integer "user_id"
     t.integer "physician_id"
     t.string "tag_code"
@@ -252,7 +255,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "macros", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.text "description"
     t.datetime "created_at", null: false
@@ -261,7 +264,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "micros", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.text "description"
     t.datetime "created_at", null: false
@@ -282,7 +285,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
 
   create_table "objections", force: :cascade do |t|
     t.string "objectionable_type"
-    t.integer "objectionable_id"
+    t.bigint "objectionable_id"
     t.integer "user_id"
     t.integer "obcode_id"
     t.integer "responsible_user_id"
@@ -293,6 +296,76 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["objectionable_type", "objectionable_id"], name: "index_objections_on_objectionable_type_and_objectionable_id"
+  end
+
+  create_table "oldcitos", force: :cascade do |t|
+    t.string "clave"
+    t.string "numero"
+    t.date "fecharec"
+    t.date "fecha"
+    t.string "apellido"
+    t.string "apellido2"
+    t.string "nombre"
+    t.string "nombre2"
+    t.string "identif"
+    t.string "cedula"
+    t.string "historia"
+    t.string "uniedad"
+    t.string "edad"
+    t.string "sexo"
+    t.string "clinica"
+    t.string "entidad"
+    t.string "entad"
+    t.string "codval1"
+    t.string "por1"
+    t.string "saldo"
+    t.string "dnombre"
+    t.string "dapellido"
+    t.string "oficina"
+    t.string "telefono"
+    t.text "diag"
+    t.text "notas"
+    t.text "sugerencia"
+    t.string "citologa"
+    t.string "patologo"
+    t.string "celsup"
+    t.string "celint"
+    t.string "celpara"
+    t.string "plega"
+    t.string "agrupa"
+    t.string "prestador"
+    t.string "factura"
+    t.string "autoriz"
+    t.string "usuario"
+    t.string "ocupacion"
+    t.string "residencia"
+    t.string "zona"
+    t.string "emb"
+    t.string "estado"
+    t.string "embarazo"
+    t.string "fum"
+    t.string "citprev"
+    t.string "codigo"
+    t.string "codcito"
+    t.string "vinculado"
+    t.string "secretaria"
+    t.string "secretauno"
+    t.date "fecha1"
+    t.date "fechato"
+    t.string "resultado"
+    t.string "imprimir"
+    t.string "revisor"
+    t.date "fechanac"
+    t.string "sincroniza"
+    t.date "fsincro"
+    t.string "planifica"
+    t.string "muestra"
+    t.string "colade"
+    t.string "colinad"
+    t.string "montade"
+    t.string "montainad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "oldrecords", force: :cascade do |t|
@@ -399,7 +472,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "physicians", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.string "name"
     t.string "lastname"
@@ -415,7 +488,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
 
   create_table "pictures", force: :cascade do |t|
     t.string "imageable_type"
-    t.integer "imageable_id"
+    t.bigint "imageable_id"
     t.integer "user_id"
     t.string "name"
     t.text "description"
@@ -445,7 +518,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "recipients", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.string "tag"
     t.text "description"
@@ -469,7 +542,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "samples", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.string "name"
     t.text "description"
@@ -486,7 +559,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "scripts", force: :cascade do |t|
-    t.integer "automatic_id"
+    t.bigint "automatic_id"
     t.string "script_type"
     t.text "description"
     t.string "organ"
@@ -504,7 +577,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "slides", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.string "slide_tag"
     t.boolean "stored"
@@ -518,7 +591,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "studies", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.integer "codeval_id"
     t.integer "factor"
@@ -532,7 +605,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "suggestions", force: :cascade do |t|
-    t.integer "inform_id"
+    t.bigint "inform_id"
     t.integer "user_id"
     t.text "description"
     t.datetime "created_at", null: false
@@ -574,8 +647,8 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
   end
 
   create_table "values", force: :cascade do |t|
-    t.integer "codeval_id"
-    t.integer "cost_id"
+    t.bigint "codeval_id"
+    t.bigint "cost_id"
     t.decimal "value"
     t.text "description"
     t.integer "admin_id"
@@ -585,4 +658,23 @@ ActiveRecord::Schema.define(version: 2020_10_20_215506) do
     t.index ["cost_id"], name: "index_values_on_cost_id"
   end
 
+  add_foreign_key "autos", "diagcodes"
+  add_foreign_key "blocks", "informs"
+  add_foreign_key "branches", "entities"
+  add_foreign_key "cytologies", "informs"
+  add_foreign_key "diagnostics", "informs"
+  add_foreign_key "factors", "codevals"
+  add_foreign_key "factors", "rates"
+  add_foreign_key "informs", "patients"
+  add_foreign_key "macros", "informs"
+  add_foreign_key "micros", "informs"
+  add_foreign_key "physicians", "informs"
+  add_foreign_key "recipients", "informs"
+  add_foreign_key "samples", "informs"
+  add_foreign_key "scripts", "automatics"
+  add_foreign_key "slides", "informs"
+  add_foreign_key "studies", "informs"
+  add_foreign_key "suggestions", "informs"
+  add_foreign_key "values", "codevals"
+  add_foreign_key "values", "costs"
 end

@@ -1,0 +1,89 @@
+
+<div class="info">
+  <h3>
+    <strong><%= @oldcito.tag_code %></strong>: <strong><%= @oldcito.fullname.to_s %></strong>, <strong><%= @oldcito.edad.to_s + " " + (@oldcito.uniedad.to_s == "1" ? "A" : (@oldcito.uniedad.to_s == "2" ? "M" : "D")) %></strong>, sexo: <strong><%= @oldcito.sexo.to_s %></strong>, <%= @oldcito.identif.to_s %>: <strong><%= @oldcito.cedula.to_s + @oldcito.historia.to_s %> </strong>, fecha: <%= @oldcito.fecharec.to_s %>
+  </h3>
+</div>
+<div class="inform">
+  </strong> - Dirección: <strong><%= @oldcito.residencia %> - </strong> - Fecha de entrega: <strong><%= @oldcito.fecha1 %></strong> - EPS: <strong><%= @oldcito.entidad %></strong> - Sede IPS: <strong><%= @oldcito.clinica %></strong></p>
+
+  
+  <p><strong>Médico tratante:</strong> <%= @oldcito.dnombre %> <%= @oldcito.dapellido %> Contactos: <strong><%= @oldcito.oficina %></strong> <strong><%= @oldcito.telefono %></strong> <strong><%= @oldcito.telefono %></strong>
+  
+  | <%= link_to 'Volver a informes', informs_path %> | <%= link_to 'Previsualizar informe', preview_inform_path %></p>
+  <p>
+    <strong>Prestador: </strong><%= @oldcito.prestador %><strong>Factura: </strong><%= @oldcito.factura %> <strong>Autoriz: </strong><%= @oldcito.autoriz %> <strong>Saldo: </strong><%= @oldcito.saldo %>
+  </p>
+
+</div>
+
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @oldcito.fecha %>
+</p>
+
+<p>
+  <strong>Codval1: </strong><%= @oldcito.codval1 %> x <%= @oldcito.por1 %>
+</p>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <div class="card bg-light mx-2 mb-3">
+        <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+          <p>Notas</p>
+        </div>
+        <div class="card-body">
+          <p><%= simple_format(fix_accent(@oldcito.notas)) %></p>
+          <div class="text-muted"><p>Por: <%= @oldcito.patologo %></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <div class="card bg-light mx-2 mb-3">
+        <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+          <p>Resultado producido el <%= @oldcito.fecha1 %></p>
+        </div>
+        <div class="card-body">
+          <p><%= simple_format(fix_accent(@oldcito.diag)) %></p>
+          <div class="text-muted"><p>Por: <%= @oldcito.patologo %></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <div class="card bg-light mx-2 mb-3">
+        <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+          <p>Sugerencias</p>
+        </div>
+        <div class="card-body">
+          <p><%= simple_format(fix_accent(@oldcito.sugerencia)) %></p>
+          <div class="text-muted"><p>Por: <%= @oldcito.citologa %></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>
+  <strong>Firma: </strong>
+   <strong>Secretaria: </strong><%= @oldcito.secretaria %>
+</p>
+
+<p>
+  <strong>Revisor científico:</strong><%= @oldcito.revisor %>
+  <strong>Revisor admin: </strong><%= @oldcito.secretauno %>
+</p>
+
+
+<%= link_to 'Back', oldcitos_path %>

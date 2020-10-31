@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :oldcitos do
+    collection {post :import}
+  end
+  
   get 'imports/import_index'
   get 'imports/import_date_filter'
   get 'imports/import_patient'

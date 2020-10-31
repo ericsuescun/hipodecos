@@ -135,7 +135,9 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "Sin paciente asignado", imports_import_index_path, class: "dropdown-item" %>
-              <%= link_to "Búsqueda de registros", oldrecords_path + "?init_date=2020-07-01&final_date=2020-07-31", class: "dropdown-item" %>
+              <%= link_to "Biopsias: Búsqueda de registros", oldrecords_path + "?init_date=2020-07-01&final_date=2020-07-31", class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Citos: Búsqueda de registros", oldcitos_path + "?init_date=2020-07-01&final_date=2020-07-31", class: "dropdown-item" %>
               
             </div>
           </li>

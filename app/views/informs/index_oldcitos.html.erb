@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-secondary">
+        <%= form_tag informs_path, method: "get" do %>
+          <div class="form-row">
+              <div class="form-group col-4">
+                <%= label_tag "Fecha inicial" %>
+                <%= date_field_tag :init_date, class: "form-control input" %>
+              </div>
+              <div class="form-group col-4">
+                <%= label_tag "Fecha final" %>
+                <%= date_field_tag :final_date, class: "form-control input" %>
+              </div>
+            <div class="col-4">
+              <%= submit_tag("Buscar", class: "btn btn-primary") %>
+            </div>
+            
+          </div>
+          
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      <h3><%= @oldcitos.count %> de <%= Oldcito.count %> citologías FoxPro encontrados <%= new_search_range %></h3>
+      <%= will_paginate @oldcitos, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Informe</th>
+            <th>Tipo</th>
+            <th>Ingreso PSS</th>
+            <th>User PSS</th>
+            <th>Paciente</th>
+            <th>EPS</th>
+            <th>Sede IPS</th>
+            <th>Código Authoriz.</th>
+            <th scope="1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @oldcitos.each do |oldcito| %>
+            <tr>
+              <td>
+                <%= link_to oldcito  do %>
+                  <%= oldcito.tag_code %>
+                <% end %>
+              </td>
+              <td><%= oldcito.clave %></td>
+              <td><%= oldcito.fecharec.strftime('%d/%m/%Y') %></td>
+              <td><%= oldcito.secretaria %></td>
+              <td>
+                <% if oldcito.patient_id %>
+                  <%= link_to Patient.where(id: oldcito.patient_id).first  do %>
+                    <%= Patient.where(id: oldcito.patient_id).first.fullname %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td><%= oldcito.entidad %></td>
+              <td><%= oldcito.clinica %></td>
+              <td><%= oldcito.autoriz %></td>  
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @oldcitos, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    </div>
+  </div>
+</div>

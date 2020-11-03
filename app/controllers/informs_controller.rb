@@ -26,15 +26,32 @@ class InformsController < ApplicationController
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @informs = Inform.where(receive_date: date_range).paginate(page: params[:page], per_page: 60)
+      @informs = Inform.where(receive_date: date_range).paginate(page: params[:page], per_page: 10)
+    else
+      @informs = Inform.where(receive_date: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 10)
+    end
+  end
+
+  def index_oldrecords
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
       @oldrecords = Oldrecord.where(fecharec: date_range).paginate(page: params[:page], per_page: 60)
+    else
+      @oldrecords = Oldrecord.where(fecharec: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 60)
+    end
+  end
+
+  def index_oldcitos
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
       @oldcitos = Oldcito.where(fecharec: date_range).paginate(page: params[:page], per_page: 60)
     else
-      @informs = Inform.where(receive_date: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 60)
-      @oldrecords = Oldrecord.where(fecharec: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 60)
       @oldcitos = Oldcito.where(fecharec: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 60)
     end
-    
   end
 
   def last20

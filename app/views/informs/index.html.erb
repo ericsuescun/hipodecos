@@ -1,1 +1,85 @@
-<%= render 'index', informs: @informs, oldrecords: @oldrecords %>
+<div class="container-fluid">
+	<div class="row">
+	  <div class="col-12">
+	    <div class="alert alert-secondary">
+	      <%= form_tag informs_path, method: "get" do %>
+	        <div class="form-row">
+	            <div class="form-group col-4">
+	              <%= label_tag "Fecha inicial" %>
+	              <%= date_field_tag :init_date, class: "form-control input" %>
+	            </div>
+	            <div class="form-group col-4">
+	              <%= label_tag "Fecha final" %>
+	              <%= date_field_tag :final_date, class: "form-control input" %>
+	            </div>
+		        <div class="col-4">
+		        	<%= submit_tag("Buscar", class: "btn btn-primary") %>
+		        </div>
+	          
+	        </div>
+	        
+	      <% end %>
+	    </div>
+	  </div>
+	</div>
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+    	<h3><%= @informs.count %> de <%= Inform.count %> informes encontrados <%= new_search_range %></h3>
+      <%= will_paginate @informs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Informe</th>
+            <th>Tipo</th>
+            <th>Ingreso PSS</th>
+            <th>User PSS</th>
+            <th>Paciente</th>
+            <th>EPS</th>
+            <th>Sede IPS</th>
+            <th>Código Authoriz.</th>
+            <th scope="1"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @informs.each do |inform| %>
+            <tr>
+              <td>
+                <% if inform.inf_status == "anulado" %>
+                  <del class="anulated">
+                    <%= link_to inform  do %>
+                      <%= inform.tag_code %>
+                    <% end %>
+                  </del>
+                <% else %>
+                  <%= link_to inform  do %>
+                    <%= inform.tag_code %>
+                  <% end %>
+                <% end %>
+                
+              </td>
+              <td><%= inform.inf_type %></td>
+              <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
+              <td><%= User.where(id: inform.user_id).first.try(:first_name) %></td>
+              <td>
+                <%= link_to inform.patient  do %>
+                  <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
+                  <% end %>
+              </td>
+              <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
+              <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
+              <td><%= inform.prmtr_auth_code %></td>
+              <% if inform.inf_status == "anulado" %>
+                <td><%= link_to 'Restaurar', anulate_inform_path(inform), data: { confirm: '¿Confirmas la operación?' } %></td>
+              <% else %>
+                <td><%= link_to 'Anular', anulate_inform_path(inform), data: { confirm: '¿Confirmas la operación?' } %></td>
+              <% end %>
+              
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @informs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    </div>
+  </div>
+</div>

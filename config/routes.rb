@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :oldcitos do
-    collection {post :import}
+    collection do
+      post :import
+    end
   end
   
   get 'imports/import_index'
@@ -9,7 +11,9 @@ Rails.application.routes.draw do
   get 'imports/import_patient'
 
   resources :oldrecords do
-    collection {post :import}
+    collection do
+      post :import
+    end
   end
   
   post 'suggestions/review', to: 'suggestions#review'
@@ -230,6 +234,8 @@ Rails.application.routes.draw do
         get :descr_micros_cyto
         get :index_revision
         get :last20
+        get :index_oldrecords
+        get :index_oldcitos
       end
 
       member do

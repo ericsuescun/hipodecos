@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <h3><%= @informs.count %> de <%= Inform.count %> informes encontrados <%= new_search_range %></h3>
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
       <h4>Informes <%= search_range %></h4>
@@ -57,6 +58,7 @@
           <% end %>
         </tbody>
       </table>
+      <h3><%= @informs.count %> de <%= Inform.count %> registros FoxPro encontrados <%= new_search_range %></h3>
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
@@ -84,13 +86,39 @@
               <td><%= oldrecord.fecharec.strftime('%d/%m/%Y') %></td>
               <td><%= oldrecord.secretaria %></td>
               <td>
-                <%= link_to Patient.where(id: oldrecord.patient_id).first  do %>
-                  <%= Patient.where(id: oldrecord.patient_id).first.fullname %>
+                <% if oldrecord.patient_id %>
+                  <%= link_to Patient.where(id: oldrecord.patient_id).first  do %>
+                    <%= Patient.where(id: oldrecord.patient_id).first.fullname %>
                   <% end %>
+                <% end %>
               </td>
               <td><%= oldrecord.entidad %></td>
               <td><%= oldrecord.clinica %></td>
               <td><%= oldrecord.autoriz %></td>
+              
+              
+            </tr>
+          <% end %>
+        </tbody>
+        <tbody>
+          <% oldcitos.each do |oldcito| %>
+            <tr>
+              <td>
+                <%= link_to oldcito  do %>
+                  <%= oldcito.tag_code %>
+                <% end %>
+              </td>
+              <td><%= oldcito.clave %></td>
+              <td><%= oldcito.fecharec.strftime('%d/%m/%Y') %></td>
+              <td><%= oldcito.secretaria %></td>
+              <td>
+                <%= link_to Patient.where(id: oldcito.patient_id).first  do %>
+                  <%= Patient.where(id: oldcito.patient_id).first.fullname %>
+                  <% end %>
+              </td>
+              <td><%= oldcito.entidad %></td>
+              <td><%= oldcito.clinica %></td>
+              <td><%= oldcito.autoriz %></td>
               
               
             </tr>

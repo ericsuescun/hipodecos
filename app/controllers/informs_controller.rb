@@ -5,23 +5,36 @@ class InformsController < ApplicationController
   # GET /informs
   # GET /informs.json
   def index
-    if params[:yi]
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    # if params[:yi]
+    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    #   date_range = initial_date..final_date
+    #   @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type])
+    #   @oldrecords = Oldrecord.where(fecharec: date_range)
+    # else
+    #   initial_date = 1.year.ago.beginning_of_day
+    #   final_date = Date.today.end_of_day
+    #   date_range = initial_date..final_date
+    #   if params[:tag_code].blank?
+    #     @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type])
+    #     @oldrecords = Oldrecord.where(fecharec: date_range)
+    #   else
+    #     @informs = Inform.where(tag_code: params[:tag_code])
+    #   end
+    # end
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type])
-      @oldrecords = Oldrecord.where(fecharec: date_range)
+      @informs = Inform.where(receive_date: date_range).paginate(page: params[:page], per_page: 60)
+      @oldrecords = Oldrecord.where(fecharec: date_range).paginate(page: params[:page], per_page: 60)
+      @oldcitos = Oldcito.where(fecharec: date_range).paginate(page: params[:page], per_page: 60)
     else
-      initial_date = 1.year.ago.beginning_of_day
-      final_date = Date.today.end_of_day
-      date_range = initial_date..final_date
-      if params[:tag_code].blank?
-        @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type])
-        @oldrecords = Oldrecord.where(fecharec: date_range)
-      else
-        @informs = Inform.where(tag_code: params[:tag_code])
-      end
+      @informs = Inform.where(receive_date: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 60)
+      @oldrecords = Oldrecord.where(fecharec: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 60)
+      @oldcitos = Oldcito.where(fecharec: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 60)
     end
+    
   end
 
   def last20

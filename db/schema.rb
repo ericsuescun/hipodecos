@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_31_213623) do
+ActiveRecord::Schema.define(version: 2020_11_03_030053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -366,6 +366,7 @@ ActiveRecord::Schema.define(version: 2020_10_31_213623) do
     t.string "montainad"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "patient_id"
   end
 
   create_table "oldrecords", force: :cascade do |t|

@@ -40,6 +40,8 @@ module ApplicationHelper
 			else
 				"entre " + init_date.strftime('%b %d de %Y') + " y " + final_date.strftime('%b %d de %Y')
 			end
+		else
+			"durante el último día."
 		end
 	end
 

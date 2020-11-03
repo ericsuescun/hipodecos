@@ -57,6 +57,8 @@
                   <%= link_to Patient.where(id: oldrecord.patient_id).first  do %>
                     <%= Patient.where(id: oldrecord.patient_id).first.fullname %>
                   <% end %>
+                <% else %>
+                  <%= oldrecord.fullname %>
                 <% end %>
               </td>
               <td><%= oldrecord.entidad %></td>

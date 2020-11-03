@@ -1,0 +1,103 @@
+<div class="info">
+	<h4>Facturación para el periodo <%= new_search_range %>: <strong><%= number_to_currency(@total_accumulated, precision: 0, delimiter: '.') %></strong></h4>
+</div>
+<div class="container">
+	<div class="row">
+	  <div class="col-12">
+	  	
+	    <div class="alert alert-secondary">
+	      <%= form_tag reports_sales2_path, method: "get" do %>
+	        <div class="form-row">
+	            <div class="form-group col-4">
+	              <%= label_tag "Fecha inicial" %>
+	              <%= date_field_tag :init_date, class: "form-control input" %>
+	            </div>
+	            <div class="form-group col-4">
+	              <%= label_tag "Fecha final" %>
+	              <%= date_field_tag :final_date, class: "form-control input" %>
+	            </div>
+		        <div class="col-4">
+		        	<%= submit_tag("Buscar", class: "btn btn-primary") %>
+		        </div>
+	          
+	        </div>
+	        
+	      <% end %>
+	    </div>
+	  </div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<strong><h4>Reporte general de ventas</h4></strong>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>IPS</th>
+						<th>Factura</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @total_entities.each do |entity| %>
+						<tr>
+							<td>
+								<%= Entity.find(entity[0]).name %>
+							</td>
+							<td>
+								<%= number_to_currency(entity[1], precision: 0, delimiter: '.') %>
+							</td>
+						</tr>
+					<% end %>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<strong><h4>Reporte detallado de ventas</h4></strong>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>IPS</th>
+						<th>Sede</th>
+						<th>Informe</th>
+						<th>CUP</th>
+						<th>Precio unitario</th>
+						<th>Cant.</th>
+						<th>Precio total</th>
+						<th>Acumulado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @total_detail.each do |detail| %>
+						<% if detail[1] == "--" %>
+							<tr class="alert alert-warning">
+								<td><%= detail[0] %></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+							</tr>
+						<% else %>
+							<tr>
+								<td><%= detail[0] %></td>
+								<td><%= detail[1] %></td>
+								<td><%= detail[2] %></td>
+								<td><%= detail[3] %></td>
+								<td><%= number_to_currency(detail[4], precision: 0, delimiter: '.') %></td>
+								<td><%= detail[5] %></td>
+								<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
+								<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+							</tr>
+						<% end %>
+						
+					<% end %>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

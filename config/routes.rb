@@ -92,18 +92,11 @@ Rails.application.routes.draw do
     get 'reports/status'
     get 'reports/objections'
     get 'reports/sales'
+    get 'reports/sales2'
     get 'reports/reports_params_today'
     get 'reports/reports_params_yes'
     get 'reports/reports_params_yes2'
     get 'reports/reports_params_week'
-
-    get 'pictures/index'
-    get 'pictures/new'
-    get 'pictures/create'
-    get 'pictures/edit'
-    get 'pictures/update'
-    get 'pictures/delete'
-    get 'pictures/show'
 
     resources :objections
 

@@ -53,24 +53,12 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Ventas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", reports_sales_path + day_before_search(0), class: "dropdown-item" %>
-              <%= link_to "Ayer", reports_sales_path + day_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <% (2..7).each do |day| %>
-                <%= link_to "#{(Date.today - day).strftime('el %A pasado')}", reports_sales_path + day_before_search(day), class: "dropdown-item" %>
-              <% end %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Esta semana", reports_sales_path + week_before_search(0), class: "dropdown-item" %>
-              <%= link_to "La semana pasada", reports_sales_path + week_before_search(1), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Este mes", reports_sales_path + month_before_search(0), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", reports_sales_path + month_before_search(1), class: "dropdown-item" %>
-              <% (2..6).each do |month| %>
-                <%= link_to "#{(Date.today - month.month).strftime('%b de %Y')}", reports_sales_path + month_before_search(month), class: "dropdown-item" %>
+              <% (0..11).each do |m| %>
+                <%= link_to "Ventas #{m.month.ago.strftime('%b de %Y')}", reports_sales2_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
               <% end %>
             </div>
           </li>

@@ -66,6 +66,7 @@ class ReportsController < ApplicationController
 
       @total_entities = []
       @total_detail = []
+      @branch_detail = []
       @total_accumulated = 0
       Entity.all.each do |entity|
         @price = 0
@@ -77,6 +78,7 @@ class ReportsController < ApplicationController
               @total_detail << [ entity.name, branch.name, inform.tag_code, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
             end
           end
+          @total_detail << [ entity.name, branch.name, "**", "--", 0, 0, 0, @price ]
         end
         @total_detail << [ entity.name, "--", "--", "--", 0, 0, 0, @price ]
 

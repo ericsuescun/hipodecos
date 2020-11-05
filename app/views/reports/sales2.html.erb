@@ -38,9 +38,10 @@
 				</thead>
 				<tbody>
 					<% @total_entities.each do |entity| %>
-						<tr class="alert alert-success">
+						<tr class="alert alert-primary">
 							<td>
-								<%= Entity.find(entity[0]).name %>
+								<%= link_to "#{Entity.find(entity[0]).name}", report_path(Entity.find(entity[0]), init_date: params[:init_date], final_date: params[:final_date]) %>
+								
 							</td>
 							<td>
 								<%= number_to_currency(entity[1], precision: 0, delimiter: '.') %>
@@ -70,46 +71,81 @@
 				</thead>
 				<tbody>
 					<% @total_detail.each do |detail| %>
-						<% if detail[1] == "--" %>
-							<tr class="alert alert-success">
-								<td><%= detail[0] %></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>Total IPS</td>
-								<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+						<% if detail[2] == "++" %>
+							<tr>
+								<td><h1><%= link_to "#{detail[0].name}", report_path(detail[0], init_date: params[:init_date], final_date: params[:final_date]) %></h1></td>
+								
 							</tr>
 						<% else %>
-							<% if detail[2] == "**" %>
-								<tr class="alert alert-warning">
+							<% if detail[1] == "--" %>
+								<tr class="alert alert-primary">
 									<td><%= detail[0] %></td>
-									<td><%= detail[1] %></td>
 									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>
-									<td>Subtotal sede</td>
+									<td></td>
+									<td>Total IPS</td>
 									<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+								</tr>
+								<tr class="alert alert-light">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr class="alert alert-light">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
 								</tr>
 							<% else %>
-								<tr>
-									<td><%= detail[0] %></td>
-									<td><%= detail[1] %></td>
-									<td><%= detail[2] %></td>
-									<td><%= detail[3] %></td>
-									<td><%= number_to_currency(detail[4], precision: 0, delimiter: '.') %></td>
-									<td><%= detail[5] %></td>
-									<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
-									<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+								<% if detail[2] == "**" %>
+									<tr class="alert alert-warning">
+										<td><%= detail[0] %></td>
+										<td><%= detail[1] %></td>
+										<td></td>
+										<td></td>
+										<td>Subtotal sede</td>
+										<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
+										<td>Total IPS</td>
+										<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+									</tr>
+									<tr class="alert alert-light">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
 								</tr>
+								<% else %>
+									<tr>
+										<td><%= detail[0] %></td>
+										<td><%= detail[1] %></td>
+										<td><%= link_to "#{detail[2].tag_code}", inform_path(detail[2]) %></td>
+										<td><%= detail[3] %></td>
+										<td><%= number_to_currency(detail[4], precision: 0, delimiter: '.') %></td>
+										<td><%= detail[5] %></td>
+										<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
+										<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+									</tr>
+								<% end %>
+								
 							<% end %>
-							
 						<% end %>
-						
 					<% end %>
-					
 				</tbody>
 			</table>
 		</div>

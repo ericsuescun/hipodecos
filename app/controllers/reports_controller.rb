@@ -69,16 +69,19 @@ class ReportsController < ApplicationController
       @branch_detail = []
       @total_accumulated = 0
       Entity.all.each do |entity|
+        @total_detail << [ entity, "", "++", "--", 0, 0, 0, 0 ]
         @price = 0
         @total_branch = []
         entity.branches.each do |branch|
+          @partial = 0
           Inform.where(receive_date: date_range, branch_id: branch.id).each do |inform|
             inform.studies.each do |study|
               @price += study.price * study.factor
-              @total_detail << [ entity.name, branch.name, inform.tag_code, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
+              @partial += study.price * study.factor
+              @total_detail << [ entity.name, branch.name, inform, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
             end
           end
-          @total_detail << [ entity.name, branch.name, "**", "--", 0, 0, 0, @price ]
+          @total_detail << [ entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
         end
         @total_detail << [ entity.name, "--", "--", "--", 0, 0, 0, @price ]
 
@@ -97,10 +100,12 @@ class ReportsController < ApplicationController
       Entity.all.each do |entity|
         @price = 0
         entity.branches.each do |branch|
+          @partial = 0
           Inform.where(receive_date: date_range, branch_id: branch.id).each do |inform|
             inform.studies.each do |study|
               @price += study.price * study.factor
-              @total_detail << [ entity.name, branch.name, inform.tag_code, study.price, study.factor, study.price * study.factor, @price ]
+              @partial += study.price * study.factor
+              @total_detail << [ entity.name, branch.name, inform, study.price, study.factor, study.price * study.factor, @price ]
             end
           end
         end
@@ -108,6 +113,35 @@ class ReportsController < ApplicationController
       end
     end
     
+  end
+
+  def show
+    @entity = Entity.find(params[:id])
+    initial_date = Date.parse(params[:init_date]).beginning_of_day
+    final_date = Date.parse(params[:final_date]).end_of_day
+    date_range = initial_date..final_date
+
+    @total_entities = []
+    @total_detail = []
+    @branch_detail = []
+    @total_accumulated = 0
+    @price = 0
+    @total_branch = []
+    @entity.branches.each do |branch|
+      @partial = 0
+      Inform.where(receive_date: date_range, branch_id: branch.id).each do |inform|
+        inform.studies.each do |study|
+          @price += study.price * study.factor
+          @partial += study.price * study.factor
+          @total_detail << [ @entity.name, branch.name, inform, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
+        end
+      end
+      @total_detail << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
+    end
+    @total_detail << [ @entity.name, "--", "--", "--", 0, 0, 0, @price ]
+
+    @total_entities << [ @entity.id, @price ]
+    @total_accumulated += @price
   end
 
   def reports_params_today

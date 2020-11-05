@@ -98,6 +98,8 @@ Rails.application.routes.draw do
     get 'reports/reports_params_yes2'
     get 'reports/reports_params_week'
 
+    resources :reports
+
     resources :objections
 
     resources :autos

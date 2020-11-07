@@ -6,11 +6,11 @@
 	        <div class="form-row">
 	            <div class="form-group col-4">
                 <%= label_tag "Fecha inicial" %>
-                <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
+                <%= date_field_tag :init_date, params[:init_date] != nil ? Date.parse(params[:init_date]) : nil, class: "form-control input" %>
               </div>
               <div class="form-group col-4">
                 <%= label_tag "Fecha final" %>
-                <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
+                <%= date_field_tag :final_date, params[:final_date] != nil ? Date.parse(params[:final_date]) : nil, class: "form-control input" %>
               </div>
 		        <div class="col-4">
 		        	<%= submit_tag("Buscar", class: "btn btn-primary") %>

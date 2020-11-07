@@ -54,21 +54,31 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Ventas
+              Facturación
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% (0..11).each do |m| %>
-                <%= link_to "#{m.month.ago.strftime('%b de %Y')}", reports_sales2_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
+                <%= link_to "#{m.month.ago.strftime('%b de %Y')}", billings_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
               <% end %>
             </div>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Ventas25
+              Facturación 25
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% (0..11).each do |m| %>
-                <%= link_to "#{(Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%b %d")} a #{(Time.now.beginning_of_month - m.month).year == Time.now.year ? (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d") : (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d de %Y")}", reports_sales2_path + "?init_date=" + (Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%d-%m-%Y") + "&final_date=" + (Time.now.beginning_of_month - m.month + 24.days).strftime("%d-%m-%Y") , class: "dropdown-item" %>
+                <%= link_to "#{(Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%b %d")} a #{(Time.now.beginning_of_month - m.month).year == Time.now.year ? (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d") : (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d de %Y")}", billings_reports_path + "?init_date=" + (Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%d-%m-%Y") + "&final_date=" + (Time.now.beginning_of_month - m.month + 24.days).strftime("%d-%m-%Y") , class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ventas
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% (0..11).each do |m| %>
+                <%= link_to "#{m.month.ago.strftime('%b de %Y')}", sales_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
               <% end %>
             </div>
           </li>

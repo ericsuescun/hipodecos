@@ -91,14 +91,26 @@ Rails.application.routes.draw do
     get 'reports/index'
     get 'reports/status'
     get 'reports/objections'
-    get 'reports/sales'
+    
     get 'reports/sales2'
+    post 'reports/invoice'
     get 'reports/reports_params_today'
     get 'reports/reports_params_yes'
     get 'reports/reports_params_yes2'
     get 'reports/reports_params_week'
 
-    resources :reports
+    resources :reports do
+      collection do
+        get :billings
+        get :sales
+      end
+
+      member do
+        post :invoice
+        get :show_sale
+        get :show_billing
+      end
+    end
 
     resources :objections
 

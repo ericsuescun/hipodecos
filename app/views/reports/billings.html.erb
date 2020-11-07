@@ -6,29 +6,27 @@
 	  <div class="col-12">
 	  	
 	    <div class="alert alert-secondary">
-	      <%= form_tag reports_sales2_path, method: "get" do %>
-	        <div class="form-row">
-	            <div class="form-group col-4">
-	              <%= label_tag "Fecha inicial" %>
-	              <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
-	            </div>
-	            <div class="form-group col-4">
-	              <%= label_tag "Fecha final" %>
-	              <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
-	            </div>
-		        <div class="col-4">
-		        	<%= submit_tag("Buscar", class: "btn btn-primary") %>
+	    	<%= form_tag billings_reports_path, method: "get" do %>
+		        <div class="form-row">
+		            <div class="form-group col-4">
+		              <%= label_tag "Fecha inicial" %>
+		              <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
+		            </div>
+		            <div class="form-group col-4">
+		              <%= label_tag "Fecha final" %>
+		              <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
+		            </div>
+			        <div class="col-4">
+			        	<%= submit_tag("Buscar", class: "btn btn-primary") %>
+			        </div>
 		        </div>
-	          
-	        </div>
-	        
-	      <% end %>
+	    	<% end %>
 	    </div>
 	  </div>
 	</div>
 	<div class="row">
 		<div class="col-12 col-lg-12">
-			<strong><h4>Reporte general de ventas</h4></strong>
+			<strong><h4>Reporte general de facturación</h4></strong>
 			<table class="table">
 				<thead>
 					<tr>
@@ -40,7 +38,7 @@
 					<% @total_entities.each do |entity| %>
 						<tr class="alert alert-primary">
 							<td>
-								<%= link_to "#{Entity.find(entity[0]).name}", report_path(Entity.find(entity[0]), init_date: params[:init_date], final_date: params[:final_date]) %>
+								<%= link_to "#{Entity.find(entity[0]).name}", show_billing_report_path(Entity.find(entity[0]), init_date: params[:init_date], final_date: params[:final_date]) %>
 								
 							</td>
 							<td>

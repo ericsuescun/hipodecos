@@ -28,7 +28,12 @@ class InformsController < ApplicationController
       date_range = initial_date..final_date
       @informs = Inform.where(receive_date: date_range).paginate(page: params[:page], per_page: 10)
     else
-      @informs = Inform.where(receive_date: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 10)
+      if params[:tag_code]
+        @informs = Inform.where(tag_code: params[:tag_code]).paginate(page: params[:page], per_page: 10)
+      else
+        @informs = Inform.where(receive_date: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 10)
+      end
+      
     end
   end
 
@@ -385,7 +390,7 @@ class InformsController < ApplicationController
     inform.user_id = current_user.id
   
 
-    entity = Branch.where(id: inform.branch_id).first
+    entity = Branch.where(id: inform.branch_id).first.entity
     if entity == nil
       inform.entity_id = nil
     else
@@ -419,16 +424,16 @@ class InformsController < ApplicationController
   # PATCH/PUT /informs/1
   # PATCH/PUT /informs/1.json
   def update
-    if @inform.update(inform_params)
-      if @inform.inf_status == "revision"
-        redirect_to show_revision_inform_path(@inform), notice: 'Informe exitosamente actualizado.'
-      else
-        redirect_to @inform, notice: 'Informe exitosamente actualizado.'
-      end
-      
+    @inform.branch_id = inform_params[:branch_id]
+    @inform.entity_id = Branch.find(inform_params[:branch_id]).entity.id
+    @inform.save
+
+    if @inform.inf_status == "revision"
+      redirect_to show_revision_inform_path(@inform), notice: 'Informe exitosamente actualizado.'
     else
-      render :edit
+      redirect_to @inform, notice: 'Informe exitosamente actualizado.'
     end
+    
   end
 
   # DELETE /informs/1

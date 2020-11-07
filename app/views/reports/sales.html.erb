@@ -1,98 +1,143 @@
-<h1>Reporte de ventas</h1>
-<h1><%= search_range %></h1>
+<div class="info">
+	<h4>Ventas para el periodo <%= new_search_range %>: <strong><%= number_to_currency(@total_accumulated, precision: 0, delimiter: '.') %></strong></h4>
+</div>
 <div class="container">
 	<div class="row">
+	  <div class="col-12">
+	  	
+	    <div class="alert alert-secondary">
+	      <%= form_tag reports_sales2_path, method: "get" do %>
+	        <div class="form-row">
+	            <div class="form-group col-4">
+	              <%= label_tag "Fecha inicial" %>
+	              <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
+	            </div>
+	            <div class="form-group col-4">
+	              <%= label_tag "Fecha final" %>
+	              <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
+	            </div>
+		        <div class="col-4">
+		        	<%= submit_tag("Buscar", class: "btn btn-primary") %>
+		        </div>
+	          
+	        </div>
+	        
+	      <% end %>
+	    </div>
+	  </div>
+	</div>
+	<div class="row">
 		<div class="col-12 col-lg-12">
-			<h1>Reporte de ventas totales en el periodo</h1>
-			<table class="table table-striped">
+			<strong><h4>Reporte general de ventas</h4></strong>
+			<table class="table">
 				<thead>
 					<tr>
-						<th>Ventas</th>
-						<th>Costos</th>
-						<th>Margen</th>
-						<th>Informes</th>
-						<th>CUPS</th>
+						<th>IPS</th>
+						<th>Monto</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><%= number_to_currency(whole_sales_indexes[0], precision: 0, delimiter: '.') %></td>
-						<td><%= number_to_currency(whole_sales_indexes[1], precision: 0, delimiter: '.') %> (<%= whole_sales_indexes[0] != 0 ? number_with_precision(100 * whole_sales_indexes[1] / whole_sales_indexes[0], :precision => 1) : "sin dato" %>%)</td>
-						<td><%= number_to_currency(whole_sales_indexes[2], precision: 0, delimiter: '.') %> (<%= whole_sales_indexes[0] != 0 ? number_with_precision(100 * whole_sales_indexes[2] / whole_sales_indexes[0], :precision => 1) : "sin dato" %>%)</td>
-						<td><%= whole_sales_indexes[3] %></td>
-						<td><%= whole_sales_indexes[4] %></td>
-					</tr>
-				</tbody>
-			</table>
-			<br>
-			<h1>Reporte de promedios en el periodo</h1>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Ventas / Informe</th>
-						<th>Costos / Informe</th>
-						<th>Margen / Informe</th>
-						<th>CUPS / Informe</th>
-						<th>Ventas / CUPS</th>
-						<th>Costos / CUPS</th>
-						<th>Márgenes / CUPS</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<% if whole_sales_indexes[3] != 0 %>
-							<td><%= number_to_currency(whole_sales_indexes[0] / whole_sales_indexes[3], precision: 0, delimiter: '.') %></td>
-							<td><%= number_to_currency(whole_sales_indexes[1] / whole_sales_indexes[3], precision: 0, delimiter: '.') %></td>
-							<td><%= number_to_currency(whole_sales_indexes[2] / whole_sales_indexes[3], precision: 0, delimiter: '.') %></td>
-							<td><%= number_with_precision(100 * whole_sales_indexes[4] / whole_sales_indexes[3], :precision => 0) %>%</td>
-						<% else %>
-							<td>Sin dato</td>
-							<td>Sin dato</td>
-							<td>Sin dato</td>
-							<td>Sin dato</td>
-						<% end %>
-						<% if whole_sales_indexes[4] != 0 %>
-							<td><%= number_to_currency(whole_sales_indexes[0] / whole_sales_indexes[4], precision: 0, delimiter: '.') %></td>
-							<td><%= number_to_currency(whole_sales_indexes[1] / whole_sales_indexes[4], precision: 0, delimiter: '.') %></td>
-							<td><%= number_to_currency(whole_sales_indexes[2] / whole_sales_indexes[4], precision: 0, delimiter: '.') %></td>
-						<% else %>
-							<td>Sin dato</td>
-							<td>Sin dato</td>
-							<td>Sin dato</td>
-						<% end %>
-					</tr>
+					<% @total_entities.each do |entity| %>
+						<tr class="alert alert-primary">
+							<td>
+								<%= link_to "#{Entity.find(entity[0]).name}", show_sale_report_path(Entity.find(entity[0]), init_date: params[:init_date], final_date: params[:final_date]) %>
+								
+							</td>
+							<td>
+								<%= number_to_currency(entity[1], precision: 0, delimiter: '.') %>
+							</td>
+						</tr>
+					<% end %>
+					
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-12 col-lg-12">
-			<h1>Reporte por sedes de IPS</h1>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Sede IPS</th>
-						<th>Tarifas</th>
-						<th>Ventas</th>
-						<th>Tablas</th>
-						<th>Costo</th>
-						<th>Margen</th>
-						<th>Informes</th>
-						<th>CUPS</th>
-					</tr>
-				</thead>
+			<strong><h4>Reporte detallado de ventas</h4></strong>
+			<table class="table">
+				
 				<tbody>
-					<% @branches.each do |branch| %>
-						<tr>
-							<td><%= branch.initials %></td>
-							<td><%= Rate.find(branch.entity.rate_id).name %></td>
-							<td><%= number_to_currency(sales(branch)[0], precision: 0, delimiter: '.') %></td>
-							<td><%= Cost.find(branch.entity.cost_id).name %></td>
-							<td><%= number_to_currency(sales(branch)[1], precision: 0, delimiter: '.') %></td>
-							<td><%= number_to_currency(sales(branch)[2], precision: 0, delimiter: '.') %></td>
-							<td><%= sales(branch)[3] %></td>
-							<td><%= sales(branch)[4] %></td>
-						</tr>
+					<% @total_detail.each do |detail| %>
+						<% if detail[2] == "++" %>
+							<tr>
+								<td><h1><%= link_to "#{detail[0].name}", show_sale_report_path(detail[0], init_date: params[:init_date], final_date: params[:final_date]) %></h1></td>
+								
+							</tr>
+							<tr>
+								<th>Sede</th>
+								<th>Informe</th>
+								<th>CUP</th>
+								<th>Precio unitario</th>
+								<th>Cant.</th>
+								<th>Precio total</th>
+								<th>Acumulado</th>
+							</tr>
+						<% else %>
+							<% if detail[1] == "--" %>
+								<tr class="alert alert-primary">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>Total IPS</td>
+									<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+								</tr>
+								<tr class="alert alert-light">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr class="alert alert-light">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							<% else %>
+								<% if detail[2] == "**" %>
+									<tr class="alert alert-warning">
+										<td><%= detail[1] %></td>
+										<td></td>
+										<td></td>
+										<td>Subtotal sede</td>
+										<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
+										<td>Total IPS</td>
+										<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+									</tr>
+									<tr class="alert alert-light">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<% else %>
+									<tr>
+										<td><%= detail[1] %></td>
+										<td><%= link_to "#{detail[2].tag_code} #{detail[2].receive_date.strftime("%b %d")}", inform_path(detail[2]) %></td>
+										<td><%= detail[3] %></td>
+										<td><%= number_to_currency(detail[4], precision: 0, delimiter: '.') %></td>
+										<td><%= detail[5] %></td>
+										<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
+										<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+									</tr>
+								<% end %>
+								
+							<% end %>
+						<% end %>
 					<% end %>
 				</tbody>
 			</table>

@@ -60,7 +60,7 @@
 					<% @total_detail.each do |detail| %>
 						<% if detail[2] == "++" %>
 							<tr>
-								<td><h1><%= link_to "#{detail[0].name}", report_path(detail[0], init_date: params[:init_date], final_date: params[:final_date]) %></h1></td>
+								<td><h1><%= link_to "#{detail[0].name}", show_billing_report_path(detail[0], init_date: params[:init_date], final_date: params[:final_date]) %></h1></td>
 								
 							</tr>
 							<tr>

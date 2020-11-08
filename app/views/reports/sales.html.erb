@@ -1,31 +1,30 @@
 <div class="info">
-	<h4>Ventas para el periodo <%= new_search_range %>: <strong><%= number_to_currency(@total_accumulated, precision: 0, delimiter: '.') %></strong></h4>
+	<h4>Ventas <%= params[:inf_type] == 'clin' ? "Clínicas" : params[:inf_type] == 'hosp' ? "Hospital" : "Citlogías" %> para el periodo <%= new_search_range %>: <strong><%= number_to_currency(@total_accumulated, precision: 0, delimiter: '.') %></strong></h4>
 </div>
 <div class="container">
 	<div class="row">
-	  <div class="col-12">
-	  	
-	    <div class="alert alert-secondary">
-	      <%= form_tag reports_sales2_path, method: "get" do %>
-	        <div class="form-row">
-	            <div class="form-group col-4">
-	              <%= label_tag "Fecha inicial" %>
-	              <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
-	            </div>
-	            <div class="form-group col-4">
-	              <%= label_tag "Fecha final" %>
-	              <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
-	            </div>
-		        <div class="col-4">
-		        	<%= submit_tag("Buscar", class: "btn btn-primary") %>
-		        </div>
-	          
-	        </div>
-	        
-	      <% end %>
-	    </div>
-	  </div>
-	</div>
+		  <div class="col-12">
+		  	
+		    <div class="alert alert-secondary">
+		    	<%= form_tag sales_reports_path, method: "get" do %>
+		    		<%= hidden_field_tag :inf_type, value: params[:inf_type] %>
+			        <div class="form-row">
+			            <div class="form-group col-4">
+			              <%= label_tag "Fecha inicial" %>
+			              <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
+			            </div>
+			            <div class="form-group col-4">
+			              <%= label_tag "Fecha final" %>
+			              <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
+			            </div>
+				        <div class="col-4">
+				        	<%= submit_tag("Buscar", class: "btn btn-primary") %>
+				        </div>
+			        </div>
+		    	<% end %>
+		    </div>
+		  </div>
+		</div>
 	<div class="row">
 		<div class="col-12 col-lg-12">
 			<strong><h4>Reporte general de ventas</h4></strong>
@@ -40,7 +39,7 @@
 					<% @total_entities.each do |entity| %>
 						<tr class="alert alert-primary">
 							<td>
-								<%= link_to "#{Entity.find(entity[0]).name}", show_sale_report_path(Entity.find(entity[0]), init_date: params[:init_date], final_date: params[:final_date]) %>
+								<%= link_to "#{Entity.find(entity[0]).name}", show_sale_report_path(Entity.find(entity[0]), init_date: params[:init_date], final_date: params[:final_date], inf_type: params[:inf_type]) %>
 								
 							</td>
 							<td>

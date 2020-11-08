@@ -38,5 +38,9 @@ class Patient < ApplicationRecord
 	def fullname
 	  [name1, name2, lastname1, lastname2].join(' ')
 	end
+
+	def halfname
+	  [name1, lastname1].join(' ')
+	end
 		
 end

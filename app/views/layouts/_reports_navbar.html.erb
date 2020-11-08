@@ -54,21 +54,55 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Facturación
+              Mes a mes
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% (0..11).each do |m| %>
-                <%= link_to "#{m.month.ago.strftime('%b de %Y')}", billings_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
+              <% (0..2).each do |m| %>
+                <%= link_to "C: #{m.month.ago.strftime('%b de %Y')}", billings_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=clin" , class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <% (0..2).each do |m| %>
+                <%= link_to "H: #{m.month.ago.strftime('%b de %Y')}", billings_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=hosp" , class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <% (0..2).each do |m| %>
+                <%= link_to "K: #{m.month.ago.strftime('%b de %Y')}", billings_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=cito" , class: "dropdown-item" %>
               <% end %>
             </div>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Facturación 25
+              16 a 15
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% (0..11).each do |m| %>
-                <%= link_to "#{(Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%b %d")} a #{(Time.now.beginning_of_month - m.month).year == Time.now.year ? (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d") : (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d de %Y")}", billings_reports_path + "?init_date=" + (Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%d-%m-%Y") + "&final_date=" + (Time.now.beginning_of_month - m.month + 24.days).strftime("%d-%m-%Y") , class: "dropdown-item" %>
+              <% (0..2).each do |m| %>
+                <%= link_to "C: #{(Time.now.beginning_of_month - (m + 1).month + 15.days).strftime("%b %d")} a #{(Time.now.beginning_of_month - m.month).year == Time.now.year ? (Time.now.beginning_of_month - m.month + 14.days).strftime("%b %d") : (Time.now.beginning_of_month - m.month + 14.days).strftime("%b %d de %Y")}", billings_reports_path + "?init_date=" + (Time.now.beginning_of_month - (m + 1).month + 15.days).strftime("%d-%m-%Y") + "&final_date=" + (Time.now.beginning_of_month - m.month + 14.days).strftime("%d-%m-%Y") + "&inf_type=clin" , class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <% (0..2).each do |m| %>
+                <%= link_to "H: #{(Time.now.beginning_of_month - (m + 1).month + 15.days).strftime("%b %d")} a #{(Time.now.beginning_of_month - m.month).year == Time.now.year ? (Time.now.beginning_of_month - m.month + 14.days).strftime("%b %d") : (Time.now.beginning_of_month - m.month + 14.days).strftime("%b %d de %Y")}", billings_reports_path + "?init_date=" + (Time.now.beginning_of_month - (m + 1).month + 15.days).strftime("%d-%m-%Y") + "&final_date=" + (Time.now.beginning_of_month - m.month + 14.days).strftime("%d-%m-%Y") + "&inf_type=hosp" , class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <% (0..2).each do |m| %>
+                <%= link_to "K: #{(Time.now.beginning_of_month - (m + 1).month + 15.days).strftime("%b %d")} a #{(Time.now.beginning_of_month - m.month).year == Time.now.year ? (Time.now.beginning_of_month - m.month + 14.days).strftime("%b %d") : (Time.now.beginning_of_month - m.month + 14.days).strftime("%b %d de %Y")}", billings_reports_path + "?init_date=" + (Time.now.beginning_of_month - (m + 1).month + 15.days).strftime("%d-%m-%Y") + "&final_date=" + (Time.now.beginning_of_month - m.month + 14.days).strftime("%d-%m-%Y") + "&inf_type=cito" , class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              26 a 25
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% (0..2).each do |m| %>
+                <%= link_to "C: #{(Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%b %d")} a #{(Time.now.beginning_of_month - m.month).year == Time.now.year ? (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d") : (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d de %Y")}", billings_reports_path + "?init_date=" + (Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%d-%m-%Y") + "&final_date=" + (Time.now.beginning_of_month - m.month + 24.days).strftime("%d-%m-%Y") + "&inf_type=clin" , class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <% (0..2).each do |m| %>
+                <%= link_to "H: #{(Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%b %d")} a #{(Time.now.beginning_of_month - m.month).year == Time.now.year ? (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d") : (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d de %Y")}", billings_reports_path + "?init_date=" + (Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%d-%m-%Y") + "&final_date=" + (Time.now.beginning_of_month - m.month + 24.days).strftime("%d-%m-%Y") + "&inf_type=hosp" , class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <% (0..2).each do |m| %>
+                <%= link_to "K: #{(Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%b %d")} a #{(Time.now.beginning_of_month - m.month).year == Time.now.year ? (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d") : (Time.now.beginning_of_month - m.month + 24.days).strftime("%b %d de %Y")}", billings_reports_path + "?init_date=" + (Time.now.beginning_of_month - (m + 1).month + 25.days).strftime("%d-%m-%Y") + "&final_date=" + (Time.now.beginning_of_month - m.month + 24.days).strftime("%d-%m-%Y") + "&inf_type=cito" , class: "dropdown-item" %>
               <% end %>
             </div>
           </li>
@@ -77,8 +111,14 @@
               Ventas
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% (0..11).each do |m| %>
-                <%= link_to "#{m.month.ago.strftime('%b de %Y')}", sales_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
+              <% (0..2).each do |m| %>
+                <%= link_to "C: #{m.month.ago.strftime('%b de %Y')}", sales_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=clin" , class: "dropdown-item" %>
+              <% end %>
+              <% (0..2).each do |m| %>
+                <%= link_to "H: #{m.month.ago.strftime('%b de %Y')}", sales_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=hosp" , class: "dropdown-item" %>
+              <% end %>
+              <% (0..2).each do |m| %>
+                <%= link_to "K: #{m.month.ago.strftime('%b de %Y')}", sales_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=cito" , class: "dropdown-item" %>
               <% end %>
             </div>
           </li>

@@ -1,11 +1,12 @@
 <div class="info">
-	<h4>Facturación para el periodo <%= new_search_range %>: <strong><%= number_to_currency(@total_accumulated, precision: 0, delimiter: '.') %></strong></h4>
+	<h4>Facturación <%= params[:inf_type] == 'clin' ? "Clínica" : params[:inf_type] == 'hosp' ? "Hospital" : "Citlogías" %> para el periodo <%= new_search_range %>: <strong><%= number_to_currency(@total_accumulated, precision: 0, delimiter: '.') %></strong></h4>
 </div>
 <div class="container">
 	<div class="row">
 	  <div class="col-12 col-lg-7">
 	    <div class="alert alert-secondary pl-1 pb-1">
-	      <%= form_tag report_path(params[:id]), method: "get" do %>
+	      <%= form_tag show_billing_report_path(params[:id]), method: "get" do %>
+	      	<%= hidden_field_tag :inf_type, params[:inf_type] %>
 	        <div class="row">
 	        	<div class="col-12 col-lg-5">
 	        		<div class="form-group">
@@ -27,7 +28,7 @@
 	  </div>
 	  <div class="col-12 col-lg-5">
 	  	<div class="alert alert-secondary pb-1">
-	  		<%= form_tag invoice_report_path(params[:id], init_date: params[:init_date], final_date: params[:final_date]), method: "post" do %>
+	  		<%= form_tag invoice_report_path(params[:id], init_date: params[:init_date], final_date: params[:final_date], inf_type: params[:inf_type]), method: "post" do %>
 	  			<div class="row">
 	  				<div class="col-12 col-lg-8">
 	  					<div class="form-group">
@@ -46,18 +47,19 @@
 	
 	<div class="row">
 		<div class="col-12 col-lg-12">
-			<strong><h4>Reporte detallado de ventas</h4></strong>
+			<strong><h4>Reporte detallado de facturación</h4></strong>
 			<h1><%= Entity.where(id: params[:id]).first.name %></h1>
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Sede</th>
 						<th>Informe</th>
+						<th>Nombre</th>
+						<th>Identif.</th>
+						
 						<th>CUP</th>
-						<th>Precio unitario</th>
-						<th>Cant.</th>
+						
 						<th>Precio total</th>
-						<th>Acumulado</th>
+						<th>Saldo</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -68,22 +70,24 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td></td>
+								
 								<td>Total IPS</td>
 								<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
 							</tr>
 						<% else %>
 							<% if detail[2] == "**" %>
-								<tr class="alert alert-warning">
-									<td><%= detail[1] %></td>
-									<td></td>
-									<td></td>
-									<td>Subtotal sede</td>
-									<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
-									<td>Total IPS</td>
-									<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
-								</tr>
-								<tr class="alert alert-light">
+									<tr class="alert alert-warning">
+										<td></td>
+										<td><%= detail[1] %></td>
+										<td>Total sede</td>
+										
+										
+										<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
+										<td>Acumulado IPS</td>
+										<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+									</tr>
+									<tr class="alert alert-light">
+									
 									<td></td>
 									<td></td>
 									<td></td>
@@ -94,11 +98,14 @@
 								</tr>
 							<% else %>
 								<tr>
-									<td><%= detail[1] %></td>
 									<td><%= link_to "#{detail[2].tag_code}", inform_path(detail[2]) %></td>
-									<td><%= detail[3] %></td>
-									<td><%= number_to_currency(detail[4], precision: 0, delimiter: '.') %></td>
-									<td><%= detail[5] %></td>
+									<td><%= detail[2].patient.halfname %></td>
+									<td><%= detail[2].patient.id_number %></td>
+									<td>
+										<% detail[3].each do |study| %>
+											<strong>(<%= study.factor %>*)</strong><%= Codeval.find(study.codeval_id).code %>
+										<% end %>
+									</td>
 									<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
 									<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
 								</tr>

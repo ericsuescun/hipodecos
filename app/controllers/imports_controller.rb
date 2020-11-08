@@ -63,13 +63,8 @@ class ImportsController < ApplicationController
 			@patient.sex = oldrecord.sexo
 
 			if oldrecord.cedula == nil
-				if oldrecord.historia == nil
-					@patient.id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
-					# @patient.id_type = "**"	#Marco el registro para el futuro
-				else
-					@patient.id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
-					# @patient.id_type == "**"
-				end
+				@patient.id_number = "REVISAR-" + oldrecord.id.to_s	#Asigno un número que sería unico que es el id
+				
 
 				@patient.password = @patient.id_number
 				@patient.password_confirmation = @patient.id_number
@@ -127,14 +122,8 @@ class ImportsController < ApplicationController
 			@patient.birth_date = oldcito.fechanac
 
 			if oldcito.cedula == nil
-				if oldcito.historia == nil
-					@patient.id_number = "REVISAR-" + oldcito.id.to_s	#Asigno un número que sería unico que es el id
-					# @patient.id_type = "**"	#Marco el registro para el futuro
-				else
-					@patient.id_number = "REVISAR-" + oldcito.id.to_s	#Asigno un número que sería unico que es el id
-					# @patient.id_type == "**"
-				end
-
+				@patient.id_number = "REVISAR-" + oldcito.id.to_s	#Asigno un número que sería unico que es el id
+				
 				@patient.password = @patient.id_number
 				@patient.password_confirmation = @patient.id_number
 				

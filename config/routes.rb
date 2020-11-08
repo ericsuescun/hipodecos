@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get 'imports/oldrecord_import_index'
   get 'imports/oldcito_import_index'
   get 'imports/import_date_filter'
-  get 'imports/import_patient'
+  get 'imports/oldrecord_import_patient'
+  get 'imports/oldcito_import_patient'
 
   resources :oldrecords do
     collection do

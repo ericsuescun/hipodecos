@@ -86,7 +86,7 @@ class ImportsController < ApplicationController
 				end
 			end
 		end
-		redirect_to imports_import_index_path
+		redirect_to imports_oldrecord_import_index_path
 	end
 
 	def oldcito_import_patient
@@ -144,7 +144,7 @@ class ImportsController < ApplicationController
 				end
 			end
 		end
-		redirect_to imports_import_index_path
+		redirect_to imports_oldcito_import_index_path
 	end
 
 	private

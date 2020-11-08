@@ -1,0 +1,71 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<% if params[:init_date] != nil %>
+				<h3><%= @oldcitos.count %> registros FoxPro sin paciente entre el <%= Date.parse(params[:init_date]).strftime("%d/%m/%Y") %> y el <%= Date.parse(params[:final_date]).strftime("%d/%m/%Y") %></h1>
+				
+				<%= link_to "+ Procesar Pacientes", imports_import_patient_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date], class: "btn btn-primary my-3" %>
+			<% else %>
+				<h3><%= @oldcitos.count %> registros FoxPro sin paciente asignado</h3>
+				<%= form_tag "oldcito_import_index", method: "get" do %>
+					<div class="row">
+						<div class="col-12 col-lg-4">
+							<div class="form-group">
+								<%= label_tag "Fecha inicial" %>
+								<%= date_field_tag(:init_date, class: "form-control input") %>
+							</div>
+						</div>
+						<div class="col-12 col-lg-4">
+							<div class="form-group">
+								<%= label_tag "Fecha final" %>
+								<%= date_field_tag(:final_date, class: "form-control input") %>
+							</div>
+						</div>
+						<div class="col-12 col-lg-4">
+							<%= submit_tag("Filtrar por fecha para procesar", class: "btn btn-primary mb-3") %>
+						</div>
+					</div>
+					
+					
+				<% end %>
+
+
+				
+				
+			<% end %>
+
+			<%= will_paginate @oldcitos, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+			<table class="table table-striped">
+			  <thead class="thead-dark">
+			    <tr>
+			      <th>Informe</th>
+			      
+			      <th>Ingreso PSS</th>
+			      
+			      <th>Nombre</th>
+			      <th>Id</th>
+			      <th>EPS</th>
+			      <th>Sede IPS</th>
+			    </tr>
+			  </thead>
+
+			  <tbody>
+			    <% @oldcitos.each do |oldcito| %>
+			      <tr>
+			        <td><%= oldcito.clave + oldcito.fecharec.strftime('%y') + "-" + oldcito.numero %></td>
+			        
+			        <td><%= oldcito.fecharec.strftime('%d/%m/%Y') %></td>
+			        
+			        <td><%= oldcito.fullname %></td>
+			        <td><%= oldcito.identif %>: <%= oldcito.cedula %></td>
+			        <td><%= oldcito.entidad %></td>
+			        <td><%= oldcito.clinica %></td>
+			        
+			      </tr>
+			    <% end %>
+			  </tbody>
+			</table>
+
+		</div>
+	</div>
+</div>

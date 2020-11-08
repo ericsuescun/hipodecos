@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     end
   end
   
-  get 'imports/import_index'
+  get 'imports/oldrecord_import_index'
+  get 'imports/oldcito_import_index'
   get 'imports/import_date_filter'
   get 'imports/import_patient'
 

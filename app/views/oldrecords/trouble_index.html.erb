@@ -1,0 +1,77 @@
+<div class="container">
+  <h3><%= @oldrecords.count %> de <%= Oldrecord.count %> registros FoxPro encontrados entre el <%= Date.parse(params[:init_date]).strftime("%d/%m/%Y") %> y el <%= Date.parse(params[:final_date]).strftime("%d/%m/%Y") %></h3>
+  <div class="row">
+
+    <div class="col-12 col-lg-6">
+      <div class="alert alert-secondary">
+        <h4>Buscar registros entre fechas</h4>
+        <%= form_tag oldrecords_path, method: "get" do %>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <%= label_tag "Fecha inicial" %>
+                <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input mb-3" %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <%= label_tag "Fecha final" %>
+                <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input mb-3" %>
+              </div>
+            </div>
+          </div>
+          <%= submit_tag("Buscar", class: "btn btn-primary my-3") %>
+        <% end %>
+      </div>
+      
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="alert alert-secondary">
+        <h4>Importar registros desde CSV</h4>
+        <%= form_tag import_oldrecords_path, multipart: true do %>
+          <%= label_tag "Seleccionar archivo" %>
+          <%= file_field_tag :file, class: "form-control input mb-3" %>
+          <%= submit_tag "Importar CSV", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <%= will_paginate @oldrecords, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Informe</th>
+            <th>Fecharec</th>
+            <th>Nombre</th>
+            <th>Id</th>
+            <th>Historia</th>
+            <th>EPS</th>
+            <th>Sede IPS</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @oldrecords.each do |oldrecord| %>
+            <tr>
+              <td><%= oldrecord.clave + oldrecord.fecharec.strftime('%y') + "-" + oldrecord.numero %></td>
+              <td><%= oldrecord.fecharec.strftime('%d/%m/%Y') %></td>
+              <td><%= oldrecord.fullname %></td>
+              <td><%= oldrecord.identif %>: <%= oldrecord.cedula %></td>
+              <td><%= oldrecord.historia %></td>
+              <td><%= oldrecord.entidad %></td>
+              <td><%= oldrecord.clinica %></td>
+              
+              <td><%= link_to 'Detalles', oldrecord %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @oldrecords, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    </div>
+  </div>
+</div>

@@ -20,7 +20,17 @@ class OldcitosController < ApplicationController
     else
       @oldcitos = Oldcito.where(fecharec: Date.parse("01/07/2020")..Date.parse("31/07/2020")).paginate(page: params[:page], per_page: 60)
     end
+  end
 
+  def trouble_index
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+      @oldcitos = Oldcito.where(fecharec: date_range, diag: nil).paginate(page: params[:page], per_page: 60)
+    else
+      @oldcitos = Oldcito.where(fecharec: Date.parse("01/07/2020")..Date.parse("31/07/2020"), diag: nil).paginate(page: params[:page], per_page: 60)
+    end
   end
 
   # GET /oldcitos/1

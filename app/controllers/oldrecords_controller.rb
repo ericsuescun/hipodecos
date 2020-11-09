@@ -20,8 +20,17 @@ class OldrecordsController < ApplicationController
     else
       @oldrecords = Oldrecord.where(fecharec: Date.parse("01/07/2020")..Date.parse("31/07/2020")).paginate(page: params[:page], per_page: 60)
     end
-    
+  end
 
+  def trouble_index
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+      @oldrecords = Oldrecord.where(fecharec: date_range, diagnostic: nil).paginate(page: params[:page], per_page: 60)
+    else
+      @oldrecords = Oldrecord.where(fecharec: Date.parse("01/07/2020")..Date.parse("31/07/2020"), diagnostic: nil).paginate(page: params[:page], per_page: 60)
+    end
   end
 
   # GET /oldrecords/1

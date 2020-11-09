@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :oldcitos do
     collection do
       post :import
+      get :trouble_index
     end
   end
   
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   resources :oldrecords do
     collection do
       post :import
+      get :trouble_index
     end
   end
   

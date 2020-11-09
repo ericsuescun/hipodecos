@@ -229,21 +229,32 @@
           </ul>
           
         <% end %>
-        <p>Sistema FoxPro</p>
-        <ul>
-          <% @oldrecords.each do |oldrecord| %>
-            <li>
-              <span class="diagnostic"><strong><%= fix_accent(oldrecord.diagnostic) %></strong></span>
-              <p>
-                <small>Fecha: <strong>
-                  <%= oldrecord.fecharec.strftime("%d/%m/%Y") %></strong></small> | <%= link_to oldrecord_path(oldrecord) do %>Ver informe <%= oldrecord.clave %><%= oldrecord.fecharec.strftime("%y") %>-<%= oldrecord.numero %> <% end %>
-
-              </p>
-            </li>
-          <% end %>
-        </ul>
       <% end %>
-      
+      <p>Sistema FoxPro</p>
+      <ul>
+        <% @oldrecords.each do |oldrecord| %>
+          <li>
+            <span class="diagnostic"><strong><%= fix_accent(oldrecord.diagnostic) %></strong></span>
+            <p>
+              <small>Fecha: <strong>
+                <%= oldrecord.fecharec.strftime("%d/%m/%Y") %></strong></small> | <%= link_to oldrecord_path(oldrecord) do %>Ver informe <%= oldrecord.clave %><%= oldrecord.fecharec.strftime("%y") %>-<%= oldrecord.numero %> <% end %>
+
+            </p>
+          </li>
+        <% end %>
+      </ul>
+      <ul>
+        <% @oldcitos.each do |oldcito| %>
+          <li>
+            <span class="diagnostic"><strong><%= fix_accent(oldcito.diag) %></strong></span>
+            <p>
+              <small>Fecha: <strong>
+                <%= oldcito.fecharec.strftime("%d/%m/%Y") %></strong></small> | <%= link_to oldcito_path(oldcito) do %>Ver informe <%= oldcito.tag_code %> <% end %>
+
+            </p>
+          </li>
+        <% end %>
+      </ul>
       
     </div>
   </div>

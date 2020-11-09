@@ -53,6 +53,7 @@ class PatientsController < ApplicationController
     @promoters = @promoters.pluck(:initials, :id)
 
     @oldrecords = Oldrecord.where(patient_id: @patient.id)
+    @oldcitos = Oldcito.where(patient_id: @patient.id)
   end
 
   # GET /patients/new

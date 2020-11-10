@@ -31,14 +31,53 @@
 </div>
 
 <div class="row">
-  <div class="col-8 col-lg-8">
-    <div class="alert alert-dark ml-1">
+  <div class="col-12 col-lg-12">
+    <div class="alert alert-secondary mx-2">
+      <h3>Diagnósticos previos encontrados</h3>
+      <% if @patient.informs.length == 0 && @oldrecords.length == 0 %>
+        <h4>No se encuentran diagnósticos previos para este paciente</h4>
+      <% else %>
+        <% @patient.informs.each do |inform| %>
+          <ul class="p-0 m-0">
+            <% inform.diagnostics.each do |diagnostic| %>
+              <li class="p-0 m-0">
+                <%= link_to inform_path(inform) do %>
+                  <%= diagnostic.inform.tag_code %>
+                <% end %> en <%= diagnostic.created_at.strftime("%d/%m/%Y") %> <strong><%= fix_accent(diagnostic.description) %></strong> 
+              </li>
+            <% end %>
+          </ul>
+          
+        <% end %>
+      <% end %>
+      <h3>Sistema FoxPro</h3>
+      <ul>
+        <% @oldrecords.each do |oldrecord| %>
+          <li>
+            <strong><%= fix_accent(oldrecord.diagnostic) %></strong> en <%= oldrecord.fecharec.strftime("%d/%m/%Y") %> | <%= link_to oldrecord_path(oldrecord) do %>Ver informe <%= oldrecord.clave %><%= oldrecord.fecharec.strftime("%y") %>-<%= oldrecord.numero %> <% end %>
+            
+          </li>
+        <% end %>
+      </ul>
+      <ul>
+        <% @oldcitos.each do |oldcito| %>
+          <li>
+            <strong><%= fix_accent(oldcito.diag) %></strong> en <%= oldcito.fecharec.strftime("%d/%m/%Y") %> | <%= link_to oldcito_path(oldcito) do %>Ver informe <%= oldcito.tag_code %> <% end %>
+            
+          </li>
+        <% end %>
+      </ul>
+      
+    </div>
+  </div>
+  <div class="col-12 col-lg-12">
+    <div class="alert alert-primary mx-2">
       <h3>Nuevo informe</h3>
       <%= form_with model: @inform, local: true do |informs_form| %>
         <%= informs_form.hidden_field :patient_id, value: @patient.id %>
         <h5>Datos del informe en la fecha de recepción del estudio de patología:</h5>
         <div class="row">
-          <div class="col-12 col-lg-3">
+          <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= informs_form.label "Tipo Informe" %>
               <%= informs_form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']], params[:inf_type]), { include_blank: true }, class: "form-control form-control input") %>
@@ -46,14 +85,20 @@
           </div>
           <div class="col-12 col-lg-3">
             <div class="form-group">
-              <%= informs_form.label "EPS" %>
-              <%= informs_form.select :promoter_id, @promoters, {prompt:"Seleccione la EPS"}, class: "form-control input" %>
+              <%= informs_form.label "Fecha recepción" %>
+              <%= informs_form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de nacimiento", class: "form-control input"  %>
             </div>
           </div>
-          <div class="col-12 col-lg-3">
+          <div class="col-12 col-lg-2">
             <div class="form-group">
-              <%= informs_form.label "Sede IPS" %>
-              <%= informs_form.select :branch_id, Branch.pluck(:initials, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control input" %>
+              <%= informs_form.label "UniEdad" %>
+              <%= informs_form.select(:p_age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']]), {  }, class: "form-control input") %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= informs_form.label "Edad" %>
+              <%= informs_form.number_field :p_age, autofocus: true, class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-3">
@@ -64,24 +109,19 @@
           </div>
         </div> 
         <div class="row">
-          <div class="col-12 col-lg-2">
+          <div class="col-12 col-lg-3">
             <div class="form-group">
-              <%= informs_form.label "Fecha recepción" %>
-              <%= informs_form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de nacimiento", class: "form-control input"  %>
+              <%= informs_form.label "EPS" %>
+              <%= informs_form.select :promoter_id, @promoters, {prompt:"Seleccione la EPS"}, class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-2">
             <div class="form-group">
-              <%= informs_form.label "Edad" %>
-              <%= informs_form.number_field :p_age, class: "form-control input" %>
+              <%= informs_form.label "Sede IPS" %>
+              <%= informs_form.select :branch_id, Branch.pluck(:initials, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control input" %>
             </div>
           </div>
-          <div class="col-12 col-lg-1">
-            <div class="form-group">
-              <%= informs_form.label "UniEdad" %>
-              <%= informs_form.select(:p_age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']]), { include_blank: true }, class: "form-control input") %>
-            </div>
-          </div>
+          
           <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= informs_form.label "Teléfono" %>
@@ -211,57 +251,6 @@
           <%= informs_form.submit "Guardar", class: "btn btn-primary" %>
         </div>
       <% end %>
-    </div>
-  </div>
-  <div class="col-4 col-lg-4">
-    <div class="alert alert-secondary mr-1">
-      <h3>Diagnósticos previos encontrados</h3>
-      <br>
-      <% if @patient.informs.length == 0 && @oldrecords.length == 0 %>
-        <h4>No se encuentran diagnósticos previos para este paciente</h4>
-      <% else %>
-        <% @patient.informs.each do |inform| %>
-          <ul>
-            <% inform.diagnostics.each do |diagnostic| %>
-              <li>
-                <span class="diagnostic"><strong><%= fix_accent(diagnostic.description) %></strong></span>
-                <p>
-                  <small>Fecha: <strong>
-                    <%= diagnostic.created_at.strftime("%d/%m/%Y") %></strong></small> | <%= link_to inform_path(inform) do %>Ver informe <%= diagnostic.inform.tag_code %> <% end %>
-
-                </p>
-              </li>
-            <% end %>
-          </ul>
-          
-        <% end %>
-      <% end %>
-      <p>Sistema FoxPro</p>
-      <ul>
-        <% @oldrecords.each do |oldrecord| %>
-          <li>
-            <span class="diagnostic"><strong><%= fix_accent(oldrecord.diagnostic) %></strong></span>
-            <p>
-              <small>Fecha: <strong>
-                <%= oldrecord.fecharec.strftime("%d/%m/%Y") %></strong></small> | <%= link_to oldrecord_path(oldrecord) do %>Ver informe <%= oldrecord.clave %><%= oldrecord.fecharec.strftime("%y") %>-<%= oldrecord.numero %> <% end %>
-
-            </p>
-          </li>
-        <% end %>
-      </ul>
-      <ul>
-        <% @oldcitos.each do |oldcito| %>
-          <li>
-            <span class="diagnostic"><strong><%= fix_accent(oldcito.diag) %></strong></span>
-            <p>
-              <small>Fecha: <strong>
-                <%= oldcito.fecharec.strftime("%d/%m/%Y") %></strong></small> | <%= link_to oldcito_path(oldcito) do %>Ver informe <%= oldcito.tag_code %> <% end %>
-
-            </p>
-          </li>
-        <% end %>
-      </ul>
-      
     </div>
   </div>
 </div>

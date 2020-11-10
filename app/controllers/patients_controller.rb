@@ -87,9 +87,19 @@ class PatientsController < ApplicationController
     if patients.length > 0
       @patient = patients.first
       @inform = patients.first.informs.build.physicians.build #Creo la instancia para physician para la form
-      redirect_to patient_path(patients.first)
+      if params[:inf_type]
+        redirect_to patient_path(patients.first) + "?inf_type=" + params[:inf_type]
+      else
+        redirect_to patient_path(patients.first)
+      end
+      
     else
-      @patient = Patient.new(id_number: params[:id_number])
+      
+      if params[:inf_type] == "cito"
+        @patient = Patient.new(id_number: params[:id_number], sex: "F")
+      else
+        @patient = Patient.new(id_number: params[:id_number])
+      end
       @inform = @patient.informs.build.physicians.build #Creo la instancia para physician para la form
     end
   end

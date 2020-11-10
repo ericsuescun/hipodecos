@@ -1,14 +1,20 @@
-
+<% if params[:inf_type] %>
+  <div class="info">
+    <h5>
+      <strong><%= next_inform(params[:inf_type]) %>, <%= @patient.fullname %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
+    </h5>
+  </div>
+<% else %>
+  <div class="info">
+    <h5>
+      <strong><%= @patient.fullname %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
+    </h5>
+  </div>
+<% end %>
 <div class="container-fluid">
+  
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
-      <div class="info">
-        <h5>
-          <strong><%= @patient.name1 %> <%= @patient.name2 %> <%= @patient.lastname1 %> <%= @patient.lastname2 %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
-        </h5>
-      </div>
-      
-      
       <div class="inform">
         <% if @patient.informs.count > 0 %>
           <p>
@@ -35,7 +41,7 @@
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= informs_form.label "Tipo Informe" %>
-              <%= informs_form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']], @patient.informs), { include_blank: true }, class: "form-control form-control input") %>
+              <%= informs_form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']], params[:inf_type]), { include_blank: true }, class: "form-control form-control input") %>
             </div>
           </div>
           <div class="col-12 col-lg-3">

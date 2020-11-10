@@ -66,5 +66,24 @@ module ApplicationHelper
 		end
 		return descr
 	end
+
+	def next_inform(type)
+		init_date =  Time.now.beginning_of_year
+		final_date = Time.now.end_of_year
+		date_range = init_date..final_date
+
+		if type == "clin"
+		   consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+		   return "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+		else
+		 if type == "hosp"
+		   consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
+		   return "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+		 else
+		   consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
+		   return "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+		 end
+		end
+	end
 	
 end

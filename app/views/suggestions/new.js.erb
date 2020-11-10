@@ -1,0 +1,12 @@
+$(document).on('page:load', refresh());
+
+function refresh() {
+
+	$('form.suggestion-form-out').remove();
+	$('div.suggestion-form').append('<%= j render "suggestions/suggestion-form", inform: @inform %>');
+
+	
+	setTimeout(function() {
+		$('div.alert-growl').remove();
+	}, 3000)
+}

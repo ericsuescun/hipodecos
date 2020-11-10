@@ -7,19 +7,20 @@ class AutomaticsController < ApplicationController
   def index
     @macro_automatics = Automatic.where(auto_type: "macro")
     @micro_automatics = Automatic.where(auto_type: "micro")
+    @micro_automatics = Automatic.where(auto_type: "cito")
     @automatics = Automatic.all
   end
 
   def index_macro
-    @macro_automatics = Automatic.where(auto_type: "macro").unscoped.order(organ: :asc)
+    @macro_automatics = Automatic.unscoped.where(auto_type: "macro").order(organ: :asc)
   end
 
   def index_micro
-    @micro_automatics = Automatic.where(auto_type: "micro").unscoped.order(organ: :asc)
+    @micro_automatics = Automatic.unscoped.where(auto_type: "micro").order(organ: :asc)
   end
 
   def index_cito
-    @cito_automatics = Automatic.where(auto_type: "cito").unscoped.order(organ: :asc)
+    @cito_automatics = Automatic.unscoped.where(auto_type: "cito").order(organ: :asc)
   end
 
   # GET /automatics/1

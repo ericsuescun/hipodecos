@@ -1,28 +1,23 @@
 <div class="container diagnostics-out">
   <div class="row">
     <div class="col-12 col-lg-12 col-xl-12">
-      <div class="card w-100">
+      <div class="card">
         <div class="card-header m-0 p-0">
-          <% if inform.inf_type != 'cito' %>
-            <div class="d-flex justify-content-start align-items-center">
-              <%= form_with url: new_diagnostic_path, method: "get", class: "diagnostic-form-out mr-3 mb-1" do |form| %>
-                <%= form.submit "+", class: "btn btn-primary btn-sm ml-1" %>
+          <div class="d-flex justify-content-start align-items-center">
+            <span>
+              <%= form_with url: new_diagnostic_path, method: "get", class: "mr-1 my-1 ml-1" do |form| %>
+                <%= form.submit "+", class: "btn btn-primary btn-sm" %>
                 <%= form.hidden_field :inform_id, value: inform.id %>
               <% end %>
+            </span>
+            <% if inform.inf_type != 'cito' %>
               <strong>Diganósticos</strong>
-              
-            </div>
-          <% else %>
-            <div class="d-flex justify-content-start align-items-center">
+            <% else %>
               <strong>Resultados</strong>
-              <%= form_with url: new_diagnostic_path, method: "get", class: "diagnostic-form-out mr-3" do |form| %>
-                <%= form.submit " + DX manual", class: "btn btn-primary" %>
-                <%= form.hidden_field :inform_id, value: inform.id %>
-              <% end %>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-        <div class="card-body">
+        <div class="card-body py-0">
           <p class="card-text">
             <% inform.diagnostics.each_with_index do |diagnostic, n| %>
               <% if inform.inf_type == 'cito' && (diagnostic.cyto_status == 'correct' || diagnostic.cyto_status == 'confirmed') %>
@@ -32,23 +27,22 @@
                 <div class="alert alert-warning">
               <% end %>
               <% if inform.inf_type == 'cito' && diagnostic.cyto_status == nil %>
-                <div class="alert alert-dark">
+                <div>
               <% end %>
               <% if inform.inf_type != 'cito'  %>
                 <div>
               <% end %>
-                
-
                 <% if edit_diagnostic == diagnostic %>
                   <%= form_with model: diagnostic do |form| %>
                     <div class="row">
-                      <div class="col-12 col-lg-12 col-xl-12">
-                        <div class="form-group">
-                          <%= form.text_area :description, class: "form-control form-control-lg input" %>
-                          <%= form.hidden_field :edit_dx_status, value: edit_dx_status %>
-                        </div>
-                      </div>
+                      
                       <% if inform.inf_type != 'cito' %>
+                        <div class="col-12 col-lg-12 col-xl-12">
+                          <div class="form-group">
+                            <%= form.text_area :description, class: "form-control form-control-lg input" %>
+                            <%= form.hidden_field :edit_dx_status, value: edit_dx_status %>
+                          </div>
+                        </div>
                         <div class="col-12 col-lg-12 col-xl-12">
                           <div class="form-group">
                             <%= form.collection_select(:pss_code, diagcodes, :pss_code, :description, { prompt: 'Código PSS'}, { class: "form-control input" }) %>
@@ -74,34 +68,28 @@
                     </div>
                   <% end %>
                 <% else %>
-                  <% if inform.inf_type != 'cito' %>
-                    <div class="mb-1">
-                      <%= link_to edit_diagnostic_path(diagnostic), remote: true, class: "btn btn-outline-primary btn-sm" do %>
-                        <span>&#9998;</span>
-                      <% end %>
-                      <%= link_to diagnostic, method: :delete, remote: true, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-danger btn-sm" do %>
-                        <span>&times;</span>
-                      <% end %>
+                  
+                  <div class="mb-1">
+                    <%= link_to edit_diagnostic_path(diagnostic), remote: true, class: "btn btn-outline-primary btn-sm" do %>
+                      <span>&#9998;</span>
+                    <% end %>
+                    <%= link_to diagnostic, method: :delete, remote: true, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-danger btn-sm" do %>
+                      <span>&times;</span>
+                    <% end %>
+                    <% if inform.inf_type != 'cito' %>
                       <span>
                         <%= diagnostic.description %> <strong>[<%= diagnostic.pss_code %> / <%= diagnostic.who_code %>]</strong>
                       </span>
-                    </div>
-                  <% else %>
-                    <p>Código Patología Suescún para citología: <%= diagnostic.pss_code %></p>
-                    <% if diagnostic.result == "negativa" %>
-                      <div class="alert alert-success">
                     <% else %>
-                      <% if diagnostic.result == "insatisfactoria" %>
-                        <div class="alert alert-warning">
-                      <% else %>
-                        <div class="alert alert-danger">
+                      <span class="text-muted">
+                        [ - el <%= diagnostic.created_at.strftime('%d/%m/%Y') %> <%= User.where(id: diagnostic.user_id).first.try(:fullname) %> agregó ]
+                      </span>
+                      <p>Código citología: <%= diagnostic.pss_code %></p>
+                      <div class="alert alert-<%= diagnostic.result == "negativa" ? "success" : diagnostic.result == "insatisfactoria" ? "warning" : "danger" %>">
+                        <p>Resultado: <strong><%= diagnostic.result %></strong></p>
+                      </div>
                       <% end %>
-                    <% end %>
-                    
-                      <p>Resultado: <strong><%= diagnostic.result %></strong></p>
-                    </div>
-                    
-                  <% end %>
+                  </div>
                 <% end %>
                 
                 <% diagnostic.objections.each do |objection| %>

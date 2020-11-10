@@ -1,90 +1,104 @@
 <div class="container suggestions-out">
   <div class="row">
     <div class="col-12 col-lg-12 col-xl-12">
-    	<h4>Sugerencias:</h4>
-    	<% inform.suggestions.each_with_index do |suggestion, n| %>
-    	  <% if inform.inf_type == 'cito' && (suggestion.cyto_status == 'correct' || suggestion.cyto_status == 'confirmed') %>
-          <div class="alert alert-success">
-        <% end %>
-        <% if inform.inf_type == 'cito' && suggestion.cyto_status == 'uncorrect' %>
-          <div class="alert alert-warning">
-        <% end %>
-        <% if inform.inf_type == 'cito' && suggestion.cyto_status == nil %>
-          <div class="alert alert-dark">
-        <% end %>
-    	  	<div class="d-flex flex-row justify-content-between align-items-center">
-    	  	  <strong>
-    	  	    Sugerencia <%= n + 1 %> de <%= inform.suggestions.count %> para <%= inform.tag_code %>, creada el <%= suggestion.created_at.strftime('%d/%m/%Y') %>
-    	  	  </strong>
-              <%= link_to suggestion, method: :delete, remote: true, class: "btn btn-outline-dark btn-sm" do %>
-                <span>&times;</span>
+      <div class="card">
+        <div class="card-header m-0 p-0">
+          <div class="d-flex justify-content-start align-items-center">
+            <span>
+              <%= form_with url: new_suggestion_path, method: "get", remote: true, class: "suggestion-form-out mr-1 my-1 ml-1" do |form| %>
+                <%= form.submit "+", class: "btn btn-primary btn-sm" %>
+                <%= form.hidden_field :inform_id, value: inform.id %>
               <% end %>
-    	  	</div>
-    	    <% if edit_suggestion == suggestion %>
-              <%= form_with model: suggestion do |f| %>
-                <div class="field">
-                  <%= f.label "Sugerencia:" %>
-                  <%= f.text_area :description, value: suggestion.description, rows: 8, class: "form-control input" %>
-                  <%= f.hidden_field :edit_su_status, value: edit_su_status %>
-                </div>
-                <div class="actions">
-                  <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
-                </div>
-              <% end %>
-            <% else %>
-              <p>
-                <%= link_to edit_suggestion_path(suggestion), remote: true do %>
-                <span style="font-size: 25px;color: black;border: 1px solid black; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
-                <% end %>
-                <span><%= suggestion.description %>
-              </p>
+            </span>
+            <strong>Sugerencias</strong>
+          </div>
+        </div>
+        <div class="card-body py-0">
+          <p class="card-text">
+          <% inform.suggestions.each_with_index do |suggestion, n| %>
+            <% if inform.inf_type == 'cito' && (suggestion.cyto_status == 'correct' || suggestion.cyto_status == 'confirmed') %>
+              <div class="alert alert-success">
             <% end %>
-
-            <div class="text-muted"><p>Por: <%= User.where(id: suggestion.user_id).first.try(:fullname) %></p></div>
-
-            <% suggestion.objections.each do |objection| %>
+            <% if inform.inf_type == 'cito' && suggestion.cyto_status == 'uncorrect' %>
+              <div class="alert alert-warning">
+            <% end %>
+            <% if inform.inf_type == 'cito' && suggestion.cyto_status == nil %>
               <div>
-                <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></span>
-              </div>
+            <% end %>
               
-              <% if edit_objection_id == nil %>
-                <div class="d-flex flex-column">
-                  <span class="text-muted objection-description">
-                    <%= objection.description %>
-                  </span>
-                </div>
-                <% unless objection.closed %>
-                  <%= form_with url: suggestions_review_path, method: "post" do |form| %>
-                    <div class="form-group">
-                      <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
-                      <%= form.hidden_field :objection_id, value: objection.id %>
-                      <%= form.hidden_field :suggestion_id, value: suggestion.id %>
-                    </div>
-                  <% end %>
-                <% end %>
-              <% else %>
-                <% if edit_objection_id == objection %>
-                  <%= form_with url: suggestions_anotate_path, method: "post" do |form| %>
-                    <div class="form-group">
-                      <%= form.label "Historial:" %>
-                      <%= form.text_area :description, value: objection.description, rows: 10, class: "form-control input disabled" %>
-                    </div>
-                    <div class="form-group">
-                      <%= form.label "Acción de mejora:" %>
-                      <%= form.text_area :new_description, rows: 2, class: "form-control input" %>
+              <% if edit_suggestion == suggestion %>
+                  <%= form_with model: suggestion do |f| %>
+                    <div class="field">
+                      <%= f.label "Sugerencia:" %>
+                      <%= f.text_area :description, value: suggestion.description, rows: 8, class: "form-control input" %>
+                      <%= f.hidden_field :edit_su_status, value: edit_su_status %>
                     </div>
                     <div class="actions">
-                      <%= form.submit "Anotar", class: "btn btn-warning mx-1 my-1" %>
-                      <%= form.hidden_field :objection_id, value: objection.id %>
-                      <%= form.hidden_field :suggestion_id, value: suggestion.id %>
+                      <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
                     </div>
                   <% end %>
+                <% else %>
+                  <span>
+                    <%= link_to edit_suggestion_path(suggestion), remote: true, class: "btn btn-outline-primary btn-sm" do %>
+                      <span>&#9998;</span>
+                    <% end %>
+                    <%= link_to suggestion, method: :delete, remote: true, data: { confirm: '¿Confirmas la operación?' }, class: "btn btn-outline-danger btn-sm" do %>
+                      <span>&times;</span>
+                    <% end %>
+                  </span>
+                  <span class="text-muted">
+                    [ - el <%= suggestion.created_at.strftime('%d/%m/%Y') %> <%= User.where(id: suggestion.user_id).first.try(:fullname) %> agregó ]
+                  </span>
+                  <p><%= suggestion.description %></p>
                 <% end %>
-              <% end %>
+                <% suggestion.objections.each do |objection| %>
+                  <div>
+                    <span class="badge badge-<%= objection.closed == false ? "danger" : "warning" %>">No conformidad: <%= objection_title(objection.obcode_id) %></span>
+                  </div>
+                  
+                  <% if edit_objection_id == nil %>
+                    <div class="d-flex flex-column">
+                      <span class="text-muted objection-description">
+                        <%= objection.description %>
+                      </span>
+                    </div>
+                    <% unless objection.closed %>
+                      <%= form_with url: suggestions_review_path, method: "post" do |form| %>
+                        <div class="form-group">
+                          <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
+                          <%= form.hidden_field :objection_id, value: objection.id %>
+                          <%= form.hidden_field :suggestion_id, value: suggestion.id %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <% if edit_objection_id == objection %>
+                      <%= form_with url: suggestions_anotate_path, method: "post" do |form| %>
+                        <div class="form-group">
+                          <%= form.label "Historial:" %>
+                          <%= form.text_area :description, value: objection.description, rows: 10, class: "form-control input disabled" %>
+                        </div>
+                        <div class="form-group">
+                          <%= form.label "Acción de mejora:" %>
+                          <%= form.text_area :new_description, rows: 2, class: "form-control input" %>
+                        </div>
+                        <div class="actions">
+                          <%= form.submit "Anotar", class: "btn btn-warning mx-1 my-1" %>
+                          <%= form.hidden_field :objection_id, value: objection.id %>
+                          <%= form.hidden_field :suggestion_id, value: suggestion.id %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
             <% end %>
-    	  </div>
-    	  
-    	<% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-12 col-xl-12 suggestion-form">
+      <!-- Esto se deja para poder alojar una forma manual -->
     </div>
   </div>
 </div>

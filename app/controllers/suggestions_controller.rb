@@ -15,7 +15,7 @@ class SuggestionsController < ApplicationController
 
   # GET /suggestions/new
   def new
-    @suggestion = Suggestion.new
+    @inform = Inform.find(params[:inform_id])
   end
 
   # GET /suggestions/1/edit
@@ -26,50 +26,16 @@ class SuggestionsController < ApplicationController
   # POST /suggestions
   # POST /suggestions.json
   def create
-    @suggestion = Suggestion.new(suggestion_params)
+   @inform = Inform.find(params[:inform_id])
+   @suggestion = @inform.suggestions.build(suggestion_params)
+   @suggestion.user_id = current_user.id
 
-    respond_to do |format|
-      if @suggestion.save
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully created.' }
-        format.json { render :show, status: :created, location: @suggestion }
-      else
-        format.html { render :new }
-        format.json { render json: @suggestion.errors, status: :unprocessable_entity }
-      end
-    end
+   @suggestion.save
   end
 
   # PATCH/PUT /suggestions/1
   # PATCH/PUT /suggestions/1.json
   def update
-    if params[:suggestion][:edit_su_status] == "true"
-      log = ""
-      if @suggestion.description != suggestion_params[:description]
-        log += "FECHA: " + Date.today.to_s
-        log += " CAMBIOS: "
-        log += " Descripción - ANTES: " + @suggestion.description
-        log += ", por: " + User.where(id: @suggestion.user_id).first.try(:email).to_s
-        log += " Descripción - DESPUES: " + suggestion_params[:description].to_s
-        log += ", por: " + current_user.email + " \n"
-
-      else
-        log += "FECHA: " + Date.today.to_s
-        log += " SUGERENCIA SIN CAMBIOS."
-      end
-
-      #Obcode 16 corresponde a error en automatico o codigo biopsias
-      @objection = @suggestion.objections.new(
-        responsible_user_id: @suggestion.user_id,
-        user_id: current_user.id,
-        description: log,
-        obcode_id: 16,
-        close_user_id: nil,
-        closed: false
-      ) 
-      #@objectionable se crea en una version (una clase heredada) personalizada del controlador de Objection para cada tipo de modelo DESDE DONDE se le llama
-      @objection.save
-    end
-
     @suggestion.update(suggestion_params)
 
     @inform = @suggestion.inform

@@ -235,6 +235,7 @@ Rails.application.routes.draw do
       resources :micros
       resources :diagnostics
       resources :cytologies
+      resources :suggestions
       
       resources :pictures, module: :informs
 

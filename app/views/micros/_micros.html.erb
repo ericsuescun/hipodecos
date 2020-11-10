@@ -13,7 +13,7 @@
             <strong>Descripción Micro</strong>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body py-0">
           
           <p class="card-text">
             <% inform.micros.each_with_index do |micro, n| %>
@@ -24,7 +24,7 @@
                 <div class="alert alert-warning">
               <% end %>
               <% if inform.inf_type == 'cito' && micro.cyto_status == nil %>
-                <div class="alert alert-dark">
+                <div>
               <% end %>
               <% if inform.inf_type != 'cito'  %>
                 <div>

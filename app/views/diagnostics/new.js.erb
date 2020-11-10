@@ -3,7 +3,7 @@ $(document).on('page:load', refresh());
 function refresh() {
 
 	$('form.diagnostic-form-out').remove();
-	$('div.diagnostic-form').append('<%= j render "diagnostics/diagnostic-form", inform: @inform, diagcodes: @diagcodes %>');
+	$('div.diagnostic-form').append('<%= j render "diagnostics/diagnostic-form#{ @inform.inf_type == "cito" ? "-cito" : ""}", inform: @inform, diagcodes: @diagcodes %>');
 
 	
 	setTimeout(function() {

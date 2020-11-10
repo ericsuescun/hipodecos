@@ -16,15 +16,19 @@
           </div> -->
           <div class="col-12 col-lg-6 col-xl-6">
             <div class="row">
-              <div class="micros-in">
-                <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+              <div class="col-12">
+                <div class="micros-in">
+                  <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="diagnostics-in mt-3">
-                <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
+              <div class="col-12">
+                <div class="diagnostics-in mt-3">
+                  <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
+                </div>
               </div>
+              
             </div>
+            
           </div>
           <div class="col-12 col-lg-6 col-xl-6">
             <div class="card">
@@ -162,27 +166,151 @@
       <% else %>
 
         <div class="row">
-          <div class="col-12 col-lg-4 col-xl-4">
-            <div class="micros-in">
-              <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+          <div class="col-12 col-lg-6 col-xl-6">
+            <div class="row">
+              <div class="col-12">
+                <div class="micros-in">
+                  <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <div class="diagnostics-in">
+                  <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <div class="suggestions-in">
+                  <%= render partial: "suggestions/suggestions", locals: { inform: @inform, edit_suggestion: nil, edit_objection_id: nil, edit_su_status: false } %>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-12 col-lg-4 col-xl-4">
-            <div class="diagnostics-in">
-              <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
-            </div>
-          </div>
-          <div class="col-12 col-lg-4 col-xl-4">
-            <div class="suggestions-in">
-              <%= render partial: "suggestions/suggestions", locals: { inform: @inform, edit_suggestion: nil, edit_objection_id: nil, edit_su_status: false } %>
+          <div class="col-12 col-lg-6 col-xl-6">
+            <div class="card">
+              <div class="card-header m-0 p-0 pl-1">
+                <strong>Lista de automáticos</strong>
+              </div>
+              <div class="card-body">
+                
+                <p class="card-text">
+                  <div class="row">
+                    <div class="col-12 col-lg-6 col-xl-6">
+                      <table class="table table-hover select-micro">
+                        <tbody>
+                          <% @automatics.each_with_index do |automatic, j| %>
+                            <% if j < (@automatics.length / 2) + 1 %>
+                              <tr class="m-organ-<%= Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '') %> m-0 p-0">
+                                <td>
+                                  <span class="d-flex flex-row justify-content-between">
+                                    <%= automatic.title %>
+                                    <% automatic.scripts.each_with_index do |script, n| %>
+                                      <% if n == 0 %>
+
+                                        <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
+
+                                          <div class="actions">
+                                            <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
+                                              <%= "Opción #{n + 1}: " %>
+                                            </span>
+                                            <%= form.submit "#{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
+                                            <%= form.hidden_field :inform_id, value: @inform.id %>
+                                            <%= form.hidden_field :automatic_id, value: automatic.id %>
+                                            <%= form.hidden_field :script_id, value: script.id %>
+                                          </div>
+                                        <% end %>
+                                      <% end %>
+                                    <% end %>
+                                  </span>
+                                </td>
+                              </tr>
+                              <% automatic.scripts.each_with_index do |script, n| %>
+                                <% if n > 0 %>
+                                  <tr>
+                                    <td>
+                                      <span class="d-flex flex-row justify-content-end">
+                                        <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
+                                          <div class="actions">
+                                            <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
+                                              <%= "Opción #{n + 1}: " %>
+                                            </span>
+                                            <%= form.submit "#{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
+                                            <%= form.hidden_field :inform_id, value: @inform.id %>
+                                            <%= form.hidden_field :automatic_id, value: automatic.id %>
+                                            <%= form.hidden_field :script_id, value: script.id %>
+                                          </div>
+                                        <% end %>
+                                      </span>
+                                    </td>
+                                  </tr>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-12 col-lg-6 col-xl-6">
+                      <table class="table table-hover select-micro">
+                        <tbody>
+                          <% @automatics.each_with_index do |automatic, j| %>
+                            <% if j > @automatics.length / 2 %>
+                              <tr class="m-organ-<%= Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '') %> m-0 p-0">
+                                <td>
+                                  <span class="d-flex flex-row justify-content-between">
+                                    <%= automatic.title %>
+                                    <% automatic.scripts.each_with_index do |script, n| %>
+                                      <% if n == 0 %>
+                                        <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
+                                          <div class="actions">
+                                            <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
+                                              <%= "Opción #{n + 1}: " %>
+                                            </span>
+                                            <%= form.submit "#{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
+                                            <%= form.hidden_field :inform_id, value: @inform.id %>
+                                            <%= form.hidden_field :automatic_id, value: automatic.id %>
+                                            <%= form.hidden_field :script_id, value: script.id %>
+                                          </div>
+                                        <% end %>
+                                      <% end %>
+                                    <% end %>
+                                  </span>
+                                </td>
+                              </tr>
+                              <% automatic.scripts.each_with_index do |script, n| %>
+                                <% if n > 0 %>
+                                  <tr>
+                                    <td>
+                                      <span class="d-flex flex-row justify-content-end">
+                                        <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
+                                          <div class="actions">
+                                            <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
+                                              <%= "Opción #{n + 1}: " %>
+                                            </span>
+                                            <%= form.submit "#{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
+                                            <%= form.hidden_field :inform_id, value: @inform.id %>
+                                            <%= form.hidden_field :automatic_id, value: automatic.id %>
+                                            <%= form.hidden_field :script_id, value: script.id %>
+                                          </div>
+                                        <% end %>
+                                      </span>
+                                    </td>
+                                  </tr>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </p>
+                
+              </div>
             </div>
           </div>
         </div>
-        
       <% end %>
     </div>
-
-    
     <div class="row">
       <div class="col-4 col-lg-4 col-xl-4 mx-auto">
         <%= link_to "OK para validación", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>

@@ -95,7 +95,7 @@
                               <%= sample.description %>
                             <% end %>
                             
-                            <% if sample.fragment == nil || sample.description == nil || edit_sample_tag == sample.sample_tag %>
+                            <% if (sample.fragment == nil && sample.name != "Extendido") || sample.description == nil || edit_sample_tag == sample.sample_tag %>
                               <%= form_with model: sample do |f| %>
                                 <div class="field">
                                   <% if sample.name == "Cassette" %>

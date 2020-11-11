@@ -204,57 +204,47 @@
             </div>
           </div>
         </div>
-        <% if @inform.inf_type == 'cito' %>
-          <%= informs_form.form_with model: cytology do |cyto_form| %>
-            <%= render "shared/error_messages", target: cytology %>
-            <%= form.hidden_field :edit_status, value: true %>
-            
-                <div class="row">
-                  <div class="col-12 col-lg-3 col-xl-3">
-                    <div class="form-group">
-                      <%= cyto_form.label "Fecha toma muestra:" %>
-                      <%= cyto_form.date_field :sample_date, class: "form-control input" %>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-3 col-xl-3">
-                    <div class="form-group">
-                      <%= cyto_form.label "Última menstruación:" %>
-                      <%= cyto_form.text_field :last_mens, class: "form-control input" %>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-3 col-xl-3">
-                    <div class="form-group">
-                      <%= cyto_form.label "Cita anterior:" %>
-                      <%= cyto_form.text_field :prev_appo, class: "form-control input" %>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-3 col-xl-3">
-                    <div class="form-group">
-                      <%= cyto_form.label "Último resultado:" %>
-                      <%= cyto_form.text_field :last_result, class: "form-control input" %>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-3 col-xl-3">
-                    <div class="form-group">
-                      <%= cyto_form.label "Embarazos:" %>
-                      <%= cyto_form.number_field :pregnancies, class: "form-control input" %>
-                    </div>
-                  </div>
-                  <div class="col-12 col-lg-3 col-xl-3">
-                    <div class="form-group">
-                      <%= cyto_form.label "Método de planificación:" %>
-                      <%= cyto_form.text_field :birth_control, class: "form-control input" %>
-                    </div>
-                  </div>
+        <% if params[:inf_type] == 'cito' %>
+          <%= informs_form.fields_for :cytologies do |cyto_form| %>
+            <h5>Citología</h5>
+            <div class="row">
+              <div class="col-12 col-lg-3 col-xl-3">
+                <div class="form-group">
+                  <%= cyto_form.label "Fecha toma muestra:" %>
+                  <%= cyto_form.date_field :sample_date, class: "form-control input" %>
                 </div>
-                <div class="row">
-                  <div class="col-12 col-lg-3 col-xl-3">
-                    <div class="actions">
-                      <%= cyto_form.submit "Guardar", class: "btn btn-warning" %>
-                    </div>
-                  </div>
+              </div>
+              <div class="col-12 col-lg-3 col-xl-3">
+                <div class="form-group">
+                  <%= cyto_form.label "Última menstruación:" %>
+                  <%= cyto_form.text_field :last_mens, class: "form-control input" %>
                 </div>
-              
+              </div>
+              <div class="col-12 col-lg-3 col-xl-3">
+                <div class="form-group">
+                  <%= cyto_form.label "Cita anterior:" %>
+                  <%= cyto_form.text_field :prev_appo, class: "form-control input" %>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-xl-3">
+                <div class="form-group">
+                  <%= cyto_form.label "Último resultado:" %>
+                  <%= cyto_form.text_field :last_result, class: "form-control input" %>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-xl-3">
+                <div class="form-group">
+                  <%= cyto_form.label "Embarazos:" %>
+                  <%= cyto_form.number_field :pregnancies, class: "form-control input" %>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-xl-3">
+                <div class="form-group">
+                  <%= cyto_form.label "Método de planificación:" %>
+                  <%= cyto_form.text_field :birth_control, class: "form-control input" %>
+                </div>
+              </div>
+            </div>
           <% end %>
         <% end %>
         
@@ -302,7 +292,7 @@
           </div>
         <% end %>
         <div class="actions">
-          <%= informs_form.submit "Guardar", class: "btn btn-primary" %>
+          <%= informs_form.submit "Guardar", class: "btn btn-primary mt-3" %>
         </div>
       <% end %>
     </div>

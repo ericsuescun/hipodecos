@@ -188,7 +188,11 @@
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= informs_form.label "Estado del paciente" %>
-              <%= informs_form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @patient.informs), { include_blank: true }, class: "form-control form-control input") %>
+              <% if params[:inf_type] == 'hosp' || params[:inf_type] == '' %>
+                <%= informs_form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @patient.informs), { include_blank: true }, class: "form-control form-control input") %>
+              <% else %>
+                <%= informs_form.select(:status, options_for_select([['Ambulatorio', '1'], ['Hospitalizado', '2']], @patient.informs), {  }, class: "form-control form-control input") %>
+              <% end %>
             </div>
           </div>
           <div class="col-12 col-lg-3">

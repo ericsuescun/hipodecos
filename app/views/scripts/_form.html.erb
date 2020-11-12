@@ -9,7 +9,7 @@
             <div class="col-2 col-lg-2">
               <div class="form-group">
                 <%= form.label "Modelo a crear" %>
-                <%= form.select(:script_type, options_for_select([['+1 Rec', 'rec'], ['+1 Bloque', 'blo'], ['+1 Corte', 'cor'], ['+1 Ext', 'ext']], @script.script_type), {  }, class: "form-control input") %>
+                <%= form.select(:script_type, options_for_select([['+1 Recipiente', 'rec'], ['+1 Bloque', 'blo'], ['+1 Corte', 'cor'], ['+1 Ext', 'ext'], ['+1 CUP', 'cup']], @script.script_type), {  }, class: "form-control input") %>
               </div>
 
               <div class="form-group">
@@ -18,9 +18,12 @@
               </div>
 
               <div class="form-group">
-                <!-- <%= form.label "Órgano" %> -->
-                <!-- <%= form.text_field :organ, class: "form-control input" %> -->
                 <%= form.collection_select(:organ, Organ.all, :organ, :organ, {selected: @selected, include_blank: true, prompt: 'Seleccione órgano'}, { class: "form-control input" }) %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label "(solo para CUP)" %>
+                <%= form.collection_select(:param2, Codeval.all, :id, :code, { include_blank: true, prompt: 'Seleccione CUP'}, { class: "form-control input" }) %>
               </div>
 
                 <!-- <%= form.hidden_field :param2, value: 0 %> -->

@@ -37,7 +37,13 @@
 				      <tr>
 				      	<td><%= script.script_order %></td>
 				      	<td><%= script.organ %></td>
-				        <td><%= script.script_type %></td>
+				        <td>
+				        	<% if script.script_type == "cup" %>
+				        		<%= script.script_type %>: <%= Codeval.find(script.param2).code %>
+				        	<% else %>
+				        		<%= script.script_type %>
+				        	<% end %>
+				        </td>
 				        <td><%= script.description %></td>
 				        
 				        <td><%= script.param1 %></td>

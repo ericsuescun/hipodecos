@@ -257,7 +257,33 @@ class ExecuteTemplatesController < ApplicationController
 				@sample.fragment = script.param1
 				@sample.save
 
-				@last_sample = @sample	
+				@last_sample = @sample
+
+			when "cup"
+				branch = Branch.find(@inform.branch_id)
+				entity = branch.entity
+				cost = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
+				
+				price =  Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.price
+				margin =  price - cost
+
+				cost_description = Cost.where(id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:name)
+				value_description = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:description)
+				rate_description = Rate.where(id: branch.entity.rate_id).first.try(:name)
+				factor_description = Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.try(:description)
+
+				price_description = cost_description + ". " + rate_description + ". Notas costo: " + value_description + ". Notas factor: " + factor_description
+
+				@study = @inform.studies.build(
+					user_id: current_user.id,
+					codeval_id: Codeval.where(code: "898001").first.id,
+					factor: 1,
+					cost: cost,
+					price: price,
+					margin: margin,
+					price_description: price_description
+					)
+				@study.save
 			end
 		end
 
@@ -355,6 +381,7 @@ class ExecuteTemplatesController < ApplicationController
 			@diagnostic.diagcode_id = Diagcode.where(pss_code: @script.pss_code).first.id
 			@diagnostic.who_code = @script.who_code
 		else
+			byebug
 			@diagnostic.diagcode_id = Citocode.where(cito_code: @script.pss_code).first.id
 			@diagnostic.result = Citocode.where(cito_code: @script.pss_code).first.result_type
 

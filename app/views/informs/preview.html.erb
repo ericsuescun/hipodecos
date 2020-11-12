@@ -24,7 +24,7 @@
       <p class="preview-center"><strong>Teléfono:</strong> <%= @inform.p_tel %>, <strong>Celular:</strong> <%= @inform.p_cel %>, <strong>Email:</strong> <%= @inform.p_email %></p>
       
 
-      <p class="preview-center">Recibido el <%= @inform.receive_date.strftime('%d/%m/%Y') %>, <strong>EPS: </strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>, <strong>IPS: </strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %>, dirección: <%= Branch.where(id: @inform.branch_id).first.try(:address) %></p>
+      <p class="preview-center">Recibido el <%= @inform.receive_date.strftime('%d/%m/%Y') %>, <strong>EPS: </strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>, <strong>IPS: </strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %>, dirección: <%= Branch.where(id: @inform.branch_id).first.try(:name) %></p>
 
       <% if @inform.inf_type == 'cito' %>
           <% if @cytology != nil %>

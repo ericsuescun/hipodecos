@@ -12,22 +12,23 @@ module InformsHelper
 
 	def get_birth_control(n)
 		case n
+
 		when "0"
-			"Pastillas"
-		when "1"
 			"DIU"
 		when "2"
-			"Condón"
-		when "3"
-			"Implante"
+			"Implante"	
 		when "4"
-			"Óvulos"
-		when "5"
-			"Tubectomía"
+			"Pastillas"
 		when "6"
 			"Inyección"
-		when "7"
-			"Otro"
+		when "12"
+			"Esterilización"
+		when "14"
+			"Barrera"
+		when "20"
+			"No planifica"
+		when "22"
+			"Basectomía"
 		else
 			"Ninguno"
 		end

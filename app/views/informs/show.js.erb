@@ -6,6 +6,10 @@ function refresh() {
 	console.log('Auto ejecutado!');
 	$('div.recipients').remove();
 	$('div.recipient').append('<%= j render "informs/recipients", inform: @inform, automatics: @automatics, edit_sample_tag: "", edit_recipient_tag: "" %>');
+
+	$('div.codevals').remove();
+	$('div.codeval').append('<%= j render "informs/codevals", inform: @inform, edit_study_form: nil, all_cups_price: @all_cups_price %>');
+	
 	$('div.fast-bar').append('<%= j render "ok-executed" %>');
 	setTimeout(function() {
 		$('div.alert-growl').remove();

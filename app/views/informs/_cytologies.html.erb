@@ -42,7 +42,7 @@
                             <div class="col-12 col-lg-3 col-xl-3">
                               <div class="form-group">
                                 <%= form.label "Último resultado:" %>
-                                <%= cyto_form.select(:last_result, options_for_select([['ASC-US', 'ASC-US'], ['ASC-H', 'ASC-H'], ['AGC-NOS', 'AGC-NOS'], ['AGC-NEO', 'AGC-NEO'], ['LEI-BG', 'LEI-BG'], ['LEI-AG', 'LEI-AG'], ['CARCINOMA', 'CARCINOMA'], ['ADENOCARCINOMA', 'ADENOCARCINOMA'], ['NEGATIVA', 'NEGATIVA'], ['INSATISFACTORIA', 'INSATISFACTORIA']], nil), { include_blank: true }, class: "form-control input") %>
+                                <%= form.select(:last_result, options_for_select([['ASC-US', 'ASC-US'], ['ASC-H', 'ASC-H'], ['AGC-NOS', 'AGC-NOS'], ['AGC-NEO', 'AGC-NEO'], ['LEI-BG', 'LEI-BG'], ['LEI-AG', 'LEI-AG'], ['CARCINOMA', 'CARCINOMA'], ['ADENOCARCINOMA', 'ADENOCARCINOMA'], ['NEGATIVA', 'NEGATIVA'], ['INSATISFACTORIA', 'INSATISFACTORIA']], nil), { include_blank: true }, class: "form-control input") %>
                               </div>
                             </div>
                             <div class="col-12 col-lg-3 col-xl-3">
@@ -54,7 +54,7 @@
                             <div class="col-12 col-lg-3 col-xl-3">
                               <div class="form-group">
                                 <%= form.label "Método de planificación: (código)" %>
-                                <%= form.text_field :birth_control, class: "form-control input" %>
+                                <%= form.select(:birth_control, options_for_select([['DIU', '0'], ['Implante', '2'], ['Pastillas', '4'], ['Inyección', '6'], ['Esterilización', '12'], ['Barrera', '14'], ['No planifica', '20'], ['Basectomía', '22']], nil), { include_blank: true }, class: "form-control input") %>
                               </div>
                             </div>
                           </div>

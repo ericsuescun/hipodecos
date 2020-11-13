@@ -21,7 +21,6 @@ class InformsController < ApplicationController
       @informs = Inform.where(tag_code: params[:tag_code]).paginate(page: params[:page], per_page: 10)
     else
       @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type]).paginate(page: params[:page], per_page: 10)
-      @oldrecords = Oldrecord.where(fecharec: date_range, clave: params[:inf_type] == 'clin' ? "C" : params[:inf_type] == 'hosp' ? "H" : "K").paginate(page: params[:page], per_page: 10)
     end
   end
 
@@ -30,10 +29,13 @@ class InformsController < ApplicationController
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @oldrecords = Oldrecord.where(fecharec: date_range).paginate(page: params[:page], per_page: 60)
     else
-      @oldrecords = Oldrecord.where(fecharec: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 60)
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
     end
+
+    @oldrecords = Oldrecord.where(fecharec: date_range, clave: params[:inf_type] == 'clin' ? "C" : params[:inf_type] == 'hosp' ? "H" : "K").paginate(page: params[:page], per_page: 10)
   end
 
   def index_oldcitos
@@ -41,10 +43,12 @@ class InformsController < ApplicationController
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @oldcitos = Oldcito.where(fecharec: date_range).paginate(page: params[:page], per_page: 60)
     else
-      @oldcitos = Oldcito.where(fecharec: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 60)
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
     end
+    @oldcitos = Oldcito.where(fecharec: date_range, clave: "K").paginate(page: params[:page], per_page: 60)
   end
 
   def last20

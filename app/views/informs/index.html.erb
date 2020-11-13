@@ -48,31 +48,6 @@
         </thead>
 
         <tbody>
-          <% @oldrecords.each do |oldrecord| %>
-            <tr>
-              <td>
-                <%= link_to oldrecord  do %>
-                  <%= oldrecord.tag_code %>
-                <% end %>
-              </td>
-              <td><%= oldrecord.clave %></td>
-              <td><%= oldrecord.fecharec.strftime('%d/%m/%Y') %></td>
-              <td><%= oldrecord.secretaria %></td>
-              <td>
-                <% if oldrecord.patient_id %>
-                  <%= link_to Patient.where(id: oldrecord.patient_id).first  do %>
-                    <%= Patient.where(id: oldrecord.patient_id).first.fullname %>
-                  <% end %>
-                <% else %>
-                  <%= oldrecord.fullname %>
-                <% end %>
-              </td>
-              <td><%= oldrecord.entidad %></td>
-              <td><%= oldrecord.clinica %></td>
-              <td><%= oldrecord.autoriz %></td>
-              <td></td>
-            </tr>
-          <% end %>
           <% @informs.each do |inform| %>
             <tr>
               <td>

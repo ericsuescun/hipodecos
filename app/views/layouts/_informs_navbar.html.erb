@@ -10,22 +10,41 @@
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Informes
+              Clínica
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Informes", informs_path, class: "dropdown-item" %>
-              <%= link_to "Hoy", informs_path + "?init_date=" + Date.today.strftime("%d-%m-%Y") + "&final_date=" + Date.today.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Ayer", informs_path + "?init_date=" + (Date.today - 1).strftime("%d-%m-%Y") + "&final_date=" + (Date.today - 1).strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Antier", informs_path + "?init_date=" + (Date.today - 2).strftime("%d-%m-%Y") + "&final_date=" + (Date.today - 2).strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Trasantier(Puente)", informs_path + "?init_date=" + (Date.today - 3).strftime("%d-%m-%Y") + "&final_date=" + (Date.today - 3).strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Últimos 7 días", informs_path + "?init_date=" + (Date.today - 7).strftime("%d-%m-%Y") + "&final_date=" + (Date.today - 1).strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Últimos 30 días", informs_path + "?init_date=" + (Date.today - 30).strftime("%d-%m-%Y") + "&final_date=" + (Date.today - 1).strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Este mes", informs_path + "?init_date=" + Date.today.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Date.today.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "El mes pasado", informs_path + "?init_date=" + 1.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + 1.month.ago.end_of_month.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Hoy", informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Ayer", informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Antier", informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Esta semana", informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Este mes", informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "El mes pasado", informs_path + "?init_date=" + 1.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + 1.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Biopsias FoxPro", index_oldrecords_informs_path + "?init_date=" + (Oldrecord.first.fecharec - 1.day).strftime("%d-%m-%Y") + "&final_date=" + Oldrecord.first.fecharec.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Citologías FoxPro", index_oldcitos_informs_path + "?init_date=" + (Oldcito.first.fecharec - 1.day).strftime("%d-%m-%Y") + "&final_date=" + Oldcito.first.fecharec.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Hospital
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              
+              
+              <%= link_to "Hospital", informs_path + "?init_date=" + 2.weeks.ago.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
+              
+              
+              
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Citología
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Citologías", informs_path + "?init_date=" + 2.weeks.ago.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               
             </div>
           </li>

@@ -5,35 +5,23 @@ class InformsController < ApplicationController
   # GET /informs
   # GET /informs.json
   def index
-    # if params[:yi]
-    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-    #   date_range = initial_date..final_date
-    #   @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type])
-    #   @oldrecords = Oldrecord.where(fecharec: date_range)
-    # else
-    #   initial_date = 1.year.ago.beginning_of_day
-    #   final_date = Date.today.end_of_day
-    #   date_range = initial_date..final_date
-    #   if params[:tag_code].blank?
-    #     @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type])
-    #     @oldrecords = Oldrecord.where(fecharec: date_range)
-    #   else
-    #     @informs = Inform.where(tag_code: params[:tag_code])
-    #   end
-    # end
     if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @informs = Inform.where(receive_date: date_range).paginate(page: params[:page], per_page: 10)
-    else
-      if params[:tag_code]
-        @informs = Inform.where(tag_code: params[:tag_code]).paginate(page: params[:page], per_page: 10)
-      else
-        @informs = Inform.where(receive_date: 1.day.ago..Time.now).paginate(page: params[:page], per_page: 10)
-      end
       
+    else
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
+
+    end
+
+    if params[:tag_code]
+      @informs = Inform.where(tag_code: params[:tag_code]).paginate(page: params[:page], per_page: 10)
+    else
+      @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type]).paginate(page: params[:page], per_page: 10)
+      @oldrecords = Oldrecord.where(fecharec: date_range, clave: params[:inf_type] == 'clin' ? "C" : params[:inf_type] == 'hosp' ? "H" : "K").paginate(page: params[:page], per_page: 10)
     end
   end
 

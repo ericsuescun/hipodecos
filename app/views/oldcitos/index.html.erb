@@ -1,3 +1,8 @@
+<div class="info">
+  <% if params[:inf_type] %>
+    <h3>Informes FoxPro de <%= params[:inf_type] == "clin" ? "Clínica" : params[:inf_type] == "hosp" ? "Hospital" : "Citología" %></h3>
+  <% end %>
+</div>
 <div class="container">
   <h3><%= @oldcitos.count %> de <%= Oldcito.count %> registros FoxPro encontrados entre el <%= Date.parse(params[:init_date]).strftime("%d/%m/%Y") %> y el <%= Date.parse(params[:final_date]).strftime("%d/%m/%Y") %></h1>
   <div class="row">
@@ -10,13 +15,13 @@
             <div class="col-6">
               <div class="form-group">
                 <%= label_tag "Fecha inicial" %>
-                <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input mb-3" %>
+                <%= date_field_tag :init_date, params[:init_date] != nil ? Date.parse(params[:init_date]) : nil, class: "form-control input mb-3" %>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
                 <%= label_tag "Fecha final" %>
-                <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input mb-3" %>
+                <%= date_field_tag :final_date, params[:final_date] != nil ? Date.parse(params[:final_date]) : nil, class: "form-control input mb-3" %>
               </div>
             </div>
           </div>

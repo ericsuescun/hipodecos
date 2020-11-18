@@ -1,16 +1,16 @@
 <div class="d-flex justify-content-around align-items-center mt-1 flex-column">
   <div class="col-12 col-lg-12 col-lx-12">
-    <%= form_with url: list_slides_color_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
+    <%= form_with url: list_slides_color_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}", method: "post" do |form| %>
       <%= form.submit "#{slide.colored ? "Decolorar" : "Colorear"}", class: "btn btn-block btn#{slide.colored ? "-outline-" : "-"}danger btn-sm mb-2" %>
       <%= form.hidden_field :slide_id, value: slide.id %>
     <% end %>
 
-    <%= form_with url: list_slides_tag_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
+    <%= form_with url: list_slides_tag_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}", method: "post" do |form| %>
       <%= form.submit "#{slide.tagged ? "Desrotular" : "Rotular"}", class: "btn btn-block btn#{slide.tagged ? "-outline-" : "-"}dark btn-sm mb-2" %>
       <%= form.hidden_field :slide_id, value: slide.id %>
     <% end %>
 
-    <%= form_with url: list_slides_cover_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
+    <%= form_with url: list_slides_cover_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}", method: "post" do |form| %>
       <%= form.submit "#{slide.covered ? "Descubrir" : "Cubrir"}", class: "btn btn-block btn#{slide.covered ? "-outline-" : "-"}secondary btn-sm mb-2" %>
       <%= form.hidden_field :slide_id, value: slide.id %>
     <% end %>

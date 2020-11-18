@@ -5,36 +5,55 @@ class BlocksController < ApplicationController
   # GET /blocks
   # GET /blocks.json
   def index
-    if params.has_key?(:yi)
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    @tab = :blocks
+    # if params.has_key?(:yi)
+    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    #   date_range = initial_date..final_date
+    #   @blocks = Block.unscoped.where(created_at: date_range).select(:inform_id).group(:inform_id).distinct
+    #   @allblocks = []
+    #   @blocks.each do |block2|
+    #     block2.inform.blocks.each do |block|
+    #       @allblocks << block
+    #     end
+    #   end
+    # else
+    #   @blocks = Block.unscoped.all.select(:inform_id).group(:inform_id).distinct
+    #   @allblocks = []
+    #   @blocks.each do |block2|
+    #     block2.inform.blocks.each do |block|
+    #       @allblocks << block
+    #     end
+    #   end
+    # end
+
+    # if params[:yi]
+    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    #   date_range = initial_date..final_date
+    #   @samplesc = Sample.where(created_at: date_range, name: "Cassette")
+    # else
+    #   @samplesc = Sample.where(name: "Cassette")
+    # end
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @blocks = Block.unscoped.where(created_at: date_range).select(:inform_id).group(:inform_id).distinct
-      @allblocks = []
-      @blocks.each do |block2|
-        block2.inform.blocks.each do |block|
-          @allblocks << block
-        end
-      end
+      
     else
-      @blocks = Block.unscoped.all.select(:inform_id).group(:inform_id).distinct
-      @allblocks = []
-      @blocks.each do |block2|
-        block2.inform.blocks.each do |block|
-          @allblocks << block
-        end
-      end
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
     end
 
-    if params[:yi]
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-      date_range = initial_date..final_date
-      @samplesc = Sample.where(created_at: date_range, name: "Cassette")
-    else
-      @samplesc = Sample.where(name: "Cassette")
-    end
-
+    @blocks = Block.unscoped.where(created_at: date_range).select(:inform_id).group(:inform_id).distinct
+    # @allblocks = []
+    # @blocks.each do |block2|
+    #   block2.inform.blocks.each do |block|
+    #     @allblocks << block
+    #   end
+    # end
+    # @samplesc = Sample.where(created_at: date_range, name: "Cassette")
   end
 
   # GET /blocks/1

@@ -1,0 +1,78 @@
+<div class="info">
+  <% if params[:init_date] %>
+    <h4>Inclusión de bloques <%= new_search_range %></h4>
+  <% end %>
+</div>
+<h4></h4>
+<div class="row">
+  <div class="col-12 col-lg-12 mb-3 mx-auto">
+    <div class="inclusion-block">
+      
+
+      <div class="inclusion-blocks">
+        <div class="container-fluid">
+            <%= form_with url: inclusion_blocks_massive_inclusion_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}", method: "post" do |form| %>
+
+              <%= form.submit "Incluir lo marcado", class: "ml-1 my-0 d-flex btn btn-sm btn-outline-success" %>
+              <div class="row">
+                <div class="col-12 col-lg-12 col-xl-12">
+                  
+                  <div class="row">
+                    
+                      <% create_matrix(@informs_data,5).each do |informs_data| %>
+                        <div class="col-3 col-lg-3 col-xl-2">
+                          <table class="table table-hover list-blocks">
+                            
+                            <tbody>
+                              <% informs_data.each do |inform_data| %>
+                                <% inform = inform_data[0] %>
+                                <% samplesc = inform_data[1] %>
+                                <% blocks = inform_data[2] %>
+                                <tr class="inclusion-inform p-0 m-0">
+                                  <td class="m-0 p-0"><strong><span  class="badge badge-dark"><%= inform.tag_code %></span></strong></td>
+                                  <td class="m-0 p-0"></td>
+                                  <td class="m-0 p-0"><span  class="badge badge-dark"><%= blocks.count %></span></td>
+                                </tr>
+                                <tr>
+                                  <% samplesc.each_with_index do |sample, n| %>
+                                    <tr class="inclusion-inform p-0 m-0 table-<%= sample.fragment == blocks[n].fragment ? "success" : "warning" %>">
+                                      <% if sample.sample_tag == blocks[n].block_tag %>
+                                        <td class="m-0 p-0"><%= sample.sample_tag %></td>
+                                      <% else %>
+                                        <td class="m-0 p-0">Error de etiqueta</td>
+                                      <% end %>
+                                      <td class="m-0 p-0"><span class="d-flex pt-2 mr-1 badge badge-primary"><%= sample.fragment %></span></td>
+                                      <td id="add-link-block-<%= blocks[n].block_tag %>" class="m-0 p-0">
+                                        <%= render partial: "inclusion_blocks/link-block", locals: { sample: sample, block: blocks[n] } %>
+                                      </td>
+                                      <% if sample.included == true %>
+                                        <td class="m-0 p-0"></td>
+                                      <% else %>
+                                        <td class="m-0 p-0"><%= check_box_tag "block_ids[]", blocks[n].id, checked: true %></td>
+                                      <% end %>
+                                      <% if !sample.included %>
+                                        <td class="m-0 p-0">
+                                          <%= render partial: "inclusion_blocks/inclusion-block-controls", locals: { block: blocks[n], sample: sample } %>
+                                        </td>
+                                      <% else %>
+                                        <td></td>
+                                      <% end %>
+                                    </tr>
+                                  <% end %>
+                                </tr>
+                              <% end %>
+                            </tbody>
+                          </table>
+                        </div>
+                      <% end %>
+                    
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

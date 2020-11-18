@@ -16,6 +16,36 @@ class InclusionBlocksController < ApplicationController
 		end
 	end
 
+	def index
+		@tab = :inclusion
+		if params[:init_date]
+		  initial_date = Date.parse(params[:init_date]).beginning_of_day
+		  final_date = Date.parse(params[:final_date]).end_of_day
+		  date_range = initial_date..final_date
+		  
+		else
+		  initial_date = 1.day.ago.beginning_of_day
+		  final_date = Time.now.end_of_day
+		  date_range = initial_date..final_date
+		end
+		# @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
+		# @samplesc = Sample.where(name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
+		# build_inclusion
+
+		@blocks = Block.where(created_at: date_range)
+		@informs = []
+		@blocks.each do |block|
+			@informs << block.inform
+		end
+		@informs = @informs.uniq
+
+		@informs_data = []
+		# @informs = Inform.where(receive_date: date_range)
+		@informs.each do |inform|
+			@informs_data << [ inform, inform.samples.where(name: "Cassette"), inform.blocks]
+		end
+	end
+
 	def build_inclusion
 		@inclusion = []
 		@blocks.each_with_index do |block, n|
@@ -101,7 +131,8 @@ class InclusionBlocksController < ApplicationController
 	  	end
 	  	@sample.update(included: true, user_id: current_user.id)
 	  end
-	  get_blocks
+	  # get_blocks
+	  redirect_to inclusion_blocks_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date]
 	end
 
 	def block_store
@@ -117,35 +148,35 @@ class InclusionBlocksController < ApplicationController
 
 	def block_fp1
 		@sample = Sample.find(params[:sample_id])
-		@block = Block.find(params[:block_id])
+		@block = Block.find(params[:id])
 		@block.update(fragment: @block.fragment + 1, user_id: current_user.id)
 		@inform = @block.inform
 		@samplesc = @inform.samples.where(name: "Cassette")
-		get_blocks
+		# get_blocks
 	end
 
 	def block_fm1
 		@sample = Sample.find(params[:sample_id])
-		@block = Block.find(params[:block_id])
+		@block = Block.find(params[:id])
 		@block.update(fragment: @block.fragment - 1, user_id: current_user.id)
 		@inform = @block.inform
 		@samplesc = @inform.samples.where(name: "Cassette")
-		get_blocks
+		# get_blocks
 	end
 
-	def get_blocks
-		if params[:yi] != ""
-		  initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-		  final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-		  date_range = initial_date..final_date
-		  @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
-		  # @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag").select("blocks.block_tag, blocks.fragment")
-		  @samplesc = Sample.where(created_at: date_range, name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
-		  build_inclusion
-		else
-		  @blocks = Block.joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
-		  @samplesc = Sample.where(name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
-		  build_inclusion
-		end
-	end
+	# def get_blocks
+	# 	if params[:yi] != ""
+	# 	  initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+	# 	  final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+	# 	  date_range = initial_date..final_date
+	# 	  @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
+	# 	  # @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag").select("blocks.block_tag, blocks.fragment")
+	# 	  @samplesc = Sample.where(created_at: date_range, name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
+	# 	  build_inclusion
+	# 	else
+	# 	  @blocks = Block.joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
+	# 	  @samplesc = Sample.where(name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
+	# 	  build_inclusion
+	# 	end
+	# end
 end

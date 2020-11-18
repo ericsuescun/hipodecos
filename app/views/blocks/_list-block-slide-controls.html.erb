@@ -13,7 +13,7 @@
   <% end %>
   <div class="d-flex justify-content-end align-items-center mt-1">
     <% if block.slide_tag == nil %>
-      <%= form_with url: list_blocks_add_block_slide_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", id: "block-#{block.block_tag}" do |form| %>
+      <%= form_with url: list_blocks_add_block_slide_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}", method: "post", id: "block-#{block.block_tag}" do |form| %>
         <div class="actions d-flex flex-row">
           <%= form.submit "+P", class: "btn btn-outline-dark mx-2" %>
           <%= form.hidden_field :sample_id, value: sample.id %>
@@ -22,7 +22,7 @@
         </div>
       <% end %>
     <% else %>
-      <%= form_with url: list_blocks_add_block_series_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", id: "block-s-#{block.block_tag}" do |form| %>
+      <%= form_with url: list_blocks_add_block_series_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}" do |form| %>
         <div class="actions d-flex flex-row">
           <%= form.submit "+S", class: "btn btn-outline-dark mx-2" %>
           <%= form.hidden_field :block_id, value: block.id %>
@@ -30,7 +30,7 @@
       <% end %>
     <% end %>
     <% if block.slide_tag == nil && Slide.where(inform_id: block.inform).length != 0 %>
-      <%= form_with url: list_blocks_associate_block_slide_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", id: "block-a-#{block.block_tag}" do |form| %>
+      <%= form_with url: list_blocks_associate_block_slide_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}" do |form| %>
         <div class="actions d-flex flex-row">
           <%= form.submit "+A", class: "btn btn-outline-dark mx-2" %>
           <%= form.collection_select(:destination_slide, block.inform.slides, :slide_tag, :slide_tag, { prompt: 'Placa'}, { class: "form-control input" }) %>

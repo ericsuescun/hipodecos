@@ -63,9 +63,17 @@ Rails.application.routes.draw do
 
     get 'inclusion_blocks/inclusion'
 
-    post 'inclusion_blocks/block_fp1'
-    post 'inclusion_blocks/inform_ok'
-    post 'inclusion_blocks/block_fm1'
+    # get 'inclusion_blocks/block_fp1'
+    # get 'inclusion_blocks/inform_ok'
+    # get 'inclusion_blocks/block_fm1'
+
+    resources :inclusion_blocks do
+      member do
+        get :block_fp1
+        get :block_fm1
+        get :inform_ok
+      end
+    end
     post 'inclusion_blocks/massive_inclusion'
     post 'inclusion_blocks/block_store'
 

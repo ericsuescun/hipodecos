@@ -1,7 +1,7 @@
 <div class="inclusion-blocks">
   <div class="container-fluid">
     <%= form_tag color_slides_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: :put do %>
-    <%= submit_tag "Colorear lo chequeado", class: "btn btn-danger btn-sm mb-3" %>
+    
       <% if @slidesc.size != 0 %>
         <div class="row">
           <h4>Coloreadas <%= search_range %></h4>
@@ -46,6 +46,7 @@
           </div>
         </div>
       <% end %>
+      <%= submit_tag "Colorear lo chequeado", class: "btn btn-danger btn-sm mb-3" %>
       <% if @slides_first_batch.size != 0 %>
         <div class="row">
           <h4>Canastilla <%= search_range %></h4>

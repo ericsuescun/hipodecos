@@ -41,7 +41,7 @@
 							
 							<!-- <th>id</th> -->
 							<th>Citología</th>
-							<th>Resultado</th>
+							<th>Res</th>
 							<!-- <th>Placas</th> -->
 							<!-- <th>Placas listas</th> -->
 							<th>Revisa</th>
@@ -52,12 +52,12 @@
 					<tbody>
 						<% @informs.each do |inform| %>
 							<% if inform.inf_type == 'cito' %>
-								<tr>
+								<tr class="table-<%= inform.diagnostics.first.try(:result) == 'positiva' ? 'danger' : inform.diagnostics.first.try(:result) == 'negativa' ? 'success' : 'warning'%>">
 									
 									<!-- <td><%= inform.id %></td> -->
 									<td><%= inform.tag_code %></td>
-									<td class="alert alert-<%= inform.diagnostics.first.try(:result) == 'positiva' ? 'danger' : inform.diagnostics.first.try(:result) == 'negativa' ? 'success' : 'warning'%>">
-										<%= inform.diagnostics.first.try(:result) %>
+									<td>
+										<%= inform.diagnostics.first.try(:result)[0..2] %>
 											
 									</td>
 									<!-- <td><%= inform.slides.count %></td> -->
@@ -85,11 +85,11 @@
 					<tbody>
 						<% @negative_cytos.each do |inform| %>
 							<% if inform.inf_type == 'cito' %>
-								<tr>
+								<tr class="table-<%= inform.diagnostics.first.try(:result) == 'positiva' ? 'danger' : inform.diagnostics.first.try(:result) == 'negativa' ? 'success' : 'warning'%>">
 									<td></td>
 									<!-- <td><%= inform.id %></td> -->
 									<td><%= inform.tag_code %></td>
-									<td><%= inform.diagnostics.first.try(:result) %></td>
+									<td><%= inform.diagnostics.first.try(:result)[0..2] %></td>
 									<!-- <td><%= inform.slides.count %></td> -->
 									<!-- <td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td> -->
 									

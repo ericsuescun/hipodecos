@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContentB">
       <ul class="navbar-nav mr-auto">
         <% if user_signed_in? %>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown <%= 'active' if params[:inf_type] == 'clin' %>">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Clínica
             </a>
@@ -27,7 +27,7 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle <%= 'active' if params[:inf_type] == 'hosp' %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Hospital
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -45,7 +45,7 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle <%= 'active' if params[:inf_type] == 'cito' %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Citología
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -63,47 +63,59 @@
             </div>
           </li>
           <% if role_path_allowed? %>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown <%= 'active' if @tab == :pathologist %>">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Leer material
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-                <%= link_to "Hoy", descr_micros_informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-                <%= link_to "Ayer", descr_micros_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-                <%= link_to "Antier", descr_micros_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-                <%= link_to "Esta semana", descr_micros_informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-                <%= link_to "Este mes", descr_micros_informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
+                <%= link_to "Hoy", descr_micros_informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Ayer", descr_micros_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Antier", descr_micros_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Esta semana", descr_micros_informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Este mes", descr_micros_informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
                 <% (1..6).each do |m| %>
-                  <%= link_to "#{m.month.ago.strftime('%b de %Y')}", descr_micros_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=cito" , class: "dropdown-item" %>
+                  <%= link_to "#{m.month.ago.strftime('%b de %Y')}", descr_micros_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
                 <% end %>
               </div>
             </li>
           <% end %>
           <% if role_cyto_allowed? %>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown <%= 'active' if @tab == :cytologist %>">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Leer material Cito
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-                <%= link_to "Leer material (todos)", descr_micros_cyto_informs_path, class: "dropdown-item" %>
-                <%= link_to "Leer material hoy y ayer", descr_micros_cyto_informs_path + days_ago_search(1), class: "dropdown-item" %>
-                <%= link_to "Leer material semana", descr_micros_cyto_informs_path + days_ago_search(7), class: "dropdown-item" %>
+                <%= link_to "Hoy", descr_micros_cyto_informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Ayer", descr_micros_cyto_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Antier", descr_micros_cyto_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Esta semana", descr_micros_cyto_informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Este mes", descr_micros_cyto_informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <% (1..6).each do |m| %>
+                  <%= link_to "#{m.month.ago.strftime('%b de %Y')}", descr_micros_cyto_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
+                <% end %>
               </div>
             </li>
           <% end %>
           
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown <%= 'active' if @tab == :revision %>">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Validación
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Por validar (todos)", index_revision_informs_path, class: "dropdown-item" %>
-              <%= link_to "Lo de hoy y ayer", index_revision_informs_path + days_ago_search(1), class: "dropdown-item" %>
-              <%= link_to "Lo de la semana", index_revision_informs_path + days_ago_search(7), class: "dropdown-item" %>
+              <%= link_to "Hoy", index_revision_informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Ayer", index_revision_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Antier", index_revision_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Esta semana", index_revision_informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Este mes", index_revision_informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <% (1..6).each do |m| %>
+                <%= link_to "#{m.month.ago.strftime('%b de %Y')}", index_revision_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
+              <% end %>
             </div>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown <%= 'active' if @tab == :ready %>">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Estado
             </a>

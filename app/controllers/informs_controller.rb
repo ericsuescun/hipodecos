@@ -56,28 +56,51 @@ class InformsController < ApplicationController
   end
 
   def index_revision
-    if params[:yi]
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    @tab = :revision
+    # if params[:yi]
+    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    #   date_range = initial_date..final_date
+    #   @informs = Inform.where(receive_date: date_range, inf_status: "revision")
+    # else
+    #   @informs = Inform.where(inf_status: "revision")
+    # end
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @informs = Inform.where(receive_date: date_range, inf_status: "revision")
     else
-      @informs = Inform.where(inf_status: "revision")
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
     end
+    @informs = Inform.where(receive_date: date_range, inf_status: "revision")
   end
 
   def index_ready
-    if params[:yi]
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    @tab = :ready
+    # if params[:yi]
+    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    #   date_range = initial_date..final_date
+    #   @informs = Inform.where(receive_date: date_range, inf_status: "ready")
+    # else
+    #   @informs = Inform.where(inf_status: "ready")
+    # end
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @informs = Inform.where(receive_date: date_range, inf_status: "ready")
     else
-      @informs = Inform.where(inf_status: "ready")
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
     end
+    @informs = Inform.where(receive_date: date_range, inf_status: "ready")
   end
 
   def descr_micros
+    @tab = :pathologist
     # if params[:yi]
     #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
     #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
@@ -100,14 +123,26 @@ class InformsController < ApplicationController
   end
 
   def descr_micros_cyto
-    if params[:yi]
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    @tab = :cytologist
+    # if params[:yi]
+    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    #   date_range = initial_date..final_date
+    #   @informs = Inform.where(receive_date: date_range, inf_status: nil, cytologist: current_user.id)
+    # else
+    #   @informs = Inform.where(inf_status: nil, cytologist: current_user.id)
+    # end
+
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @informs = Inform.where(receive_date: date_range, inf_status: nil, cytologist: current_user.id)
     else
-      @informs = Inform.where(inf_status: nil, cytologist: current_user.id)
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
     end
+    @informs = Inform.where(receive_date: date_range, inf_status: nil, cytologist: current_user.id)
   end
 
   def descr_micro
@@ -271,16 +306,27 @@ class InformsController < ApplicationController
   end
 
   def distribution_cyto
-    if params[:yi]
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    # if params[:yi]
+    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    #   date_range = initial_date..final_date
+    #   # @informs = Inform.where(created_at: date_range).joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
+    #   @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
+    # else
+    #   # @informs = Inform.joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
+    #   @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true).joins(:inform).select("slides.inform_id").distinct
+    # end
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      # @informs = Inform.where(created_at: date_range).joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
-      @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
     else
-      # @informs = Inform.joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
-      @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true).joins(:inform).select("slides.inform_id").distinct
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
     end
+    @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
+
     @informs = []
     @slides.each do |slide|
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count

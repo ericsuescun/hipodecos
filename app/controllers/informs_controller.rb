@@ -96,7 +96,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @informs = Inform.where(receive_date: date_range, inf_status: "ready").paginate(page: params[:page], per_page: 10)
+    @informs = Inform.where(delivery_date: date_range, inf_status: "ready").paginate(page: params[:page], per_page: 10)
   end
 
   def publish

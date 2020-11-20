@@ -19,7 +19,7 @@
         </div>
       </div>
       
-      <h3 class="preview-center">Informe <strong><%= @inform.tag_code %></strong>, <%= @inform.delivery_date == nil ? "-en progreso-" : "entregado el #{@inform.delivery_date}" %></h3>
+      <h3 class="preview-center">Informe <strong><%= @inform.tag_code %></strong>, <%= @inform.delivery_date == nil ? "-en progreso-" : "#{@inform.delivery_date.strftime("%d/%m/%Y")}" %></h3>
       <h3 class="preview-center"><strong><%= @inform.patient.fullname %></strong>, <%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %>, <%= @inform.patient.id_type %>: <%= @inform.patient.id_number %></h3>
       <p class="preview-center"><strong>Teléfono:</strong> <%= @inform.p_tel %>, <strong>Celular:</strong> <%= @inform.p_cel %>, <strong>Email:</strong> <%= @inform.p_email %></p>
       

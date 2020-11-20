@@ -31,7 +31,7 @@
                 <% end %>
               </td>
               <td><%= inform.inf_status %></td>
-              <td><%= (inform.delivery_date - inform.receive_date).to_i %></td>
+              <td><%= (Date.today - inform.receive_date).to_i %></td>
               <td><%= User.where(id: inform.pathologist_review_id).first.try(:first_name) %> <%= User.where(id: inform.pathologist_review_id).first.try(:last_name) %></td>
               <td><%= User.where(id: inform.administrative_review_id).first.try(:first_name) %> <%= User.where(id: inform.administrative_review_id).first.try(:last_name) %></td>
               <td>

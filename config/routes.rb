@@ -230,6 +230,8 @@ Rails.application.routes.draw do
     get 'informs/distribution', to: 'informs#distribution', as: 'distribution'
     get 'informs/distribution_cyto', to: 'informs#distribution_cyto', as: 'distribution_cyto'
     get 'informs/index_ready', to: 'informs#index_ready', as: 'informs_index_ready'
+    get 'informs/index_published', to: 'informs#index_published', as: 'informs_index_published'
+    get 'informs/index_downloaded', to: 'informs#index_downloaded', as: 'informs_index_downloaded'
 
 
     resources :informs do
@@ -256,6 +258,10 @@ Rails.application.routes.draw do
         get :last20
         get :index_oldrecords
         get :index_oldcitos
+
+        put :publish
+        put :unpublish
+        put :undownload
       end
 
       member do

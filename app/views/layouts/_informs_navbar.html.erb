@@ -120,9 +120,22 @@
               Estado
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Listos para publicar", informs_index_ready_path, class: "dropdown-item" %>
-              <%= link_to "Publicados", informs_index_ready_path, class: "dropdown-item" %>
-              <%= link_to "Leídos", informs_index_ready_path, class: "dropdown-item" %>
+              <%= link_to "Listos para publicar hoy", informs_index_ready_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Listos para publicar de ayer", informs_index_ready_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Listos para publicar de esta semana", informs_index_ready_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Listos para publicar de este mes", informs_index_ready_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+
+              <%= link_to "Publicados hoy", informs_index_published_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Publicados ayer", informs_index_published_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Publicados esta semana", informs_index_published_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Publicados este mes", informs_index_published_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+
+              <%= link_to "Descargados hoy", informs_index_downloaded_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Descargados ayer", informs_index_downloaded_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Descargados esta semana", informs_index_downloaded_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Descargados este mes", informs_index_downloaded_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
             </div>
           </li>
           <ul class="navbar-nav d-flex justify-content-end">

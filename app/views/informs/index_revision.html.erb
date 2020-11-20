@@ -7,8 +7,7 @@
           <tr>
             <th>Informe</th>
             <th>Días</th>
-            <th>Revisión Patología</th>
-            <th>Revisión Admin</th>
+            <th>Validación Patología</th>
             <th>Identificación</th>
             <th>Paciente</th>
             <th>Edad</th>
@@ -29,7 +28,6 @@
               </td>
               <td><%= (Date.today - inform.receive_date).to_i %></td>
               <td><%= User.where(id: inform.pathologist_review_id).first.try(:first_name) %> <%= User.where(id: inform.pathologist_review_id).first.try(:last_name) %></td>
-              <td><%= User.where(id: inform.administrative_review_id).first.try(:first_name) %> <%= User.where(id: inform.administrative_review_id).first.try(:last_name) %></td>
               <td><%= inform.patient.id_type + " " + inform.patient.id_number %></td>
               <td>
                 <%= link_to inform.patient  do %>

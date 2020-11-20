@@ -74,7 +74,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @informs = Inform.where(receive_date: date_range, inf_status: "revision")
+    @informs = Inform.where(receive_date: date_range, inf_status: "revision").paginate(page: params[:page], per_page: 10)
   end
 
   def index_ready
@@ -96,7 +96,64 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @informs = Inform.where(receive_date: date_range, inf_status: "ready")
+    @informs = Inform.where(receive_date: date_range, inf_status: "ready").paginate(page: params[:page], per_page: 10)
+  end
+
+  def publish
+    Inform.where(id: params[:inform_ids]).update_all({inf_status: "published", delivery_date: Time.now})
+    if params[:init_date]
+      redirect_to informs_index_published_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}"
+    else
+      redirect_to informs_index_published_path
+    end
+  end
+
+  def index_published
+    @tab = :published
+
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+    else
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
+    end
+    @informs = Inform.where(receive_date: date_range, inf_status: "published").or(Inform.where(receive_date: date_range, inf_status: "downloaded")).paginate(page: params[:page], per_page: 10)
+  end
+
+  def unpublish
+    Inform.where(id: params[:inform_ids]).update_all({inf_status: "ready"})
+    if params[:init_date]
+      redirect_to informs_index_ready_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}"
+    else
+      redirect_to informs_index_ready_path
+    end
+  end
+
+  def index_downloaded
+    @tab = :published
+
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+    else
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
+    end
+    @informs = Inform.where(receive_date: date_range, inf_status: "downloaded").paginate(page: params[:page], per_page: 10)
+  end
+
+  def undownload
+    Inform.where(id: params[:inform_ids]).update_all({inf_status: "published"})
+    if params[:init_date]
+      redirect_to informs_index_published_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}"
+    else
+      redirect_to informs_index_published_path
+    end
   end
 
   def descr_micros
@@ -208,8 +265,11 @@ class InformsController < ApplicationController
       @inform.update(user_review_date: Date.today, administrative_review_id: current_user.id)
     end
     
-    if @inform.pathologist_review_id != nil && @inform.administrative_review_id != nil
-      @inform.update(inf_status: "ready")
+    # if @inform.pathologist_review_id != nil && @inform.administrative_review_id != nil
+    #   @inform.update(inf_status: "ready")
+    # end
+    if @inform.pathologist_review_id != nil
+      @inform.update(inf_status: "ready") #Esta opcion implica solo revision de patologo y queda READY
     end
 
     redirect_to index_revision_informs_path
@@ -484,9 +544,11 @@ class InformsController < ApplicationController
   # PATCH/PUT /informs/1
   # PATCH/PUT /informs/1.json
   def update
-    @inform.branch_id = inform_params[:branch_id]
-    @inform.entity_id = Branch.find(inform_params[:branch_id]).entity.id
-    @inform.save
+    # @inform.branch_id = inform_params[:branch_id]
+    # @inform.entity_id = Branch.find(inform_params[:branch_id]).entity.id
+    # @inform.save
+    @inform.update(inform_params)
+    @inform.update(entity_id: Branch.find(inform_params[:branch_id]).entity.id)
 
     if @inform.inf_status == "revision"
       redirect_to show_revision_inform_path(@inform), notice: 'Informe exitosamente actualizado.'

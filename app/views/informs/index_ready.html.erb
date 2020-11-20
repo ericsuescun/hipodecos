@@ -1,11 +1,15 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
+      <%= form_tag publish_informs_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}", method: :put do %>
       <h1>Informes listos para publicar</h1>
+      <%= submit_tag "Publicar lo chequeado", class: "btn btn-success btn-sm mb-3" %>
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
+            <th></th>
             <th>Informe</th>
+            <th>Estado</th>
             <th>Oportunidad</th>
             <th>Revisión Patología</th>
             <th>Revisión Admin</th>
@@ -13,18 +17,20 @@
             <th>EPS</th>
             <th>Sede IPS</th>
             <th>Código Authoriz.</th>
-            <th scope="1"></th>
+            <th scope="2"></th>
           </tr>
         </thead>
 
         <tbody>
           <% @informs.each do |inform| %>
             <tr>
+              <td><%= check_box_tag "inform_ids[]", inform.id, checked: true %></td>
               <td>
                 <%= link_to inform_path(inform), local: true  do %>
                   <%= inform.tag_code %>
                 <% end %>
               </td>
+              <td><%= inform.inf_status %></td>
               <td><%= (Date.today - inform.receive_date).to_i %></td>
               <td><%= User.where(id: inform.pathologist_review_id).first.try(:first_name) %> <%= User.where(id: inform.pathologist_review_id).first.try(:last_name) %></td>
               <td><%= User.where(id: inform.administrative_review_id).first.try(:first_name) %> <%= User.where(id: inform.administrative_review_id).first.try(:last_name) %></td>
@@ -37,10 +43,12 @@
               <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
               <td><%= inform.prmtr_auth_code %></td>
               <td><%= link_to "Revisar", show_revision_inform_path(inform), local: true %></td>
+              
             </tr>
           <% end %>
         </tbody>
       </table>
+      <% end %>
     </div>
   </div>
 </div>

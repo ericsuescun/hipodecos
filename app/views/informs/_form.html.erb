@@ -3,33 +3,13 @@
     <div class="alert alert-success">
       <%= form_for @inform do |form| %>
         <div class="row">
-          <div class="col-12 col-lg-3">
+          <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= form.label "Tipo Informe" %>
               <%= form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']], @inform.inf_type), { include_blank: true }, class: "form-control form-control input") %>
             </div>
           </div>
           <div class="col-12 col-lg-3">
-            <div class="form-group">
-              <%= form.label "EPS" %>
-              <%= form.select :promoter_id, @promoters, {prompt:"Seleccione la EPS"}, class: "form-control input" %>
-            </div>
-          </div>
-          <div class="col-12 col-lg-3">
-            <div class="form-group">
-              <%= form.label "Sede IPS" %>
-              <%= form.select :branch_id, Branch.pluck(:initials, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control input" %>
-            </div>
-          </div>
-          <div class="col-12 col-lg-3">
-            <div class="form-group">
-              <%= form.label "Factura" %>
-              <%= form.text_field :invoice, autocomplete: "Factura", class: "form-control input"  %>
-            </div>
-          </div>
-        </div> 
-        <div class="row">
-          <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= form.label "Fecha recepción" %>
               <%= form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de nacimiento", class: "form-control input"  %>
@@ -41,10 +21,31 @@
               <%= form.number_field :p_age, class: "form-control input" %>
             </div>
           </div>
-          <div class="col-12 col-lg-1">
+          <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= form.label "Tiempo" %>
               <%= form.select(:p_age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']], @inform.p_age_type), { include_blank: true }, class: "form-control input") %>
+            </div>
+          </div>
+          
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Factura" %>
+              <%= form.text_field :invoice, autocomplete: "Factura", class: "form-control input"  %>
+            </div>
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "EPS" %>
+              <%= form.select :promoter_id, @promoters, {prompt:"Seleccione la EPS"}, class: "form-control input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "Sede IPS" %>
+              <%= form.select :branch_id, Branch.pluck(:initials, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-2">

@@ -63,7 +63,7 @@ class ReportsController < ApplicationController
       @total_branch = []
       entity.branches.each do |branch|
         @partial = 0
-        Inform.where(inf_type: params[:inf_type], receive_date: date_range, branch_id: branch.id, invoice: "").each do |inform|
+        Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, branch_id: branch.id, invoice: "").each do |inform|
           @inform_partial = 0
           @inform_studies = []
           inform.studies.each do |study|
@@ -100,7 +100,7 @@ class ReportsController < ApplicationController
         @total_branch = []
         entity.branches.each do |branch|
           @partial = 0
-          Inform.where(receive_date: date_range, branch_id: branch.id).where.not(invoice: "").each do |inform|
+          Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, branch_id: branch.id).where.not(invoice: "").each do |inform|
             inform.studies.each do |study|
               @price += study.price * study.factor
               @partial += study.price * study.factor
@@ -127,7 +127,7 @@ class ReportsController < ApplicationController
         @price = 0
         entity.branches.each do |branch|
           @partial = 0
-          Inform.where(receive_date: date_range, branch_id: branch.id).where.not(invoice: "").each do |inform|
+          Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, branch_id: branch.id).where.not(invoice: "").each do |inform|
             inform.studies.each do |study|
               @price += study.price * study.factor
               @partial += study.price * study.factor
@@ -155,7 +155,7 @@ class ReportsController < ApplicationController
     @total_branch = []
     @entity.branches.each do |branch|
       @partial = 0
-      Inform.where(inf_type: params[:inf_type], receive_date: date_range, entity_id: @entity.id, branch_id: branch.id, invoice: "").each do |inform|
+      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id, invoice: "").each do |inform|
         @inform_studies = []
         @inform_partial = 0
         inform.studies.each do |study|
@@ -180,7 +180,7 @@ class ReportsController < ApplicationController
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day
     date_range = initial_date..final_date
-    @informs = Inform.where(inf_type: params[:inf_type], receive_date: date_range, entity_id: params[:id], invoice: "")
+    @informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: params[:id], invoice: "")
     @informs.update_all(invoice: params[:info])
     
     redirect_to show_sale_report_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date] + "&inf_type=" + params[:inf_type]
@@ -200,7 +200,7 @@ class ReportsController < ApplicationController
     @total_branch = []
     @entity.branches.each do |branch|
       @partial = 0
-      Inform.where(inf_type: params[:inf_type], receive_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").each do |inform|
+      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").each do |inform|
         @inform_studies = []
         @inform_partial = 0
         inform.studies.each do |study|

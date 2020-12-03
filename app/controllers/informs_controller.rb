@@ -298,7 +298,6 @@ class InformsController < ApplicationController
       date_range = initial_date..final_date
     end
     @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
-
     @informs = []
     @slides.each do |slide|
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
@@ -360,9 +359,8 @@ class InformsController < ApplicationController
       end
       
     end
-    
-    pahtologist_role_id = Role.where(name: "Patologia").first.id
-    @users = User.where(role_id: pahtologist_role_id)
+    pathologist_role_id = Role.where(name: "Patologia").first.id
+    @users = User.where(role_id: pathologist_role_id)
   end
 
   def distribution_cyto
@@ -401,29 +399,53 @@ class InformsController < ApplicationController
   def assign
     Inform.where(id: params[:inform_ids]).update_all({pathologist_id: params[:pathologist_id].to_i == 0 ? nil : params[:pathologist_id].to_i })
 
-    if params[:yi] != ""
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-      date_range = initial_date..final_date
+    # if params[:yi] != ""
+    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    #   date_range = initial_date..final_date
       
-      redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
+    #   redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
+    # else
+    #   redirect_to distribution_path
+    # end
+
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
     else
-      redirect_to distribution_path
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
     end
+
+    redirect_to distribution_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date]
   end
 
   def assign_cyto
     Inform.where(id: params[:inform_ids]).update_all({cytologist: params[:cytologist].to_i == 0 ? nil : params[:cytologist].to_i })
 
-    if params[:yi] != ""
-      initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-      final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-      date_range = initial_date..final_date
+    # if params[:yi] != ""
+    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
+    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
+    #   date_range = initial_date..final_date
       
-      redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
+    #   redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
+    # else
+    #   redirect_to distribution_cyto_path
+    # end
+
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
     else
-      redirect_to distribution_cyto_path
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
     end
+
+    redirect_to distribution_cyto_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date]
   end
 
   # GET /informs/1

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<%= form_tag assign_informs_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: :put do %>
+	<%= form_tag assign_informs_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}", method: :put do %>
 		<div class="row">
 			<div class="col-12 col-lg-4 col-xl-4">
 				<!-- <h3>Asignar biopsias a patología</h3> -->

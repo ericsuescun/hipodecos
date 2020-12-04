@@ -85,7 +85,7 @@
 					<tbody>
 						<% @negative_cytos.each do |inform| %>
 							<% if inform.inf_type == 'cito' %>
-								<tr class="table-<%= inform.diagnostics.first.try(:result) == 'positiva' ? 'danger' : inform.diagnostics.first.try(:result) == 'negativa' ? 'success' : 'warning'%>">
+								<tr>
 									<td></td>
 									<!-- <td><%= inform.id %></td> -->
 									<td><%= inform.tag_code %></td>

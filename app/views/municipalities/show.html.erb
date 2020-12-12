@@ -1,29 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <p>
+        <strong>Código:</strong>
+        <%= @municipality.code %>
+      </p>
 
-<p>
-  <strong>Code:</strong>
-  <%= @municipality.code %>
-</p>
+      <p>
+        <strong>Municipio:</strong>
+        <%= @municipality.municipality %>
+      </p>
 
-<p>
-  <strong>Municipality:</strong>
-  <%= @municipality.municipality %>
-</p>
+      <p>
+        <strong>Departamento:</strong>
+        <%= @municipality.department %>
+      </p>
 
-<p>
-  <strong>Department:</strong>
-  <%= @municipality.department %>
-</p>
+      <p>
+        <strong>Orden:</strong>
+        <%= @municipality.order %>
+      </p>
 
-<p>
-  <strong>Order:</strong>
-  <%= @municipality.order %>
-</p>
+      <p>
+        <strong>Score:</strong>
+        <%= @municipality.score %>
+      </p>
 
-<p>
-  <strong>Score:</strong>
-  <%= @municipality.score %>
-</p>
+      <%= link_to 'Editar', edit_municipality_path(@municipality) %> |
+      <%= link_to 'Volver', municipalities_path %>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_municipality_path(@municipality) %> |
-<%= link_to 'Back', municipalities_path %>
+
+

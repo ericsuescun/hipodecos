@@ -1,10 +1,16 @@
 class MunicipalitiesController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_municipality, only: [:show, :edit, :update, :destroy]
+
+  def import
+    Municipality.import(params[:file])
+    redirect_to municipalities_path, notice: "Datos importados!"
+  end
 
   # GET /municipalities
   # GET /municipalities.json
   def index
-    @municipalities = Municipality.all
+    @municipalities = Municipality.all.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /municipalities/1
@@ -28,7 +34,7 @@ class MunicipalitiesController < ApplicationController
 
     respond_to do |format|
       if @municipality.save
-        format.html { redirect_to @municipality, notice: 'Municipality was successfully created.' }
+        format.html { redirect_to @municipality, notice: 'Municipio exitosamente creado!' }
         format.json { render :show, status: :created, location: @municipality }
       else
         format.html { render :new }

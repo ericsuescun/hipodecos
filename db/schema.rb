@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_20_023638) do
+ActiveRecord::Schema.define(version: 2020_12_12_214102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,6 +272,16 @@ ActiveRecord::Schema.define(version: 2020_11_20_023638) do
     t.datetime "updated_at", null: false
     t.string "cyto_status"
     t.index ["inform_id"], name: "index_micros_on_inform_id"
+  end
+
+  create_table "municipalities", force: :cascade do |t|
+    t.string "code"
+    t.string "municipality"
+    t.string "department"
+    t.integer "order"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "obcodes", force: :cascade do |t|

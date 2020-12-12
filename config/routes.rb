@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :municipalities
   resources :oldcitos do
     collection do
       post :import

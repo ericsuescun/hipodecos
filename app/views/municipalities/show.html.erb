@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @municipality.code %>
+</p>
+
+<p>
+  <strong>Municipality:</strong>
+  <%= @municipality.municipality %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @municipality.department %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @municipality.order %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @municipality.score %>
+</p>
+
+<%= link_to 'Edit', edit_municipality_path(@municipality) %> |
+<%= link_to 'Back', municipalities_path %>

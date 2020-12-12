@@ -1,0 +1,295 @@
+<div class="info">
+	<h4>RIPS <%= params[:inf_type] == 'clin' ? "Clínica" : params[:inf_type] == 'hosp' ? "Hospital" : "Citlogías" %> para el periodo <%= new_search_range %>: <strong><%= number_to_currency(@total_accumulated, precision: 0, delimiter: '.') %></strong></h4>
+</div>
+<div class="container">
+	<div class="row">
+	  <div class="col-12 col-lg-7">
+	    <div class="alert alert-secondary pl-1 pb-1">
+	      <%= form_tag show_sale_report_path(params[:id]), method: "get" do %>
+	      	<%= hidden_field_tag :inf_type, params[:inf_type] %>
+	        <div class="row">
+	        	<div class="col-12 col-lg-5">
+	        		<div class="form-group">
+	        		  <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
+	        		</div>
+	        	</div>
+	        	<div class="col-12 col-lg-5">
+	        		<div class="form-group">
+	        		  <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
+	        		</div>
+	        	</div>
+	        	<div class="col-12 col-lg-2">
+	        		<%= submit_tag("Buscar", class: "btn btn-primary mr-1") %>
+	        	</div>
+	        </div>
+	        
+	      <% end %>
+	    </div>
+	  </div>
+	  
+	</div>
+	
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<h1><%= Entity.where(id: params[:id]).first.name %></h1>
+			<strong><h4>AP<%= 1.month.ago.strftime("%m%Y") %>.TXT</h4></strong>
+			<%= link_to show_rips_ap_report_path(@entity, init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" do %>
+				AP<%= 1.month.ago.strftime("%m%Y") %>.TXT
+			<% end %>
+			<table>
+				<thead>
+					<tr>
+						<th>Fact.</th>
+						<th>Cod.P. Serv.</th>
+						<th>TId</th>
+						<th>Identif.</th>
+						<th>Fec. Proc.</th>
+						<th>Autoriz.</th>
+						<th>CUP</th>
+						<th>Ámb</th>
+						<th>Fin</th>
+						<th>Per Ati</th>
+						<th>Dx Ppal</th>
+						<th>Dx Rel</th>
+						<th>Complic</th>
+						<th>Form. Real. Quir.</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @total_detail.each do |detail| %>
+						<tr>
+							<td><%= detail[2].invoice %></td>
+							<td>050011134601</td>
+							<td><%= detail[2].patient.id_type %></td>
+							<td><%= detail[2].patient.id_number %></td>
+							<td><%= detail[2].delivery_date.strftime("%d/%m/%Y") %></td>
+							<td><%= detail[2].prmtr_auth_code %></td>
+							<td><%= detail[3] %></td>
+							<td><%= detail[2].status %></td>
+							<td>1</td>
+							<td>1</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><%= detail[6].to_i %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12 mt-3">
+			<strong><h4>US<%= 1.month.ago.strftime("%m%Y") %>.TXT</h4></strong>
+			<%= link_to show_rips_us_report_path(@entity, init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" do %>
+				US<%= 1.month.ago.strftime("%m%Y") %>.TXT
+			<% end %>
+			<table>
+				<thead>
+					<tr>
+						<th>TId</th>
+						<th>Identif.</th>
+						<th>Entad</th>
+						<th>Reg</th>
+						<th>Apellido1</th>
+						<th>Apellido2</th>
+						<th>Nombre1</th>
+						<th>Nombre2</th>
+						<th>Edad</th>
+						<th>UniE</th>
+						<th>Sexo</th>
+						<th>Dep</th>
+						<th>Mun</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @total_users.each do |user| %>
+						<tr>
+							<td><%= user[0] %></td>
+							<td><%= user[1] %></td>
+							<td><%= user[2] %></td>
+							<td><%= user[3] %></td>
+							<td><%= user[4] %></td>
+							<td><%= user[5] %></td>
+							<td><%= user[6] %></td>
+							<td><%= user[7] %></td>
+							<td><%= user[8] %></td>
+							<td><%= user[9] %></td>
+							<td><%= user[10] %></td>
+							<td><%= user[11] %></td>
+							<td><%= user[12] %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12 mt-3">
+			<strong><h4>AD<%= 1.month.ago.strftime("%m%Y") %>.TXT</h4></strong>
+			<%= link_to show_rips_report_path(@entity, init_date: params[:init_date], final_date: params[:final_date], file: "ad_file"), class: "btn btn-primary" do %>
+				AD<%= 1.month.ago.strftime("%m%Y") %>.TXT
+			<% end %>
+			<table>
+				<thead>
+					<tr>
+						<th>Factura</th>
+						<th>Prestador</th>
+						<th>?</th>
+						<th>Usuarios</th>
+						<th>?</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if @total_detail_clin.size > 0 %>
+						<tr>
+							<td><%= @total_detail_clin.first[2].invoice %></td>
+							<td>050011134601</td>
+							<td>02</td>
+							<td><%= @total_users_clin.count %></td>
+							<td></td>
+							<td><%= @total_accumulated_clin.to_i %></td>
+						</tr>
+					<% end %>
+					<% if @total_detail_cito.size > 0 %>
+						<tr>
+							<td><%= @total_detail_cito.first[2].invoice %></td>
+							<td>050011134601</td>
+							<td>02</td>
+							<td><%= @total_users_cito.count %></td>
+							<td></td>
+							<td><%= @total_accumulated_cito.to_i %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12 mt-3">
+			<strong><h4>AF<%= 1.month.ago.strftime("%m%Y") %>.TXT</h4></strong>
+			<%= link_to show_rips_report_path(@entity, init_date: params[:init_date], final_date: params[:final_date], file: "af_file"), class: "btn btn-primary" do %>
+				AF<%= 1.month.ago.strftime("%m%Y") %>.TXT
+			<% end %>
+			<table>
+				<thead>
+					<tr>
+						<th>Prestador</th>
+						<th>Razón Social</th>
+						
+						<th>TId</th>
+						<th>Id</th>
+						<th>Factura</th>
+						<th>F.Exp</th>
+						<th>F.Ini</th>
+						<th>F.Fin</th>
+						<th>Entad</th>
+						<th>Nom Entad</th>
+						<th>Num contr</th>
+						<th>Plan Ben</th>
+						<th># poliz</th>
+						<th>Copago</th>
+						<th>Comis</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if @total_detail_clin.size > 0 %>
+						<tr>
+							<td>050011134601</td>
+							<td>PATOLOGIA SUESCUN SAS</td>
+							
+							<td>NI</td>
+							<td>900363326-8</td>
+							<td><%= @total_detail_clin.first[2].invoice %></td>
+							<td><%= Date.today.strftime("%d/%m/%Y") %></td>
+							<td><%= Date.parse(params[:init_date]).strftime("%d/%m/%Y") %></td>
+							<td><%= Date.parse(params[:final_date]).strftime("%d/%m/%Y") %></td>
+							<td>000000</td>
+							<td><%= Entity.where(id: params[:id]).first.name.upcase %></td>
+							<td></td>
+							<td>CONTRIBUTIVO</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><%= @total_accumulated_clin.to_i %></td>
+						</tr>
+					<% end %>
+					<% if @total_detail_cito.size > 0 %>
+						<tr>
+							<td>050011134601</td>
+							<td>PATOLOGIA SUESCUN SAS</td>
+							
+							<td>NI</td>
+							<td>900363326-8</td>
+							<td><%= @total_detail_cito.first[2].invoice %></td>
+							<td><%= Date.today.strftime("%d/%m/%Y") %></td>
+							<td><%= Date.parse(params[:init_date]).strftime("%d/%m/%Y") %></td>
+							<td><%= Date.parse(params[:final_date]).strftime("%d/%m/%Y") %></td>
+							<td>000000</td>
+							<td><%= Entity.where(id: params[:id]).first.name.upcase %></td>
+							<td></td>
+							<td>CONTRIBUTIVO</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><%= @total_accumulated_cito.to_i %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12 mt-3">
+			<strong><h4>CT<%= 1.month.ago.strftime("%m%Y") %>.TXT</h4></strong>
+			<%= link_to show_rips_report_path(@entity, init_date: params[:init_date], final_date: params[:final_date], file: "ct_file"), class: "btn btn-primary" do %>
+				CT<%= 1.month.ago.strftime("%m%Y") %>.TXT
+			<% end %>
+			<table>
+				<thead>
+					<tr>
+						<th>Prestador</th>
+						<th>Fecha</th>
+						<th>Usuarios</th>
+						<th>?</th>
+						<th>Valor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>050011134601</td>
+						<td><%= Date.today.strftime("%d/%m/%Y") %></td>
+						<td>US<%= 1.month.ago.strftime("%m%Y") %></td>
+						<td></td>
+						<td><%= @total_users_clin.count + @total_users_cito.count %></td>
+					</tr>
+					<tr>
+						<td>050011134601</td>
+						<td><%= Date.today.strftime("%d/%m/%Y") %></td>
+						<td>AP<%= 1.month.ago.strftime("%m%Y") %></td>
+						<td></td>
+						<td><%= @total_detail.count %></td>
+					</tr>
+					<tr>
+						<td>050011134601</td>
+						<td><%= Date.today.strftime("%d/%m/%Y") %></td>
+						<td>AF<%= 1.month.ago.strftime("%m%Y") %></td>
+						<td></td>
+						<td><%= count_invoices(@total_users_clin.count, @total_users_cito.count) %></td>
+					</tr>
+					<tr>
+						<td>050011134601</td>
+						<td><%= Date.today.strftime("%d/%m/%Y") %></td>
+						<td>AD<%= 1.month.ago.strftime("%m%Y") %></td>
+						<td></td>
+						<td><%= count_invoices(@total_users_clin.count, @total_users_cito.count) %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

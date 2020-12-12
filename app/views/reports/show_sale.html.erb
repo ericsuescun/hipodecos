@@ -26,6 +26,9 @@
 	      <% end %>
 	    </div>
 	  </div>
+	  <div class="col-12 col-lg-4 mx-auto">
+	  	<%= link_to "RIPS", show_rips_report_path(@entity.id, inf_type: params[:inf_type], init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
+	  </div>
 	  
 	</div>
 	

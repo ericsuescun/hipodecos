@@ -1,4 +1,15 @@
 module ReportsHelper
+	def count_invoices(a,b)
+		c = 0
+		if a > 0
+			c += 1
+		end
+		if b > 0
+			c += 1
+		end
+		return c
+	end
+
 	def inform_status(inform)
 		status = 0
 		inform.physicians.count > 0 ? status += 1 : status += 0

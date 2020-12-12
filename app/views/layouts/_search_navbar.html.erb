@@ -117,7 +117,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <%= link_to "Pacientes", patients_path + "?init_date=" + 2.weeks.ago.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item", class: "nav-link" %>
+            <%= link_to "Pacientes", patients_path + "?init_date=" + 2.weeks.ago.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

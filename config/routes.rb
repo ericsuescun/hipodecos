@@ -121,6 +121,12 @@ Rails.application.routes.draw do
         post :invoice
         get :show_sale
         get :show_billing
+        get :show_rips
+        get :show_rips_ap
+        get :show_rips_us
+        get :show_rips_af
+        get :show_rips_ad
+        get :show_rips_ct
       end
     end
 

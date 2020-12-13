@@ -118,7 +118,7 @@
           <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= informs_form.label "Sede IPS" %>
-              <%= informs_form.select :branch_id, Branch.pluck(:initials, :id), {prompt:"Seleccione la Sede de la IPS"}, class: "form-control input" %>
+              <%= informs_form.select :branch_id, Branch.pluck(:initials, :id), {prompt:"Sede IPS"}, class: "form-control input" %>
             </div>
           </div>
           
@@ -157,19 +157,13 @@
               <%= informs_form.text_field :p_residence_code, class: "form-control input" %>
             </div>
           </div>
-          <div class="col-12 col-lg-2">
+          <div class="col-12 col-lg-3">
             <div class="form-group">
-              <%= informs_form.label "Municipio" %>
-              <%= informs_form.text_field :p_municipality, class: "form-control input" %>
+              <%= informs_form.label "Municipio y dpto." %>
+              <%= informs_form.select :p_municipality, @municipalities.pluck(:municipality, :code), { }, class: "form-control input" %>
             </div>
           </div>
-          <div class="col-12 col-lg-2">
-            <div class="form-group">
-              <%= informs_form.label "Departamento" %>
-              <%= informs_form.text_field :p_department, class: "form-control input" %>
-            </div>
-          </div>
-          <div class="col-12 col-lg-2">
+          <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= informs_form.label "Ocupación" %>
               <%= informs_form.text_field :p_occupation, class: "form-control input" %>

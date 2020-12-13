@@ -46,6 +46,10 @@ class PatientsController < ApplicationController
     @cytology = @inform.cytologies.build
 
     @objections = @patient.objections
+    @municipalities = Municipality.all
+    @municipalities.each do |municipality|
+      municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
+    end
     
     @promoters = Promoter.where(enabled: true)
     @promoters.each do |promoter|
@@ -67,6 +71,11 @@ class PatientsController < ApplicationController
     end
     @promoters = @promoters.pluck(:initials, :id)
 
+    @municipalities = Municipality.all
+    @municipalities.each do |municipality|
+      municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
+    end
+
     if patients.length > 0
       @patient = patients.first
       @inform = patients.first.informs.build.physicians.build #Creo la instancia para physician para la form
@@ -84,6 +93,11 @@ class PatientsController < ApplicationController
       promoter.initials = promoter.regime[0] + "-" + promoter.initials
     end
     @promoters = @promoters.pluck(:initials, :id)
+
+    @municipalities = Municipality.all
+    @municipalities.each do |municipality|
+      municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
+    end
 
     if patients.length > 0
       @patient = patients.first

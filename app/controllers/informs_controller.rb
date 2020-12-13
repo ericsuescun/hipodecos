@@ -523,6 +523,11 @@ class InformsController < ApplicationController
       promoter.initials = promoter.regime[0] + "-" + promoter.initials
     end
     @promoters = @promoters.pluck(:initials, :id)
+
+    @municipalities = Municipality.all
+    @municipalities.each do |municipality|
+      municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
+    end
   end
 
   def create

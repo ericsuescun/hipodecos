@@ -85,8 +85,8 @@
           </div>
           <div class="col-12 col-lg-3">
             <div class="form-group">
-              <%= informs_form.label "Municipio y dpto." %>
-              <%= informs_form.select :p_municipality, @municipalities.pluck(:municipality, :code), { }, class: "form-control input" %>
+              <%= form.label "Municipio y dpto." %>
+              <%= form.select :p_municipality, @municipalities.pluck(:municipality, :code), { }, class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-2">

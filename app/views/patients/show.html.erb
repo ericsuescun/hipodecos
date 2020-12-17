@@ -112,13 +112,13 @@
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= informs_form.label "EPS" %>
-              <%= informs_form.select :promoter_id, @promoters, {prompt:"Seleccione la EPS"}, class: "form-control input" %>
+              <%= informs_form.select :promoter_id, @promoters, { include_blank: true }, class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= informs_form.label "Sede IPS" %>
-              <%= informs_form.select :branch_id, Branch.pluck(:initials, :id), {prompt:"Sede IPS"}, class: "form-control input" %>
+              <%= informs_form.select :branch_id, Branch.pluck(:initials, :id), { include_blank: true }, class: "form-control input" %>
             </div>
           </div>
           

@@ -359,6 +359,9 @@ class InformsController < ApplicationController
       end
       
     end
+    @negative_cytos.each do |inform|
+      inform.update(inf_status: "revision") #Se deben marcar como para validación
+    end
     pathologist_role_id = Role.where(name: "Patologia").first.id
     @users = User.where(role_id: pathologist_role_id)
   end

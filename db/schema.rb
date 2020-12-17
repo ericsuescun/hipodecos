@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_12_214102) do
+ActiveRecord::Schema.define(version: 2020_12_17_230950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -252,6 +252,7 @@ ActiveRecord::Schema.define(version: 2020_12_12_214102) do
     t.string "inf_type"
     t.integer "cytologist"
     t.datetime "download_date"
+    t.date "invoice_date"
     t.index ["patient_id"], name: "index_informs_on_patient_id"
   end
 

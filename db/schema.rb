@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_230950) do
+ActiveRecord::Schema.define(version: 2020_12_18_000707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,6 +254,19 @@ ActiveRecord::Schema.define(version: 2020_12_17_230950) do
     t.datetime "download_date"
     t.date "invoice_date"
     t.index ["patient_id"], name: "index_informs_on_patient_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string "invoice_code"
+    t.date "init_date"
+    t.date "final_date"
+    t.date "invoice_date"
+    t.integer "entity_id"
+    t.string "inf_type"
+    t.decimal "value"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "macros", force: :cascade do |t|

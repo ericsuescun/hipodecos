@@ -1,41 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <%= will_paginate @invoices, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+      <h1>Facturas</h1>
 
-<h1>Invoices</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Factura</th>
+            <th>Desde</th>
+            <th>Hasta</th>
+            <th>Fecha exp.</th>
+            <th>Cliente</th>
+            <th>Tipo</th>
+            <th>Valor</th>
+            <th>Por</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Invoice code</th>
-      <th>Init date</th>
-      <th>Final date</th>
-      <th>Invoice date</th>
-      <th>Entity</th>
-      <th>Inf type</th>
-      <th>Value</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <tbody>
+          <% @invoices.each do |invoice| %>
+            <tr>
+              <td><%= invoice.invoice_code %></td>
+              <td><%= invoice.init_date.strftime("%d/%m/%Y") %></td>
+              <td><%= invoice.final_date.strftime("%d/%m/%Y") %></td>
+              <td><%= invoice.invoice_date.strftime("%d/%m/%Y") %></td>
+              <td><%= Entity.where(id: invoice.entity_id).first.initials %></td>
+              <td><%= invoice.inf_type %></td>
+              <td><%= number_to_currency(invoice.value, precision: 0, delimiter: '.') %></td>
+              <td><%= User.where(id: invoice.user_id).first.try(:first_name) %></td>
+              <td><%= link_to 'Detalles', invoice %></td>
+              <td><%= link_to 'Editar', edit_invoice_path(invoice) %></td>
+              <td><%= link_to 'Borrar', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @invoices.each do |invoice| %>
-      <tr>
-        <td><%= invoice.invoice_code %></td>
-        <td><%= invoice.init_date %></td>
-        <td><%= invoice.final_date %></td>
-        <td><%= invoice.invoice_date %></td>
-        <td><%= invoice.entity_id %></td>
-        <td><%= invoice.inf_type %></td>
-        <td><%= invoice.value %></td>
-        <td><%= invoice.user_id %></td>
-        <td><%= link_to 'Show', invoice %></td>
-        <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Invoice', new_invoice_path %>

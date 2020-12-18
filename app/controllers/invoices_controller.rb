@@ -1,10 +1,11 @@
 class InvoicesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.all.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /invoices/1

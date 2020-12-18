@@ -204,6 +204,7 @@ class ReportsController < ApplicationController
 
     @total_entities = []
     @total_detail = []
+    @total_affinity = []
     @branch_detail = []
     @total_accumulated = 0
     @price = 0
@@ -223,6 +224,7 @@ class ReportsController < ApplicationController
         @total_detail << [ @entity.name, branch.name, inform, @inform_studies, 0, 0, @inform_partial, @price ]
       end
       @total_detail << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
+      @total_affinity << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
     end
     @total_detail << [ @entity.name, "--", "--", "--", 0, 0, 0, @price ]
 

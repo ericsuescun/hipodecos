@@ -182,6 +182,16 @@ class ReportsController < ApplicationController
     date_range = initial_date..final_date
     @informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: params[:id], invoice: "").or(@informs = Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: params[:id], invoice: ""))
     @informs.update_all(invoice: params[:invoice], invoice_date: params[:invoice_date])
+    @invoice = Invoice.create(
+        invoice_code: params[:invoice],
+        init_date: Date.parse(params[:init_date]),
+        final_date: Date.parse(params[:final_date]),
+        invoice_date: Date.parse(params[:invoice_date]),
+        entity_id: params[:id],
+        inf_type: params[:inf_type],
+        value: params[:value].to_f,
+        user_id: current_user.id
+      )
     
     redirect_to show_sale_report_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date] + "&inf_type=" + params[:inf_type]
   end

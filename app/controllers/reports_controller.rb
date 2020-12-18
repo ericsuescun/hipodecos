@@ -381,9 +381,10 @@ class ReportsController < ApplicationController
     @price = 0
     @total_branch = []
     @entity.branches.each do |branch|
+      @inform_studies = []
       @partial = 0
       Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).each do |inform|
-        @inform_studies = []
+        
         @inform_partial = 0
         @invoice = inform.invoice   #Queda con el valor de la última factura leída
 
@@ -392,12 +393,15 @@ class ReportsController < ApplicationController
           @partial += study.price * study.factor
           @inform_partial += study.price * study.factor
           #@total_detail << [ @entity.name, branch.name, inform, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
-          @inform_studies << study
+          study.factor.times do
+            @inform_studies << study
+          end
+          
         end
         @total_detail << [ @entity.name, branch.name, inform, @inform_studies, 0, 0, @inform_partial, @price ]
       end
       @total_detail << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
-      @total_affinity_trans << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
+      @total_affinity_trans << [ @entity.name, branch.name, @inform_studies, "--", 0, 0, @partial, @price ]
     end
     @total_detail << [ @entity.name, "--", "--", "--", 0, 0, 0, @price ]
 
@@ -406,13 +410,20 @@ class ReportsController < ApplicationController
 
     invoice_date = Invoice.where(invoice_code: @invoice).first.invoice_date
     offset = 0
+    count = 0
     file = ""
     if params[:type] == "det"
       file += "ET,1000,1," + invoice_date.strftime("%Y-%m-%d") + ", , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , \n"
       file += "EB,1,8003, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , \n"
       @total_affinity_trans.each_with_index do |branch_data, n|
         if branch_data[6] != 0
-          file += "RG," + n.to_s + ",0000," + invoice_date.strftime("%Y-%m-%d") + ",042," + @invoice + ",999999," + "ESTUDIOS PATOLOGICOS REALIZADOS A USUARIOS " + branch_data[1].to_s + ", , , , , , ,1,1," + branch_data[6].to_i.to_s + ",0,0,0,0,0,0,0,0,0, , , , , , ,0,0, , , , ,0,0,0\n"
+          count += 1
+          if params[:inf_type] == "clin"
+            file += "RG," + count.to_s + ",0000," + invoice_date.strftime("%Y-%m-%d") + ",042," + @invoice + ",999999," + "ESTUDIOS PATOLOGICOS REALIZADOS A USUARIOS " + branch_data[1].to_s + ", , , , , , ,1,1," + branch_data[6].to_i.to_s + ",0,0,0,0,0,0,0,0,0, , , , , , ,0,0, , , , ,0,0,0\n"
+          end
+          if params[:inf_type] == "cito"
+            file += "RG," + count.to_s + ",0000," + invoice_date.strftime("%Y-%m-%d") + ",042," + @invoice + ",898001," + "CITOLOGIA VAGINAL (Procesamiento y lectura)  USUARIAS " + branch_data[1].to_s + ", , , , , , ,#{branch_data[2].count},#{branch_data[2].count}," + Factor.where(codeval_id: 7, rate_id: @entity.rate_id).first.price.to_i.to_s + ",0,0,0,0,0,0,0,0,0, , , , , , ,0,0, , , , ,0,0,0\n"
+          end
         else
           offset += 1
         end

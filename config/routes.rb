@@ -133,6 +133,7 @@ Rails.application.routes.draw do
         get :show_rips_af
         get :show_rips_ad
         get :show_rips_ct
+        get :show_affinity
       end
     end
 

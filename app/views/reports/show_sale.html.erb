@@ -3,7 +3,7 @@
 </div>
 <div class="container">
 	<div class="row">
-	  <div class="col-12 col-lg-7">
+	  <div class="col-12 col-lg-8">
 	    <div class="alert alert-secondary pl-1 pb-1">
 	      <%= form_tag show_sale_report_path(params[:id]), method: "get" do %>
 	      	<%= hidden_field_tag :inf_type, params[:inf_type] %>
@@ -27,7 +27,12 @@
 	    </div>
 	  </div>
 	  <div class="col-12 col-lg-4 mx-auto">
-	  	<%= link_to "RIPS", show_rips_report_path(@entity.id, inf_type: params[:inf_type], init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
+	  	<div class="alert alert-secondary pl-1 pb-1">
+	  		<%= link_to "RIPS", show_rips_report_path(@entity.id, inf_type: params[:inf_type], init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
+	  		<%= link_to "Aff: Det", show_affinity_report_path(@entity.id, inf_type: params[:inf_type], init_date: params[:init_date], final_date: params[:final_date], type: "det"), class: "btn btn-primary" %>
+	  		<%= link_to "Aff: Enc", show_affinity_report_path(@entity.id, inf_type: params[:inf_type], init_date: params[:init_date], final_date: params[:final_date], type: "head"), class: "btn btn-primary" %>
+	  	</div>
+	  	
 	  </div>
 	  
 	</div>

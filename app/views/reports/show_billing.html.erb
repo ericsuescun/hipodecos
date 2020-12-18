@@ -3,40 +3,49 @@
 </div>
 <div class="container">
 	<div class="row">
-	  <div class="col-12 col-lg-7">
-	    <div class="alert alert-secondary pl-1 pb-1">
+	  <div class="col-12 col-lg-6">
+	    <div class="alert alert-secondary">
 	      <%= form_tag show_billing_report_path(params[:id]), method: "get" do %>
 	      	<%= hidden_field_tag :inf_type, params[:inf_type] %>
 	        <div class="row">
-	        	<div class="col-12 col-lg-5">
+	        	<div class="col-12 col-lg-6">
 	        		<div class="form-group">
 	        		  <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
 	        		</div>
 	        	</div>
-	        	<div class="col-12 col-lg-5">
+	        	<div class="col-12 col-lg-6">
 	        		<div class="form-group">
 	        		  <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
 	        		</div>
 	        	</div>
-	        	<div class="col-12 col-lg-2">
-	        		<%= submit_tag("Buscar", class: "btn btn-primary mr-1") %>
+	        </div>
+	        <div class="row">
+	        	<div class="col-12">
+	        		<%= submit_tag("Filtrar", class: "btn btn-primary mr-1") %>
 	        	</div>
 	        </div>
 	        
 	      <% end %>
 	    </div>
 	  </div>
-	  <div class="col-12 col-lg-5">
-	  	<div class="alert alert-secondary pb-1">
-	  		<%= form_tag invoice_report_path(params[:id], init_date: params[:init_date], final_date: params[:final_date], inf_type: params[:inf_type]), method: "post" do %>
+	  <div class="col-12 col-lg-6">
+	  	<div class="alert alert-secondary">
+	  		<%= form_tag invoice_report_path(params[:id], init_date: params[:init_date], final_date: params[:final_date], inf_type: params[:inf_type], value: @total_accumulated), method: "post" do %>
 	  			<div class="row">
-	  				<div class="col-12 col-lg-8">
+	  				<div class="col-12 col-lg-6">
 	  					<div class="form-group">
-	  					  <%= text_field_tag :info, nil, placeholder: "# de factura", class: "form-control input"  %>
+	  					  <%= date_field_tag :invoice_date, Date.today, class: "form-control input" %>
 	  					</div>
 	  				</div>
-	  				<div class="col-12 col-lg-4">
-	  					<%= submit_tag("Asignar", class: "btn btn-primary") %>
+	  				<div class="col-12 col-lg-6">
+	  					<div class="form-group">
+	  					  <%= text_field_tag :invoice, nil, placeholder: "# de factura", class: "form-control input"  %>
+	  					</div>
+	  				</div>
+	  			</div>
+	  			<div class="row">
+	  				<div class="col-12">
+	  					<%= submit_tag("Facturar", class: "btn btn-primary") %>
 	  				</div>
 	  			</div>
 	  		<% end %>

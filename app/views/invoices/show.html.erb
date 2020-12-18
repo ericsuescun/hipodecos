@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Invoice code:</strong>
+  <%= @invoice.invoice_code %>
+</p>
+
+<p>
+  <strong>Init date:</strong>
+  <%= @invoice.init_date %>
+</p>
+
+<p>
+  <strong>Final date:</strong>
+  <%= @invoice.final_date %>
+</p>
+
+<p>
+  <strong>Invoice date:</strong>
+  <%= @invoice.invoice_date %>
+</p>
+
+<p>
+  <strong>Entity:</strong>
+  <%= @invoice.entity_id %>
+</p>
+
+<p>
+  <strong>Inf type:</strong>
+  <%= @invoice.inf_type %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @invoice.value %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @invoice.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
+<%= link_to 'Back', invoices_path %>

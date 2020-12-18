@@ -180,8 +180,8 @@ class ReportsController < ApplicationController
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day
     date_range = initial_date..final_date
-    @informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: params[:id], invoice: "")
-    @informs.update_all(invoice: params[:info])
+    @informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: params[:id], invoice: "").or(@informs = Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: params[:id], invoice: ""))
+    @informs.update_all(invoice: params[:invoice], invoice_date: params[:invoice_date])
     
     redirect_to show_sale_report_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date] + "&inf_type=" + params[:inf_type]
   end

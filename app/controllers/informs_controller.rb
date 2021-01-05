@@ -299,13 +299,27 @@ class InformsController < ApplicationController
     end
     @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
     @informs = []
+    @informs_unassigned = []
+    @informs_first_batch = []
+    @informs_rest = []
     @slides.each do |slide|
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
         if slide.inform.inf_type != 'cito'
           unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded"
-            @informs << slide.inform
+            if slide.inform.pathologist_id != nil
+              @informs << slide.inform
+            else
+              @informs_unassigned << slide.inform
+            end
           end
         end
+      end
+    end
+    @informs_unassigned.each_with_index do |inform, n|
+      if n <=50
+        @informs_first_batch << inform
+      else
+        @informs_rest << inform
       end
     end
 
@@ -364,6 +378,11 @@ class InformsController < ApplicationController
     end
     pathologist_role_id = Role.where(name: "Patologia").first.id
     @users = User.where(role_id: pathologist_role_id)
+
+    # @informs_assigned = @informs.where.not(pathologist_id: nil)
+    # @informs_unassigned = @informs.where(pathologist_id: nil)
+    # @informs_first_batch = @informs_unassigned.limit(50)
+    # @informs_rest = @informs_unassigned.offset(50)
   end
 
   def distribution_cyto
@@ -397,6 +416,11 @@ class InformsController < ApplicationController
     
     cytologist_role_id = Role.where(name: "Citologia").first.id
     @users = User.where(role_id: cytologist_role_id)
+
+    # @informs_assigned = @informs.where.not(cytologist: nil)
+    # @informs_unassigned = @informs.where(cytologist: nil)
+    # @informs_first_batch = @informs_unassigned.limit(50)
+    # @informs_rest = @informs_unassigned.offset(50)
   end
 
   def assign

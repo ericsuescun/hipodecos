@@ -296,7 +296,7 @@ class ReportsController < ApplicationController
         file += @total_detail_cito.first[2].invoice + "," + "050011134601,02," + @total_users_cito.count.to_s + ",," + @total_accumulated_cito.to_i.to_s + "\n"
       end
       filename = "AD" + 1.month.ago.strftime("%m%Y") + ".TXT"
-      send_data file, filename: filename
+      send_data file, filename: filename, type: 'text/html; charset=utf-8'
     when "af_file"
       if @total_detail_clin.size > 0
         file += "050011134601,PATOLOGIA SUESCUN SAS,NI,900363326-8," + @total_detail_clin.first[2].invoice + "," + Date.today.strftime("%d/%m/%Y") + "," + Date.parse(params[:init_date]).strftime("%d/%m/%Y") + "," + Date.parse(params[:final_date]).strftime("%d/%m/%Y") + ",000000," + Entity.where(id: params[:id]).first.name.upcase + ",,CONTRIBUTIVO,,,,," + @total_accumulated_clin.to_i.to_s + "\n"
@@ -305,17 +305,17 @@ class ReportsController < ApplicationController
         file += "050011134601,PATOLOGIA SUESCUN SAS,NI,900363326-8," + @total_detail_cito.first[2].invoice + "," + Date.today.strftime("%d/%m/%Y") + "," + Date.parse(params[:init_date]).strftime("%d/%m/%Y") + "," + Date.parse(params[:final_date]).strftime("%d/%m/%Y") + ",000000," + Entity.where(id: params[:id]).first.name.upcase + ",,CONTRIBUTIVO,,,,," + @total_accumulated_cito.to_i.to_s + "\n"
       end
       filename = "AF" + 1.month.ago.strftime("%m%Y") + ".TXT"
-      send_data file, filename: filename
+      send_data file, filename: filename, type: 'text/html; charset=utf-8'
     when "ct_file"
       file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "US" + 1.month.ago.strftime("%m%Y") + "," + (@total_users_clin.count + @total_users_cito.count).to_s  + "\n"
       file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "AP" + 1.month.ago.strftime("%m%Y") + "," + (@total_detail.count).to_s + "\n"
       file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "AF" + 1.month.ago.strftime("%m%Y") + "," + count_invoices(@total_users_clin.count, @total_users_cito.count).to_s + "\n"
       file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "AD" + 1.month.ago.strftime("%m%Y") + "," + count_invoices(@total_users_clin.count, @total_users_cito.count).to_s + "\n"
       filename = "CT" + 1.month.ago.strftime("%m%Y") + ".TXT"
-      send_data file, filename: filename
+      send_data file, filename: filename, type: 'text/html; charset=utf-8'
     end
     # filename = "CT" + 1.month.ago.strftime("%m%Y") + ".TXT"
-    # send_data 'esto es una prueba', filename: filename
+    # send_data 'esto es una prueba', filename: filename, type: 'text/html; charset=utf-8'
 
   end
 
@@ -337,7 +337,7 @@ class ReportsController < ApplicationController
       end
     end
     filename = "AP" + 1.month.ago.strftime("%m%Y") + ".TXT"
-    send_data @total_detail, filename: filename
+    send_data @total_detail, filename: filename, type: 'text/html; charset=utf-8'
 
   end
 
@@ -363,7 +363,7 @@ class ReportsController < ApplicationController
     end
 
     filename = "US" + 1.month.ago.strftime("%m%Y") + ".TXT"
-    send_data users, filename: filename
+    send_data users, filename: filename, type: 'text/html; charset=utf-8'
   end
 
   def show_affinity
@@ -432,7 +432,7 @@ class ReportsController < ApplicationController
       file += "FT,1000,1,1, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , "
 
       filename = "detalle_#{params[:inf_type]}_" + @invoice + ".TXT"
-      send_data file, filename: filename
+      send_data file, filename: filename, type: 'text/html; charset=utf-8'
     end
     if params[:type] == "head"
       file += "ET,1000,1," + invoice_date.strftime("%Y-%m-%d") + ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n"
@@ -443,7 +443,7 @@ class ReportsController < ApplicationController
       file += "FT,1000,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 
       filename = "enc_#{params[:inf_type]}_" + @invoice + ".TXT"
-      send_data file, filename: filename
+      send_data file, filename: filename, type: 'text/html; charset=utf-8'
     end
     
   end

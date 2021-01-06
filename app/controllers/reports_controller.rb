@@ -290,27 +290,27 @@ class ReportsController < ApplicationController
     case params[:file]
     when "ad_file"
       if @total_detail_clin.size > 0
-        file += @total_detail_clin.first[2].invoice + "," + "050011134601,02," + @total_users_clin.count.to_s + ",," + @total_accumulated_clin.to_i.to_s + "\n"
+        file += @total_detail_clin.first[2].invoice + "," + "050011134601,02," + @total_users_clin.count.to_s + ",," + @total_accumulated_clin.to_i.to_s + "\r\n"
       end
       if @total_detail_cito.size > 0
-        file += @total_detail_cito.first[2].invoice + "," + "050011134601,02," + @total_users_cito.count.to_s + ",," + @total_accumulated_cito.to_i.to_s + "\n"
+        file += @total_detail_cito.first[2].invoice + "," + "050011134601,02," + @total_users_cito.count.to_s + ",," + @total_accumulated_cito.to_i.to_s + "\r\n"
       end
       filename = "AD" + 1.month.ago.strftime("%m%Y") + ".TXT"
       send_data file, filename: filename, type: 'text/html; charset=utf-8'
     when "af_file"
       if @total_detail_clin.size > 0
-        file += "050011134601,PATOLOGIA SUESCUN SAS,NI,900363326-8," + @total_detail_clin.first[2].invoice + "," + Date.today.strftime("%d/%m/%Y") + "," + Date.parse(params[:init_date]).strftime("%d/%m/%Y") + "," + Date.parse(params[:final_date]).strftime("%d/%m/%Y") + ",000000," + Entity.where(id: params[:id]).first.name.upcase + ",,CONTRIBUTIVO,,,,," + @total_accumulated_clin.to_i.to_s + "\n"
+        file += "050011134601,PATOLOGIA SUESCUN SAS,NI,900363326-8," + @total_detail_clin.first[2].invoice + "," + Date.today.strftime("%d/%m/%Y") + "," + Date.parse(params[:init_date]).strftime("%d/%m/%Y") + "," + Date.parse(params[:final_date]).strftime("%d/%m/%Y") + ",000000," + Entity.where(id: params[:id]).first.name.upcase + ",,CONTRIBUTIVO,,,,," + @total_accumulated_clin.to_i.to_s + "\r\n"
       end
       if @total_detail_cito.size > 0
-        file += "050011134601,PATOLOGIA SUESCUN SAS,NI,900363326-8," + @total_detail_cito.first[2].invoice + "," + Date.today.strftime("%d/%m/%Y") + "," + Date.parse(params[:init_date]).strftime("%d/%m/%Y") + "," + Date.parse(params[:final_date]).strftime("%d/%m/%Y") + ",000000," + Entity.where(id: params[:id]).first.name.upcase + ",,CONTRIBUTIVO,,,,," + @total_accumulated_cito.to_i.to_s + "\n"
+        file += "050011134601,PATOLOGIA SUESCUN SAS,NI,900363326-8," + @total_detail_cito.first[2].invoice + "," + Date.today.strftime("%d/%m/%Y") + "," + Date.parse(params[:init_date]).strftime("%d/%m/%Y") + "," + Date.parse(params[:final_date]).strftime("%d/%m/%Y") + ",000000," + Entity.where(id: params[:id]).first.name.upcase + ",,CONTRIBUTIVO,,,,," + @total_accumulated_cito.to_i.to_s + "\r\n"
       end
       filename = "AF" + 1.month.ago.strftime("%m%Y") + ".TXT"
       send_data file, filename: filename, type: 'text/html; charset=utf-8'
     when "ct_file"
-      file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "US" + 1.month.ago.strftime("%m%Y") + "," + (@total_users_clin.count + @total_users_cito.count).to_s  + "\n"
-      file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "AP" + 1.month.ago.strftime("%m%Y") + "," + (@total_detail.count).to_s + "\n"
-      file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "AF" + 1.month.ago.strftime("%m%Y") + "," + count_invoices(@total_users_clin.count, @total_users_cito.count).to_s + "\n"
-      file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "AD" + 1.month.ago.strftime("%m%Y") + "," + count_invoices(@total_users_clin.count, @total_users_cito.count).to_s + "\n"
+      file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "US" + 1.month.ago.strftime("%m%Y") + "," + (@total_users_clin.count + @total_users_cito.count).to_s  + "\r\n"
+      file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "AP" + 1.month.ago.strftime("%m%Y") + "," + (@total_detail.count).to_s + "\r\n"
+      file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "AF" + 1.month.ago.strftime("%m%Y") + "," + count_invoices(@total_users_clin.count, @total_users_cito.count).to_s + "\r\n"
+      file += "050011134601," + Date.today.strftime("%d/%m/%Y") + "," + "AD" + 1.month.ago.strftime("%m%Y") + "," + count_invoices(@total_users_clin.count, @total_users_cito.count).to_s + "\r\n"
       filename = "CT" + 1.month.ago.strftime("%m%Y") + ".TXT"
       send_data file, filename: filename, type: 'text/html; charset=utf-8'
     end
@@ -332,7 +332,7 @@ class ReportsController < ApplicationController
         # @total_users << [ inform.patient.id_type, inform.patient.id_number, "000000", regime(inform), inform.patient.lastname1, inform.patient.lastname2, inform.patient.name1, inform.patient.name2, inform.p_age, inform.p_age_type == "A" ? "1" : inform.p_age_type == "M" ? "2" : "3", inform.patient.sex, inform.p_municipality[0..1], inform.p_municipality[2..4], inform.zone_type ]
         inform.studies.each do |study|
           @price = study.price * study.factor #Aca no acumulo el valor!
-          @total_detail += inform.invoice + "," + "050011134601" + "," + inform.patient.id_type + "," + inform.patient.id_number + "," + inform.delivery_date.strftime("%d/%m/%Y") + "," + inform.prmtr_auth_code + "," + Codeval.where(id: study.codeval_id).first.code + "," + inform.status + "," + "1," + "," + "," + "," + "," + "," + @price.to_i.to_s + "\n"
+          @total_detail += inform.invoice + "," + "050011134601" + "," + inform.patient.id_type + "," + inform.patient.id_number + "," + inform.delivery_date.strftime("%d/%m/%Y") + "," + inform.prmtr_auth_code + "," + Codeval.where(id: study.codeval_id).first.code + "," + inform.status + "," + "1," + "," + "," + "," + "," + "," + @price.to_i.to_s + "\r\n"
         end
       end
     end
@@ -359,7 +359,7 @@ class ReportsController < ApplicationController
     users = ""
 
     @total_users.each do |user|
-      users += user.join(",") + "\n"
+      users += user.join(",") + "\r\n"
     end
 
     filename = "US" + 1.month.ago.strftime("%m%Y") + ".TXT"
@@ -413,33 +413,33 @@ class ReportsController < ApplicationController
     count = 0
     file = ""
     if params[:type] == "det"
-      file += "ET,1000,1," + invoice_date.strftime("%Y-%m-%d") + ", , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , \n"
-      file += "EB,1,8003, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , \n"
+      file += "ET,1000,1," + invoice_date.strftime("%Y-%m-%d") + ", , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , \r\n"
+      file += "EB,1,8003, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , \r\n"
       @total_affinity_trans.each_with_index do |branch_data, n|
         if branch_data[6] != 0
           count += 1
           if params[:inf_type] == "clin"
-            file += "RG," + count.to_s + ",0000," + invoice_date.strftime("%Y-%m-%d") + ",042," + @invoice + ",999999," + "ESTUDIOS PATOLOGICOS REALIZADOS A USUARIOS " + branch_data[1].to_s + ", , , , , , ,1,1," + branch_data[6].to_i.to_s + ",0,0,0,0,0,0,0,0,0, , , , , , ,0,0, , , , ,0,0,0\n"
+            file += "RG," + count.to_s + ",0000," + invoice_date.strftime("%Y-%m-%d") + ",042," + @invoice + ",999999," + "ESTUDIOS PATOLOGICOS REALIZADOS A USUARIOS " + branch_data[1].to_s + ", , , , , , ,1,1," + branch_data[6].to_i.to_s + ",0,0,0,0,0,0,0,0,0, , , , , , ,0,0, , , , ,0,0,0\r\n"
           end
           if params[:inf_type] == "cito"
-            file += "RG," + count.to_s + ",0000," + invoice_date.strftime("%Y-%m-%d") + ",042," + @invoice + ",898001," + "CITOLOGIA VAGINAL (Procesamiento y lectura)  USUARIAS " + branch_data[1].to_s + ", , , , , , ,#{branch_data[2].count},#{branch_data[2].count}," + Factor.where(codeval_id: 7, rate_id: @entity.rate_id).first.price.to_i.to_s + ",0,0,0,0,0,0,0,0,0, , , , , , ,0,0, , , , ,0,0,0\n"
+            file += "RG," + count.to_s + ",0000," + invoice_date.strftime("%Y-%m-%d") + ",042," + @invoice + ",898001," + "CITOLOGIA VAGINAL (Procesamiento y lectura)  USUARIAS " + branch_data[1].to_s + ", , , , , , ,#{branch_data[2].count},#{branch_data[2].count}," + Factor.where(codeval_id: 7, rate_id: @entity.rate_id).first.price.to_i.to_s + ",0,0,0,0,0,0,0,0,0, , , , , , ,0,0, , , , ,0,0,0\r\n"
           end
         else
           offset += 1
         end
       end
-      file += "FB,1,8003," + (@total_affinity_trans.count - offset).to_s + ", , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , " + "\n"
+      file += "FB,1,8003," + (@total_affinity_trans.count - offset).to_s + ", , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , " + "\r\n"
       file += "FT,1000,1,1, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , , , , , "
 
       filename = "detalle_#{params[:inf_type]}_" + @invoice + ".TXT"
       send_data file, filename: filename, type: 'text/html; charset=utf-8'
     end
     if params[:type] == "head"
-      file += "ET,1000,1," + invoice_date.strftime("%Y-%m-%d") + ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n"
-      file += "EB,1,8001,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n"
-      file += "RG,1,0000," + invoice_date.strftime("%Y-%m-%d") + "," + @invoice + ",042,VTA03,11001," + @entity.tax_id + ",04, , ,Facturacion periodo " + Date.parse(params[:init_date]).strftime("%d/%m/%Y") + " a " + Date.parse(params[:final_date]).strftime("%d/%m/%Y") + ",,015,15,10,2,1,60,0,0," + @total_accumulated.to_i.to_s + ", , , , ,00,0, , ,N,P,0, ,0, ," + @total_accumulated.to_i.to_s + ", , , , , , , , , , ,S,S,10, , , , , \n"
+      file += "ET,1000,1," + invoice_date.strftime("%Y-%m-%d") + ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\r\n"
+      file += "EB,1,8001,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\r\n"
+      file += "RG,1,0000," + invoice_date.strftime("%Y-%m-%d") + "," + @invoice + ",042,VTA03,11001," + @entity.tax_id + ",04, , ,Facturacion periodo " + Date.parse(params[:init_date]).strftime("%d/%m/%Y") + " a " + Date.parse(params[:final_date]).strftime("%d/%m/%Y") + ",,015,15,10,2,1,60,0,0," + @total_accumulated.to_i.to_s + ", , , , ,00,0, , ,N,P,0, ,0, ," + @total_accumulated.to_i.to_s + ", , , , , , , , , , ,S,S,10, , , , , \r\n"
 
-      file += "FB,1,8001,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,," + "\n"
+      file += "FB,1,8001,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,," + "\r\n"
       file += "FT,1000,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 
       filename = "enc_#{params[:inf_type]}_" + @invoice + ".TXT"

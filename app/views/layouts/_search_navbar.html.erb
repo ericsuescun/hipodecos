@@ -136,7 +136,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <%= link_to "Producción", blocks_path + days_ago_search(7), class: "nav-link" %>
+            <%= link_to "Producción", inclusion_blocks_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Reportes", "reports/index", class: "nav-link" %>

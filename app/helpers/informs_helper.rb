@@ -29,6 +29,8 @@ module InformsHelper
 			"No planifica"
 		when "22"
 			"Basectomía"
+		when "24"
+			"No reporta"
 		else
 			"Ninguno"
 		end

@@ -9,18 +9,44 @@
       <div class="alert alert-primary">
         <h5>Datos del paciente</h5>
         <div class="row">
-          <div class="col-12 col-lg-3">
+          <div class="col-12 col-lg-2">
             <div class="form-group">
-              <%= form.label "# de identificación" %>
-              <%= form.text_field :id_number, autofocus: true, class: "form-control input" %>
+              <%= form.label "identificación" %>
+              <%= form.text_field :id_number, placeholder: "# de identificación", class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= form.label "Tipo de id" %>
-              <%= form.select(:id_type, options_for_select([['Cédula', 'CC'], ['Cédula de extranjería', 'CE'], ['Carnet Diplomático', 'CD'], ['Pasaporte', 'PA'], ['Salvoconducto', 'SC'], ['Permiso Especial', 'PE'], ['Registro Civil', 'RC'], ['Tarjeta de Identidad', 'TI'], ['Certificado de Nacimiento', 'NC'], ['Adulto sin identificación', 'AS'], ['Menor sin identificación', 'MS']], @patient.id_type), { include_blank: true }, class: "form-control input") %>
+              <%= form.select(:id_type, options_for_select([['Cédula', 'CC'], ['Cédula de extranjería', 'CE'], ['Carnet Diplomático', 'CD'], ['Pasaporte', 'PA'], ['Salvoconducto', 'SC'], ['Permiso Especial', 'PE'], ['Registro Civil', 'RC'], ['Tarjeta de Identidad', 'TI'], ['Certificado de Nacimiento', 'NC'], ['Adulto sin identificación', 'AS'], ['Menor sin identificación', 'MS']], @patient.id_type), {  }, class: "form-control input") %>
             </div>
           </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "1er nombre" %>
+              <%= form.text_field :name1, autofocus: true, class: "form-control input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "2do nombre" %>
+              <%= form.text_field :name2, class: "form-control input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "1er apellido" %>
+              <%= form.text_field :lastname1, class: "form-control input" %>
+            </div>
+          </div>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= form.label "2do apellido" %>
+              <%= form.text_field :lastname2, class: "form-control input" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= form.label "Fecha de nacimiento" %>
@@ -33,35 +59,6 @@
               <%= form.select(:sex, options_for_select([['Femenino', 'F'], ['Masculino', 'M']], @patient.sex), { include_blank: true }, class: "form-control input") %>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-lg-3">
-            <div class="form-group">
-              <%= form.label "Nombre" %>
-              <%= form.text_field :name1, class: "form-control input" %>
-            </div>
-          </div>
-          <div class="col-12 col-lg-3">
-            <div class="form-group">
-              <%= form.label "Segundo nombre" %>
-              <%= form.text_field :name2, class: "form-control input" %>
-            </div>
-          </div>
-          <div class="col-12 col-lg-3">
-            <div class="form-group">
-              <%= form.label "Apellido" %>
-              <%= form.text_field :lastname1, class: "form-control input" %>
-            </div>
-          </div>
-          <div class="col-12 col-lg-3">
-            <div class="form-group">
-              <%= form.label "Segundo apellido" %>
-              <%= form.text_field :lastname2, class: "form-control input" %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          
         </div>
       </div>
       
@@ -187,7 +184,7 @@
               <div class="col-12 col-lg-3">
                 <div class="form-group">
                   <%= informs_form.label "Tipo de zona" %>
-                  <%= informs_form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']], @patient.informs), {  }, class: "form-control form-control input") %>
+                  <%= informs_form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']], @patient.informs), { include_blank: true }, class: "form-control form-control input") %>
                 </div>
               </div>
               <div class="col-12 col-lg-3">
@@ -215,14 +212,14 @@
                   </div>
                   <div class="col-12 col-lg-3 col-xl-3">
                     <div class="form-group">
-                      <%= cyto_form.label "Cita anterior:" %>
+                      <%= cyto_form.label "Citología anterior:" %>
                       <%= cyto_form.text_field :prev_appo, class: "form-control input" %>
                     </div>
                   </div>
                   <div class="col-12 col-lg-3 col-xl-3">
                     <div class="form-group">
                       <%= cyto_form.label "Último resultado:" %>
-                      <%= cyto_form.select(:last_result, options_for_select([['ASC-US', 'ASC-US'], ['ASC-H', 'ASC-H'], ['AGC-NOS', 'AGC-NOS'], ['AGC-NEO', 'AGC-NEO'], ['LEI-BG', 'LEI-BG'], ['LEI-AG', 'LEI-AG'], ['CARCINOMA', 'CARCINOMA'], ['ADENOCARCINOMA', 'ADENOCARCINOMA'], ['NEGATIVA', 'NEGATIVA'], ['INSATISFACTORIA', 'INSATISFACTORIA']], nil), { include_blank: true }, class: "form-control input") %>
+                      <%= cyto_form.select(:last_result, options_for_select([['ASC-US', 'ASC-US'], ['ASC-H', 'ASC-H'], ['AGC-NOS', 'AGC-NOS'], ['AGC-NEO', 'AGC-NEO'], ['LEI-BG', 'LEI-BG'], ['LEI-AG', 'LEI-AG'], ['CARCINOMA', 'CARCINOMA'], ['ADENOCARCINOMA', 'ADENOCARCINOMA'], ['NEGATIVA', 'NEGATIVA'], ['INSATISFACTORIA', 'INSATISFACTORIA'], ['NO SABE', 'NO SABE']], nil), { include_blank: true }, class: "form-control input") %>
                     </div>
                   </div>
                   <div class="col-12 col-lg-3 col-xl-3">
@@ -234,7 +231,7 @@
                   <div class="col-12 col-lg-3 col-xl-3">
                     <div class="form-group">
                       <%= cyto_form.label "Método de planificación:" %>
-                      <%= cyto_form.select(:birth_control, options_for_select([['DIU', '0'], ['Implante', '2'], ['Pastillas', '4'], ['Inyección', '6'], ['Esterilización', '12'], ['Barrera', '14'], ['No planifica', '20'], ['Basectomía', '22']], nil), { include_blank: true }, class: "form-control input") %>
+                      <%= cyto_form.select(:birth_control, options_for_select([['DIU', '0'], ['Implante', '2'], ['Pastillas', '4'], ['Inyección', '6'], ['Esterilización', '12'], ['Barrera', '14'], ['No planifica', '20'], ['Basectomía', '22'], ['No reporta', '24']], nil), { include_blank: true }, class: "form-control input") %>
                     </div>
                   </div>
                 </div>
@@ -244,48 +241,74 @@
           
 
             <%= informs_form.fields_for :physicians do |phy_form| %>
+
           <div class="alert alert-success">
-            <h5>Médico tratante</h5>
-              <div class="row">
-                <div class="col-12 col-lg-4">
-                  <div class="form-group">
-                    <%= phy_form.label "Nombre" %>
-                    <%= phy_form.text_field :name, class: "form-control input" %>
+            <% if params[:inf_type] != 'cito' %>
+              <h5>Médico tratante</h5>
+                <div class="row">
+                  <div class="col-12 col-lg-4">
+                    <div class="form-group">
+                      <%= phy_form.label "Nombre" %>
+                      <%= phy_form.text_field :name, class: "form-control input" %>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-4">
+                    <div class="form-group">
+                      <%= phy_form.label "Apellido" %>
+                      <%= phy_form.text_field :lastname, class: "form-control input" %>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-2">
+                    <div class="form-group">
+                      <%= phy_form.label "Teléfono" %>
+                      <%= phy_form.text_field :tel, class: "form-control input" %>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-2">
+                    <div class="form-group">
+                      <%= phy_form.label "Celular" %>
+                      <%= phy_form.text_field :cel, class: "form-control input" %>
+                    </div>
                   </div>
                 </div>
-                <div class="col-12 col-lg-4">
-                  <div class="form-group">
-                    <%= phy_form.label "Apellido" %>
-                    <%= phy_form.text_field :lastname, class: "form-control input" %>
+                <div class="row">
+                  <div class="col-12 col-lg-4">
+                    <%= phy_form.label "email" %>
+                    <%= phy_form.text_field :email, class: "form-control input" %>
+                  </div>
+                  <div class="col-12 col-lg-4">
+                    <%= phy_form.label "Especialidad" %>
+                    <%= phy_form.text_field :study1, class: "form-control input" %>
+                  </div>
+                  <div class="col-12 col-lg-4">
+                    <%= phy_form.label "Otro estudio/especialidad" %>
+                    <%= phy_form.text_field :study2, class: "form-control input" %>
                   </div>
                 </div>
-                <div class="col-12 col-lg-2">
-                  <div class="form-group">
-                    <%= phy_form.label "Teléfono" %>
-                    <%= phy_form.text_field :tel, class: "form-control input" %>
+            <% else %>
+              <h5>Profesional toma de muestra</h5>
+                <div class="row">
+                  <div class="col-12 col-lg-4">
+                    <div class="form-group">
+                      <%= phy_form.label "Nombre" %>
+                      <%= phy_form.text_field :name, class: "form-control input" %>
+                    </div>
                   </div>
-                </div>
-                <div class="col-12 col-lg-2">
-                  <div class="form-group">
-                    <%= phy_form.label "Celular" %>
-                    <%= phy_form.text_field :cel, class: "form-control input" %>
+                  <div class="col-12 col-lg-4">
+                    <div class="form-group">
+                      <%= phy_form.label "Apellido" %>
+                      <%= phy_form.text_field :lastname, class: "form-control input" %>
+                    </div>
                   </div>
+                  <div class="col-12 col-lg-4">
+                    <%= phy_form.label "Especialidad" %>
+                    <%= phy_form.select(:study1, options_for_select([['Citohistotecnología', 'cht'], ['Histotecnología', 'ht'], ['Citología', 'c']], nil), { include_blank: true }, class: "form-control input") %>
+                  </div>
+                  
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-12 col-lg-4">
-                  <%= phy_form.label "email" %>
-                  <%= phy_form.text_field :email, class: "form-control input" %>
-                </div>
-                <div class="col-12 col-lg-4">
-                  <%= phy_form.label "Especialidad" %>
-                  <%= phy_form.text_field :study1, class: "form-control input" %>
-                </div>
-                <div class="col-12 col-lg-4">
-                  <%= phy_form.label "Otro estudio/especialidad" %>
-                  <%= phy_form.text_field :study2, class: "form-control input" %>
-                </div>
-              </div>
+                
+            <% end %>
+            
             <% end %>
           </div>
         <% end %>

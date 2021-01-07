@@ -1,5 +1,5 @@
 <div class="info">
-	<h4>Ventas <%= params[:inf_type] == 'clin' ? "Clínica" : params[:inf_type] == 'hosp' ? "Hospital" : "Citlogías" %> para el periodo <%= new_search_range %>: <strong><%= number_to_currency(@total_accumulated, precision: 0, delimiter: '.') %></strong></h4>
+	<h4><%= params[:inf_type] == 'clin' ? "Clínica" : params[:inf_type] == 'hosp' ? "Hospital" : "Citologías" %> facturadas para el periodo <%= new_search_range %>: <strong><%= number_to_currency(@total_accumulated, precision: 0, delimiter: '.') %></strong></h4>
 </div>
 <div class="container">
 	<div class="row">
@@ -70,6 +70,7 @@
 							</tr>
 						<% else %>
 							<% if detail[2] == "**" %>
+								<% if detail[6] != 0 %>
 									<tr class="alert alert-warning">
 										<td></td>
 										<td></td>
@@ -90,11 +91,13 @@
 									<td></td>
 									<td></td>
 									<td></td>
+								<% end %>
+									
 								</tr>
 							<% else %>
 								<tr>
-									<td><%= detail[2].invoice %></td>
-									<td><%= link_to "#{detail[2].tag_code}", inform_path(detail[2]) %></td>
+									<td><%= detail[2].invoice %> <%= detail[2].prmtr_auth_code %></td>
+									<td><%= detail[2].tag_code %></td>
 									<td><%= detail[2].patient.halfname %></td>
 									<td><%= detail[2].patient.id_number %></td>
 									<td>
@@ -103,7 +106,7 @@
 										<% end %>
 									</td>
 									<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
-									<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+									<td></td>
 								</tr>
 							<% end %>
 							

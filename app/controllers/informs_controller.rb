@@ -341,7 +341,7 @@ class InformsController < ApplicationController
           unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded"
             # @informs2 << slide.inform
             if slide.inform.pathologist_id != nil
-              @informs2 << slide.informs # citos ya asignadas en otro batch, van directo a @informs porque ya tienen patologo/a
+              @informs2 << slide.inform # citos ya asignadas en otro batch, van directo a @informs porque ya tienen patologo/a
             else
               @informs2_unassigned << slide.inform
             end

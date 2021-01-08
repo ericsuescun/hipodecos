@@ -384,7 +384,7 @@ class InformsController < ApplicationController
           while @informs.last == @negative_cytos[n]
             n = rand(1..@negative_cytos.length) - 1 #No es posible repetir numero
           end
-          @informs << @negative_cytos[n]
+          @informs3_unassigned << @negative_cytos[n]
           @negative_cytos.delete_at(n)
         end
       end

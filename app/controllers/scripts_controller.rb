@@ -75,7 +75,13 @@ class ScriptsController < ApplicationController
   private
     def get_diagcodes
       if @automatic.auto_type == 'cito'
-        @diagcodes = Citocode.all
+        # @diagcodes = Citocode.all
+
+        @diagcodes = []
+        Citocode.all.each do |citocode|
+          citocode.description = citocode.result_type.upcase + " - " + citocode.cito_code + ". " + citocode.description
+          @diagcodes << citocode
+        end
         
       else
         @diagcodes = []

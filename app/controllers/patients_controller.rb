@@ -6,15 +6,18 @@ class PatientsController < ApplicationController
   # GET /patients.json
   def index
     @tab = :series
+    @patients = []
     if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @patients = Patient.where(created_at: date_range).paginate(page: params[:page], per_page: 30)
+      # @patients = Patient.where(created_at: date_range).paginate(page: params[:page], per_page: 30)
+      @patients = Patient.joins(:informs).where(informs: { created_at: date_range }).distinct.paginate(page: params[:page], per_page: 30)
      else
-      @patients = Patient.where(created_at: 2.weeks.ago..Time.now).paginate(page: params[:page], per_page: 30)
+      # @patients = Patient.where(created_at: 2.weeks.ago..Time.now).paginate(page: params[:page], per_page: 30)
+
+      @patients = Patient.joins(:informs).where(informs: { created_at: 2.weeks.ago..Time.now }).distinct.paginate(page: params[:page], per_page: 30)
     end
-    
   end
 
   def index_one
@@ -23,9 +26,11 @@ class PatientsController < ApplicationController
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @patients = Patient.where(created_at: date_range).paginate(page: params[:page], per_page: 30)
+      # @patients = Patient.where(created_at: date_range).paginate(page: params[:page], per_page: 30)
+      @patients = Patient.joins(:informs).where(informs: { created_at: date_range }).distinct.paginate(page: params[:page], per_page: 30)
      else
-      @patients = Patient.where(created_at: 2.weeks.ago..Time.now).paginate(page: params[:page], per_page: 30)
+      # @patients = Patient.where(created_at: 2.weeks.ago..Time.now).paginate(page: params[:page], per_page: 30)
+      @patients = Patient.joins(:informs).where(informs: { created_at: 2.weeks.ago..Time.now }).distinct.paginate(page: params[:page], per_page: 30)
     end
   end
 

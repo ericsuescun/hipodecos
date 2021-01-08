@@ -434,9 +434,24 @@ class InformsController < ApplicationController
     @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
 
     @informs = []
+    @informs_unassigned = []
+    @informs_first_batch = []
+    @informs_rest = []
     @slides.each do |slide|
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
-        @informs << slide.inform
+        if slide.inform.cytologist != nil
+          @informs << slide.inform
+        else
+          @informs_unassigned << slide.inform
+        end
+      end
+      @informs_first_batch = @informs_unassigned[0..49]
+      if @informs_first_batch == nil
+        @informs_first_batch = []
+      end
+      @informs_rest = @informs_unassigned[50..-1]
+      if @informs_rest == nil
+        @informs_rest = []
       end
     end
     

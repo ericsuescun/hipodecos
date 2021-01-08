@@ -338,7 +338,7 @@ class InformsController < ApplicationController
     @slides.each do |slide|
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
         if slide.inform.inf_type == 'cito'
-          unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded"
+          unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded" || slide.inform.inf_status == "revision"
             # @informs2 << slide.inform
             if slide.inform.pathologist_id != nil
               @informs2 << slide.inform # citos ya asignadas en otro batch, van directo a @informs porque ya tienen patologo/a

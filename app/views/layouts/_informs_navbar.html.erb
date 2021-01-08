@@ -49,7 +49,7 @@
               Citología
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
+              <%= link_to "Hoy", informs_path + "?init_date=" + Date.today.strftime("%d-%m-%Y") + "&final_date=" + Date.today.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <%= link_to "Ayer", informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <%= link_to "Antier", informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <%= link_to "Esta semana", informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>

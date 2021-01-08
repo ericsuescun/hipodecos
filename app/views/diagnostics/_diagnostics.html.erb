@@ -57,7 +57,7 @@
                           </div>
                           <div class="form-group">
                             <%= form.label "Resultado:" %>
-                            <%= form.select(:result, options_for_select([['Positiva', 'positiva'], ['Negativa', 'negativa'], ['Insatisfactoria', 'insatisfactoria']]), { prompt: "Selecciona" }, class: "form-control form-control input") %>
+                            <%= form.select(:result, options_for_select([['Positiva', 'positiva'], ['Negativa', 'negativa'], ['Insatisfactoria', 'insatisfactoria']], diagnostic.result), { prompt: "Selecciona" }, class: "form-control form-control input") %>
                           </div>
                         </div>
                       <% end %>

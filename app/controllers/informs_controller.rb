@@ -315,20 +315,36 @@ class InformsController < ApplicationController
         end
       end
     end
-    @informs_unassigned.each_with_index do |inform, n|
-      if n <=50
-        @informs_first_batch << inform
-      else
-        @informs_rest << inform
-      end
+    # @informs_unassigned.each_with_index do |inform, n|
+    #   if n <=50
+    #     @informs_first_batch << inform
+    #   else
+    #     @informs_rest << inform
+    #   end
+    # end
+    @informs_first_batch = @informs_unassigned[0..49]
+    if @informs_first_batch == nil
+      @informs_unassigned = []
+    end
+    @informs_rest = @informs_unassigned[50..-1]
+    if @informs_rest == nil
+      @informs_rest = []
     end
 
     @informs2 = []
+    @informs2_unassigned = []
+    @informs2_first_batch = []
+    @informs2_rest = []
     @slides.each do |slide|
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
         if slide.inform.inf_type == 'cito'
           unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded"
-            @informs2 << slide.inform
+            # @informs2 << slide.inform
+            if slide.inform.pathologist_id != nil
+              @informs2 << slide.informs # citos ya asignadas en otro batch, van directo a @informs porque ya tienen patologo/a
+            else
+              @informs2_unassigned << slide.inform
+            end
           end
         end
       end
@@ -336,19 +352,20 @@ class InformsController < ApplicationController
 
     @already_negative = 0
     @negative_cytos = []
-    if @informs2 != nil
-      @informs2.each do |inform|
+    @informs3_unassigned = []   #Aca solo almaceno las positivas e instatisfactorias. No las saco del arreglo original para no lidiar con offsets
+    if @informs2_unassigned != nil
+      @informs2_unassigned.each do |inform|
         if inform.diagnostics != []
           if inform.diagnostics.first.result != nil
             if inform.diagnostics.first.result == 'positiva'
-              @informs << inform
+              @informs3_unassigned << inform
             end
             if inform.diagnostics.first.result == 'insatisfactoria'
-              @informs << inform
+              @informs3_unassigned << inform
             end
             if inform.diagnostics.first.result == 'negativa'
               if inform.pathologist_id != nil
-                @informs << inform
+                @informs2 << inform
                 @already_negative = @already_negative + 1
               else
                 @negative_cytos << inform
@@ -371,8 +388,17 @@ class InformsController < ApplicationController
           @negative_cytos.delete_at(n)
         end
       end
-      
     end
+
+    @informs2_first_batch = @informs3_unassigned[0..49]
+    if @informs2_first_batch == nil
+      @informs_unassigned = []
+    end
+    @informs2_rest = @informs3_unassigned[50..-1]
+    if @informs2_rest == nil
+      @informs2_rest = []
+    end
+
     @negative_cytos.each do |inform|
       inform.update(inf_status: "revision") #Se deben marcar como para validación
     end

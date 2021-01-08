@@ -1,4 +1,11 @@
 <div class="inclusion-blocks">
+  <div class="info">
+    <% if params[:inf_type] != 'cito' %>
+      <h4>Placas de clínica/hospital</h4>
+    <% else %>
+      <h4>Placas de citología</h4>
+    <% end %>
+  </div>
   <div class="container-fluid">
     <%= form_tag cover_slides_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: :put do %>
     <%= submit_tag "Curbrir lo chequeado", class: "btn btn-secondary btn-sm mb-3" %>

@@ -59,7 +59,7 @@
                   </del>
                 <% else %>
                   <%= link_to inform  do %>
-                    <%= inform.tag_code %>
+                    <%= inform.tag_code %>: <%= inform.inf_status.to_s %>
                   <% end %>
                 <% end %>
                 

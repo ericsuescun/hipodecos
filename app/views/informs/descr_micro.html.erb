@@ -210,9 +210,9 @@
 
                                           <div class="actions">
                                             <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
-                                              <%= "Opc. #{n + 1}: " %>
+                                              <%= "Op #{n + 1}: " %>
                                             </span>
-                                            <%= form.submit "cod: #{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
+                                            <%= form.submit "(#{script.pss_code})", { class: "m-0 p-0 auto-option" } %>
                                             <%= form.hidden_field :inform_id, value: @inform.id %>
                                             <%= form.hidden_field :automatic_id, value: automatic.id %>
                                             <%= form.hidden_field :script_id, value: script.id %>
@@ -231,9 +231,9 @@
                                         <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
                                           <div class="actions">
                                             <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
-                                              <%= "Opc. #{n + 1}: " %>
+                                              <%= "Op #{n + 1}: " %>
                                             </span>
-                                            <%= form.submit "cod: #{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
+                                            <%= form.submit "(#{script.pss_code})", { class: "m-0 p-0 auto-option" } %>
                                             <%= form.hidden_field :inform_id, value: @inform.id %>
                                             <%= form.hidden_field :automatic_id, value: automatic.id %>
                                             <%= form.hidden_field :script_id, value: script.id %>
@@ -263,9 +263,9 @@
                                         <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
                                           <div class="actions">
                                             <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
-                                              <%= "Opc. #{n + 1}: " %>
+                                              <%= "Op #{n + 1}: " %>
                                             </span>
-                                            <%= form.submit "cod: #{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
+                                            <%= form.submit "(#{script.pss_code})", { class: "m-0 p-0 auto-option" } %>
                                             <%= form.hidden_field :inform_id, value: @inform.id %>
                                             <%= form.hidden_field :automatic_id, value: automatic.id %>
                                             <%= form.hidden_field :script_id, value: script.id %>
@@ -284,9 +284,9 @@
                                         <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>
                                           <div class="actions">
                                             <span class="m-0 p-0" data-toggle="tooltip" data-placement="top" data-html="true" title="<%= "#{script.description} DX: <b>#{script.diagnostic}</b>" %>" >
-                                              <%= "Opc. #{n + 1}: " %>
+                                              <%= "Op #{n + 1}: " %>
                                             </span>
-                                            <%= form.submit "cod: #{script.pss_code}", { class: "m-0 p-0 auto-option" } %>
+                                            <%= form.submit "(#{script.pss_code})", { class: "m-0 p-0 auto-option" } %>
                                             <%= form.hidden_field :inform_id, value: @inform.id %>
                                             <%= form.hidden_field :automatic_id, value: automatic.id %>
                                             <%= form.hidden_field :script_id, value: script.id %>

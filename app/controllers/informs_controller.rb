@@ -351,6 +351,19 @@ class InformsController < ApplicationController
     end
 
     @already_negative = 0
+
+    @informs2.each do |inform|
+      if inform.diagnostics != []
+        if inform.diagnostics.first.result != nil
+          if inform.diagnostics.first.result == 'negativa'
+            if inform.pathologist_id != nil
+              @already_negative = @already_negative + 1
+            end
+          end
+        end
+      end
+    end
+
     @negative_cytos = []
     @informs3_unassigned = []   #Aca solo almaceno las positivas e instatisfactorias. No las saco del arreglo original para no lidiar con offsets
     if @informs2_unassigned != nil

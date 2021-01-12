@@ -6,15 +6,19 @@
         <%= render partial: "inform" %>
       </div>
     </div>
+    <div class="row">
+      <div class="col-12">
+        <%= render partial: "macros/macros", locals: { inform: @inform } %>
+      </div>
+    </div>
     <br>
     <div class="container-fluid">
       <% if @inform.inf_type != "cito" %>
         
         <div class="row">
-          <!-- <div class="col-12 col-lg-4 col-xl-4 macros-in">
-            <%= render partial: "macros/macros", locals: { inform: @inform } %>
-          </div> -->
+          
           <div class="col-12 col-lg-6 col-xl-6">
+            
             <div class="row">
               <div class="col-12">
                 <div class="micros-in">

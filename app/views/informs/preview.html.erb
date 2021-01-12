@@ -178,7 +178,7 @@
             <div class="card-body">
               <% if @inform.inf_type != 'cito' %>
                 <div class="d-flex flex-row">
-                  <h5 class="card-title mr-2"><strong><%= @diagnostic_text %></strong></h5>
+                  <h5 class="card-title mr-2"><strong><%= simple_format(@diagnostic_text) %></strong></h5>
                 </div>
                 
                 <div class="row d-flex flex-row">
@@ -196,7 +196,7 @@
               <% else %>
                 <% if @inform.diagnostics != [] %>
                   <% diagnostic = @inform.diagnostics.last %>
-                  <h5 class="card-title"><strong><%= diagnostic.description %></strong></h5>
+                  <h5 class="card-title"><strong><%= simple_format(diagnostic.description) %></strong></h5>
                   <div class="row d-flex flex-row">
                     <% @pathologists.each do |pathologist| %>
                       <div class="col-4 col-lg-4 mt-3">

@@ -42,7 +42,7 @@
               <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
               <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
               <td><%= inform.prmtr_auth_code %></td>
-              <td><%= link_to "Revisar", show_revision_inform_path(inform), local: true %></td>
+              <td><%= link_to "Invalidar", show_revision_inform_path(inform), local: true, class: "btn btn-warning btn-sm" %></td>
               
             </tr>
           <% end %>

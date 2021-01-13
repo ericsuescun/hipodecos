@@ -1,18 +1,14 @@
 <%= render "shared/error_messages", target: @inform %>
 <div class="row">
+  <div class="col-12 col-lg-12 col-xl-12 ml-1">
+    <%= render partial: "inform" %>
+  </div>
+  <div class="col-12">
+    <%= render partial: "macros/macros", locals: { inform: @inform } %>
+  </div>
   <div class="col-12 col-lg-12 mx-auto">
+    
     <div class="row">
-      <div class="col-12 col-lg-12 col-xl-12 ml-1">
-        <%= render partial: "inform" %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <%= render partial: "macros/macros", locals: { inform: @inform } %>
-      </div>
-    </div>
-    <br>
-    <div class="container-fluid">
       <% if @inform.inf_type != "cito" %>
         
         <div class="row">
@@ -159,13 +155,7 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-12 col-lg-12 col-xl-12 ">
-            <div class="slide">
-              <%= render partial: "slides-micro", locals: { inform: @inform } %>
-            </div>
-          </div>
-        </div>
+        
 
       <% else %>
 
@@ -315,6 +305,16 @@
         </div>
       <% end %>
     </div>
+    <% if @inform.inf_type != "cito" %>
+      <div class="row">
+        <div class="col-12 col-lg-12 col-xl-12 ">
+          <div class="slide">
+            <%= render partial: "slides-micro", locals: { inform: @inform } %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    
     <div class="row">
       <div class="col-4 col-lg-4 col-xl-4 mx-auto">
         <%= link_to "OK para validación", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>

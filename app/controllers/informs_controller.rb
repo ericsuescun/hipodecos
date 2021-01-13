@@ -74,7 +74,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @informs = Inform.where(receive_date: date_range, inf_status: "revision").paginate(page: params[:page], per_page: 10)
+    @informs = Inform.where(user_review_date: date_range, inf_status: "revision").paginate(page: params[:page], per_page: 10)
   end
 
   def index_ready
@@ -233,15 +233,15 @@ class InformsController < ApplicationController
   def set_revision
     if @inform.inf_type == 'cito'
       if @inform.pathologist_id == nil && @inform.cytologist != nil
-        @inform.update(inf_status: "revision_cyto")
+        @inform.update(user_review_date: Date.today, inf_status: "revision_cyto")
         redirect_to descr_micros_cyto_informs_path
       end
       if @inform.pathologist_id != nil
-        @inform.update(inf_status: "revision")
+        @inform.update(user_review_date: Date.today, inf_status: "revision")
         redirect_to descr_micros_informs_path
       end
     else
-      @inform.update(inf_status: "revision")
+      @inform.update(user_review_date: Date.today, inf_status: "revision")
       redirect_to descr_micros_informs_path
     end
   end
@@ -253,25 +253,11 @@ class InformsController < ApplicationController
   end
 
   def set_ready
-    
-    if Role.where(id: current_user.role_id).first.name == "Patologia"
-      @inform.update(user_review_date: Date.today, pathologist_review_id: current_user.id)
-    elsif Role.where(id: current_user.role_id).first.name == "CTO"
-      @inform.update(user_review_date: Date.today, pathologist_review_id: current_user.id)
-      @inform.update(user_review_date: Date.today, administrative_review_id: current_user.id)
-    elsif Role.where(id: current_user.role_id).first.name == "Secretaria"
-      @inform.update(user_review_date: Date.today, administrative_review_id: current_user.id)
-    elsif Role.where(id: current_user.role_id).first.name == "Jefatura de laboratorio"
-      @inform.update(user_review_date: Date.today, administrative_review_id: current_user.id)
+    if Role.where(id: current_user.role_id).first.name == "Patologia" || Role.where(id: current_user.role_id).first.name == "CTO"
+      @inform.update(pathologist_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
+    elsif Role.where(id: current_user.role_id).first.name == "Secretaria" || Role.where(id: current_user.role_id).first.name == "Jefatura de laboratorio"
+      @inform.update(administrative_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
     end
-    
-    # if @inform.pathologist_review_id != nil && @inform.administrative_review_id != nil
-    #   @inform.update(inf_status: "ready")
-    # end
-    if @inform.pathologist_review_id != nil
-      @inform.update(inf_status: "ready", delivery_date: Time.now) #Esta opcion implica solo revision de patologo y queda READY
-    end
-
     redirect_to index_revision_informs_path
   end
 

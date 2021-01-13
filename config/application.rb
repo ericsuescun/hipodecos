@@ -12,10 +12,13 @@ module Hipodecos
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
-
     config.i18n.default_locale = :es
     config.i18n.enforce_available_locales = true
+
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
+    config.time_zone = 'Bogota'
+    config.active_record.default_timezone = :local
 
     # config.middleware.use PDFKit::Middleware, :print_media_type => true
 

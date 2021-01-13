@@ -30,7 +30,9 @@
             </div>
             <div class="col-12 col-lg-6 col-xl-6 d-flex justify-content-end align-items-end">
                 <div>
-                    <%= link_to 'Volver a informes', informs_path, class: "btn btn-primary btn-sm mr-1" %>
+                    <%= link_to informs_path + "?init_date=" + Date.today.strftime("%d-%m-%Y") + "&final_date=" + Date.today.strftime("%d-%m-%Y") + "&inf_type=" + @inform.inf_type, class: "btn btn-primary btn-sm mr-1" do %>
+                        <%= @inform.inf_type == "cito" ? "K" : @inform.inf_type == "clin" ? "C" : "H" %>: Volver a informes
+                    <% end %>
                 </div>
                 <div>
                     <%= link_to 'Previsualizar', preview_inform_path, class: "btn btn-primary btn-sm mr-1" %>

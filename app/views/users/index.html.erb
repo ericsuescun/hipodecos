@@ -1,27 +1,25 @@
 <div class="contanier">
   <div class="row">
-    <div class="col-8 col-lg-8 mx-auto">
+    <div class="col-12">
       <h1>Usuarios de Hipodecos</h1>
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
             <th>Id</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
+            <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
             <th>Celular</th>
             <th>Activo</th>
-            <th>Cargo</th>
-            <th colspan="2"></th>
+            <th>Rol</th>
+            <th colspan="3"></th>
           </tr>
         </thead>
         <tbody>
           <% @users.each do |user| %>
             <tr>
               <td><%= user.id %></td>
-              <td><%= user.first_name %></td>
-              <td><%= user.last_name %></td>
+              <td><%= user.first_name %> <%= user.last_name %></td>
               <td><%= user.email %></td>
               <td><%= user.tel %></td>
               <td><%= user.cel %></td>

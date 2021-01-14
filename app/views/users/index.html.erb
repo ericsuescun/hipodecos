@@ -5,7 +5,6 @@
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
-            <th>Id</th>
             <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
@@ -18,12 +17,11 @@
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><%= user.id %></td>
-              <td><%= user.first_name %> <%= user.last_name %></td>
+              <td><%= user.id %>. <%= user.first_name %> <%= user.last_name %>: <%= user.active == true ? "Activo" : "No activo" %></td>
               <td><%= user.email %></td>
               <td><%= user.tel %></td>
               <td><%= user.cel %></td>
-              <td><%= user.active %></td>
+              <td></td>
               <td><%= Role.find(user.role_id.to_i).name %></td>
               <td><%= link_to 'Det.', user_path(user) %></td>
               <td><%= link_to 'User', edit_user_registration_path(user) %></td>

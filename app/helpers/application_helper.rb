@@ -1,5 +1,20 @@
 module ApplicationHelper
 
+	def get_age(date)
+		if date == nil
+			return ["", ""]
+		else
+			days = Date.today - date
+			if days >= 365
+				return [ (days / 365).to_i, "A"]
+			end
+			if days >= 30
+				return [ (days / 30).to_i, "M"]
+			end
+			return [ days.to_i, "D"]
+		end
+	end
+
 	def day_before_search(n)	#Day by day
 		"?di=" + n.day.ago.day.to_s + "&mi=" + n.day.ago.month.to_s + "&yi=" + n.day.ago.year.to_s + "&df=" + n.day.ago.day.to_s + "&mf=" + n.day.ago.month.to_s + "&yf=" + n.day.ago.year.to_s
 	end

@@ -83,13 +83,13 @@
               <div class="col-12 col-lg-2">
                 <div class="form-group">
                   <%= informs_form.label "UniEdad" %>
-                  <%= informs_form.select(:p_age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']]), {  }, class: "form-control input") %>
+                  <%= informs_form.select(:p_age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']], get_age(patient.birth_date)[1]), {  }, class: "form-control input") %>
                 </div>
               </div>
               <div class="col-12 col-lg-2">
                 <div class="form-group">
                   <%= informs_form.label "Edad" %>
-                  <%= informs_form.number_field :p_age, class: "form-control input" %>
+                  <%= informs_form.number_field :p_age, get_age(patient.birth_date)[0], class: "form-control input" %>
                 </div>
               </div>
               <div class="col-12 col-lg-3">

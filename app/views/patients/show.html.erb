@@ -1,13 +1,16 @@
 <% if params[:inf_type] %>
   <div class="info">
     <h5>
-      <strong><%= next_inform(params[:inf_type]) %>, <%= @patient.fullname %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
+      <%= link_to edit_patient_path(@patient, inf_type: params[:inf_type]), local: true, class: "btn btn-outline-primary btn-sm" do %>
+        <span>&#9998;</span>
+      <% end %>
+      <strong><%= next_inform(params[:inf_type]) %>, <%= @patient.fullname %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %>, edad: <span class="p_age"><%= get_age(@patient.birth_date)[0] %> <%= get_age(@patient.birth_date)[1] %></span></strong>
     </h5>
   </div>
 <% else %>
   <div class="info">
     <h5>
-      <strong><%= @patient.fullname %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %> </strong>
+      <strong><%= @patient.fullname %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %>, edad: <span class="p_age"><%= get_age(@patient.birth_date)[0] %> <%= get_age(@patient.birth_date)[1] %></span></strong>
     </h5>
   </div>
 <% end %>
@@ -24,8 +27,9 @@
         <% end %>
         
       </div>
-      <%= link_to 'Editar paciente', edit_patient_path(@patient) %> |
-      <%= link_to 'Regresar a pacientes', patients_path %>
+      <%= link_to patients_path(inf_type: params[:inf_type]), class: "btn btn-primary btn-sm mb-1"  do %>
+        <%= params[:inf_type] == "cito" ? "K" : params[:inf_type] == "clin" ? "C" : "H" %>: Volver a pacientes
+      <% end %>
     </div>      
   </div>
 </div>
@@ -34,21 +38,40 @@
   <div class="col-12 col-lg-12">
     <div class="alert alert-secondary mx-2">
       <h3>Diagnósticos previos encontrados</h3>
-      <% if @patient.informs.length == 0 && @oldrecords.length == 0 %>
+      <% if @patient.informs.length == 0 && @oldrecords.length == 0 && @oldcitos.length == 0 %>
         <h4>No se encuentran diagnósticos previos para este paciente</h4>
       <% else %>
-        <% @patient.informs.each do |inform| %>
-          <ul class="p-0 m-0">
-            <% inform.diagnostics.each do |diagnostic| %>
-              <li class="p-0 m-0">
-                <%= link_to inform_path(inform) do %>
-                  <%= diagnostic.inform.tag_code %>
-                <% end %> en <%= diagnostic.created_at.strftime("%d/%m/%Y") %> <strong><%= fix_accent(diagnostic.description) %></strong> 
-              </li>
-            <% end %>
-          </ul>
-          
-        <% end %>
+        <ul>
+          <% @patient.informs.each do |inform| %>
+            <li class="p-0 m-0">
+             <%= link_to inform_path(inform) do %>
+               <span><%= inform.tag_code %></span>
+             <% end %>
+             <span>
+              <% if inform.diagnostics.count == 0 %>
+                En progreso
+              <% else %>
+                en <%= inform.diagnostics.first.created_at.strftime("%d/%m/%Y") %>
+                <% inform.diagnostics.each do |diagnostic| %>
+                   <strong><%= fix_accent(diagnostic.description) %></strong>
+                <% end %>
+              <% end %>
+              
+             </span>
+            </li>
+            <!-- <ul class="p-0 m-0">
+              <% inform.diagnostics.each do |diagnostic| %>
+                <li class="p-0 m-0">
+                  <%= link_to inform_path(inform) do %>
+                    <%= diagnostic.inform.tag_code %>
+                  <% end %> en <%= diagnostic.created_at.strftime("%d/%m/%Y") %> <strong><%= fix_accent(diagnostic.description) %></strong> 
+                </li>
+              <% end %>
+            </ul> -->
+            
+          <% end %>
+        </ul>
+        
       <% end %>
       <h3>Sistema FoxPro</h3>
       <ul>
@@ -92,19 +115,19 @@
           <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= informs_form.label "UniEdad" %>
-              <%= informs_form.select(:p_age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']]), {  }, class: "form-control input") %>
+              <%= informs_form.select(:p_age_type, options_for_select([['Años', 'A'], ['Meses', 'M'], ['Días', 'D']], get_age(@patient.birth_date)[1]), {  }, class: "form-control input") %>
             </div>
           </div>
           <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= informs_form.label "Edad" %>
-              <%= informs_form.number_field :p_age, autofocus: true, class: "form-control input" %>
+              <%= informs_form.number_field :p_age, value: get_age(@patient.birth_date)[0], autofocus: get_age(@patient.birth_date)[0] == "" ? true : false, class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= informs_form.label "Factura" %>
-              <%= informs_form.text_field :invoice, autocomplete: "Factura", class: "form-control input"  %>
+              <%= informs_form.text_field :invoice, autocomplete: "Factura", autofocus: get_age(@patient.birth_date)[0] != "" ? true : false, class: "form-control input"  %>
             </div>
           </div>
         </div> 

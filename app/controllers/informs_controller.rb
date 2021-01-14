@@ -629,7 +629,8 @@ class InformsController < ApplicationController
     end
 
     if inform.save
-      redirect_to inform, notice: 'Informe exitosamente creado.'
+      # redirect_to inform, notice: 'Informe exitosamente creado.'
+      redirect_to patients_path + "?inf_type=" + params[:inform][:inf_type]
     else
       render :new
     end

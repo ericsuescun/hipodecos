@@ -186,6 +186,57 @@ class PatientsController < ApplicationController
     end
 
     if @patient.save
+      inform = @patient.informs.first #Si el informe más reciente fue cito, preparo toda la info
+      if inform.inf_type == 'cito'
+        #Se crea el recipiente
+        @recipient = inform.recipients.build
+        @recipient.tag = generate_rec_tag(inform)
+        @recipient.user_id = current_user.id
+        @recipient.description = ""
+        @recipient.save
+
+        #Se crea el extendido
+        @sample = inform.samples.build
+        @sample.user_id = current_user.id
+        @sample.name = "Extendido"
+        @sample.included = false
+        @sample.recipient_tag = @recipient.tag
+        @sample.sample_tag = generate_letter_tag(inform)
+        @sample.organ_code = "Vagina"
+        @sample.description = ""
+        @sample.fragment = 1
+        @sample.save
+
+        #Se crea el CUP
+        branch = Branch.find(inform.branch_id)
+        entity = branch.entity
+        cost = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
+        
+        price =  Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.price
+        margin =  price - cost
+
+        cost_description = Cost.where(id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:name)
+        value_description = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:description)
+        rate_description = Rate.where(id: branch.entity.rate_id).first.try(:name)
+        factor_description = Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.try(:description)
+
+        price_description = cost_description + ". " + rate_description + ". Notas costo: " + value_description + ". Notas factor: " + factor_description
+
+        @study = inform.studies.build(
+          user_id: current_user.id,
+          codeval_id: Codeval.where(code: "898001").first.id,
+          factor: 1,
+          cost: cost,
+          price: price,
+          margin: margin,
+          price_description: price_description
+          )
+        @study.save
+
+        #Se crea el slide
+        inform.slides.create(slide_tag: @sample.sample_tag, user_id: current_user.id) #Se crea un slide con el mismo tag de la sample
+        @sample.update(slide_tag: @sample.sample_tag)  #Se guarda el tag creado en la sample para que queden asociados
+      end
       redirect_to inform_path(@patient.informs.first), notice: 'Paciente matriculado exitosamente.'
     else
       render :fast_new
@@ -227,6 +278,58 @@ class PatientsController < ApplicationController
     end
 
     if @patient.save
+
+      inform = @patient.informs.first #Si el informe más reciente fue cito, preparo toda la info
+      if inform.inf_type == 'cito'
+        #Se crea el recipiente
+        @recipient = inform.recipients.build
+        @recipient.tag = generate_rec_tag(inform)
+        @recipient.user_id = current_user.id
+        @recipient.description = ""
+        @recipient.save
+
+        #Se crea el extendido
+        @sample = inform.samples.build
+        @sample.user_id = current_user.id
+        @sample.name = "Extendido"
+        @sample.included = false
+        @sample.recipient_tag = @recipient.tag
+        @sample.sample_tag = generate_letter_tag(inform)
+        @sample.organ_code = "Vagina"
+        @sample.description = ""
+        @sample.fragment = 1
+        @sample.save
+
+        #Se crea el CUP
+        branch = Branch.find(inform.branch_id)
+        entity = branch.entity
+        cost = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
+        
+        price =  Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.price
+        margin =  price - cost
+
+        cost_description = Cost.where(id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:name)
+        value_description = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:description)
+        rate_description = Rate.where(id: branch.entity.rate_id).first.try(:name)
+        factor_description = Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.try(:description)
+
+        price_description = cost_description + ". " + rate_description + ". Notas costo: " + value_description + ". Notas factor: " + factor_description
+
+        @study = inform.studies.build(
+          user_id: current_user.id,
+          codeval_id: Codeval.where(code: "898001").first.id,
+          factor: 1,
+          cost: cost,
+          price: price,
+          margin: margin,
+          price_description: price_description
+          )
+        @study.save
+
+        #Se crea el slide
+        inform.slides.create(slide_tag: @sample.sample_tag, user_id: current_user.id) #Se crea un slide con el mismo tag de la sample
+        @sample.update(slide_tag: @sample.sample_tag)  #Se guarda el tag creado en la sample para que queden asociados
+      end
       redirect_to patients_path + "?inf_type=" + params[:patient][:informs_attributes][:"0"][:inf_type], notice: 'Paciente matriculado exitosamente.'
     else
       render :fast_new
@@ -329,6 +432,53 @@ class PatientsController < ApplicationController
   end
 
   private
+    def generate_rec_tag(inform)
+      next_number = 1
+      answer = false
+      if inform.recipients.empty?
+        return inform.tag_code + '-R1'
+      end
+
+      inform.recipients.length.times {
+        inform.recipients.each do |rec|
+          if (rec.tag == inform.tag_code + '-R' + next_number.to_s)
+            next_number = next_number + 1
+            break
+          end
+        end
+      }
+      
+      return inform.tag_code + '-R' + next_number.to_s
+    end
+
+    def generate_number_tag(sample)
+      if sample.sample_tag[-1] =~ /[A-Z]/
+        # sample.update(sample_tag: sample.sample_tag + '1')
+        return sample.sample_tag + '2'
+      end
+      if sample.sample_tag[-1] =~ /[0-9]/
+        return sample.sample_tag[0..-2] + (sample.sample_tag[-1].to_i + 1).to_s
+      end
+    end
+
+    def generate_letter_tag(inform)
+      next_letter = 'A'
+      answer = false
+      if inform.samples.empty?
+        return inform.tag_code + '-A'
+      end
+
+      inform.samples.length.times {
+        inform.samples.each do |sample|
+          if (sample.sample_tag == inform.tag_code + '-' + next_letter) || (sample.sample_tag == inform.tag_code + '-' + next_letter + '1')
+            next_letter = (next_letter.ord + 1).chr
+            break
+          end
+        end
+      }
+      
+      return inform.tag_code + '-' + next_letter
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_patient
       @patient = Patient.find(params[:id])

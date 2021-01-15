@@ -832,6 +832,7 @@ class InformsController < ApplicationController
       
       return inform.tag_code + '-' + next_letter
     end
+    
     def clasify_templates
 
     end

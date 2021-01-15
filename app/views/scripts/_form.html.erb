@@ -9,7 +9,7 @@
             <div class="col-2 col-lg-2">
               <div class="form-group">
                 <%= form.label "Modelo a crear" %>
-                <%= form.select(:script_type, options_for_select([['+1 Recipiente', 'rec'], ['+1 Bloque', 'blo'], ['+1 Corte', 'cor'], ['+1 Ext', 'ext'], ['+1 CUP', 'cup']], @script.script_type), {  }, class: "form-control input") %>
+                <%= form.select(:script_type, options_for_select([['+1 Recipiente', 'rec'], ['+1 Bloque', 'blo'], ['+1 Corte', 'cor'], ['+1 Ext', 'ext'], ['+1 CUP', 'cup'], ['+1 Placa', 'sld']], @script.script_type), {  }, class: "form-control input") %>
               </div>
 
               <div class="form-group">

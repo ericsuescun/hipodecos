@@ -9,6 +9,9 @@ function refresh() {
 
 	$('div.codevals').remove();
 	$('div.codeval').append('<%= j render "informs/codevals", inform: @inform, edit_study_form: nil, all_cups_price: @all_cups_price %>');
+
+	$('div.slides').remove();
+	$('div.slide').append('<%= j render "informs/slides", inform: @inform %>');
 	
 	$('div.fast-bar').append('<%= j render "ok-executed" %>');
 	setTimeout(function() {

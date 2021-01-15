@@ -312,7 +312,7 @@ class PatientsController < ApplicationController
           redirect_to @patient, notice: 'Paciente exitosamente editado.'
         end
       else
-        redirect_to @patient, notice: 'Paciente exitosamente editado.'
+        redirect_to patient_path(@patient, inf_type: params[:patient][:inf_type]), notice: 'Paciente exitosamente editado.'
       end
       
       

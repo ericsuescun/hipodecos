@@ -6,6 +6,7 @@
       <% if params[:inform_id] != nil %>
         <%= form.hidden_field :inform_id, value: params[:inform_id] %>
       <% end %>
+      <%= form.hidden_field :inf_type, value: inf_type %>
       <div class="alert alert-primary">
         <h5>Datos del paciente</h5>
         <div class="row">

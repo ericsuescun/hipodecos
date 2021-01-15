@@ -10,6 +10,9 @@
 <% else %>
   <div class="info">
     <h5>
+      <%= link_to edit_patient_path(@patient, inf_type: params[:inf_type]), local: true, class: "btn btn-outline-primary btn-sm" do %>
+        <span>&#9998;</span>
+      <% end %>
       <strong><%= @patient.fullname %></strong>, <%= @patient.id_type %>: <strong><%= @patient.id_number %>, edad: <span class="p_age"><%= get_age(@patient.birth_date)[0] %> <%= get_age(@patient.birth_date)[1] %></span></strong>
     </h5>
   </div>
@@ -28,7 +31,7 @@
         
       </div>
       <%= link_to patients_path(inf_type: params[:inf_type]), class: "btn btn-primary btn-sm mb-1"  do %>
-        <%= params[:inf_type] == "cito" ? "K" : params[:inf_type] == "clin" ? "C" : "H" %>: Volver a pacientes
+        <%= params[:inf_type] == "cito" ? "K:" : params[:inf_type] == "clin" ? "C:" : params[:inf_type] == "hosp" ? "H:" : "" %> Volver a pacientes
       <% end %>
     </div>      
   </div>
@@ -37,7 +40,7 @@
 <div class="row">
   <div class="col-12 col-lg-12">
     <div class="alert alert-secondary mx-2">
-      <h3>Diagnósticos previos encontrados</h3>
+      <h3>Informes previos encontrados</h3>
       <% if @patient.informs.length == 0 && @oldrecords.length == 0 && @oldcitos.length == 0 %>
         <h4>No se encuentran diagnósticos previos para este paciente</h4>
       <% else %>
@@ -103,7 +106,7 @@
           <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= informs_form.label "Tipo Informe" %>
-              <%= informs_form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']], params[:inf_type]), { include_blank: true }, class: "form-control form-control input") %>
+              <%= informs_form.select(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']], params[:inf_type]), { include_blank: true }, autofocus: params[:inf_type] == nil ? true : false, class: "form-control form-control input") %>
             </div>
           </div>
           <div class="col-12 col-lg-3">
@@ -121,13 +124,13 @@
           <div class="col-12 col-lg-2">
             <div class="form-group">
               <%= informs_form.label "Edad" %>
-              <%= informs_form.number_field :p_age, value: get_age(@patient.birth_date)[0], autofocus: get_age(@patient.birth_date)[0] == "" ? true : false, class: "form-control input" %>
+              <%= informs_form.number_field :p_age, value: get_age(@patient.birth_date)[0], autofocus: get_age(@patient.birth_date)[0] == "" && params[:inf_type] != nil ? true : false, class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= informs_form.label "Factura" %>
-              <%= informs_form.text_field :invoice, autocomplete: "Factura", autofocus: get_age(@patient.birth_date)[0] != "" ? true : false, class: "form-control input"  %>
+              <%= informs_form.text_field :invoice, autocomplete: "Factura", autofocus: get_age(@patient.birth_date)[0] != "" && params[:inf_type] != nil ? true : false, class: "form-control input"  %>
             </div>
           </div>
         </div> 

@@ -156,6 +156,181 @@ class InformsController < ApplicationController
     end
   end
 
+  def export_foxpro
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+    else
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
+    end
+    informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range).where.not(invoice: ""))
+    file = ""
+    file_name = 1
+    informs.each do |inform|
+
+      file += '"' + inform.tag_code[0] + '"' + ";"
+      file += inform.tag_code[4..-1] + ";"
+      file += inform.receive_date.strftime("%d/%m/%Y") + ";"
+      file += inform.delivery_date.strftime("%d/%m/%Y") + ";"
+      file += '"' + inform.patient.lastname1.upcase + '"' + ";"
+      file += '"' + inform.patient.lastname2.upcase + '"' + ";"
+      file += '"' + inform.patient.name1.upcase + '"' + ";"
+      file += '"' + inform.patient.name2.upcase + '"' + ";"
+      file += '"' + inform.patient.id_type + '"' + ";"
+      file += '"' + inform.patient.id_number + '"' + ";"
+      file += '"' + '"' + ";" #Historia, se supone que ese campo ya no se usa
+      if inform.p_age_type == "A"
+        file += '"' + "1" + '";'
+      elsif inform.p_age_type == "M"
+        file += '"' + "2" + '";'
+      elsif inform.p_age_type == "D"
+        file += '"' + "3" + '";'
+      end
+      
+      file += '"' + inform.p_age.to_s + '"' + ";"
+      file += '"' + inform.patient.sex + '"' + ";"
+      file += '"' + Entity.where(id: inform.entity_id).first.try(:initials) + '"' + ";"
+      file += '"' + Promoter.where(id: inform.promoter_id).first.try(:initials) + '"' + ";"
+      file += '"' + Promoter.where(id: inform.promoter_id).first.try(:code) + '"' + ";"
+      file += '"' + Codeval.where(id: inform.studies.first.codeval_id).first.try(:code)  + ";"
+      file += inform.studies.first.factor.to_s + ";"
+      if inform.studies.second != nil
+        file += '"' + Codeval.where(id: inform.studies.second.codeval_id).first.try(:code) + ";"
+        file += inform.studies.second.factor.to_s + ";"
+      else
+        file += ";"
+      end
+      if inform.studies.third != nil
+        file += '"' + Codeval.where(id: inform.studies.third.codeval_id).first.try(:code) + ";"
+        file += inform.studies.third.factor.to_s + ";"
+      else
+        file += ";"
+      end
+      
+      
+      
+      file += inform.cost.to_s + ";"
+      #DESCR
+      #DIAGNOSTIC
+      file += '"' + inform.diagnostics.first.pss_code + '"' + ";"
+
+      if inform.diagnostics.second != nil
+        file += '"' + inform.diagnostics.second.pss_code + '"' + ";"
+      else
+        file += '"' + '"' + ";"
+      end
+      if inform.diagnostics.third != nil
+        file += '"' + inform.diagnostics.third.pss_code + '"' + ";"
+      else
+        file += '"' + '"' + ";"
+      end
+      if inform.diagnostics.fourth != nil
+        file += '"' + inform.diagnostics.fourth.pss_code + '"' + ";"
+      else
+        file += '"' + '"' + ";"
+      end
+      if inform.diagnostics.fifth != nil
+        file += '"' + inform.diagnostics.fifth.pss_code + '"' + ";"
+      else
+        file += '"' + '"' + ";"
+      end
+      if inform.diagnostics[6] != nil
+        file += '"' + inform.diagnostics[6].pss_code + '"' + ";"
+      else
+        file += '"' + '"' + ";"
+      end
+      
+      file += '"050011134601"' + ";"
+      file += '"' + inform.invoice + '"' + ";"
+      file += '"' + inform.prmtr_auth_code + '"' + ";"
+      file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime) + '"' + ";"
+      file += '"' + '"' + ";" #OCUPACIÓN que se deja en blanco
+      file += '"' + inform.p_municipality + '"' + ";"
+      file += '"' + inform.zone_type + '"' + ";"
+      file += '"' + inform.pregnancy_status + '"' + ";"
+      file += '"' + inform.status + '"' + ";"
+      file += '"' + inform.p_tel + "-" + '"' + ";"
+      file += '"' + inform.status + '"' + ";"
+      if inform.physicians.first != nil
+        if inform.physicians.first.name != nil
+          file += '"' + inform.physicians.first.name + '"' + ";"
+        else
+          file += '"' + '"' + ";"
+        end
+        if inform.physicians.first.lastname != nil
+          file += '"' + inform.physicians.first.lastname + '"' + ";"
+        else
+          file += '"' + '"' + ";"
+        end
+      else
+        file += '"' + '"' + ";"
+        file += '"' + '"' + ";"
+      end
+      
+      
+      file += '"' + Branch.where(id: inform.branch_id).first.try(:address) + '"' + ";"
+      file += '"' + inform.blocks.where(stored: true).first.try(:block_tag).to_s + '"' + ";"
+      file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ";"
+      file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ";"
+      file += '"' + '"' + ";" #TIPO que se deja en blanco
+      file += ";" #IMPRIMIR que se deja en blanco pero es numérico
+      file += '"' + User.where(id: inform.user_id).first.fullname.upcase + '"' + ";"
+      file += inform.created_at.strftime("%d/%m/%Y") + ";"
+      file += ";" #FOTO que se deja en blanco pero es general
+      file += ";" #FOTO1 que se deja en blanco pero es general
+      file += ";" #FOTO2 que se deja en blanco pero es general
+      file += '"' + User.where(id: inform.pathologist_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ";"
+      file += ";" #RANGO que se deja en blanco pero es numérico
+      file += '"' + inform.diagnostics.first.who_code + '"' + ";"
+      file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ";"
+      file += '"' + inform.p_age_type == "A" ? '"AÑOS";' : inform.p_age_type == "M" ? '"MESES";' : '"DÍAS";'
+      file += '"";' #SINCRONIZA que se deja en blanco
+      file += "\r\n" #FSINCRO que se deja en blanco
+
+
+      @macro_text = ""
+      inform.recipients.each_with_index do |recipient, n|
+        @macro_text += "Contenido de recipiente\r\n"
+        @macro_text += recipient.description + "\r\n"
+        @macro_text += "Bloqueado de la siguiente manera:\r\n"
+        Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i|
+          if sample.name == "Cassette"
+            @macro_text += sample.description + ":" if sample.description == "" 
+            @macro_text += sample.fragment.to_s + "F-" + get_nomen(sample.sample_tag)
+          else
+            @macro_text += sample.description if sample.name == "Cassette"
+            @macro_text += "-" + get_nomen(sample.sample_tag)
+            @macro_text += "\r\n"
+          end
+        end
+      end
+      @micro_text = ""
+      inform.micros.each do |micro|
+        if micro.description.size > 500
+          @micro_text = @micro_text + "\n" + "\n" + micro.description + "\n "
+        else
+          @micro_text = @micro_text + micro.description + " "  
+        end
+      end
+      @descr = @macro_text + @micro_text
+      # filename = "#{file_name}" + ".CSV"
+      # send_data @descr, filename: filename, type: 'text/html; charset=utf-8'
+
+      @diagnostic_text = ""
+      inform.diagnostics.each do |diagnostic|
+        @diagnostic_text = @diagnostic_text + diagnostic.description + " "
+      end
+      # filename = "#{file_name + 1}" + ".CSV"
+      # send_data @descr, filename: filename, type: 'text/html; charset=utf-8'
+      file_name += 2
+    end
+    filename = "export" + ".CSV"
+    send_data file[0..-3], filename: filename, type: 'text/html; charset=utf-8'
+  end
+
   def descr_micros
     @tab = :pathologist
     # if params[:yi]
@@ -788,6 +963,10 @@ class InformsController < ApplicationController
   end
 
   # private
+    def get_nomen(str)
+      return str.split('-',2)[1].split('-',2)[1]
+    end
+
     def generate_rec_tag(inform)
       next_number = 1
       answer = false

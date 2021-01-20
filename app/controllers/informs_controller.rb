@@ -120,7 +120,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @informs = Inform.where(delivery_date: date_range, inf_status: "published").or(Inform.where(delivery_date: date_range, inf_status: "downloaded")).paginate(page: params[:page], per_page: 10)
+    @informs = Inform.where(delivery_date: date_range, inf_status: "published").or(Inform.where(delivery_date: date_range, inf_status: "downloaded"))
   end
 
   def unpublish
@@ -156,6 +156,19 @@ class InformsController < ApplicationController
     end
   end
 
+  def view_export_foxpro
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+    else
+      initial_date = 1.day.ago.beginning_of_day
+      final_date = Time.now.end_of_day
+      date_range = initial_date..final_date
+    end
+    @informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range).or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range))
+  end
+
   def export_foxpro
     if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day
@@ -166,7 +179,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range).where.not(invoice: ""))
+    informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range).or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range))
     file = ""
     file_name = 1
     informs.each do |inform|

@@ -276,6 +276,7 @@ Rails.application.routes.draw do
         put :unpublish
         put :undownload
         get :export_foxpro
+        get :view_export_foxpro
       end
 
       member do

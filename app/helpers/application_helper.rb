@@ -2,7 +2,8 @@ module ApplicationHelper
 	def get_status(inform)
 		status = "("
 		status += inform.recipients.count.to_s + "R,"
-		status += inform.samples.count.to_s + "M)["
+		status += inform.samples.count.to_s + "M,"
+		status += inform.studies.count.to_s + "C)["
 		status += inform.blocks.count.to_s + "B," if inform.inf_type != 'cito'
 		status += inform.slides.count.to_s + "P]{"
 		status += inform.micros.count.to_s + "M,"

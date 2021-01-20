@@ -265,7 +265,7 @@ class InformsController < ApplicationController
       file += '"' + inform.zone_type + '"' + ","
       file += '"' + inform.pregnancy_status + '"' + ","
       file += '"' + inform.status + '"' + ","
-      file += '"' + inform.p_tel + "-" + '"' + ","
+      file += '"' + inform.p_tel.to_s + "-" + '"' + ","
       if inform.physicians.first != nil
         if inform.physicians.first.name != nil
           file += '"' + inform.physicians.first.name + '"' + ","

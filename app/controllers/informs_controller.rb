@@ -195,12 +195,16 @@ class InformsController < ApplicationController
       file += '"' + inform.patient.id_type + '"' + ","
       file += '"' + inform.patient.id_number + '"' + ","
       file += '"' + '"' + "," #Historia, se supone que ese campo ya no se usa
-      if inform.p_age_type == "A"
-        file += '"' + "1" + '",'
-      elsif inform.p_age_type == "M"
-        file += '"' + "2" + '",'
-      elsif inform.p_age_type == "D"
-        file += '"' + "3" + '",'
+      if inform.p_age_type == ""
+        file += '"",'
+      else
+        if inform.p_age_type == "A"
+          file += '"' + "1" + '",'
+        elsif inform.p_age_type == "M"
+          file += '"' + "2" + '",'
+        elsif inform.p_age_type == "D"
+          file += '"' + "3" + '",'
+        end
       end
       
       file += '"' + inform.p_age.to_s + '"' + ","

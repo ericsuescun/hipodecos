@@ -299,7 +299,15 @@ class InformsController < ApplicationController
       file += "," #RANGO que se deja en blanco pero es numérico
       file += '"' + inform.diagnostics.first.who_code.to_s + '"' + ","
       file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","
-      file += '"' + inform.p_age_type == "A" ? '"AÑOS",' : inform.p_age_type == "M" ? '"MESES",' : '"DÍAS",'
+      if inform.p_age_type == nil
+        file += '"",'
+      elsif inform.p_age_type == "A"
+        file += '"AÑOS",'
+      elsif inform.p_age_type == "M"
+        file += '"MESES",'
+      elsif inform.p_age_type == "D"
+        file += '"DÍAS",'
+      end
       file += ',' #COPAGOENTIDAD a partir de aca es 
       file += ',' #COPAGO
       file += "\n"

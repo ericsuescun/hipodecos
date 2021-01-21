@@ -195,7 +195,7 @@ class InformsController < ApplicationController
       file += '"' + inform.patient.id_type + '"' + ","
       file += '"' + inform.patient.id_number + '"' + ","
       file += '"' + '"' + "," #Historia, se supone que ese campo ya no se usa
-      if inform.p_age_type == ""
+      if inform.p_age_type == nil
         file += '"",'
       else
         if inform.p_age_type == "A"

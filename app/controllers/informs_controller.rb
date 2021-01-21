@@ -206,8 +206,14 @@ class InformsController < ApplicationController
           file += '"' + "3" + '",'
         end
       end
+
+      if inform.p_age == nil
+        file += '"",'
+      else
+        file += '"' + inform.p_age.to_s + '"' + ","
+      end
       
-      file += '"' + inform.p_age.to_s + '"' + ","
+      
       file += '"' + inform.patient.sex + '"' + ","
       file += '"' + Entity.where(id: inform.entity_id).first.try(:initials) + '"' + ","
       file += '"' + Promoter.where(id: inform.promoter_id).first.try(:initials) + '"' + ","

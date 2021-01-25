@@ -1,0 +1,71 @@
+<div class="info">
+	<h4><%= params[:inf_type] == 'clin' ? "Clínica" : params[:inf_type] == 'hosp' ? "Hospital" : "Citologías" %> facturadas para el periodo <%= new_search_range %> </h4>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<strong><h4>Reporte detallado de ventas</h4></strong>
+			<h1><%= Entity.where(id: params[:id]).first.name %></h1>
+			<% if params[:branch_name] != nil %>
+				<h4>Sede <%= params[:branch_name] %></h4>
+				<%= link_to "Retornar a IPS", show_sale_report_path(id: params[:id], init_date: params[:init_date], final_date: params[:final_date], inf_type: params[:inf_type]), class: "btn btn-primary my-3" %>
+			<% end %>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Factura</th>
+						<th>Informe</th>
+						<th>Nombre</th>
+						<th>Identif.</th>
+						
+						<th>CUP</th>
+						
+						<th>Informe</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @total_detail.each do |detail| %>
+						<% if detail[2] == "**" %>
+							<% if detail[6] != 0 %>
+								<tr class="alert alert-warning">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td><strong>Total sede</strong></td>
+									
+									
+									<td><strong><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></strong></td>
+								</tr>
+								<tr class="alert alert-light">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							<% end %>
+								
+							</tr>
+						<% else %>
+							<tr>
+								<td><%= detail[2].invoice %> <%= detail[2].prmtr_auth_code %></td>
+								<td><%= detail[2].tag_code %></td>
+								<td><%= detail[2].patient.halfname %></td>
+								<td><%= detail[2].patient.id_number %></td>
+								<td>
+									<% detail[3].each do |study| %>
+										<strong>(<%= study.factor %>*)</strong><%= Codeval.find(study.codeval_id).code %>
+									<% end %>
+								</td>
+								<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
+							</tr>
+						<% end %>						
+					<% end %>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

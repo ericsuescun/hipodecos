@@ -36,11 +36,67 @@
 	  </div>
 	  
 	</div>
-	
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Sede</th>
+						<th>Detalle</th>
+						
+						<th>Valor</th>
+						
+						<th>Acumulado</th>
+						<th>Saldo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @total_detail.each do |detail| %>
+						<% if detail[2] == "**" %>
+							<% if detail[6] != 0 %>
+								<tr class="alert alert-warning">
+									<td>
+										<%= detail[1] %>
+									</td>
+									<td>Total sede</td>
+									
+									
+									<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
+									<td>Acumulado IPS</td>
+									<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+									<td><%= link_to "Detalles", show_branch_report_path(
+											id: params[:id],
+											init_date: params[:init_date],
+											final_date: params[:final_date],
+											inf_type: params[:inf_type],
+											branch_name: detail[1]
+										), class: "btn btn-warning btn-sm ml-3" %>
+										</td>
+								</tr>
+								<tr class="alert alert-light">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							<% end %>
+								
+							</tr>
+						<% end %>						
+					<% end %>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-12 col-lg-12">
 			<strong><h4>Reporte detallado de ventas</h4></strong>
 			<h1><%= Entity.where(id: params[:id]).first.name %></h1>
+			<% if params[:branch_name] != nil %>
+				<h4>Sede <%= params[:branch_name] %></h4>
+				<%= link_to "Retornar a IPS", show_sale_report_path(id: params[:id], init_date: params[:init_date], final_date: params[:final_date], inf_type: params[:inf_type]) %>
+			<% end %>
 			<table class="table">
 				<thead>
 					<tr>
@@ -52,7 +108,7 @@
 						<th>CUP</th>
 						
 						<th>Precio total</th>
-						<th>Saldo</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -63,10 +119,11 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td></td>
+								
 								
 								<td>Total IPS</td>
 								<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+								<td></td>
 							</tr>
 						<% else %>
 							<% if detail[2] == "**" %>
@@ -74,13 +131,23 @@
 									<tr class="alert alert-warning">
 										<td></td>
 										<td></td>
+										<!-- <td><%= detail[1] %></td> -->
 										<td><%= detail[1] %></td>
-										<td>Total sede</td>
+										<!-- <td>Total sede</td> -->
 										
 										
 										<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>
 										<td>Acumulado IPS</td>
 										<td><%= number_to_currency(detail[7], precision: 0, delimiter: '.') %></td>
+										<td>
+											<%= link_to "Detalles", show_branch_report_path(
+												id: params[:id],
+												init_date: params[:init_date],
+												final_date: params[:final_date],
+												inf_type: params[:inf_type],
+												branch_name: detail[1]
+											), class: "btn btn-warning btn-sm" %>
+										</td>
 									</tr>
 									<tr class="alert alert-light">
 									<td></td>

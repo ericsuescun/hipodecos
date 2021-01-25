@@ -127,6 +127,7 @@ Rails.application.routes.draw do
         post :invoice
         get :show_sale
         get :show_billing
+        get :show_branch
         get :show_rips
         get :show_rips_ap
         get :show_rips_us

@@ -209,6 +209,7 @@ class ReportsController < ApplicationController
     @total_accumulated = 0
     @price = 0
     @total_branch = []
+
     @entity.branches.each do |branch|
       @partial = 0
       Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).each do |inform|
@@ -230,6 +231,61 @@ class ReportsController < ApplicationController
 
     @total_entities << [ @entity.id, @price ]
     @total_accumulated += @price
+  end
+
+  def show_branch
+    @entity = Entity.find(params[:id])
+    initial_date = Date.parse(params[:init_date]).beginning_of_day
+    final_date = Date.parse(params[:final_date]).end_of_day
+    date_range = initial_date..final_date
+
+    @total_entities = []
+    @total_detail = []
+    @total_affinity = []
+    @branch_detail = []
+    @total_accumulated = 0
+    @price = 0
+    @total_branch = []
+
+    if params[:branch_name] != nil
+      branch = Branch.where(name: params[:branch_name]).first
+      @partial = 0
+      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).each do |inform|
+        @inform_studies = []
+        @inform_partial = 0
+        inform.studies.each do |study|
+          @price += study.price * study.factor
+          @partial += study.price * study.factor
+          @inform_partial += study.price * study.factor
+          #@total_detail << [ @entity.name, branch.name, inform, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
+          @inform_studies << study
+        end
+        @total_detail << [ @entity.name, branch.name, inform, @inform_studies, 0, 0, @inform_partial, @price ]
+      end
+      @total_detail << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
+    else
+      @entity.branches.each do |branch|
+        @partial = 0
+        Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).each do |inform|
+          @inform_studies = []
+          @inform_partial = 0
+          inform.studies.each do |study|
+            @price += study.price * study.factor
+            @partial += study.price * study.factor
+            @inform_partial += study.price * study.factor
+            #@total_detail << [ @entity.name, branch.name, inform, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
+            @inform_studies << study
+          end
+          @total_detail << [ @entity.name, branch.name, inform, @inform_studies, 0, 0, @inform_partial, @price ]
+        end
+        @total_detail << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
+        @total_affinity << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
+      end
+      @total_detail << [ @entity.name, "--", "--", "--", 0, 0, 0, @price ]
+
+      @total_entities << [ @entity.id, @price ]
+      @total_accumulated += @price
+    end
   end
 
   def show_rips

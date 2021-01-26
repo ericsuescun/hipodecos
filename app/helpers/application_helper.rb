@@ -8,6 +8,7 @@ module ApplicationHelper
 		status += inform.slides.count.to_s + "P]{"
 		status += inform.micros.count.to_s + "M,"
 		status += inform.diagnostics.count.to_s + "D}"
+		status += (inform.invoice == nil || inform.invoice == "") ? "" : "-F"
 		return status
 	end
 

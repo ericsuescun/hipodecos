@@ -1,16 +1,89 @@
 module ApplicationHelper
-	def get_status(inform)
-		status = "("
-		status += inform.recipients.count.to_s + "R,"
-		status += inform.samples.count.to_s + "M,"
-		status += inform.studies.count.to_s + "C)["
-		status += inform.blocks.count.to_s + "B," if inform.inf_type != 'cito'
-		status += inform.slides.count.to_s + "P]{"
-		status += inform.micros.count.to_s + "M,"
-		status += inform.diagnostics.count.to_s + "D}"
-		status += (inform.invoice == nil || inform.invoice == "") ? "" : "-F"
-		return status
+
+	def get_cups_status(inform)
+		if inform.studies.count != 0
+			return ["success", inform.studies.count]
+		else
+			return ["danger", inform.studies.count]
+		end
 	end
+
+	def get_macro_status(inform)
+		if inform.recipients.count != 0 && inform.samples.count != 0 && inform.studies.count != 0
+			return ["success", inform.recipients.count, inform.samples.count, inform.studies.count]
+		end
+		if inform.recipients.count == 0 && inform.samples.count == 0 && inform.studies.count == 0
+			return ["danger", inform.recipients.count, inform.samples.count, inform.studies.count]
+		end
+		return ["warning", inform.recipients.count, inform.samples.count, inform.studies.count]
+	end
+
+	def get_blocks_status(inform)
+		if inform.inf_type == 'cito'
+			if (inform.samples.where(name: "Extendido").count != 0)
+				return ["success", inform.samples.where(name: "Extendido").count]
+			else
+				return ["danger", inform.samples.where(name: "Extendido").count]
+			end
+		else
+			if (inform.samples.where(name: "Cassette").count == inform.blocks.count) && inform.samples.where(name: "Extendido").count > 0
+				return ["success", inform.samples.where(name: "Cassette").count, inform.blocks.count, inform.samples.where(name: "Extendido").count]
+			end
+			if (inform.samples.where(name: "Cassette").count == inform.blocks.count) && inform.samples.where(name: "Cassette").count > 0
+				return ["success", inform.samples.where(name: "Cassette").count, inform.blocks.count, inform.samples.where(name: "Extendido").count]
+			end
+			if inform.blocks.count == 0 && inform.samples.where(name: "Cassette").count == 0
+				return ["danger", inform.samples.where(name: "Cassette").count, inform.blocks.count, inform.samples.where(name: "Extendido").count]
+			end
+			return ["warning", inform.samples.where(name: "Cassette").count, inform.blocks.count, inform.samples.where(name: "Extendido").count]		
+		end
+		
+	end
+
+	def get_slides_status(inform)
+		if inform.inf_type == 'cito'
+			if inform.slides.count != 0
+				return ["success", inform.blocks.count, inform.slides.count, inform.studies.count]
+			end
+			if inform.slides.count == 0
+				return ["danger", inform.blocks.count, inform.slides.count, inform.studies.count]
+			end
+		else	
+			if (inform.slides.where(colored: true, covered: true, tagged: true).count == inform.slides.count) && inform.slides.count > 0
+				return ["success", inform.blocks.count, inform.slides.where(colored: true, covered: true, tagged: true).count, inform.slides.count]
+			end
+			if inform.slides.count == 0
+				return ["danger", inform.blocks.count, inform.slides.where(colored: true, covered: true, tagged: true).count, inform.slides.count]
+			end
+			return ["warning", inform.blocks.count, inform.slides.where(colored: true, covered: true, tagged: true).count, inform.slides.count]
+		end
+		
+	end
+
+	def get_info_status(inform)
+
+		if inform.micros.count != 0 && inform.diagnostics.count != 0
+			return ["success", inform.micros.count, inform.diagnostics.count, inform.studies.count]
+		end
+		if inform.micros.count == 0 && inform.diagnostics.count == 0
+			return ["danger", inform.micros.count, inform.diagnostics.count, inform.studies.count]
+		end
+		return ["warning", inform.micros.count, inform.diagnostics.count]
+	end
+	
+
+	# def get_status(inform)
+	# 	status = "("
+	# 	status += inform.recipients.count.to_s + "R,"
+	# 	status += inform.samples.count.to_s + "M,"
+	# 	status += inform.studies.count.to_s + "C)["
+	# 	status += inform.blocks.count.to_s + "B," if inform.inf_type != 'cito'
+	# 	status += inform.slides.count.to_s + "P]{"
+	# 	status += inform.micros.count.to_s + "M,"
+	# 	status += inform.diagnostics.count.to_s + "D}"
+	# 	status += (inform.invoice == nil || inform.invoice == "") ? "" : "-F"
+	# 	return status
+	# end
 
 	def get_age(date)
 		if date == nil

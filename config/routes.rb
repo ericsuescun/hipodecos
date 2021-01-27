@@ -289,6 +289,7 @@ Rails.application.routes.draw do
         get :preview
         get :autos_micro
         get :anulate
+        put :switch_patient
       end
     end
 

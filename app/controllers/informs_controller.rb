@@ -750,6 +750,44 @@ class InformsController < ApplicationController
     end
   end
 
+  def switch_patient
+    @patient = Patient.where(id_number: params[:new_id]).first
+    @inform = Inform.find(params[:id])
+    if @patient != nil
+      if @patient.birth_date != nil
+        @inform.update(patient_id: @patient.id, p_age: get_age(@patient.birth_date)[0], p_age_type: get_age(@patient.birth_date)[1])
+      else
+        @inform.update(patient_id: @patient.id)
+      end
+      objection = @inform.objections.build(
+          user_id: current_user.id,
+          obcode_id: params[:obcode_id],
+          responsible_user_id: @inform.user_id,
+          description: "Se hace cambio de paciente en: " + Time.now.to_s
+
+        )
+      objection.save
+      redirect_to @inform, notice: "Informe exitosamente asignado a paciente!"
+    else
+      redirect_to @inform, alert: "Número de identificación no encontrado!"
+    end
+  end
+
+  def get_age(date)
+    if date == nil
+      return ["", ""]
+    else
+      days = Date.today - date
+      if days >= 365
+        return [ (days / 365).to_i, "A"]
+      end
+      if days >= 30
+        return [ (days / 30).to_i, "M"]
+      end
+      return [ days.to_i, "D"]
+    end
+  end
+
   def show_revision
     @organs = Organ.all
 

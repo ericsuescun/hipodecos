@@ -4,3 +4,34 @@
 
 <%= link_to 'No editar y regresar a ' + @inform.tag_code , @inform %> |
 <%= link_to 'Volver a informes', informs_path %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-xl-12">
+      <div class="alert alert-danger mt-1">
+        <%= form_tag switch_patient_inform_path, method: "put" do %>
+          
+          <div class="row">
+            <div class="col-12 col-lg-4">
+              <div class="form-group">
+                <%= label_tag "Nueva identificación" %>
+                <%= text_field_tag :new_id, nil,  placeholder: "# de identificaión", class: "form-control input" %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4">
+              <div class="form-group">
+                <%= label_tag "No Conformidad" %>
+                <%= select_tag :obcode_id, options_for_select(Obcode.where(process: "Inform").pluck(:title, :id) << ['Otra' , 25 ]), class: "form-control input" %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-3">
+              <div class="form-group">
+                <%= label_tag "Verificar identificación" %>
+                <%= submit_tag("Cambiar de paciente", class: "btn btn-outline-danger") %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>

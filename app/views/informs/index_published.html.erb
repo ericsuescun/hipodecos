@@ -4,10 +4,9 @@
       <%= form_tag unpublish_informs_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}", method: :put do %>
         <h1>Informes publicados</h1>
         <%= submit_tag "Retirar de publicación", class: "btn btn-success btn-sm mb-3" %>
-        <%= link_to "C: Exportar a FoxPro", export_foxpro_informs_path(inf_type: 'clin', init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
-        <%= link_to "View Export FoxPro", view_export_foxpro_informs_path(inf_type: 'clin', init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
-        <%= link_to "H: Exportar a FoxPro", export_foxpro_informs_path(inf_type: 'hosp', init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
-        <%= link_to "K: Exportar a FoxPro", export_foxpro_informs_path(inf_type: 'cito', init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
+        <%= link_to "C: Exportar a FoxPro", export_foxpro_informs_path(inf_type: 'clin', init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary btn-sm mb-3 mx-3" %>
+        <%= link_to "H: Exportar a FoxPro", export_foxpro_informs_path(inf_type: 'hosp', init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary btn-sm mb-3 mx-3" %>
+        <%= link_to "K: Exportar a FoxPro", export_foxpro_informs_path(inf_type: 'cito', init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary btn-sm mb-3 mx-3" %>
         <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
@@ -33,7 +32,9 @@
                     <%= inform.tag_code %>
                   <% end %>
                 </td>
-                <td><%= inform.inf_status %>: <%= get_status(inform) %></td>
+                <td>
+                  <%= render 'inform_status', inform: inform %>
+                </td>
                 <td><%= (Date.today - inform.receive_date).to_i %></td>
                 <td><%= User.where(id: inform.pathologist_review_id).first.try(:first_name) %> <%= User.where(id: inform.pathologist_review_id).first.try(:last_name) %></td>
                 <td>

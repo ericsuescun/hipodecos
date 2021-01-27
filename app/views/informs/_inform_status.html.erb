@@ -1,0 +1,29 @@
+<span class="badge badge-pill badge-<%= get_cups_status(inform)[0] %>">
+  <%= get_cups_status(inform)[1] %>C
+</span>
+<% if inform.inf_type == 'cito' %>
+  <span class="badge badge-pill badge-<%= get_blocks_status(inform)[0] %>">
+    <%= get_blocks_status(inform)[1] %>E
+  </span>
+<% else %>
+  <span class="badge badge-pill badge-<%= get_blocks_status(inform)[0] %>">
+    <%= get_blocks_status(inform)[3] == 0 ? "" : "#{get_blocks_status(inform)[3]}E+" %><%= get_blocks_status(inform)[1] %>M:<%= get_blocks_status(inform)[2] %>B
+  </span>
+<% end %>
+<% if inform.inf_type == 'cito' %>
+  <span class="badge badge-pill badge-<%= get_slides_status(inform)[0] %>">
+    <%= get_slides_status(inform)[2] %>P
+  </span>
+<% else %>
+  <span class="badge badge-pill badge-<%= get_slides_status(inform)[0] %>">
+    <%= get_slides_status(inform)[2] %>P<%= get_slides_status(inform)[3] %>
+  </span>
+<% end %>
+<span class="badge badge-pill badge-<%= get_info_status(inform)[0] %>">
+  <%= get_info_status(inform)[1] %>M <%= get_info_status(inform)[2] %>D
+</span>
+<% if inform.invoice.to_s != "" %>
+  <span class="badge badge-pill badge-primary">
+    F
+  </span>
+<% end %>

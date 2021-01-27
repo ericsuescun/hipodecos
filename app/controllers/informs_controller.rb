@@ -321,47 +321,8 @@ class InformsController < ApplicationController
       file += ',' #COPAGOENTIDAD a partir de aca es 
       file += ',' #COPAGO
       file += "\n"
-      # file += '"",' #SINCRONIZA que se deja en blanco
-      # file += "\n\r" #FSINCRO que se deja en blanco
-
-
-      # @macro_text = ""
-      # inform.recipients.each_with_index do |recipient, n|
-      #   @macro_text += "Contenido de recipiente\r\n"
-      #   @macro_text += recipient.description + "\r\n"
-      #   @macro_text += "Bloqueado de la siguiente manera:\r\n"
-      #   Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i|
-      #     if sample.name == "Cassette"
-      #       @macro_text += sample.description + ":" if sample.description == "" 
-      #       @macro_text += sample.fragment.to_s + "F-" + get_nomen(sample.sample_tag)
-      #     else
-      #       @macro_text += sample.description if sample.name == "Cassette"
-      #       @macro_text += "-" + get_nomen(sample.sample_tag)
-      #       @macro_text += "\r\n"
-      #     end
-      #   end
-      # end
-      # @micro_text = ""
-      # inform.micros.each do |micro|
-      #   if micro.description.size > 500
-      #     @micro_text = @micro_text + "\n" + "\n" + micro.description + "\n "
-      #   else
-      #     @micro_text = @micro_text + micro.description + " "  
-      #   end
-      # end
-      # @descr = @macro_text + @micro_text
-      # filename = "#{file_name}" + ".CSV"
-      # send_data @descr, filename: filename, type: 'text/html; charset=utf-8'
-
-      # @diagnostic_text = ""
-      # inform.diagnostics.each do |diagnostic|
-      #   @diagnostic_text = @diagnostic_text + diagnostic.description + " "
-      # end
-      # filename = "#{file_name + 1}" + ".CSV"
-      # send_data @descr, filename: filename, type: 'text/html; charset=utf-8'
-      # file_name += 2
     end
-    filename = "test" + ".TXT"
+    filename = "foxpro_data" + ".TXT"
     send_data file[0..-3], filename: filename, type: 'text/html; charset=utf-8'
   end
 

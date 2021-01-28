@@ -557,6 +557,13 @@ class InformsController < ApplicationController
           @negative_cytos.delete_at(n)
         end
       end
+      if @already_negative == negative_pick
+        if @negative_cytos != []
+          @negative_cytos.each do |inform|
+            inform.update(inf_status: "revision") #Se deben marcar como para validación
+          end
+        end
+      end
     end
 
     @informs2_first_batch = @informs3_unassigned[0..49]
@@ -568,9 +575,7 @@ class InformsController < ApplicationController
       @informs2_rest = []
     end
 
-    # @negative_cytos.each do |inform|
-    #   inform.update(inf_status: "revision") #Se deben marcar como para validación
-    # end
+    
     pathologist_role_id = Role.where(name: "Patologia").first.id
     @users = User.where(role_id: pathologist_role_id)
 

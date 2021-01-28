@@ -138,6 +138,26 @@
           <li class="nav-item">
             <%= link_to "Producción", inclusion_blocks_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "nav-link" %>
           </li>
+          <li class="nav-item dropdown <%= 'active' if @tab == :asign %>">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Asignar informes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+              <p class="dropdown-item">Patología</p>
+              <%= link_to "Hoy", distribution_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Ayer", distribution_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Antier", distribution_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Esta semana", distribution_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Este mes", distribution_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <p class="dropdown-item">Citología</p>
+              <%= link_to "Hoy", distribution_cyto_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Ayer", distribution_cyto_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Antier", distribution_cyto_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Esta semana", distribution_cyto_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Este mes", distribution_cyto_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+            </div>
+          </li>
           <li class="nav-item">
             <%= link_to "Reportes", "reports/index", class: "nav-link" %>
           </li>
@@ -147,7 +167,7 @@
           </li> -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Automáticos
+              Autos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "Macro", automatics_index_macro_path, class: "dropdown-item" %>

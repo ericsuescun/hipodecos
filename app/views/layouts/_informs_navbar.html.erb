@@ -13,11 +13,11 @@
               Clínica
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Hoy", informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
               <%= link_to "Ayer", informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
               <%= link_to "Antier", informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "Esta semana", informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "Este mes", informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Esta semana", informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Este mes", informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <% (1..6).each do |m| %>
                 <%= link_to "#{m.month.ago.strftime('%b de %Y')}", informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=clin" , class: "dropdown-item" %>
@@ -31,11 +31,11 @@
               Hospital
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Hoy", informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
+              <%= link_to "Hoy", informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
               <%= link_to "Ayer", informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
               <%= link_to "Antier", informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "Esta semana", informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "Este mes", informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
+              <%= link_to "Esta semana", informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
+              <%= link_to "Este mes", informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <% (1..6).each do |m| %>
                 <%= link_to "#{m.month.ago.strftime('%b de %Y')}", informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=hosp" , class: "dropdown-item" %>
@@ -52,8 +52,8 @@
               <%= link_to "Hoy", informs_path + "?init_date=" + Date.today.strftime("%d-%m-%Y") + "&final_date=" + Date.today.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <%= link_to "Ayer", informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <%= link_to "Antier", informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "Esta semana", informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "Este mes", informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
+              <%= link_to "Esta semana", informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
+              <%= link_to "Este mes", informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <% (1..6).each do |m| %>
                 <%= link_to "#{m.month.ago.strftime('%b de %Y')}", informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=cito" , class: "dropdown-item" %>
@@ -68,11 +68,11 @@
                 Leer material
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-                <%= link_to "Hoy", descr_micros_informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Hoy", descr_micros_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
                 <%= link_to "Ayer", descr_micros_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
                 <%= link_to "Antier", descr_micros_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Esta semana", descr_micros_informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Este mes", descr_micros_informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Esta semana", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Este mes", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
                 <% (1..6).each do |m| %>
                   <%= link_to "#{m.month.ago.strftime('%b de %Y')}", descr_micros_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
@@ -86,11 +86,11 @@
                 Leer material Cito
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-                <%= link_to "Hoy", descr_micros_cyto_informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Hoy", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
                 <%= link_to "Ayer", descr_micros_cyto_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
                 <%= link_to "Antier", descr_micros_cyto_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Esta semana", descr_micros_cyto_informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Este mes", descr_micros_cyto_informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Esta semana", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+                <%= link_to "Este mes", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
                 <% (1..6).each do |m| %>
                   <%= link_to "#{m.month.ago.strftime('%b de %Y')}", descr_micros_cyto_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
@@ -104,11 +104,11 @@
               Validación
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Hoy", index_revision_informs_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Hoy", index_revision_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <%= link_to "Ayer", index_revision_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <%= link_to "Antier", index_revision_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Esta semana", index_revision_informs_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Este mes", index_revision_informs_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Esta semana", index_revision_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Este mes", index_revision_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <% (1..6).each do |m| %>
                 <%= link_to "#{m.month.ago.strftime('%b de %Y')}", index_revision_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
@@ -120,22 +120,22 @@
               Estado
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Listos para publicar hoy", informs_index_ready_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Listos para publicar hoy", informs_index_ready_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <%= link_to "Listos para publicar de ayer", informs_index_ready_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Listos para publicar de esta semana", informs_index_ready_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Listos para publicar de este mes", informs_index_ready_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Listos para publicar de esta semana", informs_index_ready_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Listos para publicar de este mes", informs_index_ready_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
 
-              <%= link_to "Publicados hoy", informs_index_published_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Publicados hoy", informs_index_published_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <%= link_to "Publicados ayer", informs_index_published_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Publicados esta semana", informs_index_published_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Publicados este mes", informs_index_published_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Publicados esta semana", informs_index_published_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Publicados este mes", informs_index_published_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
 
-              <%= link_to "Descargados hoy", informs_index_downloaded_path + "?init_date=" + Time.now.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Descargados hoy", informs_index_downloaded_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <%= link_to "Descargados ayer", informs_index_downloaded_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Descargados esta semana", informs_index_downloaded_path + "?init_date=" + Time.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Descargados este mes", informs_index_downloaded_path + "?init_date=" + Time.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Descargados esta semana", informs_index_downloaded_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Descargados este mes", informs_index_downloaded_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
             </div>
           </li>
           <ul class="navbar-nav d-flex justify-content-end">

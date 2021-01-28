@@ -346,7 +346,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @informs = Inform.where(receive_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.where(receive_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
+    @informs = Inform.where(user_review_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
   end
 
   def descr_micros_cyto
@@ -403,15 +403,15 @@ class InformsController < ApplicationController
   def set_revision
     if @inform.inf_type == 'cito'
       if @inform.pathologist_id == nil && @inform.cytologist != nil
-        @inform.update(user_review_date: Date.today, inf_status: "revision_cyto")
+        @inform.update(user_review_date: Time.zone.now.to_date, inf_status: "revision_cyto")
         redirect_to descr_micros_cyto_informs_path
       end
       if @inform.pathologist_id != nil
-        @inform.update(user_review_date: Date.today, inf_status: "revision")
+        @inform.update(user_review_date: Time.zone.now.to_date, inf_status: "revision")
         redirect_to descr_micros_informs_path
       end
     else
-      @inform.update(user_review_date: Date.today, inf_status: "revision")
+      @inform.update(user_review_date: Time.zone.now.to_date, inf_status: "revision")
       redirect_to descr_micros_informs_path
     end
   end
@@ -560,7 +560,7 @@ class InformsController < ApplicationController
       if @already_negative == negative_pick
         if @negative_cytos != []
           @negative_cytos.each do |inform|
-            inform.update(inf_status: "revision") #Se deben marcar como para validación
+            inform.update(inf_status: "revision", user_review_date: Time.zone.now.to_date) #Se deben marcar como para validación
           end
         end
       end
@@ -639,7 +639,7 @@ class InformsController < ApplicationController
   end
 
   def assign
-    Inform.where(id: params[:inform_ids]).update_all({pathologist_id: params[:pathologist_id].to_i == 0 ? nil : params[:pathologist_id].to_i })
+    Inform.where(id: params[:inform_ids]).update_all({pathologist_id: params[:pathologist_id].to_i == 0 ? nil : params[:pathologist_id].to_i, user_review_date: Time.zone.now.to_date })
 
     # if params[:yi] != ""
     #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
@@ -743,7 +743,7 @@ class InformsController < ApplicationController
     if date == nil
       return ["", ""]
     else
-      days = Date.today - date
+      days = Time.zone.now.to_date - date
       if days >= 365
         return [ (days / 365).to_i, "A"]
       end
@@ -826,18 +826,18 @@ class InformsController < ApplicationController
     
     inform.regime = Promoter.where(id: inform.promoter_id).first.try(:regime)
 
-    date_range = Date.today.beginning_of_year..Date.today.end_of_year
+    date_range = Time.zone.now.to_date.beginning_of_year..Time.zone.now.to_date.end_of_year
 
     if params[:inform][:inf_type] == "clin"
        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
-       inform.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+       inform.tag_code = "C" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
     else
      if params[:inform][:inf_type] == "hosp"
        consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
-       inform.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+       inform.tag_code = "H" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
      else
        consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
-       inform.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+       inform.tag_code = "K" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
      end
     end
 

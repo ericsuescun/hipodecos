@@ -471,6 +471,15 @@ class InformsController < ApplicationController
         end
       end
     end
+
+
+    # Inform.unscoped.where.not(inf_type: "cito").joins(:slides).where(slides: { created_at: Date.parse("01-01-2021")..Date.parse("28-01-2021"), colored: true, covered: true, tagged: true}).select(:tag_code, :id, :pathologist_id, :inf_status).order(pathologist_id: :asc)
+
+
+
+
+
+    
     # @informs_unassigned.each_with_index do |inform, n|
     #   if n <=50
     #     @informs_first_batch << inform

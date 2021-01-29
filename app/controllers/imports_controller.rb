@@ -12,6 +12,7 @@ class ImportsController < ApplicationController
 			@oldrecords = Oldrecord.where(patient_id: nil).paginate(page: params[:page], per_page: 60)
 			
 		end
+		# Oldrecord.unscoped.select(:cedula, :id, :nombre, :nombre2, :apellido, :apellido2, :identif).group(:id, :cedula).all
 	end
 
 	def oldcito_import_index

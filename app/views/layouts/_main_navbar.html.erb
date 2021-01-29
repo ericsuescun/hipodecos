@@ -200,10 +200,10 @@
               <%= link_to "Biopsias sin paciente asignado", imports_oldrecord_import_index_path, class: "dropdown-item" %>
               <%= link_to "Biopsias: Búsqueda de registros", oldrecords_path + "?init_date=2020-07-01&final_date=2020-07-31", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Biopsias importadas con problemas", trouble_index_oldrecords_path + "?init_date=2020-07-01&final_date=2020-07-31", class: "dropdown-item" %>
+              <%= link_to "Biopsias importadas con problemas", trouble_index_oldrecords_path + "?init_date=" + (Oldrecord.first.fecharec - 1.day).strftime("%d-%m-%Y") + "&final_date=" + Oldrecord.first.fecharec.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Citologías sin paciente asignado", imports_oldcito_import_index_path, class: "dropdown-item" %>
-              <%= link_to "Citos: Búsqueda de registros", oldcitos_path + "?init_date=2020-07-01&final_date=2020-07-31", class: "dropdown-item" %>
+              <%= link_to "Citos: Búsqueda de registros", oldcitos_path + "?init_date=" + (Oldcito.first.fecharec - 1.day).strftime("%d-%m-%Y") + "&final_date=" + Oldcito.first.fecharec.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "Citos importadas con problemas", trouble_index_oldcitos_path + "?init_date=2020-07-01&final_date=2020-07-31", class: "dropdown-item" %>
             </div>

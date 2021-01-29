@@ -8,6 +8,7 @@
     <div class="col-12 col-lg-6 col-xl-4">
       <div class="alert alert-secondary">
         <%= form_tag index_oldrecords_informs_path, method: "get" do %>
+          <%= hidden_field_tag :inf_type, params[:inf_type] %>
           <div class="row">
             <div class="col-12 col-lg-6">
               <div class="form-group">

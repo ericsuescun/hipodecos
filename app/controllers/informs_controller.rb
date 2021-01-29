@@ -719,6 +719,7 @@ class InformsController < ApplicationController
   def switch_patient
     @patient = Patient.where(id_number: params[:new_id]).first
     @inform = Inform.find(params[:id])
+    old_patient_id_number = @inform.patient.id_number
     if @patient != nil
       if @patient.birth_date != nil
         @inform.update(patient_id: @patient.id, p_age: get_age(@patient.birth_date)[0], p_age_type: get_age(@patient.birth_date)[1])
@@ -729,7 +730,7 @@ class InformsController < ApplicationController
           user_id: current_user.id,
           obcode_id: params[:obcode_id],
           responsible_user_id: @inform.user_id,
-          description: "Se hace cambio de paciente en: " + Time.now.to_s
+          description: "Se hace cambio de paciente en: " + Time.now.to_s + ". Id anterior: " + old_patient_id_number + ". Nuevo Id: " + @patient.id_number + "."
 
         )
       objection.save

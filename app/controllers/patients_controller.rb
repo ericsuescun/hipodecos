@@ -11,15 +11,33 @@ class PatientsController < ApplicationController
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      # @patients = Patient.where(created_at: date_range).paginate(page: params[:page], per_page: 30)
-      # @patients = Patient.joins(:informs).where(informs: { created_at: date_range }).distinct.paginate(page: params[:page], per_page: 30)
     else
       date_range = 2.weeks.ago..Time.zone.now
-
-      # @patients = Patient.joins(:informs).where(informs: { created_at: 2.weeks.ago..Time.zone.now }).or(Patient.where(created_at: 1.day.ago..Time.zone.now)).distinct.paginate(page: params[:page], per_page: 30)
     end
     @patients = Patient.joins(:informs).where(informs: { created_at: date_range }).distinct.paginate(page: params[:page], per_page: 30)
     @patients_single = Patient.where(created_at: date_range).limit(3)
+
+    if params[:name] != nil
+
+      if params[:name].split(" ")[0] != nil
+        @patients = Patient.where(name1: params[:name].split(" ")[0].downcase.capitalize).or(Patient.where(name2: params[:name].split(" ")[0].downcase.capitalize)).paginate(page: params[:page], per_page: 30)
+      end
+
+      if params[:name].split(" ")[1] != nil
+        @patients = Patient.where(name1: params[:name].split(" ")[0].downcase.capitalize, name2: params[:name].split(" ")[1].downcase.capitalize).or(Patient.where(name1: params[:name].split(" ")[1].downcase.capitalize)).or(Patient.where(name2: params[:name].split(" ")[0].downcase.capitalize)).paginate(page: params[:page], per_page: 30)
+      end
+    end
+    if params[:lastname] != nil
+
+      if params[:lastname].split(" ")[0] != nil
+        @patients = Patient.where(lastname1: params[:lastname].split(" ")[0].downcase.capitalize).or(Patient.where(lastname2: params[:lastname].split(" ")[0].downcase.capitalize)).paginate(page: params[:page], per_page: 30)
+      end
+
+      if params[:lastname].split(" ")[1] != nil
+        @patients = Patient.where(lastname1: params[:lastname].split(" ")[0].downcase.capitalize, lastname2: params[:lastname].split(" ")[1].downcase.capitalize).or(Patient.where(lastname1: params[:lastname].split(" ")[1].downcase.capitalize)).or(Patient.where(lastname2: params[:lastname].split(" ")[0].downcase.capitalize)).paginate(page: params[:page], per_page: 30)
+      end
+    end
+
   end
 
   def index_one

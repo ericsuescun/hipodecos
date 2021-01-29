@@ -127,10 +127,10 @@
                 <td><%= link_to "#{patient.informs.first.tag_code}", patient.informs.first %></td>
               <% else %>
                 <% if patient.oldrecords != [] %>
-                  <td><%= link_to "#{patient.oldrecords.first.tag_code}", patient.informs.first %></td>
+                  <td><%= link_to "#{Oldrecord.where(patient_id: patient.id).first.tag_code}", oldrecord_path(Oldrecord.where(patient_id: patient.id).first.id) %></td>
                 <% else %>
                   <% if patient.oldcitos != [] %>
-                    <td><%= link_to "#{patient.oldcitos.first.tag_code}", patient.informs.first %></td>
+                    <td><%= link_to "#{Oldcito.where(patient_id: patient.id).first.tag_code}", oldrecord_path(Oldcito.where(patient_id: patient.id).first.id) %></td>
                   <% else %>
                     <td></td>
                   <% end %>

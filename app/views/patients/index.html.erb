@@ -50,7 +50,7 @@
         </div>
         
       </div>
-      <!-- <div class="row">
+      <div class="row">
         <div class="col-12 col-lg-12">
           <div class="alert alert-info">
             <h4>Buscar por nombres y apellidos:</h4>
@@ -75,7 +75,7 @@
             <% end %>
           </div>
         </div>
-      </div> -->
+      </div>
       
       <%= will_paginate @patients, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       <table class="table table-striped">
@@ -123,7 +123,19 @@
                 <% end %>
               </td>
               <td><%= patient.fullname %></td>
-              <td><%= link_to "#{patient.informs.first.tag_code}", patient.informs.first %></td>
+              <% if patient.informs != [] %>
+                <td><%= link_to "#{patient.informs.first.tag_code}", patient.informs.first %></td>
+              <% else %>
+                <% if patient.oldrecords != [] %>
+                  <td><%= link_to "#{patient.oldrecords.first.tag_code}", patient.informs.first %></td>
+                <% else %>
+                  <% if patient.oldcitos != [] %>
+                    <td><%= link_to "#{patient.oldcitos.first.tag_code}", patient.informs.first %></td>
+                  <% else %>
+                    <td></td>
+                  <% end %>
+                <% end %>
+              <% end %>
               <td><%= patient.sex %></td>
               <td><%= patient.informs.first.try(:p_email) %></td>
               <td><%= patient.informs.first.try(:p_tel) %></td>

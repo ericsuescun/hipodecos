@@ -126,15 +126,7 @@
               <% if patient.informs != [] %>
                 <td><%= link_to "#{patient.informs.first.tag_code}", patient.informs.first %></td>
               <% else %>
-                <% if Oldrecord.where(patient_id: patient.id) != [] %>
-                  <td><%= link_to "#{Oldrecord.where(patient_id: patient.id).first.tag_code}", oldrecord_path(Oldrecord.where(patient_id: patient.id).first.id) %></td>
-                <% else %>
-                  <% if Oldcito.where(patient_id: patient.id) != [] %>
-                    <td><%= link_to "#{Oldcito.where(patient_id: patient.id).first.tag_code}", oldrecord_path(Oldcito.where(patient_id: patient.id).first.id) %></td>
-                  <% else %>
-                    <td></td>
-                  <% end %>
-                <% end %>
+                <td>Sistema FoxPro</td>
               <% end %>
               <td><%= patient.sex %></td>
               <td><%= patient.informs.first.try(:p_email) %></td>

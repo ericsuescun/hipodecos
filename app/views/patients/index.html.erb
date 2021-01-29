@@ -6,7 +6,7 @@
   <% end %>
   <div class="row">
     <div class="col-12">
-      <h4>Pacientes creados <%= new_search_range %></h4>
+      <h4>Pacientes atendidos <%= new_search_range %></h4>
       <div class="row">
         <div class="col-12 col-lg-6">
           <%= form_tag patients_new_series_path, method: "get", class: "form-inline my-3" do %>
@@ -18,12 +18,12 @@
         <div class="col-12 col-lg-6">
           <%= form_tag patients_path, method: "get", class: "form-inline" do %>
             <div class="form-group mr-1">
-              <%= date_field_tag :init_date, class: "form-control mb-3" %>
+              <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control mb-3" %>
               
             </div>
             <div class="form-group mr-1">
               
-              <%= date_field_tag :final_date, class: "form-control mb-3" %>
+              <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control mb-3" %>
             </div>
             <%= submit_tag("Buscar", class: "btn btn-primary my-3") %>
           <% end %>
@@ -47,6 +47,28 @@
         </thead>
 
         <tbody>
+          <% @patients_single.each do |patient| %>
+            <% if patient.informs == [] %>
+              <tr>
+                <td><%= patient.id_type %>
+                  <%= link_to patient do %>
+                     <%= patient.id_number %>
+                  <% end %>
+                </td>
+                <td><%= patient.fullname %></td>
+                <td></td>
+                <td><%= patient.sex %></td>
+                <td><%= patient.informs.first.try(:p_email) %></td>
+                <td><%= patient.informs.first.try(:p_tel) %></td>
+                <td><%= patient.informs.first.try(:p_cel) %></td>
+                <td><%= link_to 'Editar', edit_patient_path(patient) %></td>
+                <% if admin_signed_in? %>
+                  <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% end %>
+              </tr>
+            <% end %>
+            
+          <% end %>
           <% @patients.each do |patient| %>
             <tr>
               <td><%= patient.id_type %>

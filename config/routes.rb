@@ -194,6 +194,8 @@ Rails.application.routes.draw do
     get 'patients/new_series', to: 'patients#new_series'
     post 'patients/create_series', to: 'patients#create_series'
     
+    get 'patients/new_single', to: 'patients#new_single'
+    post 'patients/create_new', to: 'patients#create_new'
     resources :patients do
       resources :informs do
         resources :physicians
@@ -201,7 +203,6 @@ Rails.application.routes.draw do
 
       member do
         post :matriculate
-
       end
 
       collection do

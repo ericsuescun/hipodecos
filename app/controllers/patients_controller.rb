@@ -12,12 +12,14 @@ class PatientsController < ApplicationController
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
       # @patients = Patient.where(created_at: date_range).paginate(page: params[:page], per_page: 30)
-      @patients = Patient.joins(:informs).where(informs: { created_at: date_range }).distinct.paginate(page: params[:page], per_page: 30)
-     else
-      # @patients = Patient.where(created_at: 2.weeks.ago..Time.now).paginate(page: params[:page], per_page: 30)
+      # @patients = Patient.joins(:informs).where(informs: { created_at: date_range }).distinct.paginate(page: params[:page], per_page: 30)
+    else
+      date_range = 2.weeks.ago..Time.zone.now
 
-      @patients = Patient.joins(:informs).where(informs: { created_at: 2.weeks.ago..Time.now }).distinct.paginate(page: params[:page], per_page: 30)
+      # @patients = Patient.joins(:informs).where(informs: { created_at: 2.weeks.ago..Time.zone.now }).or(Patient.where(created_at: 1.day.ago..Time.zone.now)).distinct.paginate(page: params[:page], per_page: 30)
     end
+    @patients = Patient.joins(:informs).where(informs: { created_at: date_range }).distinct.paginate(page: params[:page], per_page: 30)
+    @patients_single = Patient.where(created_at: date_range).limit(3)
   end
 
   def index_one
@@ -89,6 +91,21 @@ class PatientsController < ApplicationController
       @patient = Patient.new(id_number: params[:id_number])
       @inform = @patient.informs.build.physicians.build #Creo la instancia para physician para la form
     end
+  end
+
+  def new_single
+    @patient = Patient.new
+  end
+
+  def create_new
+    patient = Patient.new(patient_params)
+    if patient.save
+      redirect_to patient, notice: "Paciente sin informe creado con éxito!"
+    else
+      redirect_to patients_new_single_path
+    end
+    
+    
   end
 
   def new_series

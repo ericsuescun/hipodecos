@@ -10,9 +10,8 @@
             <th></th>
             <th>Informe</th>
             <th>Estado</th>
-            <th>Oportunidad</th>
-            <th>Revisión Patología</th>
-            <th>Revisión Admin</th>
+            <th>Días</th>
+            <th>Revisión</th>
             <th>Paciente</th>
             <th>EPS</th>
             <th>Sede IPS</th>
@@ -32,8 +31,7 @@
               </td>
               <td><%= inform.inf_status %></td>
               <td><%= (Date.today - inform.receive_date).to_i %></td>
-              <td><%= User.where(id: inform.pathologist_review_id).first.try(:first_name) %> <%= User.where(id: inform.pathologist_review_id).first.try(:last_name) %></td>
-              <td><%= User.where(id: inform.administrative_review_id).first.try(:first_name) %> <%= User.where(id: inform.administrative_review_id).first.try(:last_name) %></td>
+              <td><%= User.where(id: inform.pathologist_review_id).first.try(:initials) %> <%= User.where(id: inform.administrative_review_id).first.try(:initials) %></td>
               <td>
                 <%= link_to inform.patient  do %>
                   <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>

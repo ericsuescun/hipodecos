@@ -74,7 +74,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @informs = Inform.where(user_review_date: date_range, inf_status: "revision").paginate(page: params[:page], per_page: 10)
+    @informs = Inform.unscoped.where(user_review_date: date_range, inf_status: "revision").order(pathologist_id: :asc, cytologist: :asc).paginate(page: params[:page], per_page: 10)
   end
 
   def index_ready

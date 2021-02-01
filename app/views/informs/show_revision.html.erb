@@ -57,14 +57,16 @@
       <% if @inform.administrative_review_id == nil %>
         <div class="row">
           <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-            <%= link_to "Admin: Listo para publicar!", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+            <%= link_to set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" do %>
+              Listo para publicar por: <%= current_user.initials %>
+            <% end %>
           </div>
         </div>
       <% else %>
         <div class="row">
           <div class="col-4 col-lg-4 col-xl-4 mx-auto">
             <div class="alert alert-success mt-3">
-              <h6>Validado por: <%= User.where(id: @inform.administrative_review_id).first.try(:email) %></h6>
+              <h6>Validado por: <%= User.where(id: @inform.administrative_review_id).first.try(:initials) %></h6>
             </div>
           </div>
         </div>
@@ -75,14 +77,16 @@
       <% if @inform.pathologist_review_id == nil %>
         <div class="row">
           <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-            <%= link_to "Patología: Listo para publicar!", set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+            <%= link_to set_ready_inform_path(@inform), class: "btn btn-success btn-block mt-3" do %>
+              Listo para publicar por <%= current_user.initials %>
+            <% end %>
           </div>
         </div>
       <% else %>
         <div class="row">
           <div class="col-4 col-lg-4 col-xl-4 mx-auto">
             <div class="alert alert-success mt-3">
-              <h6>Validado por: <%= User.where(id: @inform.pathologist_review_id).first.try(:email) %></h6>
+              <h6>Validado por: <%= User.where(id: @inform.pathologist_review_id).first.try(:initials) %></h6>
             </div>
           </div>
         </div>

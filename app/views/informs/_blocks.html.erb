@@ -107,7 +107,7 @@
                           <% end %>
                         <% end %>
                         <% if block.verified %>
-                          <span><strong>Bloque verificado por: <%= current_user.email %></strong></span>
+                          <span><strong>Bloque verificado por: <%= current_user.initials %></strong></span>
                         <% end %>
                         <% if block.verified %>
                           <div id="controls-block-<%= block.block_tag %>">

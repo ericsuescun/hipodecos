@@ -126,7 +126,7 @@ class BlocksController < ApplicationController
   # DELETE /blocks/1.json
   def destroy
     sample = Sample.where(sample_tag: @block.block_tag).first
-    sample.update(blocked: false)
+    sample.update(blocked: false, included: false)
     @block.destroy
     respond_to do |format|
       format.html { redirect_to inform_path(@inf), notice: 'Block was successfully destroyed.' }

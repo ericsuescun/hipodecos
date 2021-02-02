@@ -180,6 +180,7 @@
             </div>
           </div>
           <div class="col-12 col-lg-6 col-xl-6">
+            <% if @inform.micros.count < 2 %>
             <div class="card">
               <div class="card-header m-0 p-0 pl-1">
                 <strong>Lista de automáticos</strong>
@@ -301,6 +302,7 @@
                 
               </div>
             </div>
+            <% end %>
           </div>
         </div>
       <% end %>

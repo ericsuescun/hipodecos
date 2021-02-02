@@ -4,12 +4,14 @@
       <div class="card">
         <div class="card-header m-0 p-0">
           <div class="d-flex justify-content-start align-items-center">
-            <span>
-              <%= form_with url: new_suggestion_path, method: "get", remote: true, class: "suggestion-form-out mr-1 my-1 ml-1" do |form| %>
-                <%= form.submit "+", class: "btn btn-primary btn-sm" %>
-                <%= form.hidden_field :inform_id, value: inform.id %>
-              <% end %>
-            </span>
+            <% if inform.diagnostics.count < 2 %>
+              <span>
+                <%= form_with url: new_suggestion_path, method: "get", remote: true, class: "suggestion-form-out mr-1 my-1 ml-1" do |form| %>
+                  <%= form.submit "+", class: "btn btn-primary btn-sm" %>
+                  <%= form.hidden_field :inform_id, value: inform.id %>
+                <% end %>
+              </span>
+            <% end %>
             <strong>Sugerencias</strong>
           </div>
         </div>

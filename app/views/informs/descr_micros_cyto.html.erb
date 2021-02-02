@@ -1,11 +1,14 @@
+<div class="info">
+  <h4>Descripciones micro pendientes para <%= current_user.fullname %></h4>
+</div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
-      <h1>Descripciones micro pendientes para <%= current_user.fullname %></h1>
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
             <th>Informe</th>
+            <th>Asignado</th>
             <th>Estado</th>
             <th>Ingreso PSS</th>
             <th>Paciente</th>
@@ -21,6 +24,7 @@
                   <%= inform.tag_code %>
                 <% end %>
               </td>
+              <td><%= User.where(id: inform.cytologist).first.try(:initials) %></td>
               <td><%= inform.inf_status %></td>
               <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
               <td>

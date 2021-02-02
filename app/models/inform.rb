@@ -30,6 +30,8 @@ class Inform < ApplicationRecord
 
   has_many :objections, as: :objectionable, dependent: :destroy
 
+  has_many :comments, as: :commentable, dependent: :destroy
+
 
   # has_many :samples
   # has_many :studies

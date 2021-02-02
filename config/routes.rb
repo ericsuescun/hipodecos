@@ -286,6 +286,7 @@ Rails.application.routes.draw do
         get :clear_revision
         get :descr_micro
         get :set_revision
+        put :set_revision_secretary
         get :set_ready
         get :preview
         get :autos_micro

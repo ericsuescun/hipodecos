@@ -4,13 +4,26 @@
       <div class="card">
         <div class="card-header m-0 p-0">
           <div class="d-flex justify-content-start align-items-center">
-            <span>
-              <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-1 my-1 ml-1" do |form| %>
-                <%= form.submit "+", class: "btn btn-primary btn-sm" %>
-                <%= form.hidden_field :inform_id, value: inform.id %>
+            <% if inform.inf_type == "cito" %>
+              <% if inform.micros.count < 2 %>
+                <span>
+                  <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-1 my-1 ml-1" do |form| %>
+                    <%= form.submit "+", class: "btn btn-primary btn-sm" %>
+                    <%= form.hidden_field :inform_id, value: inform.id %>
+                  <% end %>
+                </span>
               <% end %>
-            </span>
-            <strong>Descripción Micro</strong>
+            <% else %>
+              <span>
+                <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-1 my-1 ml-1" do |form| %>
+                  <%= form.submit "+", class: "btn btn-primary btn-sm" %>
+                  <%= form.hidden_field :inform_id, value: inform.id %>
+                <% end %>
+              </span>
+            <% end %>
+            
+            
+            <strong>Descripción Micro por: <%= get_resource_initials(inform) %></strong>
           </div>
         </div>
         <div class="card-body py-0">
@@ -50,7 +63,7 @@
                       <span>&times;</span>
                     <% end %>
                     <span class="text-muted">
-                      [ - el <%= micro.created_at.strftime('%d/%m/%Y') %> <%= User.where(id: micro.user_id).first.try(:fullname) %> agregó ]
+                      [ el <%= micro.created_at.strftime('%d/%m/%Y') %> <%= User.where(id: micro.user_id).first.try(:initials) %> agregó ]
                     </span>
                     <div>
                       <%= simple_format(micro.description) %>

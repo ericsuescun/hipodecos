@@ -1,5 +1,17 @@
 module InformsHelper
 
+	def get_resource_initials(inform)
+		if inform.inf_type == "cito"
+			if inform.pathologist_id != nil && inform.cytologist != nil
+				User.where(id: inform.cytologist).first.try(:initials) + " / " + User.where(id: inform.pathologist_id).first.try(:initials)
+			else
+				User.where(id: inform.cytologist).first.try(:initials).to_s + User.where(id: inform.pathologist_id).first.try(:initials).to_s 
+			end
+		else
+			User.where(id: inform.pathologist_id).first.try(:initials).to_s
+		end
+	end
+
 	def codevals
 		codevals = Codeval.all
 		new_codevals = []

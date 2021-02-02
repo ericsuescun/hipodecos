@@ -346,7 +346,22 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @informs = Inform.where(user_review_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
+
+    if role_admin_allowed?
+      @informs = Inform.unscoped.where(user_review_date: date_range, inf_status: nil).or(Inform.unscoped.where(user_review_date: date_range, inf_status: "revision_cyto")).order(pathologist_id: :asc)
+    else
+      @informs = Inform.where(user_review_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
+    end
+    
+  end
+
+  def role_admin_allowed?
+    actual_role = Role.where(id: current_user.role_id).first.name
+    if actual_role == "Secretaria" || actual_role == "Jefatura de laboratorio" || actual_role == "CTO"
+      return true
+    else
+      return false
+    end
   end
 
   def descr_micros_cyto
@@ -369,7 +384,12 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @informs = Inform.where(receive_date: date_range, inf_status: nil, cytologist: current_user.id)
+
+    if role_admin_allowed?
+      @informs = Inform.unscoped.where(user_review_date: date_range, inf_type: "cito", inf_status: nil).order(pathologist_id: :asc)
+    else
+      @informs = Inform.where(receive_date: date_range, inf_type: "cito", inf_status: nil, cytologist: current_user.id)
+    end
   end
 
   def descr_micro
@@ -403,15 +423,15 @@ class InformsController < ApplicationController
   def set_revision
     if @inform.inf_type == 'cito'
       if @inform.pathologist_id == nil && @inform.cytologist != nil
-        @inform.update(user_review_date: Time.zone.now.to_date, inf_status: "revision_cyto")
+        @inform.update(user_id: current_user.id, user_review_date: Time.zone.now.to_date, inf_status: "revision_cyto")
         redirect_to descr_micros_cyto_informs_path
       end
       if @inform.pathologist_id != nil
-        @inform.update(user_review_date: Time.zone.now.to_date, inf_status: "revision")
+        @inform.update(user_id: current_user.id, user_review_date: Time.zone.now.to_date, inf_status: "revision")
         redirect_to descr_micros_informs_path
       end
     else
-      @inform.update(user_review_date: Time.zone.now.to_date, inf_status: "revision")
+      @inform.update(user_id: current_user.id, user_review_date: Time.zone.now.to_date, inf_status: "revision")
       redirect_to descr_micros_informs_path
     end
   end
@@ -964,11 +984,17 @@ class InformsController < ApplicationController
   end
 
   def preview
+    p_role = Role.where(name: "Patologia").first.id
     if @inform.inf_type != 'cito'
       @pathologists = []
 
+      @pathologists << User.find(id: @inform.pathologist_id)
+
       @micro_text = ""
       @inform.micros.each do |micro|
+        if User.find(micro.user_id).role_id == p_role
+          @pathologists << User.find(micro.user_id)
+        end
         if micro.description.size > 500
           @micro_text = @micro_text + "\n" + "\n" + micro.description + "\n "
         else
@@ -979,22 +1005,28 @@ class InformsController < ApplicationController
 
       @diagnostic_text = ""
       @inform.diagnostics.each do |diagnostic|
-        @pathologists << User.where(id: diagnostic.user_id).first
+        if User.find(diagnostic.user_id).role_id == p_role
+          @pathologists << User.find(diagnostic.user_id)
+        end
         @diagnostic_text = @diagnostic_text + diagnostic.description + " "
       end
+
       @pathologists = @pathologists.uniq
       
     else
       @pathologists = []
 
+      if @inform.pathologist_id != nil
+        @pathologists << User.find(@inform.pathologist_id)
+      end
+
       if @inform.diagnostics != []
         diagnostic = @inform.diagnostics.last
-        @pathologists << User.where(id: diagnostic.user_id).first
-        @pathologists = @pathologists.uniq
-      else
-        diagnostic = nil
-        @pathologists = []
+        if User.find(diagnostic.user_id).role_id == p_role
+          @pathologists << User.find(diagnostic.user_id)
+        end
       end
+      @pathologists = @pathologists.uniq
       
       @cytologist = User.where(id: @inform.cytologist).first
 
@@ -1003,11 +1035,7 @@ class InformsController < ApplicationController
       else
         @cytology = nil
       end
-      
-
     end
-    
-
   end
 
   # private

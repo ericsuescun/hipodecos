@@ -277,7 +277,7 @@ class ExecuteTemplatesController < ApplicationController
 				@study = @inform.studies.build(
 					user_id: current_user.id,
 					codeval_id: script.param2,
-					factor: 1,
+					factor: script.param1,
 					cost: cost,
 					price: price,
 					margin: margin,

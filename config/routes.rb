@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'comments/index'
   resources :invoices
   resources :municipalities do
     collection do

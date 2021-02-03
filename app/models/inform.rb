@@ -1,7 +1,7 @@
 class Inform < ApplicationRecord
   belongs_to :patient, optional: true
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(created_at: :asc) }
 
   scope :cyto, -> { where(inf_type: 'cito') }
   scope :biop, -> { where("inf_type != 'cito'") }

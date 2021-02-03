@@ -42,21 +42,20 @@
             <%= link_to "K: Exportar a FoxPro", export_foxpro_informs_path(inf_type: 'cito', init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary btn-sm mb-3 mx-3" %>
           </div>
         </div>
-        
-        
+        <%= will_paginate @informs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
         <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
               <th></th>
               <th>Informe</th>
-              <th>Estado</th>
-              <th>Oportunidad</th>
-              <th>Revisión Patología</th>
+              <!-- <th>Estado</th> -->
+              <th>Fecha</th>
+              <th>Días</th>
+              <th>Revisión</th>
               <th>Paciente</th>
               <th>EPS</th>
-              <th>Sede IPS</th>
-              <th>Código Authoriz.</th>
-              <th scope="1"></th>
+              <th>IPS</th>
+              <th>Authoriz</th>
             </tr>
           </thead>
 
@@ -69,18 +68,19 @@
                     <%= inform.tag_code %>
                   <% end %>
                 </td>
-                <td>
+                <!-- <td>
                   <%= render 'inform_status', inform: inform %>
-                </td>
+                </td> -->
+                <td><%= inform.delivery_date.strftime("%d/%m") %></td>
                 <td><%= (Date.today - inform.receive_date).to_i %></td>
-                <td><%= User.where(id: inform.pathologist_review_id).first.try(:first_name) %> <%= User.where(id: inform.pathologist_review_id).first.try(:last_name) %></td>
+                <td><%= User.where(id: inform.pathologist_review_id).first.try(:initials) %></td>
                 <td>
                   <%= link_to inform.patient  do %>
                     <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
                     <% end %>
                 </td>
-                <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
-                <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %>: <%= inform.invoice %></td>
+                <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials)[0..10] %></td>
+                <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
                 <td><%= inform.prmtr_auth_code %></td>
                 
               </tr>

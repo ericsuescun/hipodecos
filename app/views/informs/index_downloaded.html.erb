@@ -33,6 +33,7 @@
     <div class="col-12 col-lg-12 mx-auto">
       <%= form_tag undownload_informs_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}", method: :put do %>
         <%= submit_tag "Marcar como no descargado", class: "btn btn-success btn-sm mb-3" %>
+        <%= will_paginate @informs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
         <table class="table table-striped">
           <thead class="thead-dark">
             <tr>

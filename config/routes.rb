@@ -208,6 +208,7 @@ Rails.application.routes.draw do
 
       collection do
         get :index_one
+        get :index_names
       end
     end
 

@@ -18,7 +18,6 @@ class PatientsController < ApplicationController
     @patients_single = Patient.where(created_at: date_range).limit(3)
 
     if params[:name] != nil
-
       if params[:name].split(" ")[0] != nil
         @patients = Patient.where(name1: params[:name].split(" ")[0].upcase).or(Patient.where(name2: params[:name].split(" ")[0].upcase)).paginate(page: params[:page], per_page: 30)
       end
@@ -38,6 +37,66 @@ class PatientsController < ApplicationController
       end
     end
 
+  end
+
+  def index_names
+    @tab = :series
+    @patients = []
+    if params[:name] != "" || params[:lastname] != ""
+
+      if params[:name].split(" ")[0] != nil && params[:name].split(" ")[1] == nil && params[:lastname].split(" ")[0] != nil && params[:lastname].split(" ")[1] == nil
+        @patients = Patient.where(
+          name1: params[:name].split(" ")[0].upcase,
+          lastname1: params[:lastname].split(" ")[0].upcase)
+        .or(Patient.where(
+          name2: params[:name].split(" ")[0].upcase,
+          lastname1: params[:lastname].split(" ")[0].upcase)
+        ).paginate(page: params[:page], per_page: 10)
+      end
+
+      if params[:name].split(" ")[0] != nil && params[:name].split(" ")[1] == nil && params[:lastname].split(" ")[0] != nil && params[:lastname].split(" ")[1] != nil
+        @patients = Patient.where(
+          name1: params[:name].split(" ")[0].upcase,
+          lastname1: params[:lastname].split(" ")[0].upcase,
+          lastname2: params[:lastname].split(" ")[1].upcase)
+        .or(Patient.where(
+          name2: params[:name].split(" ")[0].upcase,
+          lastname1: params[:lastname].split(" ")[0].upcase,
+          lastname2: params[:lastname].split(" ")[1].upcase))
+        .paginate(page: params[:page], per_page: 10)
+      end
+
+      if params[:name].split(" ")[0] != nil && params[:name].split(" ")[1] != nil && params[:lastname].split(" ")[0] != nil && params[:lastname].split(" ")[1] == nil
+        @patients = Patient.where(
+          name1: params[:name].split(" ")[0].upcase,
+          name2: params[:name].split(" ")[1].upcase,
+          lastname1: params[:lastname].split(" ")[0].upcase)
+        .paginate(page: params[:page], per_page: 10)
+      end
+
+      if params[:name].split(" ")[0] != nil && params[:name].split(" ")[1] != nil && params[:lastname].split(" ")[0] != nil && params[:lastname].split(" ")[1] != nil
+        @patients = Patient.where(
+          name1: params[:name].split(" ")[0].upcase,
+          name2: params[:name].split(" ")[1].upcase,
+          lastname1: params[:lastname].split(" ")[0].upcase,
+          lastname2: params[:lastname].split(" ")[1].upcase)
+        .paginate(page: params[:page], per_page: 10)
+      end
+
+      if params[:name].split(" ")[0] != nil && params[:name].split(" ")[1] != nil && params[:lastname].split(" ")[0] == nil && params[:lastname].split(" ")[1] == nil
+        @patients = Patient.where(
+          name1: params[:name].split(" ")[0].upcase,
+          name2: params[:name].split(" ")[1].upcase)
+        .paginate(page: params[:page], per_page: 10)
+      end
+
+      if params[:name].split(" ")[0] == nil && params[:name].split(" ")[1] == nil && params[:lastname].split(" ")[0] != nil && params[:lastname].split(" ")[1] != nil
+        @patients = Patient.where(
+          lastname1: params[:lastname].split(" ")[0].upcase,
+          lastname2: params[:lastname].split(" ")[1].upcase)
+        .paginate(page: params[:page], per_page: 10)
+      end
+    end
   end
 
   def index_one

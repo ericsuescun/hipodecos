@@ -35,6 +35,11 @@ class Patient < ApplicationRecord
 
 	validates :id_number, uniqueness: true
 
+	before_save { self.name1.upcase! }
+	before_save { self.name2.upcase! }
+	before_save { self.lastname1.upcase! }
+	before_save { self.lastname2.upcase! }
+
 	def fullname
 	  [name1, name2, lastname1, lastname2].join(' ')
 	end

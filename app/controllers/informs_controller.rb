@@ -1,4 +1,7 @@
 class InformsController < ApplicationController
+
+  require 'zip'
+
   before_action :authenticate_user!
   before_action :set_inform, only: [:show, :show_revision, :edit, :update, :destroy, :preview, :descr_micro, :clear_revision, :set_revision, :set_ready, :autos_micro, :anulate]
 
@@ -182,148 +185,208 @@ class InformsController < ApplicationController
     informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range).or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range))
     file = ""
     file_name = 1
-    informs.each do |inform|
+    filename = "campos_memo.zip"
+    temp_file = Tempfile.new(filename)
+    begin
+      Zip::OutputStream.open(temp_file) { |zos| }
 
-      file += '"' + inform.tag_code[0] + '"' + ","
-      file += inform.tag_code[4..-1] + ","
-      file += inform.receive_date.strftime("%d/%m/%Y") + ","
-      file += inform.delivery_date.strftime("%d/%m/%Y") + ","
-      file += '"' + inform.patient.lastname1.upcase + '"' + ","
-      file += '"' + inform.patient.lastname2.upcase + '"' + ","
-      file += '"' + inform.patient.name1.upcase + '"' + ","
-      file += '"' + inform.patient.name2.upcase + '"' + ","
-      file += '"' + inform.patient.id_type + '"' + ","
-      file += '"' + inform.patient.id_number + '"' + ","
-      file += '"' + '"' + "," #Historia, se supone que ese campo ya no se usa
-      if inform.p_age_type == nil || inform.p_age_type == ""
-        file += '"",'
-      else
-        if inform.p_age_type == "A"
-          file += '"' + "1" + '",'
-        elsif inform.p_age_type == "M"
-          file += '"' + "2" + '",'
-        elsif inform.p_age_type == "D"
-          file += '"' + "3" + '",'
+      Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
+          
+        informs.each do |inform|
+
+          text_file1 = Tempfile.new("#{file_name}.TXT")
+          descr = ""
+          inform.recipients.each_with_index do |recipient, n|
+            descr += "Contenido de recipiente \##{n + 1}:" + "\r\n" + recipient.description + "\r\n" + "Bloqueado de la siguiente manera:\r\n\r\n"
+            inform.samples.where(recipient_tag: recipient.tag).each do |sample|
+              if sample.name == "Cassette"
+                descr += sample.description
+                descr += ": " if sample.description != ""
+                descr += sample.fragment.to_s + "F-" + get_nomen(sample.sample_tag) + "\r\n"
+              else
+                descr += sample.description + "-" + get_nomen(sample.sample_tag) + "\r\n"
+              end
+            end
+            descr += "\r\n"
+          end
+          text_file1.puts(descr)
+          
+          zipfile.add("#{file_name}.TXT", text_file1.path)
+          text_file1.close
+
+          file_name += 1
+
+          text_file2 = Tempfile.new("#{file_name}.TXT")
+          diagnostic = ""
+          inform.micros.each do |micro|
+            if micro.description.size > 500
+              diagnostic += "\r\n" + "\r\n" + micro.description + "\r\n "
+            else
+              diagnostic += micro.description + " "  
+            end
+          end
+          text_file2.puts(diagnostic)
+          
+          zipfile.add("#{file_name}.TXT", text_file2.path)
+          text_file2.close
+
+          file_name += 1
+
+          file += '"' + inform.tag_code[0] + '"' + ","
+          file += inform.tag_code[4..-1] + ","
+          file += inform.receive_date.strftime("%d/%m/%Y") + ","
+          file += inform.delivery_date.strftime("%d/%m/%Y") + ","
+          file += '"' + inform.patient.lastname1.upcase + '"' + ","
+          file += '"' + inform.patient.lastname2.upcase + '"' + ","
+          file += '"' + inform.patient.name1.upcase + '"' + ","
+          file += '"' + inform.patient.name2.upcase + '"' + ","
+          file += '"' + inform.patient.id_type + '"' + ","
+          file += '"' + inform.patient.id_number + '"' + ","
+          file += '"' + '"' + "," #Historia, se supone que ese campo ya no se usa
+          if inform.p_age_type == nil || inform.p_age_type == ""
+            file += '"",'
+          else
+            if inform.p_age_type == "A"
+              file += '"' + "1" + '",'
+            elsif inform.p_age_type == "M"
+              file += '"' + "2" + '",'
+            elsif inform.p_age_type == "D"
+              file += '"' + "3" + '",'
+            end
+          end
+
+          if inform.p_age == nil || inform.p_age == ""
+            file += '"",'
+          else
+            file += '"' + inform.p_age.to_s + '"' + ","
+          end
+          
+          
+          file += '"' + inform.patient.sex + '"' + ","
+          file += '"' + Entity.where(id: inform.entity_id).first.try(:initials) + '"' + ","
+          file += '"' + Promoter.where(id: inform.promoter_id).first.try(:initials) + '"' + ","
+          file += '"' + Promoter.where(id: inform.promoter_id).first.try(:code) + '"' + ","
+
+          file += '"' + Codeval.where(id: inform.studies.first.codeval_id).first.try(:code) + '"' + ","
+          file += inform.studies.first.factor.to_s + ","
+
+          if inform.studies.second != nil
+            file += '"' + Codeval.where(id: inform.studies.second.codeval_id).first.try(:code)+ '"' + ","
+            file += inform.studies.second.factor.to_s + ","
+          else
+            file += '"",,'
+          end
+          if inform.studies.third != nil
+            file += '"' + Codeval.where(id: inform.studies.third.codeval_id).first.try(:code) + '"' + ","
+            file += inform.studies.third.factor.to_s + ","
+          else
+            file += '"",,'
+          end
+          
+          file += inform.cost.to_s + ","
+          # file += ','#DESCR
+          # file += ','#DIAGNOSTIC
+          file += '"' + inform.diagnostics.first.pss_code + '"' + ","
+
+          if inform.diagnostics.second != nil
+            file += '"' + inform.diagnostics.second.pss_code + '"' + ","
+          else
+            file += '"' + '"' + ","
+          end
+          if inform.diagnostics.third != nil
+            file += '"' + inform.diagnostics.third.pss_code + '"' + ","
+          else
+            file += '"' + '"' + ","
+          end
+          if inform.diagnostics.fourth != nil
+            file += '"' + inform.diagnostics.fourth.pss_code + '"' + ","
+          else
+            file += '"' + '"' + ","
+          end
+          if inform.diagnostics.fifth != nil
+            file += '"' + inform.diagnostics.fifth.pss_code + '"' + ","
+          else
+            file += '"' + '"' + ","
+          end
+          if inform.diagnostics[6] != nil
+            file += '"' + inform.diagnostics[6].pss_code + '"' + ","
+          else
+            file += '"' + '"' + ","
+          end
+          
+          file += '"050011134601"' + ","
+          file += '"' + inform.invoice + '"' + ","
+          file += '"' + inform.prmtr_auth_code + '"' + ","
+          file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime) + '"' + ","
+          file += '"' + '"' + "," #OCUPACIÓN que se deja en blanco
+          file += '"' + inform.p_municipality + '"' + ","
+          file += '"' + inform.zone_type + '"' + ","
+          file += '"' + inform.pregnancy_status + '"' + ","
+          file += '"' + inform.status + '"' + ","
+          file += '"' + inform.p_tel.to_s + "-" + '"' + ","
+          if inform.physicians.first != nil
+            if inform.physicians.first.name != nil
+              file += '"' + inform.physicians.first.name + '"' + ","
+            else
+              file += '"' + '"' + ","
+            end
+            if inform.physicians.first.lastname != nil
+              file += '"' + inform.physicians.first.lastname + '"' + ","
+            else
+              file += '"' + '"' + ","
+            end
+          else
+            file += '"' + '"' + ","
+            file += '"' + '"' + ","
+          end
+          
+          
+          file += '"' + Branch.where(id: inform.branch_id).first.try(:address) + '"' + ","
+          file += '"' + inform.blocks.where(stored: true).first.try(:block_tag).to_s + '"' + ","
+          file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ","
+          file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ","
+          file += '"' + '"' + "," #TIPO que se deja en blanco
+          file += "," #IMPRIMIR que se deja en blanco pero es numérico
+          file += '"' + User.where(id: inform.user_id).first.fullname.upcase + '"' + ","
+          file += inform.created_at.strftime("%d/%m/%Y") + ","
+          # file += "," #FOTO que se deja en blanco pero es general
+          # file += "," #FOTO1 que se deja en blanco pero es general
+          # file += "," #FOTO2 que se deja en blanco pero es general
+          file += "," #Campo ORDEN que NO esta en la documentacion pero EXISTE
+          file += '"' + User.where(id: inform.pathologist_id).first.first_name + User.where(id: inform.pathologist_id).first.last_name + '"' + ","
+          file += "," #RANGO que se deja en blanco pero es numérico
+          file += '"' + inform.diagnostics.first.who_code.to_s + '"' + ","
+          file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","
+          if inform.p_age_type == nil
+            file += '"",'
+          elsif inform.p_age_type == "A"
+            file += '"AÑOS",'
+          elsif inform.p_age_type == "M"
+            file += '"MESES",'
+          elsif inform.p_age_type == "D"
+            file += '"DÍAS",'
+          end
+          file += ',' #COPAGOENTIDAD a partir de aca es 
+          file += ',' #COPAGO
+          file += "\n"
+
+
         end
+        text_file3 = Tempfile.new("foxpro_data.TXT")
+        text_file3.puts(file)
+        
+        zipfile.add("foxpro_data.TXT", text_file3.path)
+        text_file3.close
+        
       end
 
-      if inform.p_age == nil || inform.p_age == ""
-        file += '"",'
-      else
-        file += '"' + inform.p_age.to_s + '"' + ","
-      end
-      
-      
-      file += '"' + inform.patient.sex + '"' + ","
-      file += '"' + Entity.where(id: inform.entity_id).first.try(:initials) + '"' + ","
-      file += '"' + Promoter.where(id: inform.promoter_id).first.try(:initials) + '"' + ","
-      file += '"' + Promoter.where(id: inform.promoter_id).first.try(:code) + '"' + ","
+      zip_data = File.read(temp_file.path)
+      send_data(zip_data, type: 'application/zip', disposition: 'attachment', filename: filename)
+    ensure
+      temp_file.close
+      temp_file.unlink
 
-      file += '"' + Codeval.where(id: inform.studies.first.codeval_id).first.try(:code) + '"' + ","
-      file += inform.studies.first.factor.to_s + ","
-
-      if inform.studies.second != nil
-        file += '"' + Codeval.where(id: inform.studies.second.codeval_id).first.try(:code)+ '"' + ","
-        file += inform.studies.second.factor.to_s + ","
-      else
-        file += '"",,'
-      end
-      if inform.studies.third != nil
-        file += '"' + Codeval.where(id: inform.studies.third.codeval_id).first.try(:code) + '"' + ","
-        file += inform.studies.third.factor.to_s + ","
-      else
-        file += '"",,'
-      end
-      
-      file += inform.cost.to_s + ","
-      # file += ','#DESCR
-      # file += ','#DIAGNOSTIC
-      file += '"' + inform.diagnostics.first.pss_code + '"' + ","
-
-      if inform.diagnostics.second != nil
-        file += '"' + inform.diagnostics.second.pss_code + '"' + ","
-      else
-        file += '"' + '"' + ","
-      end
-      if inform.diagnostics.third != nil
-        file += '"' + inform.diagnostics.third.pss_code + '"' + ","
-      else
-        file += '"' + '"' + ","
-      end
-      if inform.diagnostics.fourth != nil
-        file += '"' + inform.diagnostics.fourth.pss_code + '"' + ","
-      else
-        file += '"' + '"' + ","
-      end
-      if inform.diagnostics.fifth != nil
-        file += '"' + inform.diagnostics.fifth.pss_code + '"' + ","
-      else
-        file += '"' + '"' + ","
-      end
-      if inform.diagnostics[6] != nil
-        file += '"' + inform.diagnostics[6].pss_code + '"' + ","
-      else
-        file += '"' + '"' + ","
-      end
-      
-      file += '"050011134601"' + ","
-      file += '"' + inform.invoice + '"' + ","
-      file += '"' + inform.prmtr_auth_code + '"' + ","
-      file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime) + '"' + ","
-      file += '"' + '"' + "," #OCUPACIÓN que se deja en blanco
-      file += '"' + inform.p_municipality + '"' + ","
-      file += '"' + inform.zone_type + '"' + ","
-      file += '"' + inform.pregnancy_status + '"' + ","
-      file += '"' + inform.status + '"' + ","
-      file += '"' + inform.p_tel.to_s + "-" + '"' + ","
-      if inform.physicians.first != nil
-        if inform.physicians.first.name != nil
-          file += '"' + inform.physicians.first.name + '"' + ","
-        else
-          file += '"' + '"' + ","
-        end
-        if inform.physicians.first.lastname != nil
-          file += '"' + inform.physicians.first.lastname + '"' + ","
-        else
-          file += '"' + '"' + ","
-        end
-      else
-        file += '"' + '"' + ","
-        file += '"' + '"' + ","
-      end
-      
-      
-      file += '"' + Branch.where(id: inform.branch_id).first.try(:address) + '"' + ","
-      file += '"' + inform.blocks.where(stored: true).first.try(:block_tag).to_s + '"' + ","
-      file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ","
-      file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ","
-      file += '"' + '"' + "," #TIPO que se deja en blanco
-      file += "," #IMPRIMIR que se deja en blanco pero es numérico
-      file += '"' + User.where(id: inform.user_id).first.fullname.upcase + '"' + ","
-      file += inform.created_at.strftime("%d/%m/%Y") + ","
-      # file += "," #FOTO que se deja en blanco pero es general
-      # file += "," #FOTO1 que se deja en blanco pero es general
-      # file += "," #FOTO2 que se deja en blanco pero es general
-      file += "," #Campo ORDEN que NO esta en la documentacion pero EXISTE
-      file += '"' + User.where(id: inform.pathologist_id).first.first_name + User.where(id: inform.pathologist_id).first.last_name + '"' + ","
-      file += "," #RANGO que se deja en blanco pero es numérico
-      file += '"' + inform.diagnostics.first.who_code.to_s + '"' + ","
-      file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","
-      if inform.p_age_type == nil
-        file += '"",'
-      elsif inform.p_age_type == "A"
-        file += '"AÑOS",'
-      elsif inform.p_age_type == "M"
-        file += '"MESES",'
-      elsif inform.p_age_type == "D"
-        file += '"DÍAS",'
-      end
-      file += ',' #COPAGOENTIDAD a partir de aca es 
-      file += ',' #COPAGO
-      file += "\n"
     end
-    filename = "foxpro_data" + ".TXT"
-    send_data file[0..-3], filename: filename, type: 'text/html; charset=utf-8'
   end
 
   def descr_micros

@@ -515,6 +515,7 @@ DEPENDENCIES
   rake
   redcarpet
   responders
+  rubyzip
   sass-rails (~> 5.0)
   selenium-webdriver
   sendgrid-ruby

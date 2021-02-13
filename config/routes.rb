@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get :trouble_index
     end
   end
-  
+
   get 'imports/oldrecord_import_index'
   get 'imports/oldcito_import_index'
   get 'imports/import_date_filter'
@@ -26,14 +26,14 @@ Rails.application.routes.draw do
       get :trouble_index
     end
   end
-  
+
   post 'suggestions/review', to: 'suggestions#review'
   post 'suggestions/anotate', to: 'suggestions#anotate'
   resources :suggestions
   resources :citocodes do
     collection {post :import}
   end
-    root to: "static_pages#home"    
+    root to: "static_pages#home"
 
     get 'execute_templates/create'
 
@@ -91,7 +91,7 @@ Rails.application.routes.draw do
     get 'processing_slides/coloring_slides'
     get 'processing_slides/covering_slides'
     get 'processing_slides/tagging_slides'
-    
+
     get 'static_pages/home'
     get 'static_pages/services'
     get 'static_pages/whoweare'
@@ -106,11 +106,15 @@ Rails.application.routes.draw do
     get 'static_pages/news'
     get 'static_pages/welcome_user'
     get 'static_pages/matriculate'
+    get 'static_pages/help_manual'
+    get 'static_pages/help_faq'
+    get 'static_pages/patients_faq'
+    get 'static_pages/patients_help'
 
     get 'reports/index'
     get 'reports/status'
     get 'reports/objections'
-    
+
     get 'reports/sales2'
     post 'reports/invoice'
     get 'reports/reports_params_today'
@@ -178,7 +182,7 @@ Rails.application.routes.draw do
         get :anotate
       end
     end
-    
+
     devise_for :users, path: 'users', controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords", unlocks: "users/unlocks", confirmations: "users/confirmations" }
 
     resources :users, only: [:index, :edit, :update, :show]
@@ -187,14 +191,14 @@ Rails.application.routes.draw do
     devise_for :admins, path: 'admins', controllers: { sessions: "admins/sessions", passwords: "admins/passwords", unlocks: "admins/unlocks", confirmations: "admins/confirmations" }
 
     resources :admins, only: [:index]
-    
+
     devise_for :patients, path: 'patients', controllers: { sessions: "patients/sessions" }
 
     get 'patients/fast_new_form'
     get 'patients/fast_new', to: 'patients#fast_new'
     get 'patients/new_series', to: 'patients#new_series'
     post 'patients/create_series', to: 'patients#create_series'
-    
+
     get 'patients/new_single', to: 'patients#new_single'
     post 'patients/create_new', to: 'patients#create_new'
     resources :patients do
@@ -226,7 +230,7 @@ Rails.application.routes.draw do
       resources :autos
       collection {post :import}
     end
-    
+
     resources :promoters do
       collection {post :import}
     end
@@ -243,7 +247,7 @@ Rails.application.routes.draw do
       resources :branches
     end
 
-    
+
     get 'informs/distribution', to: 'informs#distribution', as: 'distribution'
     get 'informs/distribution_cyto', to: 'informs#distribution_cyto', as: 'distribution_cyto'
     get 'informs/index_ready', to: 'informs#index_ready', as: 'informs_index_ready'
@@ -263,7 +267,7 @@ Rails.application.routes.draw do
       resources :diagnostics
       resources :cytologies
       resources :suggestions
-      
+
       resources :pictures, module: :informs
 
       collection do
@@ -297,7 +301,7 @@ Rails.application.routes.draw do
       end
     end
 
-    
+
 
     resources :recipients do
       resources :objections, module: :recipients
@@ -350,7 +354,7 @@ Rails.application.routes.draw do
     post 'diagnostics/review', to: 'diagnostics#review'
     post 'diagnostics/anotate', to: 'diagnostics#anotate'
     post 'diagnostics/destroy_diagnostic', to: 'diagnostics#destroy_diagnostic'
-    
+
     resources :diagnostics do
       resources :objections, module: :diagnostics
     end
@@ -363,7 +367,7 @@ Rails.application.routes.draw do
       resources :scripts
     end
 
-    
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -28,11 +28,23 @@
           <li class="nav-item <%= 'active' if @tab == :series %>">
             <%= link_to "Matricular varios", patients_path, class: "nav-link" %>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ayuda
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Preguntas frecuentes", static_pages_patients_faq_path, class: "dropdown-item" %>
+              <%= link_to "Creando un paciente", static_pages_patients_help_path, class: "dropdown-item" %>
+
+              <div class="dropdown-divider"></div>
+
+            </div>
+          </li>
         <% end %>
       </ul>
       <% if user_signed_in? %>
         <ul class="navbar-nav d-flex justify-content-end">
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Usuario: <%= current_user.initials %>

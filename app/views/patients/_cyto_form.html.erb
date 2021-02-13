@@ -1,0 +1,41 @@
+<%= form_builder.fields_for :cytologies do |cyto_form| %>
+  <h5>Citología</h5>
+  <div class="row">
+    <div class="col-12 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <%= cyto_form.label "Fecha toma muestra:" %>
+        <%= cyto_form.date_field :sample_date, class: "form-control input" %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <%= cyto_form.label "Última menstruación:" %>
+        <%= cyto_form.text_field :last_mens, class: "form-control input" %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <%= cyto_form.label "Citología anterior:" %>
+        <%= cyto_form.text_field :prev_appo, class: "form-control input" %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <%= cyto_form.label "Último resultado:" %>
+        <%= cyto_form.select(:last_result, options_for_select([['ASC-US', 'ASC-US'], ['ASC-H', 'ASC-H'], ['AGC-NOS', 'AGC-NOS'], ['AGC-NEO', 'AGC-NEO'], ['LEI-BG', 'LEI-BG'], ['LEI-AG', 'LEI-AG'], ['CARCINOMA', 'CARCINOMA'], ['ADENOCARCINOMA', 'ADENOCARCINOMA'], ['NEGATIVA', 'NEGATIVA'], ['INSATISFACTORIA', 'INSATISFACTORIA'], ['NO SABE', 'NO SABE']], nil), { include_blank: true }, class: "form-control input") %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <%= cyto_form.label "Embarazos:" %>
+        <%= cyto_form.number_field :pregnancies, class: "form-control input" %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <%= cyto_form.label "Método de planificación:" %>
+        <%= cyto_form.select(:birth_control, options_for_select([['DIU', '0'], ['Implante', '2'], ['Pastillas', '4'], ['Inyección', '6'], ['Esterilización', '12'], ['Barrera', '14'], ['No planifica', '20'], ['Basectomía', '22'], ['No reporta', '24']], nil), { include_blank: true }, class: "form-control input") %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -29,7 +29,7 @@
               Reportes
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              
+
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -59,7 +59,7 @@
               <div class="dropdown-divider"></div>
               <%= link_to "Tarifas", rates_path, class: "dropdown-item" %>
               <%= link_to "Nueva Tarifa", new_rate_path, class: "dropdown-item" %>
-              
+
               <div class="dropdown-divider"></div>
               <%= link_to "Listado de No Conformidades", obcodes_path, class: "dropdown-item" %>
               <%= link_to "Nueva No Conformidad", new_obcode_path, class: "dropdown-item" %>
@@ -156,7 +156,7 @@
               <%= link_to "Esta semana", informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <%= link_to "Este mes", informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <%= link_to "Desde el mes pasado", informs_path + "?init_date=" + 1.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              
+
             </div>
           </li>
           <li class="nav-item">
@@ -185,7 +185,7 @@
           <li class="nav-item">
             <%= link_to "Reportes", "reports/index", class: "nav-link" %>
           </li>
-         
+
           <!-- <li class="nav-item mr-2 mt-1">
             <%= link_to "Autos.", automatics_path, class: "btn btn-primary btn-sm btn-block my-2 my-lg-0" %>
           </li> -->
@@ -220,11 +220,23 @@
               <%= link_to "Citos importadas con problemas", trouble_index_oldcitos_path + "?init_date=2020-07-01&final_date=2020-07-31", class: "dropdown-item" %>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :admins %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ayuda
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Preguntas frecuentes", static_pages_help_faq_path, class: "dropdown-item" %>
+              <%= link_to "Creando un informe de patología", static_pages_help_manual_path, class: "dropdown-item" %>
+
+              <div class="dropdown-divider"></div>
+
+            </div>
+          </li>
         <% end %>
       </ul>
       <% if user_signed_in? %>
         <ul class="navbar-nav d-flex justify-content-end">
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Usuario: <%= current_user.initials %>
@@ -235,9 +247,9 @@
           </li>
         </ul>
       <% end %>
-      
-      
-      
+
+
+
       <% unless user_signed_in? || admin_signed_in? %>
         <ul class="navbar-nav d-flex justify-content-end">
           <li class="nav-item active">

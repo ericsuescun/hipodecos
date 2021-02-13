@@ -33,18 +33,40 @@ class StaticPagesController < ApplicationController
   end
 
   def science
-    
+
   end
 
   def news
-    
+
   end
 
   def welcome_user
   end
 
   def matriculate
-    
   end
+
+  def help_manual
+  end
+
+  def help_faq
+  end
+
+  def patients_help
+  end
+
+  def patients_faq
+  end
+
+  def inform_help
+  end
+
+  def production_help
+  end
+
+  def reports_help
+  end
+
+
 
 end

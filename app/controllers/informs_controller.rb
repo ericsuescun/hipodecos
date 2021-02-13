@@ -1051,7 +1051,12 @@ class InformsController < ApplicationController
     if @inform.inf_type != 'cito'
       @pathologists = []
 
-      @pathologists << User.find(@inform.pathologist_id)
+      if @inform.pathologist_id != nil
+        @pathologists << User.find(@inform.pathologist_id)
+      else
+        @pathologists = []
+      end
+
 
       @micro_text = ""
       @inform.micros.each do |micro|

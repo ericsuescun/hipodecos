@@ -15,14 +15,14 @@
         <div class="col-4 col-lg-4">
         </div>
         <div class="col-4 col-lg-4">
-          <%= image_tag "datos.JPG", class: "img-fluid" %>
+          <%= image_tag "datos.JPG", class: "img-fluid no_print" %>
         </div>
       </div>
-      
+
       <h3 class="preview-center">Informe <strong><%= @inform.tag_code %></strong>, <%= @inform.delivery_date == nil ? "-en progreso-" : "#{@inform.delivery_date.strftime("%d/%m/%Y")}" %></h3>
       <h3 class="preview-center"><strong><%= @inform.patient.fullname %></strong>, <%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %>, <%= @inform.patient.id_type %>: <%= @inform.patient.id_number %></h3>
       <p class="preview-center"><strong>Teléfono:</strong> <%= @inform.p_tel %>, <strong>Celular:</strong> <%= @inform.p_cel %>, <strong>Email:</strong> <%= @inform.p_email %></p>
-      
+
 
       <p class="preview-center">Recibido el <%= @inform.receive_date.strftime('%d/%m/%Y') %>, <strong>EPS: </strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>, <strong>IPS: </strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %>, <strong>Dirección:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:name) %></p>
 
@@ -43,11 +43,11 @@
         <% end %>
       </p>
       <p class="preview-center"><strong>Dirección de entrega: </strong><%= @inform.p_address %>, <strong>Código de autorización: </strong><%= @inform.prmtr_auth_code %></p>
-      
+
       <br>
 
       <% if @inform.inf_type != 'cito' %>
-        
+
 
         <div class="row">
           <div class="col-4 col-lg-4">
@@ -61,9 +61,9 @@
               <div class="preview">
                 <br>
                 <div>
-                  
+
                     Contenido de recipiente #<%= n + 1 %>:
-                  
+
                 </div>
                 <div class="preview"><%= recipient.description %></div>
               </div>
@@ -91,8 +91,8 @@
         <h4 class="preview-center">CITOLOGÍA CERVICO-UTERINA</h4>
         <h5 class="preview-center">(INFORME TIPO BETHESDA 2001)</h5>
       <% end %>
-      
-      
+
+
 
 
       <% if @inform.inf_type != 'cito' %>
@@ -104,9 +104,9 @@
         <div class="preview">
           <%= simple_format(@micro_text) %>
         </div>
-        
+
         <!-- <%= text_area_tag :micro, @micro_text, size: "95x60" %> -->
-        
+
       <% else %>
         <div class="row">
           <div class="col-12 col-lg-12">
@@ -122,7 +122,7 @@
         </div>
       <% end %>
 
-      
+
       <% if @inform.inf_type != 'cito' %>
         <% @inform.micros.each_with_index do |micro, n| %>
           <div class="row">
@@ -162,7 +162,7 @@
         <% end %>
       <% end %>
 
-      
+
 
       <div class="row diagnostic">
         <div class="col-12 col-lg-12">
@@ -173,14 +173,14 @@
               <% else %>
                 <strong>INTERPRETACIÓN Y RESULTADO</strong>
               <% end %>
-              
+
             </div>
             <div class="card-body">
               <% if @inform.inf_type != 'cito' %>
                 <div class="d-flex flex-row">
                   <h5 class="card-title mr-2"><strong><%= simple_format(@diagnostic_text) %></strong></h5>
                 </div>
-                
+
                 <div class="row d-flex flex-row">
                   <% @pathologists.each do |pathologist| %>
                     <div class="col-4 col-lg-4 mt-3">
@@ -227,7 +227,7 @@
                     <strong>Código:</strong> <%= diagnostic.pss_code %> <strong>DX:</strong> <%= diagnostic.who_code %>
                   <% end %>
                   <% if @inform.blocks.where(stored: true) != [] %>
-                    Se guarda 
+                    Se guarda
                     <% @inform.blocks.where(stored: true).each do |stored_block| %>
                       <strong><%= stored_block.block_tag %> </strong>
                     <% end %>
@@ -237,9 +237,9 @@
                     <% diagnostic = @inform.diagnostics.last %>
                     <strong>Código:</strong> <%= diagnostic.pss_code %>
                   <% end %>
-                  
+
                 <% end %>
-                
+
               </div>
               <div>
                 <strong>Secretaria:</strong> <%= User.where(id: @inform.user_id).first.try(:fullname) %>

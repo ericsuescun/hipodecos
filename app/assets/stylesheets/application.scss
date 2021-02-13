@@ -377,7 +377,7 @@ h2.edit-user {
 	color: red;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -390,7 +390,7 @@ h2.edit-user {
 	color: black;
 	border-radius: 3px;
 	border-style: solid;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -402,7 +402,7 @@ h2.edit-user {
 	color: slateblue;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -414,7 +414,7 @@ h2.edit-user {
 	color: brown;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -426,7 +426,7 @@ h2.edit-user {
 	color: orange;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -438,7 +438,7 @@ h2.edit-user {
 	color: tomato;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -450,7 +450,7 @@ h2.edit-user {
 	color: blue;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -462,7 +462,7 @@ h2.edit-user {
 	color: purple;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -474,7 +474,7 @@ h2.edit-user {
 	color: dodgerblue;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -486,7 +486,7 @@ h2.edit-user {
 	color: green;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -498,7 +498,7 @@ h2.edit-user {
 	color: rgba(100,100,100,1);
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -510,7 +510,7 @@ h2.edit-user {
 	color: grey;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -522,7 +522,7 @@ h2.edit-user {
 	color: tomato;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -534,7 +534,7 @@ h2.edit-user {
 	color: black;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -546,7 +546,7 @@ h2.edit-user {
 	color: white;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -558,7 +558,7 @@ h2.edit-user {
 	color: purple;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -570,7 +570,7 @@ h2.edit-user {
 	color: mediumseagreen;
 	border-radius: 3px;
 	border-style: hidden;
-	
+
 	&:hover, &:focus {
 		color: black;
 		text-decoration: none;
@@ -670,6 +670,10 @@ strong {
 
 @media print {
 	header, footer, aside, form, nav, a, … {
+		display: none;
+	}
+
+	.no_print {
 		display: none;
 	}
 

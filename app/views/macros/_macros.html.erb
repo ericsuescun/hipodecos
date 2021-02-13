@@ -6,6 +6,7 @@
     <div class="card-body py-0">
         <% @inform.recipients.each_with_index do |recipient, n| %>
           <br>
+          <br>
           Contenido de recipiente #<%= n + 1 %>:
           <%= simple_format(recipient.description) %>
           Bloqueado de la siguiente manera:

@@ -191,7 +191,7 @@ class InformsController < ApplicationController
       Zip::OutputStream.open(temp_file) { |zos| }
 
       Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
-          
+
         informs.each do |inform|
 
           text_file1 = Tempfile.new("#{file_name}.TXT")
@@ -210,7 +210,7 @@ class InformsController < ApplicationController
             descr += "\r\n"
           end
           text_file1.puts(descr)
-          
+
           zipfile.add("#{file_name}.TXT", text_file1.path)
           text_file1.close
 
@@ -222,11 +222,11 @@ class InformsController < ApplicationController
             if micro.description.size > 500
               diagnostic += "\r\n" + "\r\n" + micro.description + "\r\n "
             else
-              diagnostic += micro.description + " "  
+              diagnostic += micro.description + " "
             end
           end
           text_file2.puts(diagnostic)
-          
+
           zipfile.add("#{file_name}.TXT", text_file2.path)
           text_file2.close
 
@@ -260,8 +260,8 @@ class InformsController < ApplicationController
           else
             file += '"' + inform.p_age.to_s + '"' + ","
           end
-          
-          
+
+
           file += '"' + inform.patient.sex + '"' + ","
           file += '"' + Entity.where(id: inform.entity_id).first.try(:initials) + '"' + ","
           file += '"' + Promoter.where(id: inform.promoter_id).first.try(:initials) + '"' + ","
@@ -282,7 +282,7 @@ class InformsController < ApplicationController
           else
             file += '"",,'
           end
-          
+
           file += inform.cost.to_s + ","
           # file += ','#DESCR
           # file += ','#DIAGNOSTIC
@@ -313,7 +313,7 @@ class InformsController < ApplicationController
           else
             file += '"' + '"' + ","
           end
-          
+
           file += '"050011134601"' + ","
           file += '"' + inform.invoice + '"' + ","
           file += '"' + inform.prmtr_auth_code + '"' + ","
@@ -339,8 +339,8 @@ class InformsController < ApplicationController
             file += '"' + '"' + ","
             file += '"' + '"' + ","
           end
-          
-          
+
+
           file += '"' + Branch.where(id: inform.branch_id).first.try(:address) + '"' + ","
           file += '"' + inform.blocks.where(stored: true).first.try(:block_tag).to_s + '"' + ","
           file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ","
@@ -366,7 +366,7 @@ class InformsController < ApplicationController
           elsif inform.p_age_type == "D"
             file += '"DÍAS",'
           end
-          file += ',' #COPAGOENTIDAD a partir de aca es 
+          file += ',' #COPAGOENTIDAD a partir de aca es
           file += ',' #COPAGO
           file += "\n"
 
@@ -374,10 +374,10 @@ class InformsController < ApplicationController
         end
         text_file3 = Tempfile.new("foxpro_data.TXT")
         text_file3.puts(file)
-        
+
         zipfile.add("foxpro_data.TXT", text_file3.path)
         text_file3.close
-        
+
       end
 
       zip_data = File.read(temp_file.path)
@@ -415,7 +415,7 @@ class InformsController < ApplicationController
     else
       @informs = Inform.where(user_review_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
     end
-    
+
   end
 
   def role_admin_allowed?
@@ -470,7 +470,7 @@ class InformsController < ApplicationController
           @automatics << auto
         end
       end
-    end   
+    end
 
     # @samples = @inform.samples
 
@@ -480,7 +480,7 @@ class InformsController < ApplicationController
   end
 
   def edit_micro
-    
+
   end
 
   def set_revision
@@ -562,7 +562,7 @@ class InformsController < ApplicationController
 
 
 
-    
+
     # @informs_unassigned.each_with_index do |inform, n|
     #   if n <=50
     #     @informs_first_batch << inform
@@ -631,7 +631,7 @@ class InformsController < ApplicationController
               else
                 @negative_cytos << inform
               end
-              
+
             end
           end
         end
@@ -667,7 +667,7 @@ class InformsController < ApplicationController
       @informs2_rest = []
     end
 
-    
+
     pathologist_role_id = Role.where(name: "Patologia").first.id
     @users = User.where(role_id: pathologist_role_id)
 
@@ -720,7 +720,7 @@ class InformsController < ApplicationController
         @informs_rest = []
       end
     end
-    
+
     cytologist_role_id = Role.where(name: "Citologia").first.id
     @users = User.where(role_id: cytologist_role_id)
 
@@ -737,7 +737,7 @@ class InformsController < ApplicationController
     #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
     #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
     #   date_range = initial_date..final_date
-      
+
     #   redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
     # else
     #   redirect_to distribution_path
@@ -763,7 +763,7 @@ class InformsController < ApplicationController
     #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
     #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
     #   date_range = initial_date..final_date
-      
+
     #   redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
     # else
     #   redirect_to distribution_cyto_path
@@ -880,7 +880,7 @@ class InformsController < ApplicationController
       Automatic.where(auto_type: "micro", organ: sample.organ_code).each do |auto|
         @automatics << auto
       end
-    end 
+    end
   end
 
   # GET /informs/new
@@ -908,15 +908,15 @@ class InformsController < ApplicationController
     inform.patient_id = params[:inform][:patient_id]
     # inform = @patient.informs.build(inform_params)
     inform.user_id = current_user.id
-  
+
 
     entity = Branch.where(id: inform.branch_id).first.entity
     if entity == nil
       inform.entity_id = nil
     else
       inform.entity_id = entity.id
-    end  
-    
+    end
+
     inform.regime = Promoter.where(id: inform.promoter_id).first.try(:regime)
 
     date_range = Time.zone.now.to_date.beginning_of_year..Time.zone.now.to_date.end_of_year
@@ -960,7 +960,7 @@ class InformsController < ApplicationController
       branch = Branch.find(inform.branch_id)
       entity = branch.entity
       cost = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
-      
+
       price =  Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.price
       margin =  price - cost
 
@@ -1008,7 +1008,7 @@ class InformsController < ApplicationController
     else
       redirect_to @inform, notice: 'Informe exitosamente actualizado.'
     end
-    
+
   end
 
   # DELETE /informs/1
@@ -1042,7 +1042,7 @@ class InformsController < ApplicationController
         )
     end
     objection.save
-    
+
     redirect_to informs_url, notice: 'Informe exitosamente anulado.'
   end
 
@@ -1051,7 +1051,7 @@ class InformsController < ApplicationController
     if @inform.inf_type != 'cito'
       @pathologists = []
 
-      @pathologists << User.find(id: @inform.pathologist_id)
+      @pathologists << User.find(@inform.pathologist_id)
 
       @micro_text = ""
       @inform.micros.each do |micro|
@@ -1061,9 +1061,9 @@ class InformsController < ApplicationController
         if micro.description.size > 500
           @micro_text = @micro_text + "\n" + "\n" + micro.description + "\n "
         else
-          @micro_text = @micro_text + micro.description + " "  
+          @micro_text = @micro_text + micro.description + " "
         end
-        
+
       end
 
       @diagnostic_text = ""
@@ -1075,7 +1075,7 @@ class InformsController < ApplicationController
       end
 
       @pathologists = @pathologists.uniq
-      
+
     else
       @pathologists = []
 
@@ -1090,7 +1090,7 @@ class InformsController < ApplicationController
         end
       end
       @pathologists = @pathologists.uniq
-      
+
       @cytologist = User.where(id: @inform.cytologist).first
 
       if @inform.cytologies != []
@@ -1121,7 +1121,7 @@ class InformsController < ApplicationController
           end
         end
       }
-      
+
       return inform.tag_code + '-R' + next_number.to_s
     end
 
@@ -1150,10 +1150,10 @@ class InformsController < ApplicationController
           end
         end
       }
-      
+
       return inform.tag_code + '-' + next_letter
     end
-    
+
     def clasify_templates
 
     end

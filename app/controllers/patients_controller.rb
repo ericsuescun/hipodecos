@@ -134,7 +134,7 @@ class PatientsController < ApplicationController
     @municipalities.each do |municipality|
       municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
     end
-    
+
     @promoters = Promoter.where(enabled: true)
     @promoters.each do |promoter|
       promoter.initials = promoter.regime[0] + "-" + promoter.initials
@@ -181,8 +181,8 @@ class PatientsController < ApplicationController
     else
       redirect_to patients_new_single_path
     end
-    
-    
+
+
   end
 
   def new_series
@@ -206,9 +206,9 @@ class PatientsController < ApplicationController
       else
         redirect_to patient_path(patients.first)
       end
-      
+
     else
-      
+
       if params[:inf_type] == "cito"
         @patient = Patient.new(id_number: params[:id_number], sex: "F")
         @inform = @patient.informs.build
@@ -305,7 +305,7 @@ class PatientsController < ApplicationController
         branch = Branch.find(inform.branch_id)
         entity = branch.entity
         cost = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
-        
+
         price =  Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.price
         margin =  price - cost
 
@@ -330,9 +330,9 @@ class PatientsController < ApplicationController
         #Se crea el slide
         inform.slides.create(slide_tag: @sample.sample_tag, user_id: current_user.id) #Se crea un slide con el mismo tag de la sample
         @sample.update(slide_tag: @sample.sample_tag)  #Se guarda el tag creado en la sample para que queden asociados
-        inform.update(inf_status: "placado")
-      else
-        inform.update(inf_status: "matriculado")
+        # inform.update(inf_status: "placado")
+      # else
+        # inform.update(inf_status: "matriculado")
       end
       redirect_to inform_path(@patient.informs.first), notice: 'Paciente matriculado exitosamente.'
     else
@@ -401,7 +401,7 @@ class PatientsController < ApplicationController
         branch = Branch.find(inform.branch_id)
         entity = branch.entity
         cost = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
-        
+
         price =  Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.price
         margin =  price - cost
 
@@ -437,7 +437,7 @@ class PatientsController < ApplicationController
   end
 
   def update
-    
+
     log = "\nCAMBIOS:\n"
 
     if @patient.id_number != params[:patient][:id_number]
@@ -517,8 +517,8 @@ class PatientsController < ApplicationController
       else
         redirect_to patient_path(@patient, inf_type: params[:patient][:inf_type]), notice: 'Paciente exitosamente editado.'
       end
-      
-      
+
+
     else
       render :edit
     end
@@ -547,7 +547,7 @@ class PatientsController < ApplicationController
           end
         end
       }
-      
+
       return inform.tag_code + '-R' + next_number.to_s
     end
 
@@ -576,7 +576,7 @@ class PatientsController < ApplicationController
           end
         end
       }
-      
+
       return inform.tag_code + '-' + next_letter
     end
     # Use callbacks to share common setup or constraints between actions.

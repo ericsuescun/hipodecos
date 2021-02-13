@@ -20,7 +20,7 @@ module Hipodecos
     config.time_zone = 'Bogota'
     config.active_record.default_timezone = :local
 
-    # config.middleware.use PDFKit::Middleware, :print_media_type => true
+    config.middleware.use PDFKit::Middleware, :print_media_type => true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

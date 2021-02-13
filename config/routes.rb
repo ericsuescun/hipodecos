@@ -106,8 +106,10 @@ Rails.application.routes.draw do
     get 'static_pages/news'
     get 'static_pages/welcome_user'
     get 'static_pages/matriculate'
+
     get 'static_pages/help_manual'
     get 'static_pages/help_faq'
+
     get 'static_pages/patients_faq'
     get 'static_pages/patients_help'
 

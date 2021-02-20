@@ -336,7 +336,7 @@ class PatientsController < ApplicationController
       end
       redirect_to inform_path(@patient.informs.first), notice: 'Paciente matriculado exitosamente.'
     else
-      render :fast_new
+      redirect_to patients_new_series_path + "?inf_type=" + params[:inf_type] + "&id_number=" + params[:id_number]
     end
   end
 
@@ -432,7 +432,7 @@ class PatientsController < ApplicationController
       end
       redirect_to patients_path + "?inf_type=" + params[:patient][:informs_attributes][:"0"][:inf_type], notice: 'Paciente matriculado exitosamente.'
     else
-      render :fast_new
+      redirect_to patients_new_series_path + "?inf_type=" + params[:inf_type] + "&id_number=" + params[:id_number]
     end
   end
 
@@ -441,13 +441,13 @@ class PatientsController < ApplicationController
     log = "\nCAMBIOS:\n"
 
     if @patient.id_number != params[:patient][:id_number]
-      log += "IDENTIFICACION: ANTES:" + @patient.id_number + " DESPUÉS: " + params[:patient][:id_number] + "\n"
+      log += "IDENTIFICACION: ANTES:" + @patient.id_number + " DESPUÉS: " + params[:patient][:id_number].to_s + "\n"
     else
       log += "IDENTIFICACION: SIN CAMBIOS." + "\n"
     end
 
     if @patient.id_type != params[:patient][:id_type]
-      log += "TIPO DE IDENTIFICACION: ANTES:" + @patient.id_type + " DESPUÉS: " + params[:patient][:id_type] + "\n"
+      log += "TIPO DE IDENTIFICACION: ANTES:" + @patient.id_type + " DESPUÉS: " + params[:patient][:id_type].to_s + "\n"
     else
       log += "TIPO DE IDENTIFICACION: SIN CAMBIOS." + "\n"
     end
@@ -459,37 +459,37 @@ class PatientsController < ApplicationController
     end
 
     if @patient.name1 != params[:patient][:name1]
-      log += "PRIMER NOMBRE: ANTES:" + @patient.name1 + " DESPUÉS: " + params[:patient][:name1] + "\n"
+      log += "PRIMER NOMBRE: ANTES:" + @patient.name1 + " DESPUÉS: " + params[:patient][:name1].to_s + "\n"
     else
       log += "PRIMER NOMBRE: nSIN CAMBIOS." + "\n"
     end
 
     if @patient.name2 != params[:patient][:name2]
-      log += "SEGUNDO NOMBRE: ANTES:" + @patient.name2 + " DESPUÉS: " + params[:patient][:name2] + "\n"
+      log += "SEGUNDO NOMBRE: ANTES:" + @patient.name2 + " DESPUÉS: " + params[:patient][:name2].to_s + "\n"
     else
       log += "SEGUNDO NOMBRE: SIN CAMBIOS." + "\n"
     end
 
     if @patient.lastname1 != params[:patient][:lastname1]
-      log += "PRIMER APELLIDO: ANTES:" + @patient.lastname1 + " DESPUÉS: " + params[:patient][:lastname1] + "\n"
+      log += "PRIMER APELLIDO: ANTES:" + @patient.lastname1 + " DESPUÉS: " + params[:patient][:lastname1].to_s + "\n"
     else
       log += "PRIMER APELLIDO: SIN CAMBIOS." + "\n"
     end
 
     if @patient.lastname2 != params[:patient][:lastname2]
-      log += "SEGUNDO APELLIDO: ANTES:" + @patient.lastname2 + " DESPUÉS: " + params[:patient][:lastname2] + "\n"
+      log += "SEGUNDO APELLIDO: ANTES:" + @patient.lastname2 + " DESPUÉS: " + params[:patient][:lastname2].to_s + "\n"
     else
       log += "SEGUNDO APELLIDO:SIN CAMBIOS." + "\n"
     end
 
     if @patient.sex != params[:patient][:sex]
-      log += "SEXO: ANTES:" + @patient.sex + " DESPUÉS: " + params[:patient][:sex] + "\n"
+      log += "SEXO: ANTES:" + @patient.sex + " DESPUÉS: " + params[:patient][:sex].to_s + "\n"
     else
       log += "SEXO: SIN CAMBIOS." + "\n"
     end
 
     if @patient.gender != params[:patient][:gender]
-      log += "GÉNERO: ANTES:" + @patient.gender + " DESPUÉS: " + params[:patient][:gender] + "\n"
+      log += "GÉNERO: ANTES:" + @patient.gender + " DESPUÉS: " + params[:patient][:gender].to_s + "\n"
     else
       log += "GÉNERO: SIN CAMBIOS." + "\n"
     end

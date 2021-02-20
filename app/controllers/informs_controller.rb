@@ -985,10 +985,6 @@ class InformsController < ApplicationController
       #Se crea el slide
       inform.slides.create(slide_tag: @sample.sample_tag, user_id: current_user.id) #Se crea un slide con el mismo tag de la sample
       @sample.update(slide_tag: @sample.sample_tag)  #Se guarda el tag creado en la sample para que queden asociados
-
-      inform.update(inf_status: "placado")
-    else
-      inform.update(inf_status: "matriculado")
     end
       # redirect_to inform, notice: 'Informe exitosamente creado.'
     redirect_to patients_path + "?inf_type=" + params[:inform][:inf_type]

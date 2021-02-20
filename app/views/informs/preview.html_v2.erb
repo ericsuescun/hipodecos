@@ -18,7 +18,7 @@
           <strong>Informe número</strong> <%= @inform.tag_code %>
         </div>
       </div>
-      
+
       <div class="row">
         <div class="col-12 col-lg-6">
           <strong>Paciente:</strong> <%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %>
@@ -27,7 +27,7 @@
           <strong>F. recibo:</strong> <%= @inform.receive_date.strftime('%d/%m/%Y') %>
         </div>
       </div>
-      
+
       <div class="row">
         <div class="col-12 col-lg-3">
           <strong><%= @inform.patient.id_type %>:</strong> <%= @inform.patient.id_number %>

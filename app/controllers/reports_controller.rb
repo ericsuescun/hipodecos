@@ -114,7 +114,7 @@ class ReportsController < ApplicationController
         @total_entities << [ entity.id, @price ]
         @total_accumulated += @price
       end
-      
+
 
     else
       initial_date = Date.today.beginning_of_month
@@ -138,7 +138,7 @@ class ReportsController < ApplicationController
         @total_entities << [ entity.id, @price ]
       end
     end
-    
+
   end
 
   def show_billing
@@ -192,7 +192,7 @@ class ReportsController < ApplicationController
         value: params[:value].to_f,
         user_id: current_user.id
       )
-    
+
     redirect_to show_sale_report_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date] + "&inf_type=" + params[:inf_type]
   end
 
@@ -393,7 +393,7 @@ class ReportsController < ApplicationController
       end
     end
     filename = "AP" + 1.month.ago.strftime("%m%Y") + ".TXT"
-    send_data @total_detail[0..-3], filename: filename, type: 'text/html; charset=utf-8'
+    send_data @total_detail[0..-4], filename: filename, type: 'text/html; charset=utf-8'
 
   end
 
@@ -440,7 +440,7 @@ class ReportsController < ApplicationController
       @inform_studies = []
       @partial = 0
       Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).each do |inform|
-        
+
         @inform_partial = 0
         @invoice = inform.invoice   #Queda con el valor de la última factura leída
 
@@ -452,7 +452,7 @@ class ReportsController < ApplicationController
           study.factor.times do
             @inform_studies << study
           end
-          
+
         end
         @total_detail << [ @entity.name, branch.name, inform, @inform_studies, 0, 0, @inform_partial, @price ]
       end
@@ -501,7 +501,7 @@ class ReportsController < ApplicationController
       filename = "enc_#{params[:inf_type]}_" + @invoice + ".TXT"
       send_data file, filename: filename, type: 'text/html; charset=utf-8'
     end
-    
+
   end
 
 

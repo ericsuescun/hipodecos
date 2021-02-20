@@ -368,12 +368,12 @@ class InformsController < ApplicationController
           end
           file += ',' #COPAGOENTIDAD a partir de aca es
           file += ',' #COPAGO
-          file += "\n"
+          file += "\r\n"
 
 
         end
         text_file3 = Tempfile.new("foxpro_data.TXT")
-        text_file3.puts(file)
+        text_file3.puts(file[0..-3])
 
         zipfile.add("foxpro_data.TXT", text_file3.path)
         text_file3.close

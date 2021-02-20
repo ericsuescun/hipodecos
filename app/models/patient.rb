@@ -11,12 +11,12 @@ class Patient < ApplicationRecord
 	def will_save_change_to_email?
 	  false
 	end
-	
+
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 	devise :database_authenticatable, :timeoutable,
 	     :rememberable, :authentication_keys => [:id_number]
-         
+
 	has_many :informs, dependent: :destroy
 
 	# has_many :informs
@@ -24,7 +24,7 @@ class Patient < ApplicationRecord
 	has_many :diganostics, through: :informs
 
 	has_many :objections, as: :objectionable, dependent: :destroy
-	
+
 	# accepts_nested_attributes_for :informs, allow_destroy: true
 	accepts_nested_attributes_for :informs
 
@@ -35,10 +35,10 @@ class Patient < ApplicationRecord
 
 	validates :id_number, uniqueness: true
 
-	before_save { self.name1.upcase! }
-	before_save { self.name2.upcase! }
-	before_save { self.lastname1.upcase! }
-	before_save { self.lastname2.upcase! }
+	before_save { self.name1.to_s.upcase! }
+	before_save { self.name2.to_s.upcase! }
+	before_save { self.lastname1.to_s.upcase! }
+	before_save { self.lastname2.to_s.upcase! }
 
 	def fullname
 	  [name1, name2, lastname1, lastname2].join(' ')
@@ -47,5 +47,5 @@ class Patient < ApplicationRecord
 	def halfname
 	  [name1, lastname1].join(' ')
 	end
-		
+
 end

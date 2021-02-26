@@ -183,18 +183,15 @@ class InformsController < ApplicationController
       date_range = initial_date..final_date
     end
     informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range).or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range))
+
     file = ""
     file_name = 1
-    filename = "campos_memo.zip"
-    temp_file = Tempfile.new(filename)
+    filename = "exp_fox_" + params[:inf_type] + "_" + params[:init_date] + "_a_" + params[:final_date] + ".zip"
     begin
-      Zip::OutputStream.open(temp_file) { |zos| }
+      Zip::File.open("temp_file.zip", Zip::File::CREATE) do |zipfile|
 
-      Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
+        informs.each_with_index do |inform, idx|
 
-        informs.each do |inform|
-
-          text_file1 = Tempfile.new("#{file_name}.TXT")
           descr = ""
           inform.recipients.each_with_index do |recipient, n|
             descr += "Contenido de recipiente \##{n + 1}:" + "\r\n" + recipient.description + "\r\n" + "Bloqueado de la siguiente manera:\r\n\r\n"
@@ -209,28 +206,28 @@ class InformsController < ApplicationController
             end
             descr += "\r\n"
           end
-          text_file1.puts(descr)
-
-          zipfile.add("#{file_name}.TXT", text_file1.path)
-          text_file1.close
-
-          file_name += 1
-
-          text_file2 = Tempfile.new("#{file_name}.TXT")
-          diagnostic = ""
+          descr += "DESCRIPCIÓN MICROSCÓPICA\r\n\r\n"
           inform.micros.each do |micro|
             if micro.description.size > 500
-              diagnostic += "\r\n" + "\r\n" + micro.description + "\r\n "
+              descr += "\r\n" + "\r\n" + micro.description + "\r\n "
             else
-              diagnostic += micro.description + " "
+              descr += micro.description + " "
             end
           end
-          text_file2.puts(diagnostic)
 
-          zipfile.add("#{file_name}.TXT", text_file2.path)
-          text_file2.close
+          zipfile.get_output_stream("#{file_name}.TXT") { |f| f.puts(descr) }
 
           file_name += 1
+
+          diag = ""
+          inform.diagnostics.each do |diagnostic|
+            diag += diagnostic.description + " "
+          end
+
+          zipfile.get_output_stream("#{file_name}.TXT") { |f| f.puts(diag) }
+
+          file_name += 1
+
 
           file += '"' + inform.tag_code[0] + '"' + ","
           file += inform.tag_code[4..-1] + ","
@@ -369,23 +366,14 @@ class InformsController < ApplicationController
           file += ',' #COPAGOENTIDAD a partir de aca es
           file += ',' #COPAGO
           file += "\r\n"
-
-
         end
-        text_file3 = Tempfile.new("foxpro_data.TXT")
-        text_file3.puts(file[0..-3])
-
-        zipfile.add("foxpro_data.TXT", text_file3.path)
-        text_file3.close
-
+        zipfile.get_output_stream("informes.TXT") { |f| f.puts(file[0..-3]) }
       end
-
-      zip_data = File.read(temp_file.path)
+      file = File.open("temp_file.zip")
+      zip_data = File.read("temp_file.zip")
       send_data(zip_data, type: 'application/zip', disposition: 'attachment', filename: filename)
     ensure
-      temp_file.close
-      temp_file.unlink
-
+      File.delete(file)
     end
   end
 

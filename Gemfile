@@ -45,9 +45,10 @@ gem 'pdfkit'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 gem 'will_paginate', '~> 3.1.1'
-# gem 'will_paginate-bootstrap' 
+# gem 'will_paginate-bootstrap'
 gem 'bootstrap-will_paginate'
 gem 'rubyzip'
+gem "activerecord", ">= 5.2.4.5"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

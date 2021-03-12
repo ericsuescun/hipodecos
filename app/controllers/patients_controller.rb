@@ -130,7 +130,7 @@ class PatientsController < ApplicationController
     @cytology = @inform.cytologies.build
 
     @objections = @patient.objections
-    @municipalities = Municipality.all
+    @municipalities = Municipality.order(order: :desc)
     @municipalities.each do |municipality|
       municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
     end
@@ -151,11 +151,11 @@ class PatientsController < ApplicationController
 
     @promoters = Promoter.where(enabled: true)
     @promoters.each do |promoter|
-      promoter.initials = promoter.regime[0] + "-" + promoter.initials
+      promoter.initials = promoter.initials + "-" + promoter.regime[0]
     end
     @promoters = @promoters.pluck(:initials, :id)
 
-    @municipalities = Municipality.all
+    @municipalities = Municipality.order(order: :desc)
     @municipalities.each do |municipality|
       municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
     end
@@ -193,7 +193,7 @@ class PatientsController < ApplicationController
     end
     @promoters = @promoters.pluck(:initials, :id)
 
-    @municipalities = Municipality.all
+    @municipalities = Municipality.order(order: :desc)
     @municipalities.each do |municipality|
       municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
     end

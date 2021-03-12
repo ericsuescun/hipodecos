@@ -432,7 +432,15 @@ class PatientsController < ApplicationController
       end
       redirect_to patients_path + "?inf_type=" + params[:patient][:informs_attributes][:"0"][:inf_type], notice: 'Paciente matriculado exitosamente.'
     else
-      redirect_to patients_new_series_path + "?inf_type=" + params[:inf_type] + "&id_number=" + params[:id_number]
+      # redirect_to patients_new_series_path + "?inf_type=" + params[:inf_type] + "&id_number=" + params[:id_number]
+      @promoters = Promoter.where(enabled: true)
+      @promoters = @promoters.pluck(:initials, :id)
+      @municipalities = Municipality.all
+      @municipalities.each do |municipality|
+        municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
+      end
+
+      render :new_series
     end
   end
 

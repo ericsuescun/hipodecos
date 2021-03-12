@@ -4,6 +4,7 @@ class Entity < ApplicationRecord
 
 
 	validates :name, :initials, :code, :rate_id, presence: true
-	validates :code, :initials, uniqueness: true
+	# validates :code, :initials, uniqueness: true
+  validates :initials, uniqueness: true
 
 end

@@ -6,6 +6,9 @@ es:
   activerecord:
     models:
       inform: Informes
+      patient: Paciente
+      micro: Descripción micro
+      macro: Descripción macro
     attributes:
       user:
         password: Contraseña
@@ -57,17 +60,19 @@ es:
         age_type: Unidades de edad
         sex: Sexo
         id_type: Tipo de id
-    errors:
-      models:
-        inform: Informe
-        promoter: EPS
-
-      messages:
-
-        record_invalid: 'La validación falló: %{errors}'
-        restrict_dependent_destroy:
-          has_one: El registro no puede ser eliminado pues existe un %{record} dependiente
-          has_many: El registro no puede ser eliminado pues existen %{record} dependientes
+        id_number: Número de identificación
+        name1: 1er nombre
+        lastname1: 1er apellido
+      inform:
+        inf_type: Tipo de informe
+        tag_code: Código
+        receive_date: Fecha de recuperación
+        delivery_date: Fecha de entrega
+      informs:
+        inf_type: Tipo de informe
+        tag_code: Código
+        receive_date: Fecha de recuperación
+        delivery_date: Fecha de entrega
   date:
     abbr_day_names:
     - dom
@@ -78,7 +83,7 @@ es:
     - vie
     - sáb
     abbr_month_names:
-    - 
+    -
     - ene
     - feb
     - mar
@@ -104,7 +109,7 @@ es:
       long: "%A, %d de %B de %Y"
       short: "%d de %b"
     month_names:
-    - 
+    -
     - enero
     - febrero
     - marzo
@@ -318,7 +323,7 @@ es:
         success: 'Has sido autorizado satisfactoriamente de la cuenta %{kind}.'
         failure: 'No has sido autorizado en la cuenta %{kind} porque "%{reason}".'
       mailer:
-        confirmation_instructions: 
+        confirmation_instructions:
           subject: 'Instrucciones de confirmación'
         reset_password_instructions:
           subject: 'Instrucciones de recuperación de contraseña'

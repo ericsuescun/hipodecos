@@ -20,7 +20,7 @@ class Inform < ApplicationRecord
 
   has_many :physicians, dependent: :destroy
   accepts_nested_attributes_for :physicians
-  
+
   has_many :cytologies, dependent: :destroy
   accepts_nested_attributes_for :cytologies
 
@@ -45,6 +45,6 @@ class Inform < ApplicationRecord
   # has_many :physicians
   # accepts_nested_attributes_for :physicians
 
-  validates :receive_date, :inf_type, presence: true
+  validates :zone_type, :receive_date, :inf_type, presence: true
 
 end

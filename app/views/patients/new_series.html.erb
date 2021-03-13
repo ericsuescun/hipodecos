@@ -64,7 +64,7 @@
             </div>
           </div>
         </div>
-        
+
         <%= form.fields_for :informs do |informs_form| %>
           <div class="alert alert-primary mb-3">
             <h5>Datos del informe en la fecha de recepción del estudio de patología:</h5>
@@ -99,7 +99,7 @@
                   <%= informs_form.text_field :invoice, autocomplete: "Factura", class: "form-control input"  %>
                 </div>
               </div>
-            </div> 
+            </div>
             <div class="row">
               <div class="col-12 col-lg-3">
                 <div class="form-group">
@@ -112,9 +112,9 @@
                   <%= informs_form.label "Sede IPS" %>
                   <%= informs_form.select :branch_id, Branch.pluck(:initials, :id), { include_blank: true }, class: "form-control input" %>
                 </div>
-                
+
               </div>
-              
+
               <div class="col-12 col-lg-2">
                 <div class="form-group">
                   <%= informs_form.label "Teléfono" %>
@@ -133,11 +133,11 @@
                   <%= informs_form.text_field :p_email, class: "form-control input" %>
                 </div>
               </div>
-              
+
             </div>
 
             <div class="row">
-              
+
               <div class="col-12 col-lg-4">
                 <div class="form-group">
                   <%= informs_form.label "Dirección de residencia" %>
@@ -164,8 +164,14 @@
               </div>
             </div>
 
-            
+
             <div class="row">
+              <div class="col-12 col-lg-2">
+                <div class="form-group">
+                  <%= informs_form.label "Régimen" %>
+                  <%= informs_form.select(:regime, options_for_select([['Subsidiado', 'Subsidiado'], ['Contributivo', 'Contributivo'], ['Régimen Especial', 'Régimen Especial'], ['Particular', 'Particular']], @patient.informs), { include_blank: true }, class: "form-control form-control input") %>
+                </div>
+              </div>
               <div class="col-12 col-lg-3">
                 <div class="form-group">
                   <%= informs_form.label "Autorización EPS/IPS" %>
@@ -182,15 +188,15 @@
                   <% end %>
                 </div>
               </div>
-              <div class="col-12 col-lg-3">
+              <div class="col-12 col-lg-2">
                 <div class="form-group">
                   <%= informs_form.label "Tipo de zona" %>
                   <%= informs_form.select(:zone_type, options_for_select([['Urbano', 'U'], ['Rural', 'R']], @patient.informs), { include_blank: true }, class: "form-control form-control input") %>
                 </div>
               </div>
-              <div class="col-12 col-lg-3">
+              <div class="col-12 col-lg-2">
                 <div class="form-group">
-                  <%= informs_form.label "Estado de embarazo" %>
+                  <%= informs_form.label "Estado emb" %>
                   <%= informs_form.select(:pregnancy_status, options_for_select([['No Emb', '4'], ['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3']], @patient.informs), {  }, class: "form-control form-control input") %>
                 </div>
               </div>
@@ -200,8 +206,8 @@
                 <%= render 'cyto_form', form_builder: informs_form %>
               <% end %>
             </div>
-          </div> 
-          
+          </div>
+
 
             <%= informs_form.fields_for :physicians do |phy_form| %>
           <div class="alert alert-primary">
@@ -266,14 +272,14 @@
                     <%= phy_form.label "Especialidad" %>
                     <%= phy_form.select(:study1, options_for_select([['Histocitotecnología', 'Histocitotecnología'], ['Bacteriología', 'Bacteriología'], ['Aux Enfermería', 'Aux Enfermería'], ['Enfermería', 'Enfermería'], ['Ginecología', 'Ginecología']], nil), { include_blank: true }, class: "form-control input") %>
                   </div>
-                  
+
                 </div>
-                
+
             <% end %>
             <% end %>
           </div>
         <% end %>
-        
+
 
         <div class="row">
           <div class="col-12 col-lg-4 mx-auto">

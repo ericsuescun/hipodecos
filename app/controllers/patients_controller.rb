@@ -137,7 +137,7 @@ class PatientsController < ApplicationController
 
     @promoters = Promoter.where(enabled: true)
     @promoters.each do |promoter|
-      promoter.initials = promoter.regime[0] + "-" + promoter.initials
+      promoter.initials = promoter.initials + "-" + promoter.regime[0]
     end
     @promoters = @promoters.pluck(:initials, :id)
 
@@ -189,7 +189,7 @@ class PatientsController < ApplicationController
     patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
     @promoters = Promoter.where(enabled: true)
     @promoters.each do |promoter|
-      promoter.initials = promoter.regime[0] + "-" + promoter.initials
+      promoter.initials = promoter.initials + "-" + promoter.regime[0]
     end
     @promoters = @promoters.pluck(:initials, :id)
 

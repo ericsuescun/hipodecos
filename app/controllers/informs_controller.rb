@@ -192,41 +192,43 @@ class InformsController < ApplicationController
 
         informs.each_with_index do |inform, idx|
 
-          descr = ""
-          inform.recipients.each_with_index do |recipient, n|
-            descr += "Contenido de recipiente \##{n + 1}:" + "\r\n" + recipient.description + "\r\n" + "Bloqueado de la siguiente manera:\r\n\r\n"
-            inform.samples.where(recipient_tag: recipient.tag).each do |sample|
-              if sample.name == "Cassette"
-                descr += sample.description
-                descr += ": " if sample.description != ""
-                descr += sample.fragment.to_s + "F-" + get_nomen(sample.sample_tag) + "\r\n"
+          if params[:inf_type] != 'cito'
+            descr = ""
+            inform.recipients.each_with_index do |recipient, n|
+              descr += "Contenido de recipiente \##{n + 1}:" + "\r\n" + recipient.description + "\r\n" + "Bloqueado de la siguiente manera:\r\n\r\n"
+              inform.samples.where(recipient_tag: recipient.tag).each do |sample|
+                if sample.name == "Cassette"
+                  descr += sample.description
+                  descr += ": " if sample.description != ""
+                  descr += sample.fragment.to_s + "F-" + get_nomen(sample.sample_tag) + "\r\n"
+                else
+                  descr += sample.description + "-" + get_nomen(sample.sample_tag) + "\r\n"
+                end
+              end
+              descr += "\r\n"
+            end
+            descr += "DESCRIPCIÓN MICROSCÓPICA\r\n\r\n"
+            inform.micros.each do |micro|
+              if micro.description.size > 500
+                descr += "\r\n" + "\r\n" + micro.description + "\r\n "
               else
-                descr += sample.description + "-" + get_nomen(sample.sample_tag) + "\r\n"
+                descr += micro.description + " "
               end
             end
-            descr += "\r\n"
-          end
-          descr += "DESCRIPCIÓN MICROSCÓPICA\r\n\r\n"
-          inform.micros.each do |micro|
-            if micro.description.size > 500
-              descr += "\r\n" + "\r\n" + micro.description + "\r\n "
-            else
-              descr += micro.description + " "
+
+            zipfile.get_output_stream("#{file_name}.TXT") { |f| f.puts(descr) }
+
+            file_name += 1
+
+            diag = ""
+            inform.diagnostics.each do |diagnostic|
+              diag += diagnostic.description + " "
             end
+
+            zipfile.get_output_stream("#{file_name}.TXT") { |f| f.puts(diag) }
+
+            file_name += 1
           end
-
-          zipfile.get_output_stream("#{file_name}.TXT") { |f| f.puts(descr) }
-
-          file_name += 1
-
-          diag = ""
-          inform.diagnostics.each do |diagnostic|
-            diag += diagnostic.description + " "
-          end
-
-          zipfile.get_output_stream("#{file_name}.TXT") { |f| f.puts(diag) }
-
-          file_name += 1
 
 
           file += '"' + inform.tag_code[0] + '"' + ","
@@ -267,60 +269,67 @@ class InformsController < ApplicationController
           file += '"' + Codeval.where(id: inform.studies.first.codeval_id).first.try(:code) + '"' + ","
           file += inform.studies.first.factor.to_s + ","
 
-          if inform.studies.second != nil
-            file += '"' + Codeval.where(id: inform.studies.second.codeval_id).first.try(:code)+ '"' + ","
-            file += inform.studies.second.factor.to_s + ","
-          else
-            file += '"",,'
+          if params[:inf_type] != 'cito'
+            if inform.studies.second != nil
+              file += '"' + Codeval.where(id: inform.studies.second.codeval_id).first.try(:code)+ '"' + ","
+              file += inform.studies.second.factor.to_s + ","
+            else
+              file += '"",,'
+            end
+            if inform.studies.third != nil
+              file += '"' + Codeval.where(id: inform.studies.third.codeval_id).first.try(:code) + '"' + ","
+              file += inform.studies.third.factor.to_s + ","
+            else
+              file += '"",,'
+            end
           end
-          if inform.studies.third != nil
-            file += '"' + Codeval.where(id: inform.studies.third.codeval_id).first.try(:code) + '"' + ","
-            file += inform.studies.third.factor.to_s + ","
-          else
-            file += '"",,'
-          end
+
 
           file += inform.cost.to_s + ","
-          # file += ','#DESCR
-          # file += ','#DIAGNOSTIC
-          file += '"' + inform.diagnostics.first.pss_code + '"' + ","
 
-          if inform.diagnostics.second != nil
-            file += '"' + inform.diagnostics.second.pss_code + '"' + ","
-          else
-            file += '"' + '"' + ","
-          end
-          if inform.diagnostics.third != nil
-            file += '"' + inform.diagnostics.third.pss_code + '"' + ","
-          else
-            file += '"' + '"' + ","
-          end
-          if inform.diagnostics.fourth != nil
-            file += '"' + inform.diagnostics.fourth.pss_code + '"' + ","
-          else
-            file += '"' + '"' + ","
-          end
-          if inform.diagnostics.fifth != nil
-            file += '"' + inform.diagnostics.fifth.pss_code + '"' + ","
-          else
-            file += '"' + '"' + ","
-          end
-          if inform.diagnostics[6] != nil
-            file += '"' + inform.diagnostics[6].pss_code + '"' + ","
-          else
-            file += '"' + '"' + ","
+          if params[:inf_type] != 'cito'
+            # file += ','#DESCR
+            # file += ','#DIAGNOSTIC
+            file += '"' + inform.diagnostics.first.pss_code + '"' + ","
+
+            if inform.diagnostics.second != nil
+              file += '"' + inform.diagnostics.second.pss_code + '"' + ","
+            else
+              file += '"' + '"' + ","
+            end
+            if inform.diagnostics.third != nil
+              file += '"' + inform.diagnostics.third.pss_code + '"' + ","
+            else
+              file += '"' + '"' + ","
+            end
+            if inform.diagnostics.fourth != nil
+              file += '"' + inform.diagnostics.fourth.pss_code + '"' + ","
+            else
+              file += '"' + '"' + ","
+            end
+            if inform.diagnostics.fifth != nil
+              file += '"' + inform.diagnostics.fifth.pss_code + '"' + ","
+            else
+              file += '"' + '"' + ","
+            end
+            if inform.diagnostics[6] != nil
+              file += '"' + inform.diagnostics[6].pss_code + '"' + ","
+            else
+              file += '"' + '"' + ","
+            end
+
+            file += '"050011134601"' + ","
+            file += '"' + inform.invoice + '"' + ","
+            file += '"' + inform.prmtr_auth_code + '"' + ","
+            file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime) + '"' + ","
+            file += '"' + '"' + "," #OCUPACIÓN que se deja en blanco
+            file += '"' + inform.p_municipality + '"' + ","
+            file += '"' + inform.zone_type + '"' + ","
+            file += '"' + inform.pregnancy_status + '"' + ","
+            file += '"' + inform.status + '"' + ","
+            file += '"' + inform.p_tel.to_s + "-" + '"' + ","
           end
 
-          file += '"050011134601"' + ","
-          file += '"' + inform.invoice + '"' + ","
-          file += '"' + inform.prmtr_auth_code + '"' + ","
-          file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime) + '"' + ","
-          file += '"' + '"' + "," #OCUPACIÓN que se deja en blanco
-          file += '"' + inform.p_municipality + '"' + ","
-          file += '"' + inform.zone_type + '"' + ","
-          file += '"' + inform.pregnancy_status + '"' + ","
-          file += '"' + inform.status + '"' + ","
-          file += '"' + inform.p_tel.to_s + "-" + '"' + ","
           if inform.physicians.first != nil
             if inform.physicians.first.name != nil
               file += '"' + inform.physicians.first.name + '"' + ","
@@ -337,43 +346,109 @@ class InformsController < ApplicationController
             file += '"' + '"' + ","
           end
 
-
           file += '"' + Branch.where(id: inform.branch_id).first.try(:address) + '"' + ","
-          file += '"' + inform.blocks.where(stored: true).first.try(:block_tag).to_s + '"' + ","
-          file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ","
-          file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ","
-          file += '"' + '"' + "," #TIPO que se deja en blanco
-          file += "," #IMPRIMIR que se deja en blanco pero es numérico
-          file += '"' + User.where(id: inform.user_id).first.fullname.upcase + '"' + ","
-          file += inform.created_at.strftime("%d/%m/%Y") + ","
-          # file += "," #FOTO que se deja en blanco pero es general
-          # file += "," #FOTO1 que se deja en blanco pero es general
-          # file += "," #FOTO2 que se deja en blanco pero es general
-          file += "," #Campo ORDEN que NO esta en la documentacion pero EXISTE
-          file += '"' + User.where(id: inform.pathologist_id).first.first_name + User.where(id: inform.pathologist_id).first.last_name + '"' + ","
-          file += "," #RANGO que se deja en blanco pero es numérico
-          file += '"' + inform.diagnostics.first.who_code.to_s + '"' + ","
-          file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","
-          if inform.p_age_type == nil
-            file += '"",'
-          elsif inform.p_age_type == "A"
-            file += '"AÑOS",'
-          elsif inform.p_age_type == "M"
-            file += '"MESES",'
-          elsif inform.p_age_type == "D"
-            file += '"DÍAS",'
+
+          if params[:inf_type] == 'cito'
+            file += '"' + inform.p_tel.to_s + "-" + '"' + ","
+            file += '"' + inform.diagnostics.first.result.to_s + '"' + ","
+            file += '"' + inform.diagnostics.first.description.to_s + '"' + ","
+            file += '"' + inform.cytologies.first.suggestion.to_s + '"' + ","
+            file += '"' + User.where(id: inform.cytologist).first.fullname.upcase + '"' + ","
+            if inform.cytologies.count == 1
+              file += '"' + User.where(last_name: "Suescún Tarazona").first.fullname.upcase + '"' + ","
+            else
+              file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ","
+            end
+
+            file += '"' + '"' + "," #CELSUP
+            file += '"' + '"' + "," #CELINT
+            file += '"' + '"' + "," #CELPARA
+            file += '"' + '"' + "," #PLEGA
+            file += '"' + '"' + "," #AGRUPA
+            file += '"050011134601"' + ","
+            # file += '"' + inform.invoice + '"' + ","
+            file += '"' + inform.prmtr_auth_code + '"' + ","
+            file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime) + '"' + ","
+            file += '"' + '"' + "," #OCUPACIÓN que se deja en blanco
+            file += '"' + inform.p_municipality + '"' + ","
+            file += '"' + inform.zone_type + '"' + ","
+            file += '"' + inform.pregnancy_status + '"' + ","
+            file += '"' + inform.status + '"' + ","
+            file += '"' + inform.cytologies.first.pregnancies.to_s + '"' + ","
+            file += '"' + inform.cytologies.first.last_mens.to_s + '"' + ","
+            file += '"' + inform.cytologies.first.prev_appo.to_s + '"' + ","
+            if inform.cytologies.count == 1
+              file += '"' + 95.to_s + '"' + ","  #DIRIMIR CODIGO, 95 cuando patologo no leyo
+              file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #CODCITO
+            else
+              file += '"' + inform.diagnostics.second.pss_code.to_s + '"' + ","  #CODIGO patologo
+              file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #CODCITO citologo
+            end
+            file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #DIRIMIR CODIGO, 95 cuando patologo no leyo
+            file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #DIRIMIR CODCITO
+            file += '"' + '"' + ","  #VINCULADO
+            file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ","  #SECRETARIA
+            file += '"' + User.where(id: inform.user_id).first.fullname.upcase + '"' + ","  #SECRETAUNO
+            file += inform.created_at.strftime("%d/%m/%Y") + ","  #FECHA1
+            file += '"' + inform.cytologies.first.sample_date.strftime("%d/%m/%Y") + '"' + ","
+            file += '"' + inform.cytologies.first.last_result.to_s + '"' + ","
+            file += "," #IMPRIMIR que se deja en blanco pero es numérico
+
+            if inform.cytologies.count == 1
+              file += '"' + "DS" + '"' + ","
+            else
+              file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","
+            end
+
+            file += inform.patient.birth_date.strftime("%d/%m/%Y") #FECHANAC
+            file += '"' + '"' + "," #SINCRONIZA
+            file += Time.current.strftime("%d/%m/%Y") #FSINCRO
+            file += '"' + inform.cytologies.first.birth_control.to_s + '"' + ","
+            file += '"' + '"' + "," #COLADE
+            file += '"' + '"' + "," #COLINAD
+            file += '"' + '"' + "," #MONTAINE
+            file += '"' + '"' #MONTAINAD
+            file += "\r\n"
           end
-          file += ',' #COPAGOENTIDAD a partir de aca es
-          file += ',' #COPAGO
-          file += "\r\n"
+
+          if params[:inf_type] != 'cito'
+            file += '"' + inform.blocks.where(stored: true).first.try(:block_tag).to_s + '"' + ","
+            file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ","
+            file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ","
+            file += '"' + '"' + "," #TIPO que se deja en blanco
+            file += "," #IMPRIMIR que se deja en blanco pero es numérico
+            file += '"' + User.where(id: inform.user_id).first.fullname.upcase + '"' + ","
+            file += inform.created_at.strftime("%d/%m/%Y") + ","
+            # file += "," #FOTO que se deja en blanco pero es general
+            # file += "," #FOTO1 que se deja en blanco pero es general
+            # file += "," #FOTO2 que se deja en blanco pero es general
+            file += "," #Campo ORDEN que NO esta en la documentacion pero EXISTE
+            file += '"' + User.where(id: inform.pathologist_id).first.first_name + User.where(id: inform.pathologist_id).first.last_name + '"' + ","
+            file += "," #RANGO que se deja en blanco pero es numérico
+            file += '"' + inform.diagnostics.first.who_code.to_s + '"' + ","
+            file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","
+            if inform.p_age_type == nil
+              file += '"",'
+            elsif inform.p_age_type == "A"
+              file += '"AÑOS",'
+            elsif inform.p_age_type == "M"
+              file += '"MESES",'
+            elsif inform.p_age_type == "D"
+              file += '"DÍAS",'
+            end
+            file += ',' #COPAGOENTIDAD a partir de aca es
+            file += ',' #COPAGO
+            file += "\r\n"
+          end
+
         end
         zipfile.get_output_stream("informes.TXT") { |f| f.puts(file[0..-3]) }
       end
-      file = File.open("temp_file.zip")
+      @file2 = File.open("temp_file.zip")
       zip_data = File.read("temp_file.zip")
       send_data(zip_data, type: 'application/zip', disposition: 'attachment', filename: filename)
     ensure
-      File.delete(file)
+      File.delete(@file2)
     end
   end
 

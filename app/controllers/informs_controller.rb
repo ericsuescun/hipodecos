@@ -354,7 +354,7 @@ class InformsController < ApplicationController
             file += '"' + inform.diagnostics.first.description.to_s + '"' + ","
             file += '"' + inform.cytologies.first.suggestion.to_s + '"' + ","
             file += '"' + User.where(id: inform.cytologist).first.fullname.upcase + '"' + ","
-            if inform.cytologies.count == 1
+            if inform.diagnostics.count == 1
               file += '"' + User.where(last_name: "Suescún Tarazona").first.fullname.upcase + '"' + ","
             else
               file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ","
@@ -377,7 +377,7 @@ class InformsController < ApplicationController
             file += '"' + inform.cytologies.first.pregnancies.to_s + '"' + ","
             file += '"' + inform.cytologies.first.last_mens.to_s + '"' + ","
             file += '"' + inform.cytologies.first.prev_appo.to_s + '"' + ","
-            if inform.cytologies.count == 1
+            if inform.diagnostics.count == 1
               file += '"' + 95.to_s + '"' + ","  #DIRIMIR CODIGO, 95 cuando patologo no leyo
               file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #CODCITO
             else
@@ -394,7 +394,7 @@ class InformsController < ApplicationController
             file += '"' + inform.cytologies.first.last_result.to_s + '"' + ","
             file += "," #IMPRIMIR que se deja en blanco pero es numérico
 
-            if inform.cytologies.count == 1
+            if inform.diagnostics.count == 1
               file += '"' + "DS" + '"' + ","
             else
               file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","

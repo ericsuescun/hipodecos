@@ -366,7 +366,7 @@ class InformsController < ApplicationController
             file += '"' + '"' + "," #PLEGA
             file += '"' + '"' + "," #AGRUPA
             file += '"050011134601"' + ","
-            # file += '"' + inform.invoice + '"' + ","
+            file += '"' + inform.invoice.to_s + '"' + ","
             file += '"' + inform.prmtr_auth_code + '"' + ","
             file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime) + '"' + ","
             file += '"' + '"' + "," #OCUPACIÓN que se deja en blanco

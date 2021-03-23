@@ -397,7 +397,7 @@ class InformsController < ApplicationController
             if inform.diagnostics.count == 1
               file += '"' + "DS" + '"' + ","
             else
-              file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","
+              file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_review_id).first.last_name[0] + '"' + ","
             end
 
             file += inform.patient.birth_date.strftime("%d/%m/%Y") #FECHANAC

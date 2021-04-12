@@ -186,7 +186,19 @@ class InformsController < ApplicationController
 
     file = ""
     file_name = 1
-    filename = "exp_fox_" + params[:inf_type] + "_" + params[:init_date] + "_a_" + params[:final_date] + ".zip"
+
+    # filename = "exp_fox_" + params[:inf_type] + "_" + params[:init_date] + "_a_" + params[:final_date] + ".zip"
+
+    if params[:inf_type] == 'clin'
+      filename = "CLH.zip"
+    elsif params[:inf_type] == 'hosp'
+      filename = "HOH.zip"
+    elsif params[:inf_type] == 'cito'
+      filename = "KCIT1.zip"
+    elsif params[:inf_type] == 'cito2'
+      filename = "KCIT2.zip"
+    end
+
     begin
       Zip::File.open("temp_file.zip", Zip::File::CREATE) do |zipfile|
 

@@ -421,9 +421,9 @@ class PatientsController < ApplicationController
         #Se crea el slide
         inform.slides.create(slide_tag: @sample.sample_tag, user_id: current_user.id) #Se crea un slide con el mismo tag de la sample
         @sample.update(slide_tag: @sample.sample_tag)  #Se guarda el tag creado en la sample para que queden asociados
-        inform.update(inf_status: "placado")
-      else
-        inform.update(inf_status: "matriculado")
+        # inform.update(inf_status: "placado")
+      # else
+        # inform.update(inf_status: "matriculado")
       end
       redirect_to patients_path + "?inf_type=" + params[:patient][:informs_attributes][:"0"][:inf_type], notice: 'Paciente matriculado exitosamente.'
     else

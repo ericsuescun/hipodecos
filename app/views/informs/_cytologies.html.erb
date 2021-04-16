@@ -17,7 +17,7 @@
                       <div class="card mb-2">
                         <div class="card-header d-flex flex-row align-items-center justify-content-between px-1">
                           <span class="d-flex"><strong>Editar citología</strong></span>
-                          
+
                         </div>
                         <div class="card-body">
                           <div class="row">
@@ -76,7 +76,7 @@
                         <%= link_to edit_cytology_path(cytology), remote: true, class: "d-flex my-0 py-0 mx-2" do %>
                           <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none;">&#9998;</span>
                         <% end %>
-                        
+
                         <%= link_to cytology, method: :delete, remote: true, class: "mx-2 my-2 px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
                           <span>&times;</span>
                         <% end %>
@@ -84,7 +84,7 @@
                       <div class="card-body p-1 m-0 d-flex flex-column">
                         <p><span><strong>Última menstruación:</strong> <%= cytology.last_mens %> - <strong>Fecha de cita anterior:</strong> <%= cytology.prev_appo %> - <strong>Fecha de toma de la muestra:</strong> <%= cytology.sample_date %></span></p>
                         <p><span><strong>Número de embarazos:</strong> <%= cytology.pregnancies %> - <strong>Método de planificación:</strong> <%= get_birth_control(cytology.birth_control) %> - <strong>Último resultado:</strong> <%= cytology.last_result %></span></p>
-                        
+
                         <% cytology.objections.each do |objection| %>
                           <% if edit_objection_id == nil %>
                             <div class="d-flex flex-column">
@@ -115,7 +115,7 @@
                                   <%= form.label "Acción de mejora:" %>
                                   <%= form.text_area :new_description, class: "form-control input" %>
                                 </div>
-                                
+
                                 <div class="actions">
                                   <%= form.submit "Anotar", class: "btn btn-outline-warning mx-1 my-1" %>
                                   <%= form.hidden_field :cytology_id, value: cytology.id %>
@@ -127,7 +127,7 @@
                         <% end %>
                       </div>
                     </div>
-                  </div>    
+                  </div>
                 <% end %>
               <% end %>
               <% if inform.cytologies.count < 1 %>
@@ -136,14 +136,14 @@
                     <div class="card mb-2">
                       <div class="card-header d-flex flex-row align-items-center justify-content-between m-0 p-0">
                         <span class="d-flex"><strong>Nueva citología</strong></span>
-                        
+
                       </div>
                       <div class="card-body">
                         <div class="row">
                           <div class="col-12 col-lg-3 col-xl-3 d-flex align-items-center">
                             <div class="form-group">
                               <%= form.label "Fecha toma muestra:" %>
-                              <%= form.date_field :sample_date, class: "form-control input" %>
+                              <%= form.date_field :sample_date, value: Date.today, class: "form-control input" %>
                             </div>
                           </div>
                           <div class="col-12 col-lg-3 col-xl-3">
@@ -178,7 +178,7 @@
                               <%= form.select(:birth_control, options_for_select([['DIU', '0'], ['Implante', '2'], ['Pastillas', '4'], ['Inyección', '6'], ['Esterilización', '12'], ['Barrera', '14'], ['No planifica', '20'], ['Basectomía', '22']], nil), { include_blank: true }, class: "form-control input") %>
                             </div>
                           </div>
-                          
+
                         </div>
                         <div class="row">
                           <div class="col-12 col-lg-3 col-xl-3">
@@ -192,10 +192,10 @@
                   <% end %>
                 </div>
               <% end %>
-              
+
             </div>
           </div>
-        </div>     
+        </div>
       </div>
     </div>
   </div>

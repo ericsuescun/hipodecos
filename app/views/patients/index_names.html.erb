@@ -14,7 +14,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <%= hidden_field_tag :inf_type, params[:inf_type] %>
-                  <%= text_field_tag :id_number, nil, class: "form-control input", placeholder: "# identificación" %>
+                  <%= text_field_tag :id_number, nil, autofocus: true, class: "form-control input", placeholder: "# identificación" %>
                 </div>
               </div>
               <div class="col-12">
@@ -22,7 +22,7 @@
                   <%= submit_tag "Buscar/Matricular varios", class: "btn btn-primary btn-block" %>
                 </div>
               </div>
-              
+
             <% end %>
           </div>
         </div>
@@ -45,9 +45,9 @@
               <%= submit_tag "Buscar", class: "btn btn-primary btn-block" %>
             <% end %>
           </div>
-          
+
         </div>
-        
+
       </div>
       <div class="row">
         <div class="col-12 col-lg-12">
@@ -75,7 +75,7 @@
           </div>
         </div>
       </div>
-      
+
       <%= will_paginate @patients, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       <table class="table table-striped">
         <thead class="thead-dark">

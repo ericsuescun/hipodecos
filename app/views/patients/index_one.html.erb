@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-12 col-lg-6">
           <%= form_tag new_patient_path, method: "get", class: "form-inline my-3" do %>
-            <%= text_field_tag :id_number, nil, class: "form-control input", placeholder: "# identificación" %>
+            <%= text_field_tag :id_number, nil, autofocus: true, class: "form-control input", placeholder: "# identificación" %>
             <button class="btn btn-primary ml-3" type="submit">Buscar / Matricular y editar</button>
           <% end %>
         </div>
@@ -13,18 +13,18 @@
           <%= form_tag patients_path, method: "get", class: "form-inline" do %>
             <div class="form-group mr-1">
               <%= date_field_tag :init_date, class: "form-control mb-3" %>
-              
+
             </div>
             <div class="form-group mr-1">
-              
+
               <%= date_field_tag :final_date, class: "form-control mb-3" %>
             </div>
             <%= submit_tag("Buscar", class: "btn btn-primary my-3") %>
           <% end %>
         </div>
-        
+
       </div>
-      
+
       <%= will_paginate @patients, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       <table class="table table-striped">
         <thead class="thead-dark">

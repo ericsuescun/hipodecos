@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="card my-1">
+    <div class="card-header m-0 p-0 pl-1">
+      <strong>Citología</strong>
+    </div>
+    <div class="card-body py-0">
+      <% inform.cytologies.each_with_index do |cytology, n| %>
+        <p><span><strong>Última menstruación:</strong> <%= cytology.last_mens %> - <strong>Fecha de cita anterior:</strong> <%= cytology.prev_appo %> - <strong>Fecha de toma de la muestra:</strong> <%= cytology.sample_date %></span></p>
+        <p><span><strong>Número de embarazos:</strong> <%= cytology.pregnancies %> - <strong>Método de planificación:</strong> <%= get_birth_control(cytology.birth_control) %> - <strong>Último resultado:</strong> <%= cytology.last_result %></span></p>
+      <% end %>
+    </div>
+  </div>
+</div>

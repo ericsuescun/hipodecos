@@ -403,7 +403,13 @@ class InformsController < ApplicationController
             file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ","  #SECRETARIA
             file += '"' + User.where(id: inform.user_id).first.try(:fullname).to_s.upcase + '"' + ","  #SECRETAUNO
             file += inform.created_at.strftime("%d/%m/%Y") + ","  #FECHA1
-            file += '"' + inform.cytologies.first.sample_date.strftime("%d/%m/%Y") + '"' + ","
+
+            if inform.cytologies.first.sample_date != nil
+              file += '"' + inform.cytologies.first.sample_date.strftime("%d/%m/%Y") + '"' + ","
+            else
+              file += '"",'
+            end
+
             file += '"' + inform.cytologies.first.last_result.to_s + '"' + ","
             file += "," #IMPRIMIR que se deja en blanco pero es numérico
 

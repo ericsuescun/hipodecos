@@ -244,16 +244,16 @@ class InformsController < ApplicationController
           end
 
 
-          file += '"' + inform.tag_code[0] + '"' + ","
-          file += inform.tag_code[4..-1] + ","
+          file += '"' + inform.tag_code[0].to_s + '"' + ","
+          file += inform.tag_code[4..-1].to_s + ","
           file += inform.receive_date.strftime("%d/%m/%Y") + ","
           file += inform.delivery_date.strftime("%d/%m/%Y") + ","
-          file += '"' + inform.patient.lastname1.upcase + '"' + ","
-          file += '"' + inform.patient.lastname2.upcase + '"' + ","
-          file += '"' + inform.patient.name1.upcase + '"' + ","
-          file += '"' + inform.patient.name2.upcase + '"' + ","
-          file += '"' + inform.patient.id_type + '"' + ","
-          file += '"' + inform.patient.id_number + '"' + ","
+          file += '"' + inform.patient.lastname1.to_s.upcase + '"' + ","
+          file += '"' + inform.patient.lastname2.to_s.upcase + '"' + ","
+          file += '"' + inform.patient.name1.to_s.upcase + '"' + ","
+          file += '"' + inform.patient.name2.to_s.upcase + '"' + ","
+          file += '"' + inform.patient.id_type.to_s + '"' + ","
+          file += '"' + inform.patient.id_number.to_s + '"' + ","
           file += '"' + '"' + "," #Historia, se supone que ese campo ya no se usa
           if inform.p_age_type == nil || inform.p_age_type == ""
             file += '"",'
@@ -274,23 +274,23 @@ class InformsController < ApplicationController
           end
 
 
-          file += '"' + inform.patient.sex + '"' + ","
-          file += '"' + Entity.where(id: inform.entity_id).first.try(:initials) + '"' + ","
-          file += '"' + Promoter.where(id: inform.promoter_id).first.try(:initials) + '"' + ","
-          file += '"' + Promoter.where(id: inform.promoter_id).first.try(:code) + '"' + ","
+          file += '"' + inform.patient.sex.to_s + '"' + ","
+          file += '"' + Entity.where(id: inform.entity_id).first.try(:initials).to_s + '"' + ","
+          file += '"' + Promoter.where(id: inform.promoter_id).first.try(:initials).to_s + '"' + ","
+          file += '"' + Promoter.where(id: inform.promoter_id).first.try(:code).to_s + '"' + ","
 
-          file += '"' + Codeval.where(id: inform.studies.first.codeval_id).first.try(:code) + '"' + ","
+          file += '"' + Codeval.where(id: inform.studies.first.codeval_id).first.try(:code).to_s + '"' + ","
           file += inform.studies.first.factor.to_s + ","
 
           if params[:inf_type] != 'cito'
             if inform.studies.second != nil
-              file += '"' + Codeval.where(id: inform.studies.second.codeval_id).first.try(:code)+ '"' + ","
+              file += '"' + Codeval.where(id: inform.studies.second.codeval_id).first.try(:code).to_s + '"' + ","
               file += inform.studies.second.factor.to_s + ","
             else
               file += '"",,'
             end
             if inform.studies.third != nil
-              file += '"' + Codeval.where(id: inform.studies.third.codeval_id).first.try(:code) + '"' + ","
+              file += '"' + Codeval.where(id: inform.studies.third.codeval_id).first.try(:code).to_s + '"' + ","
               file += inform.studies.third.factor.to_s + ","
             else
               file += '"",,'
@@ -303,54 +303,54 @@ class InformsController < ApplicationController
           if params[:inf_type] != 'cito'
             # file += ','#DESCR
             # file += ','#DIAGNOSTIC
-            file += '"' + inform.diagnostics.first.pss_code + '"' + ","
+            file += '"' + inform.diagnostics.first.try(:pss_code).to_s + '"' + ","
 
             if inform.diagnostics.second != nil
-              file += '"' + inform.diagnostics.second.pss_code + '"' + ","
+              file += '"' + inform.diagnostics.second.try(:pss_code).to_s + '"' + ","
             else
               file += '"' + '"' + ","
             end
             if inform.diagnostics.third != nil
-              file += '"' + inform.diagnostics.third.pss_code + '"' + ","
+              file += '"' + inform.diagnostics.third.try(:pss_code).to_s + '"' + ","
             else
               file += '"' + '"' + ","
             end
             if inform.diagnostics.fourth != nil
-              file += '"' + inform.diagnostics.fourth.pss_code + '"' + ","
+              file += '"' + inform.diagnostics.fourth.try(:pss_code).to_s + '"' + ","
             else
               file += '"' + '"' + ","
             end
             if inform.diagnostics.fifth != nil
-              file += '"' + inform.diagnostics.fifth.pss_code + '"' + ","
+              file += '"' + inform.diagnostics.fifth.try(:pss_code).to_s + '"' + ","
             else
               file += '"' + '"' + ","
             end
             if inform.diagnostics[6] != nil
-              file += '"' + inform.diagnostics[6].pss_code + '"' + ","
+              file += '"' + inform.diagnostics[6].try(:pss_code).to_s + '"' + ","
             else
               file += '"' + '"' + ","
             end
 
             file += '"050011134601"' + ","
-            file += '"' + inform.invoice + '"' + ","
-            file += '"' + inform.prmtr_auth_code + '"' + ","
-            file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime) + '"' + ","
+            file += '"' + inform.invoice.to_s + '"' + ","
+            file += '"' + inform.prmtr_auth_code.to_s + '"' + ","
+            file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime).to_s + '"' + ","
             file += '"' + '"' + "," #OCUPACIÓN que se deja en blanco
-            file += '"' + inform.p_municipality + '"' + ","
-            file += '"' + inform.zone_type + '"' + ","
-            file += '"' + inform.pregnancy_status + '"' + ","
-            file += '"' + inform.status + '"' + ","
+            file += '"' + inform.p_municipality.to_s + '"' + ","
+            file += '"' + inform.zone_type.to_s + '"' + ","
+            file += '"' + inform.pregnancy_status.to_s + '"' + ","
+            file += '"' + inform.status.to_s + '"' + ","
             file += '"' + inform.p_tel.to_s + "-" + '"' + ","
           end
 
           if inform.physicians.first != nil
             if inform.physicians.first.name != nil
-              file += '"' + inform.physicians.first.name + '"' + ","
+              file += '"' + inform.physicians.first.try(:name).to_s + '"' + ","
             else
               file += '"' + '"' + ","
             end
             if inform.physicians.first.lastname != nil
-              file += '"' + inform.physicians.first.lastname + '"' + ","
+              file += '"' + inform.physicians.first.try(:lastname).to_s + '"' + ","
             else
               file += '"' + '"' + ","
             end
@@ -359,18 +359,18 @@ class InformsController < ApplicationController
             file += '"' + '"' + ","
           end
 
-          file += '"' + Branch.where(id: inform.branch_id).first.try(:address) + '"' + ","
+          file += '"' + Branch.where(id: inform.branch_id).first.try(:address).to_s + '"' + ","
 
           if params[:inf_type] == 'cito'
             file += '"' + inform.p_tel.to_s + "-" + '"' + ","
             file += '"' + inform.diagnostics.last.result.to_s + '"' + ","
             file += '"' + inform.diagnostics.last.description.to_s + '"' + ","
             file += '"' + inform.cytologies.first.suggestion.to_s + '"' + ","
-            file += '"' + User.where(id: inform.cytologist).first.fullname.upcase + '"' + ","
+            file += '"' + User.where(id: inform.cytologist).first.try(:fullname).to_s.upcase + '"' + ","
             if inform.diagnostics.count == 1
               file += '"' + "DAVID SUESCUN TARAZONA" + '"' + ","
             else
-              file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ","
+              file += '"' + User.where(id: inform.pathologist_id).first.try(:fullname).to_s.upcase + '"' + ","
             end
 
             file += '"' + '"' + "," #CELSUP
@@ -380,13 +380,13 @@ class InformsController < ApplicationController
             file += '"' + '"' + "," #AGRUPA
             file += '"050011134601"' + ","
             file += '"' + inform.invoice.to_s + '"' + ","
-            file += '"' + inform.prmtr_auth_code + '"' + ","
-            file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime) + '"' + ","
+            file += '"' + inform.prmtr_auth_code.to_s + '"' + ","
+            file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime).to_s + '"' + ","
             file += '"' + '"' + "," #OCUPACIÓN que se deja en blanco
-            file += '"' + inform.p_municipality + '"' + ","
-            file += '"' + inform.zone_type + '"' + ","
-            file += '"' + inform.pregnancy_status + '"' + ","
-            file += '"' + inform.status + '"' + ","
+            file += '"' + inform.p_municipality.to_s + '"' + ","
+            file += '"' + inform.zone_type.to_s + '"' + ","
+            file += '"' + inform.pregnancy_status.to_s + '"' + ","
+            file += '"' + inform.status.to_s + '"' + ","
             file += '"' + inform.cytologies.first.pregnancies.to_s + '"' + ","
             file += '"' + inform.cytologies.first.last_mens.to_s + '"' + ","
             file += '"' + inform.cytologies.first.prev_appo.to_s + '"' + ","
@@ -401,20 +401,24 @@ class InformsController < ApplicationController
             file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #DIRIMIR CODCITO
             file += '"' + '"' + ","  #VINCULADO
             file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ","  #SECRETARIA
-            file += '"' + User.where(id: inform.user_id).first.fullname.upcase + '"' + ","  #SECRETAUNO
+            file += '"' + User.where(id: inform.user_id).first.try(:fullname).to_s.upcase + '"' + ","  #SECRETAUNO
             file += inform.created_at.strftime("%d/%m/%Y") + ","  #FECHA1
             file += '"' + inform.cytologies.first.sample_date.strftime("%d/%m/%Y") + '"' + ","
             file += '"' + inform.cytologies.first.last_result.to_s + '"' + ","
             file += "," #IMPRIMIR que se deja en blanco pero es numérico
 
             if inform.diagnostics.count == 1
-              file += '"' + "DS" + '"' + ","
+              file += '"' + "DST" + '"' + ","
             else
-              file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_review_id).first.last_name[0] + '"' + ","
+              if User.where(id: inform.pathologist_review_id).length > 0
+                file += '"' + User.find(inform.pathologist_review_id).initials + '"' + ","
+              else
+                file += '"",'
+              end
             end
 
             file += inform.patient.birth_date.strftime("%d/%m/%Y") #FECHANAC
-            file += '"' + '"' + "," #SINCRONIZA
+            file += '"",' #SINCRONIZA
             file += Time.current.strftime("%d/%m/%Y") #FSINCRO
             file += '"' + inform.cytologies.first.birth_control.to_s + '"' + ","
             file += '"' + '"' + "," #COLADE
@@ -426,20 +430,27 @@ class InformsController < ApplicationController
 
           if params[:inf_type] != 'cito'
             file += '"' + inform.blocks.where(stored: true).first.try(:block_tag).to_s + '"' + ","
-            file += '"' + User.where(id: inform.pathologist_id).first.fullname.upcase + '"' + ","
-            file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ","
+            file += '"' + User.where(id: inform.pathologist_id).first.try(:fullname).to_s.upcase + '"' + ","
+            file += '"' + User.where(id: inform.administrative_review_id).first.try(:fullname).to_s.upcase + '"' + ","
             file += '"' + '"' + "," #TIPO que se deja en blanco
             file += "," #IMPRIMIR que se deja en blanco pero es numérico
-            file += '"' + User.where(id: inform.user_id).first.fullname.upcase + '"' + ","
+            file += '"' + User.where(id: inform.user_id).first.try(:fullname).to_s.upcase + '"' + ","
             file += inform.created_at.strftime("%d/%m/%Y") + ","
             # file += "," #FOTO que se deja en blanco pero es general
             # file += "," #FOTO1 que se deja en blanco pero es general
             # file += "," #FOTO2 que se deja en blanco pero es general
             file += "," #Campo ORDEN que NO esta en la documentacion pero EXISTE
-            file += '"' + User.where(id: inform.pathologist_id).first.first_name + User.where(id: inform.pathologist_id).first.last_name + '"' + ","
+            file += '"' + User.where(id: inform.pathologist_id).first.try(:fullname).to_s.upcase + '"' + ","
             file += "," #RANGO que se deja en blanco pero es numérico
             file += '"' + inform.diagnostics.first.who_code.to_s + '"' + ","
-            file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","
+
+            if User.where(id: inform.pathologist_review_id).length > 0
+              file += '"' + User.find(inform.pathologist_review_id).initials + '"' + ","
+            else
+              file += '"",'
+            end
+            # file += '"' + User.where(id: inform.pathologist_review_id).first.first_name[0] + User.where(id: inform.pathologist_id).first.last_name[0] + '"' + ","
+
             if inform.p_age_type == nil
               file += '"",'
             elsif inform.p_age_type == "A"
@@ -583,9 +594,25 @@ class InformsController < ApplicationController
 
   def set_ready
     if Role.where(id: current_user.role_id).first.name == "Patologia" || Role.where(id: current_user.role_id).first.name == "CTO"
+      administrative_standard_review_id = User.where(email: "administracion@patologiasuescun.com").first.id
       @inform.update(pathologist_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
     elsif Role.where(id: current_user.role_id).first.name == "Secretaria" || Role.where(id: current_user.role_id).first.name == "Jefatura de laboratorio"
-      @inform.update(administrative_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
+      if inf_type != 'cito'
+        if @inform.pathologist_review_id == nil
+          @inform.update(pathologist_review_id: @inform.pathologist_id, administrative_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
+          @inform.comments.create(user_id: current_user.id, title: "revision", body: "Revisión científica asignada automáticamente al mismo patógolo por administrativo, al encontrarse sin revisar por usuario de patología")
+        else
+          @inform.update(administrative_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
+        end
+      else
+        if @inform.pathologist_id == nil  #Si nungún patólogo estuvo asignado, debe quedar DST
+          pathologist_standard_id = User.where(email: "gerencia@patologiasuescun.com").first.id
+          @inform.update(pathologist_id: pathologist_standard_id, pathologist_review_id: pathologist_standard_id, administrative_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
+        else
+          @inform.update(pathologist_review_id: @inform.pathologist_id, administrative_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)  #En este caso, pathologist_id podría ser nil si la cito era negativa, o podría tener datos si tuvo que ser validada por patologia
+        end
+
+      end
     end
     redirect_to index_revision_informs_path
   end

@@ -417,7 +417,12 @@ class InformsController < ApplicationController
               end
             end
 
-            file += inform.patient.birth_date.strftime("%d/%m/%Y") #FECHANAC
+            if inform.patient.birth_date != nil
+              file += inform.patient.birth_date.strftime("%d/%m/%Y") #FECHANAC
+            else
+              file += '"",'
+            end
+
             file += '"",' #SINCRONIZA
             file += Time.current.strftime("%d/%m/%Y") #FSINCRO
             file += '"' + inform.cytologies.first.birth_control.to_s + '"' + ","

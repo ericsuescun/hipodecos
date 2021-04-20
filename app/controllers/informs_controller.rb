@@ -605,7 +605,7 @@ class InformsController < ApplicationController
 
   def set_ready
     if Role.where(id: current_user.role_id).first.name == "Patologia" || Role.where(id: current_user.role_id).first.name == "CTO"
-      administrative_standard_review_id = User.where(email: "administracion@patologiasuescun.com").first.id
+      # administrative_standard_review_id = User.where(email: "administracion@patologiasuescun.com").first.id
       @inform.update(pathologist_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
     elsif Role.where(id: current_user.role_id).first.name == "Secretaria" || Role.where(id: current_user.role_id).first.name == "Jefatura de laboratorio"
       if inf_type != 'cito'

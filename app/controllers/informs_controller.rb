@@ -608,7 +608,7 @@ class InformsController < ApplicationController
       # administrative_standard_review_id = User.where(email: "administracion@patologiasuescun.com").first.id
       @inform.update(pathologist_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
     elsif Role.where(id: current_user.role_id).first.name == "Secretaria" || Role.where(id: current_user.role_id).first.name == "Jefatura de laboratorio"
-      if inf_type != 'cito'
+      if @inform.inf_type != 'cito'
         if @inform.pathologist_review_id == nil
           @inform.update(pathologist_review_id: @inform.pathologist_id, administrative_review_id: current_user.id, inf_status: "ready", delivery_date: Time.now)
           @inform.comments.create(user_id: current_user.id, title: "revision", body: "Revisión científica asignada automáticamente al mismo patógolo por administrativo, al encontrarse sin revisar por usuario de patología")

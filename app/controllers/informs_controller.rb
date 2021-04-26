@@ -191,13 +191,13 @@ class InformsController < ApplicationController
     # filename = "exp_fox_" + params[:inf_type] + "_" + params[:init_date] + "_a_" + params[:final_date] + ".zip"
 
     if params[:inf_type] == 'clin'
-      filename = "CLH.zip"
+      filename = "clin.zip"
     elsif params[:inf_type] == 'hosp'
-      filename = "HOH.zip"
+      filename = "hosp.zip"
     elsif params[:inf_type] == 'cito'
-      filename = "KCIT1.zip"
+      filename = "cit1.zip"
     elsif params[:inf_type] == 'cito2'
-      filename = "KCIT2.zip"
+      filename = "cit2.zip"
     end
 
     begin
@@ -244,7 +244,7 @@ class InformsController < ApplicationController
           end
 
 
-          file += '"' + inform.tag_code[0].to_s + '"' + ","
+          file += '"' + inform.tag_code[0].to_s + '"' + "," #SE ESTA COLANDO ALGO AQUI
           file += inform.tag_code[4..-1].to_s + ","
           file += inform.receive_date.strftime("%d/%m/%Y") + ","
           file += inform.delivery_date.strftime("%d/%m/%Y") + ","
@@ -477,7 +477,22 @@ class InformsController < ApplicationController
           end
 
         end
-        zipfile.get_output_stream("informes.TXT") { |f| f.puts(file[0..-3]) }
+
+        if params[:inf_type] == 'clin'
+          # filename = "CLH.zip"
+          zipfile.get_output_stream("clh.TXT") { |f| f.puts(file[0..-3]) }
+        elsif params[:inf_type] == 'hosp'
+          # filename = "HOH.zip"
+          zipfile.get_output_stream("hoh.TXT") { |f| f.puts(file[0..-3]) }
+        elsif params[:inf_type] == 'cito'
+          # filename = "KCIT1.zip"
+          zipfile.get_output_stream("kcit1.TXT") { |f| f.puts(file[0..-3]) }
+        elsif params[:inf_type] == 'cito2'
+          # filename = "KCIT2.zip"
+          zipfile.get_output_stream("kcit2.TXT") { |f| f.puts(file[0..-3]) }
+        end
+
+
       end
       @file2 = File.open("temp_file.zip")
       zip_data = File.read("temp_file.zip")

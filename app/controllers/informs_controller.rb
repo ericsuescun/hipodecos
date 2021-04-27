@@ -363,9 +363,9 @@ class InformsController < ApplicationController
 
           if params[:inf_type] == 'cito'
             file += '"' + inform.p_tel.to_s + "-" + '"' + ","
-            file += '"' + inform.diagnostics.last.result.to_s + '"' + ","
+            file += '"' + inform.micros.last.description.to_s + '"' + ","
             file += '"' + inform.diagnostics.last.description.to_s + '"' + ","
-            file += '"' + inform.cytologies.first.suggestion.to_s + '"' + ","
+            file += '"' + inform.suggestions.last.description.to_s + '"' + ","
             file += '"' + User.where(id: inform.cytologist).first.try(:fullname).to_s.upcase + '"' + ","
             if inform.diagnostics.count == 1
               file += '"' + "DAVID SUESCUN TARAZONA" + '"' + ","

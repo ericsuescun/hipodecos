@@ -397,11 +397,21 @@ class InformsController < ApplicationController
               file += '"' + inform.diagnostics.second.pss_code.to_s + '"' + ","  #CODIGO patologo
               file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #CODCITO citologo
             end
-            file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #DIRIMIR CODIGO, 95 cuando patologo no leyo
-            file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #DIRIMIR CODCITO
+            # file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #DIRIMIR CODIGO, 95 cuando patologo no leyo
+            # file += '"' + inform.diagnostics.first.pss_code.to_s + '"' + ","  #DIRIMIR CODCITO
             file += '"' + '"' + ","  #VINCULADO
-            file += '"' + User.where(id: inform.administrative_review_id).first.try(:first_name).to_s.upcase + " " + User.where(id: inform.administrative_review_id).first.try(:last_name).to_s.upcase + '"' + ","  #SECRETARIA
-            file += '"' + User.where(id: inform.user_id).first.try(:fullname).to_s.upcase + '"' + ","  #SECRETAUNO
+            if inform.administrative_review_id.present?
+              file += '"' + User.find(inform.administrative_review_id).initials + '",'
+            else
+              file += '"",'
+            end
+
+            if inform.user_id.present?
+              file += '"' + User.find(inform.user_id).initials + '",'
+            else
+              file += '"",'
+            end
+
             file += inform.created_at.strftime("%d/%m/%Y") + ","  #FECHA1
 
             if inform.cytologies.first.sample_date != nil
@@ -432,6 +442,7 @@ class InformsController < ApplicationController
             file += '"",' #SINCRONIZA
             file += Time.current.strftime("%d/%m/%Y") #FSINCRO
             file += '"' + inform.cytologies.first.birth_control.to_s + '"' + ","
+            file += '"' + Branch.where(id: inform.branch_id).first.try(:initials).to_s + '"' + ","      #ACA VA LA SEDE DONDE SE TOMO LA MUESTRA
             file += '"' + '"' + "," #COLADE
             file += '"' + '"' + "," #COLINAD
             file += '"' + '"' + "," #MONTAINE

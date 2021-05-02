@@ -1226,6 +1226,7 @@ class InformsController < ApplicationController
         end
         @diagnostic_text = @diagnostic_text + diagnostic.description + " "
       end
+      @diagnostic_codes = @inform.diagnostics.pluck(:pss_code, :who_code).uniq
 
       @pathologists = @pathologists.uniq
 

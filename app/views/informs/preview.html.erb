@@ -223,13 +223,13 @@
             <div class="card-footer text-muted d-flex justify-content-between">
               <div>
                 <% if @inform.inf_type != 'cito' %>
-                  <% @inform.diagnostics.each do |diagnostic| %>
-                    <strong>Código:</strong> <%= diagnostic.pss_code %> <strong>DX:</strong> <%= diagnostic.who_code %>
+                  <% @diagnostic_codes.each do |diagnostic| %>
+                    <strong>PSS:</strong> <%= diagnostic[0].to_s %> <strong>OMS:</strong> <%= diagnostic[1].to_s %>
                   <% end %>
                   <% if @inform.blocks.where(stored: true) != [] %>
-                    Se guarda
+                    <strong>, Se guarda:</strong>
                     <% @inform.blocks.where(stored: true).each do |stored_block| %>
-                      <strong><%= stored_block.block_tag %> </strong>
+                      <%= stored_block.block_tag %>
                     <% end %>
                   <% end %>
                 <% else %>
@@ -242,7 +242,7 @@
 
               </div>
               <div>
-                <strong>Secretaria:</strong> <%= User.where(id: @inform.user_id).first.try(:fullname) %>
+                <strong>Proyecta:</strong> <%= User.where(id: @inform.user_id).first.try(:fullname) %>
               </div>
             </div>
           </div>

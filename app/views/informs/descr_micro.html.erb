@@ -327,7 +327,7 @@
 
     <div class="row">
       <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-        <%= link_to "OK para validación", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+        <%= link_to "OK para validación por: #{current_user.initials}", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
       </div>
     </div>
   </div>

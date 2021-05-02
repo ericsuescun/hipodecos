@@ -8,6 +8,8 @@ class Inform < ApplicationRecord
   scope :hosp, -> { where(inf_type: 'hosp') }
   scope :clin, -> { where(inf_type: 'clin') }
   scope :ready, -> { where(inf_status: 'ready')}
+  scope :publ_down, -> { where(inf_status: 'published').or(where(inf_status: 'downloaded')) }
+  scope :delivery_range, -> (start_date, end_date) { where(delivery_date: start_date..end_date) }
 
   has_many :samples, dependent: :destroy  #Dificulto el borrado automático para evitar catástrofes
   has_many :studies, dependent: :destroy

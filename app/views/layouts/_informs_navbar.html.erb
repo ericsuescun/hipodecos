@@ -62,67 +62,30 @@
               <%= link_to "Citologías FoxPro", index_oldcitos_informs_path + "?init_date=" + (Oldcito.first.fecharec - 1.day).strftime("%d-%m-%Y") + "&final_date=" + Oldcito.first.fecharec.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
             </div>
           </li>
-          <% if role_path_allowed? %>
-            <li class="nav-item dropdown <%= 'active' if @tab == :pathologist %>">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Leer material
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-                <%= link_to "Hoy", descr_micros_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Ayer", descr_micros_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Antier", descr_micros_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Esta semana", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Este mes", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <div class="dropdown-divider"></div>
-                <% (1..6).each do |m| %>
-                  <%= link_to "#{m.month.ago.strftime('%b de %Y')}", descr_micros_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
-                <% end %>
-              </div>
-            </li>
-          <% end %>
-          <% if role_cyto_allowed? %>
-            <li class="nav-item dropdown <%= 'active' if @tab == :cytologist %>">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Leer material Cito
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-                <%= link_to "Hoy", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Ayer", descr_micros_cyto_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Antier", descr_micros_cyto_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Esta semana", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Este mes", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <div class="dropdown-divider"></div>
-                <% (1..6).each do |m| %>
-                  <%= link_to "#{m.month.ago.strftime('%b de %Y')}", descr_micros_cyto_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
-                <% end %>
-              </div>
-            </li>
-          <% end %>
-          <% if role_admin_allowed? %>
-            <li class="nav-item dropdown <%= 'active' if @tab == :cytologist %>">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Anotar lectura
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-                <p class="dropdown-item">Patología</p>
-                <%= link_to "Hoy", descr_micros_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Ayer", descr_micros_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Antier", descr_micros_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Esta semana", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Este mes", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <div class="dropdown-divider"></div>
-                <p class="dropdown-item">Citología</p>
-                <%= link_to "Hoy", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Ayer", descr_micros_cyto_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Antier", descr_micros_cyto_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Esta semana", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <%= link_to "Este mes", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-                <div class="dropdown-divider"></div>
-                
-              </div>
-            </li>
-          <% end %>
-          
+          <li class="nav-item dropdown <%= 'active' if @tab == :pathologist %>">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Lectura
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+              <%= link_to "Pat: Hoy", descr_micros_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Pat: Ayer", descr_micros_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Pat: Antier", descr_micros_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Pat: Esta semana", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Pat: Este mes", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <% (1..2).each do |m| %>
+                <%= link_to "Pat: #{m.month.ago.strftime('%b de %Y')}", descr_micros_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Cit: Hoy", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Cit: Ayer", descr_micros_cyto_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Cit: Antier", descr_micros_cyto_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Cit: Esta semana", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Cit: Este mes", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <% (1..2).each do |m| %>
+                <%= link_to "Cit: #{m.month.ago.strftime('%b de %Y')}", descr_micros_cyto_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </li>
           <li class="nav-item dropdown <%= 'active' if @tab == :revision %>">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Validación
@@ -172,7 +135,7 @@
       </ul>
       <% if user_signed_in? %>
         <ul class="navbar-nav d-flex justify-content-end">
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Usuario: <%= current_user.initials %>

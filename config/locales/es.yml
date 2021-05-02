@@ -4,6 +4,9 @@ es:
     next_label: "Siguiente"
     page_gap: "..."
   activerecord:
+    errors:
+      messages:
+        record_invalid: Registro inválido
     models:
       inform: Informes
       patient: Paciente

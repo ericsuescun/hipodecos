@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
+      <%= will_paginate @informs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       <h1>Informes por validar</h1>
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -14,7 +15,7 @@
             <th>EPS</th>
             <th>Sede IPS</th>
             <th>Código Authoriz.</th>
-            
+
           </tr>
         </thead>
 
@@ -31,14 +32,14 @@
               <td><%= inform.patient.id_type + " " + inform.patient.id_number %></td>
               <td>
                 <%= link_to inform.patient  do %>
-                  <%= inform.patient.fullname %> 
+                  <%= inform.patient.fullname %>
                 <% end %>
               </td>
               <td><%= inform.p_age %></td>
               <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
               <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
               <td><%= inform.prmtr_auth_code %></td>
-              
+
             </tr>
           <% end %>
         </tbody>

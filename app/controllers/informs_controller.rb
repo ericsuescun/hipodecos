@@ -68,17 +68,17 @@ class InformsController < ApplicationController
     # else
     #   @informs = Inform.where(inf_status: "revision")
     # end
-    if params[:init_date]
-      initial_date = Date.parse(params[:init_date]).beginning_of_day
-      final_date = Date.parse(params[:final_date]).end_of_day
-      date_range = initial_date..final_date
-    else
-      initial_date = 1.day.ago.beginning_of_day
-      final_date = Time.now.end_of_day
-      date_range = initial_date..final_date
-    end
+    # if params[:init_date]
+    #   initial_date = Date.parse(params[:init_date]).beginning_of_day
+    #   final_date = Date.parse(params[:final_date]).end_of_day
+    #   date_range = initial_date..final_date
+    # else
+    #   initial_date = 1.day.ago.beginning_of_day
+    #   final_date = Time.now.end_of_day
+    #   date_range = initial_date..final_date
+    # end
     # @informs = Inform.unscoped.where(user_review_date: date_range, inf_status: "revision").order(pathologist_id: :asc, cytologist: :asc).paginate(page: params[:page], per_page: 10)
-    @informs = Inform.unscoped.where(user_review_date: date_range, inf_status: "revision").order(pathologist_id: :asc, cytologist: :asc)
+    @informs = Inform.unscoped.where(inf_status: "revision").order(pathologist_id: :asc, cytologist: :asc).paginate(page: params[:page], per_page: 10)
   end
 
   def index_ready
@@ -552,7 +552,7 @@ class InformsController < ApplicationController
       @informs = Inform.select(serializer).where(inf_status: nil).or(Inform.select(serializer).where(inf_status: "revision_cyto")).order(pathologist_id: :asc).paginate(page: params[:page], per_page: 10)
     else
       # @informs = Inform.select(serializer).where(user_review_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
-      @informs = Inform.select(serializer).where(inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id)).paginate(page: params[:page], per_page: 10)
+      @informs = Inform.select(serializer).where(inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(inf_status: "revision_cyto", pathologist_id: current_user.id)).paginate(page: params[:page], per_page: 10)
     end
 
   end

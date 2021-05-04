@@ -67,23 +67,9 @@
               Lectura
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Pat: Hoy", descr_micros_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Pat: Ayer", descr_micros_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Pat: Antier", descr_micros_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Pat: Esta semana", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Pat: Este mes", descr_micros_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <% (1..2).each do |m| %>
-                <%= link_to "Pat: #{m.month.ago.strftime('%b de %Y')}", descr_micros_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
-              <% end %>
+              <%= link_to "Patología", descr_micros_informs_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Cit: Hoy", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Cit: Ayer", descr_micros_cyto_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Cit: Antier", descr_micros_cyto_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Cit: Esta semana", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Cit: Este mes", descr_micros_cyto_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <% (1..2).each do |m| %>
-                <%= link_to "Cit: #{m.month.ago.strftime('%b de %Y')}", descr_micros_cyto_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
-              <% end %>
+              <%= link_to "Citología", descr_micros_cyto_informs_path, class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown <%= 'active' if @tab == :revision %>">
@@ -91,15 +77,7 @@
               Validación
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Hoy", index_revision_informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Ayer", index_revision_informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Antier", index_revision_informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Esta semana", index_revision_informs_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Este mes", index_revision_informs_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <% (1..6).each do |m| %>
-                <%= link_to "#{m.month.ago.strftime('%b de %Y')}", index_revision_informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") , class: "dropdown-item" %>
-              <% end %>
+              <%= link_to "Validación", index_revision_informs_path, class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown <%= 'active' if @tab == :ready %>">

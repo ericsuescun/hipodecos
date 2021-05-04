@@ -549,7 +549,7 @@ class InformsController < ApplicationController
 
     if role_admin_allowed?
       # @informs = Inform.unscoped.where(user_review_date: date_range, inf_status: nil).or(Inform.unscoped.where(user_review_date: date_range, inf_status: "revision_cyto")).order(pathologist_id: :asc)
-      @informs = Inform.select(serializer).where(user_review_date: date_range, inf_status: nil).or(Inform.select(serializer).where(user_review_date: date_range, inf_status: "revision_cyto")).order(pathologist_id: :asc).paginate(page: params[:page], per_page: 10)
+      @informs = Inform.select(serializer).where(inf_status: nil).or(Inform.select(serializer).where(inf_status: "revision_cyto")).order(pathologist_id: :asc).paginate(page: params[:page], per_page: 10)
     else
       # @informs = Inform.select(serializer).where(user_review_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
       @informs = Inform.select(serializer).where(inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id)).paginate(page: params[:page], per_page: 10)

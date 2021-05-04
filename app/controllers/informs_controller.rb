@@ -549,10 +549,10 @@ class InformsController < ApplicationController
 
     if role_admin_allowed?
       # @informs = Inform.unscoped.where(user_review_date: date_range, inf_status: nil).or(Inform.unscoped.where(user_review_date: date_range, inf_status: "revision_cyto")).order(pathologist_id: :asc)
-      @informs = Inform.select(serializer).where(inf_status: nil).or(Inform.select(serializer).where(inf_status: "revision_cyto")).order(pathologist_id: :asc).paginate(page: params[:page], per_page: 10)
+      @informs = Inform.select(serializer).where(inf_status: nil).or(Inform.select(serializer).where(inf_status: "revision_cyto")).order(pathologist_id: :asc).order(tag_code: :asc).paginate(page: params[:page], per_page: 10)
     else
       # @informs = Inform.select(serializer).where(user_review_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
-      @informs = Inform.select(serializer).where(inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(inf_status: "revision_cyto", pathologist_id: current_user.id)).paginate(page: params[:page], per_page: 10)
+      @informs = Inform.select(serializer).where(inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(inf_status: "revision_cyto", pathologist_id: current_user.id)).order(tag_code: :asc).paginate(page: params[:page], per_page: 10)
     end
 
   end
@@ -675,16 +675,6 @@ class InformsController < ApplicationController
 
   def distribution
     @tab = :asign
-    # if params[:yi]
-    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-    #   date_range = initial_date..final_date
-    #   # @informs = Inform.where(created_at: date_range).joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
-    #   @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
-    # else
-    #   # @informs = Inform.joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
-    #   @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true).joins(:inform).select("slides.inform_id").distinct
-    # end
 
     if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day
@@ -713,22 +703,6 @@ class InformsController < ApplicationController
         end
       end
     end
-
-
-    # Inform.unscoped.where.not(inf_type: "cito").joins(:slides).where(slides: { created_at: Date.parse("01-01-2021")..Date.parse("28-01-2021"), colored: true, covered: true, tagged: true}).select(:tag_code, :id, :pathologist_id, :inf_status).order(pathologist_id: :asc)
-
-
-
-
-
-
-    # @informs_unassigned.each_with_index do |inform, n|
-    #   if n <=50
-    #     @informs_first_batch << inform
-    #   else
-    #     @informs_rest << inform
-    #   end
-    # end
     @informs_first_batch = @informs_unassigned[0..49]
     if @informs_first_batch == nil
       @informs_unassigned = []
@@ -746,7 +720,6 @@ class InformsController < ApplicationController
       if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
         if slide.inform.inf_type == 'cito'
           unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded" || slide.inform.inf_status == "revision"
-            # @informs2 << slide.inform
             if slide.inform.pathologist_id != nil
               @informs2 << slide.inform # citos ya asignadas en otro batch, van directo a @informs porque ya tienen patologo/a
             else

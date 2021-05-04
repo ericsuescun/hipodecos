@@ -4,6 +4,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
+      <%= will_paginate @informs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>

@@ -7,6 +7,7 @@
         <thead class="thead-dark">
           <tr>
             <th>Informe</th>
+            <th>Estado</th>
             <th>Días</th>
             <th>Validación Patología</th>
             <th>Identificación</th>
@@ -26,6 +27,9 @@
                 <%= link_to show_revision_inform_path(inform), local: true  do %>
                   <%= inform.tag_code %>
                 <% end %>
+              </td>
+              <td>
+                <%= render 'inform_status', inform: inform %>
               </td>
               <td><%= (Date.today - inform.receive_date).to_i %></td>
               <td><%= User.where(id: inform.pathologist_review_id).first.try(:first_name) %> <%= User.where(id: inform.pathologist_review_id).first.try(:last_name) %></td>

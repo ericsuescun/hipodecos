@@ -7,16 +7,13 @@
         <thead class="thead-dark">
           <tr>
             <th>Informe</th>
+            <th>Pat</th>
             <th>Estado</th>
             <th>Días</th>
             <th>Fecha recibo</th>
-            <th>Valid Pat</th>
             <th>Identificación</th>
             <th>Paciente</th>
             <th>Edad</th>
-            <th>EPS</th>
-            <th>Sede IPS</th>
-            <th>Código Authoriz.</th>
 
           </tr>
         </thead>
@@ -29,12 +26,12 @@
                   <%= inform.tag_code %>
                 <% end %>
               </td>
+              <td><%= User.where(id: inform.pathologist_id).first.try(:initials) %></td>
               <td>
                 <%= render 'inform_status', inform: inform %>
               </td>
               <td><%= (Date.today - inform.receive_date).to_i %></td>
               <td><%= inform.receive_date.strftime("%d/%m/%Y") %></td>
-              <td><%= User.where(id: inform.pathologist_review_id).first.try(:initials) %></td>
               <td><%= inform.patient.id_type + " " + inform.patient.id_number %></td>
               <td>
                 <%= link_to inform.patient  do %>
@@ -42,10 +39,6 @@
                 <% end %>
               </td>
               <td><%= inform.p_age %></td>
-              <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
-              <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
-              <td><%= inform.prmtr_auth_code %></td>
-
             </tr>
           <% end %>
         </tbody>

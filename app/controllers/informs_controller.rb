@@ -587,7 +587,7 @@ class InformsController < ApplicationController
     #   date_range = initial_date..final_date
     # end
 
-    serializer = %w[id tag_code pathologist_id inf_status receive_date patient_id]
+    serializer = %w[id tag_code pathologist_id inf_status receive_date patient_id cytologist]
 
     if role_admin_allowed?
       # @informs = Inform.unscoped.where(user_review_date: date_range, inf_type: "cito", inf_status: nil).order(pathologist_id: :asc)

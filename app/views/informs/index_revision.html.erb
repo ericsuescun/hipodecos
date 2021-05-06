@@ -9,6 +9,7 @@
             <th>Informe</th>
             <th>Estado</th>
             <th>Días</th>
+            <th>Fecha recibo</th>
             <th>Valid Pat</th>
             <th>Identificación</th>
             <th>Paciente</th>
@@ -32,6 +33,7 @@
                 <%= render 'inform_status', inform: inform %>
               </td>
               <td><%= (Date.today - inform.receive_date).to_i %></td>
+              <td><%= inform.receive_date.strftime("%d/%m/%Y") %></td>
               <td><%= User.where(id: inform.pathologist_review_id).first.try(:initials) %></td>
               <td><%= inform.patient.id_type + " " + inform.patient.id_number %></td>
               <td>

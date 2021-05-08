@@ -1,4 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: organs
+#
+#  id         :bigint           not null, primary key
+#  admin_id   :integer
+#  organ      :string
+#  organ_code :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  part       :string
+#
 
 one:
   admin_id: 1

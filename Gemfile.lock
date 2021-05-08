@@ -56,6 +56,9 @@ GEM
     aliyun-sdk (0.8.0)
       nokogiri (~> 1.6)
       rest-client (~> 2.0)
+    annotate (3.1.1)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 14.0)
     ansi (1.5.0)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
@@ -486,6 +489,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (>= 5.2.4.5)
+  annotate
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)

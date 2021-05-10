@@ -115,6 +115,7 @@ class SamplesController < ApplicationController
 
       objection = block.objections.build
       objection.closed = true
+      objection.obcode_id = 1
       objection.close_user_id = current_user.id
       objection.close_date = block.updated_at
       objection.description = objection.description.to_s + log
@@ -123,6 +124,7 @@ class SamplesController < ApplicationController
 
     objection = @sample.objections.build
     objection.closed = true
+    objection.obcode_id = 1
     objection.close_user_id = current_user.id
     objection.close_date = @sample.updated_at
     objection.description = objection.description.to_s + log

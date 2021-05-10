@@ -25,4 +25,8 @@ class Physician < ApplicationRecord
   before_save { self.name.upcase! }
   before_save { self.lastname.upcase! }
 
+  def fullname
+    [name, lastname].join(' ')
+  end
+
 end

@@ -222,29 +222,9 @@ class PatientsController < ApplicationController
     end
   end
 
-  # def fast_new_form
-
-  # end
-
-  # def fast_new
-  #   patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
-
-  #   if patients.length > 0
-  #     @patient = patients.first
-  #     @inform = patients.first.informs.build.physicians.build #Creo la instancia para physician para la form
-  #     redirect_to patient_path(patients.first)
-  #   else
-  #     @patient = Patient.new(id_number: params[:id_number])
-  #     @inform = @patient.informs.build.physicians.build #Creo la instancia para physician para la form
-  #   end
-  # end
-
-  # GET /patients/1/edit
   def edit
   end
 
-  # POST /patients
-  # POST /patients.json
   def create
     @patient = Patient.new(patient_params)
 
@@ -253,26 +233,25 @@ class PatientsController < ApplicationController
     end
 
     @patient.informs.first.user_id = current_user.id
-    @patient.informs.first.entity_id = Branch.where(id: params[:patient][:informs_attributes][:"0"][:branch_id]).first.try(:entity_id)
-    # @patient.informs.first.regime = Promoter.where(id: params[:patient][:informs_attributes][:"0"][:promoter_id]).first.try(:regime)
+    # @patient.informs.first.entity_id = Branch.where(id: params[:patient][:informs_attributes][:"0"][:branch_id]).first.try(:entity_id)
 
-    @patient.password = params[:patient][:id_number]
-    @patient.password_confirmation = params[:patient][:id_number]
+    # @patient.password = params[:patient][:id_number]
+    # @patient.password_confirmation = params[:patient][:id_number]
 
-    date_range = Date.today.beginning_of_year..Date.today.end_of_year
+    # date_range = Date.today.beginning_of_year..Date.today.end_of_year
 
-    if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
-        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
-        @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-    else
-      if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
-        consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
-        @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-      else
-        consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
-        @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-      end
-    end
+    # if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
+    #     consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+    #     @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    # else
+    #   if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
+    #     consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
+    #     @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    #   else
+    #     consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
+    #     @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    #   end
+    # end
 
     if @patient.save
       inform = @patient.informs.first #Si el informe más reciente fue cito, preparo toda la info
@@ -343,31 +322,29 @@ class PatientsController < ApplicationController
     end
 
     @patient.informs.first.user_id = current_user.id
-    @patient.informs.first.entity_id = Branch.where(id: params[:patient][:informs_attributes][:"0"][:branch_id]).first.try(:entity_id)
-    @patient.informs.first.regime = Promoter.where(id: params[:patient][:informs_attributes][:"0"][:promoter_id]).first.try(:regime)
+    # @patient.informs.first.entity_id = Branch.where(id: params[:patient][:informs_attributes][:"0"][:branch_id]).first.try(:entity_id)
+    # @patient.informs.first.regime = Promoter.where(id: params[:patient][:informs_attributes][:"0"][:promoter_id]).first.try(:regime)
 
-    @patient.password = params[:patient][:id_number]
-    @patient.password_confirmation = params[:patient][:id_number]
+    # @patient.password = params[:patient][:id_number]
+    # @patient.password_confirmation = params[:patient][:id_number]
 
-    date_range = Date.today.beginning_of_year..Date.today.end_of_year
-
-    # byebug
+    # date_range = Date.today.beginning_of_year..Date.today.end_of_year
 
     # consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
     # @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
 
-    if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
-        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
-        @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-    else
-      if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
-        consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
-        @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-      else
-        consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
-        @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
-      end
-    end
+    # if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
+    #     consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+    #     @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    # else
+    #   if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
+    #     consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
+    #     @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    #   else
+    #     consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
+    #     @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    #   end
+    # end
 
     if @patient.save
 

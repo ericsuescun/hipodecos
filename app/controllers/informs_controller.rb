@@ -1042,29 +1042,29 @@ class InformsController < ApplicationController
     inform.user_id = current_user.id
 
 
-    entity = Branch.where(id: inform.branch_id).first.entity
-    if entity == nil
-      inform.entity_id = nil
-    else
-      inform.entity_id = entity.id
-    end
+    # entity = Branch.where(id: inform.branch_id).first.entity
+    # if entity == nil
+    #   inform.entity_id = nil
+    # else
+    #   inform.entity_id = entity.id
+    # end
 
-    inform.regime = Promoter.where(id: inform.promoter_id).first.try(:regime)
+    # inform.regime = Promoter.where(id: inform.promoter_id).first.try(:regime)
 
-    date_range = Time.zone.now.to_date.beginning_of_year..Time.zone.now.to_date.end_of_year
+    # date_range = Time.zone.now.to_date.beginning_of_year..Time.zone.now.to_date.end_of_year
 
-    if params[:inform][:inf_type] == "clin"
-       consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
-       inform.tag_code = "C" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
-    else
-     if params[:inform][:inf_type] == "hosp"
-       consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
-       inform.tag_code = "H" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
-     else
-       consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
-       inform.tag_code = "K" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
-     end
-    end
+    # if params[:inform][:inf_type] == "clin"
+    #    consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+    #    inform.tag_code = "C" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
+    # else
+    #  if params[:inform][:inf_type] == "hosp"
+    #    consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
+    #    inform.tag_code = "H" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
+    #  else
+    #    consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
+    #    inform.tag_code = "K" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
+    #  end
+    # end
 
     inform.save
 

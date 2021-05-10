@@ -56,4 +56,8 @@ class User < ApplicationRecord
     init.join('')
   end
 
+  def role
+    Role.find(role_id).name
+  end
+
 end

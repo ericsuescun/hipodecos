@@ -63,12 +63,38 @@ class Patient < ApplicationRecord
 	before_save { self.lastname1.to_s.upcase! }
 	before_save { self.lastname2.to_s.upcase! }
 
+	after_validation :set_age, :set_password
+
 	def fullname
 	  [name1, name2, lastname1, lastname2].join(' ')
 	end
 
 	def halfname
 	  [name1, lastname1].join(' ')
+	end
+
+	private
+
+	def set_age
+		if self.birth_date.present?
+			day_diff = ((Date.today - self.birth_date).to_i)
+			if day_diff >= 30
+				self.age_type = "M"
+				self.age_number = day_diff / 30
+			else
+				self.age_type = "D"
+				self.age_number = day_diff
+			end
+			if day_diff >= 365
+				self.age_type = "A"
+				self.age_number = day_diff / 365
+			end
+		end
+	end
+
+	def set_password
+		self.password = self.id_number
+		self.password_confirmation = self.id_number
 	end
 
 end

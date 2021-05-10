@@ -326,9 +326,16 @@
     <% end %>
 
     <div class="row">
-      <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-        <%= link_to "OK para validación por: #{current_user.initials}", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
-      </div>
+      <% if @inform.studies.count != 0 %>
+        <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+          <%= link_to "OK para validación por: #{current_user.initials}", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+        </div>
+      <% else %>
+        <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+          <%= link_to "#{current_user.initials}: Faltan CUPS", set_revision_inform_path(@inform), class: "btn btn-warning btn-block mt-3 disabled" %>
+        </div>
+      <% end %>
+
     </div>
   </div>
 </div>

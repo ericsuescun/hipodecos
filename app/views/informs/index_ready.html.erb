@@ -8,18 +8,18 @@
         <div class="row">
           <div class="col-12 col-lg-4">
             <div class="form-group mt-1">
-              
+
               <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-4">
             <div class="form-group mt-1">
-             
+
               <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
             </div>
           </div>
           <div class="col-12 col-lg-4">
-            
+
             <%= submit_tag "Buscar", class: "btn btn-primary btn-block mt-1" %>
           </div>
         </div>
@@ -39,12 +39,11 @@
             <th></th>
             <th>Informe</th>
             <th>Estado</th>
+            <th>Recibido</th>
+            <th>Entregado</th>
             <th>Días</th>
             <th>Revisión</th>
             <th>Paciente</th>
-            <th>EPS</th>
-            <th>Sede IPS</th>
-            <th>Código Authoriz.</th>
             <th scope="2"></th>
           </tr>
         </thead>
@@ -59,18 +58,17 @@
                 <% end %>
               </td>
               <td><%= inform.inf_status %></td>
-              <td><%= (Date.today - inform.receive_date).to_i %></td>
+              <td><%= inform.receive_date.strftime("%d/%m/%Y") %></td>
+              <td><%= inform.delivery_date.strftime("%d/%m/%Y") %></td>
+              <td><%= (inform.delivery_date.to_date - inform.receive_date).to_i %></td>
               <td><%= User.where(id: inform.pathologist_review_id).first.try(:initials) %> <%= User.where(id: inform.administrative_review_id).first.try(:initials) %></td>
               <td>
                 <%= link_to inform.patient  do %>
                   <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
                   <% end %>
               </td>
-              <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
-              <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
-              <td><%= inform.prmtr_auth_code %></td>
               <td><%= link_to "Invalidar", show_revision_inform_path(inform), local: true, class: "btn btn-warning btn-sm" %></td>
-              
+
             </tr>
           <% end %>
         </tbody>

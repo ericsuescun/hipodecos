@@ -37,7 +37,7 @@
                     <% end %>
                     <span><strong>Descripción del recipiente o paquete (macro):</strong> Acá, describes lo general. En cada cassette/extendido, describes lo particular.</span>
                   </div>
-                  
+
                   <p class="card-text mt-2"> <%= recipient.description %></p>
                 <% end %>
               </div>
@@ -60,13 +60,13 @@
                           <% else %>
                             <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
                           <% end %>
-                        
+
                           <% if sample.name == "Cassette" %>
                             <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
                           <% else %>
                             <span class="d-flex "><strong><%= sample.sample_tag %></strong></span>
                           <% end %>
-                          
+
 
                           <span class="mr-3"><strong><%= sample.name == "Extendido" ? sample.name[0..2] : "" %></strong></span>
                           <% unless sample.blocked %>
@@ -83,18 +83,18 @@
                               <% if sample.organ_code == nil %>
 
                                 <%= render partial: "informs/organs_choice", locals: { sample: sample } %>
-                                
+
                               <% else %>
 
-                              <% end %> 
+                              <% end %>
                             </div>
-                            
-                            <h6 class="card-title my-0">Órgano: <%= sample.organ_code %></h6>
+
+                            <h6 class="card-title my-0">Órgano: <%= sample.organ_code %> <%= link_to "(Cambiar)", edit_organ_sample_path(sample) %></h6>
 
                             <% if edit_sample_tag == "" %>
                               <%= sample.description %>
                             <% end %>
-                            
+
                             <% if (sample.fragment == nil && sample.name != "Extendido") || sample.description == nil || edit_sample_tag == sample.sample_tag %>
                               <%= form_with model: sample do |f| %>
                                 <div class="field">
@@ -102,8 +102,8 @@
                                     <%= f.label "Fragmentos:" %>
                                     <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
                                   <% end %>
-                                  
-                                  
+
+
                                 </div>
                                 <div class="field">
                                   <%= f.label "Descripción:" %>
@@ -113,18 +113,18 @@
                                   <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
                                 </div>
                               <% end %>
-                            
+
                             <% end %>
                             <div id="controls-sample-<%= sample.sample_tag %>">
                               <%= render partial: "samples/sample-controls", locals: { inform: inform, recipient: recipient, sample: sample } %>
                             </div>
-                            
+
 
                           </div>
                         </div>
-                      </div>  
+                      </div>
                     <% end %>
-                  
+
                     <div class="col-12 col-lg-3 card-in">
                       <div class="card mx-2 my-2 pb-0">
                         <div class="card-header pt-1 pb-1">
@@ -141,7 +141,7 @@
                             <% end %>
                             <span class="ml-3">Cassette</span>
                           </div>
-                            
+
                           <div class="d-flex flex-row align-items-center">
                             <%= form_with model: [inform, inform.samples.build] do |form| %>
                               <%= form.submit "+E", class: "btn btn-primary btn-sm" %>
@@ -151,14 +151,14 @@
                             <% end %>
                             <span class="ml-3">Extendido</span>
                           </div>
-                            
-                          
-                          
+
+
+
                         </div>
                       </div>
                     </div>
 
-                    
+
 
                   </div>
 
@@ -174,7 +174,7 @@
           </div>
           <div class="card-body pt-0 pb-0">
             <div class="row d-flex align-items-center">
-              
+
               <div class="col-12 col-lg-5 col-xl-5">
                 <div class="d-flex flex-row">
 
@@ -206,10 +206,10 @@
 
               <div class="col-12 col-lg-4 col-xl-3">
                 <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
-                  
-                  
+
+
                   <div class="row d-flex flex-row justify-content-center no-gutters">
-                    
+
                       <div class="actions mt-3">
                         <%= form.submit "+", class: "btn btn-outline-dark mx-1" %>
                       </div>
@@ -227,11 +227,11 @@
                         <%= form.collection_select(:organ, Organ.all, :organ, :organ, {prompt: 'Órgano'}, { class: "btn btn-outline-dark form-control input mx-2" }) %>
                       </div>
                     </div>
-                    
+
                   </div>
                   <%= form.hidden_field :inform_id, value: inform.id %>
                   <%= form.hidden_field :title, value: "+ Rec +" %>
-                  
+
                 <% end %>
               </div>
 

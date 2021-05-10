@@ -1,6 +1,6 @@
 class SamplesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_sample, only: [:show, :edit, :update, :destroy]
+  before_action :set_sample, only: [:show, :edit, :edit_organ, :update_organ, :update, :destroy]
 
   # GET /samples
   # GET /samples.json
@@ -25,6 +25,12 @@ class SamplesController < ApplicationController
     @recipient = Recipient.where(tag: recipient).first
     @edit_sample_tag = @sample.sample_tag
     @automatics = Automatic.all
+    @organs = Organ.all
+  end
+
+  def edit_organ
+    @inform = Inform.find(@sample.inform_id)
+    @organs = Organ.all.order(organ: :asc)
   end
 
   # POST /samples
@@ -82,6 +88,48 @@ class SamplesController < ApplicationController
     @recipient = Recipient.where(tag: recipient).first
     @automatics = Automatic.all
 
+  end
+
+  def update_organ
+    # log = "\nCAMBIOS:\n-TITULO-\nANTES:" + @sample.name + "\n- DESPUÉS: -\n" + sample_params[:name] + ".\n-DESCRIPCIÓN-\nANTES:" + @sample.description + "\n- DESPUÉS: -\n" + sample_params[:description] + "-\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s + "\nEtiqueta: " + sample_params[:sample_tag]
+    log = "\nCAMBIOS:\n"
+    if @sample.organ_code != sample_params[:organ_code]
+      log += "\n-ORGANO-\nANTES:" + @sample.organ_code.to_s + "\n- DESPUÉS: -\n" + sample_params[:organ_code].to_s
+    else
+      log += "\n-ORGANO-\nSIN CAMBIOS."
+    end
+    log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s + "\nEtiqueta: " + sample_params[:sample_tag].to_s
+    @sample.update(sample_params)
+
+    if @sample.name == "Cassette"
+      block = Block.where(block_tag: @sample.sample_tag).first
+
+      log = "\nCAMBIOS:\n"
+      if block.organ_code != sample_params[:organ_code]
+        log += "\n-ORGANO-\nANTES:" + block.organ_code.to_s + "\n- DESPUÉS: -\n" + sample_params[:organ_code].to_s
+      else
+        log += "\n-ORGANO-\nSIN CAMBIOS."
+      end
+      log += "\nFECHA: " + Date.today.strftime('%d/%m/%Y') + "\nUSUARIO: " + current_user.email.to_s
+      block.update(organ_code: @sample.organ_code)
+
+      objection = block.objections.build
+      objection.closed = true
+      objection.close_user_id = current_user.id
+      objection.close_date = block.updated_at
+      objection.description = objection.description.to_s + log
+      objection.save
+    end
+
+    objection = @sample.objections.build
+    objection.closed = true
+    objection.close_user_id = current_user.id
+    objection.close_date = @sample.updated_at
+    objection.description = objection.description.to_s + log
+    objection.save
+
+    inform = Inform.find(@sample.inform_id)
+    redirect_to inform_path(inform)
   end
 
   def destroy

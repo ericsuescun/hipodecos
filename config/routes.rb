@@ -313,6 +313,11 @@ Rails.application.routes.draw do
     resources :samples do
       resources :objections, module: :samples
       resources :pictures, module: :samples
+
+      member do
+        get :edit_organ
+        patch :update_organ
+      end
     end
 
     resources :studies do

@@ -77,7 +77,7 @@ class Inform < ApplicationRecord
 
   validates :branch_id, :zone_type, :receive_date, :inf_type, presence: true
 
-  after_validation :get_tag_code, :get_entity
+  before_save :get_tag_code, :get_entity, on: :create
 
   def get_entity
     self.entity_id = Branch.find(self.branch_id).entity.id

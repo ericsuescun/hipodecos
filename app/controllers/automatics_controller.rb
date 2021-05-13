@@ -71,7 +71,7 @@ class AutomaticsController < ApplicationController
   # PATCH/PUT /automatics/1.json
   def update
     @automatic.user_id = current_user.id
-    
+
     respond_to do |format|
       if @automatic.update(automatic_params)
         format.html { redirect_to @automatic, notice: 'El automático fue actualizado exitosamente!' }
@@ -86,11 +86,19 @@ class AutomaticsController < ApplicationController
   # DELETE /automatics/1
   # DELETE /automatics/1.json
   def destroy
+    type = @automatic.auto_type
     @automatic.destroy
-    respond_to do |format|
-      format.html { redirect_to automatics_url, notice: 'El automático y sus pasos fueron borrados exitosamente!' }
-      format.json { head :no_content }
+    if type == "micro"
+      @macro_automatics = Automatic.unscoped.where(auto_type: "micro").order(organ: :asc)
+      redirect_to automatics_index_micro_url, notice: 'El automático y sus pasos fueron borrados exitosamente!'
+    elsif type = "macro"
+      @macro_automatics = Automatic.unscoped.where(auto_type: "macro").order(organ: :asc)
+      redirect_to automatics_index_macro_url, notice: 'El automático y sus pasos fueron borrados exitosamente!'
+    else
+      @macro_automatics = Automatic.unscoped.where(auto_type: "cito").order(organ: :asc)
+      redirect_to automatics_index_cito_url, notice: 'El automático y sus pasos fueron borrados exitosamente!'
     end
+
   end
 
   private

@@ -15,17 +15,31 @@
 
   <tbody>
     <% automatics.each do |automatic| %>
-      <tr>
-        <td><%= automatic.organ %></td>
-        <td><%= automatic.title %></td>
-        <td><%= automatic.scripts.count %></td>
-        <td><%= User.where(id: automatic.user_id).first.try(:fullname) %></td>
-        <td><%= automatic.created_at.strftime('%d/%m/%Y') %></td>
-        <td><%= automatic.updated_at.strftime('%d/%m/%Y') %></td>
-        <td><%= link_to 'Detalles', automatic %></td>
-        <td><%= link_to 'Editar', edit_automatic_path(automatic) %></td>
-        <td><%= link_to 'Borrar', automatic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
-      </tr>
+      <% if automatic.scripts.count == 1 %>
+        <tr class="table-warning">
+          <td><%= automatic.organ.upcase %></td>
+          <td><%= link_to automatic.title.upcase, automatic %></td>
+          <td><%= automatic.scripts.count %></td>
+          <td><%= User.find(automatic.user_id).initials %></td>
+          <td><%= automatic.created_at.strftime('%d/%m/%Y') %></td>
+          <td><%= automatic.updated_at.strftime('%d/%m/%Y') %></td>
+
+          <td><%= link_to 'Editar', edit_automatic_path(automatic) %></td>
+          <td><%= link_to 'Borrar', automatic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td><%= automatic.organ.upcase %></td>
+          <td><%= link_to automatic.title.upcase, automatic %></td>
+          <td><%= automatic.scripts.count %></td>
+          <td><%= User.find(automatic.user_id).initials %></td>
+          <td><%= automatic.created_at.strftime('%d/%m/%Y') %></td>
+          <td><%= automatic.updated_at.strftime('%d/%m/%Y') %></td>
+
+          <td><%= link_to 'Editar', edit_automatic_path(automatic) %></td>
+          <td><%= link_to 'Borrar', automatic, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

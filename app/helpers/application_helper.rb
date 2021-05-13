@@ -35,20 +35,21 @@ module ApplicationHelper
 			if inform.blocks.count == 0 && inform.samples.where(name: "Cassette").count == 0
 				return ["danger", inform.samples.where(name: "Cassette").count, inform.blocks.count, inform.samples.where(name: "Extendido").count]
 			end
-			return ["warning", inform.samples.where(name: "Cassette").count, inform.blocks.count, inform.samples.where(name: "Extendido").count]		
+			return ["warning", inform.samples.where(name: "Cassette").count, inform.blocks.count, inform.samples.where(name: "Extendido").count]
 		end
-		
+
 	end
 
 	def get_slides_status(inform)
 		if inform.inf_type == 'cito'
-			if inform.slides.count != 0
-				return ["success", inform.blocks.count, inform.slides.count, inform.studies.count]
+			if (inform.slides.where(colored: true, covered: true, tagged: true).count == inform.slides.count) && inform.slides.count > 0
+				return ["success", inform.blocks.count, inform.slides.where(colored: true, covered: true, tagged: true).count, inform.slides.count, inform.studies.count]
 			end
 			if inform.slides.count == 0
-				return ["danger", inform.blocks.count, inform.slides.count, inform.studies.count]
+				return ["danger", inform.blocks.count, inform.slides.where(colored: true, covered: true, tagged: true).count, inform.slides.count, inform.studies.count]
 			end
-		else	
+			return ["warning", inform.blocks.count, inform.slides.where(colored: true, covered: true, tagged: true).count, inform.slides.count]
+		else
 			if (inform.slides.where(colored: true, covered: true, tagged: true).count == inform.slides.count) && inform.slides.count > 0
 				return ["success", inform.blocks.count, inform.slides.where(colored: true, covered: true, tagged: true).count, inform.slides.count]
 			end
@@ -57,7 +58,7 @@ module ApplicationHelper
 			end
 			return ["warning", inform.blocks.count, inform.slides.where(colored: true, covered: true, tagged: true).count, inform.slides.count]
 		end
-		
+
 	end
 
 	def get_info_status(inform)
@@ -70,7 +71,7 @@ module ApplicationHelper
 		end
 		return ["warning", inform.micros.count, inform.diagnostics.count]
 	end
-	
+
 
 	# def get_status(inform)
 	# 	status = "("
@@ -127,7 +128,7 @@ module ApplicationHelper
 				"entre " + date_init.strftime('%b %d de %Y') + " y " + date_final.strftime('%b %d de %Y')
 			end
 		end
-		
+
 	end
 
 	def new_search_range
@@ -153,9 +154,9 @@ module ApplicationHelper
 
 		if descr
 			descr.gsub!("Ã\u009F","á")
-			
+
 			descr.gsub!("Ã\u009A","é")
-			
+
 			descr.gsub!("Ã\u009D","í")
 
 			descr.gsub!("Â¾","ó")
@@ -185,5 +186,5 @@ module ApplicationHelper
 		 end
 		end
 	end
-	
+
 end

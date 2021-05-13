@@ -12,7 +12,7 @@
 <% end %>
 <% if inform.inf_type == 'cito' %>
   <span class="badge badge-pill badge-<%= get_slides_status(inform)[0] %>">
-    <%= get_slides_status(inform)[2] %>P
+    <%= get_slides_status(inform)[2] %>P<%= get_slides_status(inform)[3] %>
   </span>
 <% else %>
   <span class="badge badge-pill badge-<%= get_slides_status(inform)[0] %>">

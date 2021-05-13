@@ -16,7 +16,7 @@ class AutomaticsController < ApplicationController
   end
 
   def index_micro
-    @micro_automatics = Automatic.unscoped.where(auto_type: "micro").order(organ: :asc)
+    @micro_automatics = Automatic.unscoped.where(auto_type: "micro").order(organ: :asc, title: :asc)
   end
 
   def index_cito

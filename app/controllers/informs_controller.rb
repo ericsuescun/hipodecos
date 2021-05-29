@@ -1193,9 +1193,9 @@ class InformsController < ApplicationController
           @pathologists << User.find(micro.user_id)
         end
         if micro.description.size > 500
-          @micro_text = @micro_text + "\n" + "\n" + micro.description + "\n "
+          @micro_text = @micro_text + "\n\r" + "\n\r" + micro.description + "\n\r "
         else
-          @micro_text = @micro_text + micro.description + "\n\r"
+          @micro_text = @micro_text + micro.description + " "
         end
 
       end
@@ -1205,7 +1205,7 @@ class InformsController < ApplicationController
         if User.find(diagnostic.user_id).role_id == p_role
           @pathologists << User.find(diagnostic.user_id)
         end
-        @diagnostic_text = @diagnostic_text + diagnostic.description + "\n\r"
+        @diagnostic_text = @diagnostic_text + diagnostic.description + " "
       end
       @diagnostic_codes = @inform.diagnostics.pluck(:pss_code, :who_code).uniq
 

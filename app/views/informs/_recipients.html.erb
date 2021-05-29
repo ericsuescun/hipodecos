@@ -126,36 +126,36 @@
                     <% end %>
 
                     <div class="col-12 col-lg-3 card-in">
-                      <div class="card mx-2 my-2 pb-0">
-                        <div class="card-header pt-1 pb-1">
-                          <strong>Nueva muestra</strong>
-                        </div>
-                        <div class="card-body">
-
-                          <div class="d-flex flex-row align-items-center mb-3">
-                            <%= form_with model: [inform, inform.samples.build] do |form| %>
-                              <%= form.submit " + ", class: "btn btn-primary btn-sm" %>
-                              <%= form.hidden_field :recipient_tag, value: recipient.tag %>
-                              <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
-                              <%= form.hidden_field :name, value: "Cassette" %>
-                            <% end %>
-                            <span class="ml-3">Cassette</span>
+                      <% if inform.inf_status != 'revision' %>
+                        <div class="card mx-2 my-2 pb-0">
+                          <div class="card-header pt-1 pb-1">
+                            <strong>Nueva muestra</strong>
                           </div>
+                          <div class="card-body">
 
-                          <div class="d-flex flex-row align-items-center">
-                            <%= form_with model: [inform, inform.samples.build] do |form| %>
-                              <%= form.submit "+E", class: "btn btn-primary btn-sm" %>
-                              <%= form.hidden_field :recipient_tag, value: recipient.tag %>
-                              <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
-                              <%= form.hidden_field :name, value: "Extendido" %>
-                            <% end %>
-                            <span class="ml-3">Extendido</span>
+                            <div class="d-flex flex-row align-items-center mb-3">
+                              <%= form_with model: [inform, inform.samples.build] do |form| %>
+                                <%= form.submit " + ", class: "btn btn-primary btn-sm" %>
+                                <%= form.hidden_field :recipient_tag, value: recipient.tag %>
+                                <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
+                                <%= form.hidden_field :name, value: "Cassette" %>
+                              <% end %>
+                              <span class="ml-3">Cassette</span>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center">
+                              <%= form_with model: [inform, inform.samples.build] do |form| %>
+                                <%= form.submit "+E", class: "btn btn-primary btn-sm" %>
+                                <%= form.hidden_field :recipient_tag, value: recipient.tag %>
+                                <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
+                                <%= form.hidden_field :name, value: "Extendido" %>
+                              <% end %>
+                              <span class="ml-3">Extendido</span>
+                            </div>
+
                           </div>
-
-
-
                         </div>
-                      </div>
+                      <% end %>
                     </div>
 
 
@@ -168,83 +168,86 @@
             </div>
           </div>
         <% end %>
-        <div class="card bg-light mx-2 mb-3">
-          <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
-            <strong>Nuevo recipiente</strong>
-          </div>
-          <div class="card-body pt-0 pb-0">
-            <div class="row d-flex align-items-center">
+        <% if inform.inf_status != 'revision' %>
+          <div class="card bg-light mx-2 mb-3">
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <strong>Nuevo recipiente</strong>
+            </div>
+            <div class="card-body pt-0 pb-0">
+              <div class="row d-flex align-items-center">
 
-              <div class="col-12 col-lg-5 col-xl-5">
-                <div class="d-flex flex-row">
+                <div class="col-12 col-lg-5 col-xl-5">
+                  <div class="d-flex flex-row">
 
-                  <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
-                    <div class="actions">
-                      <%= form.submit "+ Cassette", class: "btn btn-outline-dark mx-1 my-1" %>
-                      <%= form.hidden_field :inform_id, value: inform.id %>
-                      <%= form.hidden_field :title, value: "+ Rec +1" %>
-                    </div>
-                  <% end %>
-                  <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
-                    <div class="actions">
-                      <%= form.submit "+ 2 Cassettes", class: "btn btn-outline-dark mx-1 my-1" %>
-                      <%= form.hidden_field :inform_id, value: inform.id %>
-                      <%= form.hidden_field :title, value: "+ Rec +2" %>
-                    </div>
-                  <% end %>
-                  <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
-                    <div class="actions">
-                      <%= form.submit "+ 3 Cassettes", class: "btn btn-outline-dark mx-1 my-1" %>
-                      <%= form.hidden_field :inform_id, value: inform.id %>
-                      <%= form.hidden_field :title, value: "+ Rec +3" %>
-                    </div>
-                  <% end %>
-
-
-                </div>
-              </div>
-
-              <div class="col-12 col-lg-4 col-xl-3">
-                <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
-
-
-                  <div class="row d-flex flex-row justify-content-center no-gutters">
-
-                      <div class="actions mt-3">
-                        <%= form.submit "+", class: "btn btn-outline-dark mx-1" %>
+                    <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
+                      <div class="actions">
+                        <%= form.submit "+ Cassette", class: "btn btn-outline-dark mx-1 my-1" %>
+                        <%= form.hidden_field :inform_id, value: inform.id %>
+                        <%= form.hidden_field :title, value: "+ Rec +1" %>
                       </div>
-
-                    <div class="col-12 col-lg-3 col-xl-3">
-                      <div class="form-group mt-3">
-                        <%= form.number_field :samples, value: 4, class: "form-control input mx-1" %>
+                    <% end %>
+                    <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
+                      <div class="actions">
+                        <%= form.submit "+ 2 Cassettes", class: "btn btn-outline-dark mx-1 my-1" %>
+                        <%= form.hidden_field :inform_id, value: inform.id %>
+                        <%= form.hidden_field :title, value: "+ Rec +2" %>
                       </div>
-                    </div>
-
-
-
-                    <div class="col-12 col-lg-5 col-xl-5">
-                      <div class="form-group mt-3">
-                        <%= form.collection_select(:organ, Organ.all, :organ, :organ, {prompt: 'Órgano'}, { class: "btn btn-outline-dark form-control input mx-2" }) %>
+                    <% end %>
+                    <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
+                      <div class="actions">
+                        <%= form.submit "+ 3 Cassettes", class: "btn btn-outline-dark mx-1 my-1" %>
+                        <%= form.hidden_field :inform_id, value: inform.id %>
+                        <%= form.hidden_field :title, value: "+ Rec +3" %>
                       </div>
-                    </div>
+                    <% end %>
+
 
                   </div>
-                  <%= form.hidden_field :inform_id, value: inform.id %>
-                  <%= form.hidden_field :title, value: "+ Rec +" %>
+                </div>
 
-                <% end %>
+                <div class="col-12 col-lg-4 col-xl-3">
+                  <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
+
+
+                    <div class="row d-flex flex-row justify-content-center no-gutters">
+
+                        <div class="actions mt-3">
+                          <%= form.submit "+", class: "btn btn-outline-dark mx-1" %>
+                        </div>
+
+                      <div class="col-12 col-lg-3 col-xl-3">
+                        <div class="form-group mt-3">
+                          <%= form.number_field :samples, value: 4, class: "form-control input mx-1" %>
+                        </div>
+                      </div>
+
+
+
+                      <div class="col-12 col-lg-5 col-xl-5">
+                        <div class="form-group mt-3">
+                          <%= form.collection_select(:organ, Organ.all, :organ, :organ, {prompt: 'Órgano'}, { class: "btn btn-outline-dark form-control input mx-2" }) %>
+                        </div>
+                      </div>
+
+                    </div>
+                    <%= form.hidden_field :inform_id, value: inform.id %>
+                    <%= form.hidden_field :title, value: "+ Rec +" %>
+
+                  <% end %>
+                </div>
+
+                <div class="col-12 col-lg-3">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#autosMacroModal">
+                    + Automáticos
+                  </button>
+                </div>
+
               </div>
-
-              <div class="col-12 col-lg-3">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#autosMacroModal">
-                  + Automáticos
-                </button>
-              </div>
-
             </div>
           </div>
-        </div>
+        <% end %>
+
       </div>
     </div>
 

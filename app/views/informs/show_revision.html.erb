@@ -9,11 +9,15 @@
     <br>
     <div class="container-fluid">
       <% if @inform.inf_type != "cito" %>
-
         <div class="row">
-          <!-- <div class="col-12 col-lg-4 col-xl-4 macros-in">
-            <%= render partial: "macros/macros", locals: { inform: @inform } %>
-          </div> -->
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="recipient">
+              <!-- <h1>Recipientes</h1> -->
+              <%= render partial: "recipients", locals: { inform: @inform, edit_sample_tag: "", edit_recipient_tag: "", automatics: @automatics } %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-12 col-lg-6 col-xl-6">
             <div class="row">
               <div class="micros-in">

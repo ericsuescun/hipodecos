@@ -1175,6 +1175,7 @@ class InformsController < ApplicationController
   end
 
   def preview
+    @samples = @inform.samples.select(:fragment, :sample_tag, :description, :name)
     p_role = Role.where(name: "Patologia").first.id
     if @inform.inf_type != 'cito'
       @pathologists = []
@@ -1194,7 +1195,7 @@ class InformsController < ApplicationController
         if micro.description.size > 500
           @micro_text = @micro_text + "\n" + "\n" + micro.description + "\n "
         else
-          @micro_text = @micro_text + micro.description + " "
+          @micro_text = @micro_text + micro.description + "\n\r"
         end
 
       end
@@ -1204,7 +1205,7 @@ class InformsController < ApplicationController
         if User.find(diagnostic.user_id).role_id == p_role
           @pathologists << User.find(diagnostic.user_id)
         end
-        @diagnostic_text = @diagnostic_text + diagnostic.description + " "
+        @diagnostic_text = @diagnostic_text + diagnostic.description + "\n\r"
       end
       @diagnostic_codes = @inform.diagnostics.pluck(:pss_code, :who_code).uniq
 

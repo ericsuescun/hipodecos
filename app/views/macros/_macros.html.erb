@@ -5,16 +5,13 @@
     </div>
     <div class="card-body py-0">
         <% @inform.recipients.each_with_index do |recipient, n| %>
-          <br>
-          <br>
           Contenido de recipiente #<%= n + 1 %>:
           <%= simple_format(recipient.description) %>
           Bloqueado de la siguiente manera:
-          <br>
           <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
             <strong><%= sample.description %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></strong>
-
           <% end %>
+          <br>
         <% end %>
       <p class="card-text">
       </p>

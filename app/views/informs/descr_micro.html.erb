@@ -18,11 +18,8 @@
 
     <div class="row">
       <% if @inform.inf_type != "cito" %>
-
         <div class="row">
-
           <div class="col-12 col-lg-6 col-xl-6">
-
             <div class="row">
               <div class="col-12">
                 <div class="micros-in">
@@ -34,9 +31,7 @@
                   <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
                 </div>
               </div>
-
             </div>
-
           </div>
           <div class="col-12 col-lg-6 col-xl-6">
             <div class="card">
@@ -44,7 +39,6 @@
                 <strong>Lista de automáticos</strong>
               </div>
               <div class="card-body">
-
                 <p class="card-text">
                   <div class="row">
                     <div class="col-12 col-lg-6 col-xl-6">
@@ -157,45 +151,55 @@
                     </div>
                   </div>
                 </p>
-
               </div>
             </div>
           </div>
         </div>
-
-
-
       <% else %>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 col-lg-6 mt-3">
+              <div class="row">
+                <div class="col-12">
+                  <div class="micros-in">
+                    <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
+                  </div>
+                </div>
+                <div class="col-12 mt-3">
+                  <div class="diagnostics-in">
+                    <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
+                  </div>
+                </div>
+                <div class="col-12 mt-3">
+                  <div class="suggestions-in">
+                    <%= render partial: "suggestions/suggestions", locals: { inform: @inform, edit_suggestion: nil, edit_objection_id: nil, edit_su_status: false } %>
+                  </div>
+                </div>
+                <% if @inform.inf_type == 'cito' %>
+                  <div class="col-12 col-lg-8 mx-auto">
+                    <div class="row">
+                      <% if @inform.studies.count != 0 %>
+                        <div class="col-12 col-lg-12 col-xl-12 mx-auto">
+                          <%= link_to "OK para validación por: #{current_user.initials}", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+                        </div>
+                      <% else %>
+                        <div class="col-12 col-lg-12 col-xl-12 mx-auto">
+                          <%= link_to "#{current_user.initials}: Faltan CUPS", set_revision_inform_path(@inform), class: "btn btn-warning btn-block mt-3 disabled" %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
 
-        <div class="row">
-          <div class="col-12 col-lg-6 col-xl-6">
-            <div class="row">
-              <div class="col-12">
-                <div class="micros-in">
-                  <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>
-                </div>
-              </div>
-              <div class="col-12 mt-3">
-                <div class="diagnostics-in">
-                  <%= render partial: "diagnostics/diagnostics", locals: { inform: @inform, diagcodes: @diagcodes, edit_diagnostic: nil, edit_objection_id: nil, edit_dx_status: false } %>
-                </div>
-              </div>
-              <div class="col-12 mt-3">
-                <div class="suggestions-in">
-                  <%= render partial: "suggestions/suggestions", locals: { inform: @inform, edit_suggestion: nil, edit_objection_id: nil, edit_su_status: false } %>
-                </div>
+                <% end %>
               </div>
             </div>
-          </div>
-          <div class="col-12 col-lg-6 col-xl-6">
-            <% if @inform.micros.count < 2 %>
-            <div class="card">
-              <div class="card-header m-0 p-0 pl-1">
-                <strong>Lista de automáticos</strong>
-              </div>
-              <div class="card-body">
-
-                <p class="card-text">
+            <div class="col-12 col-lg-6 mt-3">
+              <% if @inform.micros.count < 2 %>
+              <div class="card">
+                <div class="card-header m-0 p-0 pl-1">
+                  <strong>Lista de automáticos</strong>
+                </div>
+                <div class="card-body">
                   <div class="row">
                     <div class="col-12 col-lg-6 col-xl-6">
                       <table class="table table-hover select-micro">
@@ -306,13 +310,13 @@
                       </table>
                     </div>
                   </div>
-                </p>
-
+                </div>
               </div>
+              <% end %>
             </div>
-            <% end %>
           </div>
         </div>
+
       <% end %>
     </div>
     <% if @inform.inf_type != "cito" %>
@@ -324,18 +328,18 @@
         </div>
       </div>
     <% end %>
-
-    <div class="row">
-      <% if @inform.studies.count != 0 %>
-        <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-          <%= link_to "OK para validación por: #{current_user.initials}", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
-        </div>
-      <% else %>
-        <div class="col-4 col-lg-4 col-xl-4 mx-auto">
-          <%= link_to "#{current_user.initials}: Faltan CUPS", set_revision_inform_path(@inform), class: "btn btn-warning btn-block mt-3 disabled" %>
-        </div>
-      <% end %>
-
-    </div>
+    <% if @inform.inf_type != 'cito' %>
+      <div class="row">
+        <% if @inform.studies.count != 0 %>
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <%= link_to "OK para validación por: #{current_user.initials}", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+          </div>
+        <% else %>
+          <div class="col-4 col-lg-4 col-xl-4 mx-auto">
+            <%= link_to "#{current_user.initials}: Faltan CUPS", set_revision_inform_path(@inform), class: "btn btn-warning btn-block mt-3 disabled" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

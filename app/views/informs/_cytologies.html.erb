@@ -35,26 +35,38 @@
                             </div>
                             <div class="col-12 col-lg-3 col-xl-3">
                               <div class="form-group">
-                                <%= form.label "Cita anterior:" %>
+                                <%= form.label "Citología anterior:" %>
                                 <%= form.text_field :prev_appo, class: "form-control input" %>
                               </div>
                             </div>
                             <div class="col-12 col-lg-3 col-xl-3">
                               <div class="form-group">
                                 <%= form.label "Último resultado:" %>
-                                <%= form.select(:last_result, options_for_select([['ASC-US', 'ASC-US'], ['ASC-H', 'ASC-H'], ['AGC-NOS', 'AGC-NOS'], ['AGC-NEO', 'AGC-NEO'], ['LEI-BG', 'LEI-BG'], ['LEI-AG', 'LEI-AG'], ['CARCINOMA', 'CARCINOMA'], ['ADENOCARCINOMA', 'ADENOCARCINOMA'], ['NEGATIVA', 'NEGATIVA'], ['INSATISFACTORIA', 'INSATISFACTORIA']], nil), { include_blank: true }, class: "form-control input") %>
+                                <%= form.select(:last_result, options_for_select([['ASC-US', 'ASC-US'], ['ASC-H', 'ASC-H'], ['AGC-NOS', 'AGC-NOS'], ['AGC-NEO', 'AGC-NEO'], ['LEI-BG', 'LEI-BG'], ['LEI-AG', 'LEI-AG'], ['CARCINOMA', 'CARCINOMA'], ['ADENOCARCINOMA', 'ADENOCARCINOMA'], ['NEGATIVA', 'NEGATIVA'], ['INSATISFACTORIA', 'INSATISFACTORIA']], cytology.last_result), { include_blank: true }, class: "form-control input") %>
                               </div>
                             </div>
-                            <div class="col-12 col-lg-3 col-xl-3">
+                            <div class="col-12 col-lg-2 col-xl-2">
                               <div class="form-group">
                                 <%= form.label "Embarazos:" %>
                                 <%= form.number_field :pregnancies, class: "form-control input" %>
                               </div>
                             </div>
-                            <div class="col-12 col-lg-3 col-xl-3">
+                            <div class="col-12 col-lg-2 col-xl-2">
                               <div class="form-group">
-                                <%= form.label "Método de planificación" %>
-                                <%= form.select(:birth_control, options_for_select([['DIU', '0'], ['Implante', '2'], ['Pastillas', '4'], ['Inyección', '6'], ['Esterilización', '12'], ['Barrera', '14'], ['No planifica', '20'], ['Basectomía', '22']], nil), { include_blank: true }, class: "form-control input") %>
+                                <%= form.label "Método planif:" %>
+                                <%= form.select(:birth_control, options_for_select([['DIU', '0'], ['Implante', '2'], ['Pastillas', '4'], ['Inyección', '6'], ['Esterilización', '12'], ['Barrera', '14'], ['No planifica', '20'], ['Basectomía', '22']], cytology.birth_control), { include_blank: true }, class: "form-control input") %>
+                              </div>
+                            </div>
+                            <div class="col-12 col-lg-2 col-xl-2">
+                              <div class="form-group">
+                                <%= form.label "Histerectomía:" %>
+                                <%= form.select(:hysterectomy, options_for_select([['Si', 'Si'], ['No', 'No']], cytology.hysterectomy), { include_blank: true }, class: "form-control input") %>
+                              </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-6">
+                              <div class="form-group">
+                                <%= form.label "Aspecto de cuello:" %>
+                                <%= form.text_area :neck_aspect, class: "form-control input" %>
                               </div>
                             </div>
                           </div>
@@ -84,6 +96,7 @@
                       <div class="card-body p-1 m-0 d-flex flex-column">
                         <p><span><strong>Última menstruación:</strong> <%= cytology.last_mens %> - <strong>Fecha de cita anterior:</strong> <%= cytology.prev_appo %> - <strong>Fecha de toma de la muestra:</strong> <%= cytology.sample_date %></span></p>
                         <p><span><strong>Número de embarazos:</strong> <%= cytology.pregnancies %> - <strong>Método de planificación:</strong> <%= get_birth_control(cytology.birth_control) %> - <strong>Último resultado:</strong> <%= cytology.last_result %></span></p>
+                        <p><span><strong>Histerectomía:</strong> <%= cytology.hysterectomy %> - <strong>Aspecto del cuello:</strong> <%= cytology.neck_aspect %></span></p>
 
                         <% cytology.objections.each do |objection| %>
                           <% if edit_objection_id == nil %>

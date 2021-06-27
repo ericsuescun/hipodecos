@@ -107,14 +107,21 @@
       <% else %>
         <div class="row">
           <div class="col-12 col-lg-12">
-            <strong>TIPO DE MUESTRA, CALIDAD DEL ESPECIMEN, CATEGORIZACIÓN Y DESCRIPCIÓN</strong>
           </div>
         </div>
+        
         <div class="row">
           <div class="col-12 col-lg-12">
-            <% if @inform.micros != [] %>
-              <%= @inform.micros.last.description %>
-            <% end %>
+            <div class="card mt-3">
+              <div class="card-header text-center py-1">
+                <strong>TIPO DE MUESTRA, CALIDAD DEL ESPECIMEN, CATEGORIZACIÓN Y DESCRIPCIÓN</strong>
+              </div>
+              <div class="card-body">
+                <% if @inform.micros != [] %>
+                  <%= simple_format(@inform.micros.last.description) %>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>
@@ -164,7 +171,7 @@
       <div class="row diagnostic">
         <div class="col-12 col-lg-12">
           <div class="card mt-3">
-            <div class="card-header text-center">
+            <div class="card-header text-center py-1">
               <% if @inform.inf_type != 'cito' %>
                 <strong>DIAGNÓSTICO Y PROCEDIMIENTOS</strong>
               <% else %>
@@ -245,6 +252,23 @@
           </div>
         </div>
       </div>
+
+      <% if @inform.inf_type == 'cito' %>
+        <div class="row sugerencias">
+          <div class="col-12 col-lg-12">
+            <div class="card mt-3">
+              <div class="card-header text-center py-1">
+                <strong>SUGERENCIAS</strong>
+              </div>
+              <div class="card-body">
+                <div class="d-flex flex-row">
+                  <h5 class="card-title mr-2"><strong><%= simple_format(@inform.suggestions.first.description) %></strong></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %> 
     </div>
   </div>
 </div>

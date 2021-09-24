@@ -22,7 +22,6 @@ class InclusionBlocksController < ApplicationController
 		informs = Inform.select(:id, :tag_code, :created_at).joins(:blocks).merge(Block.not_verified).select(:block_tag).uniq
 
 		@informs_data = []
-		# @informs = Inform.where(receive_date: date_range)
 		informs.each do |inform|
 			@informs_data << [ inform, inform.samples.with_cassette, inform.blocks]
 		end
@@ -114,7 +113,7 @@ class InclusionBlocksController < ApplicationController
 	  	@sample.update(included: true, user_id: current_user.id)
 	  end
 	  # get_blocks
-	  redirect_to inclusion_blocks_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date]
+	  redirect_to inclusion_blocks_path
 	end
 
 	def block_store

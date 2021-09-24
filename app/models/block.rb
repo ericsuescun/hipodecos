@@ -21,7 +21,11 @@ class Block < ApplicationRecord
   has_many :objections, as: :objectionable, dependent: :destroy
   # has_many :objections, as: :objectionable
 
+  has_one :sample, class_name: 'Sample', primary_key: 'block_tag', foreign_key: 'sample_tag'
+
   default_scope -> { order(block_tag: :asc) }
+  scope :verified, -> { where(verified: true) }
+  scope :not_verified, -> { where(verified: false) }
   
   validates :block_tag, uniqueness: true
 end

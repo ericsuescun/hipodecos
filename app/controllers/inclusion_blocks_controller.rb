@@ -18,31 +18,13 @@ class InclusionBlocksController < ApplicationController
 
 	def index
 		@tab = :inclusion
-		if params[:init_date]
-		  initial_date = Date.parse(params[:init_date]).beginning_of_day
-		  final_date = Date.parse(params[:final_date]).end_of_day
-		  date_range = initial_date..final_date
-		  
-		else
-		  initial_date = 1.day.ago.beginning_of_day
-		  final_date = Time.now.end_of_day
-		  date_range = initial_date..final_date
-		end
-		# @blocks = Block.where(created_at: date_range).joins("INNER JOIN samples ON blocks.block_tag = samples.sample_tag")
-		# @samplesc = Sample.where(name: "Cassette").joins("INNER JOIN blocks ON blocks.block_tag = samples.sample_tag")
-		# build_inclusion
 
-		@blocks = Block.where(created_at: date_range)
-		@informs = []
-		@blocks.each do |block|
-			@informs << block.inform
-		end
-		@informs = @informs.uniq
+		informs = Inform.select(:id, :tag_code, :created_at).joins(:blocks).merge(Block.not_verified).select(:block_tag).uniq
 
 		@informs_data = []
 		# @informs = Inform.where(receive_date: date_range)
-		@informs.each do |inform|
-			@informs_data << [ inform, inform.samples.where(name: "Cassette"), inform.blocks]
+		informs.each do |inform|
+			@informs_data << [ inform, inform.samples.with_cassette, inform.blocks]
 		end
 	end
 

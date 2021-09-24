@@ -16,48 +16,61 @@
               <%= form.submit "Incluir lo marcado", class: "ml-1 my-0 d-flex btn btn-sm btn-outline-success" %>
               <div class="row">
                 <div class="col-12 col-lg-12 col-xl-12">
-                  
-                  <div class="row">
-                    
+                  <% if @informs_data.present? %>
+                    <div class="row">
+                      
                       <% create_matrix(@informs_data,5).each do |informs_data| %>
                         <div class="col-3 col-lg-3 col-xl-2">
                           <table class="table table-hover list-blocks">
-                            
                             <tbody>
                               <% informs_data.each do |inform_data| %>
                                 <% inform = inform_data[0] %>
                                 <% samplesc = inform_data[1] %>
                                 <% blocks = inform_data[2] %>
                                 <tr class="inclusion-inform p-0 m-0">
-                                  <td class="m-0 p-0"><strong><span  class="badge badge-dark"><%= inform.tag_code %></span></strong></td>
+                                  <td class="m-0 p-0"><strong><span  class="badge badge-dark">
+                                    <%= link_to inform_path(inform), class: "badge badge-dark" do %>
+                                      <%= inform.tag_code %>
+                                    <% end %>
+                                      
+                                    </span></strong></td>
                                   <td class="m-0 p-0"></td>
                                   <td class="m-0 p-0"><span  class="badge badge-dark"><%= blocks.count %></span></td>
                                 </tr>
                                 <tr>
                                   <% samplesc.each_with_index do |sample, n| %>
-                                    <tr class="inclusion-inform p-0 m-0 table-<%= sample.fragment == blocks[n].fragment ? "success" : "warning" %>">
-                                      <% if sample.sample_tag == blocks[n].block_tag %>
-                                        <td class="m-0 p-0"><%= sample.sample_tag %></td>
-                                      <% else %>
-                                        <td class="m-0 p-0">Error de etiqueta</td>
-                                      <% end %>
-                                      <td class="m-0 p-0"><span class="d-flex pt-2 mr-1 badge badge-primary"><%= sample.fragment %></span></td>
-                                      <td id="add-link-block-<%= blocks[n].block_tag %>" class="m-0 p-0">
-                                        <%= render partial: "inclusion_blocks/link-block", locals: { sample: sample, block: blocks[n] } %>
-                                      </td>
-                                      <% if sample.included == true %>
-                                        <td class="m-0 p-0"></td>
-                                      <% else %>
-                                        <td class="m-0 p-0"><%= check_box_tag "block_ids[]", blocks[n].id, checked: true %></td>
-                                      <% end %>
-                                      <% if !sample.included %>
-                                        <td class="m-0 p-0">
-                                          <%= render partial: "inclusion_blocks/inclusion-block-controls", locals: { block: blocks[n], sample: sample } %>
+                                    <% if blocks[n].present? %>
+                                      <tr class="inclusion-inform p-0 m-0 table-<%= sample.fragment == blocks[n].fragment ? "success" : "warning" %>">
+                                        <% if sample.sample_tag == blocks[n].block_tag %>
+                                          <td class="m-0 p-0"><%= sample.sample_tag %></td>
+                                        <% else %>
+                                          <td class="m-0 p-0">Error de etiqueta</td>
+                                        <% end %>
+                                        <td class="m-0 p-0"><span class="d-flex pt-2 mr-1 badge badge-primary"><%= sample.fragment %></span></td>
+                                        <td id="add-link-block-<%= blocks[n].block_tag %>" class="m-0 p-0">
+                                          <%= render partial: "inclusion_blocks/link-block", locals: { sample: sample, block: blocks[n] } %>
                                         </td>
-                                      <% else %>
-                                        <td></td>
-                                      <% end %>
-                                    </tr>
+                                        <% if sample.included == true %>
+                                          <td class="m-0 p-0"></td>
+                                        <% else %>
+                                          <td class="m-0 p-0"><%= check_box_tag "block_ids[]", blocks[n].id, checked: true %></td>
+                                        <% end %>
+                                        <% if !sample.included %>
+                                          <td class="m-0 p-0">
+                                            <%= render partial: "inclusion_blocks/inclusion-block-controls", locals: { block: blocks[n], sample: sample } %>
+                                          </td>
+                                        <% else %>
+                                          <td></td>
+                                        <% end %>
+                                      </tr>
+                                    <% else %>
+                                      <tr class="inclusion-inform p-0 m-0 table-danger %>">
+                                        <td class="m-0 p-0"><%= sample.sample_tag %></td>
+                                        <td class="m-0 p-0"><span class="d-flex pt-2 mr-1 badge badge-primary"><%= sample.fragment %></span></td>
+                                        <td class="m-0 p-0"><span class="d-flex pt-2 mr-1 badge badge-danger">X</span></td>
+                                      </tr>
+                                    <% end %>
+                                    
                                   <% end %>
                                 </tr>
                               <% end %>
@@ -65,8 +78,11 @@
                           </table>
                         </div>
                       <% end %>
-                    
-                  </div>
+                    </div>
+                  <% else %>
+                    <h6>Faltan muestras por procesar</h6>
+                  <% end %>
+                  
                 </div>
               </div>
             <% end %>

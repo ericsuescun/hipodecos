@@ -26,6 +26,8 @@ class Block < ApplicationRecord
   default_scope -> { order(block_tag: :asc) }
   scope :verified, -> { where(verified: true) }
   scope :not_verified, -> { where(verified: false) }
+  scope :slided, -> { where.not(slide_tag: nil) }
+  scope :not_slided, -> { where(slide_tag: nil) }
   
   validates :block_tag, uniqueness: true
 end

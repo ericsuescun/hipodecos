@@ -3,7 +3,7 @@
 	function refresh2() {
 
 	  $('div.list-slides').remove();
-	  $('div.list-slide').append('<%= j render "slides/list-slides", slides: @slides %>');
+	  $('div.list-slide').append('<%= j render "slides/list-slides", informs: @informs %>');
 
 	  
 	  $('div.fast-bar').append('<%= j render "ok-message", message: "cubierta" %>');

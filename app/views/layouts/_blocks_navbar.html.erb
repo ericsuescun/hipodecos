@@ -22,23 +22,11 @@
               Coloración
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "C: Hoy", processing_slides_coloring_slides_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Ayer", processing_slides_coloring_slides_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Antier", processing_slides_coloring_slides_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Esta semana", processing_slides_coloring_slides_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Este mes", processing_slides_coloring_slides_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Placas Clínica: C", processing_slides_coloring_slides_path + "?inf_type=clin", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "H: Hoy", processing_slides_coloring_slides_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Ayer", processing_slides_coloring_slides_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Antier", processing_slides_coloring_slides_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Esta semana", processing_slides_coloring_slides_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Este mes", processing_slides_coloring_slides_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
+              <%= link_to "Placas Hospital: H", processing_slides_coloring_slides_path + "?inf_type=hosp", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "K: Hoy", processing_slides_coloring_slides_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Ayer", processing_slides_coloring_slides_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Antier", processing_slides_coloring_slides_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Esta semana", processing_slides_coloring_slides_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Este mes", processing_slides_coloring_slides_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
+              <%= link_to "Placas Citologías: K", processing_slides_coloring_slides_path + "?inf_type=cito", class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown <%= 'active' if @tab == :cover %>">
@@ -46,24 +34,11 @@
               Cubrimiento
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "C: Hoy", processing_slides_covering_slides_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Ayer", processing_slides_covering_slides_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Antier", processing_slides_covering_slides_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Esta semana", processing_slides_covering_slides_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Este mes", processing_slides_covering_slides_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Placas Clínica: C", processing_slides_covering_slides_path + "?inf_type=clin", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "H: Hoy", processing_slides_covering_slides_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Ayer", processing_slides_covering_slides_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Antier", processing_slides_covering_slides_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Esta semana", processing_slides_covering_slides_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Este mes", processing_slides_covering_slides_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
+              <%= link_to "Placas Hospital: H", processing_slides_covering_slides_path + "?inf_type=hosp", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "K: Hoy", processing_slides_covering_slides_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Ayer", processing_slides_covering_slides_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Antier", processing_slides_covering_slides_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Esta semana", processing_slides_covering_slides_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Este mes", processing_slides_covering_slides_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
+              <%= link_to "Placas Citología: K", processing_slides_covering_slides_path + "?inf_type=cito", class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown <%= 'active' if @tab == :tag %>">
@@ -71,24 +46,11 @@
               Rotulado
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "C: Hoy", processing_slides_tagging_slides_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Ayer", processing_slides_tagging_slides_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Antier", processing_slides_tagging_slides_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Esta semana", processing_slides_tagging_slides_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
-              <%= link_to "C: Este mes", processing_slides_tagging_slides_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Placas Clínica: C", processing_slides_tagging_slides_path + "?inf_type=clin", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "H: Hoy", processing_slides_tagging_slides_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Ayer", processing_slides_tagging_slides_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Antier", processing_slides_tagging_slides_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Esta semana", processing_slides_tagging_slides_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
-              <%= link_to "H: Este mes", processing_slides_tagging_slides_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
+              <%= link_to "Placas Hospital: H", processing_slides_tagging_slides_path + "?inf_type=hosp", class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <%= link_to "K: Hoy", processing_slides_tagging_slides_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Ayer", processing_slides_tagging_slides_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Antier", processing_slides_tagging_slides_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Esta semana", processing_slides_tagging_slides_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <%= link_to "K: Este mes", processing_slides_tagging_slides_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
+              <%= link_to "Placas Citología: K", processing_slides_tagging_slides_path + "?inf_type=cito", class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown <%= 'active' if @tab == :asign %>">
@@ -96,19 +58,9 @@
               Asignar informes
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <p class="dropdown-item">Patología</p>
-              <%= link_to "Hoy", distribution_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Ayer", distribution_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Antier", distribution_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Esta semana", distribution_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Este mes", distribution_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Patología", distribution_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
-              <p class="dropdown-item">Citología</p>
-              <%= link_to "Hoy", distribution_cyto_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Ayer", distribution_cyto_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Antier", distribution_cyto_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Esta semana", distribution_cyto_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
-              <%= link_to "Este mes", distribution_cyto_path + "?init_date=" + Time.zone.now.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              <%= link_to "Citología", distribution_cyto_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
             </div>
           </li>
         <% end %>

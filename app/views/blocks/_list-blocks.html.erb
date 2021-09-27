@@ -1,9 +1,8 @@
 <div class="list-blocks">
   <div class="container-fluid">
     <div class="row">
-      <h4>Bloques <%= new_search_range %></h4>
       <div class="col-12 col-lg-12 mx-auto">
-        <% @informs.each do |inform| %>
+        <% informs.each do |inform| %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0">
               <strong>Bloques para informe <%= inform.tag_code %></strong>

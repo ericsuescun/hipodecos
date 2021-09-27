@@ -46,16 +46,26 @@
 class Inform < ApplicationRecord
   belongs_to :patient, optional: true
 
-  default_scope -> { order(tag_code: :asc, created_at: :asc) }
+  # default_scope -> { order(created_at: :asc, tag_code: :asc) }
+  scope :by_tagcode, -> { order(tag_code: :asc) }
+  scope :by_created_at, -> { order(created_at: :asc) }
 
   scope :cyto, -> { where(inf_type: 'cito') }
-  scope :biop, -> { where("inf_type != 'cito'") }
+  scope :biop, -> { where(inf_type: 'clin').or(where(inf_type: 'hosp')) }
   scope :hosp, -> { where(inf_type: 'hosp') }
   scope :clin, -> { where(inf_type: 'clin') }
-  scope :ready, -> { where(inf_status: 'ready')}
-  scope :publ_down, -> { where(inf_status: 'published').or(where(inf_status: 'downloaded')) }
+  
   scope :delivery_range, -> (start_date, end_date) { where(delivery_date: start_date..end_date) }
   scope :receive_range, -> (start_date, end_date) { where(receive_date: start_date..end_date) }
+
+  scope :not_assigned, -> { where(pathologist_id: nil) }
+
+  scope :ready, -> { where(inf_status: 'ready')}
+  scope :publ_down, -> { where(inf_status: 'published').or(where(inf_status: 'downloaded')) }
+  scope :pending, -> { where(inf_status: nil) }
+  scope :not_ready, -> { where(inf_status: nil) }
+  scope :not_ready_or_cyto, -> { where(inf_status: nil).or(where(inf_status: 'revision_cyto')) }
+  scope :revision, -> { where(inf_status: "revision") }
 
 
   has_many :samples, dependent: :destroy  #Dificulto el borrado automático para evitar catástrofes
@@ -81,6 +91,28 @@ class Inform < ApplicationRecord
 
   def get_entity
     self.entity_id = Branch.find(self.branch_id).entity.id
+  end
+
+  def slides_ok?
+    self.slides.count == self.slides.colored.covered.tagged.count && self.slides.count != 0
+  end
+
+  def path_assigned?
+    self.pathologist_id != nil
+  end
+
+  def cyto_assigned?
+    self.cytologist != nil
+  end
+
+  def cyto_pos_ins?
+    if self.diagnostics.present?
+      self.diagnostics.first.result == 'positiva' || self.diagnostics.first.result == 'insatisfactoria'
+    end
+  end
+
+  def cyto_neg?
+    self.diagnostics.first.result == 'negativa' if self.diagnostics.present?
   end
 
   # def get_regime

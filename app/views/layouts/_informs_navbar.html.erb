@@ -13,6 +13,8 @@
               Clínica
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "PENDIENTES", index_pending_informs_path + "?inf_type=clin", class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
               <%= link_to "Hoy", informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
               <%= link_to "Ayer", informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
               <%= link_to "Antier", informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
@@ -31,6 +33,8 @@
               Hospital
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "PENDIENTES", index_pending_informs_path + "?inf_type=hosp", class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
               <%= link_to "Hoy", informs_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
               <%= link_to "Ayer", informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
               <%= link_to "Antier", informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
@@ -49,6 +53,8 @@
               Citología
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "PENDIENTES", index_pending_informs_path + "?inf_type=cito", class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
               <%= link_to "Hoy", informs_path + "?init_date=" + Date.today.strftime("%d-%m-%Y") + "&final_date=" + Date.today.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <%= link_to "Ayer", informs_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
               <%= link_to "Antier", informs_path + "?init_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&final_date=" + 2.days.ago.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
@@ -72,19 +78,15 @@
               <%= link_to "Citología", descr_micros_cyto_informs_path, class: "dropdown-item" %>
             </div>
           </li>
-          <li class="nav-item dropdown <%= 'active' if @tab == :revision %>">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Validación
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
-              <%= link_to "Validación", index_revision_informs_path, class: "dropdown-item" %>
-            </div>
+          <li class="nav-item <%= 'active' if @tab == :revision %>">
+            <%= link_to "Validación", index_revision_informs_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown <%= 'active' if @tab == :ready %>">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInf" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Estado
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownInf">
+              <%= link_to "TODOS listos para publicar", informs_index_ready_path, class: "dropdown-item" %>
               <%= link_to "Listos para publicar hoy", informs_index_ready_path + "?init_date=" + Time.zone.now.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <%= link_to "Listos para publicar de ayer", informs_index_ready_path + "?init_date=" + 1.day.ago.strftime("%d-%m-%Y") + "&final_date=" + 1.day.ago.strftime("%d-%m-%Y"), class: "dropdown-item" %>
               <%= link_to "Listos para publicar de esta semana", informs_index_ready_path + "?init_date=" + Time.zone.now.beginning_of_week.strftime("%d-%m-%Y") + "&final_date=" + Time.zone.now.strftime("%d-%m-%Y"), class: "dropdown-item" %>

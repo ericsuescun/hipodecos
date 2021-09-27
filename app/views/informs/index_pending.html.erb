@@ -1,0 +1,76 @@
+<div class="info">
+  <% if params[:inf_type] %>
+    <div class="row">
+      <div class="col-12 col-lg-4">
+        <h4 class="mt-2"><%= @informs.count %> informes pendientes de <%= params[:inf_type] == "clin" ? "clínica" : params[:inf_type] == "hosp" ? "hospital" : "citología" %></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br>
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-12 col-lg-12 mx-auto">
+      
+      <%= will_paginate @informs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Informe</th>
+            <th>Estado</th>
+            <th>Ingreso</th>
+            <th>User</th>
+            <th>Paciente</th>
+            <th>EPS</th>
+            <th>IPS</th>
+            <th>Autoriz</th>
+            <th scope="1"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @informs.each do |inform| %>
+            <tr>
+              <td>
+                <% if inform.inf_status == "anulado" %>
+                  <del class="anulated">
+                    <%= link_to inform  do %>
+                      <%= inform.tag_code %>
+                    <% end %>
+                  </del>
+                <% else %>
+                  <%= link_to inform  do %>
+                    <%= inform.tag_code %>: <%= inform.inf_status.to_s %>
+                  <% end %>
+                <% end %>
+                
+              </td>
+              <td>
+                <%= render 'inform_status', inform: inform %>
+              </td>
+              <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
+              <td><%= User.where(id: inform.user_id).first.try(:initials) %></td>
+              <td>
+                <%= link_to inform.patient  do %>
+                  <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
+                  <% end %>
+              </td>
+              <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
+              <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
+              <td><%= inform.prmtr_auth_code %></td>
+              <% if inform.inf_status == "anulado" %>
+                <td><%= link_to 'Restaurar', anulate_inform_path(inform), data: { confirm: '¿Confirmas la operación?' } %></td>
+              <% else %>
+                <td><%= link_to 'Anular', anulate_inform_path(inform), data: { confirm: '¿Confirmas la operación?' } %></td>
+              <% end %>
+              
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @informs, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    </div>
+  </div>
+</div>
+
+

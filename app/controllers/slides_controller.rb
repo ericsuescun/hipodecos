@@ -6,7 +6,8 @@ class SlidesController < ApplicationController
   # GET /slides.json
   def index
     @tab = :slides
-    @informs = Inform.joins(:slides).merge(Slide.not_colored.not_tagged.not_covered).uniq
+    # @informs = Inform.joins(:slides).merge(Slide.where(colored: false).or(Slide.where(covered: false).or(Slide.where(tagged: false)))).uniq
+    @informs = Inform.joins(:slides).merge(Slide.not_colored.or(Slide.not_covered).or(Slide.not_tagged)).uniq
   end
 
   # GET /slides/1

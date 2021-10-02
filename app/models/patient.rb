@@ -63,6 +63,13 @@ class Patient < ApplicationRecord
 	before_save { self.lastname1.to_s.upcase! }
 	before_save { self.lastname2.to_s.upcase! }
 
+	serialize :name1, EncryptedField.new
+	serialize :name2, EncryptedField.new
+	serialize :lastname1, EncryptedField.new
+	serialize :lastname2, EncryptedField.new
+	
+	
+
 	after_validation :set_age, :set_password
 
 	def fullname

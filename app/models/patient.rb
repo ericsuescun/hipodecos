@@ -67,7 +67,7 @@ class Patient < ApplicationRecord
 	serialize :name2, EncryptedField.new
 	serialize :lastname1, EncryptedField.new
 	serialize :lastname2, EncryptedField.new
-	# serialize :id_number, EncryptedField.new
+	serialize :id_number, EncryptedField.new
 	serialize :id_type, EncryptedField.new
 	serialize :sex, EncryptedField.new
 	serialize :gender, EncryptedField.new

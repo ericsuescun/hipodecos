@@ -96,6 +96,18 @@ class PatientsController < ApplicationController
           lastname2: params[:lastname].split(" ")[1].upcase)
         .paginate(page: params[:page], per_page: 10)
       end
+
+      if params[:name].split(" ")[0] != nil && params[:name].split(" ")[1] == nil && params[:lastname].split(" ")[0] == nil && params[:lastname].split(" ")[1] == nil
+        @patients = Patient.where(
+          name1: params[:name].upcase)
+        .paginate(page: params[:page], per_page: 10)
+      end
+
+      if params[:name].split(" ")[0] == nil && params[:name].split(" ")[1] == nil && params[:lastname].split(" ")[0] != nil && params[:lastname].split(" ")[1] == nil
+        @patients = Patient.where(
+          lastname1: params[:lastname].upcase)
+        .paginate(page: params[:page], per_page: 10)
+      end
     end
   end
 
@@ -518,6 +530,10 @@ class PatientsController < ApplicationController
   end
 
   private
+    def encrypt(data)
+      Base64.strict_encode64(data)
+    end
+
     def generate_rec_tag(inform)
       next_number = 1
       answer = false

@@ -530,10 +530,6 @@ class PatientsController < ApplicationController
   end
 
   private
-    def encrypt(data)
-      Base64.strict_encode64(data)
-    end
-
     def generate_rec_tag(inform)
       next_number = 1
       answer = false

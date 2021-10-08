@@ -1,13 +1,13 @@
 namespace :oldrecords do
   task :import_count => :environment do
-    date_range = Date.parse("01-01-2020")..Date.parse("31-05-2020")
+    date_range = Date.parse("01-01-2020")..Date.parse("30-06-2020")
     oldrecords = Oldrecord.where(fecharec: date_range)
     total = oldrecords.count
     puts "El total a importar es: #{total}"
   end
 
   task :import => :environment do
-    date_range = Date.parse("01-01-2020")..Date.parse("31-05-2020")
+    date_range = Date.parse("01-01-2020")..Date.parse("30-06-2020")
     oldrecords = Oldrecord.where(fecharec: date_range)
     total = oldrecords.count
 
@@ -29,7 +29,6 @@ namespace :oldrecords do
         end
       end
       
-      
       patient.name1 = oldrecord.nombre
       patient.name2 = oldrecord.nombre2
       patient.lastname1 = oldrecord.apellido
@@ -46,7 +45,7 @@ namespace :oldrecords do
         patient.save
 
         oldrecord.update(patient_id: patient.id)
-        puts "Paciente #{n} de #{total}: #{patient.id_number}"
+        puts "Paciente #{n} de #{total}: #{patient.id_number} #{100 * n / total}%"
       else
         patients = Patient.where(id_number: oldrecord.cedula)
         if patients.count != 0 
@@ -58,21 +57,23 @@ namespace :oldrecords do
           patient.save
 
           oldrecord.update(patient_id: patient.id)
-          puts "Paciente #{n} de #{total}: #{patient.id_number}"
+          puts "Paciente #{n} de #{total}: #{patient.id_number} #{100 * n / total}%"
         end
       end
     end
   end
+end
 
+namespace :oldcitos do
   task :import_count => :environment do
-    date_range = Date.parse("01-01-2020")..Date.parse("31-05-2020")
+    date_range = Date.parse("01-01-2020")..Date.parse("30-06-2020")
     oldrecords = Oldcito.where(fecharec: date_range)
     total = oldrecords.count
     puts "El total a importar es: #{total}"
   end
 
   task :import => :environment do
-    date_range = initial_date..final_date
+    date_range = Date.parse("01-01-2020")..Date.parse("30-06-2020")
     oldcitos = Oldcito.where(fecharec: date_range)
 
     oldcitos.each_with_index do |oldcito, n|
@@ -110,7 +111,7 @@ namespace :oldrecords do
         patient.save
 
         oldcito.update(patient_id: patient.id)
-        puts "Paciente #{n} de #{total}: #{patient.id_number}"
+        puts "Paciente #{n} de #{total}: #{patient.id_number} #{100 * n / total}%"
       else
         patients = Patient.where(id_number: oldcito.cedula)
         if patients.count != 0 
@@ -122,7 +123,7 @@ namespace :oldrecords do
           patient.save
 
           oldcito.update(patient_id: patient.id)
-          puts "Paciente #{n} de #{total}: #{patient.id_number}"
+          puts "Paciente #{n} de #{total}: #{patient.id_number} #{100 * n / total}%"
         end
       end
     end

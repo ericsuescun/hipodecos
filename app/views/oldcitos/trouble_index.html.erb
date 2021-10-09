@@ -10,13 +10,13 @@
             <div class="col-6">
               <div class="form-group">
                 <%= label_tag "Fecha inicial" %>
-                <%= date_field_tag :init_date, Date.parse(params[:init_date]) if params[:init_date].present?, class: "form-control input mb-3" %>
+                <%= date_field_tag :init_date, nil, class: "form-control input mb-3" %>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group">
                 <%= label_tag "Fecha final" %>
-                <%= date_field_tag :final_date, Date.parse(params[:final_date])  if params[:final_date].present?, class: "form-control input mb-3" %>
+                <%= date_field_tag :final_date, nil, class: "form-control input mb-3" %>
               </div>
             </div>
           </div>

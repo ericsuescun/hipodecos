@@ -11,6 +11,7 @@ class ListBlocksController < ApplicationController
 		@inform = @block.inform
 		@inform.slides.create(slide_tag: params[:block_tag], user_id: current_user.id)	#Se crea un slide con el mismo tag de la sample
 		@block.update(slide_tag: params[:block_tag])	#Se guarda el tag creado en el block para que queden asociados
+		@informs = Inform.joins(:blocks).merge(Block.not_slided).order(tag_code: :asc).uniq
 	end
 
 	def add_block_series
@@ -66,17 +67,17 @@ class ListBlocksController < ApplicationController
 		#   @samplesc = Sample.where(name: "Cassette")
 		# end
 
-		if params[:init_date]
-		  initial_date = Date.parse(params[:init_date]).beginning_of_day
-		  final_date = Date.parse(params[:final_date]).end_of_day
-		  date_range = initial_date..final_date
+		# if params[:init_date]
+		#   initial_date = Date.parse(params[:init_date]).beginning_of_day
+		#   final_date = Date.parse(params[:final_date]).end_of_day
+		#   date_range = initial_date..final_date
 		  
-		else
-		  initial_date = 1.day.ago.beginning_of_day
-		  final_date = Time.now.end_of_day
-		  date_range = initial_date..final_date
-		end
-		@blocks = Block.unscoped.where(created_at: date_range).select(:inform_id).group(:inform_id).distinct
+		# else
+		#   initial_date = 1.day.ago.beginning_of_day
+		#   final_date = Time.now.end_of_day
+		#   date_range = initial_date..final_date
+		# end
+		@blocks = Block.unscoped.select(:inform_id).group(:inform_id).distinct
 		# @samplesc = Sample.where(created_at: date_range, name: "Cassette")
 	end
 
@@ -113,6 +114,7 @@ class ListBlocksController < ApplicationController
 		# @samplesc = Sample.where(name: "Cassette")
 		# @blocks = Block.all
 		get_samplesc_and_blocks
+		@informs = Inform.joins(:blocks).merge(Block.not_slided).order(tag_code: :asc).uniq
 	end
 
 	def block_fok
@@ -147,6 +149,7 @@ class ListBlocksController < ApplicationController
 			@block.update(verified: true, user_id: current_user.id)
 		end
 		@sample.update(included: true, user_id: current_user.id)
+		@informs = Inform.joins(:blocks).merge(Block.not_slided).order(tag_code: :asc).uniq
 	end
 
 	def block_fm1
@@ -157,6 +160,7 @@ class ListBlocksController < ApplicationController
 		# @samplesc = Sample.where(name: "Cassette")
 		# @blocks = Block.all
 		get_samplesc_and_blocks
+		@informs = Inform.joins(:blocks).merge(Block.not_slided).order(tag_code: :asc).uniq
 	end
 
 	def get_nomen(str)

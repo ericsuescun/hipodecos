@@ -25,6 +25,10 @@ class InformsController < ApplicationController
     end
   end
 
+  def index_pending
+    @informs = Inform.where(inf_type: params[:inf_type]).pending.paginate(page: params[:page], per_page: 10)
+  end
+
   def index_oldrecords
     if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day
@@ -49,7 +53,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @oldcitos = Oldcito.where(fecharec: date_range, clave: "K").paginate(page: params[:page], per_page: 60)
+    @oldcitos = Oldcito.where(fecharec: date_range, clave: "K").paginate(page: params[:page], per_page: 10)
   end
 
   def last20
@@ -83,24 +87,16 @@ class InformsController < ApplicationController
 
   def index_ready
     @tab = :ready
-    # if params[:yi]
-    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-    #   date_range = initial_date..final_date
-    #   @informs = Inform.where(receive_date: date_range, inf_status: "ready")
-    # else
-    #   @informs = Inform.where(inf_status: "ready")
-    # end
+    
     if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
+      @informs = Inform.where(delivery_date: date_range, inf_status: "ready")
     else
-      initial_date = 1.day.ago.beginning_of_day
-      final_date = Time.now.end_of_day
-      date_range = initial_date..final_date
+      @informs = Inform.where(inf_status: "ready")
     end
-    @informs = Inform.where(delivery_date: date_range, inf_status: "ready")
+    
   end
 
   def publish
@@ -527,32 +523,13 @@ class InformsController < ApplicationController
 
   def descr_micros
     @tab = :pathologist
-    # if params[:yi]
-    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-    #   date_range = initial_date..final_date
-    #   @informs = Inform.where(receive_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.where(receive_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
-    # else
-    #   @informs = Inform.where(inf_status: nil, pathologist_id: current_user.id).or(Inform.where(inf_status: "revision_cyto", pathologist_id: current_user.id))
-    # end
+
     serializer = %w[id tag_code pathologist_id inf_status receive_date patient_id]
 
-    # if params[:init_date]
-    #   initial_date = Date.parse(params[:init_date]).beginning_of_day
-    #   final_date = Date.parse(params[:final_date]).end_of_day
-    #   date_range = initial_date..final_date
-    # else
-    #   initial_date = 1.day.ago.beginning_of_day
-    #   final_date = Time.now.end_of_day
-    #   date_range = initial_date..final_date
-    # end
-
     if role_admin_allowed?
-      # @informs = Inform.unscoped.where(user_review_date: date_range, inf_status: nil).or(Inform.unscoped.where(user_review_date: date_range, inf_status: "revision_cyto")).order(pathologist_id: :asc)
-      @informs = Inform.unscoped.select(serializer).where(inf_status: nil).or(Inform.unscoped.select(serializer).where(inf_status: "revision_cyto")).order(pathologist_id: :asc).order(tag_code: :asc).paginate(page: params[:page], per_page: 10)
+      @informs = Inform.select(serializer).where(inf_status: nil).or(Inform.select(serializer).where(inf_status: "revision_cyto")).order(pathologist_id: :asc).order(tag_code: :asc).paginate(page: params[:page], per_page: 10)
     else
-      # @informs = Inform.select(serializer).where(user_review_date: date_range, inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(user_review_date: date_range, inf_status: "revision_cyto", pathologist_id: current_user.id))
-      @informs = Inform.unscoped.select(serializer).where(inf_status: nil, pathologist_id: current_user.id).or(Inform.unscoped.select(serializer).where(inf_status: "revision_cyto", pathologist_id: current_user.id)).order(tag_code: :asc).paginate(page: params[:page], per_page: 10)
+      @informs = Inform.select(serializer).where(inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(inf_status: "revision_cyto", pathologist_id: current_user.id)).order(tag_code: :asc).paginate(page: params[:page], per_page: 10)
     end
 
   end
@@ -676,94 +653,50 @@ class InformsController < ApplicationController
   def distribution
     @tab = :asign
 
-    if params[:init_date]
-      initial_date = Date.parse(params[:init_date]).beginning_of_day
-      final_date = Date.parse(params[:final_date]).end_of_day
-      date_range = initial_date..final_date
-    else
-      initial_date = 1.day.ago.beginning_of_day
-      final_date = Time.now.end_of_day
-      date_range = initial_date..final_date
-    end
-    @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
     @informs = []
     @informs_unassigned = []
-    @informs_first_batch = []
     @informs_rest = []
-    @slides.each do |slide|
-      if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
-        if slide.inform.inf_type != 'cito'
-          unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded"
-            if slide.inform.pathologist_id != nil
-              @informs << slide.inform
-            else
-              @informs_unassigned << slide.inform
-            end
-          end
-        end
-      end
+
+    Inform.by_tagcode.biop.not_ready.each do |inform|
+      @informs << inform if inform.slides_ok? && inform.path_assigned?
+      @informs_unassigned << inform if inform.slides_ok? && !inform.path_assigned?
     end
+
     @informs_first_batch = @informs_unassigned[0..49]
-    if @informs_first_batch == nil
-      @informs_unassigned = []
-    end
-    @informs_rest = @informs_unassigned[50..-1]
-    if @informs_rest == nil
-      @informs_rest = []
-    end
+    @informs_rest = @informs_unassigned[50..-1] if @informs_unassigned[50..-1].present?
 
     @informs2 = []
     @informs2_unassigned = []
-    @informs2_first_batch = []
     @informs2_rest = []
-    @slides.each do |slide|
-      if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
-        if slide.inform.inf_type == 'cito'
-          unless slide.inform.inf_status == "ready" || slide.inform.inf_status == "published" || slide.inform.inf_status == "downloaded" || slide.inform.inf_status == "revision"
-            if slide.inform.pathologist_id != nil
-              @informs2 << slide.inform # citos ya asignadas en otro batch, van directo a @informs porque ya tienen patologo/a
-            else
-              @informs2_unassigned << slide.inform
-            end
-          end
-        end
-      end
+
+    Inform.by_tagcode.cyto.not_ready_or_cyto.each do |inform|
+      @informs2 << inform if inform.slides_ok? && inform.path_assigned?
+      @informs2_unassigned << inform if inform.slides_ok? && !inform.path_assigned?
     end
+
+    @informs2_first_batch = @informs2_unassigned[0..49]
+    @informs2_rest = @informs2_unassigned[50..-1] if @informs2_unassigned[50..-1].present?
 
     @already_negative = 0
 
     @informs2.each do |inform|
-      if inform.diagnostics != []
-        if inform.diagnostics.first.result != nil
-          if inform.diagnostics.first.result == 'negativa'
-            if inform.pathologist_id != nil
-              @already_negative = @already_negative + 1
-            end
-          end
-        end
+      if inform.diagnostics.first&.result.present?
+        @already_negative += 1 if inform.cyto_neg? && inform.path_assigned?
       end
     end
 
     @negative_cytos = []
     @informs3_unassigned = []   #Aca solo almaceno las positivas e instatisfactorias. No las saco del arreglo original para no lidiar con offsets
-    if @informs2_unassigned != nil
+    if @informs2_unassigned.present?
       @informs2_unassigned.each do |inform|
-        if inform.diagnostics != []
-          if inform.diagnostics.first.result != nil
-            if inform.diagnostics.first.result == 'positiva'
-              @informs3_unassigned << inform
-            end
-            if inform.diagnostics.first.result == 'insatisfactoria'
-              @informs3_unassigned << inform
-            end
-            if inform.diagnostics.first.result == 'negativa'
-              if inform.pathologist_id != nil
-                @informs2 << inform
-                @already_negative = @already_negative + 1
-              else
-                @negative_cytos << inform
-              end
-
+        if inform.diagnostics.first&.result.present?
+          @informs3_unassigned << inform if inform.cyto_pos_ins?
+          if inform.cyto_neg?
+            if inform.path_assigned?
+              @informs2 << inform
+              @already_negative = @already_negative + 1
+            else
+              @negative_cytos << inform
             end
           end
         end
@@ -782,7 +715,7 @@ class InformsController < ApplicationController
         end
       end
       if @already_negative == negative_pick
-        if @negative_cytos != []
+        if @negative_cytos.present?
           @negative_cytos.each do |inform|
             inform.update(inf_status: "revision", user_review_date: Time.zone.now.to_date) #Se deben marcar como para validación
           end
@@ -791,127 +724,42 @@ class InformsController < ApplicationController
     end
 
     @informs2_first_batch = @informs3_unassigned[0..49]
-    if @informs2_first_batch == nil
-      @informs_unassigned = []
-    end
+    @informs_unassigned = [] if @informs2_first_batch.blank?
+
     @informs2_rest = @informs3_unassigned[50..-1]
-    if @informs2_rest == nil
-      @informs2_rest = []
-    end
-
-
-    pathologist_role_id = Role.where(name: "Patologia").first.id
+    @informs2_rest = [] if @informs2_rest.blank?
+      
+    pathologist_role_id = Role.find_by_name("Patologia").id
     @users = User.where(role_id: pathologist_role_id)
-
-    # @informs_assigned = @informs.where.not(pathologist_id: nil)
-    # @informs_unassigned = @informs.where(pathologist_id: nil)
-    # @informs_first_batch = @informs_unassigned.limit(50)
-    # @informs_rest = @informs_unassigned.offset(50)
   end
 
   def distribution_cyto
-    # if params[:yi]
-    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-    #   date_range = initial_date..final_date
-    #   # @informs = Inform.where(created_at: date_range).joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
-    #   @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
-    # else
-    #   # @informs = Inform.joins("INNER JOIN slides ON slides.colored = true AND slides.covered = true AND slides.tagged = true").distinct
-    #   @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true).joins(:inform).select("slides.inform_id").distinct
-    # end
-    if params[:init_date]
-      initial_date = Date.parse(params[:init_date]).beginning_of_day
-      final_date = Date.parse(params[:final_date]).end_of_day
-      date_range = initial_date..final_date
-    else
-      initial_date = 1.day.ago.beginning_of_day
-      final_date = Time.now.end_of_day
-      date_range = initial_date..final_date
-    end
-    @slides = Slide.unscoped.where(colored: true, covered: true, tagged: true, created_at: date_range).joins(:inform).select("slides.inform_id").distinct
-
     @informs = []
     @informs_unassigned = []
-    @informs_first_batch = []
     @informs_rest = []
-    @slides.each do |slide|
-      if slide.inform.slides.count == slide.inform.slides.where(colored: true, covered: true, tagged: true).count
-        if slide.inform.cytologist != nil
-          @informs << slide.inform
-        else
-          @informs_unassigned << slide.inform
-        end
-      end
-      @informs_first_batch = @informs_unassigned[0..49]
-      if @informs_first_batch == nil
-        @informs_first_batch = []
-      end
-      @informs_rest = @informs_unassigned[50..-1]
-      if @informs_rest == nil
-        @informs_rest = []
-      end
+
+    Inform.by_tagcode.cyto.not_ready.each do |inform|
+      @informs << inform if inform.slides_ok? && inform.cyto_assigned?
+      @informs_unassigned << inform if inform.slides_ok? && !inform.cyto_assigned?
     end
+
+    @informs_first_batch = @informs_unassigned[0..49]
+    @informs_rest = @informs_unassigned[50..-1] if @informs_unassigned[50..-1].present?
 
     cytologist_role_id = Role.where(name: "Citologia").first.id
     @users = User.where(role_id: cytologist_role_id)
-
-    # @informs_assigned = @informs.where.not(cytologist: nil)
-    # @informs_unassigned = @informs.where(cytologist: nil)
-    # @informs_first_batch = @informs_unassigned.limit(50)
-    # @informs_rest = @informs_unassigned.offset(50)
   end
 
   def assign
     Inform.where(id: params[:inform_ids]).update_all({pathologist_id: params[:pathologist_id].to_i == 0 ? nil : params[:pathologist_id].to_i, user_review_date: Time.zone.now.to_date })
 
-    # if params[:yi] != ""
-    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-    #   date_range = initial_date..final_date
-
-    #   redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
-    # else
-    #   redirect_to distribution_path
-    # end
-
-    if params[:init_date]
-      initial_date = Date.parse(params[:init_date]).beginning_of_day
-      final_date = Date.parse(params[:final_date]).end_of_day
-      date_range = initial_date..final_date
-    else
-      initial_date = 1.day.ago.beginning_of_day
-      final_date = Time.now.end_of_day
-      date_range = initial_date..final_date
-    end
-
-    redirect_to distribution_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date]
+    redirect_to distribution_path
   end
 
   def assign_cyto
     Inform.where(id: params[:inform_ids]).update_all({cytologist: params[:cytologist].to_i == 0 ? nil : params[:cytologist].to_i })
 
-    # if params[:yi] != ""
-    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-    #   date_range = initial_date..final_date
-
-    #   redirect_to distribution_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}"
-    # else
-    #   redirect_to distribution_cyto_path
-    # end
-
-    if params[:init_date]
-      initial_date = Date.parse(params[:init_date]).beginning_of_day
-      final_date = Date.parse(params[:final_date]).end_of_day
-      date_range = initial_date..final_date
-    else
-      initial_date = 1.day.ago.beginning_of_day
-      final_date = Time.now.end_of_day
-      date_range = initial_date..final_date
-    end
-
-    redirect_to distribution_cyto_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date]
+    redirect_to distribution_cyto_path
   end
 
   # GET /informs/1
@@ -1054,15 +902,21 @@ class InformsController < ApplicationController
     date_range = Time.zone.now.to_date.beginning_of_year..Time.zone.now.to_date.end_of_year
 
     if params[:inform][:inf_type] == "clin"
-       consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+      adjust = 0
+      adjust = Oldrecord.where(clave: 'C', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
+       consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1 + adjust
        inform.tag_code = "C" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
     else
-     if params[:inform][:inf_type] == "hosp"
-       consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
-       inform.tag_code = "H" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
-     else
-       consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
-       inform.tag_code = "K" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
+      if params[:inform][:inf_type] == "hosp"
+        adjust = 0
+        adjust = Oldrecord.where(clave: 'H', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
+        consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1 + adjust
+        inform.tag_code = "H" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
+    else
+      adjust = 0
+      adjust = Oldcito.where(clave: 'K', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
+      consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1 + adjust
+      inform.tag_code = "K" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
      end
     end
 

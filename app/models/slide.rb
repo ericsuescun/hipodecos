@@ -21,4 +21,10 @@ class Slide < ApplicationRecord
   # has_many :objections, as: :objectionable
 
   default_scope -> { order(slide_tag: :asc) }
+  scope :colored, -> { where(colored: true) }
+  scope :tagged, -> { where(tagged: true) }
+  scope :covered, -> { where(covered: true) }
+  scope :not_colored, -> { where(colored: false) }
+  scope :not_tagged, -> { where(tagged: false) }
+  scope :not_covered, -> { where(covered: false) }
 end

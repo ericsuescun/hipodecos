@@ -7,7 +7,7 @@
 				<%= link_to "+ Procesar Pacientes", imports_oldrecord_import_patient_path + "?init_date=" + params[:init_date] + "&final_date=" + params[:final_date], class: "btn btn-primary my-3" %>
 			<% else %>
 				<h3><%= @oldrecords.count %> registros FoxPro sin paciente asignado</h3>
-				<%= form_tag "import_index", method: "get" do %>
+				<%= form_tag imports_oldrecord_import_index_path, method: "get" do %>
 					<div class="row">
 						<div class="col-12 col-lg-4">
 							<div class="form-group">

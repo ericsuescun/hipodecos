@@ -281,6 +281,7 @@ Rails.application.routes.draw do
         get :last20
         get :index_oldrecords
         get :index_oldcitos
+        get :index_pending
 
         put :publish
         put :unpublish

@@ -1,12 +1,11 @@
 <div class="list-blocks">
   <div class="container-fluid">
     <div class="row">
-      <h4>Bloques <%= new_search_range %></h4>
       <div class="col-12 col-lg-12 mx-auto">
-        <% blocks.each do |block2| %>
+        <% informs.each do |inform| %>
           <div class="card bg-light mx-2 mb-3">
             <div class="card-header pl-1 pr-0 pt-0 pb-0">
-              <strong>Bloques para informe <%= block2.inform.tag_code %></strong>
+              <strong>Bloques para informe <%= inform.tag_code %></strong>
             </div>
             <div class="card-body list-block">
               <table class="table table-hover table-borderless list-blocks">
@@ -21,7 +20,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% block2.inform.blocks.each do |block| %>
+                  <% inform.blocks.each do |block| %>
                     <% sample = Sample.where(sample_tag: block.block_tag, name: "Cassette").first %>
                     <% if !sample.included %>
                       <tr>

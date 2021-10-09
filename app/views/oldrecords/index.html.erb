@@ -4,7 +4,7 @@
   <% end %>
 </div>
 <div class="container">
-  <h3><%= @oldrecords.count %> de <%= Oldrecord.count %> registros FoxPro encontrados entre el <%= Date.parse(params[:init_date]).strftime("%d/%m/%Y") %> y el <%= Date.parse(params[:final_date]).strftime("%d/%m/%Y") %></h3>
+  <h3><%= @oldrecords.count %> de <%= Oldrecord.count %> registros FoxPro encontrados entre el <%= Date.parse(params[:init_date]).strftime("%d/%m/%Y") if params[:init_date].present? %> y el <%= Date.parse(params[:final_date]).strftime("%d/%m/%Y") if params[:final_date].present? %></h3>
   <div class="row">
 
     <div class="col-12 col-lg-6">
@@ -72,6 +72,7 @@
               <td><%= oldrecord.clinica %></td>
               
               <td><%= link_to 'Detalles', oldrecord %></td>
+              <td><%= link_to 'Editar', edit_oldrecord_path(oldrecord) %></td>
             </tr>
           <% end %>
         </tbody>

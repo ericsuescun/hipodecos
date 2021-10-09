@@ -23,7 +23,7 @@
             <tr>
               <td>
                 <%= link_to show_revision_inform_path(inform), local: true  do %>
-                  <%= inform.tag_code %>
+                  <%= inform.tag_code + ": " + inform.inf_status %>
                 <% end %>
               </td>
               <td><%= User.where(id: inform.pathologist_id).first.try(:initials) %></td>

@@ -78,6 +78,27 @@ class Oldrecord < ApplicationRecord
 
 	default_scope -> { order(fecharec: :desc, numero: :desc) }
 
+	serialize :apellido, EncryptedField.new
+	serialize :apellido2, EncryptedField.new
+	serialize :nombre, EncryptedField.new
+	serialize :nombre2, EncryptedField.new
+	serialize :identif, EncryptedField.new
+	serialize :cedula, EncryptedField.new
+	serialize :historia, EncryptedField.new
+	serialize :uniedad, EncryptedField.new
+	serialize :edad, EncryptedField.new
+	serialize :sexo, EncryptedField.new
+	serialize :usuario, EncryptedField.new
+	serialize :ocupacion, EncryptedField.new
+	serialize :residencia, EncryptedField.new
+	serialize :zona, EncryptedField.new
+	serialize :emb, EncryptedField.new
+	serialize :estado, EncryptedField.new
+	serialize :telefono, EncryptedField.new
+	serialize :dnombre, EncryptedField.new
+	serialize :dapellido, EncryptedField.new
+	serialize :oficina, EncryptedField.new
+
 	def fullname
 	  [nombre, nombre2, fix_accent(apellido), fix_accent(apellido2)].join(' ')
 	end

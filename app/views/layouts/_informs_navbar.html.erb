@@ -25,7 +25,7 @@
                 <%= link_to "#{m.month.ago.strftime('%b de %Y')}", informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=clin" , class: "dropdown-item" %>
               <% end %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Clínica FoxPro", index_oldrecords_informs_path + "?init_date=" + (Oldrecord.first.fecharec - 1.day).strftime("%d-%m-%Y") + "&final_date=" + Oldrecord.first.fecharec.strftime("%d-%m-%Y") + "&inf_type=clin", class: "dropdown-item" %>
+              <%= link_to "Clínica FoxPro", index_oldrecords_informs_path + "?inf_type=clin", class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -45,7 +45,7 @@
                 <%= link_to "#{m.month.ago.strftime('%b de %Y')}", informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=hosp" , class: "dropdown-item" %>
               <% end %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Hospital FoxPro", index_oldrecords_informs_path + "?init_date=" + (Oldrecord.first.fecharec - 1.day).strftime("%d-%m-%Y") + "&final_date=" + Oldrecord.first.fecharec.strftime("%d-%m-%Y") + "&inf_type=hosp", class: "dropdown-item" %>
+              <%= link_to "Hospital FoxPro", index_oldrecords_informs_path + "?inf_type=hosp", class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -65,7 +65,7 @@
                 <%= link_to "#{m.month.ago.strftime('%b de %Y')}", informs_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=cito" , class: "dropdown-item" %>
               <% end %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Citologías FoxPro", index_oldcitos_informs_path + "?init_date=" + (Oldcito.first.fecharec - 1.day).strftime("%d-%m-%Y") + "&final_date=" + Oldcito.first.fecharec.strftime("%d-%m-%Y") + "&inf_type=cito", class: "dropdown-item" %>
+              <%= link_to "Citologías FoxPro", index_oldcitos_informs_path + "?inf_type=cito", class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown <%= 'active' if @tab == :pathologist %>">

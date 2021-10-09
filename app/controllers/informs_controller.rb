@@ -53,7 +53,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @oldcitos = Oldcito.where(fecharec: date_range, clave: "K").paginate(page: params[:page], per_page: 60)
+    @oldcitos = Oldcito.where(fecharec: date_range, clave: "K").paginate(page: params[:page], per_page: 10)
   end
 
   def last20

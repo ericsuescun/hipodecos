@@ -16,14 +16,14 @@ class OldrecordsController < ApplicationController
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date
-      @oldrecords = Oldrecord.where(fecharec: date_range).paginate(page: params[:page], per_page: 60)
+      @oldrecords = Oldrecord.where(fecharec: date_range).paginate(page: params[:page], per_page: 10)
     else
-      @oldrecords = Oldrecord.where(fecharec: Date.parse("01/07/2020")..Date.parse("31/07/2020")).paginate(page: params[:page], per_page: 60)
+      @oldrecords = Oldrecord.where(fecharec: Date.parse("01/07/2020")..Date.parse("31/07/2020")).paginate(page: params[:page], per_page: 10)
     end
   end
 
   def trouble_index
-    @oldrecords = Oldrecord.where(diagnostic: nil).paginate(page: params[:page], per_page: 60)
+    @oldrecords = Oldrecord.where(diagnostic: nil).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /oldrecords/1

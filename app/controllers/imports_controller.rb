@@ -6,10 +6,10 @@ class ImportsController < ApplicationController
 			initial_date = Date.parse(params[:init_date]).beginning_of_day
 			final_date = Date.parse(params[:final_date]).end_of_day
 			date_range = initial_date..final_date
-			@oldrecords = Oldrecord.where(fecharec: date_range, patient_id: nil).paginate(page: params[:page], per_page: 60)
+			@oldrecords = Oldrecord.where(fecharec: date_range, patient_id: nil).paginate(page: params[:page], per_page: 10)
 			
 		else
-			@oldrecords = Oldrecord.where(patient_id: nil).paginate(page: params[:page], per_page: 60)
+			@oldrecords = Oldrecord.where(patient_id: nil).paginate(page: params[:page], per_page: 10)
 			
 		end
 		# Oldrecord.unscoped.select(:cedula, :id, :nombre, :nombre2, :apellido, :apellido2, :identif).group(:id, :cedula).all
@@ -20,10 +20,10 @@ class ImportsController < ApplicationController
 			initial_date = Date.parse(params[:init_date]).beginning_of_day
 			final_date = Date.parse(params[:final_date]).end_of_day
 			date_range = initial_date..final_date
-			@oldcitos = Oldcito.where(fecharec: date_range, patient_id: nil).paginate(page: params[:page], per_page: 60)
+			@oldcitos = Oldcito.where(fecharec: date_range, patient_id: nil).paginate(page: params[:page], per_page: 10)
 			
 		else
-			@oldcitos = Oldcito.where(patient_id: nil).paginate(page: params[:page], per_page: 60)
+			@oldcitos = Oldcito.where(patient_id: nil).paginate(page: params[:page], per_page: 10)
 			
 		end
 	end

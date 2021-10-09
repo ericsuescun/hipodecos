@@ -8,14 +8,20 @@
         <div class="row">
           <div class="col-12 col-lg-4">
             <div class="form-group mt-1">
-
-              <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
+              <%  if params[:init_date].present? %>
+                <%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
+              <% else %>
+                <%= date_field_tag :init_date, nil.to_s, class: "form-control input" %>
+              <% end %>
             </div>
           </div>
           <div class="col-12 col-lg-4">
             <div class="form-group mt-1">
-
-              <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
+              <%  if params[:final_date].present? %>
+                <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
+              <% else %>
+                <%= date_field_tag :final_date, nil.to_s, class: "form-control input" %>
+              <% end %>
             </div>
           </div>
           <div class="col-12 col-lg-4">

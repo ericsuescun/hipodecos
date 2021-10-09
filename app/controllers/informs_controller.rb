@@ -101,18 +101,14 @@ class InformsController < ApplicationController
 
   def publish
     Inform.where(id: params[:inform_ids]).update_all({inf_status: "published", delivery_date: Time.now})
-    if params[:init_date]
-      redirect_to informs_index_published_path + "?init_date=#{params[:init_date]}&final_date=#{params[:final_date]}"
-    else
-      redirect_to informs_index_published_path
-    end
+    redirect_to informs_index_published_path
   end
 
   def index_published
     @tab = :published
     serializer = [:id, :tag_code, :delivery_date, :pathologist_review_id, :promoter_id, :branch_id, :prmtr_auth_code,:inf_type, :invoice, :receive_date, :patient_id]
 
-    if params[:init_date]
+    if params[:init_date].present?
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
       date_range = initial_date..final_date

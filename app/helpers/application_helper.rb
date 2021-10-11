@@ -174,14 +174,20 @@ module ApplicationHelper
 		date_range = init_date..final_date
 
 		if type == "clin"
-		   consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1
+			adjust = 0
+			adjust = Oldrecord.where(clave: 'C', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
+		   consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1 + adjust
 		   return "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
 		else
 		 if type == "hosp"
-		   consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1
+		 	adjust = 0
+		 	adjust = Oldrecord.where(clave: 'H', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
+		   consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1 + adjust
 		   return "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
 		 else
-		   consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1
+		 	adjust = 0
+		 	adjust = Oldcito.where(clave: 'K', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
+		   consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1 + adjust
 		   return "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
 		 end
 		end

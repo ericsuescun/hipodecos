@@ -1,13 +1,13 @@
 namespace :oldrecords do
   task :import_count => :environment do
-    date_range = Date.parse("01-01-2020")..Date.parse("30-06-2020")
+    date_range = Date.parse("01-01-2021")..Date.parse("31-12-2021")
     oldrecords = Oldrecord.where(fecharec: date_range)
     total = oldrecords.count
     puts "El total a importar es: #{total}"
   end
 
   task :import => :environment do
-    date_range = Date.parse("01-01-2020")..Date.parse("30-06-2020")
+    date_range = Date.parse("01-01-2021")..Date.parse("31-12-2021")
     oldrecords = Oldrecord.where(fecharec: date_range)
     total = oldrecords.count
 
@@ -66,14 +66,14 @@ end
 
 namespace :oldcitos do
   task :import_count => :environment do
-    date_range = Date.parse("01-01-2020")..Date.parse("30-06-2020")
+    date_range = Date.parse("01-01-2021")..Date.parse("31-12-2021")
     oldrecords = Oldcito.where(fecharec: date_range)
     total = oldrecords.count
     puts "El total a importar es: #{total}"
   end
 
   task :import => :environment do
-    date_range = Date.parse("01-01-2020")..Date.parse("30-06-2020")
+    date_range = Date.parse("01-01-2021")..Date.parse("31-12-2021")
     oldcitos = Oldcito.where(fecharec: date_range)
 
     oldcitos.each_with_index do |oldcito, n|

@@ -430,15 +430,13 @@ class PatientsController < ApplicationController
       end
       redirect_to patients_path + "?inf_type=" + params[:patient][:informs_attributes][:"0"][:inf_type], notice: 'Paciente matriculado exitosamente.'
     else
-      # redirect_to patients_new_series_path + "?inf_type=" + params[:inf_type] + "&id_number=" + params[:id_number]
-      @promoters = Promoter.where(enabled: true)
-      @promoters = @promoters.pluck(:initials, :id)
-      @municipalities = Municipality.all
-      @municipalities.each do |municipality|
-        municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
-      end
-
       render :new_series
+    end
+    @promoters = Promoter.where(enabled: true)
+    @promoters = @promoters.pluck(:initials, :id)
+    @municipalities = Municipality.all
+    @municipalities.each do |municipality|
+      municipality.municipality = municipality.municipality + " - " + municipality.department[0..2]
     end
   end
 
@@ -465,25 +463,25 @@ class PatientsController < ApplicationController
     end
 
     if @patient.name1 != params[:patient][:name1]
-      log += "PRIMER NOMBRE: ANTES:" + @patient.name1 + " DESPUÉS: " + params[:patient][:name1].to_s + "\n"
+      log += "PRIMER NOMBRE: ANTES:" + @patient.name1.to_s + " DESPUÉS: " + params[:patient][:name1].to_s + "\n"
     else
       log += "PRIMER NOMBRE: nSIN CAMBIOS." + "\n"
     end
 
     if @patient.name2 != params[:patient][:name2]
-      log += "SEGUNDO NOMBRE: ANTES:" + @patient.name2 + " DESPUÉS: " + params[:patient][:name2].to_s + "\n"
+      log += "SEGUNDO NOMBRE: ANTES:" + @patient.name2.to_s + " DESPUÉS: " + params[:patient][:name2].to_s + "\n"
     else
       log += "SEGUNDO NOMBRE: SIN CAMBIOS." + "\n"
     end
 
     if @patient.lastname1 != params[:patient][:lastname1]
-      log += "PRIMER APELLIDO: ANTES:" + @patient.lastname1 + " DESPUÉS: " + params[:patient][:lastname1].to_s + "\n"
+      log += "PRIMER APELLIDO: ANTES:" + @patient.lastname1.to_s + " DESPUÉS: " + params[:patient][:lastname1].to_s + "\n"
     else
       log += "PRIMER APELLIDO: SIN CAMBIOS." + "\n"
     end
 
     if @patient.lastname2 != params[:patient][:lastname2]
-      log += "SEGUNDO APELLIDO: ANTES:" + @patient.lastname2 + " DESPUÉS: " + params[:patient][:lastname2].to_s + "\n"
+      log += "SEGUNDO APELLIDO: ANTES:" + @patient.lastname2.to_s + " DESPUÉS: " + params[:patient][:lastname2].to_s + "\n"
     else
       log += "SEGUNDO APELLIDO:SIN CAMBIOS." + "\n"
     end
@@ -495,7 +493,7 @@ class PatientsController < ApplicationController
     end
 
     if @patient.gender != params[:patient][:gender]
-      log += "GÉNERO: ANTES:" + @patient.gender + " DESPUÉS: " + params[:patient][:gender].to_s + "\n"
+      log += "GÉNERO: ANTES:" + @patient.gender.to_s + " DESPUÉS: " + params[:patient][:gender].to_s + "\n"
     else
       log += "GÉNERO: SIN CAMBIOS." + "\n"
     end

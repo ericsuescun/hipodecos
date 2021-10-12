@@ -58,11 +58,6 @@ class Patient < ApplicationRecord
 	validates :id_type, :id_number, :name1, :lastname1, :sex, presence: true
 	validates :id_number, uniqueness: true
 
-	before_save { self.name1.to_s.upcase! }
-	before_save { self.name2.to_s.upcase! }
-	before_save { self.lastname1.to_s.upcase! }
-	before_save { self.lastname2.to_s.upcase! }
-
 	serialize :name1, EncryptedField.new
 	serialize :name2, EncryptedField.new
 	serialize :lastname1, EncryptedField.new
@@ -71,8 +66,6 @@ class Patient < ApplicationRecord
 	serialize :id_type, EncryptedField.new
 	serialize :sex, EncryptedField.new
 	serialize :gender, EncryptedField.new
-	serialize :birth_date, EncryptedField.new
-	serialize :age_number, EncryptedField.new
 	serialize :age_type, EncryptedField.new
 	serialize :address, EncryptedField.new
 	serialize :email, EncryptedField.new
@@ -83,7 +76,7 @@ class Patient < ApplicationRecord
 	serialize :municipality, EncryptedField.new
 	serialize :department, EncryptedField.new
 
-	after_validation :set_age, :set_password
+	after_validation :set_age, :set_password, :set_uppecase
 
 	def fullname
 	  [name1, name2, lastname1, lastname2].join(' ')
@@ -117,4 +110,10 @@ class Patient < ApplicationRecord
 		self.password_confirmation = self.id_number
 	end
 
+	def set_uppecase
+		self.name1.to_s.upcase!
+		self.name2.to_s.upcase!
+		self.lastname1.to_s.upcase!
+		self.lastname2.to_s.upcase!
+	end
 end

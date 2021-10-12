@@ -40,7 +40,7 @@
 									<!-- <td><%= inform.slides.count %></td> -->
 									<!-- <td><%= inform.slides.where(colored: true, covered: true, tagged: true).count %></td> -->
 									<td><%= User.where(id: inform.cytologist).first.try(:fullname) %></td>
-									<td><%= check_box_tag "inform_ids[]", inform.id, checked: true %></td>
+									<td><%= check_box_tag "inform_ids[]", inform.id %></td>
 								</tr>	
 							<% end %>
 						<% end %>

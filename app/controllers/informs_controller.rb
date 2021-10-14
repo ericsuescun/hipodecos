@@ -26,7 +26,7 @@ class InformsController < ApplicationController
   end
 
   def index_pending
-    @informs = Inform.where(inf_type: params[:inf_type]).pending.paginate(page: params[:page], per_page: 10)
+    @informs = Inform.where(inf_type: params[:inf_type]).pending.order(:tag_code).paginate(page: params[:page], per_page: 60)
   end
 
   def index_oldrecords

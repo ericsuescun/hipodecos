@@ -462,7 +462,7 @@ class InformsController < ApplicationController
             end
 
             file += '"",' #SINCRONIZA
-            file += Time.current.strftime("%d/%m/%Y") + ',' #FSINCRO
+            file += ',' #FSINCRO
             file += '"' + inform.cytologies.first.birth_control.to_s + '"' + ","
             file += '"' + Branch.where(id: inform.branch_id).first.try(:initials).to_s + '"' + ","      #ACA VA LA SEDE DONDE SE TOMO LA MUESTRA
             file += '"",' #COLADE

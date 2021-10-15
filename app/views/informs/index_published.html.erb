@@ -69,7 +69,7 @@
                 <td>
                   <%= link_to inform_path(inform), local: true  do %>
                     <% if inform.inf_type == 'cito' %>
-                      <%= inform.tag_code + ':' + inform.cytologies.count %>
+                      <%= inform.tag_code + ':' + inform.cytologies.count.to_i %>
                     <% else %>
                       <%= inform.tag_code %>
                     <% end %>

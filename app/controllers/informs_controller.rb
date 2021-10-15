@@ -21,7 +21,7 @@ class InformsController < ApplicationController
     if params[:tag_code]
       @informs = Inform.where(tag_code: params[:tag_code]).paginate(page: params[:page], per_page: 10)
     else
-      @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type]).paginate(page: params[:page], per_page: 10)
+      @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type]).order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
     end
   end
 
@@ -40,7 +40,7 @@ class InformsController < ApplicationController
       date_range = initial_date..final_date
     end
 
-    @oldrecords = Oldrecord.where(fecharec: date_range, clave: params[:inf_type] == 'clin' ? "C" : params[:inf_type] == 'hosp' ? "H" : "K").paginate(page: params[:page], per_page: 10)
+    @oldrecords = Oldrecord.where(fecharec: date_range, clave: params[:inf_type] == 'clin' ? "C" : params[:inf_type] == 'hosp' ? "H" : "K").paginate(page: params[:page], per_page: 60)
   end
 
   def index_oldcitos
@@ -53,7 +53,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    @oldcitos = Oldcito.where(fecharec: date_range, clave: "K").paginate(page: params[:page], per_page: 10)
+    @oldcitos = Oldcito.where(fecharec: date_range, clave: "K").paginate(page: params[:page], per_page: 60)
   end
 
   def last20

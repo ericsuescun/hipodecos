@@ -274,7 +274,10 @@ class InformsController < ApplicationController
           file += '"' + Branch.where(id: inform.branch_id).first.try(:initials).to_s + '"' + ","
 
           file += '"' + Promoter.where(id: inform.promoter_id).first.try(:initials).to_s + '"' + ","
-          file += '"' + Promoter.where(id: inform.promoter_id).first.try(:code).to_s + '"' + ","
+
+
+          file += '"' + Branch.where(id: inform.branch_id).first.try(:code).to_s + '"' + ","
+
 
           file += '"' + Codeval.where(id: inform.studies.first.codeval_id).first.try(:code).to_s + '"' + ","
           file += inform.studies.first.factor.to_s + ","

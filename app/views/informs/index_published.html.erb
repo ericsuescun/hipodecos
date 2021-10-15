@@ -66,13 +66,10 @@
             <% @informs.each do |inform| %>
               <tr>
                 <td><%= check_box_tag "inform_ids[]", inform.id %></td>
+                <td><%= inform.cytologies.count.to_s %></td>
                 <td>
                   <%= link_to inform_path(inform), local: true  do %>
-                    <% if inform.inf_type == 'cito' %>
-                      <%= inform.tag_code + ':' + inform.cytologies.count.to_i %>
-                    <% else %>
-                      <%= inform.tag_code %>
-                    <% end %>
+                    <%= inform.tag_code %>
                   <% end %>
                 </td>
                 <!-- <td>

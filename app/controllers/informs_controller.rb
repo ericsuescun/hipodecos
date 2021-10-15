@@ -177,7 +177,7 @@ class InformsController < ApplicationController
       final_date = Time.now.end_of_day
       date_range = initial_date..final_date
     end
-    informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range).or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range))
+    informs = Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range).or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range)).order(tag_code: :asc)
 
     file = ""
     file_name = 1

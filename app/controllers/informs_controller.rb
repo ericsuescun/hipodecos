@@ -738,7 +738,7 @@ class InformsController < ApplicationController
           @negative_cytos.delete_at(n)
         end
       end
-      if @already_negative == negative_pick
+      if @already_negative >= negative_pick
         if @negative_cytos.present?
           @negative_cytos.each do |inform|
             inform.update(inf_status: "revision", user_review_date: Time.zone.now.to_date) #Se deben marcar como para validación

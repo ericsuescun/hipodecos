@@ -68,7 +68,11 @@
                 <td><%= check_box_tag "inform_ids[]", inform.id %></td>
                 <td>
                   <%= link_to inform_path(inform), local: true  do %>
-                    <%= inform.tag_code %>
+                    <% if inform.inf_type == 'cito' %>
+                      <%= inform.tag_code + ':' + inform.cytologies.count %>
+                    <% else %>
+                      <%= inform.tag_code %>
+                    <% end %>
                   <% end %>
                 </td>
                 <!-- <td>

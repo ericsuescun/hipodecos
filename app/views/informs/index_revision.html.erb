@@ -11,8 +11,8 @@
             <th>Estado</th>
             <th>Días</th>
             <th>Recibido</th>
-            <th>Identificación</th>
             <th>Paciente</th>
+            <th>Identificación</th>
             <th>Edad</th>
 
           </tr>
@@ -32,12 +32,12 @@
               </td>
               <td><%= (Date.today - inform.receive_date).to_i %></td>
               <td><%= inform.receive_date.strftime("%d/%m/%Y") %></td>
-              <td><%= inform.patient.id_type + " " + inform.patient.id_number %></td>
               <td>
                 <%= link_to inform.patient  do %>
                   <%= inform.patient.fullname %>
                 <% end %>
               </td>
+              <td><%= inform.patient.id_type + " " + inform.patient.id_number %></td>
               <td><%= inform.p_age %></td>
             </tr>
           <% end %>

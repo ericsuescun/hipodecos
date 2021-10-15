@@ -513,7 +513,7 @@ class InformsController < ApplicationController
       zip_data = File.read("temp_file.zip")
       send_data(zip_data, type: 'application/zip', disposition: 'attachment', filename: filename)
     ensure
-      File.delete(@file2)
+      File.delete(@file2) if @file2.present?
     end
   end
 

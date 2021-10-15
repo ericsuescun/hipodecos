@@ -2,6 +2,9 @@
   <%= get_cups_status(inform)[1] %>C
 </span>
 <% if inform.inf_type == 'cito' %>
+  <span class="badge badge-pill badge-<%= get_poll_status(inform)[0] %>">
+    <%= get_poll_status(inform)[1] %>EN
+  </span>
   <span class="badge badge-pill badge-<%= get_blocks_status(inform)[0] %>">
     <%= get_blocks_status(inform)[1] %>E
   </span>

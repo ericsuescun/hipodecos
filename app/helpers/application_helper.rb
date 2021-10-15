@@ -37,7 +37,14 @@ module ApplicationHelper
 			end
 			return ["warning", inform.samples.where(name: "Cassette").count, inform.blocks.count, inform.samples.where(name: "Extendido").count]
 		end
+	end
 
+	def get_poll_status(inform)
+		if inform.cytologies.count == 0
+			return ['danger', inform.cytologies.count]
+		else
+			return ['success', inform.cytologies.count]
+		end
 	end
 
 	def get_slides_status(inform)

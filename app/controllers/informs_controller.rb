@@ -336,13 +336,13 @@ class InformsController < ApplicationController
             file += '"' + inform.prmtr_auth_code.to_s + '"' + ","
 
             case Promoter.where(id: inform.promoter_id).first.try(:regime).to_s
-            when 'C'
+            when 'Contributivo'
               file += '1,'
-            when 'S'
+            when 'Subsidiado'
               file += '2,'
-            when 'V'
+            when 'Vinculado'
               file += '3,'
-            when 'P'
+            when 'Particular'
               file += '4,'
             end
 
@@ -394,13 +394,13 @@ class InformsController < ApplicationController
             file += '"' + inform.prmtr_auth_code.to_s + '"' + ","
 
             case Promoter.where(id: inform.promoter_id).first.try(:regime).to_s
-            when 'C'
+            when 'Contributivo'
               file += '1,'
-            when 'S'
+            when 'Subsidiado'
               file += '2,'
-            when 'V'
+            when 'Vinculado'
               file += '3,'
-            when 'P'
+            when 'Particular'
               file += '4,'
             end
 

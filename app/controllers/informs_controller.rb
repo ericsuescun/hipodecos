@@ -334,7 +334,18 @@ class InformsController < ApplicationController
             file += '"050011134601"' + ","
             file += '"' + inform.invoice.to_s + '"' + ","
             file += '"' + inform.prmtr_auth_code.to_s + '"' + ","
-            file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime).to_s + '"' + ","
+
+            case Promoter.where(id: inform.promoter_id).first.try(:regime).to_s
+            when 'C'
+              file += '1,'
+            when 'S'
+              file += '2,'
+            when 'V'
+              file += '3,'
+            when 'P'
+              file += '4,'
+            end
+
             file += '"",' #OCUPACIÓN que se deja en blanco
             file += '"' + inform.p_municipality.to_s + '"' + ","
             file += '"' + inform.zone_type.to_s + '"' + ","
@@ -381,7 +392,18 @@ class InformsController < ApplicationController
             file += '"050011134601"' + ","
             file += '"' + inform.invoice.to_s + '"' + ","
             file += '"' + inform.prmtr_auth_code.to_s + '"' + ","
-            file += '"' + Promoter.where(id: inform.promoter_id).first.try(:regime).to_s + '"' + ","
+
+            case Promoter.where(id: inform.promoter_id).first.try(:regime).to_s
+            when 'C'
+              file += '1,'
+            when 'S'
+              file += '2,'
+            when 'V'
+              file += '3,'
+            when 'P'
+              file += '4,'
+            end
+
             file += '"",' #OCUPACIÓN que se deja en blanco
             file += '"' + inform.p_municipality.to_s + '"' + ","
             file += '"' + inform.zone_type.to_s + '"' + ","
@@ -434,13 +456,13 @@ class InformsController < ApplicationController
             end
 
             if inform.patient.birth_date != nil
-              file += inform.patient.birth_date.strftime("%d/%m/%Y") #FECHANAC
+              file += inform.patient.birth_date.strftime("%d/%m/%Y") + ',' #FECHANAC
             else
               file += '"",'
             end
 
             file += '"",' #SINCRONIZA
-            file += Time.current.strftime("%d/%m/%Y") #FSINCRO
+            file += Time.current.strftime("%d/%m/%Y") + ',' #FSINCRO
             file += '"' + inform.cytologies.first.birth_control.to_s + '"' + ","
             file += '"' + Branch.where(id: inform.branch_id).first.try(:initials).to_s + '"' + ","      #ACA VA LA SEDE DONDE SE TOMO LA MUESTRA
             file += '"",' #COLADE

@@ -269,7 +269,10 @@ class InformsController < ApplicationController
 
 
           file += '"' + inform.patient.sex.to_s + '"' + ","
-          file += '"' + Entity.where(id: inform.entity_id).first.try(:initials).to_s + '"' + ","
+
+          # file += '"' + Entity.where(id: inform.entity_id).first.try(:initials).to_s + '"' + ","
+          file += '"' + Branch.where(id: inform.branch_id).first.try(:initials).to_s + '"' + ","
+
           file += '"' + Promoter.where(id: inform.promoter_id).first.try(:initials).to_s + '"' + ","
           file += '"' + Promoter.where(id: inform.promoter_id).first.try(:code).to_s + '"' + ","
 

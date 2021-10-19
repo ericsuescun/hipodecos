@@ -353,7 +353,7 @@ class InformsController < ApplicationController
             file += '"' + inform.zone_type.to_s + '"' + ","
             file += '"' + inform.pregnancy_status.to_s + '"' + ","
             file += '"' + inform.status.to_s + '"' + ","
-            file += '"' + inform.p_tel.to_s + "-" + '"' + ","
+            file += '"' + inform.p_cel.to_s + '"' + ","
           end
 
           if inform.physicians.first != nil
@@ -375,7 +375,7 @@ class InformsController < ApplicationController
           file += '"' + Branch.where(id: inform.branch_id).first.try(:address).to_s + '"' + ","
 
           if params[:inf_type] == 'cito'
-            file += '"' + inform.p_tel.to_s + "-" + '"' + ","
+            file += '"' + inform.p_cel.to_s + '"' + ","
             file += '"' + inform.diagnostics.last.description.to_s + '"' + ","
             file += '"' + inform.micros.last.description.to_s + '"' + ","
             file += '"' + inform.suggestions.last.description.to_s + '"' + ","
@@ -477,7 +477,13 @@ class InformsController < ApplicationController
           end
 
           if params[:inf_type] != 'cito'
-            file += '"' + inform.blocks.where(stored: true).first.try(:block_tag).to_s + '"' + ","
+
+            if inform.blocks.where(stored: true).present?
+              file += '"SI"' + ","
+            else
+              file += '"NO"' + ","
+            end
+
             if inform.pathologist_id.present?
               file += '"' + User.find(inform.pathologist_id).initials.to_s.upcase + '"' + ","
             else
@@ -555,7 +561,7 @@ class InformsController < ApplicationController
     serializer = %w[id tag_code pathologist_id inf_status receive_date patient_id]
 
     if role_admin_allowed?
-      @informs = Inform.select(serializer).where(inf_status: nil).or(Inform.select(serializer).where(inf_status: "revision_cyto")).order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
+      @informs = Inform.select(serializer).where(inf_status: nil).where.not(pathologist_id: nil).or(Inform.select(serializer).where(inf_status: "revision_cyto")).order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
     else
       @informs = Inform.select(serializer).where(inf_status: nil, pathologist_id: current_user.id).or(Inform.select(serializer).where(inf_status: "revision_cyto", pathologist_id: current_user.id)).order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
     end
@@ -596,7 +602,7 @@ class InformsController < ApplicationController
 
     if role_admin_allowed?
       # @informs = Inform.unscoped.where(user_review_date: date_range, inf_type: "cito", inf_status: nil).order(pathologist_id: :asc)
-      @informs = Inform.select(serializer).unscoped.where(inf_type: "cito", inf_status: nil).order(tag_code: :asc).paginate(page: params[:page], per_page: 10)
+      @informs = Inform.select(serializer).unscoped.where(inf_type: "cito", inf_status: nil).where.not(cytologist: nil).order(tag_code: :asc).paginate(page: params[:page], per_page: 10)
     else
       # @informs = Inform.where(receive_date: date_range, inf_type: "cito", inf_status: nil, cytologist: current_user.id)
       @informs = Inform.select(serializer).where(inf_type: "cito", inf_status: nil, cytologist: current_user.id).order(tag_code: :asc).paginate(page: params[:page], per_page: 10)

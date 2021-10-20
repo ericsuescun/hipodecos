@@ -696,8 +696,12 @@ class InformsController < ApplicationController
       @informs_unassigned << inform if inform.slides_ok? && !inform.path_assigned?
     end
 
-    @informs_first_batch = @informs_unassigned[0..49]
-    @informs_rest = @informs_unassigned[50..-1] if @informs_unassigned[50..-1].present?
+    pathologist_role_id = Role.find_by_name("Patologia").id
+    @users = User.where(role_id: pathologist_role_id)
+  end
+
+  def distribution_pat_cyto
+    @tab = :asign
 
     @informs2 = []
     @informs2_unassigned = []
@@ -735,26 +739,26 @@ class InformsController < ApplicationController
           end
         end
       end
-      proportion = 0.1
-      negative_pick = (@negative_cytos.count * proportion).ceil  #Obtengo el 10% round up de las negativas
+      # proportion = 0.1
+      # negative_pick = (@negative_cytos.count * proportion).ceil  #Obtengo el 10% round up de las negativas
 
-      if @already_negative < negative_pick
-        negative_pick.times do
-          n = rand(1..@negative_cytos.length) - 1
-          while @informs.last == @negative_cytos[n]
-            n = rand(1..@negative_cytos.length) - 1 #No es posible repetir numero
-          end
-          @informs3_unassigned << @negative_cytos[n]
-          @negative_cytos.delete_at(n)
-        end
-      end
-      if @already_negative >= negative_pick
-        if @negative_cytos.present?
-          @negative_cytos.each do |inform|
-            inform.update(inf_status: "revision", user_review_date: Time.zone.now.to_date) #Se deben marcar como para validación
-          end
-        end
-      end
+      # if @already_negative < negative_pick
+      #   negative_pick.times do
+      #     n = rand(1..@negative_cytos.length) - 1
+      #     while @informs.last == @negative_cytos[n]
+      #       n = rand(1..@negative_cytos.length) - 1 #No es posible repetir numero
+      #     end
+      #     @informs3_unassigned << @negative_cytos[n]
+      #     @negative_cytos.delete_at(n)
+      #   end
+      # end
+      # if @already_negative >= negative_pick
+      #   if @negative_cytos.present?
+      #     @negative_cytos.each do |inform|
+      #       inform.update(inf_status: "revision", user_review_date: Time.zone.now.to_date) #Se deben marcar como para validación
+      #     end
+      #   end
+      # end
     end
 
     @informs2_first_batch = @informs3_unassigned[0..49]
@@ -788,6 +792,31 @@ class InformsController < ApplicationController
     Inform.where(id: params[:inform_ids]).update_all({pathologist_id: params[:pathologist_id].to_i == 0 ? nil : params[:pathologist_id].to_i, user_review_date: Time.zone.now.to_date })
 
     redirect_to distribution_path
+  end
+
+  def assign_pat_cyto
+    #En este proceso se asigna patólogo/a a lo que este chuleado
+    Inform.where(id: params[:inform_ids]).update_all({pathologist_id: params[:pathologist_id].to_i == 0 ? nil : params[:pathologist_id].to_i, user_review_date: Time.zone.now.to_date })
+
+    #Y en este, todo lo que no esté chuleado y sea negativa (sin asignar) se pasa a "revision"
+    @informs2_unassigned = []
+    Inform.by_tagcode.cyto.not_ready_or_cyto.each do |inform|
+      @informs2_unassigned << inform if inform.slides_ok? && !inform.path_assigned?
+    end
+
+    if @informs2_unassigned.present?
+      @informs2_unassigned.each do |inform|
+        if inform.diagnostics.first&.result.present?
+          if inform.cyto_neg?
+            unless inform.path_assigned?
+              inform.update(inf_status: "revision", user_review_date: Time.zone.now.to_date)
+            end
+          end
+        end
+      end
+    end
+
+    redirect_to distribution_pat_cyto_path
   end
 
   def assign_cyto

@@ -107,44 +107,13 @@ class Inform < ApplicationRecord
 
   def cyto_pos_ins?
     if self.diagnostics.present?
-      self.diagnostics.first.result == 'positiva' || self.diagnostics.first.result == 'insatisfactoria'
+      self.diagnostics.first.result == 'positiva' || self.diagnostics.first.result == 'insatisfactoria' || self.diagnostics.first.result == 'negativa+'
     end
   end
 
   def cyto_neg?
     self.diagnostics.first.result == 'negativa' if self.diagnostics.present?
   end
-
-  # def get_regime
-  #   if self.promoter_id.present?
-  #     self.regime = Promoter.find(self.promoter_id).regime
-  #   end
-  # end
-
-  # def get_tag_code
-  #   if self.inf_type == "clin"
-  #      self.tag_code = "C" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive(self.inf_type).to_s
-  #   elsif self.inf_type == "hosp"
-  #      self.tag_code = "H" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive(self.inf_type).to_s
-  #   elsif self.inf_type == "cito"
-  #      self.tag_code = "K" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive(self.inf_type).to_s
-  #   end
-  # end
-
-  # def next_tag_code(inf_type)
-  #   if inf_type == "clin"
-  #      tag_code = "C" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive(inf_type).to_s
-  #   elsif inf_type == "hosp"
-  #      tag_code = "H" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive(inf_type).to_s
-  #   elsif inf_type == "cito"
-  #      tag_code = "K" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive(inf_type).to_s
-  #   end
-  # end
-
-  # def consecutive(inf_type)
-  #   date_range = Time.zone.now.to_date.beginning_of_year..Time.zone.now.to_date.end_of_year
-  #   return Inform.where(inf_type: inf_type, created_at: date_range).count + 1
-  # end
 
   def physician
     if physician_id.present?

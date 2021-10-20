@@ -251,6 +251,7 @@ Rails.application.routes.draw do
 
 
     get 'informs/distribution', to: 'informs#distribution', as: 'distribution'
+    get 'informs/distribution_pat_cyto', to: 'informs#distribution_pat_cyto', as: 'distribution_pat_cyto'
     get 'informs/distribution_cyto', to: 'informs#distribution_cyto', as: 'distribution_cyto'
     get 'informs/index_ready', to: 'informs#index_ready', as: 'informs_index_ready'
     get 'informs/index_published', to: 'informs#index_published', as: 'informs_index_published'
@@ -274,6 +275,7 @@ Rails.application.routes.draw do
 
       collection do
         put :assign
+        put :assign_pat_cyto
         put :assign_cyto
         get :descr_micros
         get :descr_micros_cyto

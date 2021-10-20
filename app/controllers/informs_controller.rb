@@ -335,6 +335,8 @@ class InformsController < ApplicationController
               file += '4,'
             when 'Especial'
               file += '1,'
+            else
+              file += ','
             end
 
             file += '"",' #OCUPACIÓN que se deja en blanco
@@ -395,6 +397,8 @@ class InformsController < ApplicationController
               file += '4,'
             when 'Especial'
               file += '1,'
+            else
+              file += ','
             end
 
             file += '"",' #OCUPACIÓN que se deja en blanco

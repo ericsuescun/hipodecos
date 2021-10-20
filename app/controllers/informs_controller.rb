@@ -64,25 +64,9 @@ class InformsController < ApplicationController
 
   def index_revision
     @tab = :revision
-    # if params[:yi]
-    #   initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day
-    #   final_date = Date.new(params[:yf].to_i, params[:mf].to_i, params[:df].to_i).end_of_day
-    #   date_range = initial_date..final_date
-    #   @informs = Inform.where(receive_date: date_range, inf_status: "revision")
-    # else
-    #   @informs = Inform.where(inf_status: "revision")
-    # end
-    # if params[:init_date]
-    #   initial_date = Date.parse(params[:init_date]).beginning_of_day
-    #   final_date = Date.parse(params[:final_date]).end_of_day
-    #   date_range = initial_date..final_date
-    # else
-    #   initial_date = 1.day.ago.beginning_of_day
-    #   final_date = Time.now.end_of_day
-    #   date_range = initial_date..final_date
-    # end
-    # @informs = Inform.unscoped.where(user_review_date: date_range, inf_status: "revision").order(pathologist_id: :asc, cytologist: :asc).paginate(page: params[:page], per_page: 10)
-    @informs = Inform.unscoped.where(inf_status: "revision").order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
+    
+    # @informs = Inform.unscoped.where(inf_status: "revision").order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
+    @informs = Inform.unscoped.where(inf_status: "revision", pathologist_id: current_user.id).order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
   end
 
   def index_ready

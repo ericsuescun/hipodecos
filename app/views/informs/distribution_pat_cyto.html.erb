@@ -1,5 +1,5 @@
 <div class="info">
-  <h5>Asignación de citologías a recursos de patología: <%= @negative_cytos.count %> Negativas: 10% = <%= @negative_cytos.count.round(0) %></h5>
+  <h5>Asignación de citologías a recursos de patología: <%= @negative_cytos.count %> Negativas: 10% = <%= (0.1 * @negative_cytos.count).round(0) %></h5>
 </div>
 <div class="container-fluid">
   <%= form_tag assign_pat_cyto_informs_path, method: :put do %>

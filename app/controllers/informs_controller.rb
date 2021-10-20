@@ -67,9 +67,9 @@ class InformsController < ApplicationController
     
     
     if role_admin_allowed?
-      @informs = Inform.unscoped.where(inf_status: "revision").order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
+      @informs = Inform.unscoped.where(inf_status: "revision").order(consecutive: :asc).paginate(page: params[:page], per_page: 60)
     else
-      @informs = Inform.unscoped.where(inf_status: "revision", pathologist_id: current_user.id).order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
+      @informs = Inform.unscoped.where(inf_status: "revision", pathologist_id: current_user.id).order(consecutive: :asc).paginate(page: params[:page], per_page: 60)
     end
     
   end

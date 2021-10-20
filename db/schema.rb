@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_27_224544) do
+ActiveRecord::Schema.define(version: 2021_10_20_161144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(version: 2021_06_27_224544) do
     t.integer "cytologist"
     t.datetime "download_date"
     t.date "invoice_date"
+    t.integer "consecutive"
     t.index ["patient_id"], name: "index_informs_on_patient_id"
   end
 

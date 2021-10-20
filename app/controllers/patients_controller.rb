@@ -257,17 +257,20 @@ class PatientsController < ApplicationController
         adjust = Oldrecord.where(clave: 'C', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
         consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1 + adjust
         @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+        @patient.informs.first.consecutive = consecutive.to_i
     else
       if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
         adjust = 0
         adjust = Oldrecord.where(clave: 'H', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
         consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1 + adjust
         @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+        @patient.informs.first.consecutive = consecutive.to_i
       else
         adjust = 0
         adjust = Oldcito.where(clave: 'K', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
         consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1 + adjust
         @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+        @patient.informs.first.consecutive = consecutive.to_i
       end
     end
 
@@ -352,23 +355,27 @@ class PatientsController < ApplicationController
 
     consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1 + adjust
     @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+    @patient.informs.first.consecutive = consecutive.to_i
 
     if params[:patient][:informs_attributes][:"0"][:inf_type] == "clin"
         adjust = 0
         adjust = Oldrecord.where(clave: 'C', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
         consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1 + adjust
         @patient.informs.first.tag_code = "C" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+        @patient.informs.first.consecutive = consecutive.to_i
     else
       if params[:patient][:informs_attributes][:"0"][:inf_type] == "hosp"
         adjust = 0
         adjust = Oldrecord.where(clave: 'H', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
         consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1 + adjust
         @patient.informs.first.tag_code = "H" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+        @patient.informs.first.consecutive = consecutive.to_i
       else
         adjust = 0
         adjust = Oldcito.where(clave: 'K', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
         consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1 + adjust
         @patient.informs.first.tag_code = "K" + Date.today.strftime('%y').to_s + '-' + consecutive.to_s
+        @patient.informs.first.consecutive = consecutive.to_i
       end
     end
 

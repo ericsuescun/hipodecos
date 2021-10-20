@@ -26,7 +26,7 @@ class InformsController < ApplicationController
   end
 
   def index_pending
-    @informs = Inform.where(inf_type: params[:inf_type]).pending.order(:tag_code).paginate(page: params[:page], per_page: 60)
+    @informs = Inform.where(inf_type: params[:inf_type]).pending.order(:consecutive).paginate(page: params[:page], per_page: 60)
   end
 
   def index_oldrecords
@@ -969,17 +969,20 @@ class InformsController < ApplicationController
       adjust = Oldrecord.where(clave: 'C', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
        consecutive = Inform.where(inf_type: "clin", created_at: date_range).count + 1 + adjust
        inform.tag_code = "C" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
+       inform.consecutive = consecutive.to_i
     else
       if params[:inform][:inf_type] == "hosp"
         adjust = 0
         adjust = Oldrecord.where(clave: 'H', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
         consecutive = Inform.where(inf_type: "hosp", created_at: date_range).count + 1 + adjust
         inform.tag_code = "H" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
+        inform.consecutive = consecutive.to_i
     else
       adjust = 0
       adjust = Oldcito.where(clave: 'K', fecha1: date_range).count if Time.current.strftime('%Y') == '2021'
       consecutive = Inform.where(inf_type: "cito", created_at: date_range).count + 1 + adjust
       inform.tag_code = "K" + Time.zone.now.to_date.strftime('%y').to_s + '-' + consecutive.to_s
+      inform.consecutive = consecutive.to_i
      end
     end
 

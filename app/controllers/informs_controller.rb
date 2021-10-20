@@ -347,21 +347,29 @@ class InformsController < ApplicationController
             file += '"' + inform.p_cel.to_s + '"' + ","
           end
 
-          if inform.physicians.first != nil
-            if inform.physicians.first.name != nil
-              file += '"' + inform.physicians.first.try(:name).to_s + '"' + ","
+          if params[:inf_type] != 'cito'
+            if inform.physicians.first != nil
+              if inform.physicians.first.name != nil
+                file += '"' + inform.physicians.first.try(:name).to_s + '"' + ","
+              else
+                file += '"",'
+              end
+              if inform.physicians.first.lastname != nil
+                file += '"' + inform.physicians.first.try(:lastname).to_s + '"' + ","
+              else
+                file += '"",'
+              end
             else
               file += '"",'
-            end
-            if inform.physicians.first.lastname != nil
-              file += '"' + inform.physicians.first.try(:lastname).to_s + '"' + ","
-            else
               file += '"",'
             end
-          else
-            file += '"",'
-            file += '"",'
           end
+
+          if params[:inf_type] == 'cito'
+            file += '"",' #DNOMBRE
+            file += '"",' #DAPELLIDO
+          end
+          
 
           file += '"' + Branch.where(id: inform.branch_id).first.try(:address).to_s + '"' + ","
 

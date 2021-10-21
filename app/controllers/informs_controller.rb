@@ -380,7 +380,7 @@ class InformsController < ApplicationController
             file += '"' + inform.suggestions.last.description.to_s + '"' + ","
             file += '"' + User.where(id: inform.cytologist).first.try(:fullname).to_s.upcase + '"' + ","
             if inform.diagnostics.count == 1
-              file += '"' + "DAVID SUESCUN TARAZONA" + '"' + ","
+              file += '"' + "DAVID SUESCUN R:268-1970" + '"' + ","
             else
               file += '"' + User.where(id: inform.pathologist_id).first.try(:fullname).to_s.upcase + '"' + ","
             end
@@ -469,7 +469,10 @@ class InformsController < ApplicationController
             file += '"",' #SINCRONIZA
             file += ',' #FSINCRO
             file += '"' + inform.cytologies.first.birth_control.to_s + '"' + ","
-            file += '"' + Branch.where(id: inform.branch_id).first.try(:initials).to_s + '"' + ","      #ACA VA LA SEDE DONDE SE TOMO LA MUESTRA
+
+            # file += '"' + Branch.where(id: inform.branch_id).first.try(:initials).to_s + '"' + ","      #ACA VA LA SEDE DONDE SE TOMO LA MUESTRA
+            file += ',' #Se reemplazo la de arriba por vacío
+
             file += '"",' #COLADE
             file += '"",' #COLINAD
             file += '"",' #MONTAINE

@@ -378,11 +378,15 @@ class InformsController < ApplicationController
             file += '"' + inform.diagnostics.last.description.to_s + '"' + ","
             file += '"' + inform.micros.last.description.to_s + '"' + ","
             file += '"' + inform.suggestions.last.description.to_s + '"' + ","
-            file += '"' + User.where(id: inform.cytologist).first.try(:fullname).to_s.upcase + '"' + ","
+
+            u = User.where(id: inform.cytologist).first
+            file += '"' + u.try(:shortname).to_s.upcase + ": #{u.register.to_s}" + '"' + ","
+
+            u = User.where(id: inform.pathologist_id).first
             if inform.diagnostics.count == 1
-              file += '"' + "DAVID SUESCUN R:268-1970" + '"' + ","
+              file += '"' + "#{u.shortname.upcase}: #{u.register.to_s}" + '"' + ","
             else
-              file += '"' + User.where(id: inform.pathologist_id).first.try(:fullname).to_s.upcase + '"' + ","
+              file += '"' + "#{u.shortname.upcase}: #{u.register.to_s}" + '"' + ","
             end
 
             file += '"",' #CELSUP

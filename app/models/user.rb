@@ -47,6 +47,12 @@ class User < ApplicationRecord
     [first_name, last_name].join(' ')
   end
 
+  def shortname
+    fn = first_name.split(' ')[0]
+    ln = last_name.split(' ')[0]
+    [fn, ln].join(' ')
+  end
+
   def initials
     init = []
     init << first_name[0]

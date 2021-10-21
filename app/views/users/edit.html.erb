@@ -102,6 +102,21 @@
           <div class="row mx-auto">
             <div class="col-4 col-lg-4 mx-auto">
               <div class="form-group">
+                <%= f.label "Número de registro" %><br />
+                <%= f.text_field :register, class: "form-control"  %>
+              </div>
+            </div>
+            <div class="col-4 col-lg-4 mx-auto">
+              
+            </div>
+            <div class="col-4 col-lg-4 mx-auto">
+              
+            </div>
+          </div>
+
+          <div class="row mx-auto">
+            <div class="col-4 col-lg-4 mx-auto">
+              <div class="form-group">
                 <%= f.check_box :active %>
                 <%= f.label "Activo" %>
               </div>

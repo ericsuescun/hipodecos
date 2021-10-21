@@ -74,7 +74,12 @@
                 <!-- <td>
                   <%= render 'inform_status', inform: inform %>
                 </td> -->
-                <td><%= inform.receive_date.strftime("%d/%m/%Y") %></td>
+                <% if inform.inf_type != 'cito' %>
+                  <td><%= inform.receive_date.strftime("%d/%m/%Y") %></td>
+                <% else %>
+                  <td><%= inform.receive_date.strftime("%d/%m/%Y") %>, FT(<%= inform.cytologies.first.sample_date.strftime("%d/%m/%Y") %>)</td>
+                <% end %>
+                
                 <td><%= inform.delivery_date.strftime("%d/%m/%Y") %></td>
                 <td><%= (inform.delivery_date.to_date - inform.receive_date).to_i %></td>
                 <td><%= User.where(id: inform.pathologist_review_id).first.try(:initials) %></td>

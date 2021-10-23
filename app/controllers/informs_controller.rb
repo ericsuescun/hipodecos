@@ -514,7 +514,7 @@ class InformsController < ApplicationController
             file += "," #Campo ORDEN que NO esta en la documentacion pero EXISTE
 
             u = User.where(id: inform.pathologist_id).first.
-            file += '"' + u.try(:shortname).to_s.upcase + ": #{u.register}" + '"' + ","
+            file += '"' + u.try(:shortname).to_s.upcase + ": #{u.register.to_s}" + '"' + ","
             file += "," #RANGO que se deja en blanco pero es numérico
             file += '"' + inform.diagnostics.first.who_code.to_s + '"' + ","
 

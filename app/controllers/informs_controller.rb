@@ -512,7 +512,13 @@ class InformsController < ApplicationController
             # file += "," #FOTO1 que se deja en blanco pero es general
             # file += "," #FOTO2 que se deja en blanco pero es general
             file += "," #Campo ORDEN que NO esta en la documentacion pero EXISTE
-            file += '"' + User.where(id: inform.pathologist_id).first.try(:fullname).to_s.upcase + '"' + ","
+
+
+            u = User.where(id: inform.pathologist_id).first
+            file += '"' + u.try(:shortname).to_s.upcase + ": #{u.register.to_s}" + '"' + ","
+            # file += '"' + User.where(id: inform.pathologist_id).first.try(:fullname).to_s.upcase + '"' + ","
+
+
             file += "," #RANGO que se deja en blanco pero es numérico
             file += '"' + inform.diagnostics.first.who_code.to_s + '"' + ","
 

@@ -15,7 +15,12 @@
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= form.label "Fecha recepción" %>
-              <%= form.date_field :receive_date, value: Date.today, autocomplete: "Fecha de nacimiento", class: "form-control input"  %>
+              <% if Inform.exists?(@inform.id) %>
+                <%= form.date_field :receive_date, value: @inform.receive_date, class: "form-control input"  %>
+              <% else %>
+                <%= form.date_field :receive_date, value: Date.today, class: "form-control input"  %>
+              <% end %>
+              
             </div>
           </div>
           <div class="col-12 col-lg-2">

@@ -160,6 +160,21 @@
           <div class="row">
             <div class="col-12 col-lg-6 mt-3">
               <div class="row">
+                <% if @inform.inf_type == 'cito' %>
+                  <div class="col-12 col-lg-8 mx-auto mb-3">
+                    <div class="row">
+                      <% if @inform.studies.count != 0 %>
+                        <div class="col-12 col-lg-12 col-xl-12 mx-auto">
+                          <%= link_to "OK para validación por: #{current_user.initials}", set_revision_inform_path(@inform), class: "btn btn-success btn-block mt-3" %>
+                        </div>
+                      <% else %>
+                        <div class="col-12 col-lg-12 col-xl-12 mx-auto">
+                          <%= link_to "#{current_user.initials}: Faltan CUPS", set_revision_inform_path(@inform), class: "btn btn-warning btn-block mt-3 disabled" %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
                 <div class="col-12">
                   <div class="micros-in">
                     <%= render partial: "micros/micros", locals: { inform: @inform, automatics: @automatics, edit_micro: nil, edit_objection_id: nil, edit_status: false } %>

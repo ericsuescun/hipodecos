@@ -46,6 +46,7 @@ class ListBlocksController < ApplicationController
 		end
 		# @blocks = @inform.blocks	#Tengo que enviar todos los blocks para renderizado!
 		get_samplesc_and_blocks
+		@informs = Inform.joins(:blocks).merge(Block.not_slided).order(tag_code: :asc).uniq
 	end
 
 	def get_samplesc_and_blocks

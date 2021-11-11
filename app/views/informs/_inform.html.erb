@@ -7,7 +7,7 @@
         <%= link_to edit_inform_path(@inform), local: true, class: "btn btn-outline-primary btn-sm mt-0 mb-1" do %>
           <span>&#9998;</span>
         <% end %>
-        Teléfono: <strong><%= @inform.p_tel %></strong> - Celular: <strong><%= @inform.p_cel %></strong> - Dirección: <strong><%= @inform.p_address %> - </strong>Email: <strong><%= @inform.p_email %></strong> - Fecha de entrega: <strong><%= @inform.delivery_date %></strong> - EPS: <strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %></strong> - IPS: <strong><%= Entity.where(id: @inform.entity_id).first.try(:initials) %></strong> (Sede: <strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %></strong>) - Factura: <strong><%= @inform.invoice %></strong>
+        Teléfono: <strong><%= @inform.p_tel %></strong> - Celular: <strong><%= @inform.p_cel %></strong> - Dirección: <strong><%= @inform.p_address %> - </strong>Email: <strong><%= @inform.p_email %></strong> - Fecha de entrega: <strong><%= @inform.delivery_date %></strong> - EPS: <strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %></strong> - IPS: <strong><%= Entity.where(id: @inform.entity_id).first.try(:initials) %></strong> (Sede: <strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %></strong>) - Factura: <strong><%= @inform.invoice %></strong> - Tipo de zona: <strong><%= @inform.zone_type %></strong> - Régimen: <strong><%= @inform.regime %></strong>
         <div class="row">
             <div class="col-12 col-lg-6 col-xl-6">
                 <%= link_to new_inform_physician_path(@inform), class: "btn btn-primary btn-sm mr-1 mb-1" do %>

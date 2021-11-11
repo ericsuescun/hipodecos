@@ -34,7 +34,15 @@
           </div>
         </div>
       <% else %>
-
+        <% if @inform.inf_type == 'cito' %>
+          <div class="row">
+            <div class="col-12 col-lg-12 mb-3 mx-auto">
+              <div class="cytology">
+                <%= render partial: "cytologies", locals: { inform: @inform, edit_cytology_form: nil, edit_objection_id: nil } %>
+              </div>
+            </div>
+          </div>
+        <% end %>
         <div class="row">
           <div class="col-12 col-lg-4 col-xl-4">
             <div class="micros-in">

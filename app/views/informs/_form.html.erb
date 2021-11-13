@@ -104,8 +104,6 @@
             </div>
           </div>
         </div>
-
-        
         <div class="row">
           <div class="col-12 col-lg-3">
             <div class="form-group">
@@ -129,6 +127,14 @@
             <div class="form-group">
               <%= form.label "Estado de embarazo" %>
               <%= form.select(:pregnancy_status, options_for_select([['No Emb', '4'], ['EMB1', '1'], ['EMB2', '2'], ['EMB3', '3']], @inform.pregnancy_status), {  }, class: "form-control form-control input") %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <%= form.label "Régimen" %>
+              <%= form.select(:regime, options_for_select([['Subsidiado', 'Subsidiado'], ['Contributivo', 'Contributivo'], ['Régimen Especial', 'Régimen Especial'], ['Particular', 'Particular']], @inform.regime), { include_blank: true }, class: "form-control form-control input") %>
             </div>
           </div>
         </div>

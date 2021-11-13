@@ -74,6 +74,30 @@ class InformsController < ApplicationController
     
   end
 
+  def show_revision
+    @organs = Organ.all
+
+    @automatics = Automatic.all
+    @automatics_macro = Automatic.where(auto_type: "macro")
+    @automatics_micro = Automatic.where(auto_type: "micro")
+
+
+    @samples = @inform.samples
+
+    @samplesc = @inform.samples.where(name: "Cassette")
+
+    @blocks = @inform.blocks
+
+    @all_cups_price = 0
+    @inform.studies.each do |study|
+      @all_cups_price += study.price * study.factor
+    end
+
+    if @inform.inf_type == 'cito'
+      @cytologies = @inform.cytologies
+    end
+  end
+
   def index_ready
     @tab = :ready
     
@@ -695,7 +719,11 @@ class InformsController < ApplicationController
 
       end
     end
-    redirect_to index_revision_informs_path
+    if index_revision_next
+      redirect_to show_revision_inform_path(index_revision_next)
+    else
+      redirect_to index_revision_informs_path
+    end
   end
 
   def distribution
@@ -901,30 +929,6 @@ class InformsController < ApplicationController
         return [ (days / 30).to_i, "M"]
       end
       return [ days.to_i, "D"]
-    end
-  end
-
-  def show_revision
-    @organs = Organ.all
-
-    @automatics = Automatic.all
-    @automatics_macro = Automatic.where(auto_type: "macro")
-    @automatics_micro = Automatic.where(auto_type: "micro")
-
-
-    @samples = @inform.samples
-
-    @samplesc = @inform.samples.where(name: "Cassette")
-
-    @blocks = @inform.blocks
-
-    @all_cups_price = 0
-    @inform.studies.each do |study|
-      @all_cups_price += study.price * study.factor
-    end
-
-    if @inform.inf_type == 'cito'
-      @cytologies = @inform.cytologies
     end
   end
 
@@ -1229,6 +1233,18 @@ class InformsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_inform
       @inform = Inform.find(params[:id])
+    end
+
+    private
+
+    def index_revision_next
+      if role_admin_allowed?
+        @informs = Inform.unscoped.where(inf_status: "revision").order(inf_type: :asc, consecutive: :asc)
+      else
+        @informs = Inform.unscoped.where(inf_status: "revision", pathologist_id: current_user.id).order(inf_type: :asc, consecutive: :asc)
+      end
+
+      @informs.first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

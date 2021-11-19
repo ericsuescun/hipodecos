@@ -11,9 +11,10 @@ class ResultsController < ApplicationController
 		if current_patient.id == Inform.where(id: params[:id]).first.patient.id
 				@inform = Inform.find(params[:id])
 			  	@pathologists = []
-			  	@inform.diagnostics.each do |diagnostic|
-			    	@pathologists << User.where(id: diagnostic.user_id).first
-			  	end
+			  	# @inform.diagnostics.each do |diagnostic|
+			   #  	@pathologists << User.where(id: diagnostic.user_id).first
+			  	# end
+			  	@pathologists << User.where(id: @inform.pathologist_id).first if @inform.pathologist_id
 			  	@pathologists = @pathologists.uniq
 			  	if @inform.inf_status != "downloaded"
 			  		@inform.update(inf_status: "downloaded", download_date: Time.now)

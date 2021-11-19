@@ -678,15 +678,18 @@ class InformsController < ApplicationController
   def set_revision
     if @inform.inf_type == 'cito'
       if @inform.pathologist_id == nil && @inform.cytologist != nil
-        @inform.update(user_id: current_user.id, user_review_date: Time.zone.now.to_date, inf_status: "revision_cyto")
+        # @inform.update(user_id: current_user.id, user_review_date: Time.zone.now.to_date, inf_status: "revision_cyto")
+        @inform.update(user_review_date: Time.zone.now.to_date, inf_status: "revision_cyto")
         redirect_to descr_micros_cyto_informs_path
       end
       if @inform.pathologist_id != nil
-        @inform.update(user_id: current_user.id, user_review_date: Time.zone.now.to_date, inf_status: "revision")
+        # @inform.update(user_id: current_user.id, user_review_date: Time.zone.now.to_date, inf_status: "revision")
+        @inform.update(user_review_date: Time.zone.now.to_date, inf_status: "revision")
         redirect_to descr_micros_informs_path
       end
     else
-      @inform.update(user_id: current_user.id, user_review_date: Time.zone.now.to_date, inf_status: "revision")
+      # @inform.update(user_id: current_user.id, user_review_date: Time.zone.now.to_date, inf_status: "revision")
+      @inform.update(user_review_date: Time.zone.now.to_date, inf_status: "revision")
       redirect_to descr_micros_informs_path
     end
   end

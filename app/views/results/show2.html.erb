@@ -1,0 +1,193 @@
+<header>
+  <%= link_to 'Volver a resultados', results_path %> |
+  <%= link_to 'Descargar en PDF', result_path(@inform, format: "pdf") %>
+  <%= link_to "Salir de forma segura", destroy_patient_session_path, method: :delete, class: "btn btn-primary" %>
+</header>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-10 col-lg-10 mx-auto">
+      <br>
+      <div class="row d-flex flex-row">
+        <div class="col-4 col-lg-4">
+          <%= image_tag "logo.JPG", class: "img-fluid" %>
+        </div>
+        <div class="col-4 col-lg-4">
+        </div>
+        <div class="col-4 col-lg-4">
+          <%= image_tag "datos.JPG", class: "img-fluid" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 col-lg-4 mx-auto">
+          <strong>Informe número</strong> <%= @inform.tag_code %>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-6 col-lg-6">
+          <strong>Paciente:</strong> <%= @inform.patient.name1 %> <%= @inform.patient.name2 %> <%= @inform.patient.lastname1 %> <%= @inform.patient.lastname2 %>
+        </div>
+        <div class="col-3 col-lg-3">
+        </div>
+        <div class="col-3 col-lg-3">
+          <strong>F. recibo:</strong> <%= @inform.receive_date.strftime('%d/%m/%Y') %>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-3 col-lg-3">
+          <strong><%= @inform.patient.id_type %>:</strong> <%= @inform.patient.id_number %>
+        </div>
+        <div class="col-3 col-lg-3">
+          <strong>Edad:</strong> <%= @inform.patient.age_number %> <%= @inform.patient.age_type == 'A' ? 'Años' : @inform.patient.age_type == 'M' ? 'Meses' : 'Días' %>
+        </div>
+        <div class="col-3 col-lg-3">
+          
+        </div>
+        <div class="col-3 col-lg-3">
+          <strong>F. infor:</strong> <%= @inform.delivery_date %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3 col-lg-3">
+          <strong>Teléfono:</strong> <%= @inform.patient.tel %>
+        </div>
+        <div class="col-3 col-lg-3">
+          <strong>Celular:</strong> <%= @inform.patient.cel %>
+        </div>
+        <div class="col-6 col-lg-6">
+          <strong>Email:</strong> <%= @inform.patient.email %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-3 col-lg-3">
+          <strong>Clínica:</strong> <%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>
+        </div>
+        <div class="col-4 col-lg-4">
+          <strong>Entidad:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:initials) %>
+        </div>
+      </div>
+
+      <% @inform.physicians.each do |physician| %>
+        <div class="row">
+          <div class="col-6 col-lg-6">
+            <strong>Doctor:</strong> <%= physician.name %> <%= physician.lastname %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-6 col-lg-6">
+          <strong>Dirección de entrega:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:address) %>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-4 col-lg-4">
+          <strong>Descripción Macroscópica</strong>
+        </div>
+      </div>
+
+      <% @inform.recipients.each_with_index do |recipient, n| %>
+        <div class="row">
+          <div class="col-12 col-lg-12 col-xl-12">
+            <div class="preview">
+              <br>
+              <div>
+                
+                  Contenido de recipiente #<%= n + 1 %>:
+                
+              </div>
+              <div class="preview"><%= recipient.description %></div>
+            </div>
+            <div>Bloqueado de la siguiente manera:</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-12 col-xl-12">
+            <% Sample.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
+              <div class="preview ">
+                <strong><i><%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %></i></strong>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      
+      <br>
+      <div class="row">
+        <div class="col-4 col-lg-4">
+          <strong>Descripción Microscópica</strong>
+        </div>
+      </div>
+
+      <% @inform.micros.each_with_index do |micro, n| %>
+        <div class="row">
+          <div class="col-12 col-lg-12">
+            <%= micro.description %>
+          </div>
+        </div>
+      <% end %>
+
+      <% @inform.micros.each_with_index do |micro, n| %>
+        <div class="row">
+          <div class="col-12 col-lg-12">
+            <div class="row">
+              <% micro.pictures.each do |picture| %>
+                <div class="col-4 col-lg-4 mx-auto">
+                  <div class="card">
+                    <%= link_to picture.name.url  do %>
+                      <%= image_tag picture.name.url, class: "card-img-top" %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row diagnostic">
+        <div class="col-12 col-lg-12">
+          <div class="card mt-3">
+            <div class="card-header text-center">
+              <strong>DIAGNÓSTICO Y PROCEDIMIENTOS</strong>
+            </div>
+            <div class="card-body">
+              <% @inform.diagnostics.each do |diagnostic| %>
+                <h5 class="card-title"><strong><%= diagnostic.description %></strong></h5>
+              <% end %>
+              <div class="row d-flex flex-row">
+                <% @pathologists.each do |pathologist| %>
+                  <div class="col-4 col-lg-4 mt-3">
+                    <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
+                    <% if pathologist.signfile.file != nil %>
+                      <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
+                    <% else %>
+                      Sin archivo de firma!
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-between">
+              <div>
+                <% @inform.diagnostics.each do |diagnostic| %>
+                  <strong>Código:</strong> <%= diagnostic.pss_code %> <strong>DX:</strong> <%= diagnostic.who_code %>
+                <% end %>
+              </div>
+              <div>
+                <strong>Secretaria:</strong> <%= User.where(id: @inform.user_id).first.try(:first_name) %> <%= User.where(id: @inform.user_id).first.try(:last_name) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

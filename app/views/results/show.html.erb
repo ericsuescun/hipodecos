@@ -41,7 +41,7 @@
           <strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %>
         <% end %>
       </p>
-      <p class="preview-center"><strong>Dirección de entrega: </strong><%= Branch.where(id: @inform.branch_id).first.try(:address) %>, <strong>Código de autorización: </strong><%= @inform.prmtr_auth_code %></p>
+      <p class="preview-center"><strong>Dirección de entrega: </strong><%= @delivery_address %>, <strong>Código de autorización: </strong><%= @inform.prmtr_auth_code %></p>
 
       <br>
 

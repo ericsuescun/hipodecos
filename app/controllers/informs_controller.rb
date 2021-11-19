@@ -1175,6 +1175,8 @@ class InformsController < ApplicationController
         @cytology = nil
       end
     end
+    @delivery_address = @inform.p_address
+    @delivery_address = Branch.where(id: @inform.branch_id).first.try(:address) if @inform.inf_type != 'hosp'
   end
 
   # private

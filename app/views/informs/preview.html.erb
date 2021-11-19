@@ -191,8 +191,6 @@
                       <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
                       <% if pathologist.signfile.file != nil %>
                         <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
-                      <% else %>
-                        Sin archivo de firma!
                       <% end %>
                     </div>
                   <% end %>
@@ -216,8 +214,6 @@
                       <h5 class="card-title"><strong>Citóloga:</strong> <%= @cytologist.fullname %></h5>
                       <% if @cytologist.signfile.file != nil %>
                         <%= image_tag @cytologist.signfile.url, class: "img-fluid" %>
-                      <% else %>
-                        Sin archivo de firma!
                       <% end %>
                     </div>
                   </div>

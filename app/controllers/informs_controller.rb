@@ -215,14 +215,14 @@ class InformsController < ApplicationController
           if params[:inf_type] != 'cito'
             descr = ""
             inform.recipients.each_with_index do |recipient, n|
-              descr += "Contenido de recipiente \##{n + 1}:" + "\r\n" + recipient.description + "\r\n" + "Bloqueado de la siguiente manera:\r\n\r\n"
+              descr += "Contenido de recipiente \##{n + 1}:" + "\r\n" + recipient.description.to_s + "\r\n" + "Bloqueado de la siguiente manera:\r\n\r\n"
               inform.samples.where(recipient_tag: recipient.tag).each do |sample|
                 if sample.name == "Cassette"
-                  descr += sample.description
+                  descr += sample.description.to_s
                   descr += ": " if sample.description != ""
                   descr += sample.fragment.to_s + "F-" + get_nomen(sample.sample_tag) + "\r\n"
                 else
-                  descr += sample.description + "-" + get_nomen(sample.sample_tag) + "\r\n"
+                  descr += sample.description.to_s + "-" + get_nomen(sample.sample_tag) + "\r\n"
                 end
               end
               descr += "\r\n"

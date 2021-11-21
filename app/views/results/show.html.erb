@@ -186,7 +186,7 @@
 
                 <div class="row d-flex flex-row">
                   <% @pathologists.each do |pathologist| %>
-                    <div class="col-4 col-lg-4 mt-3">
+                    <div class="col-12 col-lg-12 mt-3">
                       <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
                       <% if pathologist.signfile.file != nil %>
                         <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
@@ -200,14 +200,14 @@
                   <h5 class="card-title"><strong><%= simple_format(diagnostic.description) %></strong></h5>
                   <div class="row d-flex flex-row">
                     <% @pathologists.each do |pathologist| %>
-                      <div class="col-4 col-lg-4 mt-3">
+                      <div class="col-6 col-lg-6 mt-3">
                         <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
                         <% if pathologist.signfile.file != nil %>
                           <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
                         <% end %>
                       </div>
                     <% end %>
-                    <div class="col-4 col-lg-4 mt-3">
+                    <div class="col-6 col-lg-6 mt-3">
                       <h5 class="card-title"><strong>Citóloga:</strong> <%= @cytologist.fullname %></h5>
                       <% if @cytologist.signfile.file != nil %>
                         <%= image_tag @cytologist.signfile.url, class: "img-fluid" %>
@@ -224,10 +224,12 @@
                     <strong>PSS:</strong> <%= diagnostic[0].to_s %> <strong>OMS:</strong> <%= diagnostic[1].to_s %>
                   <% end %>
                   <% if @inform.blocks.where(stored: true) != [] %>
-                    <strong>, Se guarda:</strong>
+                    <strong>, Bloques:</strong>
                     <% @inform.blocks.where(stored: true).each do |stored_block| %>
-                      <%= stored_block.block_tag %>
+                      <%= stored_block.block_tag[-1] + " " %>
                     <% end %>
+                  <% else %>
+                    <strong>, Bloques: NO</strong>
                   <% end %>
                 <% else %>
                   <% if @inform.diagnostics != [] %>
@@ -239,7 +241,7 @@
 
               </div>
               <div>
-                <strong>Proyecta:</strong> <%= User.where(id: @inform.user_id).first.try(:fullname) %>
+                <strong>Digita:</strong> <%= User.where(id: @inform.user_id).first.try(:fullname) %>
               </div>
             </div>
           </div>

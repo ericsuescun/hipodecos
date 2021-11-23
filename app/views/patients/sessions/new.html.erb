@@ -1,17 +1,19 @@
 <div class="row">
   <div class="col-4 col-lg-4 col-xl-4 offset-4">
     <h1>Resultados</h1>
-    <h4>Hola! En Patología Suescún hemos hecho algunos cambios:</h4>
-
-    <h6>Si eres un usuario corporativo, ingresa el código asignado a la sede en Número de indetificación y la contraseña</h6>
-    
+    <h4>Hola! En Patología Suescún hemos hecho algunos cambios</h4>
+    <br>
+    <p>Si eres un <strong>paciente</strong>, ingresa con tu número de cédula en Número de indentificación y Contraseña</p>
+    <br>
+    <p>Si eres un <strong>usuario corporativo</strong>, ingresa el código asignado a la sede en Número de indetificación y la contraseña</p>
+    <br>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.label "Número de identificación" %><br />
         <%= f.number_field :id_number, autofocus: true, autocomplete: "Identificación", class: "form-control" %>
       </div>
 
-      <h6>Si eres un paciente, puedes usasr todos los dígitos de tu cédula como contraseña por defecto</h6>
+      <p>Si eres un <strong>paciente</strong>, recuerda usar <strong>todos</strong> los dígitos de tu cédula como contraseña por defecto</p>
       <div class="form-group">
         <%= f.label "Contraseña" %><br />
         <%= f.password_field :password, autocomplete: "Contraseña", class: "form-control" %>

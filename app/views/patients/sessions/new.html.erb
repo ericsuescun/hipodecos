@@ -11,13 +11,13 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
           <%= f.label "Número de identificación" %><br />
-          <%= f.number_field :id_number, autofocus: true, autocomplete: "Identificación", class: "form-control" %>
+          <%= f.number_field :id_number, autofocus: true, autocomplete: "Identificación", class: "form-control input-lg" %>
         </div>
 
         <p>Si eres un <strong>paciente</strong>, recuerda usar <strong>todos</strong> los dígitos de tu cédula como contraseña por defecto</p>
         <div class="form-group">
           <%= f.label "Contraseña" %><br />
-          <%= f.password_field :password, autocomplete: "Contraseña", class: "form-control" %>
+          <%= f.password_field :password, autocomplete: "Contraseña", class: "form-control input-lg" %>
         </div>
         <p>Ejemplo: 1128777333</p>
 
@@ -31,7 +31,7 @@
         <% end %>
 
         <div class="actions">
-          <%= f.submit "Ingresar", class: "btn btn-primary btn-block mb-3" %>
+          <%= f.submit "Ingresar", class: "btn btn-primary btn-block btn-lg mb-3" %>
         </div>
       <% end %>
 

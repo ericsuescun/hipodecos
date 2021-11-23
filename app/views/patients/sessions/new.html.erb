@@ -1,40 +1,43 @@
-<div class="row">
-  <div class="col-4 col-lg-4 col-xl-4 offset-4">
-    <h1>Resultados</h1>
-    <h4>Hola! En Patología Suescún hemos hecho algunos cambios</h4>
-    <br>
-    <p>Si eres un <strong>paciente</strong>, ingresa con tu número de cédula en Número de indentificación y Contraseña</p>
-    <br>
-    <p>Si eres un <strong>usuario corporativo</strong>, ingresa el código asignado a la sede en Número de indetificación y la contraseña</p>
-    <br>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="form-group">
-        <%= f.label "Número de identificación" %><br />
-        <%= f.number_field :id_number, autofocus: true, autocomplete: "Identificación", class: "form-control" %>
-      </div>
-
-      <p>Si eres un <strong>paciente</strong>, recuerda usar <strong>todos</strong> los dígitos de tu cédula como contraseña por defecto</p>
-      <div class="form-group">
-        <%= f.label "Contraseña" %><br />
-        <%= f.password_field :password, autocomplete: "Contraseña", class: "form-control" %>
-      </div>
-      <p>Ejemplo: 1128777333</p>
-
-      <% if devise_mapping.rememberable? %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4 col-xl-4 mx-auto">
+      <h1>Resultados</h1>
+      <h4>Hola! En Patología Suescún hemos hecho algunos cambios</h4>
+      <br>
+      <p>Si eres un <strong>paciente</strong>, ingresa con tu número de cédula en Número de indentificación y Contraseña</p>
+      <br>
+      <p>Si eres un <strong>usuario corporativo</strong>, ingresa el código asignado a la sede en Número de indetificación y la contraseña</p>
+      <br>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
-          <div class="form-check form-check-inline">
-            <%= f.check_box :remember_me, class: "form-check-input" %>
-            <%= f.label "Recuérdame", class: "form-check-label" %>
+          <%= f.label "Número de identificación" %><br />
+          <%= f.number_field :id_number, autofocus: true, autocomplete: "Identificación", class: "form-control" %>
+        </div>
+
+        <p>Si eres un <strong>paciente</strong>, recuerda usar <strong>todos</strong> los dígitos de tu cédula como contraseña por defecto</p>
+        <div class="form-group">
+          <%= f.label "Contraseña" %><br />
+          <%= f.password_field :password, autocomplete: "Contraseña", class: "form-control" %>
+        </div>
+        <p>Ejemplo: 1128777333</p>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <%= f.check_box :remember_me, class: "form-check-input" %>
+              <%= f.label "Recuérdame", class: "form-check-label" %>
+            </div>
           </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Ingresar", class: "btn btn-primary btn-block mb-3" %>
         </div>
       <% end %>
 
-      <div class="actions">
-        <%= f.submit "Ingresar", class: "btn btn-primary btn-block mb-3" %>
-      </div>
-    <% end %>
+      <%= render "patients/shared/links" %>
 
-    <%= render "patients/shared/links" %>
-
+    </div>
   </div>
+
 </div>

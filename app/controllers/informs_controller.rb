@@ -655,6 +655,7 @@ class InformsController < ApplicationController
     Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
       if @inform.inf_type == "cito"
         Automatic.where(auto_type: "cito", organ: sample.organ_code).order(:title).each do |auto|
+          auto.title = auto.scripts.first.pss_code + ". " + auto.title if auto.scripts.present?
           @automatics << auto
         end
       else

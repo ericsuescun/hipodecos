@@ -654,7 +654,16 @@ class InformsController < ApplicationController
     # @inform.samples.unscoped.select(:organ_code).distinct.each do |sample|
     Sample.unscoped.where(inform_id: @inform.id).select(:organ_code).distinct.each do |sample|
       if @inform.inf_type == "cito"
-        Automatic.where(auto_type: "cito", organ: sample.organ_code).order(:title).each do |auto|
+        Automatic.where(auto_type: "cito", organ: sample.organ_code).each do |auto|
+          if auto.scripts.first.pss_code.present?
+            pss_code = auto.scripts.first.pss_code.to_i
+            if pss_code < 10
+              auto.title = '0' + auto.scripts.first.pss_code + ". " + auto.title if auto.scripts.present?
+            else
+              auto.title = auto.scripts.first.pss_code + ". " + auto.title if auto.scripts.present?
+            end
+          end
+          
           @automatics << auto
         end
       else
@@ -663,6 +672,12 @@ class InformsController < ApplicationController
         end
       end
     end
+
+    if @inform.inf_type == 'cito'
+      @automatics = @automatics.sort_by {|auto| auto[:title] }
+    end
+
+    @automatics
 
     # @samples = @inform.samples
 

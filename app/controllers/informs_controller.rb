@@ -665,6 +665,12 @@ class InformsController < ApplicationController
       end
     end
 
+    if @inform.inf_type == 'cito'
+      @automatics.sort_by {|auto| auto[:title] }
+    end
+
+    @automatics
+
     # @samples = @inform.samples
 
     # @samplesc = @inform.samples.where(name: "Cassette")

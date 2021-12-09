@@ -224,7 +224,7 @@
                               <tr class="m-organ-<%= Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '') %> m-0 p-0">
                                 <td>
                                   <span class="d-flex flex-row justify-content-between">
-                                    <%= Citocode.where(cito_code: automatic.scripts.first.pss_code.to_i).first.result_type[0].upcase + ": " %><%= automatic.title[0..5] %>
+                                    <%= Citocode.where(cito_code: automatic.scripts.first.pss_code.to_i).first.result_type[0].upcase + ": " %><%= automatic.title[0..10] %>
                                     <% automatic.scripts.each_with_index do |script, n| %>
                                       <% if n == 0 %>
 
@@ -279,7 +279,7 @@
                               <tr class="m-organ-<%= Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '') %> m-0 p-0">
                                 <td>
                                   <span class="d-flex flex-row justify-content-between">
-                                    <%= Citocode.where(cito_code: automatic.scripts.first.pss_code.to_i).first.result_type[0].upcase + ": " %><%= automatic.title[0..5] %>
+                                    <%= Citocode.where(cito_code: automatic.scripts.first.pss_code.to_i).first.result_type[0].upcase + ": " %><%= automatic.title[0..10] %>
                                     <% automatic.scripts.each_with_index do |script, n| %>
                                       <% if n == 0 %>
                                         <%= form_with url: execute_templates_micro_path, method: "get" do |form| %>

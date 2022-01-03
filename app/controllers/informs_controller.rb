@@ -19,9 +19,9 @@ class InformsController < ApplicationController
     end
 
     if params[:tag_code]
-      @informs = Inform.where(tag_code: params[:tag_code]).paginate(page: params[:page], per_page: 10)
+      @informs = Inform.where(tag_code: params[:tag_code]).order(:consecutive).paginate(page: params[:page], per_page: 10)
     else
-      @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type]).order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
+      @informs = Inform.where(receive_date: date_range, inf_type: params[:inf_type]).order(:consecutive).order(tag_code: :asc).paginate(page: params[:page], per_page: 60)
     end
   end
 

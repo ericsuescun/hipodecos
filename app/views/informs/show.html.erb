@@ -7,11 +7,20 @@
             <%= render partial: "inform" %>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-12 mb-3 mx-auto">
+            <div class="inform-parse">
+              <!-- <h1>Recipientes</h1> -->
+              <%= render partial: "inform-parse" %>
+            </div>
+          </div>
+        </div>
         
         <div class="row">
           <div class="col-12 col-lg-12 mb-3 mx-auto">
             <div class="recipient">
-              <!-- <h1>Recipientes</h1> -->
+              <h4>Descripción Macro</h4>
               <%= render partial: "recipients", locals: { inform: @inform, edit_sample_tag: "", edit_recipient_tag: "", automatics: @automatics } %>
             </div>
           </div>

@@ -4,9 +4,7 @@ class InformsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_inform, only: [:show, :show_revision, :edit, :update, :destroy, :preview, :descr_micro, :clear_revision, :set_revision, :set_ready, :autos_micro, :anulate]
-
-  # GET /informs
-  # GET /informs.json
+  
   def index
     if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day

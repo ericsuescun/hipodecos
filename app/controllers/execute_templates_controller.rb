@@ -1,6 +1,211 @@
 class ExecuteTemplatesController < ApplicationController
 	before_action :authenticate_user!
 
+	def macro_parse
+		@inform = Inform.find_by(id: params[:inform_id])
+		ttp = params[:text_to_parse]
+		if ttp[0] == '#'
+			recipient = ttp[1..-1]
+			consecutive = recipient.split(' ').first
+			
+			unless consecutive.match(/[0-9]/)
+				redirect_to @inform, notice: "Hay un problema con tu # de recipiente #{ttp[0..5]}"
+			end
+			
+			organ = params[:organ]
+			new_recipient = @inform.recipients.build
+			new_recipient.tag = @inform.tag_code + '-R' + consecutive
+			recipient_line = recipient.split('SPCR')
+			description = recipient_line.first
+			blocking = recipient_line.second
+			new_recipient.description = "#" + description + " SE BLOQUEAN CORTES REPRESENTATIVOS: #{blocking}"
+			new_recipient.save
+			
+			parts = blocking.split(' ')
+			
+			if parts.size == 1
+				fragments = parts.first[0..-2]
+				parts = blocking.split('-')
+				letter = parts.second
+				if parts.second[-1] == '.'
+					letter = parts.second[0..-2]
+				end
+				
+				sample = @inform.samples.build
+				sample.user_id = current_user.id
+				sample.name = "Cassette"
+				sample.included = false
+				sample.sample_tag = @inform.tag_code + "-#{letter}"
+				sample.recipient_tag = new_recipient.tag
+				sample.organ_code = organ
+				sample.description = ''
+				sample.fragment = fragments.to_i
+				sample.save
+			else
+				if parts.size > 2
+					samples_range = parts.last
+					if samples_range[-1] == '.'
+						samples_range = samples_range[0..-2]
+					end
+					start_range = samples_range.split('-').first[1..-1].to_i
+					end_range = samples_range.split('-').second[1..-1].to_i
+					letter_range = samples_range[0]
+
+					start_range.upto(end_range) do |n|
+						sample = @inform.samples.build
+						sample.user_id = current_user.id
+						sample.name = "Cassette"
+						sample.included = false
+						sample.sample_tag = @inform.tag_code + "-#{letter_range}#{n}"
+						sample.recipient_tag = new_recipient.tag
+						sample.organ_code = organ
+						sample.description = ''
+						sample.fragment = 1
+						
+						sample.save
+					end
+				else
+					fragments = parts.first[0..-2]
+					samples_range = parts.last
+					if samples_range[-1] == '.'
+						samples_range = samples_range[0..-2]
+					end
+					start_range = samples_range.split('-').first[1..-1].to_i
+					end_range = samples_range.split('-').second[1..-1].to_i
+					letter_range = samples_range[0]
+
+					start_range.upto(end_range) do |n|
+						sample = @inform.samples.build
+						sample.user_id = current_user.id
+						sample.name = "Cassette"
+						sample.included = false
+						sample.sample_tag = @inform.tag_code + "-#{letter_range}#{n}"
+						sample.recipient_tag = new_recipient.tag
+						sample.organ_code = organ
+						sample.description = ''
+						if n == start_range
+							sample.fragment = fragments.to_i / end_range + (fragments.to_i % end_range)
+						else
+							sample.fragment = fragments.to_i / end_range
+						end
+						
+						
+						sample.save
+					end
+				end
+			end
+		end
+
+		redirect_to @inform
+	end
+
+	def inform_parse
+		@inform = Inform.find_by(id: params[:inform_id])
+		ttp = params[:text_to_parse].split('#')
+		ttp.each do |recipient|
+			next if recipient.blank?
+			consecutive = recipient.split(' ').first
+			organ_cue = recipient.split(' ').second[0..-2]
+			organ = organ_cue
+
+			organs = Organ.all
+			organs.each do |org|
+				options = org.keywords if org.keywords.present?
+				next if options.blank?
+				if options.include?(organ_cue.downcase)
+					organ = org.organ
+				end
+			end
+			unless consecutive.match(/[0-9]/)
+				redirect_to @inform, notice: "Hay un problema con tu # de recipiente #{ttp[0..5]}"
+			end
+			
+			new_recipient = @inform.recipients.build
+			new_recipient.tag = @inform.tag_code + '-R' + consecutive
+			recipient_line = recipient.split('SPCR')
+			description = recipient_line.first
+			blocking = recipient_line.second
+			new_recipient.description = "#" + description + " SE BLOQUEAN CORTES REPRESENTATIVOS: #{blocking}"
+			new_recipient.save
+			
+			parts = blocking.split(' ')
+			
+			if parts.size == 1
+				fragments = parts.first[0..-2]
+				parts = blocking.split('-')
+				letter = parts.second
+				if parts.second[-1] == '.'
+					letter = parts.second[0..-2]
+				end
+				
+				sample = @inform.samples.build
+				sample.user_id = current_user.id
+				sample.name = "Cassette"
+				sample.included = false
+				sample.sample_tag = @inform.tag_code + "-#{letter}"
+				sample.recipient_tag = new_recipient.tag
+				sample.organ_code = organ
+				sample.description = ''
+				sample.fragment = fragments.to_i
+				sample.save
+			else
+				if parts.size > 2
+					samples_range = parts.last
+					if samples_range[-1] == '.'
+						samples_range = samples_range[0..-2]
+					end
+					start_range = samples_range.split('-').first[1..-1].to_i
+					end_range = samples_range.split('-').second[1..-1].to_i
+					letter_range = samples_range[0]
+
+					start_range.upto(end_range) do |n|
+						sample = @inform.samples.build
+						sample.user_id = current_user.id
+						sample.name = "Cassette"
+						sample.included = false
+						sample.sample_tag = @inform.tag_code + "-#{letter_range}#{n}"
+						sample.recipient_tag = new_recipient.tag
+						sample.organ_code = organ
+						sample.description = ''
+						sample.fragment = 1
+						
+						sample.save
+					end
+				else
+					fragments = parts.first[0..-2]
+					samples_range = parts.last
+					if samples_range[-1] == '.'
+						samples_range = samples_range[0..-2]
+					end
+					start_range = samples_range.split('-').first[1..-1].to_i
+					end_range = samples_range.split('-').second[1..-1].to_i
+					letter_range = samples_range[0]
+
+					start_range.upto(end_range) do |n|
+						sample = @inform.samples.build
+						sample.user_id = current_user.id
+						sample.name = "Cassette"
+						sample.included = false
+						sample.sample_tag = @inform.tag_code + "-#{letter_range}#{n}"
+						sample.recipient_tag = new_recipient.tag
+						sample.organ_code = organ
+						sample.description = ''
+						if n == start_range
+							sample.fragment = fragments.to_i / end_range + (fragments.to_i % end_range)
+						else
+							sample.fragment = fragments.to_i / end_range
+						end
+						
+						
+						sample.save
+					end
+				end
+			end
+		end
+		redirect_to @inform
+	end
+	
+
 	def anotate_block
 		@block = Block.find(params[:block_id])
 		@inform = @block.inform

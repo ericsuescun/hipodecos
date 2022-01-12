@@ -1,0 +1,27 @@
+<div class="recipients">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-lg-12">
+        <% if @inform.inf_status != 'revision' %>
+          <strong>Nueva Macro</strong>
+          <%= form_with url: execute_templates_inform_parse_path, method: "post" do |form| %>
+            <div class="row d-flex flex-row justify-content-center">
+              <div class="col-12 col-lg-8 col-xl-8">
+                  <div class="form-group mt-3">
+                      <%= form.text_area :text_to_parse, size: '10x10', value: nil, class: "form-control input mx-1" %>
+                  </div>
+              </div>
+              <div class="col-12 col-lg-2 col-xl-2">
+                  <div class="form-group mt-3">
+                    <%= form.submit "+", class: "btn btn-outline-dark" %>
+                  </div>
+              </div>
+            </div>
+            <%= form.hidden_field :inform_id, value: @inform.id %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

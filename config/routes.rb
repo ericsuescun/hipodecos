@@ -68,6 +68,8 @@ Rails.application.routes.draw do
     post 'list_blocks/review_block'
     post 'list_blocks/anotate_block'
 
+    post 'execute_templates/inform_parse'
+
     get 'inclusion_blocks/inclusion'
 
     # get 'inclusion_blocks/block_fp1'

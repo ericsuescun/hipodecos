@@ -14,6 +14,7 @@
           <tr>
             <th>Admin</th>
             <th>Órgano</th>
+            <th>Keywords</th>
             <th>Código</th>
             <th>Sistema</th>
             <th colspan="3"></th>
@@ -26,6 +27,7 @@
               <td><%= Admin.where(id: organ.admin_id).first.try(:name) %></td>
 
               <td><%= organ.organ %></td>
+              <td><%= organ.keywords %></td>
               <td><%= organ.organ_code %></td>
               <td><%= organ.part %></td>
 

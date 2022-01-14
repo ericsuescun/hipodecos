@@ -49,8 +49,11 @@ class OrgansController < ApplicationController
   # PATCH/PUT /organs/1.json
   def update
     @organ.admin_id = current_admin.id
+    
     respond_to do |format|
       if @organ.update(organ_params)
+        @organ.keywords = organ_params[:keywords].downcase.split(' ')
+        @organ.save
         format.html { redirect_to @organ, notice: 'Organ was successfully updated.' }
         format.json { render :show, status: :ok, location: @organ }
       else
@@ -78,6 +81,6 @@ class OrgansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def organ_params
-      params.require(:organ).permit(:admin_id, :organ, :organ_code, :part)
+      params.require(:organ).permit(:admin_id, :organ, :organ_code, :part, :keywords)
     end
 end

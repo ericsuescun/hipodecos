@@ -8,6 +8,7 @@ class ResultsController < ApplicationController
 	end
 
 	def show
+		@source = 'results'
 		if current_patient.id == Inform.where(id: params[:id]).first.patient.id
 				@inform = Inform.find(params[:id])
 

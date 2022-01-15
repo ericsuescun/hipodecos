@@ -1,0 +1,260 @@
+<header>
+    
+  <% if source == 'informs' %>
+    <%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform), class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Volver a informes', informs_path, class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Volver a informe', inform_path(@inform), class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Descargar en PDF', preview_inform_path(@inform, format: "pdf"), class: "btn btn-outline-primary ml-3" %>
+  <% end %>
+  <% if source == 'results' %>
+    <%= link_to 'Volver a resultados', results_path, class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Descargar en PDF', result_path(@inform, format: "pdf"), class: "btn btn-primary ml-3" %>
+    <%= link_to "Salir de forma segura", destroy_patient_session_path, method: :delete, class: "btn btn-primary ml-3" %>
+  <% end %>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-10 col-lg-10 mx-auto">
+      <br>
+      <div>
+        <%= image_tag "logo.JPG", class: "img-fluid", width: 250, height: 250%>
+        <%= image_tag "datos.JPG", class: "img-fluid", width: 250, height: 250, align: "right" %>
+      </div>
+
+      <h4 class="preview-center">Informe <strong><%= @inform.tag_code %></strong>. Fecha: <%= @inform.delivery_date == nil ? "-en progreso-" : "#{@inform.delivery_date.strftime("%d/%m/%Y")}" %></h4>
+      <h6 class="preview-center"><strong><%= @inform.patient.fullname %></strong>, <%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %>, <%= @inform.patient.id_type %>: <%= @inform.patient.id_number %></h6>
+      <h6 class="preview-center"><%= "Teléfono: #{@inform.p_tel} " if @inform.p_tel.present? %> <%= " Celular: #{@inform.p_cel} " if @inform.p_cel.present? %> <%= " Email: #{@inform.p_email}" if @inform.p_email.present? %></h6>
+
+      <h6 class="preview-center">Fecha de recepción: <%= @inform.receive_date.strftime('%d/%m/%Y') %>, <strong>EPS: </strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>, <strong>IPS: </strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %>, <strong>Dirección:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:name) %></h6>
+
+      <% if @inform.inf_type == 'cito' %>
+          <% if @cytology != nil %>
+              <p class="preview-center">
+                <strong>Emb:</strong> <%= @cytology.pregnancies %>, <strong>FUM:</strong> <%= @cytology.last_mens %>, <strong>Última citología:</strong> <%= @cytology.prev_appo %>, <strong>Fecha de muestra:</strong> <%= @cytology.sample_date.strftime("%d/%m/%Y") %>
+              </p>
+          <% end %>
+          <% if @inform.diagnostics != [] %>
+            <p class="preview-center"><strong>Resultado: <%= @inform.diagnostics.last.result %></strong></p>
+          <% end %>
+      <% end %>
+
+      <h6 class="preview-center">
+        <% @inform.physicians.each do |physician| %>
+          <strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %>
+        <% end %>
+      </h6>
+      <h6 class="preview-center"><strong>Dirección de entrega: </strong><%= @delivery_address %>, <%= "Código de autorización: #{@inform.prmtr_auth_code}" if @inform.prmtr_auth_code.present? %></h6>
+
+      <br>
+
+      <% if @inform.inf_type != 'cito' %>
+
+
+        <div class="row">
+          <div class="col-4 col-lg-4">
+            <strong>DESCRIPCIÓN MACROSCÓPICA</strong>
+          </div>
+        </div>
+        <br>
+        <% @inform.recipients.each_with_index do |recipient, n| %>
+          <div class="row">
+            <div class="col-12 col-lg-12 col-xl-12">
+              <div class="preview">
+                <div class="preview"><%= recipient.description %></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-12 col-xl-12">
+              
+            </div>
+          </div>
+          <br>
+        <% end %>
+      <% end %>
+
+      <br>
+      <% if @inform.inf_type == 'cito' %>
+        <h4 class="preview-center">CITOLOGÍA CERVICO-UTERINA</h4>
+        <h5 class="preview-center">(INFORME TIPO BETHESDA 2001)</h5>
+      <% end %>
+
+
+
+
+      <% if @inform.inf_type != 'cito' %>
+        <div class="row">
+          <div class="col-4 col-lg-4 mb-3">
+            <strong>DESCRIPCIÓN MICROSCÓPICA</strong>
+          </div>
+        </div>
+        <div class="preview">
+          <%= simple_format(@micro_text) %>
+        </div>
+
+        <!-- <%= text_area_tag :micro, @micro_text, size: "95x60" %> -->
+
+      <% else %>
+        <div class="row">
+          <div class="col-12 col-lg-12">
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-12 col-lg-12">
+            <div class="card mt-3">
+              <div class="card-header text-center py-1">
+                <strong>TIPO DE MUESTRA, CALIDAD DEL ESPECIMEN, CATEGORIZACIÓN Y DESCRIPCIÓN</strong>
+              </div>
+              <div class="card-body">
+                <% if @inform.micros != [] %>
+                  <%= simple_format(@inform.micros.last.description) %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+
+      <% if @inform.inf_type != 'cito' %>
+        <% @inform.micros.each_with_index do |micro, n| %>
+          <div class="row">
+            <div class="col-12 col-lg-12">
+              <div class="row">
+                <% micro.pictures.each do |picture| %>
+                  <div class="col-4 col-lg-4 mx-auto">
+                    <div class="card">
+                      <%= link_to picture.name.url  do %>
+                        <%= image_tag picture.name.url, class: "card-img-top" %>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <% if @inform.micros != [] %>
+          <% micro = @inform.micros.last %>
+          <div class="row">
+            <div class="col-12 col-lg-12">
+              <div class="row">
+                <% micro.pictures.each do |picture| %>
+                  <div class="col-4 col-lg-4 mx-auto">
+                    <div class="card">
+                      <%= link_to picture.name.url  do %>
+                        <%= image_tag picture.name.url, class: "card-img-top" %>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+
+
+      <div class="row diagnostic">
+        <div class="col-12 col-lg-12">
+          <div class="card mt-3">
+            <div class="card-header text-center py-1">
+              <% if @inform.inf_type != 'cito' %>
+                <strong>DIAGNÓSTICO Y PROCEDIMIENTOS</strong>
+              <% else %>
+                <strong>INTERPRETACIÓN Y RESULTADO</strong>
+              <% end %>
+
+            </div>
+            <div class="card-body">
+              <% if @inform.inf_type != 'cito' %>
+                <div class="d-flex flex-row">
+                  <h5 class="card-title mr-2"><strong><%= simple_format(@diagnostic_text) %></strong></h5>
+                </div>
+
+                <div class="row d-flex flex-row">
+                  <% @pathologists.each do |pathologist| %>
+                    <div class="col-12 col-lg-12 mt-3">
+                      <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
+                      <% if pathologist.signfile.file != nil %>
+                        <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              <% else %>
+                <% if @inform.diagnostics != [] %>
+                  <% diagnostic = @inform.diagnostics.last %>
+                  <h5 class="card-title"><strong><%= simple_format(diagnostic.description) %></strong></h5>
+                  <div class="row d-flex flex-row">
+                    <% @pathologists.each do |pathologist| %>
+                      <div class="col-6 col-lg-6 mt-3">
+                        <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
+                        <% if pathologist.signfile.file != nil %>
+                          <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                    <div class="col-6 col-lg-6 mt-3">
+                      <h5 class="card-title"><strong>Citóloga:</strong> <%= @cytologist.fullname %></h5>
+                      <% if @cytologist.signfile.file != nil %>
+                        <%= image_tag @cytologist.signfile.url, class: "img-fluid" %>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-between">
+              <div>
+                <% if @inform.inf_type != 'cito' %>
+                  <% @diagnostic_codes.each do |diagnostic| %>
+                    <strong>PSS:</strong> <%= diagnostic[0].to_s %> <strong>OMS:</strong> <%= diagnostic[1].to_s %>
+                  <% end %>
+                  <% if @inform.blocks.where(stored: true) != [] %>
+                    <strong>, Bloques:</strong>
+                    <% @inform.blocks.where(stored: true).each do |stored_block| %>
+                      <%= stored_block.block_tag[-1] + " " %>
+                    <% end %>
+                  <% else %>
+                    <strong>, Bloques: NO</strong>
+                  <% end %>
+                <% else %>
+                  <% if @inform.diagnostics != [] %>
+                    <% diagnostic = @inform.diagnostics.last %>
+                    <strong>Código:</strong> <%= diagnostic.pss_code %>
+                  <% end %>
+
+                <% end %>
+
+              </div>
+              <div>
+                <strong>Digita:</strong> <%= User.where(id: @inform.user_id).first.try(:fullname) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% if @inform.inf_type == 'cito' %>
+        <div class="row sugerencias">
+          <div class="col-12 col-lg-12">
+            <div class="card mt-3">
+              <div class="card-header text-center py-1">
+                <strong>SUGERENCIAS</strong>
+              </div>
+              <div class="card-body">
+                <div class="d-flex flex-row">
+                  <h5 class="card-title mr-2"><strong><%= simple_format(@inform.suggestions.last.description) %></strong></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %> 
+    </div>
+  </div>
+</div>

@@ -1,30 +1,31 @@
 <header>
-  <%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform) %> |
-  <%= link_to 'Volver a informes', informs_path %> |
-  <%= link_to 'Volver a informe', inform_path(@inform) %> |
-  <%= link_to 'Descargar en PDF', preview_inform_path(@inform, format: "pdf") %>
+    
+  <% if source == 'informs' %>
+    <%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform), class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Volver a informes', informs_path, class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Volver a informe', inform_path(@inform), class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Descargar en PDF', preview_inform_path(@inform, format: "pdf"), class: "btn btn-outline-primary ml-3" %>
+  <% end %>
+  <% if source == 'results' %>
+    <%= link_to 'Volver a resultados', results_path, class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Descargar en PDF', result_path(@inform, format: "pdf"), class: "btn btn-primary ml-3" %>
+    <%= link_to "Salir de forma segura", destroy_patient_session_path, method: :delete, class: "btn btn-primary ml-3" %>
+  <% end %>
 </header>
 <div class="container">
   <div class="row">
     <div class="col-10 col-lg-10 mx-auto">
       <br>
-      <div class="row d-flex flex-row">
-        <div class="col-4 col-lg-4">
-          <%= image_tag "logo.JPG", class: "img-fluid" %>
-        </div>
-        <div class="col-4 col-lg-4">
-        </div>
-        <div class="col-4 col-lg-4">
-          <%= image_tag "datos.JPG", class: "img-fluid no_print" %>
-        </div>
+      <div>
+        <%= image_tag "logo.JPG", class: "img-fluid", width: 250, height: 250%>
+        <%= image_tag "datos.JPG", class: "img-fluid", width: 250, height: 250, align: "right" %>
       </div>
 
-      <h2 class="preview-center">Informe <strong><%= @inform.tag_code %></strong> del <%= @inform.delivery_date == nil ? "-en progreso-" : "#{@inform.delivery_date.strftime("%d/%m/%Y")}" %></h2>
-      <h3 class="preview-center"><strong><%= @inform.patient.fullname %></strong>, <%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %>, <%= @inform.patient.id_type %>: <%= @inform.patient.id_number %></h3>
-      <p class="preview-center"><strong>Teléfono:</strong> <%= @inform.p_tel %>, <strong>Celular:</strong> <%= @inform.p_cel %>, <strong>Email:</strong> <%= @inform.p_email %></p>
+      <h4 class="preview-center">Informe <strong><%= @inform.tag_code %></strong>. Fecha: <%= @inform.delivery_date == nil ? "-en progreso-" : "#{@inform.delivery_date.strftime("%d/%m/%Y")}" %></h4>
+      <h6 class="preview-center"><strong><%= @inform.patient.fullname %></strong>, <%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %>, <%= @inform.patient.id_type %>: <%= @inform.patient.id_number %></h6>
+      <h6 class="preview-center"><%= "Teléfono: #{@inform.p_tel} " if @inform.p_tel.present? %> <%= " Celular: #{@inform.p_cel} " if @inform.p_cel.present? %> <%= " Email: #{@inform.p_email}" if @inform.p_email.present? %></h6>
 
-
-      <p class="preview-center">Recibido el <%= @inform.receive_date.strftime('%d/%m/%Y') %>, <strong>EPS: </strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>, <strong>IPS: </strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %>, <strong>Dirección:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:name) %></p>
+      <h6 class="preview-center">Fecha de recepción: <%= @inform.receive_date.strftime('%d/%m/%Y') %>, <strong>EPS: </strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>, <strong>IPS: </strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %>, <strong>Dirección:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:name) %></h6>
 
       <% if @inform.inf_type == 'cito' %>
           <% if @cytology != nil %>
@@ -37,12 +38,12 @@
           <% end %>
       <% end %>
 
-      <p class="preview-center">
+      <h6 class="preview-center">
         <% @inform.physicians.each do |physician| %>
           <strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %>
         <% end %>
-      </p>
-      <p class="preview-center"><strong>Dirección de entrega: </strong><%= @delivery_address %>, <strong>Código de autorización: </strong><%= @inform.prmtr_auth_code %></p>
+      </h6>
+      <h6 class="preview-center"><strong>Dirección de entrega: </strong><%= @delivery_address %>, <%= "Código de autorización: #{@inform.prmtr_auth_code}" if @inform.prmtr_auth_code.present? %></h6>
 
       <br>
 
@@ -51,7 +52,7 @@
 
         <div class="row">
           <div class="col-4 col-lg-4">
-            <strong>Descripción Macroscópica</strong>
+            <strong>DESCRIPCIÓN MACROSCÓPICA</strong>
           </div>
         </div>
         <br>
@@ -59,27 +60,16 @@
           <div class="row">
             <div class="col-12 col-lg-12 col-xl-12">
               <div class="preview">
-                <div>
-                  Contenido de recipiente #<%= n + 1 %>:
-                </div>
                 <div class="preview"><%= recipient.description %></div>
               </div>
-              <div>Bloqueado de la siguiente manera:</div>
             </div>
           </div>
           <div class="row">
             <div class="col-12 col-lg-12 col-xl-12">
-              <% @samples.where(recipient_tag: recipient.tag).each_with_index do |sample, i| %>
-                <div class="preview ">
-                  <% if sample.name == "Cassette" %>
-                    <%= sample.description %><%= sample.description == "" ? "" : ":" %> <%= sample.fragment %>F - <%= get_nomen(sample.sample_tag) %>
-                  <% else %>
-                    <%= sample.description %> <%= sample.name == "Cassette" ? sample.fragment : "" %> - <%= get_nomen(sample.sample_tag) %>
-                  <% end %>
-                </div>
-              <% end %>
+              
             </div>
           </div>
+          <br>
         <% end %>
       <% end %>
 
@@ -95,7 +85,7 @@
       <% if @inform.inf_type != 'cito' %>
         <div class="row">
           <div class="col-4 col-lg-4 mb-3">
-            <strong>Descripción Microscópica</strong>
+            <strong>DESCRIPCIÓN MICROSCÓPICA</strong>
           </div>
         </div>
         <div class="preview">
@@ -187,7 +177,7 @@
 
                 <div class="row d-flex flex-row">
                   <% @pathologists.each do |pathologist| %>
-                    <div class="col-4 col-lg-4 mt-3">
+                    <div class="col-12 col-lg-12 mt-3">
                       <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
                       <% if pathologist.signfile.file != nil %>
                         <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
@@ -201,16 +191,14 @@
                   <h5 class="card-title"><strong><%= simple_format(diagnostic.description) %></strong></h5>
                   <div class="row d-flex flex-row">
                     <% @pathologists.each do |pathologist| %>
-                      <div class="col-4 col-lg-4 mt-3">
+                      <div class="col-6 col-lg-6 mt-3">
                         <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
                         <% if pathologist.signfile.file != nil %>
                           <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
-                        <% else %>
-                          Sin archivo de firma!
                         <% end %>
                       </div>
                     <% end %>
-                    <div class="col-4 col-lg-4 mt-3">
+                    <div class="col-6 col-lg-6 mt-3">
                       <h5 class="card-title"><strong>Citóloga:</strong> <%= @cytologist.fullname %></h5>
                       <% if @cytologist.signfile.file != nil %>
                         <%= image_tag @cytologist.signfile.url, class: "img-fluid" %>
@@ -227,10 +215,12 @@
                     <strong>PSS:</strong> <%= diagnostic[0].to_s %> <strong>OMS:</strong> <%= diagnostic[1].to_s %>
                   <% end %>
                   <% if @inform.blocks.where(stored: true) != [] %>
-                    <strong>, Se guarda:</strong>
+                    <strong>, Bloques:</strong>
                     <% @inform.blocks.where(stored: true).each do |stored_block| %>
-                      <%= stored_block.block_tag %>
+                      <%= stored_block.block_tag[-1] + " " %>
                     <% end %>
+                  <% else %>
+                    <strong>, Bloques: NO</strong>
                   <% end %>
                 <% else %>
                   <% if @inform.diagnostics != [] %>
@@ -242,7 +232,7 @@
 
               </div>
               <div>
-                <strong>Proyecta:</strong> <%= User.where(id: @inform.user_id).first.try(:fullname) %>
+                <strong>Digita:</strong> <%= User.where(id: @inform.user_id).first.try(:fullname) %>
               </div>
             </div>
           </div>

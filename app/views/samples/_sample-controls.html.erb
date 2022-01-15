@@ -1,14 +1,16 @@
 <div id="control-sample-<%= sample.sample_tag %>">
 
 
-  <div class="d-flex justify-content-around align-items-center">
+  <div class="d-flex justify-content-around align-items-center mt-1">
     <% unless sample.blocked && sample.inform.inf_type == 'revision' %>
-      <%= link_to '[E]', edit_sample_path(sample), remote: true, class: "my-0 mx-1" %>
+      <%= link_to edit_sample_path(sample), remote: true, class: "my-0 mx-1" do %>
+        <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 5px;padding-right: 5px;text-decoration: none">&#9998;</span>
+      <% end %>
       <% if sample.slide_tag == nil %>
         <% if !next_number_tag_exists?(inform, sample) %>
           <% if sample.inform.inf_status != 'revision' %>
             <%= form_with model: [inform, inform.samples.build] do |form| %>
-              <%= form.submit "[+ corte]", class: "mx-2 my-0" %>
+              <%= form.submit " + ", class: "mx-2 my-0 d-flex btn btn-primary btn-sm" %>
               <%= form.hidden_field :recipient_tag, value: recipient.tag %>
               <%= form.hidden_field :organ_code, value: sample.organ_code %>
               <%= form.hidden_field :name, value: sample.name %>
@@ -25,7 +27,7 @@
         <%= form_with url: execute_templates_add_slide_path, method: "get", id: "sample-#{sample.sample_tag}" do |form| %>
           <div class="actions d-flex flex-row">
 
-            <%= form.submit "[+P]", class: "mx-2 my-0 d-flex" %>
+            <%= form.submit "+P", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>
             <%= form.hidden_field :inform_id, value: inform.id %>
             <%= form.hidden_field :sample_id, value: sample.id %>
             <%= form.hidden_field :sample_tag, value: sample.sample_tag %>
@@ -36,7 +38,7 @@
         <%= form_with url: execute_templates_add_series_path, method: "get", id: "sample-s-#{sample.sample_tag}" do |form| %>
           <div class="actions d-flex flex-row">
 
-            <%= form.submit "[+S]", class: "mx-2 my-0 d-flex" %>
+            <%= form.submit "+S", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>
             <%= form.hidden_field :inform_id, value: inform.id %>
             <%= form.hidden_field :sample_tag, value: sample.sample_tag %>
           </div>
@@ -50,7 +52,7 @@
         <%= form_with url: execute_templates_associate_slide_path, method: "get", id: "sample-a-#{sample.sample_tag}" do |form| %>
           <div class="actions d-flex flex-row">
 
-            <%= form.submit "+A", class: "mx-2 my-0 d-flex" %>
+            <%= form.submit "+A", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>
             <%= form.collection_select(:destination_slide, inform.slides, :slide_tag, :slide_tag, { prompt: 'Placa'}, { class: "form-control input" }) %>
             <%= form.hidden_field :sample_id, value: sample.id %>
             <%= form.hidden_field :inform_id, value: inform.id %>

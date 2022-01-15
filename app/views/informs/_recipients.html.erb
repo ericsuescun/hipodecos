@@ -3,171 +3,170 @@
     <div class="row">
       <div class="col-12 col-sm-12 col-lg-12">
         <% inform.recipients.each_with_index do |recipient, n| %>
-          <div class="row">
-            <div class="col-12 col-lg-6">
-              <% if recipient.description == nil || edit_recipient_tag == recipient.tag %>
-                <%= form_with model: recipient do |f| %>
-                    <div class="field">
-                      <%= f.label "Descripción:" %>
-                      <%= f.text_area :description, rows: "10", cols: "80", class: "form-control input" %>
-                    </div>
-                    <div class="actions">
-                      <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
-                    </div>
-                <% end %>
-              <% else %>
-                <div class="row">
-                  <% if inform.samples.where(recipient_tag: recipient.tag).count < 1 %>
-                    <%= link_to '[Borrar recipiente]', recipient, method: :delete, remote: true, class: "mx-2 my-2 px-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}" %>
+          <div class="card bg-light mx-2 mb-3">
+            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+              <div class="d-flex align-items-center p-0">
+                <span class="d-flex">
+                  <strong>Recipiente <%= n + 1 %> de <%= inform.recipients.count %>: <%= recipient.tag %></strong>, creado por: <%= User.where(id: recipient.user_id).first.try(:fullname) %>
+                </span>
+              </div>
+              <div class="d-flex">
+                <% if inform.samples.where(recipient_tag: recipient.tag).count < 1 %>
+                  <%= link_to recipient, method: :delete, remote: true, class: "mx-2 my-2 px-2 #{Sample.where(inform_id: inform.id, recipient_tag: recipient.tag).count != 0 ? "disabled" : ""}", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;" do %>
+                    <span>&times;</span>
                   <% end %>
-                </div>
-                
-                <%= recipient.description %></span><span><%= link_to '[Editar]',  edit_recipient_path(recipient), remote: true %><strong>[<%= n + 1 %>/<%= inform.recipients.count %>]</strong>
-                
-                  <div class="row">
-                    <% inform.samples.unscoped.where(recipient_tag: recipient.tag).order(:id).each do |sample| %>
-                      <div class= "col-12 col-xl-12">
-                        
-                        <% if sample.name == "Cassette" %>
-                          <span><strong><%= get_nomen(sample.sample_tag) %>: <%= sample.fragment %>F</strong></span>
-                        <% else %>
-                          <span><strong><%= get_nomen(sample.sample_tag) %></strong></span>
-                        <% end %>
-                        
-
-                        <span><strong><%= sample.name == "Extendido" ? sample.name[0..2] : "" %></strong></span>
-                        
-                        <% if sample.organ_code == nil %>
-                          <%= render partial: "informs/organs_choice", locals: { sample: sample } %>
-                        <% end %>
-                        
-                        
-                        <% if edit_sample_tag == "" %>
-                          <%= sample.description %>
-                        <% end %>
-                        <% unless sample.blocked %>
-                          <% if sample.slide_tag == nil %>
-                            <%= link_to '[X]', sample, method: :delete, class: "", remote: true %>
-                          <% end %>
-                        <% end %>
-                        <%= link_to "[Org]", edit_organ_sample_path(sample) %>
-                        <%= link_to '[Editar]', edit_sample_path(sample), remote: true %>
-                        <% if (sample.fragment == nil && sample.name != "Extendido") || sample.description == nil || edit_sample_tag == sample.sample_tag %>
-                          <%= form_with model: sample do |f| %>
-                            <div class="field">
-                              <% if sample.name == "Cassette" %>
-                                <%= f.label "Fragmentos:" %>
-                                <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
-                              <% end %>
-                            </div>
-                            <div class="field">
-                              <%= f.label "Descripción:" %>
-                              <%= f.text_area :description, class: "form-control input" %>
-                            </div>
-                            <div class="actions">
-                              <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
-                            </div>
-                          <% end %>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </div>
-                
-              <% end %>
+                <% end %>
+              </div>
             </div>
-            <div class="col-12 col-lg-6">
+            <div class="card-body elements-in-for-<%= recipient.tag %>">
+              <div class="alert alert-secondary">
+                <% if recipient.description == nil || edit_recipient_tag == recipient.tag %>
+                  <%= form_with model: recipient do |f| %>
+                      <div class="field">
+                        <%= f.label "Descripción:" %>
+                        <%= f.text_area :description, rows: "10", cols: "80", class: "form-control input" %>
+                      </div>
+                      <div class="actions">
+                        <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
+                      </div>
+                  <% end %>
+                <% else %>
+                  <div class="d-flex flex-row align-items-center">
+                    <%= link_to edit_recipient_path(recipient), remote: true, class: "d-flex my-0 py-0 mr-3" do %>
+                      <span style="font-size: 25px;color: grey;border: 1px solid grey; border-radius: 3px;padding-left: 8px;padding-right: 8px;text-decoration: none;">&#9998;</span>
+                    <% end %>
+                    <span><strong>Descripción del recipiente o paquete (macro):</strong> Acá, describes lo general. En cada cassette/extendido, describes lo particular.</span>
+                  </div>
+
+                  <p class="card-text mt-2"> <%= recipient.description %></p>
+                <% end %>
+              </div>
+
               <div class="row recipient-<%= recipient.tag %>">
-                <div class="col-12">
+                <div class="col-12 col-md-12 col-lg-12">
                   <div class="card-deck">
                     <% inform.samples.where(recipient_tag: recipient.tag).each do |sample| %>
+
                       <% if sample.organ_code == nil %>
                         <div class="col-12 col-md-12 col-lg-12 card-in">
                       <% else %>
-                        <div class="col-12 col-lg-4 card-in">
+                        <div class="col-12 col-lg-3 card-in">
                       <% end %>
 
-                        <div class="card m-0 p-0" id="sample-<%= sample.sample_tag %>" style="background-color: <%= get_color(sample) %>">
+                        <div class="card mx-2 my-2 pb-0" id="sample-<%= sample.sample_tag %>" style="background-color: <%= get_color(sample) %>">
 
-                          <div class="card-body py-0 sample-card-<%= sample.sample_tag %>">
+                          <% if sample.name == "Extendido" %>
+                            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between" style="background-color: white">
+                          <% else %>
+                            <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
+                          <% end %>
+
+                          <% if sample.name == "Cassette" %>
+                            <span class="d-flex "><strong><%= sample.sample_tag %>: <%= sample.fragment %>F</strong></span>
+                          <% else %>
+                            <span class="d-flex "><strong><%= sample.sample_tag %></strong></span>
+                          <% end %>
+
+
+                          <span class="mr-3"><strong><%= sample.name == "Extendido" ? sample.name[0..2] : "" %></strong></span>
+                          <% unless sample.blocked %>
+                            <% if sample.slide_tag == nil %>
+                              <%= link_to sample, method: :delete, class: "my-0 d-flex px-2", style: "color: grey; font-size: 20px;border: 1px solid grey; border-radius: 3px;text-decoration: none;", remote: true  do %>
+                                <span>&times;</span>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                          </div>
+
+                          <div class="card-body p-1 m-1 sample-card-<%= sample.sample_tag %>">
                             <div class="row">
-                              <% if sample.name == "Cassette" %>
-                                <span><strong><%= get_nomen(sample.sample_tag) %>: <%= sample.fragment %>F</strong></span>
+                              <% if sample.organ_code == nil %>
+
+                                <%= render partial: "informs/organs_choice", locals: { sample: sample } %>
+
                               <% else %>
-                                <span><strong><%= get_nomen(sample.sample_tag) %></strong></span>
+
                               <% end %>
-                              <% unless sample.blocked %>
-                                <% if sample.slide_tag == nil %>
-                                  <%= link_to '[X]', sample, method: :delete, class: "", remote: true %>
-                                <% end %>
+                            </div>
+
+                            <h6 class="card-title my-0">Órgano: <%= sample.organ_code %> <%= link_to "(Cambiar)", edit_organ_sample_path(sample) %></h6>
+
+                            <% if edit_sample_tag == "" %>
+                              <%= sample.description %>
+                            <% end %>
+
+                            <% if (sample.fragment == nil && sample.name != "Extendido") || sample.description == nil || edit_sample_tag == sample.sample_tag %>
+                              <%= form_with model: sample do |f| %>
+                                <div class="field">
+                                  <% if sample.name == "Cassette" %>
+                                    <%= f.label "Fragmentos:" %>
+                                    <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
+                                  <% end %>
+
+
+                                </div>
+                                <div class="field">
+                                  <%= f.label "Descripción:" %>
+                                  <%= f.text_area :description, class: "form-control input" %>
+                                </div>
+                                <div class="actions">
+                                  <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
+                                </div>
                               <% end %>
 
-                              <span class="mr-3"><strong><%= sample.name == "Extendido" ? sample.name[0..2] : "" %></strong></span>
-                              
-                              <% if sample.organ_code == nil %>
-                                <%= render partial: "informs/organs_choice", locals: { sample: sample } %>
-                              <% end %>
-                              <%= sample.organ_code %>
-                              <%= link_to "[C]", edit_organ_sample_path(sample) %>
-                              <div id="controls-sample-<%= sample.sample_tag %>">
+                            <% end %>
+                            <div id="controls-sample-<%= sample.sample_tag %>">
                               <%= render partial: "samples/sample-controls", locals: { inform: inform, recipient: recipient, sample: sample } %>
                             </div>
-                          </div>
 
-                          <% if edit_sample_tag == "" %>
-                            <%= sample.description %>
-                          <% end %>
 
-                          <% if (sample.fragment == nil && sample.name != "Extendido") || sample.description == nil || edit_sample_tag == sample.sample_tag %>
-                            <%= form_with model: sample do |f| %>
-                              <div class="field">
-                                <% if sample.name == "Cassette" %>
-                                  <%= f.label "Fragmentos:" %>
-                                  <%= f.number_field :fragment, value: sample.fragment != nil ? sample.fragment : 1, class: "form-control input" %>
-                                <% end %>
-                              </div>
-                              <div class="field">
-                                <%= f.label "Descripción:" %>
-                                <%= f.text_area :description, class: "form-control input" %>
-                              </div>
-                              <div class="actions">
-                                <%= f.submit "Guardar", class: "btn btn-warning btn-sm mt-2" %>
-                              </div>
-                            <% end %>
-                          <% end %>
                           </div>
                         </div>
                       </div>
                     <% end %>
-                    <% if inform.inf_status != 'revision' %>
-                      <div class="col-12 col-lg-4 card-in">
-                        <div class="card m-0 p-0">
-                          <div class="card-body py-0">
-                            <div class="row">
+
+                    <div class="col-12 col-lg-3 card-in">
+                      <% if inform.inf_status != 'revision' %>
+                        <div class="card mx-2 my-2 pb-0">
+                          <div class="card-header pt-1 pb-1">
+                            <strong>Nueva muestra</strong>
+                          </div>
+                          <div class="card-body">
+
+                            <div class="d-flex flex-row align-items-center mb-3">
                               <%= form_with model: [inform, inform.samples.build] do |form| %>
-                              <%= form.submit "[+ bloque]" %>
-                              <%= form.hidden_field :recipient_tag, value: recipient.tag %>
-                              <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
-                              <%= form.hidden_field :name, value: "Cassette" %>
-                            <% end %>
-                            <%= form_with model: [inform, inform.samples.build] do |form| %>
-                              <%= form.submit "[+Extendido]" %>
-                              <%= form.hidden_field :recipient_tag, value: recipient.tag %>
-                              <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
-                              <%= form.hidden_field :name, value: "Extendido" %>
-                            <% end %>
+                                <%= form.submit " + ", class: "btn btn-primary btn-sm" %>
+                                <%= form.hidden_field :recipient_tag, value: recipient.tag %>
+                                <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
+                                <%= form.hidden_field :name, value: "Cassette" %>
+                              <% end %>
+                              <span class="ml-3">Cassette</span>
                             </div>
-                            
+
+                            <div class="d-flex flex-row align-items-center">
+                              <%= form_with model: [inform, inform.samples.build] do |form| %>
+                                <%= form.submit "+E", class: "btn btn-primary btn-sm" %>
+                                <%= form.hidden_field :recipient_tag, value: recipient.tag %>
+                                <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
+                                <%= form.hidden_field :name, value: "Extendido" %>
+                              <% end %>
+                              <span class="ml-3">Extendido</span>
+                            </div>
+
                           </div>
                         </div>
-                      </div>
-                    <% end %>
+                      <% end %>
+                    </div>
+
+
+
                   </div>
 
                 </div>
               </div>
+
             </div>
           </div>
-
         <% end %>
         <% if inform.inf_status != 'revision' %>
           <div class="card bg-light mx-2 mb-3">

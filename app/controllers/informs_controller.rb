@@ -1132,6 +1132,7 @@ class InformsController < ApplicationController
   end
 
   def preview
+    @source = 'informs'
     @samples = @inform.samples.select(:fragment, :sample_tag, :description, :name)
     p_role = Role.where(name: "Patologia").first.id
     if @inform.inf_type != 'cito'

@@ -33,6 +33,6 @@
 
 # Ignorar las fotos subidas en development
 /public/uploads/picture/*
-
+/public/uploads/*
 # Env Vars
 .env

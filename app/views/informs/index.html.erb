@@ -43,10 +43,10 @@
             <th>Estado</th>
             <th>Ingreso</th>
             <th>User</th>
+            <th>Id</th>
             <th>Paciente</th>
             <th>EPS</th>
             <th>IPS</th>
-            <th>Autoriz</th>
             <th scope="1"></th>
           </tr>
         </thead>
@@ -73,6 +73,7 @@
               </td>
               <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>
               <td><%= User.where(id: inform.user_id).first.try(:initials) %></td>
+              <td><%= inform.patient.id_number %></td>
               <td>
                 <%= link_to inform.patient  do %>
                   <%= inform.patient.name1 %> <%= inform.patient.name2 %> <%= inform.patient.lastname1 %> <%= inform.patient.lastname2 %>
@@ -80,7 +81,6 @@
               </td>
               <td><%= Promoter.where(id: inform.promoter_id).first.try(:initials) %></td>
               <td><%= Branch.where(id: inform.branch_id).first.try(:initials) %></td>
-              <td><%= inform.prmtr_auth_code %></td>
               <% if inform.inf_status == "anulado" %>
                 <td><%= link_to 'Restaurar', anulate_inform_path(inform), data: { confirm: '¿Confirmas la operación?' } %></td>
               <% else %>

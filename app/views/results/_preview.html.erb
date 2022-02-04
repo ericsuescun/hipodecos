@@ -22,20 +22,20 @@
       </div>
 
       <h4 class="preview-center">Informe <strong><%= @inform.tag_code %></strong>. Fecha: <%= @inform.delivery_date == nil ? "-en progreso-" : "#{@inform.delivery_date.strftime("%d/%m/%Y")}" %></h4>
-      <h6 class="preview-center"><strong><%= @inform.patient.fullname %></strong>, <%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %>, <%= @inform.patient.id_type %>: <%= @inform.patient.id_number %></h6>
+      <h6 class="preview-center"><strong><%= @inform.patient.fullname %></strong>, <%= @inform.patient.id_type %>: <%= @inform.patient.id_number %>, <%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %></h6>
       <h6 class="preview-center"><%= "Teléfono: #{@inform.p_tel} " if @inform.p_tel.present? %> <%= " Celular: #{@inform.p_cel} " if @inform.p_cel.present? %> <%= " Email: #{@inform.p_email}" if @inform.p_email.present? %></h6>
 
       <h6 class="preview-center">Fecha de recepción: <%= @inform.receive_date.strftime('%d/%m/%Y') %>, <strong>EPS: </strong><%= Promoter.where(id: @inform.promoter_id).first.try(:initials) %>, <strong>IPS: </strong><%= Branch.where(id: @inform.branch_id).first.try(:initials) %>, <strong>Dirección:</strong> <%= Branch.where(id: @inform.branch_id).first.try(:name) %></h6>
 
       <% if @inform.inf_type == 'cito' %>
-          <% if @cytology != nil %>
-              <p class="preview-center">
-                <strong>Emb:</strong> <%= @cytology.pregnancies %>, <strong>FUM:</strong> <%= @cytology.last_mens %>, <strong>Última citología:</strong> <%= @cytology.prev_appo %>, <strong>Fecha de muestra:</strong> <%= @cytology.sample_date.strftime("%d/%m/%Y") %>
-              </p>
-          <% end %>
-          <% if @inform.diagnostics != [] %>
-            <p class="preview-center"><strong>Resultado: <%= @inform.diagnostics.last.result %></strong></p>
-          <% end %>
+        <% if @cytology != nil %>
+            <p class="preview-center">
+              <strong>Emb:</strong> <%= @cytology.pregnancies %>, <strong>FUM:</strong> <%= @cytology.last_mens %>, <strong>Fecha de muestra:</strong> <%= @cytology.sample_date.strftime("%d/%m/%Y") %>
+            </p>
+        <% end %>
+        <% if @inform.cytologies.present? %>
+          <p class="preview-center"><strong>Última citología:</strong> <%= @cytology.prev_appo %>, <strong>Último resultado: <%= @inform.cytologies.last.last_result %></strong></p>
+        <% end %>
       <% end %>
 
       <h6 class="preview-center">

@@ -174,35 +174,67 @@
                 <div class="d-flex flex-row">
                   <h5 class="card-title mr-2"><strong><%= simple_format(@diagnostic_text) %></strong></h5>
                 </div>
+              <% else %>
+                <% if @inform.diagnostics != [] %>
+                  <% diagnostic = @inform.diagnostics.last %>
+                  <h5 class="card-title"><strong><%= simple_format(diagnostic.description) %></strong></h5>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <% if @inform.inf_type == 'cito' %>
+        <div class="row sugerencias">
+          <div class="col-12 col-lg-12">
+            <div class="card mt-3">
+              <div class="card-header text-center py-1">
+                <strong>SUGERENCIAS</strong>
+              </div>
+              <div class="card-body">
+                <div class="d-flex flex-row">
+                  <h5 class="card-title mr-2"><strong><%= simple_format(@inform.suggestions.last.description) %></strong></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %> 
+
+      <div class="row footer">
+        <div class="col-12 col-lg-12">
+          <div class="card mt-3">
+            <div class="card-body">
+              <% if @inform.inf_type != 'cito' %>
                 <div class="row d-flex flex-row">
                   <% @pathologists.each do |pathologist| %>
                     <div class="col-12 col-lg-12 mt-3">
-                      <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
                       <% if pathologist.signfile.file != nil %>
                         <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
                       <% end %>
+                      <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
                     </div>
                   <% end %>
                 </div>
               <% else %>
                 <% if @inform.diagnostics != [] %>
-                  <% diagnostic = @inform.diagnostics.last %>
-                  <h5 class="card-title"><strong><%= simple_format(diagnostic.description) %></strong></h5>
                   <div class="row d-flex flex-row">
                     <% @pathologists.each do |pathologist| %>
                       <div class="col-6 col-lg-6 mt-3">
-                        <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
+                        
                         <% if pathologist.signfile.file != nil %>
                           <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
                         <% end %>
+                        <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
                       </div>
                     <% end %>
                     <div class="col-6 col-lg-6 mt-3">
-                      <h5 class="card-title"><strong>Citóloga:</strong> <%= @cytologist.fullname %></h5>
+                      
                       <% if @cytologist.signfile.file != nil %>
                         <%= image_tag @cytologist.signfile.url, class: "img-fluid" %>
                       <% end %>
+                      <h5 class="card-title"><strong>Citóloga:</strong> <%= @cytologist.fullname %></h5>
                     </div>
                   </div>
                 <% end %>
@@ -227,9 +259,7 @@
                     <% diagnostic = @inform.diagnostics.last %>
                     <strong>Código:</strong> <%= diagnostic.pss_code %>
                   <% end %>
-
                 <% end %>
-
               </div>
               <div>
                 <strong>Digita:</strong> <%= User.where(id: @inform.user_id).first.try(:fullname) %>
@@ -239,22 +269,6 @@
         </div>
       </div>
 
-      <% if @inform.inf_type == 'cito' %>
-        <div class="row sugerencias">
-          <div class="col-12 col-lg-12">
-            <div class="card mt-3">
-              <div class="card-header text-center py-1">
-                <strong>SUGERENCIAS</strong>
-              </div>
-              <div class="card-body">
-                <div class="d-flex flex-row">
-                  <h5 class="card-title mr-2"><strong><%= simple_format(@inform.suggestions.last.description) %></strong></h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %> 
     </div>
   </div>
 </div>

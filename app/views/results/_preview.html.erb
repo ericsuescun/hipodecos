@@ -209,7 +209,7 @@
               <% if @inform.inf_type != 'cito' %>
                 <div class="row d-flex flex-row">
                   <% @pathologists.each do |pathologist| %>
-                    <div class="col-12 col-lg-12 mt-3">
+                    <div class="col-12 col-lg-12">
                       <% if pathologist.signfile.file != nil %>
                         <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
                       <% end %>
@@ -221,7 +221,7 @@
                 <% if @inform.diagnostics != [] %>
                   <div class="row d-flex flex-row">
                     <% @pathologists.each do |pathologist| %>
-                      <div class="col-12 col-lg-12 mt-3">
+                      <div class="col-12 col-lg-12">
                         <% if pathologist.signfile.file != nil %>
                           <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
                         <% end %>

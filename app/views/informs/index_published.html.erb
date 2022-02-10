@@ -5,6 +5,7 @@
     </div>
     <div class="col-12 col-lg-8">
       <%= form_tag informs_index_published_path, method: "get" do %>
+        <%= hidden_field_tag :inf_type, params[:inf_type] %>
         <div class="row">
           <div class="col-12 col-lg-4">
             <div class="form-group mt-1">
@@ -25,7 +26,6 @@
             </div>
           </div>
           <div class="col-12 col-lg-4">
-
             <%= submit_tag "Buscar", class: "btn btn-primary btn-block mt-1" %>
           </div>
         </div>

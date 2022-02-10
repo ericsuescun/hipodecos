@@ -513,7 +513,11 @@ class ReportsController < ApplicationController
     @informs = Inform.where(delivery_date: date_range, inf_type: 'cito', branch_id: branches) if entity.present? || branches.present?
   end
 
-  def reports_params_today
+  def stored_blocks
+    initial_date = Date.parse(params[:init_date]).beginning_of_day
+    final_date = Date.parse(params[:final_date]).end_of_day
+    date_range = initial_date..final_date
+    @blocks = Block.where(created_at: date_range)
   end
 
   private

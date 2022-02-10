@@ -1,0 +1,49 @@
+<div class="info">
+	<h4>Bloques guardados para el periodo <%= new_search_range %></h4>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="alert alert-secondary">
+				<%= form_tag stored_blocks_reports_path, method: "get" do %>
+					<div class="form-row">
+						<div class="form-group col-4">
+							<%= label_tag "Fecha inicial" %>
+							<%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
+						</div>
+						<div class="form-group col-4">
+							<%= label_tag "Fecha final" %>
+							<%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
+						</div>
+						<div class="col-4">
+							<%= submit_tag("Buscar", class: "btn btn-primary") %>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<strong><h4>Reporte de bloques guardados</h4></strong>
+			<table class="dense table-striped">
+				<thead>
+					<tr>
+						<th>Informe</th>
+						<th>Código</th>
+            <th>Fecha</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @blocks.each do |block| %>
+						<tr>
+							<td><%= block.inform.tag_code %></td>
+							<td><%= block.block_tag %></td>
+              <td><%= block.created_at.strftime("%d/%m/%Y") %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

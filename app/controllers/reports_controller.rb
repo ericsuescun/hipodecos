@@ -517,7 +517,7 @@ class ReportsController < ApplicationController
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day
     date_range = initial_date..final_date
-    @blocks = Block.where(created_at: date_range)
+    @blocks = Block.where(created_at: date_range, stored: true)
   end
 
   private

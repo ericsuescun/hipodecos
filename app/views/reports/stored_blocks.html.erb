@@ -30,6 +30,7 @@
 				<thead>
 					<tr>
 						<th>Informe</th>
+            <th>F. Entrega</th>
 						<th>Código</th>
             <th>Fecha</th>
 					</tr>
@@ -38,6 +39,7 @@
 					<% @blocks.each do |block| %>
 						<tr>
 							<td><%= block.inform.tag_code %></td>
+              <td><%= block.inform.delivery_date.strftime("%d/%b/%y") if block.inform.delivery_date.present? %></td>
 							<td><%= block.block_tag %></td>
               <td><%= block.created_at.strftime("%d/%m/%Y") %></td>
 						</tr>

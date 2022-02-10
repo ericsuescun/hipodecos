@@ -128,6 +128,7 @@ Rails.application.routes.draw do
       collection do
         get :billings
         get :sales
+        get :daily_citos
       end
 
       member do

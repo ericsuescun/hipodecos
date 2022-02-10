@@ -80,6 +80,16 @@
               <% end %>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Citologías
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% Entity.all.each do |entity| %>
+                <%= link_to "#{entity.initials} Hoy", daily_citos_reports_path + "?init_date=" + Date.today.strftime("%d-%m-%Y") + "&final_date=" + Date.today.strftime("%d-%m-%Y") + "&entity=#{entity.initials}", class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </li>
             
         <% end %>
       </ul>

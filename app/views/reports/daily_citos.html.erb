@@ -1,0 +1,83 @@
+<div class="info">
+	<h4>Citologías de <%= params[:entity] %> para el periodo <%= new_search_range %></h4>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="alert alert-secondary">
+				<%= form_tag daily_citos_reports_path, method: "get" do %>
+					<div class="form-row">
+						<div class="form-group col-4">
+							<%= label_tag "Fecha inicial" %>
+							<%= date_field_tag :init_date, Date.parse(params[:init_date]), class: "form-control input" %>
+						</div>
+						<div class="form-group col-4">
+							<%= label_tag "Fecha final" %>
+							<%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
+						</div>
+						<%= hidden_field_tag :entity, params[:entity] %>
+						<div class="col-4">
+							<%= submit_tag("Buscar", class: "btn btn-primary") %>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<strong><h4>Reporte general de citologías</h4></strong>
+			<table class="dense table-striped">
+				<thead>
+					<tr>
+						<th>Numero</th>
+						<th>Autorización</th>
+            <th>fechato</th>
+            <th>fecharec</th>
+            <th>fecha</th>
+            <th>nombre</th>
+            <th>nombre2</th>
+            <th>apellido</th>
+            <th>apellido2</th>
+            <th>cedula</th>
+            <th>fechanac</th>
+            <th>edad</th>
+            <th>clinica</th>
+            <th>entidad</th>
+            <th>telefono</th>
+            <th>notas</th>
+            <th>diag</th>
+            <th>citaprev</th>
+            <th>resultado</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<% @informs.each do |inform| %>
+						<tr>
+							<td><%= inform.tag_code[4..-1] %></td>
+							<td><%= inform.prmtr_auth_code %></td>
+							<td><%= inform.cytologies.take.sample_date.strftime("%d/%b/%y") %></td>
+							<td><%= inform.receive_date.strftime("%d/%b/%y") %></td>
+							<td><%= inform.delivery_date.strftime("%d/%b/%y") %></td>
+							<td><%= inform.patient.name1 %></td>
+							<td><%= inform.patient.name2 %></td>
+							<td><%= inform.patient.lastname1 %></td>
+							<td><%= inform.patient.lastname2 %></td>
+							<td><%= inform.patient.id_number %></td>
+							<td><%= inform.patient.birth_date.strftime("%d/%b/%y") if inform.patient.birth_date.present? %></td>
+							<td><%= inform.p_age %></td>
+							<td><%= Branch.where(id: inform.branch_id).take.try(:initials) %></td>
+							<td><%= Promoter.where(id: inform.promoter_id).take.try(:initials) %></td>
+							<td><%= inform.p_cel %></td>
+							<td><%= Citocode.find(inform.diagnostics.take.diagcode_id).description %></td>
+							<td><%= inform.diagnostics.take.description %></td>
+							<td><%= inform.cytologies.take.prev_appo %></td>
+							<td><%= inform.diagnostics.take.result %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

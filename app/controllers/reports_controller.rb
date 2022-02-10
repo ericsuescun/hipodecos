@@ -504,7 +504,14 @@ class ReportsController < ApplicationController
 
   end
 
-
+  def daily_citos
+    initial_date = Date.parse(params[:init_date]).beginning_of_day
+    final_date = Date.parse(params[:final_date]).end_of_day
+    entity = Entity.where(initials: params[:entity]).take if params[:entity].present?
+    branches = entity.branches.ids if entity.present?
+    date_range = initial_date..final_date
+    @informs = Inform.where(delivery_date: date_range, inf_type: 'cito', branch_id: branches) if entity.present? || branches.present?
+  end
 
   def reports_params_today
   end

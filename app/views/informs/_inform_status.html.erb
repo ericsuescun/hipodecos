@@ -25,8 +25,13 @@
 <span class="badge badge-pill badge-<%= get_info_status(inform)[0] %>">
   <%= get_info_status(inform)[1] %>M <%= get_info_status(inform)[2] %>D
 </span>
-<% if inform.invoice.to_s != "" %>
+<% if inform.invoice.present? %>
   <span class="badge badge-pill badge-primary">
     F
+  </span>
+<% end %>
+<% if inform.blocks.where(stored: true).present? %>
+  <span class="badge badge-pill badge-primary">
+    B
   </span>
 <% end %>

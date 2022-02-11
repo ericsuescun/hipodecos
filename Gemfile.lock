@@ -361,7 +361,8 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (4.0.6)
-    puma (3.12.6)
+    puma (4.3.11)
+      nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-test (1.1.0)
@@ -523,7 +524,7 @@ DEPENDENCIES
   minitest-reporters (= 1.1.14)
   pdfkit
   pg
-  puma (~> 3.12.6)
+  puma (~> 4.3.11)
   rails (~> 5.2.3)
   rails-controller-testing (= 1.0.2)
   rails_12factor

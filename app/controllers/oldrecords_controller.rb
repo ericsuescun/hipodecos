@@ -1,6 +1,6 @@
 class OldrecordsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_oldrecord, only: [:show, :edit, :update, :destroy]
+  before_action :set_oldrecord, only: [:show, :edit, :update, :destroy, :preview]
 
   def import
     Oldrecord.import(params[:file])
@@ -29,6 +29,10 @@ class OldrecordsController < ApplicationController
   # GET /oldrecords/1
   # GET /oldrecords/1.json
   def show
+  end
+
+  def preview
+    @source = 'informs'
   end
 
   # GET /oldrecords/new

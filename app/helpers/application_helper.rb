@@ -161,13 +161,16 @@ module ApplicationHelper
 
 		if descr
 			descr.gsub!("Ã\u009F","á")
+			descr.gsub!("ß","á")
 
 			descr.gsub!("Ã\u009A","é")
+			descr.gsub!("Ú","é")
 
 			descr.gsub!("Ã\u009D","í")
+			descr.gsub!("Ý","í")
 
 			descr.gsub!("Â¾","ó")
-
+			descr.gsub!("¾","ó")
 			descr.gsub!("Ã\u008B","Ó")
 
 			descr.gsub!("Â·", "ú")

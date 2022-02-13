@@ -67,14 +67,15 @@ end
 namespace :oldcitos do
   task :import_count => :environment do
     date_range = Date.parse("01-01-2021")..Date.parse("31-12-2021")
-    oldrecords = Oldcito.where(fecharec: date_range, patient_id: nil)
-    total = oldrecords.count
+    oldcitos = Oldcito.where(fecharec: date_range, patient_id: nil)
+    total = oldcitos.count
     puts "El total a importar es: #{total}"
   end
 
   task :import => :environment do
     date_range = Date.parse("01-01-2021")..Date.parse("31-12-2021")
     oldcitos = Oldcito.where(fecharec: date_range, patient_id: nil)
+    total = oldcitos.count
 
     oldcitos.each_with_index do |oldcito, n|
 

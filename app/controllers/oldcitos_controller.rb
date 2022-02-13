@@ -1,6 +1,6 @@
 class OldcitosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_oldcito, only: [:show, :edit, :update, :destroy]
+  before_action :set_oldcito, only: [:show, :edit, :update, :destroy, :preview]
 
   def import
     Oldcito.import(params[:file])
@@ -30,6 +30,11 @@ class OldcitosController < ApplicationController
   # GET /oldcitos/1.json
   def show
   end
+
+  def preview
+    @source = 'informs'
+  end
+  
 
   # GET /oldcitos/new
   def new

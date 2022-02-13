@@ -122,6 +122,8 @@ class Oldrecord < ApplicationRecord
 
 				descr.gsub!("Â¾","ó")
 
+				descr.gsub!("¾","ó")
+
 				descr.gsub!("Ã\u008B","Ó")
 
 				descr.gsub!("Â·", "ú")

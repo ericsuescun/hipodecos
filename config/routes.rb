@@ -29,6 +29,10 @@ Rails.application.routes.draw do
       post :import
       get :trouble_index
     end
+
+    member do
+      get :preview
+    end
   end
 
   post 'suggestions/review', to: 'suggestions#review'

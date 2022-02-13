@@ -10,7 +10,7 @@
   
   <p><strong>Médico tratante:</strong> <%= @oldrecord.dnombre %> <%= @oldrecord.dapellido %> Contactos: <strong><%= @oldrecord.oficina %></strong> <strong><%= @oldrecord.telefono %></strong> <strong><%= @oldrecord.telefono %></strong>
   
-  | <%= link_to 'Volver a informes', informs_path %> | <%= link_to 'Previsualizar informe', preview_inform_path %></p>
+  | <%= link_to 'Volver a informes', oldrecords_path %> | <%= link_to 'Previsualizar informe', preview_oldrecord_path %></p>
   <p>
     <strong>Prestador: </strong><%= @oldrecord.prestador %><strong>Factura: </strong><%= @oldrecord.factura %> <strong>Autoriz: </strong><%= @oldrecord.autoriz %> <strong>Saldo: </strong><%= @oldrecord.saldo %>
   </p>

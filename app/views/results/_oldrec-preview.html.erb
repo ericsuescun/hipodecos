@@ -1,0 +1,92 @@
+<header>
+    
+  <% if source == 'informs' %>
+    <%
+=begin%>
+ <%= link_to 'Editar informe ' + @inform.tag_code, edit_inform_path(@inform), class: "btn btn-outline-primary ml-3" %> 
+<%
+=end%>
+    <%= link_to 'Volver a informes', oldrecord_path, class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Volver a informe', @oldrecord, class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Descargar en PDF', preview_oldrecord_path(@oldrecord, format: "pdf"), class: "btn btn-outline-primary ml-3" %>
+  <% end %>
+  <% if source == 'results' %>
+    <%= link_to 'Volver a resultados', results_path, class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Descargar en PDF', result_path(@oldrecord, format: "pdf"), class: "btn btn-primary ml-3" %>
+    <%= link_to "Salir de forma segura", destroy_patient_session_path, method: :delete, class: "btn btn-primary ml-3" %>
+  <% end %>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-10 col-lg-10 mx-auto">
+      <br>
+      <div>
+        <%= image_tag "logo.JPG", class: "img-fluid", width: 250, height: 250%>
+        <%= image_tag "datos.JPG", class: "img-fluid", width: 250, height: 250, align: "right" %>
+      </div>
+
+      <h4 class="preview-center">Informe <strong><%= @oldrecord.tag_code.to_s %></strong>. Fecha: <%= @oldrecord.fecha.to_s %></h4>
+      <h6 class="preview-center"><strong><%= @oldrecord.fullname.to_s %></strong>, <%= @oldrecord.identif.to_s %>: <%= @oldrecord.cedula.to_s %>, <%= @oldrecord.edad.to_s.to_s %> <%= @oldrecord.uniedad.to_s.to_s == "1" ? "A" : (@oldrecord.uniedad.to_s == "2" ? "M" : "D") %></h6>
+      <h6 class="preview-center"><%= "Teléfono: #{@oldrecord.telefono.to_s} " if @oldrecord.telefono.present? %></h6>
+
+      <h6 class="preview-center">Fecha de recepción: <%= @oldrecord.fecharec.to_s %>, <strong>EPS: </strong><%= @oldrecord.entidad.to_s %>, <strong>IPS: </strong><%= @oldrecord.clinica.to_s %>, <strong>Dirección:</strong> <%= @oldrecord.residencia.to_s %></h6>
+
+      <h6 class="preview-center">
+        <strong>Médico tratante:</strong> <%= @oldrecord.dnombre.to_s %> <%= @oldrecord.dapellido.to_s %>
+      </h6>
+      <h6 class="preview-center"><strong>Dirección de entrega: </strong><%= @oldrecord.oficina.to_s %>, <%= "Código de autorización: #{@oldrecord.autoriz.to_s}" if @oldrecord.autoriz.to_s %></h6>
+
+      <br>
+
+      <div class="row">
+        <div class="col-4 col-lg-4">
+          DESCRIPCIÓN MACROSCÓPICA:
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-12 col-lg-12 col-xl-12">
+          <div class="preview">
+            <div class="preview"><%= simple_format(fix_accent(@oldrecord.descr.to_s)) %></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row diagnostic">
+        <div class="col-12 col-lg-12">
+          <div class="card mt-3">
+            <div class="card-header text-center py-1">
+              <strong>DIAGNÓSTICO Y PROCEDIMIENTOS</strong>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><strong><%= fix_accent(@oldrecord.diagnostic.to_s) %></strong></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row footer">
+        <div class="col-12 col-lg-12">
+          <div class="card mt-3">
+            <div class="card-body">
+              <div class="row d-flex flex-row">
+                <div class="col-12 col-lg-12">
+                  <span style="float:left;"><strong>Patólogo:</strong> <%= @oldrecord.patologo.to_s %></span>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between mt-3">
+              <div>
+                <strong>PSS:</strong> <%= @oldrecord.codigo.to_s %> <strong>OMS:</strong> <%= @oldrecord.dx.to_s %>
+                <strong>, <%= "Bloques: #{@oldrecord.bloque.to_s}" if @oldrecord.bloque.present? %> </strong>
+                <span style="float:right;"><strong>Digita:</strong> <%= @oldrecord.secretaria.to_s %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

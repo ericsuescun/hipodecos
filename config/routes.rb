@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       post :import
       get :trouble_index
     end
+
+    member do
+      get :preview
+    end
   end
 
   get 'imports/oldrecord_import_index'

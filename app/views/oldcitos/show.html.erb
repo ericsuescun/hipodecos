@@ -10,7 +10,7 @@
   
   <p><strong>Médico tratante:</strong> <%= @oldcito.dnombre %> <%= @oldcito.dapellido %> Contactos: <strong><%= @oldcito.oficina %></strong> <strong><%= @oldcito.telefono %></strong> <strong><%= @oldcito.telefono %></strong>
   
-  | <%= link_to 'Volver a informes', informs_path %> | <%= link_to 'Previsualizar informe', preview_inform_path %></p>
+  | <%= link_to 'Volver a informes', oldcitos_path %> | <%= link_to 'Previsualizar informe', preview_oldcito_path %></p>
   <p>
     <strong>Prestador: </strong><%= @oldcito.prestador %><strong>Factura: </strong><%= @oldcito.factura %> <strong>Autoriz: </strong><%= @oldcito.autoriz %> <strong>Saldo: </strong><%= @oldcito.saldo %>
   </p>

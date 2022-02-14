@@ -103,7 +103,15 @@ class ResultsController < ApplicationController
 		else
 			render :not_permitted
 		end
-		
+	end
+
+	def show_oldcito
+		if current_patient.id == Oldcito.where(id: params[:id]).first.patient_id
+			@oldcito = Oldcito.find(params[:id])
+			@patient = Patient.find(@oldrecord.patient_id)
+		else
+			render :not_permitted
+		end
 	end
 
 	def not_permitted

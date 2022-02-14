@@ -8,7 +8,7 @@
 =end%>
     <%= link_to 'Volver a informes', oldcitos_path, class: "btn btn-outline-primary ml-3" %>
     <%= link_to 'Volver a informe', oldcito_path(@oldcito), class: "btn btn-outline-primary ml-3" %>
-    <%= link_to 'Descargar en PDF', preview_inform_path(@oldcito, format: "pdf"), class: "btn btn-outline-primary ml-3" %>
+    <%= link_to 'Descargar en PDF', preview_oldcito_path(@oldcito, format: "pdf"), class: "btn btn-outline-primary ml-3" %>
   <% end %>
   <% if source == 'results' %>
     <%= link_to 'Volver a resultados', results_path, class: "btn btn-outline-primary ml-3" %>

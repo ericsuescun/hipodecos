@@ -121,7 +121,7 @@ namespace :oldcitos do
           patient.password = patient.id_number
           patient.password_confirmation = patient.id_number
           
-          patient.save
+          patient.save!
 
           oldcito.update(patient_id: patient.id)
           puts "Paciente #{n} de #{total}: #{patient.id_number} #{100 * n / total}%"

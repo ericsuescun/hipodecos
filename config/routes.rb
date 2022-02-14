@@ -184,6 +184,7 @@ Rails.application.routes.draw do
     resources :results do
       member do
         get :show_oldrecord
+        get :show_oldcito
       end
     end
     resources :cytologies

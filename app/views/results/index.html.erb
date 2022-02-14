@@ -16,6 +16,24 @@
         </thead>
 
         <tbody>
+          <% @oldcitos.each do |oldcito| %>
+            <tr>
+              <td>
+                <%= link_to show_oldcito_result_path(oldcito)  do %>
+                  <%= oldcito.clave %><%= oldcito.fecharec.strftime("%y") %>-<%= oldcito.numero %>
+                <% end %>
+              </td>
+              <td><%= oldcito.fecharec.strftime('%d/%m/%Y') %></td>
+              <td><%= oldcito.secretauno %></td>
+              <td>
+                <%= Patient.where(id: oldcito.patient_id).first.fullname %> 
+              </td>
+              <td><%= oldcito.prestador %></td>
+              <td><%= oldcito.clinica %></td>
+              <td><%= oldcito.autoriz %></td>
+              
+            </tr>  
+          <% end %>
           <% @oldrecords.each do |oldrecord| %>
             <tr>
               <td>

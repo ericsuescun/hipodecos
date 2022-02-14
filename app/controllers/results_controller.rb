@@ -5,6 +5,7 @@ class ResultsController < ApplicationController
 		@patient = current_patient
 		@informs = @patient.informs.where(inf_status: "published").or(@patient.informs.where(inf_status: "downloaded"))
 		@oldrecords = Oldrecord.where(patient_id: current_patient.id)
+		@oldcitos = Oldcito.where(patient_id: current_patient.id)
 	end
 
 	def show

@@ -110,7 +110,7 @@ class ResultsController < ApplicationController
 		@source = 'results'
 		if current_patient.id == Oldcito.where(id: params[:id]).first.patient_id
 			@oldcito = Oldcito.find(params[:id])
-			@patient = Patient.find(@oldrecord.patient_id)
+			@patient = Patient.find(@oldcito.patient_id)
 		else
 			render :not_permitted
 		end

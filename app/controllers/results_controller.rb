@@ -97,6 +97,7 @@ class ResultsController < ApplicationController
 	end
 
 	def show_oldrecord
+		@source = 'results'
 		if current_patient.id == Oldrecord.where(id: params[:id]).first.patient_id
 			@oldrecord = Oldrecord.find(params[:id])
 			@patient = Patient.find(@oldrecord.patient_id)
@@ -106,6 +107,7 @@ class ResultsController < ApplicationController
 	end
 
 	def show_oldcito
+		@source = 'results'
 		if current_patient.id == Oldcito.where(id: params[:id]).first.patient_id
 			@oldcito = Oldcito.find(params[:id])
 			@patient = Patient.find(@oldrecord.patient_id)

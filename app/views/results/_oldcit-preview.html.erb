@@ -12,7 +12,7 @@
   <% end %>
   <% if source == 'results' %>
     <%= link_to 'Volver a resultados', results_path, class: "btn btn-outline-primary ml-3" %>
-    <%= link_to 'Descargar en PDF', result_path(@oldcito, format: "pdf"), class: "btn btn-primary ml-3" %>
+    <%= link_to 'Descargar en PDF', preview_oldcito_path(@oldcito, format: "pdf"), class: "btn btn-primary ml-3" %>
     <%= link_to "Salir de forma segura", destroy_patient_session_path, method: :delete, class: "btn btn-primary ml-3" %>
   <% end %>
 </header>

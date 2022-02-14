@@ -121,7 +121,11 @@ namespace :oldcitos do
           patient.password = patient.id_number
           patient.password_confirmation = patient.id_number
           
-          patient.save!
+          begin
+            patient.save!
+          rescue StandardError => e
+            puts "Resuced: #{e.message}"
+          end
 
           oldcito.update(patient_id: patient.id)
           puts "Paciente #{n} de #{total}: #{patient.id_number} #{100 * n / total}%"

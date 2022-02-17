@@ -9,7 +9,7 @@
       <% end %>
 
       <h1>Listado de Diagnósticos automáticos</h1>
-      <table class="table table-striped">
+      <table class="table-striped dense">
         <thead class="thead-dark">
           <tr>
             <tr>
@@ -22,6 +22,7 @@
               <!-- <th>Sub Clae 2</th> -->
               <th>Descr.</th>
               <th>Pss code</th>
+              <th>Cáncer</th>
               <!-- <th>Archivo</th> -->
               <!-- <th>Who code</th> -->
               <!-- <th>Score</th> -->
@@ -42,6 +43,11 @@
               <!-- <td><%= diagcode.feature5 %></td> -->
               <td><%= diagcode.description %></td>
               <td><%= diagcode.pss_code %></td>
+              <% if diagcode.cancer %>
+                <td><span class="badge badge-pill badge-danger">Cáncer<span></td>
+              <% else %>
+                <td></td>
+              <% end %>
               <!-- <td><%= load_txt("/Users/ericsuescun/Documents/Projects/rails/hipodecos/app/assets/txt/" + diagcode.pss_code.to_s.strip + ".txt") %></td> -->
               <!-- <td><%= diagcode.who_code %></td> -->
               <!-- <td><%= diagcode.score %></td> -->

@@ -155,7 +155,7 @@ class ReportsController < ApplicationController
     @total_branch = []
     @entity.branches.each do |branch|
       @partial = 0
-      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id, invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id, invoice: "")).each do |inform|
+      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id, invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id, invoice: "")).order(consecutive: :asc).each do |inform|
         @inform_studies = []
         @inform_partial = 0
         inform.studies.each do |study|
@@ -250,7 +250,7 @@ class ReportsController < ApplicationController
     if params[:branch_name] != nil
       branch = Branch.where(name: params[:branch_name]).first
       @partial = 0
-      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).each do |inform|
+      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).order(consecutive: :asc).each do |inform|
         @inform_studies = []
         @inform_partial = 0
         inform.studies.each do |study|
@@ -266,7 +266,7 @@ class ReportsController < ApplicationController
     else
       @entity.branches.each do |branch|
         @partial = 0
-        Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).each do |inform|
+        Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).order(consecutive: :asc).each do |inform|
           @inform_studies = []
           @inform_partial = 0
           inform.studies.each do |study|

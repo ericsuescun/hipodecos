@@ -20,8 +20,8 @@
 #  organ_code  :integer
 #
 class Diagcode < ApplicationRecord
-
 	has_many :autos, dependent: :destroy
+	has_many :diagnostics
 
 	require 'csv'
 

@@ -138,6 +138,7 @@ Rails.application.routes.draw do
         get :sales
         get :daily_citos
         get :stored_blocks
+        get :cancer_report
       end
 
       member do

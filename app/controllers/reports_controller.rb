@@ -1,6 +1,21 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
 
+  def cancer_report
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+    else
+      initial_date = Date.today.beginning_of_month
+      final_date = Date.today.end_of_month
+      date_range = initial_date..final_date
+    end
+
+    diagnostics = Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published"}).joins(:diagcode).where(diagcodes: { cancer: true  })
+    @informs = diagnostics.map { |diagnostic| diagnostic.inform }.uniq
+  end
+  
   def status
     if params[:yi]
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day

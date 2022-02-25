@@ -51,7 +51,7 @@
 					<% @informs.each do |inform| %>
 						<tr>
 							<td><%= inform.tag_code %></td>
-              <td><%= inform.delivery_date.strftime("%Y/%m%d") %></td>
+              <td><%= inform.delivery_date.strftime("%Y/%m/%d") %></td>
               <td><%= inform.patient.fullname %></td>
               <td><%= inform.patient.id_number %></td>
               <td><%= inform.p_age %></td>

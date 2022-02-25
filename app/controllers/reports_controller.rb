@@ -13,7 +13,7 @@ class ReportsController < ApplicationController
     end
 
     diagnostics = Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published"}).joins(:diagcode).where(diagcodes: { cancer: true  })
-    @informs = diagnostics.map { |diagnostic| diagnostic.inform }.uniq
+    @informs = diagnostics.map { |diagnostic| diagnostic.inform }.uniq.sort_by {|inform| inform[:consecutive]}
   end
   
   def status

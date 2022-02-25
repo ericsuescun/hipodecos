@@ -92,6 +92,16 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Cáncer
+            </a>
+            <% (1..3).each do |m| %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "#{m.month.ago.strftime("%b %Y")}", cancer_report_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y"), class: "dropdown-item" %>
+              </div>
+            <% end %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Bloques
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -12,6 +12,8 @@
 #  enabled    :boolean
 #
 class Promoter < ApplicationRecord
+	has_many :informs
+	
 	validates :name, :initials, :code, presence: true
 	validates :code, uniqueness: true
 

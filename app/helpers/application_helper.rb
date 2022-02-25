@@ -1,4 +1,22 @@
 module ApplicationHelper
+	def add_diags(inform)
+		diags = ""
+		inform.diagnostics.each do |diagnostic|
+			next if diagnostic.description.blank?
+			diags += "#{diagnostic.description}"
+		end
+		diags[0..-3]
+	end
+
+	def add_codes(inform)
+		diags = ""
+		inform.diagnostics.each do |diagnostic|
+			next if diagnostic.diagcode_id.blank?
+			diags += "#{diagnostic.diagcode.pss_code}, "
+		end
+		diags[0..-3]
+	end
+	
 
 	def get_cups_status(inform)
 		if inform.studies.count != 0

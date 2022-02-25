@@ -20,6 +20,7 @@
 #
 class Branch < ApplicationRecord
   belongs_to :entity
+  has_many :informs
 
   validates :name, :initials, presence: true
   

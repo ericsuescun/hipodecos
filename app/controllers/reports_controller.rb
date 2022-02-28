@@ -12,8 +12,17 @@ class ReportsController < ApplicationController
       date_range = initial_date..final_date
     end
 
-    diagnostics = Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published"}).joins(:diagcode).where(diagcodes: { cancer: true  })
-    @informs = diagnostics.map { |diagnostic| diagnostic.inform }.uniq.sort_by {|inform| inform[:consecutive]}
+    # diagnostics = Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published"}).joins(:diagcode).where(diagcodes: { cancer: true  })
+    diagnostics = Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published", inf_type: "clin" })
+    diag = []
+    diagnostics.map do |diagnostic|
+      if diagnostic.diagcode_id.present?
+        diag << diagnostic if Diagcode.where(id: diagnostic.diagcode_id).take.cancer 
+      end
+    end
+
+    @informs = []
+    @informs = diag.map { |diagnostic| diagnostic.inform }.uniq.sort_by {|inform| inform[:consecutive]} if diagnostics.present?
   end
   
   def status

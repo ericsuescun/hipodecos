@@ -57,10 +57,10 @@
               <td><%= inform.p_age %></td>
               <td><%= inform.patient.sex %></td>
               <td><%= Branch.where(id: inform.branch_id).take.try(:initials) %></td>
-              <td><%= inform.promoter.initials.to_s %></td>
+              <td><%= Promoter.where(id: inform.promoter_id).take.try(:initials) %></td>
               <td><%= add_diags(inform) %></td>
               <td></td>
-              <td><%= inform.promoter.regime %></td>
+              <td><%= Promoter.where(id: inform.promoter_id).take.try(:regime) %></td>
               <td><%= inform.p_address %></td>
               <td><%= inform.zone_type %></td>
               <td><%= inform.p_tel %></td>

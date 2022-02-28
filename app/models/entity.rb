@@ -22,7 +22,6 @@
 #
 class Entity < ApplicationRecord
 	has_many :branches, dependent: :destroy	#Hago dificil la borrada para evitar catástrofes
-	has_many :informs
 	# has_many :branches
 
 

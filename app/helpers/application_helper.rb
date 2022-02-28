@@ -12,7 +12,7 @@ module ApplicationHelper
 		diags = ""
 		inform.diagnostics.each do |diagnostic|
 			next if diagnostic.diagcode_id.blank?
-			diags += "#{diagnostic.diagcode.pss_code}, "
+			diags += "#{diagnostic.pss_code}, "
 		end
 		diags[0..-3]
 	end

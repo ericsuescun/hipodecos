@@ -18,7 +18,6 @@ class Diagnostic < ApplicationRecord
   belongs_to :inform
 
   has_many :objections, as: :objectionable, dependent: :destroy
-  belongs_to :diagcode
 
   default_scope -> { order(created_at: :asc) }
 

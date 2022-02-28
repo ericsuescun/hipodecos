@@ -45,9 +45,6 @@
 #
 class Inform < ApplicationRecord
   belongs_to :patient, optional: true
-  belongs_to :promoter
-  belongs_to :entity
-  belongs_to :branch
 
   # default_scope -> { order(created_at: :asc, tag_code: :asc) }
   scope :by_tagcode, -> { order(tag_code: :asc) }

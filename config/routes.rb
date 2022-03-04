@@ -139,6 +139,8 @@ Rails.application.routes.draw do
         get :daily_citos
         get :stored_blocks
         get :cancer_report
+        get :branch_report
+        get :branch_index
       end
 
       member do

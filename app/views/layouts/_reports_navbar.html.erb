@@ -108,7 +108,9 @@
               <%= link_to "Bloques guardados Hoy", stored_blocks_reports_path + "?init_date=" + Date.today.strftime("%d-%m-%Y") + "&final_date=" + Date.today.strftime("%d-%m-%Y"), class: "dropdown-item" %>
             </div>
           </li>
-            
+          <li class="nav-item">
+            <%= link_to "Sedes", branch_index_reports_path, class: "nav-link" %>
+          </li>
         <% end %>
       </ul>
       <% if user_signed_in? %>

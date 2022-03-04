@@ -24,6 +24,18 @@ class ReportsController < ApplicationController
     @informs = []
     @informs = diag.map { |diagnostic| diagnostic.inform }.uniq.sort_by {|inform| inform[:consecutive]} if diagnostics.present?
   end
+
+  def branch_report
+    @branch_id = params[:branch_id]
+    inf_type = params[:inf_type]
+    @informs = Inform.where(inf_type: inf_type, branch_id: @branch_id, delivery_date: date_range).publ_down.order(consecutive: :asc)
+  end
+
+  def branch_index
+    @branches = Branch.all
+  end
+  
+  
   
   def status
     if params[:yi]
@@ -545,6 +557,21 @@ class ReportsController < ApplicationController
   end
 
   private
+
+    def date_range
+      date_range = nil
+      if params[:init_date].present?
+        initial_date = Date.parse(params[:init_date]).beginning_of_day
+        final_date = Date.parse(params[:final_date]).end_of_day
+        date_range = initial_date..final_date
+      else
+        initial_date = Date.today.beginning_of_month
+        final_date = Date.today.end_of_month
+        date_range = initial_date..final_date
+      end
+      date_range
+    end
+    
     def count_invoices(a,b)
       c = 0
       if a > 0

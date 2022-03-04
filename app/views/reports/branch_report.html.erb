@@ -1,0 +1,80 @@
+<div class="info">
+	<h4>Reporte sede <%= Branch.find_by(id: params[:branch_id].to_i).initials %> para el periodo <%= new_search_range %></h4>
+</div>
+<div class="container-fluid">
+	<div class="row">
+	  <div class="col-12">
+	    <div class="alert alert-secondary">
+	    	<%= form_tag branch_report_reports_path, method: "get" do %>
+          <div class="form-row">
+              <div class="form-group col-3">
+                <%= label_tag "Fecha inicial" %>
+                <%= date_field_tag :init_date, params[:init_date], class: "form-control input" %>
+              </div>
+              <div class="form-group col-3">
+                <%= label_tag "Fecha final" %>
+                <%= date_field_tag :final_date, params[:final_date], class: "form-control input" %>
+              </div>
+              <div class="form-group col-2">
+                <%= label_tag "Tipo Informe" %>
+                <%= select_tag(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']]), class: "form-control form-control input") %>
+              </div>
+              <div class="form-group col-2">
+                <%= label_tag "Sede IPS" %>
+                <%= select_tag(:branch_id, options_from_collection_for_select(Branch.all, "id", "initials", params[:branch_id]), include_blank: true, class: "form-control input") %>
+              </div>
+            <div class="col-4">
+              <%= submit_tag("Buscar", class: "btn btn-primary") %>
+            </div>
+          </div>
+	    	<% end %>
+	    </div>
+	  </div>
+	</div>
+	<div class="row">
+		<div class="col-12 col-lg-12">
+			<table class="table-striped dense">
+				<thead>
+					<tr>
+						<th>Código</th>
+						<th>Fecha</th>
+            <th>Nombre</th>
+            <th>Id</th>
+            <th>Edad</th>
+            <th>Sexo</th>
+            <th>Sede</th>
+            <th>EPS</th>
+            <th>Diagnóstico</th>
+            <th>Prestador</th>
+            <th>Usuario</th>
+            <th>Residencia</th>
+            <th>Zona</th>
+            <th>Teléfono</th>
+            <th>Código</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @informs.each do |inform| %>
+						<tr>
+							<td><%= inform.tag_code %></td>
+              <td><%= inform.delivery_date.strftime("%Y/%m/%d") %></td>
+              <td><%= inform.patient.fullname %></td>
+              <td><%= inform.patient.id_number %></td>
+              <td><%= inform.p_age %></td>
+              <td><%= inform.patient.sex %></td>
+              <td><%= Branch.where(id: inform.branch_id).take.try(:initials) %></td>
+              <td><%= Promoter.where(id: inform.promoter_id).take.try(:initials) %></td>
+              <td><%= add_diags(inform) %></td>
+              <td></td>
+              <td><%= Promoter.where(id: inform.promoter_id).take.try(:regime) %></td>
+              <td><%= inform.p_address %></td>
+              <td><%= inform.zone_type %></td>
+              <td><%= inform.p_tel %></td>
+              <td><%= add_codes(inform) %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

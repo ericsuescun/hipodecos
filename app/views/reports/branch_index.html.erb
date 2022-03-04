@@ -1,0 +1,31 @@
+<div class="container-fluid">
+	<div class="row">
+	  <div class="col-12">
+	    <div class="alert alert-secondary">
+	    	<%= form_tag branch_report_reports_path, method: "get" do %>
+          <div class="form-row">
+              <div class="form-group col-3">
+                <%= label_tag "Fecha inicial" %>
+                <%= date_field_tag :init_date, nil, class: "form-control input" %>
+              </div>
+              <div class="form-group col-3">
+                <%= label_tag "Fecha final" %>
+                <%= date_field_tag :final_date, nil, class: "form-control input" %>
+              </div>
+              <div class="form-group col-3">
+                <%= label_tag "Tipo Informe" %>
+                <%= select_tag(:inf_type, options_for_select([['Clínica', 'clin'], ['Hospital', 'hosp'], ['Citología', 'cito']]), class: "form-control form-control input") %>
+              </div>
+              <div class="form-group col-3">
+                <%= label_tag "Sede IPS" %>
+                <%= select_tag(:branch_id, options_from_collection_for_select(@branches, "id", "initials"), include_blank: true, class: "form-control input") %>
+              </div>
+            <div class="col-4">
+              <%= submit_tag("Buscar", class: "btn btn-primary") %>
+            </div>
+          </div>
+	    	<% end %>
+	    </div>
+	  </div>
+	</div>
+</div>

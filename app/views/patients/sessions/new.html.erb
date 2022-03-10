@@ -11,7 +11,7 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
           <%= f.label "Número de identificación" %><br />
-          <%= f.number_field :id_number, autofocus: true, autocomplete: "Identificación", class: "form-control input-lg" %>
+          <%= f.text_field :id_number, autofocus: true, autocomplete: "Identificación", class: "form-control input-lg" %>
         </div>
 
         <p>Si eres un <strong>paciente</strong>, recuerda usar <strong>todos</strong> los dígitos de tu cédula como contraseña por defecto</p>

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :utility_files do
+    member do
+      get :download, to: 'utility_files#download'
+    end
+  end
+
   get 'comments/index'
   resources :invoices
   resources :municipalities do
@@ -146,6 +152,7 @@ Rails.application.routes.draw do
       member do
         post :invoice
         get :show_sale
+        get :rips_aff_files
         get :show_billing
         get :show_branch
         get :show_rips

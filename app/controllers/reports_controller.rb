@@ -324,6 +324,14 @@ class ReportsController < ApplicationController
     end
   end
 
+  def rips_aff_files
+    RipsApJob.perform_later(permit_reports_params)
+    RipsAdAfCtUsJob.perform_later(permit_reports_params)
+    AffDetEncJob.perform_later(permit_reports_params)
+
+    redirect_to utility_files_path, notice: 'Estoy trabajando para generar los archivos RIPS y Affinity. Regresa a REPORTES/DESCARGAS en un par de minutos'
+  end
+  
   def show_rips
     @entity = Entity.find(params[:id])
     initial_date = Date.parse(params[:init_date]).beginning_of_day
@@ -406,9 +414,6 @@ class ReportsController < ApplicationController
       filename = "CT" + 1.month.ago.strftime("%m%Y") + ".TXT"
       send_data file[0..-3], filename: filename, type: 'text/html; charset=utf-8'
     end
-    # filename = "CT" + 1.month.ago.strftime("%m%Y") + ".TXT"
-    # send_data 'esto es una prueba', filename: filename, type: 'text/html; charset=utf-8'
-
   end
 
   def show_rips_ap
@@ -537,7 +542,6 @@ class ReportsController < ApplicationController
       filename = "enc_#{params[:inf_type]}_" + @invoice + ".TXT"
       send_data file, filename: filename, type: 'text/html; charset=utf-8'
     end
-
   end
 
   def daily_citos
@@ -557,6 +561,10 @@ class ReportsController < ApplicationController
   end
 
   private
+    def permit_reports_params
+      params.permit(:id, :init_date, :final_date, :inf_type, :entity, :type, :file)
+    end
+    
 
     def date_range
       date_range = nil
@@ -603,8 +611,6 @@ class ReportsController < ApplicationController
       when "Víctima no asegurado"
         return "8"
       end
-
-
     end
 
 end

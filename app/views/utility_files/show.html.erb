@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @utility_file.name %>
+</p>
+
+<p>
+  <strong>Filepath:</strong>
+  <%= @utility_file.filepath %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @utility_file.description %>
+</p>
+
+<%= link_to 'Edit', edit_utility_file_path(@utility_file) %> |
+<%= link_to 'Back', utility_files_path %>

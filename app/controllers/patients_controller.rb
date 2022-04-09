@@ -344,8 +344,7 @@ class PatientsController < ApplicationController
 
     @patient.informs.first.user_id = current_user.id
     @patient.informs.first.entity_id = Branch.where(id: params[:patient][:informs_attributes][:"0"][:branch_id]).first.try(:entity_id)
-    @patient.informs.first.regime = Promoter.where(id: params[:patient][:informs_attributes][:"0"][:promoter_id]).first.try(:regime)
-
+    
     @patient.password = params[:patient][:id_number]
     @patient.password_confirmation = params[:patient][:id_number]
 

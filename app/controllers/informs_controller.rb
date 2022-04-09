@@ -1000,8 +1000,6 @@ class InformsController < ApplicationController
       inform.entity_id = entity.id
     end
 
-    inform.regime = Promoter.where(id: inform.promoter_id).first.try(:regime)
-
     date_range = Time.zone.now.to_date.beginning_of_year..Time.zone.now.to_date.end_of_year
 
     if params[:inform][:inf_type] == "clin"

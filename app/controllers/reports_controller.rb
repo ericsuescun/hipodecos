@@ -2,6 +2,7 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!
 
   def cancer_report
+    @tab = :cancer
     if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day
       final_date = Date.parse(params[:final_date]).end_of_day
@@ -11,7 +12,6 @@ class ReportsController < ApplicationController
       final_date = Date.today.end_of_month
       date_range = initial_date..final_date
     end
-
     # diagnostics = Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published"}).joins(:diagcode).where(diagcodes: { cancer: true  })
     diagnostics = Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published", inf_type: "clin" })
     diag = []
@@ -23,7 +23,69 @@ class ReportsController < ApplicationController
 
     @informs = []
     @informs = diag.map { |diagnostic| diagnostic.inform }.uniq.sort_by {|inform| inform[:consecutive]} if diagnostics.present?
+
+    csv_file = CSV.generate(headers: true) do |csv|
+      csv << %w[
+      Código
+      Fecha
+      Nombre
+      Id
+      Edad
+      Sexo
+      Sede
+      EPS
+      Diagnóstico
+      Prestador
+      Usuario
+      Residencia
+      Zona
+      Teléfono
+      Código
+      ]
+      @informs.each do |inform|
+        csv << [
+          inform.tag_code,
+          inform.delivery_date.strftime("%Y/%m/%d"),
+          inform.patient.fullname,
+          inform.patient.id_number,
+          inform.p_age,
+          inform.patient.sex,
+          Branch.where(id: inform.branch_id).take.try(:initials),
+          Promoter.where(id: inform.promoter_id).take.try(:initials),
+          add_diags(inform),
+          Promoter.where(id: inform.promoter_id).take.try(:regime),
+          inform.p_address,
+          inform.zone_type,
+          inform.p_tel,
+          add_codes(inform),
+        ]
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data csv_file, filename: "cancer_report_ini_#{initial_date}_fin_#{final_date}.csv", type: 'text/html; charset=utf-8' }
+    end
   end
+
+  def add_diags(inform)
+		diags = ""
+		inform.diagnostics.each do |diagnostic|
+			next if diagnostic.description.blank?
+			diags += "#{diagnostic.description}"
+		end
+		diags[0..-3]
+	end
+
+	def add_codes(inform)
+		diags = ""
+		inform.diagnostics.each do |diagnostic|
+			next if diagnostic.diagcode_id.blank?
+			diags += "#{diagnostic.pss_code}, "
+		end
+		diags[0..-3]
+	end
+  
 
   def branch_report
     @branch_id = params[:branch_id]
@@ -545,12 +607,48 @@ class ReportsController < ApplicationController
   end
 
   def daily_citos
+    @tab = :citos
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day
     entity = Entity.where(initials: params[:entity]).take if params[:entity].present?
     branches = entity.branches.ids if entity.present?
     date_range = initial_date..final_date
     @informs = Inform.where(delivery_date: date_range, inf_type: 'cito', branch_id: branches) if entity.present? || branches.present?
+
+    csv_file = CSV.generate(headers: true) do |csv|
+      csv << %W[
+      Numero Autorización fechato fecharec fecha nombre nombre2 apellido apellido2 cedula fechanac
+      edad clinica entidad telefono notas diag citaprev resultado
+      ]
+      @informs.each do |inform|
+        csv << [
+          inform.tag_code[4..-1],
+          inform.prmtr_auth_code,
+          inform.cytologies.take.sample_date.strftime("%d/%b/%y"),
+          inform.receive_date.strftime("%d/%b/%y"),
+          inform.delivery_date.strftime("%d/%b/%y"),
+          inform.patient.name1,
+          inform.patient.name2,
+          inform.patient.lastname1,
+          inform.patient.lastname2,
+          inform.patient.id_number,
+          inform.patient.birth_date.present? ? inform.patient.birth_date.strftime("%d/%b/%y") : "",
+          inform.p_age,
+          Branch.where(id: inform.branch_id).take.try(:initials),
+          Promoter.where(id: inform.promoter_id).take.try(:initials),
+          inform.p_cel,
+          Citocode.find(inform.diagnostics.take.diagcode_id).description,
+          inform.diagnostics.take.description,
+          inform.cytologies.take.prev_appo,
+          inform.diagnostics.take.result
+        ]
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data csv_file, filename: "cito_report_ini_#{initial_date}_fin_#{final_date}.csv", type: 'text/html; charset=utf-8' }
+    end
   end
 
   def stored_blocks

@@ -21,12 +21,13 @@
 						</div>
 					</div>
 				<% end %>
+				<%= link_to 'Descargar CSV', daily_citos_reports_path(init_date: params[:init_date], final_date: params[:final_date], entity: params[:entity], format: 'csv'), class: "btn btn-primary" %>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-12 col-lg-12">
-			<strong><h4>Reporte general de citologías</h4></strong>
+			<strong><h4>Reporte general de citologías: <%= @informs.size %> registros</h4></strong>
 			<table class="dense table-striped">
 				<thead>
 					<tr>

@@ -74,7 +74,7 @@ class ReportsController < ApplicationController
 			next if diagnostic.description.blank?
 			diags += "#{diagnostic.description}"
 		end
-		diags[0..-3]
+		diags[0..-2]
 	end
 
 	def add_codes(inform)

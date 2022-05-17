@@ -32,6 +32,7 @@ class DiagnosticsController < ApplicationController
     @diagnostic = @inform.diagnostics.build(diagnostic_params)
     @diagnostic.user_id = current_user.id
 
+    @diagnostic.diagcode_id = Diagcode.where(pss_code: @diagnostic.pss_code).first.id
     @diagnostic.who_code = Diagcode.where(pss_code: @diagnostic.pss_code).first.who_code
 
     @diagnostic.save

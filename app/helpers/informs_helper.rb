@@ -39,7 +39,7 @@ module InformsHelper
     when "20"
       "No planifica"
     when "22"
-      "Basectomía"
+      "Vasectomía"
     when "24"
       "No reporta"
     else

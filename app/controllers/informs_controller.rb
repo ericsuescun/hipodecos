@@ -119,7 +119,7 @@ class InformsController < ApplicationController
 
   def index_published
     @tab = :published
-    serializer = [:id, :tag_code, :delivery_date, :pathologist_review_id, :promoter_id, :branch_id, :prmtr_auth_code,:inf_type, :invoice, :receive_date, :patient_id, :diagnostic_id]
+    serializer = [:id, :tag_code, :delivery_date, :pathologist_review_id, :promoter_id, :branch_id, :prmtr_auth_code,:inf_type, :invoice, :receive_date, :patient_id]
 
     if params[:init_date].present?
       initial_date = Date.parse(params[:init_date]).beginning_of_day
@@ -131,8 +131,8 @@ class InformsController < ApplicationController
       date_range = initial_date..final_date
     end
     # @informs = Inform.where(delivery_date: date_range, inf_status: "published").or(Inform.where(delivery_date: date_range, inf_status: "downloaded")).paginate(page: params[:page], per_page: 10)
-    @informs = Inform.select(serializer).delivery_range(initial_date, final_date).publ_down.paginate(page: params[:page], per_page: 10) if params[:inf_type].blank?
-    @informs = Inform.select(serializer).delivery_range(initial_date, final_date).where(inf_type: params[:inf_type]).publ_down.order(consecutive: :asc).paginate(page: params[:page], per_page: 10) if params[:inf_type].present?
+    @informs = Inform.delivery_range(initial_date, final_date).publ_down.paginate(page: params[:page], per_page: 10) if params[:inf_type].blank?
+    @informs = Inform.delivery_range(initial_date, final_date).where(inf_type: params[:inf_type]).publ_down.order(consecutive: :asc).paginate(page: params[:page], per_page: 10) if params[:inf_type].present?
   end
 
   def unpublish

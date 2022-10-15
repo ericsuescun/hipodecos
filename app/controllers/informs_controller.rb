@@ -119,7 +119,7 @@ class InformsController < ApplicationController
 
   def index_published
     @tab = :published
-    serializer = [:id, :tag_code, :delivery_date, :pathologist_review_id, :promoter_id, :branch_id, :prmtr_auth_code,:inf_type, :invoice, :receive_date, :patient_id]
+    serializer = [:id, :tag_code, :delivery_date, :pathologist_review_id, :promoter_id, :branch_id, :prmtr_auth_code,:inf_type, :invoice, :receive_date, :patient_id, :diagnostic_id]
 
     if params[:init_date].present?
       initial_date = Date.parse(params[:init_date]).beginning_of_day

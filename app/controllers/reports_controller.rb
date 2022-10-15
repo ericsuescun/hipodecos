@@ -40,7 +40,6 @@ class ReportsController < ApplicationController
       Residencia
       Zona
       Teléfono
-      Código
       ]
       @informs.each do |inform|
         csv << [

@@ -22,7 +22,7 @@ class ReportsController < ApplicationController
     end
 
     @informs = []
-    @informs = diag.map { |diagnostic| diagnostic.inform }.uniq.sort_by {|inform| inform[:consecutive]} if diagnostics.present?
+    @informs = diag.map { |diagnostic| diagnostic.inform }.uniq.sort_by {|inform| inform[params[:order]]} if diagnostics.present?
 
     csv_file = CSV.generate(headers: true) do |csv|
       csv << %w[

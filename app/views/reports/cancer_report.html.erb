@@ -20,6 +20,8 @@
               <%= submit_tag("Buscar", class: "btn btn-primary") %>
             </div>
           </div>
+          <%= hidden_field_tag :order, :consecutive %>
+              </div>
 	    	<% end %>
         <%= link_to 'Descargar CSV', cancer_report_reports_path(init_date: params[:init_date], final_date: params[:final_date], format: 'csv'), class: "btn btn-primary" %>
 	    </div>
@@ -31,8 +33,14 @@
 			<table class="table-striped dense">
 				<thead>
 					<tr>
-						<th>Código</th>
-						<th>Fecha</th>
+						<th>
+              Código
+              <%= link_to '<>', cancer_report_reports_path(init_date: params[:init_date], final_date: params[:final_date], order: :consecutive) %>
+            </th>
+						<th>
+              Fecha
+              <%= link_to '<>', cancer_report_reports_path(init_date: params[:init_date], final_date: params[:final_date], order: :delivery_date) %>
+            </th>
             <th>Nombre</th>
             <th>Id</th>
             <th>Edad</th>

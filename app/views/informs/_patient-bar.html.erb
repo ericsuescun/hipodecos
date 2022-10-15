@@ -3,4 +3,9 @@
 	  <span>&#9998;</span>
 	<% end %>
 	<strong><%= @inform.tag_code %></strong>: <strong><%= @inform.patient.fullname %></strong>, <%= @inform.patient.id_type %>: <strong><%= @inform.patient.id_number %> </strong>, <strong><%= @inform.p_age %> <%= @inform.p_age_type == 'A' ? 'Años' : @inform.p_age_type == 'M' ? 'Meses' : 'Días' %></strong>, recibido el: <%= @inform.receive_date.strftime('%d/%m/%Y') %>
+	<% if @inform.cancer? %>
+		<span class="badge badge-pill badge-danger">
+			CANCER
+		</span>
+	<% end %>
 </h5>

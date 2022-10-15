@@ -217,4 +217,15 @@ class Inform < ApplicationRecord
     end
   end
 
+  def cancer?
+    diags = self.diagnostics
+
+    return unless diags
+
+    cancer = false
+    diags.each do |diag|
+      cancer ||= Diagcode.where(id: diag.diagcode_id).take.cancer
+    end
+    cancer
+  end
 end

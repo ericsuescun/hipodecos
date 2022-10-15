@@ -2,10 +2,11 @@
   <div class="row">
     <div class="col-12 col-lg-12 mx-auto">
       <h1>Resultados</h1>
+      <p>Para ver los resultados, haga clic o toque el código del informe</p>
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
-            <th>Informe</th>
+            <th>Resultados</th>
             <th>Ingreso PSS</th>
             <th>User PSS</th>
             <th>Paciente</th>
@@ -20,7 +21,7 @@
             <tr>
               <td>
                 <%= link_to show_oldcito_result_path(oldcito)  do %>
-                  <%= oldcito.clave %><%= oldcito.fecharec.strftime("%y") %>-<%= oldcito.numero %>
+                  Resultados informe <%= oldcito.clave %><%= oldcito.fecharec.strftime("%y") %>-<%= oldcito.numero %>
                 <% end %>
               </td>
               <td><%= oldcito.fecharec.strftime('%d/%m/%Y') %></td>
@@ -38,7 +39,7 @@
             <tr>
               <td>
                 <%= link_to show_oldrecord_result_path(oldrecord)  do %>
-                  <%= oldrecord.clave %><%= oldrecord.fecharec.strftime("%y") %>-<%= oldrecord.numero %>
+                  Resultados informe <%= oldrecord.clave %><%= oldrecord.fecharec.strftime("%y") %>-<%= oldrecord.numero %>
                 <% end %>
               </td>
               <td><%= oldrecord.fecharec.strftime('%d/%m/%Y') %></td>
@@ -56,7 +57,7 @@
             <tr>
               <td>
                 <%= link_to result_path(inform)  do %>
-                  <%= inform.tag_code %>
+                  Resultados informe <%= inform.tag_code %>
                 <% end %>
               </td>
               <td><%= inform.receive_date.strftime('%d/%m/%Y') %></td>

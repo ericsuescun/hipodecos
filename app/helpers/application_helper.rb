@@ -1,20 +1,20 @@
 module ApplicationHelper
 	def add_diags(inform)
-		diags = ""
+		diags = []
 		inform.diagnostics.each do |diagnostic|
 			next if diagnostic.description.blank?
-			diags += "#{diagnostic.description}"
+			diags << "#{diagnostic.description}"
 		end
-		diags[0..-3]
+		diags.join(' ')
 	end
 
 	def add_codes(inform)
-		diags = ""
+		codes = []
 		inform.diagnostics.each do |diagnostic|
 			next if diagnostic.diagcode_id.blank?
-			diags += "#{diagnostic.pss_code}, "
+			codes << "#{diagnostic.pss_code}"
 		end
-		diags[0..-3]
+		codes.join(',')
 	end
 	
 

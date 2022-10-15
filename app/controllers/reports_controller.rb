@@ -56,8 +56,7 @@ class ReportsController < ApplicationController
           Promoter.where(id: inform.promoter_id).take.try(:regime),
           inform.p_address,
           inform.zone_type,
-          inform.p_tel,
-          add_codes(inform),
+          inform.p_cel
         ]
       end
     end

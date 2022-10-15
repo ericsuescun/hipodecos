@@ -45,7 +45,6 @@
             <th>Residencia</th>
             <th>Zona</th>
             <th>Teléfono</th>
-            <th>Código</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,8 +63,7 @@
               <td><%= Promoter.where(id: inform.promoter_id).take.try(:regime) %></td>
               <td><%= inform.p_address %></td>
               <td><%= inform.zone_type %></td>
-              <td><%= inform.p_tel %></td>
-              <td><%= add_codes(inform) %></td>
+              <td><%= inform.p_cel %></td>
 						</tr>
 					<% end %>
 				</tbody>

@@ -217,7 +217,17 @@ class Inform < ApplicationRecord
     end
   end
 
+  def cito?
+    self.inf_type == 'cito'
+  end
+
+  def publ_down?
+    return self.inf_status == 'published' || self.inf_status == 'downloaded'
+  end
+
   def cancer?
+    return if self.cito?
+
     diags = self.diagnostics
 
     return unless diags

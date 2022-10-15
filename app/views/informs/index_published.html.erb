@@ -71,9 +71,6 @@
                     <%= inform.tag_code %>
                   <% end %>
                 </td>
-                <!-- <td>
-                  <%= render 'inform_status', inform: inform %>
-                </td> -->
                 <% if inform.inf_type != 'cito' %>
                   <td><%= inform.receive_date.strftime("%d/%m/%Y") %></td>
                 <% else %>

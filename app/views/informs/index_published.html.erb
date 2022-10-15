@@ -70,11 +70,6 @@
                   <%= link_to inform_path(inform), local: true  do %>
                     <%= inform.tag_code %>
                   <% end %>
-                  <% if inform.cancer? %>
-                    <span class="badge badge-pill badge-danger">
-                      CANCER
-                    </span>
-                  <% end %>
                 </td>
                 <% if inform.inf_type != 'cito' %>
                   <td><%= inform.receive_date.strftime("%d/%m/%Y") %></td>

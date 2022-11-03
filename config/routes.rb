@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     member do
       get :download, to: 'utility_files#download'
     end
+
+    collection do
+      get :destroy_all, to: 'utility_files#destroy_all'
+    end
   end
 
   get 'comments/index'

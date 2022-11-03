@@ -4,7 +4,7 @@
       <%= will_paginate @invoices, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
       <h1>Facturas</h1>
 
-      <table class="table table-striped">
+      <table class="table-striped dense">
         <thead>
           <tr>
             <th>Factura</th>
@@ -26,13 +26,13 @@
               <td><%= invoice.init_date.strftime("%d/%m/%Y") %></td>
               <td><%= invoice.final_date.strftime("%d/%m/%Y") %></td>
               <td><%= invoice.invoice_date.strftime("%d/%m/%Y") %></td>
-              <td><%= Entity.where(id: invoice.entity_id).first.initials %></td>
+              <td><%= Entity.where(id: invoice.entity_id).first.try(:initials) %></td>
               <td><%= invoice.inf_type %></td>
               <td><%= number_to_currency(invoice.value, precision: 0, delimiter: '.') %></td>
               <td><%= User.where(id: invoice.user_id).first.try(:first_name) %></td>
-              <td><%= link_to 'Detalles', invoice %></td>
+              <td><%= link_to 'Detalles', show_sale_report_path(id: invoice.entity_id, init_date: invoice.init_date.strftime("%d-%m-%Y"), final_date: invoice.final_date.strftime("%d-%m-%Y"), inf_type: invoice.inf_type) %></td>
               <td><%= link_to 'Editar', edit_invoice_path(invoice) %></td>
-              <td><%= link_to 'Borrar', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to 'Borrar', invoice, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
             </tr>
           <% end %>
         </tbody>
@@ -40,4 +40,3 @@
     </div>
   </div>
 </div>
-

@@ -78,6 +78,8 @@
               <% (0..2).each do |m| %>
                 <%= link_to "K: #{m.month.ago.strftime('%b de %Y')}", sales_reports_path + "?init_date=" + m.month.ago.beginning_of_month.strftime("%d-%m-%Y") + "&final_date=" + m.month.ago.end_of_month.strftime("%d-%m-%Y") + "&inf_type=cito" , class: "dropdown-item" %>
               <% end %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Facturas", invoices_path, class: "dropdown-item" %>
             </div>
           </li>
           <li class="nav-item dropdown">

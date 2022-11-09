@@ -5,6 +5,9 @@ class UtilityFilesController < ApplicationController
   # GET /utility_files or /utility_files.json
   def index
     @utility_files = UtilityFile.all
+    @utility_files.each do |file|
+      file.description += '- *NO ENCONTRADO*' unless Pathname.new(file.filepath).exist?
+    end
   end
 
   # GET /utility_files/1 or /utility_files/1.json
@@ -20,6 +23,8 @@ class UtilityFilesController < ApplicationController
     file = File.read(@utility_file.filepath)
         
     send_data file[0..-4], filename: @utility_file.name, type: 'text/html; charset=utf-8'
+  rescue => e
+    redirect_to utility_files_url, notice: "Archivo no encontrado: #{@utility_file.name}"
   end
   
 
@@ -64,6 +69,9 @@ class UtilityFilesController < ApplicationController
       format.html { redirect_to utility_files_url, notice: "Utility file was successfully destroyed." }
       format.json { head :no_content }
     end
+  rescue => e
+    @utility_file.destroy
+    redirect_to utility_files_url, notice: "Archivo no encontrado: #{@utility_file.name}. Eliminado de la lista de descarga"
   end
 
   def destroy_all

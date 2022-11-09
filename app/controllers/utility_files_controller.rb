@@ -74,13 +74,6 @@ class UtilityFilesController < ApplicationController
     redirect_to utility_files_url, notice: "Archivo no encontrado: #{@utility_file.name}. Eliminado de la lista de descarga"
   end
 
-  def destroy_all
-    UtilityFile.destroy_all
-
-    redirect_to utility_files_path, notice: 'Todos los registros borrados'
-  end
-  
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_utility_file

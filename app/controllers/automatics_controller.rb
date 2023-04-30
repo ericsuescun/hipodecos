@@ -91,7 +91,7 @@ class AutomaticsController < ApplicationController
     if type == "micro"
       @macro_automatics = Automatic.unscoped.where(auto_type: "micro").order(organ: :asc)
       redirect_to automatics_index_micro_url, notice: 'El automático y sus pasos fueron borrados exitosamente!'
-    elsif type = "macro"
+    elsif type == "macro"
       @macro_automatics = Automatic.unscoped.where(auto_type: "macro").order(organ: :asc)
       redirect_to automatics_index_macro_url, notice: 'El automático y sus pasos fueron borrados exitosamente!'
     else

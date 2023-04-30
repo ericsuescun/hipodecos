@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.3'
+gem 'rails', '7.0.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.12.6'
 
@@ -22,7 +22,6 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'responders'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
@@ -44,7 +43,7 @@ gem 'sendgrid-ruby'
 gem 'pdfkit'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-gem 'will_paginate', '~> 3.1.1'
+gem 'will_paginate', '~> 3.3.0'
 # gem 'will_paginate-bootstrap'
 gem 'bootstrap-will_paginate'
 gem 'rubyzip'
@@ -68,10 +67,6 @@ group :development do
   # gem 'sqlite3', '~> 1.3.6'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'minitest',                 '5.12.2'
-  gem 'minitest-reporters',       '1.1.14'
-  gem 'guard',                    '2.13.0'
-  gem 'guard-minitest',           '2.4.4'
   gem 'wkhtmltopdf-binary'
 end
 
@@ -82,8 +77,6 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   #The next 5 ones are brougth from the tutorial
-  gem 'rails-controller-testing', '1.0.2'
-
   gem 'rake'
 end
 

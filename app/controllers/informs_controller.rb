@@ -1202,6 +1202,11 @@ class InformsController < ApplicationController
     end
     
     @delivery_address = Branch.where(id: @inform.branch_id).first.try(:address) if @inform.inf_type != 'hosp'
+
+    respond_to do |format|
+      format.html
+      format.pdf
+    end
   end
 
   # private

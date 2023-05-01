@@ -85,6 +85,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
   gem 'rails_12factor'
-  gem 'wkhtmltopdf-heroku', '~> 2.12', '>= 2.12.6.0'
+  gem 'wkhtmltopdf-heroku'
   gem 'fog-aws'
 end

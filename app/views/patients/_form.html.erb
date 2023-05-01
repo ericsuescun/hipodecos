@@ -201,6 +201,14 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-12 col-lg-2">
+                <div class="form-group">
+                  <%= informs_form.label "Dx Ext" %>
+                  <%= informs_form.text_field :ext_diag, class: "form-control input" %>
+                </div>
+              </div>
+            </div>
             <% if params[:inf_type] == 'cito' %>
               <%= informs_form.fields_for :cytologies do |cyto_form| %>
                 <h5>Citología</h5>

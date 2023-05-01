@@ -366,7 +366,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   will_paginate (~> 3.3.0)
   wkhtmltopdf-binary
-  wkhtmltopdf-heroku
+  wkhtmltopdf-heroku (~> 2.12, >= 2.12.6.0)
   xmlrpc
 
 RUBY VERSION

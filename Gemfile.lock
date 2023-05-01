@@ -314,7 +314,7 @@ GEM
     websocket-extensions (0.1.5)
     will_paginate (3.3.1)
     wkhtmltopdf-binary (0.12.6.6)
-    wkhtmltopdf-heroku (2.12.6.0)
+    wkhtmltopdf-heroku (3.0.0.pre.rc0)
     xmlrpc (0.3.2)
       webrick
     xpath (3.2.0)
@@ -366,7 +366,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   will_paginate (~> 3.3.0)
   wkhtmltopdf-binary
-  wkhtmltopdf-heroku
+  wkhtmltopdf-heroku (= 3.0.0.pre.rc0)
   xmlrpc
 
 RUBY VERSION

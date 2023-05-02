@@ -117,9 +117,9 @@ class Patient < ApplicationRecord
 	end
 
 	def set_uppecase
-		self.name1.dup.to_s.upcase!
-		self.name2.dup.to_s.upcase!
-		self.lastname1.dup.to_s.upcase!
-		self.lastname2.dup.to_s.upcase!
+		self.name1.to_s.dup.upcase!
+		self.name2.to_s.dup.upcase!
+		self.lastname1.to_s.dup.upcase!
+		self.lastname2.to_s.dup.upcase!
 	end
 end

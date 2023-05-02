@@ -20,7 +20,7 @@
                   <div class="d-flex flex-wrap">
                     <% Automatic.where(organ: organ.organ, auto_type: 'macro').each do |automatic| %>
 
-                      <%= form_with url: execute_templates_create_path, method: "get" do |form| %>
+                      <%= form_with url: execute_templates_create_path, method: "get", local: false do |form| %>
                         <div class="actions">
                           <%= form.submit automatic.title, class: "organ-#{Organ.where(organ: automatic.organ).first.part.gsub(/\s+/, '')} mb-2" %>
                           <%= form.hidden_field :inform_id, value: inform.id %>

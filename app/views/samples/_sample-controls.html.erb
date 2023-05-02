@@ -9,7 +9,7 @@
       <% if sample.slide_tag == nil %>
         <% if !next_number_tag_exists?(inform, sample) %>
           <% if sample.inform.inf_status != 'revision' %>
-            <%= form_with model: [inform, inform.samples.build] do |form| %>
+            <%= form_with model: [inform, inform.samples.build], local: false do |form| %>
               <%= form.submit " + ", class: "mx-2 my-0 d-flex btn btn-primary btn-sm" %>
               <%= form.hidden_field :recipient_tag, value: recipient.tag %>
               <%= form.hidden_field :organ_code, value: sample.organ_code %>
@@ -24,7 +24,7 @@
 
     <% if sample.name == "Extendido" %>
       <% if sample.slide_tag == nil %>
-        <%= form_with url: execute_templates_add_slide_path, method: "get", id: "sample-#{sample.sample_tag}" do |form| %>
+        <%= form_with url: execute_templates_add_slide_path, method: "get", id: "sample-#{sample.sample_tag}", local: false do |form| %>
           <div class="actions d-flex flex-row">
 
             <%= form.submit "+P", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>
@@ -35,7 +35,7 @@
         <% end %>
       <% end %>
       <% if sample.slide_tag != nil %>
-        <%= form_with url: execute_templates_add_series_path, method: "get", id: "sample-s-#{sample.sample_tag}" do |form| %>
+        <%= form_with url: execute_templates_add_series_path, method: "get", id: "sample-s-#{sample.sample_tag}", local: false do |form| %>
           <div class="actions d-flex flex-row">
 
             <%= form.submit "+S", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>
@@ -49,7 +49,7 @@
   <% if sample.name == "Extendido" %>
     <% if sample.slide_tag == nil && Slide.where(inform_id: sample.inform).length != 0 %>
       <div class="d-flex justify-content-around align-items-center mt-1">
-        <%= form_with url: execute_templates_associate_slide_path, method: "get", id: "sample-a-#{sample.sample_tag}" do |form| %>
+        <%= form_with url: execute_templates_associate_slide_path, method: "get", id: "sample-a-#{sample.sample_tag}", local: false do |form| %>
           <div class="actions d-flex flex-row">
 
             <%= form.submit "+A", class: "mx-2 my-0 d-flex", style: "padding-left: 10px;padding-right: 10px;font-size: 16px;border: 1px solid grey; border-radius: 3px;background-color: purple;color: white;" %>

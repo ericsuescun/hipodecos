@@ -134,7 +134,7 @@
                           <div class="card-body">
 
                             <div class="d-flex flex-row align-items-center mb-3">
-                              <%= form_with model: [inform, inform.samples.build] do |form| %>
+                              <%= form_with model: [inform, inform.samples.build], local: false do |form| %>
                                 <%= form.submit " + ", class: "btn btn-primary btn-sm" %>
                                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                                 <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>
@@ -144,7 +144,7 @@
                             </div>
 
                             <div class="d-flex flex-row align-items-center">
-                              <%= form_with model: [inform, inform.samples.build] do |form| %>
+                              <%= form_with model: [inform, inform.samples.build], local: false do |form| %>
                                 <%= form.submit "+E", class: "btn btn-primary btn-sm" %>
                                 <%= form.hidden_field :recipient_tag, value: recipient.tag %>
                                 <%= form.hidden_field :sample_tag, value: generate_letter_tag(inform) %>

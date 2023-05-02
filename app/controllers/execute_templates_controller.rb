@@ -362,11 +362,21 @@ class ExecuteTemplatesController < ApplicationController
 		# end
 
 		# @edit_status = false
+
+		respond_to do |format|
+			format.html
+			format.js
+		end
 	end
 
 	def micro_new
 		
 		all_micro
+
+		respond_to do |format|
+			format.html
+			format.js
+		end
 	end
 
 	def all_micro
@@ -440,7 +450,10 @@ class ExecuteTemplatesController < ApplicationController
 
 		@edit_status = false
 		
-
+		respond_to do |format|
+			format.html
+			format.js
+		end
 		
 	end
 

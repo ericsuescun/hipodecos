@@ -7,7 +7,7 @@
             <% if inform.inf_type == "cito" %>
               <% if inform.micros.count < 2 %>
                 <span>
-                  <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-1 my-1 ml-1" do |form| %>
+                  <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-1 my-1 ml-1", local: false do |form| %>
                     <%= form.submit "+", class: "btn btn-primary btn-sm" %>
                     <%= form.hidden_field :inform_id, value: inform.id %>
                   <% end %>
@@ -15,7 +15,7 @@
               <% end %>
             <% else %>
               <span>
-                <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-1 my-1 ml-1" do |form| %>
+                <%= form_with url: new_micro_path, method: "get", class: "micro-form-out mr-1 my-1 ml-1", local: false do |form| %>
                   <%= form.submit "+", class: "btn btn-primary btn-sm" %>
                   <%= form.hidden_field :inform_id, value: inform.id %>
                 <% end %>
@@ -43,7 +43,7 @@
                 <div>
               <% end %>
                 <% if edit_micro == micro %>
-                  <%= form_with model: micro do |f| %>
+                  <%= form_with model: micro, local: false do |f| %>
                     <div class="form-group">
                       <%= f.label "Descripción:" %>
                       <%= f.text_area :description, value: micro.description, rows: 8, cols: 80, class: "form-control input" %>

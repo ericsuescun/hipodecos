@@ -5,7 +5,7 @@
         <div class="card bg-light mx-2 mb-3">
           <div class="card-header pl-1 pr-0 pt-0 pb-0 d-flex justify-content-between">
             <span><strong>Bloques</strong></span>
-            <%= form_with url: execute_templates_create_blocks_path, method: "get" do |form| %>
+            <%= form_with url: execute_templates_create_blocks_path, method: "get", local: false do |form| %>
               <div class="actions">
                 <%= form.submit "Procesar Cassettes", class: "btn btn-outline-dark mx-1 my-1" %>
                 <%= form.hidden_field :inform_id, value: inform.id %>
@@ -74,7 +74,7 @@
                               </span>
                             </div>
                             <% unless objection.closed %>
-                              <%= form_with url: execute_templates_review_block_path, method: "get" do |form| %>
+                              <%= form_with url: execute_templates_review_block_path, method: "get", local: false do |form| %>
                                 <div class="actions">
                                   <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-2" %>
                                   <%= form.hidden_field :block_id, value: block.id %>
@@ -84,7 +84,7 @@
                             <% end %>
                           <% else %>
                             <% if edit_objection_id == objection.id %>
-                              <%= form_with url: execute_templates_anotate_block_path, method: "get" do |form| %>
+                              <%= form_with url: execute_templates_anotate_block_path, method: "get", local: false do |form| %>
                                 <div class="field">
                                   <%= form.label "Acción de mejora:" %>
                                   <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>
@@ -225,7 +225,7 @@
                               </span>
                             </div>
                             <% unless objection.closed %>
-                              <%= form_with url: execute_templates_review_block_path, method: "get" do |form| %>
+                              <%= form_with url: execute_templates_review_block_path, method: "get", local: false do |form| %>
                                 <div class="actions">
                                   <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
                                   <%= form.hidden_field :block_id, value: block.id %>
@@ -235,7 +235,7 @@
                             <% end %>
                           <% else %>
                             <% if edit_objection_id == objection.id %>
-                              <%= form_with url: execute_templates_anotate_block_path, method: "get" do |form| %>
+                              <%= form_with url: execute_templates_anotate_block_path, method: "get", local: false do |form| %>
                                 <div class="field">
                                   <%= form.label "Historial:" %>
                                   <%= form.text_area :description, value: objection.description, class: "form-control input disabled" %>

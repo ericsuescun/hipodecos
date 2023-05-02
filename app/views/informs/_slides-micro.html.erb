@@ -1,5 +1,5 @@
 <div class="slides">
-  <%= form_with url: inclusion_blocks_block_store_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post" do |form| %>
+  <%= form_with url: inclusion_blocks_block_store_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", local: false do |form| %>
 
   <div class="card mt-3">
     <div class="card-header d-flex flex-row align-items-center justify-content-between m-0 p-0">

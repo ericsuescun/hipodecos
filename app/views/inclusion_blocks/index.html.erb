@@ -11,7 +11,7 @@
 
       <div class="inclusion-blocks">
         <div class="container-fluid">
-            <%= form_with url: inclusion_blocks_massive_inclusion_path, method: "post" do |form| %>
+            <%= form_with url: inclusion_blocks_massive_inclusion_path, method: "post", local: false do |form| %>
 
               <%= form.submit "Incluir lo marcado", class: "ml-1 my-0 d-flex btn btn-sm btn-outline-success" %>
               <div class="row">

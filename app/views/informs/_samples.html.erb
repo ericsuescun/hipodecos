@@ -34,7 +34,7 @@
   </div>
   <div class="col-4 col-lg-4">
     <h4>Agregar muestras</h4>
-    <%= form_with model: [inform, inform.samples.build] do |form| %>
+    <%= form_with model: [inform, inform.samples.build], local: false do |form| %>
       <div class="form-group">
         <%= form.label "Nombre de muestra" %>
         <%= form.text_field :name, class: "form-control input" %>
@@ -48,7 +48,7 @@
       </div>
     <% end %>
     <!-- <a class="btn btn-primary" href="<%= samples_path + '?organ=estomago&inform=' + params[:id] %>">+ Estomago</a> -->
-    <%= form_with model: [inform, inform.samples.build] do |form| %>
+    <%= form_with model: [inform, inform.samples.build], local: false do |form| %>
       <div class="actions">
         <%= form.hidden_field :specimen_tag, value: 'estomago' %>
         <%= form.submit "+Estómago", class: "btn btn-primary" %>

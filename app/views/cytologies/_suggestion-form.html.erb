@@ -1,5 +1,5 @@
 <h4>Agregar sugerencia manual</h4>
-<%= form_with model: [inform, inform.cytologies.build] do |form| %>
+<%= form_with model: [inform, inform.cytologies.build], local: false do |form| %>
   <div class="form-group">
     <%= form.text_area :suggestion, class: "form-control form-control-lg input" %>
   </div>

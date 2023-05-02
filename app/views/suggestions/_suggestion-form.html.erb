@@ -1,5 +1,5 @@
 <h4>Agregar sugerencia manual</h4>
-<%= form_with model: [inform, inform.suggestions.build] do |form| %>
+<%= form_with model: [inform, inform.suggestions.build], local: false do |form| %>
   <div class="form-group">
     <%= form.text_area :description, class: "form-control" %>
   </div>

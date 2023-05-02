@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-around align-items-center mt-1">
 
-  <%= form_with url: list_blocks_block_fm1_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", id: "block-#{block.block_tag}" do |form| %>
+  <%= form_with url: list_blocks_block_fm1_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", id: "block-#{block.block_tag}", local: false do |form| %>
     <%= form.submit " - ", class: "mx-2 my-0 d-flex btn btn-outline-danger" %>
     <%= form.hidden_field :sample_id, value: sample.id %>
     <%= form.hidden_field :block_id, value: block.id %>
@@ -8,13 +8,13 @@
     
   <% end %>
 
-  <%= form_with url: list_blocks_block_fok_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", id: "block-#{block.block_tag}" do |form| %>
+  <%= form_with url: list_blocks_block_fok_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", id: "block-#{block.block_tag}", local: false do |form| %>
     <%= form.submit "OK", class: "mx-2 my-0 d-flex btn btn-outline-success" %>
     <%= form.hidden_field :sample_id, value: sample.id %>
     <%= form.hidden_field :block_id, value: block.id %>
   <% end %>
 
-  <%= form_with url: list_blocks_block_fp1_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", id: "block-#{block.block_tag}" do |form| %>
+  <%= form_with url: list_blocks_block_fp1_path + "?di=#{params[:di]}&mi=#{params[:mi]}&yi=#{params[:yi]}&df=#{params[:df]}&mf=#{params[:mf]}&yf=#{params[:yf]}", method: "post", id: "block-#{block.block_tag}", local: false do |form| %>
     <%= form.submit " + ", class: "mx-2 my-0 d-flex btn btn-outline-primary" %>
     <%= form.hidden_field :sample_id, value: sample.id %>
     <%= form.hidden_field :block_id, value: block.id %>

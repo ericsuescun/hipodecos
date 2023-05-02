@@ -2,20 +2,20 @@
   
   <div class="d-flex justify-content-around align-items-center mt-1">
 
-    <%= form_with url: execute_templates_block_fm1_path, method: "get", id: "block-#{block.block_tag}" do |form| %>
+    <%= form_with url: execute_templates_block_fm1_path, method: "get", id: "block-#{block.block_tag}", local: false do |form| %>
       <%= form.submit " - ", class: "mx-2 my-0 d-flex btn btn-outline-danger" %>
       <%= form.hidden_field :sample_id, value: sample.id %>
       <%= form.hidden_field :block_id, value: block.id %>
       <%= form.hidden_field :fragment, value: block.fragment %>
     <% end %>
 
-    <%= form_with url: execute_templates_block_fok_path, method: "get", id: "block-#{block.block_tag}" do |form| %>
+    <%= form_with url: execute_templates_block_fok_path, method: "get", id: "block-#{block.block_tag}", local: false do |form| %>
       <%= form.submit "OK", class: "mx-2 my-0 d-flex btn btn-outline-success" %>
       <%= form.hidden_field :sample_id, value: sample.id %>
       <%= form.hidden_field :block_id, value: block.id %>
     <% end %>
 
-    <%= form_with url: execute_templates_block_fp1_path, method: "get", id: "block-#{block.block_tag}" do |form| %>
+    <%= form_with url: execute_templates_block_fp1_path, method: "get", id: "block-#{block.block_tag}", local: false do |form| %>
       <%= form.submit " + ", class: "mx-2 my-0 d-flex btn btn-outline-primary" %>
       <%= form.hidden_field :sample_id, value: sample.id %>
       <%= form.hidden_field :block_id, value: block.id %>

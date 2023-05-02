@@ -12,7 +12,7 @@
     	    
     	  </div>
     	  <% if edit_cytology == cytology %>
-    	    <%= form_with model: cytology do |f| %>
+    	    <%= form_with model: cytology, local: false do |f| %>
     	      <div class="field">
     	        <%= f.label "Sugerencia:" %>
     	        <%= f.text_area :suggestion, value: cytology.suggestion, rows: 8, class: "form-control input" %>
@@ -44,7 +44,7 @@
     	        </span>
     	      </div>
     	      <% unless objection.closed %>
-    	        <%= form_with url: cytologies_review_path, method: "post" do |form| %>
+    	        <%= form_with url: cytologies_review_path, method: "post", local: false do |form| %>
     	          <div class="form-group">
     	            <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
     	            <%= form.hidden_field :objection_id, value: objection.id %>
@@ -54,7 +54,7 @@
     	      <% end %>
     	    <% else %>
     	      <% if edit_objection_id == objection %>
-    	        <%= form_with url: cytologies_anotate_path, method: "post" do |form| %>
+    	        <%= form_with url: cytologies_anotate_path, method: "post", local: false do |form| %>
     	          <div class="form-group">
     	            <%= form.label "Historial:" %>
     	            <%= form.text_area :description, value: objection.description, rows: 10, class: "form-control input disabled" %>

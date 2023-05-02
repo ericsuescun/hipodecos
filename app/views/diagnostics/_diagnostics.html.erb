@@ -8,7 +8,7 @@
             
             <% if inform.inf_type != 'cito' %>
               <span>
-                <%= form_with url: new_diagnostic_path, method: "get", class: "mr-1 my-1 ml-1" do |form| %>
+                <%= form_with url: new_diagnostic_path, method: "get", class: "mr-1 my-1 ml-1", local: false do |form| %>
                   <%= form.submit "+", class: "btn btn-primary btn-sm" %>
                   <%= form.hidden_field :inform_id, value: inform.id %>
                 <% end %>
@@ -17,7 +17,7 @@
             <% else %>
               <% if inform.diagnostics.count < 2 %>
                 <span>
-                  <%= form_with url: new_diagnostic_path, method: "get", class: "mr-1 my-1 ml-1" do |form| %>
+                  <%= form_with url: new_diagnostic_path, method: "get", class: "mr-1 my-1 ml-1", local: false do |form| %>
                     <%= form.submit "+", class: "btn btn-primary btn-sm" %>
                     <%= form.hidden_field :inform_id, value: inform.id %>
                   <% end %>
@@ -43,7 +43,7 @@
                 <div>
               <% end %>
                 <% if edit_diagnostic == diagnostic %>
-                  <%= form_with model: diagnostic do |form| %>
+                  <%= form_with model: diagnostic, local: false do |form| %>
                     <div class="row">
                       
                       <% if inform.inf_type != 'cito' %>
@@ -117,7 +117,7 @@
                       </span>
                     </div>
                     <% unless objection.closed %>
-                      <%= form_with url: diagnostics_review_path, method: "post" do |form| %>
+                      <%= form_with url: diagnostics_review_path, method: "post", local: false do |form| %>
                         <div class="form-group">
                           <%= form.submit "Revisar", class: "btn btn-outline-danger mx-1 my-1" %>
                           <%= form.hidden_field :objection_id, value: objection.id %>
@@ -127,7 +127,7 @@
                     <% end %>
                   <% else %>
                     <% if edit_objection_id == objection %>
-                      <%= form_with url: diagnostics_anotate_path, method: "post" do |form| %>
+                      <%= form_with url: diagnostics_anotate_path, method: "post", local: false do |form| %>
                         <div class="form-group">
                           <%= form.label "Historial:" %>
                           <%= form.text_area :description, value: objection.description, rows: 4, class: "form-control input disabled" %>

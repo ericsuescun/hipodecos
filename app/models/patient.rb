@@ -30,6 +30,12 @@
 #  remember_created_at    :datetime
 #
 class Patient < ApplicationRecord
+	before_save :fill_email_with_id_number
+
+	def fill_email_with_id_number
+		self.email = self.id_number
+	end
+
 	def email_required?
 	  false
 	end

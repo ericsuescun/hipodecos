@@ -505,7 +505,8 @@ class InformsController < ApplicationController
             file += '"",' #COLADE
             file += '"",' #COLINAD
             file += '"",' #MONTAINE
-            file += '"' + '"' #MONTAINAD
+            file += '"' + '",' #MONTAINAD
+            file += '"' + inform.ext_diag.to_s + '"'
             file += "\r\n"
           end
 
@@ -565,6 +566,7 @@ class InformsController < ApplicationController
             end
             file += ',' #COPAGOENTIDAD a partir de aca es
             file += ',' #COPAGO
+            file += '"' + inform.ext_diag.to_s + '"'
             file += "\r\n"
           end
 

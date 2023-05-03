@@ -25,16 +25,28 @@
         <%= cyto_form.select(:last_result, options_for_select([['ASC-US', 'ASC-US'], ['ASC-H', 'ASC-H'], ['AGC-NOS', 'AGC-NOS'], ['AGC-NEO', 'AGC-NEO'], ['LEI-BG', 'LEI-BG'], ['LEI-AG', 'LEI-AG'], ['CARCINOMA', 'CARCINOMA'], ['ADENOCARCINOMA', 'ADENOCARCINOMA'], ['NEGATIVA', 'NEGATIVA'], ['INSATISFACTORIA', 'INSATISFACTORIA'], ['NO SABE', 'NO SABE']], nil), { include_blank: true }, class: "form-control input") %>
       </div>
     </div>
-    <div class="col-12 col-lg-3 col-xl-3">
+    <div class="col-12 col-lg-2 col-xl-2">
       <div class="form-group">
         <%= cyto_form.label "Embarazos:" %>
         <%= cyto_form.number_field :pregnancies, class: "form-control input" %>
       </div>
     </div>
-    <div class="col-12 col-lg-3 col-xl-3">
+    <div class="col-12 col-lg-2 col-xl-2">
       <div class="form-group">
         <%= cyto_form.label "Método de planificación:" %>
         <%= cyto_form.select(:birth_control, options_for_select([['DIU', '0'], ['Implante', '2'], ['Pastillas', '4'], ['Inyección', '6'], ['Esterilización', '12'], ['Barrera', '14'], ['No planifica', '20'], ['Vasectomía', '22'], ['No reporta', '24']], nil), { include_blank: true }, class: "form-control input") %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-2 col-xl-2">
+      <div class="form-group">
+        <%= cyto_form.label "Histerectomía:" %>
+        <%= cyto_form.select(:hysterectomy, options_for_select([['Si', 'Si'], ['No', 'No']], nil), { include_blank: true }, class: "form-control input") %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-6">
+      <div class="form-group">
+        <%= cyto_form.label "Aspecto de cuello:" %>
+        <%= cyto_form.text_area :neck_aspect, class: "form-control input" %>
       </div>
     </div>
   </div>

@@ -199,11 +199,16 @@
 
 
         <div class="row">
-          <% if params[:inf_type] == 'cito' %>
-            <%= informs_form.select(:regime, options_for_select([['Particular', 'Particular'], ['Subsidiado', 'Subsidiado'], ['Contributivo', 'Contributivo'], ['Régimen Especial', 'Régimen Especial']], @patient.informs), { }, class: "form-control form-control input") %>
-          <% else %>
-            <%= informs_form.select(:regime, options_for_select([['Subsidiado', 'Subsidiado'], ['Contributivo', 'Contributivo'], ['Régimen Especial', 'Régimen Especial'], ['Particular', 'Particular']], @patient.informs), { include_blank: true }, class: "form-control form-control input") %>
-          <% end %>
+          <div class="col-12 col-lg-2">
+            <div class="form-group">
+              <%= informs_form.label "Régimen" %>
+              <% if params[:inf_type] == 'cito' %>
+                <%= informs_form.select(:regime, options_for_select([['Particular', 'Particular'], ['Subsidiado', 'Subsidiado'], ['Contributivo', 'Contributivo'], ['Régimen Especial', 'Régimen Especial']], @patient.informs), { }, class: "form-control form-control input") %>
+              <% else %>
+                <%= informs_form.select(:regime, options_for_select([['Subsidiado', 'Subsidiado'], ['Contributivo', 'Contributivo'], ['Régimen Especial', 'Régimen Especial'], ['Particular', 'Particular']], @patient.informs), { include_blank: true }, class: "form-control form-control input") %>
+              <% end %>
+            </div>
+          </div>
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= informs_form.label "Autorización EPS/IPS" %>

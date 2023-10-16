@@ -27,7 +27,7 @@ gem 'responders'
 gem 'bcrypt', '~> 3.1.7'
 # Use ActiveStorage variant
 gem "mini_magick", ">= 4.9.4"
-gem 'carrierwave', '~> 0.11.2'
+gem 'carrierwave', '~> 3.0', '>= 3.0.4'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # Reduces boot times through caching; required in config/boot.rb

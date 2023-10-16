@@ -15,7 +15,7 @@
           <div class="col-12 col-lg-3">
             <div class="form-group">
               <%= form.label "Fecha recepción" %>
-              <% if Inform.exists?(@inform.id) %>
+              <% if @inform.id.present? %>
                 <%= form.date_field :receive_date, value: @inform.receive_date, class: "form-control input"  %>
               <% else %>
                 <%= form.date_field :receive_date, value: Date.today, class: "form-control input"  %>

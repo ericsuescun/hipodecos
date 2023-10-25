@@ -29,7 +29,8 @@ class DiagnosticsController < ApplicationController
   # POST /diagnostics.json
   def create
     @inform = Inform.find(params[:inform_id])
-    @diagnostic = @inform.diagnostics.build(diagnostic_params)
+    diagcode_id = Diagcode.find_by(pss_code: diagnostic_params['pss_code']).id
+    @diagnostic = @inform.diagnostics.build(diagnostic_params.merge(diagcode_id: diagcode_id))
     @diagnostic.user_id = current_user.id
 
     @diagnostic.diagcode_id = Diagcode.where(pss_code: @diagnostic.pss_code).first.id
@@ -41,7 +42,8 @@ class DiagnosticsController < ApplicationController
   end
 
   def update
-    @diagnostic.update(diagnostic_params)
+    diagcode_id = Diagcode.find_by(pss_code: diagnostic_params['pss_code']).id
+    @diagnostic.update(diagnostic_params.merge(diagcode_id: diagcode_id))
 
     @inform = @diagnostic.inform
     get_diagcodes

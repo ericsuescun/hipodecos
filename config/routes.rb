@@ -147,6 +147,8 @@ Rails.application.routes.draw do
         get :cancer_report
         get :branch_report
         get :branch_index
+        get :matriculate_report
+        get :matriculate_index
       end
 
       member do

@@ -91,12 +91,20 @@ class ReportsController < ApplicationController
     @informs = Inform.where(inf_type: inf_type, branch_id: @branch_id, delivery_date: date_range).publ_down.order(consecutive: :asc)
   end
 
+  def matriculate_report
+    @branch_id = params[:branch_id]
+    inf_type = params[:inf_type]
+    @informs = Inform.where(inf_type: inf_type, branch_id: @branch_id, receive_date: date_range).publ_down.order(consecutive: :asc)
+  end
+
   def branch_index
     @branches = Branch.all
   end
-  
-  
-  
+
+  def matriculate_index
+    @branches = Branch.all
+  end
+
   def status
     if params[:yi]
       initial_date = Date.new(params[:yi].to_i, params[:mi].to_i, params[:di].to_i).beginning_of_day

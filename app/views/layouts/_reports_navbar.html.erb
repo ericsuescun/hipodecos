@@ -111,8 +111,14 @@
               <%= link_to "Bloques guardados Hoy", stored_blocks_reports_path + "?init_date=" + Date.today.strftime("%d-%m-%Y") + "&final_date=" + Date.today.strftime("%d-%m-%Y"), class: "dropdown-item" %>
             </div>
           </li>
-          <li class="nav-item">
-            <%= link_to "Sedes", branch_index_reports_path, class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <%= 'active' if @tab == :sales %>" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sedes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Sedes", branch_index_reports_path, class: "dropdown-item" %>
+              <%= link_to "CUPS", matriculate_index_reports_path, class: "dropdown-item" %>
+            </div>
           </li>
           <li class="nav-item">
             <%= link_to "Descargas", utility_files_path, class: "nav-link" %>

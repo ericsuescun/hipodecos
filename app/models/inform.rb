@@ -238,4 +238,22 @@ class Inform < ApplicationRecord
     end
     cancer
   end
+
+  def cups_codes
+    codes = ""
+    self.studies.each do |study|
+      codes += Codeval.find(study.codeval_id).code + "(x#{study.factor}) " if study.codeval_id.present?
+    end
+
+    codes
+  end
+
+  def cups_value
+    value = 0
+    self.studies.each do |study|
+      value += study.price
+    end
+
+    value.to_i
+  end
 end

@@ -94,7 +94,7 @@ class ReportsController < ApplicationController
   def matriculate_report
     @branch_id = params[:branch_id]
     inf_type = params[:inf_type]
-    @informs = Inform.where(inf_type: inf_type, branch_id: @branch_id, receive_date: date_range).publ_down.order(consecutive: :asc)
+    @informs = Inform.where(inf_type: inf_type, branch_id: @branch_id, receive_date: date_range).order(consecutive: :asc)
   end
 
   def branch_index

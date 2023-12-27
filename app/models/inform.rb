@@ -240,20 +240,20 @@ class Inform < ApplicationRecord
   end
 
   def cups_codes
-    codes = ""
-    self.studies.each do |study|
-      codes += Codeval.find(study.codeval_id).code + "(x#{study.factor}) " if study.codeval_id.present?
+    inform_codes = ""
+    self.studies.each do |inform_study|
+      inform_codes += Codeval.find(inform_study.codeval_id).code + "(x#{inform_study.factor}) " if inform_study.codeval_id.present?
     end
 
-    codes
+    inform_codes
   end
 
   def cups_value
-    value = 0
+    inform_value = 0
     self.studies.each do |study|
-      value += study.price
+      inform_value += study.price * study.factor
     end
 
-    value.to_i
+    inform_value.to_i
   end
 end

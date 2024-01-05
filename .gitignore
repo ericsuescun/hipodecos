@@ -17,6 +17,7 @@
 !/log/.keep
 !/tmp/.keep
 /log/*.zip
+logfile
 
 # Ignore uploaded files in development
 /storage/*
@@ -36,3 +37,7 @@
 
 # Env Vars
 .env
+
+# IDE
+.idea/
+.tool-versions

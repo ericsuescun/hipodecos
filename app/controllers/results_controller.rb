@@ -2,10 +2,22 @@ class ResultsController < ApplicationController
 	before_action :authenticate_patient!
 
 	def index
-		@patient = current_patient
-		@informs = @patient.informs.where(inf_status: "published").or(@patient.informs.where(inf_status: "downloaded"))
-		@oldrecords = Oldrecord.where(patient_id: current_patient.id)
-		@oldcitos = Oldcito.where(patient_id: current_patient.id)
+		if current_patient.corporate
+			@branch = Branch.where(initials: branch_initials).take
+
+			unless params[:start_date].present? && params[:end_date].present?
+				params[:start_date] = Date.today
+				params[:end_date] = Date.today
+			end
+			@informs = Inform.where(branch_id: @branch.id, receive_date: params[:start_date]..params[:end_date])
+
+			render 'corporate_results/index'
+		else
+			@patient = current_patient
+			@informs = @patient.informs.where(inf_status: "published").or(@patient.informs.where(inf_status: "downloaded"))
+			@oldrecords = Oldrecord.where(patient_id: current_patient.id)
+			@oldcitos = Oldcito.where(patient_id: current_patient.id)
+		end
 	end
 
 	def show
@@ -118,6 +130,10 @@ class ResultsController < ApplicationController
 
 	def not_permitted
 		
+	end
+
+	def branch_initials
+		current_patient.id_number.split('-').first
 	end
 
 end

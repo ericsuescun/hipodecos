@@ -1,0 +1,2 @@
+module CorporateResultsHelper
+end

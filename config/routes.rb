@@ -114,6 +114,7 @@ Rails.application.routes.draw do
     get 'static_pages/help'
     get 'static_pages/faq'
     get 'static_pages/results'
+    get 'static_pages/corporate_results'
     get 'static_pages/tech'
     get 'static_pages/portfolio'
     get 'static_pages/science'
@@ -199,6 +200,7 @@ Rails.application.routes.draw do
         get :show_oldcito
       end
     end
+    resources :corporate_results, only: %w[index show]
     resources :cytologies
 
     resources :cytologies do

@@ -13,11 +13,10 @@ class CorporateResultsController < ApplicationController
 
       if params[:id_number].present?
         @patient = Patient.where(id_number: params[:id_number]).take
-        @informs = @patient.informs.where(inf_status: "published").or(@patient.informs.where(inf_status: "downloaded"))
+        @informs = @patient.informs.where(id_number: params[:id_number]).delivered
       else
-        @informs = Inform.where(branch_id: @branch.id, delivery_date: params[:start_date]..params[:end_date])
+        @informs = Inform.where(branch_id: @branch.id, delivery_date: params[:start_date]..params[:end_date]).delivered
       end
-      @informs = Inform.where(branch_id: @branch.id, receive_date: params[:start_date]..params[:end_date])
     else
       render :not_permitted
     end

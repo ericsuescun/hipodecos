@@ -62,6 +62,7 @@ class Inform < ApplicationRecord
 
   scope :ready, -> { where(inf_status: 'ready')}
   scope :publ_down, -> { where(inf_status: 'published').or(where(inf_status: 'downloaded')) }
+  scope :delivered, -> { where(inf_status: 'published').or(where(inf_status: 'downloaded')) }
   scope :pending, -> { where(inf_status: nil) }
   scope :not_ready, -> { where(inf_status: nil) }
   scope :not_ready_or_cyto, -> { where(inf_status: nil).or(where(inf_status: 'revision_cyto')) }

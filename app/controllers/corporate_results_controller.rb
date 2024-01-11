@@ -10,6 +10,13 @@ class CorporateResultsController < ApplicationController
         params[:start_date] = Date.today
         params[:end_date] = Date.today
       end
+
+      if params[:id_number].present?
+        @patient = Patient.where(id_number: params[:id_number]).take
+        @informs = @patient.informs.where(inf_status: "published").or(@patient.informs.where(inf_status: "downloaded"))
+      else
+        @informs = Inform.where(branch_id: @branch.id, delivery_date: params[:start_date]..params[:end_date])
+      end
       @informs = Inform.where(branch_id: @branch.id, receive_date: params[:start_date]..params[:end_date])
     else
       render :not_permitted

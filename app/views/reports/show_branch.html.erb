@@ -1,8 +1,6 @@
-<div class="info">
-	<h4><%= params[:inf_type] == 'clin' ? "Clínica" : params[:inf_type] == 'hosp' ? "Hospital" : "Citologías" %> facturadas para el periodo <%= new_search_range %> </h4>
-</div>
 <div class="container">
 	<div class="row">
+		<h4><%= params[:inf_type] == 'clin' ? "Clínica" : params[:inf_type] == 'hosp' ? "Hospital" : "Citologías" %> facturadas para el periodo <%= new_search_range %> </h4>
 		<div class="col-12 col-lg-12">
 			<strong><h4>Reporte detallado de ventas</h4></strong>
 			<h1><%= Entity.where(id: params[:id]).first.name %></h1>

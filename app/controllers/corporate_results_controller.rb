@@ -13,7 +13,7 @@ class CorporateResultsController < ApplicationController
 
       if params[:id_number].present?
         @patient = Patient.where(id_number: params[:id_number]).take
-        @informs = @patient.informs.delivered
+        @informs = @patient.informs.where(branch_id: @branch.id).delivered
       else
         @informs = Inform.where(branch_id: @branch.id, delivery_date: params[:start_date]..params[:end_date]).delivered
       end

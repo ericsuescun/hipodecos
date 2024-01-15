@@ -34,6 +34,11 @@
       </div>
 
       <div class="form-group">
+        <%= form.label "Subclase" %>
+        <%= form.text_field :feature4, class: "form-control input", placeholder: "Ej: 5. Sarcoma" %>
+      </div>
+
+      <div class="form-group">
         <div class="form-check form-check-inline">
           <%= form.check_box :cancer, class: "form-check-input" %>
           <%= form.label "Es cancer", class: "form-check-label" %>
@@ -44,7 +49,7 @@
 
       <div class="form-group">
         <%= form.label "Código del órgano" %>
-        <%= form.text_field :feature1, class: "form-control input", placeholder: "(número): Ej: 1 es corazón" %>
+        <%= form.text_field :organ_code, class: "form-control input", placeholder: "(número): Ej: 1 es el corazón" %>
       </div>
 
       <div class="form-group">

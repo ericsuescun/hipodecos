@@ -11,7 +11,7 @@ class DiagcodesController < ApplicationController
   # GET /diagcodes
   # GET /diagcodes.json
   def index
-    @diagcodes = Diagcode.all.order(organ_code: :asc, feature1: :asc, feature2: :asc, feature3: :asc, feature4: :asc)
+    @diagcodes = Diagcode.all.order(organ_code: :asc, feature1: :asc, feature2: :asc, feature3: :asc)
   end
 
   # GET /diagcodes/1

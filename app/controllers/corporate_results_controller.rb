@@ -13,10 +13,98 @@ class CorporateResultsController < ApplicationController
 
       if params[:id_number].present?
         @patient = Patient.where(id_number: params[:id_number]).take
-        @informs = @patient.informs.where(branch_id: @branch.id).delivered
+        @informs = @patient.informs.where(branch_id: @branch.id).delivered.paginate(page: params[:page], per_page: 1)
       else
-        @informs = Inform.where(branch_id: @branch.id, delivery_date: params[:start_date]..params[:end_date]).delivered
+        @informs = Inform.where(branch_id: @branch.id, delivery_date: params[:start_date]..params[:end_date])
       end
+
+      pdf_html = ''
+      debugger
+      @informs.each do |inform|
+        samples = inform.samples.select(:fragment, :sample_tag, :description, :name)
+        p_role = Role.where(name: "Patologia").first.id
+        if inform.inf_type != 'cito'
+          pathologists = []
+
+          if inform.pathologist_id != nil
+            pathologists << User.find(inform.pathologist_id)
+          else
+            pathologists = []
+          end
+
+
+          micro_text = ""
+          inform.micros.each do |micro|
+            if User.find(micro.user_id).role_id == p_role
+              pathologists << User.find(micro.user_id)
+            end
+            if micro.description.size > 500
+              micro_text = micro_text + "\n\r" + "\n\r" + micro.description + "\n\r "
+            else
+              micro_text = micro_text + micro.description + " "
+            end
+
+          end
+
+          diagnostic_text = ""
+          inform.diagnostics.each do |diagnostic|
+            if User.find(diagnostic.user_id).role_id == p_role
+              pathologists << User.find(diagnostic.user_id)
+            end
+            diagnostic_text = diagnostic_text + diagnostic.description + " "
+          end
+          diagnostic_codes = inform.diagnostics.pluck(:pss_code, :who_code).uniq
+
+          pathologists = pathologists.uniq
+
+        else
+          pathologists = []
+
+          if inform.pathologist_id != nil
+            pathologists << User.find(inform.pathologist_id)
+          end
+
+          if inform.diagnostics != []
+            diagnostic = inform.diagnostics.last
+            if User.find(diagnostic.user_id).role_id == p_role
+              pathologists << User.find(diagnostic.user_id)
+            end
+          end
+          pathologists = pathologists.uniq
+
+          cytologist = User.where(id: inform.cytologist).first
+
+          if inform.cytologies != []
+            cytology = inform.cytologies.first
+          else
+            cytology = nil
+          end
+        end
+
+        if inform.inf_type == 'hosp'
+          if inform.p_address.present?
+            delivery_address = inform.p_address
+          else
+            delivery_address = Branch.where(id: inform.branch_id).first.try(:name)
+          end
+        end
+
+        delivery_address = Branch.where(id: inform.branch_id).first.try(:address) if inform.inf_type != 'hosp'
+        debugger
+        pdf_html += render_to_string(partial: 'corporate_results/_pdf_inform', locals: { inform: inform,
+                                                                                         samples: samples,
+                                                                                         pathologists: pathologists,
+                                                                                         micro_text: micro_text,
+                                                                                         diagnostic_text: diagnostic_text,
+                                                                                         diagnostic_codes: diagnostic_codes,
+                                                                                         cytologist: cytologist,
+                                                                                         delivery_address: delivery_address,
+                                                                                         cytology: cytology })
+      end
+
+      pdf = PDFKit.new(pdf_html)
+
+      send_data pdf.to_pdf, filename: 'test.pdf', type: 'application/pdf', disposition: 'inline'
     else
       render :not_permitted
     end

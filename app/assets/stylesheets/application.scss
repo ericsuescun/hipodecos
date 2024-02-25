@@ -673,6 +673,10 @@ strong {
 }
 
 @media print {
+	.page_break {
+		page-break-before: always;
+	}
+
 	header, footer, aside, form, nav, a, … {
 		display: none;
 	}

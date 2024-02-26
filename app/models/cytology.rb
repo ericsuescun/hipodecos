@@ -19,5 +19,7 @@ class Cytology < ApplicationRecord
   belongs_to :inform, optional: true
 
   has_many :objections, as: :objectionable, dependent: :destroy
+
+  # validates :neck_aspect, presence: true
   
 end

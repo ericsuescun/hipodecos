@@ -38,15 +38,24 @@
             </p>
         <% end %>
         <% if @inform.cytologies.present? %>
-          <p class="preview-center"><strong>Última citología:</strong> <%= @cytology.prev_appo %>, <strong>Último resultado: <%= @inform.cytologies.last.last_result %></strong></p>
+          <p class="preview-center"><strong>Última citología:</strong> <%= @cytology.prev_appo %><strong><%= ", Último resultado: #{@inform.cytologies.last.last_result}" if @inform.cytologies.last.last_result.present? %></strong><strong><%= ", Histerectomía: #{@inform.cytologies.last.hysterectomy}" if @inform.cytologies.last.hysterectomy.present? %></strong><strong><%= ", Cuello uterino: #{@inform.cytologies.last.neck_aspect}" if @inform.cytologies.last.neck_aspect.present? %></strong></p>
         <% end %>
+        <h6 class="preview-center">
+          <% @inform.physicians.each do |physician| %>
+            <strong><%= "Profesional en #{physician.study1}" if physician.study1.present? %>:</strong> <%= physician.name %> <%= physician.lastname %>
+          <% end %>
+        </h6>
       <% end %>
 
-      <h6 class="preview-center">
-        <% @inform.physicians.each do |physician| %>
-          <strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %>
-        <% end %>
-      </h6>
+      <% if @inform.inf_type != 'cito' %>
+        <h6 class="preview-center">
+          <% @inform.physicians.each do |physician| %>
+            <strong>Médico tratante:</strong> <%= physician.name %> <%= physician.lastname %>
+          <% end %>
+        </h6>
+      <% end %>
+
+
       <h6 class="preview-center"><strong>Dirección de entrega: </strong><%= @delivery_address %>, <%= "Código de autorización: #{@inform.prmtr_auth_code}" if @inform.prmtr_auth_code.present? %></h6>
 
       <br>
@@ -217,6 +226,7 @@
                         <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
                       <% end %>
                       <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
+                      <h6 class="card-title"><strong>Registro:</strong> <%= pathologist.register if pathologist.register.present? %></h6>
                     </div>
                   <% end %>
                 </div>

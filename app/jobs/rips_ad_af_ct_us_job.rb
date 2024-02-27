@@ -107,11 +107,11 @@ class RipsAdAfCtUsJob < ApplicationJob
     @price = 0
     @entity.branches.each do |branch|
       Inform.where(inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).each do |inform|
-        @total_users << [ inform.patient.id_type, inform.patient.id_number, "000000", regime(inform), inform.patient.lastname1.to_s.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').upcase.strip, inform.patient.lastname2.to_s.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').upcase.strip, inform.patient.name1.to_s.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').upcase.strip, inform.patient.name2.to_s.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').upcase.strip, inform.p_age, inform.p_age_type == "A" ? "1" : inform.p_age_type == "M" ? "2" : "3", inform.patient.sex, inform.p_municipality[0..1], inform.p_municipality[2..4], inform.zone_type ]
+        @total_users << [ inform.patient.id_type, inform.patient.id_number, "000000", regime(inform), inform.patient.lastname1.to_s.upcase.strip, inform.patient.lastname2.to_s.upcase.strip, inform.patient.name1.to_s.upcase.strip, inform.patient.name2.to_s.upcase.strip, inform.p_age, inform.p_age_type == "A" ? "1" : inform.p_age_type == "M" ? "2" : "3", inform.patient.sex, inform.p_municipality[0..1], inform.p_municipality[2..4], inform.zone_type ]
       end
     end
     @total_users = @total_users.uniq  #Purgo los repetidos
-
+    debugger
     users = ""
 
     @total_users.each do |user|

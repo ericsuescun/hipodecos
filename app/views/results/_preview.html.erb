@@ -18,7 +18,7 @@
 </header>
 <div class="container">
   <div class="row">
-    <div class="col-10 col-lg-10 mx-auto">
+    <div class="col-12 col-lg-12 mx-auto">
       <br>
       <div>
         <%= image_tag "logo.JPG", class: "img-fluid", width: 250, height: 250%>
@@ -225,8 +225,7 @@
                       <% if pathologist.signfile.file != nil %>
                         <%= image_tag pathologist.signfile.url, class: "img-fluid" %>
                       <% end %>
-                      <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %></h5>
-                      <h6 class="card-title"><strong>Registro:</strong> <%= pathologist.register if pathologist.register.present? %></h6>
+                      <h5 class="card-title"><strong>Patólogo:</strong> <%= pathologist.first_name %> <%= pathologist.last_name %>, <strong>Registro:</strong> <%= pathologist.register if pathologist.register.present? %></h5>
                     </div>
                   <% end %>
                 </div>

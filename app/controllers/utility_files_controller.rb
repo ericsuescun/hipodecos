@@ -20,9 +20,7 @@ class UtilityFilesController < ApplicationController
   end
 
   def download
-    file = File.read(@utility_file.filepath)
-        
-    send_data file[0..-4], filename: @utility_file.name, type: 'text/html; charset=utf-8'
+    send_file "#{Rails.root}/#{@utility_file.name}", type: 'text/html; charset=utf-8', disposition: "attachment"
   rescue => e
     redirect_to utility_files_url, notice: "Archivo no encontrado: #{@utility_file.name}"
   end

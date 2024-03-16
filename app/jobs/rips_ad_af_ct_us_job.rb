@@ -111,7 +111,7 @@ class RipsAdAfCtUsJob < ApplicationJob
       end
     end
     @total_users = @total_users.uniq  #Purgo los repetidos
-    debugger
+
     users = ""
 
     @total_users.each do |user|

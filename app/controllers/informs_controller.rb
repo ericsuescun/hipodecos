@@ -1026,60 +1026,62 @@ class InformsController < ApplicationController
      end
     end
 
-    inform.save
+    if inform.save
+      if inform.inf_type == "cito"
+        #Se crea el recipiente
+        @recipient = inform.recipients.build
+        @recipient.tag = generate_rec_tag(inform)
+        @recipient.user_id = current_user.id
+        @recipient.description = ""
+        @recipient.save
 
-    if inform.inf_type == "cito"
-      #Se crea el recipiente
-      @recipient = inform.recipients.build
-      @recipient.tag = generate_rec_tag(inform)
-      @recipient.user_id = current_user.id
-      @recipient.description = ""
-      @recipient.save
+        #Se crea el extendido
+        @sample = inform.samples.build
+        @sample.user_id = current_user.id
+        @sample.name = "Extendido"
+        @sample.included = false
+        @sample.recipient_tag = @recipient.tag
+        @sample.sample_tag = generate_letter_tag(inform)
+        @sample.organ_code = "Vagina"
+        @sample.description = ""
+        @sample.fragment = 1
+        @sample.save
 
-      #Se crea el extendido
-      @sample = inform.samples.build
-      @sample.user_id = current_user.id
-      @sample.name = "Extendido"
-      @sample.included = false
-      @sample.recipient_tag = @recipient.tag
-      @sample.sample_tag = generate_letter_tag(inform)
-      @sample.organ_code = "Vagina"
-      @sample.description = ""
-      @sample.fragment = 1
-      @sample.save
+        #Se crea el CUP
+        branch = Branch.find(inform.branch_id)
+        entity = branch.entity
+        cost = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
 
-      #Se crea el CUP
-      branch = Branch.find(inform.branch_id)
-      entity = branch.entity
-      cost = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.value
+        price =  Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.price
+        margin =  price - cost
 
-      price =  Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.price
-      margin =  price - cost
+        cost_description = Cost.where(id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:name)
+        value_description = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:description)
+        rate_description = Rate.where(id: branch.entity.rate_id).first.try(:name)
+        factor_description = Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.try(:description)
 
-      cost_description = Cost.where(id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:name)
-      value_description = Value.where(codeval_id: Codeval.where(code: "898001").first.id, cost_id: Rate.where(id: branch.entity.rate_id).first.cost_id).first.try(:description)
-      rate_description = Rate.where(id: branch.entity.rate_id).first.try(:name)
-      factor_description = Factor.where(codeval_id: Codeval.where(code: "898001").first.id, rate_id: branch.entity.rate_id).first.try(:description)
+        price_description = cost_description + ". " + rate_description + ". Notas costo: " + value_description + ". Notas factor: " + factor_description
 
-      price_description = cost_description + ". " + rate_description + ". Notas costo: " + value_description + ". Notas factor: " + factor_description
-
-      @study = inform.studies.build(
-        user_id: current_user.id,
-        codeval_id: Codeval.where(code: "898001").first.id,
-        factor: 1,
-        cost: cost,
-        price: price,
-        margin: margin,
-        price_description: price_description
+        @study = inform.studies.build(
+          user_id: current_user.id,
+          codeval_id: Codeval.where(code: "898001").first.id,
+          factor: 1,
+          cost: cost,
+          price: price,
+          margin: margin,
+          price_description: price_description
         )
-      @study.save
+        @study.save
 
-      #Se crea el slide
-      inform.slides.create(slide_tag: @sample.sample_tag, user_id: current_user.id) #Se crea un slide con el mismo tag de la sample
-      @sample.update(slide_tag: @sample.sample_tag)  #Se guarda el tag creado en la sample para que queden asociados
+        #Se crea el slide
+        inform.slides.create(slide_tag: @sample.sample_tag, user_id: current_user.id) #Se crea un slide con el mismo tag de la sample
+        @sample.update(slide_tag: @sample.sample_tag)  #Se guarda el tag creado en la sample para que queden asociados
+      end
+
+      redirect_to patients_path + "?inf_type=" + params[:inform][:inf_type]
+    else
+      redirect_to patients_path + "/" + params[:inform][:patient_id] + "?inf_type=" + params[:inform][:inf_type] + '&errors=' + inform.errors.full_messages.join(' ')
     end
-      # redirect_to inform, notice: 'Informe exitosamente creado.'
-    redirect_to patients_path + "?inf_type=" + params[:inform][:inf_type]
   end
 
   # PATCH/PUT /informs/1

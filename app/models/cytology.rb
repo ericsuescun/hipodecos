@@ -20,6 +20,6 @@ class Cytology < ApplicationRecord
 
   has_many :objections, as: :objectionable, dependent: :destroy
 
-  # validates :neck_aspect, presence: true
+  validates :neck_aspect, presence: true
   
 end

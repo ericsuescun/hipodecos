@@ -17,6 +17,17 @@
     </h5>
   </div>
 <% end %>
+<% if params[:errors].present? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <h2><%= params[:errors] %></h2>
+    </div>
+    <div class="alert alert-primary">
+      <h2>Retorna con flecha atras</h2>
+    </div>
+  </div>
+<% end %>
+
 <div class="container-fluid">
 
   <div class="row">

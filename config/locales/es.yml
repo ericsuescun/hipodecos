@@ -8,10 +8,11 @@ es:
       messages:
         record_invalid: Registro inválido
     models:
-      inform: Informes
+      inform: Informe
       patient: Paciente
       micro: Descripción micro
       macro: Descripción macro
+      cytology: Citologia
     attributes:
       user:
         password: Contraseña
@@ -76,6 +77,8 @@ es:
         tag_code: Código
         receive_date: Fecha de recuperación
         delivery_date: Fecha de entrega
+      cytologies:
+        neck_aspect: Aspecto del cuello
   date:
     abbr_day_names:
     - dom

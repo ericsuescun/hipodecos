@@ -90,8 +90,15 @@ class ExecuteTemplatesController < ApplicationController
 						description: sample.description,
 						organ_code: sample.organ_code,
 						fragment: sample.fragment,
-						slide_tag: nil,
-						verified: false
+						slide_tag: sample.sample_tag,
+						verified: true
+					)
+					@inform.slides.create!(
+						user_id: current_user.id,
+						slide_tag: sample.sample_tag,
+						colored: true,
+						covered: true,
+						tagged: true
 					)
 					sample.update(blocked: true)
 				end

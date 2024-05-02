@@ -159,7 +159,7 @@ class PatientsController < ApplicationController
 
   # GET /patients/new
   def new
-    patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
+    patients = Patient.where(id_number: params[:id_number].strip)  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
 
     @promoters = Promoter.where(enabled: true)
     @promoters.each do |promoter|
@@ -198,7 +198,7 @@ class PatientsController < ApplicationController
   end
 
   def new_series
-    patients = Patient.where(id_number: params[:id_number])  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
+    patients = Patient.where(id_number: params[:id_number].strip)  #This where may bring a collection, thus the plural. For the moment, we just take the first element (0) but this needs more analisys
     @promoters = Promoter.where(enabled: true)
     @promoters.each do |promoter|
       promoter.initials = promoter.initials + "-" + promoter.regime[0]
@@ -239,6 +239,7 @@ class PatientsController < ApplicationController
 
   def create
     @patient = Patient.new(patient_params)
+    @patient.id_number.strip!
 
     if @patient.sex == 'M'
       @patient.informs.first.pregnancy_status = '4'
@@ -337,6 +338,7 @@ class PatientsController < ApplicationController
 
   def create_series
     @patient = Patient.new(patient_params)
+    @patient.id_number.strip!
 
     if @patient.sex == 'M'
       @patient.informs.first.pregnancy_status = '4'

@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
 
-  def cancer_report
+  def old_cancer_report
     @tab = :cancer
     if params[:init_date]
       initial_date = Date.parse(params[:init_date]).beginning_of_day
@@ -66,6 +66,114 @@ class ReportsController < ApplicationController
     end
   end
 
+  def cancer_report
+    @tab = :cancer
+    if params[:init_date]
+      initial_date = Date.parse(params[:init_date]).beginning_of_day
+      final_date = Date.parse(params[:final_date]).end_of_day
+      date_range = initial_date..final_date
+    else
+      initial_date = Date.today.beginning_of_month
+      final_date = Date.today.end_of_month
+      date_range = initial_date..final_date
+    end
+    # diagnostics = Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published"}).joins(:diagcode).where(diagcodes: { cancer: true  })
+    diagnostics = Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published", inf_type: "clin" }) + Diagnostic.joins(:inform).where(informs: { delivery_date: date_range, inf_status: "published", inf_type: "hosp" })
+    diag = []
+    diagnostics.map do |diagnostic|
+      if diagnostic.diagcode_id.present?
+        diag << diagnostic if Diagcode.where(id: diagnostic.diagcode_id).take.cancer
+      end
+    end
+
+    @informs = []
+    @informs = diag.map { |diagnostic| diagnostic.inform }.uniq.sort_by {|inform| inform[params[:order]]} if diagnostics.present?
+
+    csv_file = CSV.generate(headers: true) do |csv|
+      csv << %w[
+      codigo_habilitacion
+      nombre_institucion
+      primer_apellido
+      segundo_apellido
+      primer_nombre
+      segundo_nombre
+      tipo_identificacion
+      identificacion
+      fecha_nacimiento
+      edad
+      grupo_edad
+      genero
+      municipio_residencia
+      subregion
+      direccion_residencia
+      eapb
+      codigo_informe
+      institucion_remitente
+      fecha_diagnostico
+      metodo_diagnostico
+      organo
+      lateralidad
+      diagnostico_morfologico
+      topografia_cieo
+      morfologia_cieo
+      comportamiento_cieo
+      diferenciacion_cieo
+      observaciones
+      estado_vital_paciente
+      fecha_defuncion
+      certificado_defuncion
+      causa_defuncion
+      responsable_digitacion
+      fecha_digitacion
+      primario_multiple
+      ]
+      @informs.each do |inform|
+        csv << [
+          "050011134601",
+          "Patologia Suescun SAS",
+          inform.patient.name1,
+          inform.patient.name2,
+          inform.patient.lastname1,
+          inform.patient.lastname2,
+          inform.patient.id_type,
+          inform.patient.id_number,
+          inform.patient.birth_date,
+          inform.p_age,
+          "grupo_edad",
+          inform.patient.sex,
+          inform.p_municipality,
+          "subregion",
+          inform.p_address,
+          "eapb",
+          inform.tag_code,
+          Branch.where(id: inform.branch_id).take.try(:initials),
+          inform.delivery_date.strftime("%Y/%m/%d"),
+          "7",
+          inform.samples.first.organ_code,
+          "lateralidad",
+          add_diags(inform),
+          "topografia_cieo",
+          "morfologia_cieo",
+          "comportamiento_cieo",
+          add_descriptions(inform),
+          "observaciones",
+          "9",
+          "fecha_defuncion",
+          "certificado_defuncion",
+          "causa_defuncion",
+          User.where(id: inform.user_id).first.try(:fullname),
+          inform.receive_date.strftime('%d/%m/%Y'),
+          "primario_multiple"
+        ]
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data csv_file, filename: "cancer_report_ini_#{initial_date}_fin_#{final_date}.csv", type: 'text/html; charset=utf-8' }
+    end
+  end
+
   def add_diags(inform)
 		diags = ""
 		inform.diagnostics.each do |diagnostic|
@@ -73,7 +181,16 @@ class ReportsController < ApplicationController
 			diags += "#{diagnostic.description}"
 		end
 		diags[0..-2]
-	end
+  end
+
+  def add_descriptions(inform)
+    diags = ""
+    inform.diagnostics.each do |diagnostic|
+      next if diagnostic.description.blank?
+      diagcode = Diagcode.find(diagnostic.diagcode_id)
+      diags += "#{diagcode.organ} #{diagcode.feature1} #{diagcode.feature2} #{diagcode.feature3} #{diagcode.feature4} #{diagcode.description}"
+    end
+  end
 
 	def add_codes(inform)
 		diags = ""

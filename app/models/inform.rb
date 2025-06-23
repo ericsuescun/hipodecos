@@ -67,6 +67,7 @@ class Inform < ApplicationRecord
   scope :not_ready, -> { where(inf_status: nil) }
   scope :not_ready_or_cyto, -> { where(inf_status: nil).or(where(inf_status: 'revision_cyto')) }
   scope :revision, -> { where(inf_status: "revision") }
+  scope :invoiced, -> { where.not(invoice: "") }
 
 
   has_many :samples, dependent: :destroy  #Dificulto el borrado automático para evitar catástrofes
@@ -89,6 +90,15 @@ class Inform < ApplicationRecord
   validates :branch_id, :zone_type, :receive_date, :inf_type, presence: true
 
   # before_save :get_tag_code, :get_entity, on: :create
+
+  def main_diagnostic_code
+    diagnostics.first.who_code.to_s
+  end
+
+  def related_diagnostic_code
+    diagnostics.second&.who_code.to_s
+  end
+
 
   def get_entity
     self.entity_id = Branch.find(self.branch_id).entity.id

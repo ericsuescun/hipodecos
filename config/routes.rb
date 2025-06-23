@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :utility_files do
     member do
       get :download, to: 'utility_files#download'
@@ -138,6 +137,13 @@ Rails.application.routes.draw do
     get 'reports/reports_params_yes'
     get 'reports/reports_params_yes2'
     get 'reports/reports_params_week'
+
+  resources :rips, only: [] do
+    collection do
+      get :procedures, to: 'rips#procedures'
+      get :users, to: 'rips#users'
+    end
+  end
 
     resources :reports do
       collection do

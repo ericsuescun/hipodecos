@@ -108,7 +108,7 @@
 							<% else %>
 								<tr>
 									<td><%= link_to "#{detail[2].tag_code}", inform_path(detail[2]) %></td>
-									<td><%= detail[2].patient.halfname %></td>
+									<td><%= detail[2].patient.fullname %></td>
 									<td><%= detail[2].patient.id_number %></td>
 									<td>
 										<% detail[3].each do |study| %>

@@ -30,6 +30,12 @@
 	  	<div class="alert alert-secondary pl-1 pb-1">
 				<%= link_to "Generar archivos RIPS y Affinity", rips_aff_files_report_path(@entity.id, inf_type: params[:inf_type], init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
 	  	</div>
+			<div class="alert alert-secondary pl-1 pb-1">
+				<%= link_to "CSV NUEVOS RIPS Procedimientos", rips_procedures_path(invoice: @total_detail.first[2].invoice, init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
+			</div>
+			<div class="alert alert-secondary pl-1 pb-1">
+				<%= link_to "CSV NUEVOS RIPS Users", rips_users_path(invoice: @total_detail.first[2].invoice, init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
+			</div>
 	  	
 	  </div>
 	  
@@ -91,7 +97,7 @@
 	</div>
 	<div class="row">
 		<div class="col-12 col-lg-12">
-			<strong><h4>Reporte detallado de ventas</h4></strong>
+			<strong><h4>Reporte detallado de ventas: <%= Patient.joins(:informs).where({informs: { delivery_date: Date.parse(params[:init_date])..Date.parse(params[:final_date]), invoice: params[:invoice_code] }}).distinct.count %> pacientes</h4></strong>
 			<h1><%= Entity.where(id: params[:id]).first.name %></h1>
 			<% if params[:branch_name] != nil %>
 				<h4>Sede <%= params[:branch_name] %></h4>
@@ -100,6 +106,7 @@
 			<table class="table">
 				<thead>
 					<tr>
+						<th>#</th>
 						<th>Factura</th>
 						<th>Informe</th>
 						<th>Nombre</th>
@@ -112,7 +119,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% @total_detail.each do |detail| %>
+					<% @total_detail.each_with_index do |detail, index| %>
 						<% if detail[1] == "--" %>
 							<tr class="alert alert-primary">
 								<td></td>
@@ -163,6 +170,7 @@
 								</tr>
 							<% else %>
 								<tr>
+									<td><%= index + 1 %></td>
 									<td><%= detail[2].invoice %> <%= detail[2].prmtr_auth_code %></td>
 									<td><%= detail[2].tag_code %></td>
 									<td><%= detail[2].patient.fullname %></td>

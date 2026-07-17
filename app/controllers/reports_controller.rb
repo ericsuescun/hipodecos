@@ -421,92 +421,20 @@ class ReportsController < ApplicationController
     @entity = Entity.find(params[:id])
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day
-    date_range = initial_date..final_date
 
-    @total_entities = []
-    @total_detail = []
-    @total_affinity = []
-    @branch_detail = []
-    @total_accumulated = 0
-    @price = 0
-    @total_branch = []
-
-    @entity.branches.each do |branch|
-      @partial = 0
-      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).each do |inform|
-        @inform_studies = []
-        @inform_partial = 0
-        inform.studies.each do |study|
-          @price += study.price * study.factor
-          @partial += study.price * study.factor
-          @inform_partial += study.price * study.factor
-          #@total_detail << [ @entity.name, branch.name, inform, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
-          @inform_studies << study
-        end
-        @total_detail << [ @entity.name, branch.name, inform, @inform_studies, 0, 0, @inform_partial, @price ]
-      end
-      @total_detail << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
-      @total_affinity << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
-    end
-    @total_detail << [ @entity.name, "--", "--", "--", 0, 0, 0, @price ]
-
-    @total_entities << [ @entity.id, @price ]
-    @total_accumulated += @price
+    report = build_sale_report(@entity, initial_date, final_date, params[:inf_type])
+    assign_sale_report(report)
   end
 
   def show_branch
     @entity = Entity.find(params[:id])
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day
-    date_range = initial_date..final_date
 
-    @total_entities = []
-    @total_detail = []
-    @total_affinity = []
-    @branch_detail = []
-    @total_accumulated = 0
-    @price = 0
-    @total_branch = []
-
-    if params[:branch_name] != nil
-      branch = Branch.where(name: params[:branch_name]).first
-      @partial = 0
-      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).order(consecutive: :asc).each do |inform|
-        @inform_studies = []
-        @inform_partial = 0
-        inform.studies.each do |study|
-          @price += study.price * study.factor
-          @partial += study.price * study.factor
-          @inform_partial += study.price * study.factor
-          #@total_detail << [ @entity.name, branch.name, inform, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
-          @inform_studies << study
-        end
-        @total_detail << [ @entity.name, branch.name, inform, @inform_studies, 0, 0, @inform_partial, @price ]
-      end
-      @total_detail << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
-    else
-      @entity.branches.each do |branch|
-        @partial = 0
-        Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "downloaded", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id).where.not(invoice: "")).order(consecutive: :asc).each do |inform|
-          @inform_studies = []
-          @inform_partial = 0
-          inform.studies.each do |study|
-            @price += study.price * study.factor
-            @partial += study.price * study.factor
-            @inform_partial += study.price * study.factor
-            #@total_detail << [ @entity.name, branch.name, inform, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
-            @inform_studies << study
-          end
-          @total_detail << [ @entity.name, branch.name, inform, @inform_studies, 0, 0, @inform_partial, @price ]
-        end
-        @total_detail << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
-        @total_affinity << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
-      end
-      @total_detail << [ @entity.name, "--", "--", "--", 0, 0, 0, @price ]
-
-      @total_entities << [ @entity.id, @price ]
-      @total_accumulated += @price
-    end
+    branches = params[:branch_name].nil? ? nil : [Branch.where(name: params[:branch_name]).first]
+    report = build_sale_report(@entity, initial_date, final_date, params[:inf_type],
+                               branches: branches, entity_total_row: params[:branch_name].nil?)
+    assign_sale_report(report)
   end
 
   def rips_aff_files
@@ -782,6 +710,80 @@ class ReportsController < ApplicationController
   end
 
   private
+    # Builds the sales/billing report for an entity over a date range in a fixed handful
+    # of queries instead of the old N+1 (one query per branch, per inform and per study).
+    # Reproduces the original @total_detail exactly (8-slot rows, "**" branch-subtotal and
+    # "--" entity-total sentinel rows, initials-ASC branch order, running "Acumulado").
+    #
+    #   branches:         branches to walk (default entity.branches, initials ASC).
+    #   entity_total_row: append the trailing "--" grand-total row and set the accumulated
+    #                     total (true for the whole-entity view; false for the single-branch
+    #                     "Detalles" drill-down, matching the original show_branch).
+    def build_sale_report(entity, initial_date, final_date, inf_type, branches: nil, entity_total_row: true)
+      branches ||= entity.branches
+      branch_ids = branches.map { |b| b&.id }
+      date_range = initial_date..final_date
+
+      # One pass: all qualifying informs for the walked branches, studies + patient eager-loaded.
+      # branch_id IN (walked branches) reproduces the original per-branch loop's ownership rule
+      # (only informs whose branch belongs to the entity are counted). invoice <> '' also drops
+      # NULL invoices, and inf_status IN (...) collapses the original published-OR-downloaded legs.
+      informs = Inform
+                  .where(inf_type: inf_type, inf_status: %w[published downloaded],
+                         delivery_date: date_range, entity_id: entity.id, branch_id: branch_ids)
+                  .where.not(invoice: "")
+                  .order(consecutive: :asc)
+                  .includes(:patient, :studies)
+      informs_by_branch = informs.group_by(&:branch_id)
+
+      # Preload the lookups the views need per row, so the CUP-code column (Codeval) and the
+      # EPS column (Promoter, via the loose promoter_id) cost no extra query.
+      codeval_ids  = informs.flat_map(&:studies).map(&:codeval_id).uniq
+      @codeval_map = Codeval.where(id: codeval_ids).index_by(&:id)
+      @promoter_map = Promoter.where(id: informs.filter_map(&:promoter_id).uniq).index_by(&:id)
+
+      total_detail   = []
+      total_affinity = []
+      price = 0
+
+      branches.each do |branch|
+        partial = 0
+        (informs_by_branch[branch.id] || []).each do |inform|
+          inform_studies = inform.studies.to_a       # Study default_scope: created_at ASC (preloaded)
+          inform_partial = 0
+          inform_studies.each do |study|
+            value = study.price * study.factor        # unchanged math: still raises on a NULL price, like today
+            price += value
+            partial += value
+            inform_partial += value
+          end
+          total_detail << [ entity.name, branch.name, inform, inform_studies, 0, 0, inform_partial, price ]
+        end
+        total_detail   << [ entity.name, branch.name, "**", "--", 0, 0, partial, price ]
+        total_affinity << [ entity.name, branch.name, "**", "--", 0, 0, partial, price ]
+      end
+
+      total_detail << [ entity.name, "--", "--", "--", 0, 0, 0, price ] if entity_total_row
+
+      {
+        total_detail:      total_detail,
+        total_affinity:    total_affinity,
+        total_entities:    entity_total_row ? [[entity.id, price]] : [],
+        total_accumulated: entity_total_row ? price : 0
+      }
+    end
+
+    def assign_sale_report(report)
+      @total_detail      = report[:total_detail]
+      @total_affinity    = report[:total_affinity]
+      @total_entities    = report[:total_entities]
+      @total_accumulated = report[:total_accumulated]
+      # kept for parity with the original actions (not consumed by these views)
+      @branch_detail = []
+      @total_branch = []
+      @price = @total_accumulated
+    end
+
     def permit_reports_params
       params.permit(:id, :init_date, :final_date, :inf_type, :entity, :type, :file)
     end

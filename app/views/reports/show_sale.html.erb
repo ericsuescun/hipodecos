@@ -108,6 +108,7 @@
 					<tr>
 						<th>#</th>
 						<th>Factura</th>
+						<th>EPS</th>
 						<th>Informe</th>
 						<th>Nombre</th>
 						<th>Identif.</th>
@@ -126,6 +127,7 @@
 								<td></td>
 								<td></td>
 								<td></td>
+								<td></td>
 								
 								
 								<td>Total IPS</td>
@@ -137,6 +139,7 @@
 								<% if detail[6] != 0 %>
 									<tr class="alert alert-warning">
 										<td></td>
+<td></td>
 										<td></td>
 										<!-- <td><%= detail[1] %></td> -->
 										<td><%= detail[1] %></td>
@@ -165,6 +168,7 @@
 									<td></td>
 									<td></td>
 									<td></td>
+									<td></td>
 								<% end %>
 									
 								</tr>
@@ -172,12 +176,13 @@
 								<tr>
 									<td><%= index + 1 %></td>
 									<td><%= detail[2].invoice %> <%= detail[2].prmtr_auth_code %></td>
+									<td><%= @promoter_map[detail[2].promoter_id]&.initials %></td>
 									<td><%= detail[2].tag_code %></td>
 									<td><%= detail[2].patient.fullname %></td>
 									<td><%= detail[2].patient.id_number %></td>
 									<td>
 										<% detail[3].each do |study| %>
-											<strong>(<%= study.factor %>*)</strong><%= Codeval.find(study.codeval_id).code %>
+											<strong>(<%= study.factor %>*)</strong><%= @codeval_map[study.codeval_id]&.code %>
 										<% end %>
 									</td>
 									<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>

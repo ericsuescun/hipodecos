@@ -1,4 +1,6 @@
 class RipsController < ApplicationController
+  before_action :authenticate_user!
+
   def procedures
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day

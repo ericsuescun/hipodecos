@@ -424,6 +424,11 @@ class ReportsController < ApplicationController
 
     report = build_sale_report(@entity, initial_date, final_date, params[:inf_type])
     assign_sale_report(report)
+
+    respond_to do |format|
+      format.html
+      format.xlsx { render xlsx: "show_sale", filename: sale_export_filename(@entity) }
+    end
   end
 
   def show_branch
@@ -435,6 +440,11 @@ class ReportsController < ApplicationController
     report = build_sale_report(@entity, initial_date, final_date, params[:inf_type],
                                branches: branches, entity_total_row: params[:branch_name].nil?)
     assign_sale_report(report)
+
+    respond_to do |format|
+      format.html
+      format.xlsx { render xlsx: "show_branch", filename: sale_export_filename(@entity, params[:branch_name]) }
+    end
   end
 
   def rips_aff_files
@@ -732,7 +742,7 @@ class ReportsController < ApplicationController
                   .where(inf_type: inf_type, inf_status: %w[published downloaded],
                          delivery_date: date_range, entity_id: entity.id, branch_id: branch_ids)
                   .where.not(invoice: "")
-                  .order(consecutive: :asc)
+                  .order(delivery_date: :asc, consecutive: :asc)
                   .includes(:patient, :studies)
       informs_by_branch = informs.group_by(&:branch_id)
 
@@ -771,6 +781,16 @@ class ReportsController < ApplicationController
         total_entities:    entity_total_row ? [[entity.id, price]] : [],
         total_accumulated: entity_total_row ? price : 0
       }
+    end
+
+    # Descriptive, filesystem-safe name for the XLSX download, e.g.
+    # "ventas_salud-total_2026-01-01_a_2026-01-31.xlsx" (branch name appended for
+    # the single-branch drill-down).
+    def sale_export_filename(entity, branch_name = nil)
+      parts = ["ventas", entity.name.parameterize]
+      parts << branch_name.parameterize if branch_name.present?
+      parts += [params[:init_date], "a", params[:final_date]]
+      "#{parts.join('_')}.xlsx"
     end
 
     def assign_sale_report(report)

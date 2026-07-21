@@ -28,6 +28,9 @@
 	  </div>
 	  <div class="col-12 col-lg-4 mx-auto">
 	  	<div class="alert alert-secondary pl-1 pb-1">
+				<%= link_to "Exportar XLSX", show_sale_report_path(@entity.id, inf_type: params[:inf_type], init_date: params[:init_date], final_date: params[:final_date], format: :xlsx), class: "btn btn-success" %>
+	  	</div>
+	  	<div class="alert alert-secondary pl-1 pb-1">
 				<%= link_to "Generar archivos RIPS y Affinity", rips_aff_files_report_path(@entity.id, inf_type: params[:inf_type], init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
 	  	</div>
 			<div class="alert alert-secondary pl-1 pb-1">

@@ -3,6 +3,7 @@
 		<div class="col-12 col-lg-12">
 			<h4><%= params[:inf_type] == 'clin' ? "Clínica" : params[:inf_type] == 'hosp' ? "Hospital" : "Citologías" %> facturadas para el periodo <%= new_search_range %> </h4>
 			<strong><h4>Reporte detallado de ventas</h4></strong>
+			<%= link_to "Exportar XLSX", show_branch_report_path(id: params[:id], inf_type: params[:inf_type], init_date: params[:init_date], final_date: params[:final_date], branch_name: params[:branch_name], format: :xlsx), class: "btn btn-success my-2" %>
 			<h1><%= Entity.where(id: params[:id]).first.name %></h1>
 			<% if params[:branch_name] != nil %>
 				<h4>Sede <%= params[:branch_name] %></h4>

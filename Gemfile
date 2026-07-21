@@ -88,3 +88,6 @@ group :production do
   gem 'wkhtmltopdf-heroku', '3.0.0.pre.rc0'
   gem 'fog-aws'
 end
+
+gem "caxlsx", "~> 4.2"
+gem "caxlsx_rails", "~> 0.7.2"

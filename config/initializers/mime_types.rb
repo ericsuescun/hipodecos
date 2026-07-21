@@ -4,3 +4,4 @@
 # Mime::Type.register "text/richtext", :rtf
 
 Mime::Type.register 'application/pdf', :pdf
+Mime::Type.register 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', :xlsx unless Mime[:xlsx]

@@ -11,16 +11,15 @@
             <tr>
               <th style="white-space: nowrap; position: sticky; left: 0; z-index: 3;" class="bg-dark text-white">CUP</th>
               <% @rates.each do |rate| %>
-                <th style="white-space: nowrap; text-align: right;"><%= rate.name %></th>
+                <th style="white-space: nowrap; text-align: right; cursor: help;" title="<%= rate.name %>"><%= rate.short_name %></th>
               <% end %>
             </tr>
           </thead>
           <tbody>
             <% @codevals.each do |codeval| %>
               <tr>
-                <th scope="row" style="white-space: nowrap; position: sticky; left: 0; z-index: 1; background-color: #fff;">
+                <th scope="row" style="white-space: nowrap; position: sticky; left: 0; z-index: 1; background-color: #fff; cursor: help;" title="<%= codeval.name %>">
                   <%= codeval.code %>
-                  <% if codeval.name.present? %><br /><small class="text-muted"><%= codeval.name %></small><% end %>
                 </th>
                 <% @rates.each do |rate| %>
                   <% price = @prices[[codeval.id, rate.id]] %>

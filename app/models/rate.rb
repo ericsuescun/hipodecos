@@ -16,4 +16,13 @@ class Rate < ApplicationRecord
 	# has_many :factors
 
 	validates :name, :description, :factor, presence: true
+
+	# Short label for column headers etc.: initials of each word for multi-word
+	# names ("San Vicente Fundación" -> "SVF"), or the first 5 characters for a
+	# single-word name ("MEDIMUJER" -> "MEDIM"). The full name is shown as a
+	# tooltip wherever the short name appears.
+	def short_name
+		words = name.to_s.scan(/[[:alpha:]]+/)
+		words.size > 1 ? words.map { |word| word[0] }.join.upcase : name.to_s[0, 5].upcase
+	end
 end

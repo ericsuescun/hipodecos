@@ -39,7 +39,10 @@
 			<div class="alert alert-secondary pl-1 pb-1">
 				<%= link_to "CSV NUEVOS RIPS Users", users_rips_path(invoice: @total_detail.find { |d| d[2].is_a?(Inform) }&.dig(2)&.invoice, init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-primary" %>
 			</div>
-	  	
+			<div class="alert alert-secondary pl-1 pb-1">
+				<%= link_to "RIPS JSON (factura)", procedures_json_rips_path(invoice: @total_detail.find { |d| d[2].is_a?(Inform) }&.dig(2)&.invoice, init_date: params[:init_date], final_date: params[:final_date]), class: "btn btn-success" %>
+			</div>
+
 	  </div>
 	  
 	</div>

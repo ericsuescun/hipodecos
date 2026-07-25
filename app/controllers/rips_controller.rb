@@ -38,6 +38,17 @@ class RipsController < ApplicationController
     send_data csv_file, filename: "procedimientos_factura_#{params[:invoice]}_entre_#{initial_date.strftime("%Y-%m-%d")}_y_#{final_date.strftime("%Y-%m-%d")}.csv"
   end
 
+  def procedures_json
+    initial_date = Date.parse(params[:init_date])
+    final_date   = Date.parse(params[:final_date])
+
+    builder = RipsJsonBuilder.new(invoice: params[:invoice], init_date: initial_date, final_date: final_date)
+
+    send_data builder.to_json_string,
+              filename: "rips_factura_#{params[:invoice]}_entre_#{initial_date.strftime('%Y-%m-%d')}_y_#{final_date.strftime('%Y-%m-%d')}.json",
+              type: "application/json"
+  end
+
   def users
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day

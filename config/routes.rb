@@ -143,6 +143,7 @@ Rails.application.routes.draw do
     collection do
       get :procedures, to: 'rips#procedures'
       get :users, to: 'rips#users'
+      get :procedures_json, to: 'rips#procedures_json'
     end
   end
 

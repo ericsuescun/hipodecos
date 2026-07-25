@@ -7,7 +7,7 @@
 	  	
 	    <div class="alert alert-secondary">
 	    	<%= form_tag billings_reports_path, method: "get" do %>
-	    		<%= hidden_field_tag :inf_type, value: params[:inf_type] %>
+	    		<%= hidden_field_tag :inf_type, params[:inf_type] %>
 		        <div class="form-row">
 		            <div class="form-group col-4">
 		              <%= label_tag "Fecha inicial" %>

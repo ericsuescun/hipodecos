@@ -17,7 +17,8 @@
 		              <%= label_tag "Fecha final" %>
 		              <%= date_field_tag :final_date, Date.parse(params[:final_date]), class: "form-control input" %>
 		            </div>
-			        <div class="col-4">
+			        <div class="form-group col-4">
+			          <label class="d-block">&nbsp;</label>
 			        	<%= submit_tag("Filtrar", class: "btn btn-primary") %>
 			        </div>
 		        </div>

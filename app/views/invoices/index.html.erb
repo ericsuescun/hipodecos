@@ -1,10 +1,10 @@
-<div class="container-fluid">
+<div class="container-fluid mt-3">
   <div class="row">
-    <div class="col-12 col-lg-4">
-      <%= will_paginate @invoices, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    <div class="col-12 col-lg-12 mx-auto">
       <h1>Facturas</h1>
+      <%= will_paginate @invoices, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
 
-      <table class="table-striped dense">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Factura</th>
@@ -37,6 +37,8 @@
           <% end %>
         </tbody>
       </table>
+
+      <%= will_paginate @invoices, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
     </div>
   </div>
 </div>

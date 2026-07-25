@@ -112,7 +112,7 @@
 									<td><%= detail[2].patient.id_number %></td>
 									<td>
 										<% detail[3].each do |study| %>
-											<strong>(<%= study.factor %>*)</strong><%= Codeval.find(study.codeval_id).code %>
+											<strong>(<%= study.factor %>*)</strong><%= @codeval_map[study.codeval_id]&.code %>
 										<% end %>
 									</td>
 									<td><%= number_to_currency(detail[6], precision: 0, delimiter: '.') %></td>

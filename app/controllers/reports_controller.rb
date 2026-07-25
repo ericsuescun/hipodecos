@@ -366,34 +366,12 @@ class ReportsController < ApplicationController
     @entity = Entity.find(params[:id])
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day
-    date_range = initial_date..final_date
 
-    @total_entities = []
-    @total_detail = []
-    @branch_detail = []
-    @total_accumulated = 0
-    @price = 0
-    @total_branch = []
-    @entity.branches.each do |branch|
-      @partial = 0
-      Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id, invoice: "").or(Inform.where(inf_type: params[:inf_type], inf_status: "published", delivery_date: date_range, entity_id: @entity.id, branch_id: branch.id, invoice: "")).order(consecutive: :asc).each do |inform|
-        @inform_studies = []
-        @inform_partial = 0
-        inform.studies.each do |study|
-          @price += study.price * study.factor
-          @partial += study.price * study.factor
-          @inform_partial += study.price * study.factor
-          #@total_detail << [ @entity.name, branch.name, inform, Codeval.where(id: study.codeval_id).first.code, study.price, study.factor, study.price * study.factor, @price ]
-          @inform_studies << study
-        end
-        @total_detail << [ @entity.name, branch.name, inform, @inform_studies, 0, 0, @inform_partial, @price ]
-      end
-      @total_detail << [ @entity.name, branch.name, "**", "--", 0, 0, @partial, @price ]
-    end
-    @total_detail << [ @entity.name, "--", "--", "--", 0, 0, 0, @price ]
-
-    @total_entities << [ @entity.id, @price ]
-    @total_accumulated += @price
+    # Same builder as show_sale, but the billing/pending report scopes to un-invoiced,
+    # published-only informs (inf_status: "published", invoiced: false).
+    report = build_sale_report(@entity, initial_date, final_date, params[:inf_type],
+                               inf_status: "published", invoiced: false)
+    assign_sale_report(report)
   end
 
   def invoice
@@ -729,19 +707,23 @@ class ReportsController < ApplicationController
     #   entity_total_row: append the trailing "--" grand-total row and set the accumulated
     #                     total (true for the whole-entity view; false for the single-branch
     #                     "Detalles" drill-down, matching the original show_branch).
-    def build_sale_report(entity, initial_date, final_date, inf_type, branches: nil, entity_total_row: true)
+    def build_sale_report(entity, initial_date, final_date, inf_type, branches: nil, entity_total_row: true,
+                          inf_status: %w[published downloaded], invoiced: true)
       branches ||= entity.branches
       branch_ids = branches.map { |b| b&.id }
       date_range = initial_date..final_date
 
       # One pass: all qualifying informs for the walked branches, studies + patient eager-loaded.
       # branch_id IN (walked branches) reproduces the original per-branch loop's ownership rule
-      # (only informs whose branch belongs to the entity are counted). invoice <> '' also drops
-      # NULL invoices, and inf_status IN (...) collapses the original published-OR-downloaded legs.
+      # (only informs whose branch belongs to the entity are counted). inf_status collapses the
+      # original per-status legs. `invoiced:` picks the invoice filter: true => invoice <> ''
+      # (the sales report; also drops NULL invoices, matching where.not); false => invoice = ''
+      # (the billing/pending report — informs not yet invoiced).
       informs = Inform
-                  .where(inf_type: inf_type, inf_status: %w[published downloaded],
+                  .where(inf_type: inf_type, inf_status: inf_status,
                          delivery_date: date_range, entity_id: entity.id, branch_id: branch_ids)
-                  .where.not(invoice: "")
+      informs = invoiced ? informs.where.not(invoice: "") : informs.where(invoice: "")
+      informs = informs
                   .order(delivery_date: :asc, consecutive: :asc)
                   .includes(:patient, :studies)
       informs_by_branch = informs.group_by(&:branch_id)

@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_04_183509) do
+ActiveRecord::Schema.define(version: 2026_07_25_221834) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
@@ -487,7 +488,7 @@ ActiveRecord::Schema.define(version: 2024_01_04_183509) do
     t.string "sex"
     t.string "gender"
     t.string "address"
-    t.string "email", default: "", null: false
+    t.string "email", default: ""
     t.string "tel"
     t.string "cel"
     t.string "occupation"
@@ -676,6 +677,8 @@ ActiveRecord::Schema.define(version: 2024_01_04_183509) do
     t.string "signfile"
     t.string "contract"
     t.string "register"
+    t.string "id_number", default: ""
+    t.string "id_type", default: "CC"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

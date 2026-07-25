@@ -107,10 +107,16 @@
               </div>
             </div>
             <div class="col-4 col-lg-4 mx-auto">
-              
+              <div class="form-group">
+                <%= f.label "Tipo de documento" %><br />
+                <%= f.select :id_type, %w[CC CE TI PA RC MS PE PT], {}, class: "form-control" %>
+              </div>
             </div>
             <div class="col-4 col-lg-4 mx-auto">
-              
+              <div class="form-group">
+                <%= f.label "Número de identificación" %><br />
+                <%= f.text_field :id_number, class: "form-control" %>
+              </div>
             </div>
           </div>
 

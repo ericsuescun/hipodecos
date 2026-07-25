@@ -13,13 +13,6 @@ class RipsJsonBuilder
   NIT           = "900363326"      # numDocumentoIdObligado (lab NIT)
   COD_PRESTADOR = "050011134601"   # REPS habilitation code of the lab (not a person)
 
-  # TEMPORARY placeholder cédula for the attending professional. RIPS needs the
-  # pathologist's document of identity, but User does not store one yet (adding
-  # id_type/id_number is a deferred DB change). Until then we "burn" a single
-  # cédula so the file validates end-to-end; professional_document swaps in the
-  # real per-pathologist value automatically once User#id_number exists.
-  PLACEHOLDER_PROFESSIONAL = ["CC", "17117540"].freeze
-
   def initialize(invoice:, init_date:, final_date:)
     @invoice = invoice
     @range   = init_date.beginning_of_day..final_date.end_of_day
@@ -115,17 +108,14 @@ class RipsJsonBuilder
 
   # RIPS identifies the professional who performed the procedure by their
   # DOCUMENT OF IDENTITY (cédula) — NOT the professional registry code
-  # (User#register, e.g. "13115-2006"). Once User stores id_type/id_number this
-  # returns the real per-pathologist cédula; until then it falls back to the
-  # burned-in PLACEHOLDER_PROFESSIONAL so the file still validates.
+  # (User#register, e.g. "13115-2006"). Taken verbatim from the pathologist's
+  # User (id_type defaults to "CC", id_number is "" until filled in on their
+  # profile) so the file generates cleanly whether or not the cédula is set.
   def professional_document(inform)
     user = (User.find_by(id: inform.pathologist_id) if inform.pathologist_id.present?)
+    return [nil, nil] unless user
 
-    if user&.respond_to?(:id_number) && user.id_number.present?
-      [user.respond_to?(:id_type) ? user.id_type : "CC", user.id_number]
-    else
-      PLACEHOLDER_PROFESSIONAL
-    end
+    [user.id_type, user.id_number]
   end
 
   def codeval_code(codeval_id)

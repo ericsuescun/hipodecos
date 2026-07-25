@@ -7,8 +7,8 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Fecha exp.</th>
             <th>Factura</th>
+            <th>Fecha exp.</th>
             <th>Cliente</th>
             <th>Desde</th>
             <th>Hasta</th>
@@ -22,8 +22,8 @@
         <tbody>
           <% @invoices.each do |invoice| %>
             <tr>
-              <td><%= invoice.invoice_date.strftime("%d/%m/%Y") %></td>
               <td><%= invoice.invoice_code %></td>
+              <td><%= invoice.invoice_date.strftime("%d/%m/%Y") %></td>
               <td><%= Entity.where(id: invoice.entity_id).first.try(:initials) %></td>
               <td><%= invoice.init_date.strftime("%d/%m/%Y") %></td>
               <td><%= invoice.final_date.strftime("%d/%m/%Y") %></td>

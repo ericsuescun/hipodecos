@@ -102,6 +102,9 @@
 		<div class="col-12 col-lg-12">
 			<strong><h4>Reporte detallado de ventas: <%= @inform_count %> informes</h4></strong>
 			<h1><%= Entity.where(id: params[:id]).first.name %></h1>
+			<% if params[:invoice_code].present? %>
+				<h4>Detalle de la factura <strong><%= params[:invoice_code] %></strong></h4>
+			<% end %>
 			<% if params[:branch_name] != nil %>
 				<h4>Sede <%= params[:branch_name] %></h4>
 				<%= link_to "Retornar a IPS", show_sale_report_path(id: params[:id], init_date: params[:init_date], final_date: params[:final_date], inf_type: params[:inf_type]) %>

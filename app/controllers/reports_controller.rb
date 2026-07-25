@@ -400,7 +400,8 @@ class ReportsController < ApplicationController
     initial_date = Date.parse(params[:init_date]).beginning_of_day
     final_date = Date.parse(params[:final_date]).end_of_day
 
-    report = build_sale_report(@entity, initial_date, final_date, params[:inf_type])
+    report = build_sale_report(@entity, initial_date, final_date, params[:inf_type],
+                               invoice_code: params[:invoice_code])
     assign_sale_report(report)
 
     respond_to do |format|
@@ -708,7 +709,7 @@ class ReportsController < ApplicationController
     #                     total (true for the whole-entity view; false for the single-branch
     #                     "Detalles" drill-down, matching the original show_branch).
     def build_sale_report(entity, initial_date, final_date, inf_type, branches: nil, entity_total_row: true,
-                          inf_status: %w[published downloaded], invoiced: true)
+                          inf_status: %w[published downloaded], invoiced: true, invoice_code: nil)
       branches ||= entity.branches
       branch_ids = branches.map { |b| b&.id }
       date_range = initial_date..final_date
@@ -716,13 +717,21 @@ class ReportsController < ApplicationController
       # One pass: all qualifying informs for the walked branches, studies + patient eager-loaded.
       # branch_id IN (walked branches) reproduces the original per-branch loop's ownership rule
       # (only informs whose branch belongs to the entity are counted). inf_status collapses the
-      # original per-status legs. `invoiced:` picks the invoice filter: true => invoice <> ''
-      # (the sales report; also drops NULL invoices, matching where.not); false => invoice = ''
-      # (the billing/pending report — informs not yet invoiced).
+      # original per-status legs. The invoice filter: `invoice_code` present => scope to exactly
+      # that invoice's informs (drilling in from the invoices list); otherwise `invoiced:` picks
+      # invoice <> '' (the sales report; also drops NULLs) or invoice = '' (the billing/pending
+      # report — informs not yet invoiced).
       informs = Inform
                   .where(inf_type: inf_type, inf_status: inf_status,
                          delivery_date: date_range, entity_id: entity.id, branch_id: branch_ids)
-      informs = invoiced ? informs.where.not(invoice: "") : informs.where(invoice: "")
+      informs =
+        if invoice_code.present?
+          informs.where(invoice: invoice_code)
+        elsif invoiced
+          informs.where.not(invoice: "")
+        else
+          informs.where(invoice: "")
+        end
       informs = informs
                   .order(delivery_date: :asc, consecutive: :asc)
                   .includes(:patient, :studies)

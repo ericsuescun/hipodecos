@@ -1,3 +1,14 @@
 <h1>Editar precio</h1>
 
+<div class="container">
+  <div class="row">
+    <div class="col-8 col-lg-8 mx-auto">
+      <div class="alert alert-info mt-3">
+        <strong>CUP:</strong> <%= @factor.codeval.code %><%= " — #{@factor.codeval.name}" if @factor.codeval.name.present? %><br />
+        <strong>Tarifa:</strong> <%= @factor.rate.name %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <%= render 'form', factor: @factor %>

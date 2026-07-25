@@ -17,8 +17,8 @@ class RatesController < ApplicationController
     @rates = Rate.order(:name)
     factors = Factor.all.to_a
     @codevals = Codeval.where(id: factors.map(&:codeval_id).uniq).order(:code)
-    @prices = {}
-    factors.each { |factor| @prices[[factor.codeval_id, factor.rate_id]] = factor.price }
+    @factors = {}
+    factors.each { |factor| @factors[[factor.codeval_id, factor.rate_id]] = factor }
   end
 
   # GET /rates/1

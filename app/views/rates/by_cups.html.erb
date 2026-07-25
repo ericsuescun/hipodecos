@@ -22,9 +22,13 @@
                   <%= codeval.code %>
                 </th>
                 <% @rates.each do |rate| %>
-                  <% price = @prices[[codeval.id, rate.id]] %>
+                  <% factor = @factors[[codeval.id, rate.id]] %>
                   <td style="white-space: nowrap; text-align: right;">
-                    <%= price ? number_to_currency(price, precision: 0, delimiter: '.') : '—' %>
+                    <% if factor %>
+                      <%= link_to number_to_currency(factor.price, precision: 0, delimiter: '.'), edit_factor_path(factor), title: "Editar #{rate.short_name}" %>
+                    <% else %>
+                      &mdash;
+                    <% end %>
                   </td>
                 <% end %>
               </tr>

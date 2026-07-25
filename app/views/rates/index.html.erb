@@ -12,22 +12,18 @@
             <th>%</th>
             <th>Fecha modificación</th>
             <th>Fecha de creación</th>
-            <th colspan="3"></th>
           </tr>
         </thead>
 
         <tbody>
           <% @rates.each do |rate| %>
             <tr>
-              <td><%= rate.name %></td>
+              <td><%= link_to rate.name, rate_path(rate) %></td>
               <td><%= rate.description %></td>
               <td><%= Admin.find(rate.admin_id).name %></td>
               <td><%= rate.factor %>%</td>
               <td><%= rate.updated_at %></td>
               <td><%= rate.created_at %></td>
-              <td><%= link_to 'Mostrar tarifa', rate_path(rate) %></td>
-              <td><%= link_to 'Editar', edit_rate_path(rate) %></td>
-              <td><%= link_to 'Borrar', rate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tbody>

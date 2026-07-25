@@ -107,7 +107,7 @@
 								</tr>
 							<% else %>
 								<tr>
-									<td><%= link_to "#{detail[2].tag_code}", inform_path(detail[2]) %></td>
+									<td style="white-space: nowrap"><%= link_to "#{detail[2].tag_code}", inform_path(detail[2]) %></td>
 									<td><%= detail[2].patient.fullname %></td>
 									<td><%= detail[2].patient.id_number %></td>
 									<td>

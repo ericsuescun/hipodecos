@@ -100,7 +100,7 @@
 	</div>
 	<div class="row">
 		<div class="col-12 col-lg-12">
-			<strong><h4>Reporte detallado de ventas: <%= @patient_count %> pacientes</h4></strong>
+			<strong><h4>Reporte detallado de ventas: <%= @inform_count %> informes</h4></strong>
 			<h1><%= Entity.where(id: params[:id]).first.name %></h1>
 			<% if params[:branch_name] != nil %>
 				<h4>Sede <%= params[:branch_name] %></h4>

@@ -761,7 +761,11 @@ class ReportsController < ApplicationController
         total_detail:      total_detail,
         total_affinity:    total_affinity,
         total_entities:    entity_total_row ? [[entity.id, price]] : [],
-        total_accumulated: entity_total_row ? price : 0
+        total_accumulated: entity_total_row ? price : 0,
+        # distinct patients across exactly the informs shown (reuses the already-loaded
+        # relation — no extra query). Replaces the view's broken inline count that keyed
+        # off a nonexistent params[:invoice_code].
+        patient_count:     informs.map(&:patient_id).uniq.compact.size
       }
     end
 
@@ -780,6 +784,7 @@ class ReportsController < ApplicationController
       @total_affinity    = report[:total_affinity]
       @total_entities    = report[:total_entities]
       @total_accumulated = report[:total_accumulated]
+      @patient_count     = report[:patient_count]
       # kept for parity with the original actions (not consumed by these views)
       @branch_detail = []
       @total_branch = []

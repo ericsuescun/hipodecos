@@ -15,7 +15,7 @@
             <th>Tipo</th>
             <th>Valor</th>
             <th>Por</th>
-            <th colspan="2"></th>
+            <th></th>
           </tr>
         </thead>
 
@@ -30,7 +30,6 @@
               <td><%= invoice.inf_type %></td>
               <td><%= number_to_currency(invoice.value, precision: 0, delimiter: '.') %></td>
               <td><%= User.where(id: invoice.user_id).first.try(:first_name) %></td>
-              <td><%= link_to 'Editar', edit_invoice_path(invoice) %></td>
               <td><%= link_to 'Borrar', invoice, method: :delete, data: { confirm: '¿Confirmas la operación?' } %></td>
             </tr>
           <% end %>

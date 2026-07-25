@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  before_action :set_invoice, only: [:show, :destroy]
 
   # GET /invoices
   # GET /invoices.json
@@ -19,10 +19,6 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new
   end
 
-  # GET /invoices/1/edit
-  def edit
-  end
-
   # POST /invoices
   # POST /invoices.json
   def create
@@ -34,20 +30,6 @@ class InvoicesController < ApplicationController
         format.json { render :show, status: :created, location: @invoice }
       else
         format.html { render :new }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /invoices/1
-  # PATCH/PUT /invoices/1.json
-  def update
-    respond_to do |format|
-      if @invoice.update(invoice_params)
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
-        format.json { render :show, status: :ok, location: @invoice }
-      else
-        format.html { render :edit }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
     end

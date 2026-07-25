@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   get 'comments/index'
-  resources :invoices
+  resources :invoices, except: [:edit, :update]
   resources :municipalities do
     collection do
       post :import

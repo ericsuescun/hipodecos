@@ -1,0 +1,38 @@
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-12">
+      <h1>Tarifas por CUP</h1>
+      <p class="text-muted">Precio de cada CUP en las distintas tarifas. <%= @codevals.size %> CUPS &times; <%= @rates.size %> tarifas.</p>
+      <%= link_to "Volver a tarifas", rates_path, class: "btn btn-link pl-0" %>
+
+      <div style="overflow-x: auto;">
+        <table class="table table-striped table-sm table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th style="white-space: nowrap; position: sticky; left: 0; z-index: 3;" class="bg-dark text-white">CUP</th>
+              <% @rates.each do |rate| %>
+                <th style="white-space: nowrap; text-align: right;"><%= rate.name %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @codevals.each do |codeval| %>
+              <tr>
+                <th scope="row" style="white-space: nowrap; position: sticky; left: 0; z-index: 1; background-color: #fff;">
+                  <%= codeval.code %>
+                  <% if codeval.name.present? %><br /><small class="text-muted"><%= codeval.name %></small><% end %>
+                </th>
+                <% @rates.each do |rate| %>
+                  <% price = @prices[[codeval.id, rate.id]] %>
+                  <td style="white-space: nowrap; text-align: right;">
+                    <%= price ? number_to_currency(price, precision: 0, delimiter: '.') : '—' %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

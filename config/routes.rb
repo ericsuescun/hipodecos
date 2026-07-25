@@ -182,7 +182,11 @@ Rails.application.routes.draw do
     resources :roles
     resources :values
     resources :factors
-    resources :rates
+    resources :rates do
+      collection do
+        get :by_cups
+      end
+    end
     resources :costs
     resources :codevals
     resources :branches, except: [:new]

@@ -9,6 +9,18 @@ class RatesController < ApplicationController
     @rates = Rate.all
   end
 
+  # Pivot view: one row per CUPS, one column per rate, each cell the rate's
+  # price for that CUPS. All factors are loaded once and indexed by
+  # [codeval_id, rate_id] so the matrix renders without per-cell queries.
+  def by_cups
+    @tab = :admins
+    @rates = Rate.order(:name)
+    factors = Factor.all.to_a
+    @codevals = Codeval.where(id: factors.map(&:codeval_id).uniq).order(:code)
+    @prices = {}
+    factors.each { |factor| @prices[[factor.codeval_id, factor.rate_id]] = factor.price }
+  end
+
   # GET /rates/1
   # GET /rates/1.json
   def show

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @tab = :admins
-    @users = User.all
+    @users = User.order(updated_at: :desc)
   end
 
   # GET /users/1

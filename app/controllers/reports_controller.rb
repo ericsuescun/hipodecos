@@ -405,7 +405,7 @@ class ReportsController < ApplicationController
     assign_sale_report(report)
 
     respond_to do |format|
-      format.html
+      format.html { assign_rips_dob_warning }
       format.xlsx { render xlsx: "show_sale", filename: sale_export_filename(@entity) }
     end
   end
@@ -798,6 +798,23 @@ class ReportsController < ApplicationController
       @branch_detail = []
       @total_branch = []
       @price = @total_accumulated
+    end
+
+    # The "RIPS JSON (factura)" button downloads the file for a single factura,
+    # taken from the first real Inform row of the report. Staff are warned first
+    # (modal) about how many usuarios will go out with an empty fechaNacimiento:
+    # Colombian referral paperwork often carries only an age, so a sizeable share
+    # of patients have no birth_date and RIPS has no field to report an age in.
+    # Counts come from the builder itself so they always match the file.
+    def assign_rips_dob_warning
+      @rips_invoice = @total_detail.find { |d| d[2].is_a?(Inform) }&.dig(2)&.invoice
+      return if @rips_invoice.blank?
+
+      builder = RipsJsonBuilder.new(invoice: @rips_invoice,
+                                    init_date: Date.parse(params[:init_date]),
+                                    final_date: Date.parse(params[:final_date]))
+      @rips_usuarios_count    = builder.usuarios_count
+      @rips_missing_dob_count = builder.usuarios_without_birth_date_count
     end
 
     def permit_reports_params

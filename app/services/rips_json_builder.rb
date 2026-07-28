@@ -32,6 +32,17 @@ class RipsJsonBuilder
     JSON.pretty_generate(document)
   end
 
+  # Counts backing the pre-download warning staff see before the file is sent.
+  # Both read the SAME `patients` scope that assembles the usuarios array, so
+  # the number in the warning can never disagree with the number in the file.
+  def usuarios_count
+    patients.count
+  end
+
+  def usuarios_without_birth_date_count
+    patients.where(birth_date: nil).count
+  end
+
   private
 
   def usuarios
@@ -58,7 +69,14 @@ class RipsJsonBuilder
       tipoDocumentoIdentificacion:  patient.id_type,
       numDocumentoIdentificacion:   patient.id_number,
       tipoUsuario:                  first_inform&.regime == "Contributivo" ? "01" : "04",
-      fechaNacimiento:              patient.birth_date&.strftime("%Y-%m-%d"),
+      # Emitted as "" (not null, and NEVER derived) when the patient has no
+      # birth_date. Colombian referral paperwork frequently carries only an age,
+      # so ~25% of patients have no DOB on record and the age lives on the
+      # inform instead (p_age/p_age_type). Computing a date back from that age
+      # would put a fabricated fact in a filing to the health authorities —
+      # an unrecorded date is reported as unrecorded. Same convention as the
+      # procedures CSV (rips_controller.rb:69).
+      fechaNacimiento:              patient.birth_date.present? ? patient.birth_date.strftime("%Y-%m-%d") : "",
       codSexo:                      patient.sex,
       codPaisResidencia:            patient.id_type == "PT" ? "862" : "170",
       codMunicipioResidencia:       "05001",

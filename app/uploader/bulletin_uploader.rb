@@ -34,9 +34,14 @@ class BulletinUploader < CarrierWave::Uploader::Base
   end
 
   # URL of the uploaded bulletin, or nil if none has been uploaded yet.
+  # The existence check is an S3 round trip (~0.6s), so once the file is seen
+  # the URL is memoized: it never changes and nothing deletes the file. Until
+  # the first upload, nil is not memoized and every call checks again.
   def self.current_url
-    uploader = new
-    uploader.retrieve_from_store!(FILENAME)
-    uploader.url if uploader.file.exists?
+    @current_url ||= begin
+      uploader = new
+      uploader.retrieve_from_store!(FILENAME)
+      uploader.url if uploader.file.exists?
+    end
   end
 end

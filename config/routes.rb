@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   get 'comments/index'
+  resource :bulletin, only: [:show, :update]
   resources :invoices, except: [:edit, :update]
   resources :municipalities do
     collection do

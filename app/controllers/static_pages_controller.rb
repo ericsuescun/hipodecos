@@ -46,6 +46,10 @@ class StaticPagesController < ApplicationController
   def matriculate
   end
 
+  def patient_security
+    @bulletin_url = BulletinUploader.current_url
+  end
+
   def help_manual
   end
 

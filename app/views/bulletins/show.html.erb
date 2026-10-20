@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-10 mx-auto">
+      <h1>Boletín</h1>
+      <p class="text-muted">Imagen que se muestra en la página pública <%= link_to "Seguridad del paciente", static_pages_patient_security_path, target: "_blank" %>. Al cargar una nueva imagen, reemplaza la anterior.</p>
+
+      <div class="row">
+        <div class="col-12 col-lg-5 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cargar nueva imagen</h5>
+              <%= form_tag bulletin_path, method: :patch, multipart: true do %>
+                <div class="form-group">
+                  <%= file_field_tag :image, accept: "image/jpeg,image/png,image/gif", required: true, class: "form-control-file" %>
+                  <small class="form-text text-muted">JPG, PNG o GIF, máximo 10MB.</small>
+                </div>
+                <%= submit_tag "Cargar", class: "btn btn-primary" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-7 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Imagen actual</h5>
+              <% unless @bulletin_url %>
+                <p class="card-text text-muted">Aún no se ha cargado ningún boletín; se muestra la imagen por defecto.</p>
+              <% end %>
+              <img src="<%= @bulletin_url || asset_path('campaign.JPG') %>" class="img-fluid" alt="Boletín">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
